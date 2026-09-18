@@ -596,7 +596,16 @@ html, body {
   min-height: 34px;
 }
 .arrhead-on { background: var(--on-purple); color: var(--purple-light); font-weight: 500; }
-.arrhead-bars { font-size: 10px; color: var(--text3); font-variant-numeric: tabular-nums; }
+/* A long section name is shown as much of as fits and then cut with an
+   ellipsis. It used to wrap, which made a four-line cell out of "Four on
+   the floor" and still cut it mid-word. */
+.arrhead-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.arrhead-bars { font-size: 10px; color: var(--text3); font-variant-numeric: tabular-nums; flex: 0 0 auto; }
 .arrhead-on .arrhead-bars { color: var(--purple); }
 .arradd { width: 44px; justify-content: center; color: var(--text3); font-size: 16px; }
 
@@ -5876,7 +5885,16 @@ const CELL_WIDTH = 100;
 // reads as twice a two-bar one without a sixteen-bar one running off the
 // edge of the world.
 const BAR_WIDTH = 25;
-const MIN_CELL = 54;
+/**
+ * Wide enough for the names people actually use.
+ *
+ * At 54 a one-bar section showed "F\u2026" — which tells you nothing. The
+ * common section names are Intro, Verse, Chorus, Bridge, Breakdown,
+ * Pre-chorus; the longest of those needs about 108px at 14px type once the
+ * bar count and the padding are counted. If a section cannot be called
+ * Breakdown, the cell is too small.
+ */
+const MIN_CELL = 112;
 const MAX_CELL = 200;
 
 function cellWidth(lengthBars) {
@@ -6029,7 +6047,12 @@ function arrangementMatrix(store, onChange, {
         },
       },
       [
-        el('span', { class: 'arrhead-name', text: `${isUnlocked(song.sections[sectionId]) ? '\u26bf ' : ''}${sectionLabel(song, sectionId)}` }),
+        el('span', {
+          class: 'arrhead-name',
+          // The full name is the tooltip, since the cell shows a prefix.
+          title: sectionLabel(song, sectionId),
+          text: `${isUnlocked(song.sections[sectionId]) ? '\u26bf ' : ''}${sectionLabel(song, sectionId)}`,
+        }),
         el('span', { class: 'arrhead-bars', text: `${song.sections[sectionId].lengthBars}` }),
         // An unlocked section shows what it keeps to itself.
         isUnlocked(song.sections[sectionId])
@@ -6269,7 +6292,15 @@ function arrangementMatrix(store, onChange, {
         placeholder: sectionLabel(song, menuFor),
         'aria-label': 'Section name',
         onChange: (e) => {
-          const value = String(e.target.value || '').trim().slice(0, 16);
+          /**
+           * Name it whatever you like. The cell truncates with an ellipsis
+           * rather than the name being cut short when it is typed — a
+           * sixteen-character limit turned "Four on the floor" into "Four on
+           * the floo", which is a worse answer than showing less of a whole
+           * name. The cap here only stops a name being long enough to be a
+           * storage problem.
+           */
+          const value = String(e.target.value || '').trim().slice(0, 200);
           store.run((s) => setSectionName(s, menuFor, value || null));
           onChange();
         },
@@ -12397,6 +12428,157 @@ function fromBackup(text) {
 }
 
 
+/* ---- src/core/midi.js ---- */
+/**
+ * Standard MIDI File export.
+ *
+ * A type 1 file: one tempo track, then one track per instrument track,
+ * with the arrangement flattened — every section laid end to end in the
+ * order it plays, so what comes out is what the song sounds like rather
+ * than a pile of loops.
+ *
+ * The app's PPQ (960) is written as the file's division, so note positions
+ * need no conversion and nothing is lost to rounding.
+ */
+
+
+
+/** A MIDI variable-length quantity: seven bits per byte, high bit as "more". */
+function varLen(value) {
+  const n = Math.max(0, Math.round(value));
+  const out = [n & 0x7f];
+  let rest = Math.floor(n / 128);
+  while (rest > 0) {
+    out.unshift((rest & 0x7f) | 0x80);
+    rest = Math.floor(rest / 128);
+  }
+  return out;
+}
+
+const bytes = (...values) => values.flat();
+const u32 = (n) => [(n >> 24) & 0xff, (n >> 16) & 0xff, (n >> 8) & 0xff, n & 0xff];
+const u16 = (n) => [(n >> 8) & 0xff, n & 0xff];
+const ascii = (text) => Array.from(text, (c) => c.charCodeAt(0) & 0x7f);
+
+/** A chunk: four ASCII bytes, a length, and the body. */
+function chunk(type, body) {
+  return bytes(ascii(type), u32(body.length), body);
+}
+
+/** A track name meta event at delta 0. */
+function trackName(name) {
+  const text = ascii(String(name || '').slice(0, 60));
+  return bytes([0x00, 0xff, 0x03], varLen(text.length), text);
+}
+
+/**
+ * The tempo track. A tempo change is written wherever a section carries its
+ * own, so an unlocked section exports at the tempo it plays at.
+ */
+function tempoTrack(song) {
+  const events = [];
+  let last = 0;
+  const push = (tick, bpm) => {
+    const usPerQuarter = Math.round(60000000 / Math.max(1, bpm));
+    events.push(bytes(varLen(tick - last), [0xff, 0x51, 0x03],
+      [(usPerQuarter >> 16) & 0xff, (usPerQuarter >> 8) & 0xff, usPerQuarter & 0xff]));
+    last = tick;
+  };
+
+  let current = null;
+  songTimeline(song).segments.forEach((seg) => {
+    const section = song.sections[seg.sectionId];
+    const bpm = (section && section.unlocked && section.bpm) || song.bpm || 120;
+    if (bpm !== current) {
+      push(seg.startTick, bpm);
+      current = bpm;
+    }
+  });
+  if (current === null) push(0, song.bpm || 120);
+
+  return chunk('MTrk', bytes(trackName(song.name || 'Song'), events.flat(), [0x00, 0xff, 0x2f, 0x00]));
+}
+
+/**
+ * Every note a track plays across the whole arrangement, in absolute ticks.
+ * A section that appears twice contributes its notes twice, at both places.
+ */
+function flattenTrack(song, track) {
+  const notes = [];
+  songTimeline(song).segments.forEach((seg) => {
+    const section = song.sections[seg.sectionId];
+    const clip = section && section.clips ? section.clips[track.id] : null;
+    if (!clip) return;
+    const limit = sectionTicks(section.lengthBars);
+    clip.notes.forEach((note) => {
+      if (note.start >= limit) return;
+      notes.push({
+        pitch: note.pitch,
+        start: seg.startTick + note.start,
+        // A note is cut at its section's end, the way it sounds.
+        duration: Math.max(1, Math.min(note.duration, limit - note.start)),
+        velocity: note.velocity,
+        accent: Boolean(note.flags && note.flags.accent),
+      });
+    });
+  });
+  return notes.sort((a, b) => a.start - b.start || a.pitch - b.pitch);
+}
+
+/**
+ * One track's chunk. Drums go on channel 10 (index 9), which is where every
+ * other program expects to find them; the kit's lanes already use the
+ * General MIDI numbers, so a kick arrives as a kick.
+ */
+function instrumentTrack(song, track, channel) {
+  const family = familyById(track.family);
+  const isDrum = Boolean(family && family.kind === 'drum');
+  const ch = isDrum ? 9 : channel;
+  const notes = flattenTrack(song, track);
+
+  // Note ons and offs as one list, sorted, so deltas can be walked.
+  const events = [];
+  notes.forEach((note) => {
+    const velocity = Math.max(1, Math.min(127, Math.round((note.velocity || 0.8) * (note.accent ? 1.25 : 1) * 127)));
+    events.push({ tick: note.start, data: [0x90 | ch, note.pitch & 0x7f, velocity] });
+    events.push({ tick: note.start + note.duration, data: [0x80 | ch, note.pitch & 0x7f, 0x40] });
+  });
+  // An off at the same tick as an on comes first, so a repeated note retriggers.
+  events.sort((a, b) => a.tick - b.tick || (a.data[0] & 0xf0) - (b.data[0] & 0xf0));
+
+  const body = [];
+  body.push(...trackName(trackTitle(track)));
+  let last = 0;
+  events.forEach((ev) => {
+    body.push(...varLen(ev.tick - last), ...ev.data);
+    last = ev.tick;
+  });
+  body.push(0x00, 0xff, 0x2f, 0x00);
+  return chunk('MTrk', body);
+}
+
+/** The whole song as a Standard MIDI File. */
+function toMidiFile(song) {
+  const tracks = (song.tracks || []).filter(Boolean);
+  const chunks = [tempoTrack(song)];
+  let channel = 0;
+  tracks.forEach((track) => {
+    const family = familyById(track.family);
+    const isDrum = Boolean(family && family.kind === 'drum');
+    // `instrumentTrack` is the one place that decides a channel; this only
+    // hands it the next free pitched one.
+    chunks.push(instrumentTrack(song, track, channel));
+    // Channel 10 belongs to drums, so a pitched track never lands on it.
+    if (!isDrum) {
+      channel += 1;
+      if (channel === 9) channel = 10;
+    }
+  });
+  const header = chunk('MThd', bytes(u16(1), u16(chunks.length), u16(PPQ)));
+  return new Uint8Array(bytes(header, chunks.flat()));
+}
+
+
 /* ---- src/ui/app.js ---- */
 /**
  * @param {HTMLElement} root
@@ -13761,6 +13943,20 @@ function mountApp(root, options = {}) {
     }
   }
 
+  /**
+   * The song as a Standard MIDI File: the arrangement flattened, so it
+   * opens in any other program as the song rather than as a pile of loops.
+   */
+  function downloadMidi() {
+    try {
+      const song = store.state.song;
+      const name = `${(song.name || 'song').replace(/[^\w\-]+/g, '-').toLowerCase()}.mid`;
+      offerFile(new Blob([toMidiFile(song)], { type: 'audio/midi' }), name, { kind: 'midi', title: song.name });
+    } catch (err) {
+      reportError(err, 'export MIDI');
+    }
+  }
+
   function pickBackup() {
     try {
       const input = el('input', {
@@ -14229,7 +14425,10 @@ function mountApp(root, options = {}) {
           { label: 'Rename', onSelect: () => renameSong(id) },
           { label: entry.projectId ? 'Move to another project' : 'Move to a project', onSelect: () => songsApi.moveToProject(id) },
           { label: 'Duplicate', onSelect: () => songsApi.duplicate(id) },
+          // Three ways out: the sound, the notes, and the song itself.
           { label: 'Export audio', onSelect: () => (isOpen ? exportAudio() : songsApi.open(id).then(() => exportAudio())) },
+          { label: 'Export MIDI', onSelect: () => (isOpen ? downloadMidi() : songsApi.open(id).then(() => downloadMidi())) },
+          { label: 'Export backup', onSelect: () => (isOpen ? downloadBackup() : songsApi.open(id).then(() => downloadBackup())) },
         ];
         if (songList.length > 1) items.push({ label: 'Delete', danger: true, onSelect: () => songsApi.remove(id) });
         popoverMenu(anchor, items, host);
