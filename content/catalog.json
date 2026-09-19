@@ -1,0 +1,690 @@
+{
+  "format": "pocketdaw.catalog",
+  "version": 1,
+  "built": "2026-09-19",
+  "packs": [
+    {
+      "id": "bigrusty",
+      "name": "Big Rusty",
+      "family": "drums",
+      "kind": "drum",
+      "version": "1.0.0",
+      "file": "packs/bigrusty-1.0.0.zip",
+      "bytes": 461004,
+      "crc32": 1226615050,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sfzinstruments/karoryfer.big-rusty-drums",
+        "credit": "Karoryfer Samples, Big Rusty Drums (Zygmunt Szpaderski kit, early 1980s), CC0"
+      },
+      "manifest": {
+        "id": "bigrusty",
+        "name": "Big Rusty",
+        "version": "1.0.0",
+        "family": "drums",
+        "kind": "drum",
+        "shade": "silver",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sfzinstruments/karoryfer.big-rusty-drums",
+          "credit": "Karoryfer Samples, Big Rusty Drums (Zygmunt Szpaderski kit, early 1980s), CC0"
+        },
+        "envelope": {
+          "attack": 0.001,
+          "release": 0.01
+        },
+        "accentGain": 1.5,
+        "polyphony": 16,
+        "voicesAtOnce": 3,
+        "lanes": [
+          {
+            "midi": 49,
+            "label": "Crash",
+            "group": "cymbal"
+          },
+          {
+            "midi": 52,
+            "label": "China",
+            "group": "cymbal"
+          },
+          {
+            "midi": 51,
+            "label": "Ride",
+            "group": "cymbal"
+          },
+          {
+            "midi": 46,
+            "label": "Open hat",
+            "group": "hat",
+            "chokeGroup": "hat"
+          },
+          {
+            "midi": 42,
+            "label": "Closed hat",
+            "group": "hat",
+            "chokeGroup": "hat"
+          },
+          {
+            "midi": 44,
+            "label": "Pedal hat",
+            "group": "hat",
+            "chokeGroup": "hat"
+          },
+          {
+            "midi": 38,
+            "label": "Snare",
+            "group": "snare"
+          },
+          {
+            "midi": 40,
+            "label": "Rimshot",
+            "group": "snare"
+          },
+          {
+            "midi": 37,
+            "label": "Sidestick",
+            "group": "snare"
+          },
+          {
+            "midi": 50,
+            "label": "Hi tom",
+            "group": "tom"
+          },
+          {
+            "midi": 47,
+            "label": "Mid tom",
+            "group": "tom"
+          },
+          {
+            "midi": 45,
+            "label": "Lo tom",
+            "group": "tom"
+          },
+          {
+            "midi": 41,
+            "label": "Floor tom",
+            "group": "tom"
+          },
+          {
+            "midi": 36,
+            "label": "Kick",
+            "group": "kick"
+          }
+        ],
+        "zones": [
+          {
+            "file": "bigrusty/49-crash.m4a",
+            "placeholder": "crash",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "gain": 1.04,
+            "click": null
+          },
+          {
+            "file": "bigrusty/52-china.m4a",
+            "placeholder": "crash",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "gain": 1.02,
+            "click": null
+          },
+          {
+            "file": "bigrusty/51-ride.m4a",
+            "placeholder": "ride",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "gain": 0.84,
+            "click": null
+          },
+          {
+            "file": "bigrusty/46-openhat.m4a",
+            "placeholder": "openHat",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "gain": 2.6,
+            "click": null
+          },
+          {
+            "file": "bigrusty/42-closedhat.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "gain": 1.68,
+            "click": null
+          },
+          {
+            "file": "bigrusty/44-pedalhat.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "gain": 1.14,
+            "click": null
+          },
+          {
+            "file": "bigrusty/38-snare.m4a",
+            "placeholder": "snare",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "gain": 2.4,
+            "click": null
+          },
+          {
+            "file": "bigrusty/40-rimshot.m4a",
+            "placeholder": "rimshot",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "gain": 1.01,
+            "click": null
+          },
+          {
+            "file": "bigrusty/37-sidestick.m4a",
+            "placeholder": "rimshot",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "gain": 2.69,
+            "click": null
+          },
+          {
+            "file": "bigrusty/50-hitom.m4a",
+            "placeholder": "hiTom",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "gain": 1.6,
+            "click": null
+          },
+          {
+            "file": "bigrusty/47-midtom.m4a",
+            "placeholder": "midTom",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "gain": 1.43,
+            "click": null
+          },
+          {
+            "file": "bigrusty/45-lotom.m4a",
+            "placeholder": "loTom",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "gain": 1.16,
+            "click": null
+          },
+          {
+            "file": "bigrusty/41-floortom.m4a",
+            "placeholder": "loTom",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "gain": 1.2,
+            "click": null
+          },
+          {
+            "file": "bigrusty/36-kick.m4a",
+            "placeholder": "kick",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "gain": 1.1,
+            "click": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "growlybass",
+      "name": "Jazz Bass",
+      "family": "bass",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/growlybass-1.0.0.zip",
+      "bytes": 411864,
+      "crc32": 3981003844,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sfzinstruments/karoryfer.growlybass",
+        "credit": "Karoryfer Samples, Growlybass — a Squier Jazz Bass recorded direct, CC0"
+      },
+      "manifest": {
+        "id": "growlybass",
+        "name": "Jazz Bass",
+        "version": "1.0.0",
+        "family": "bass",
+        "kind": "pitched",
+        "range": {
+          "lo": 24,
+          "hi": 67
+        },
+        "defaultView": {
+          "lo": 36,
+          "hi": 60
+        },
+        "shade": "grape",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sfzinstruments/karoryfer.growlybass",
+          "credit": "Karoryfer Samples, Growlybass — a Squier Jazz Bass recorded direct, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.12
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 1,
+        "voicesAtOnce": 1,
+        "slideSeconds": 0.06,
+        "zones": [
+          {
+            "file": "growlybass/db2_f_rr1.m4a",
+            "rootNote": 25,
+            "lo": 24,
+            "hi": 26,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/e2_f_rr1.m4a",
+            "rootNote": 28,
+            "lo": 27,
+            "hi": 28,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/gb2_f_rr1.m4a",
+            "rootNote": 30,
+            "lo": 29,
+            "hi": 31,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/a2_f_rr1.m4a",
+            "rootNote": 33,
+            "lo": 32,
+            "hi": 34,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/c3_f_rr1.m4a",
+            "rootNote": 36,
+            "lo": 35,
+            "hi": 37,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/eb3_f_rr1.m4a",
+            "rootNote": 39,
+            "lo": 38,
+            "hi": 40,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/gb3_f_rr1.m4a",
+            "rootNote": 42,
+            "lo": 41,
+            "hi": 43,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/a3_f_rr1.m4a",
+            "rootNote": 45,
+            "lo": 44,
+            "hi": 46,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/c4_f_rr1.m4a",
+            "rootNote": 48,
+            "lo": 47,
+            "hi": 49,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/eb4_f_rr1.m4a",
+            "rootNote": 51,
+            "lo": 50,
+            "hi": 52,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/gb4_f_rr1.m4a",
+            "rootNote": 54,
+            "lo": 53,
+            "hi": 55,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/a4_f_rr1.m4a",
+            "rootNote": 57,
+            "lo": 56,
+            "hi": 58,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/c5_f_rr1.m4a",
+            "rootNote": 60,
+            "lo": 59,
+            "hi": 61,
+            "placeholder": "saw303"
+          },
+          {
+            "file": "growlybass/eb5_f_rr1.m4a",
+            "rootNote": 63,
+            "lo": 62,
+            "hi": 67,
+            "placeholder": "saw303"
+          }
+        ]
+      }
+    },
+    {
+      "id": "uprightkw",
+      "name": "Upright",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/uprightkw-1.0.0.zip",
+      "bytes": 1458531,
+      "crc32": 2372851719,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/freepats/upright-piano-KW",
+        "credit": "Upright Piano KW — a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
+      },
+      "manifest": {
+        "id": "uprightkw",
+        "name": "Upright",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 21,
+          "hi": 108
+        },
+        "defaultView": {
+          "lo": 48,
+          "hi": 72
+        },
+        "shade": "amber",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/freepats/upright-piano-KW",
+          "credit": "Upright Piano KW — a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.6
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "rumble": 0.7,
+        "zones": [
+          {
+            "file": "uprightkw/A0vH.m4a",
+            "rootNote": 21,
+            "lo": 21,
+            "hi": 22,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/B0vH.m4a",
+            "rootNote": 23,
+            "lo": 23,
+            "hi": 23,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/C1vH.m4a",
+            "rootNote": 24,
+            "lo": 24,
+            "hi": 25,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Ds1vH.m4a",
+            "rootNote": 27,
+            "lo": 26,
+            "hi": 28,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Fs1vH.m4a",
+            "rootNote": 30,
+            "lo": 29,
+            "hi": 31,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/A1vH.m4a",
+            "rootNote": 33,
+            "lo": 32,
+            "hi": 33,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/B1vH.m4a",
+            "rootNote": 35,
+            "lo": 34,
+            "hi": 35,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/C2vH.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 37,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Ds2vH.m4a",
+            "rootNote": 39,
+            "lo": 38,
+            "hi": 40,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Fs2vH.m4a",
+            "rootNote": 42,
+            "lo": 41,
+            "hi": 45,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/B2vH.m4a",
+            "rootNote": 47,
+            "lo": 46,
+            "hi": 47,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/C3vH.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 49,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Ds3vH.m4a",
+            "rootNote": 51,
+            "lo": 50,
+            "hi": 52,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Fs3vH.m4a",
+            "rootNote": 54,
+            "lo": 53,
+            "hi": 55,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/A3vH.m4a",
+            "rootNote": 57,
+            "lo": 56,
+            "hi": 57,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/B3vH.m4a",
+            "rootNote": 59,
+            "lo": 58,
+            "hi": 61,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Ds4vH.m4a",
+            "rootNote": 63,
+            "lo": 62,
+            "hi": 64,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Fs4vH.m4a",
+            "rootNote": 66,
+            "lo": 65,
+            "hi": 67,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/A4vH.m4a",
+            "rootNote": 69,
+            "lo": 68,
+            "hi": 69,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/B4vH.m4a",
+            "rootNote": 71,
+            "lo": 70,
+            "hi": 71,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/C5vH.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 73,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Ds5vH.m4a",
+            "rootNote": 75,
+            "lo": 74,
+            "hi": 76,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Fs5vH.m4a",
+            "rootNote": 78,
+            "lo": 77,
+            "hi": 79,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/A5vH.m4a",
+            "rootNote": 81,
+            "lo": 80,
+            "hi": 81,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/B5vH.m4a",
+            "rootNote": 83,
+            "lo": 82,
+            "hi": 83,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/C6vH.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 85,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Ds6vH.m4a",
+            "rootNote": 87,
+            "lo": 86,
+            "hi": 88,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Fs6vH.m4a",
+            "rootNote": 90,
+            "lo": 89,
+            "hi": 91,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/A6vH.m4a",
+            "rootNote": 93,
+            "lo": 92,
+            "hi": 93,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/B6vH.m4a",
+            "rootNote": 95,
+            "lo": 94,
+            "hi": 95,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/C7vH.m4a",
+            "rootNote": 96,
+            "lo": 96,
+            "hi": 97,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Ds7vH.m4a",
+            "rootNote": 99,
+            "lo": 98,
+            "hi": 100,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/Fs7vH.m4a",
+            "rootNote": 102,
+            "lo": 101,
+            "hi": 103,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/A7vH.m4a",
+            "rootNote": 105,
+            "lo": 104,
+            "hi": 105,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/B7vH.m4a",
+            "rootNote": 107,
+            "lo": 106,
+            "hi": 107,
+            "placeholder": "organ"
+          },
+          {
+            "file": "uprightkw/C8vH.m4a",
+            "rootNote": 108,
+            "lo": 108,
+            "hi": 108,
+            "placeholder": "organ"
+          }
+        ]
+      }
+    }
+  ],
+  "songs": []
+}
