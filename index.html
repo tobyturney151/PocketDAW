@@ -13768,8 +13768,16 @@ function renderHome(host, store, songs, actions, tab) {
    * clutter, so the Samples tree is reachable by opening the folder and
    * nowhere else. Anything the user puts in there is theirs and still shows.
    */
-  const list = songs.list.filter((entry) =>
-    !(isBuiltIn(entry.id) && isInSamples(entry.projectId, projects)));
+  /**
+   * The Library tab means *my* songs, so nothing the app ships is in it —
+   * the loops in Samples and the compositions in Example Songs alike.
+   * Keyed on the song rather than the folder it sits in, because
+   * `isInSamples` missed Example Songs entirely and a rule about what a
+   * thing *is* travels better than one about where it lives.
+   *
+   * A song the user puts inside those folders is theirs and still listed.
+   */
+  const list = songs.list.filter((entry) => !isBuiltIn(entry.id));
   const current = store.state.song;
 
   host.appendChild(
@@ -13816,7 +13824,9 @@ function renderHome(host, store, songs, actions, tab) {
     // the way a folder does inside a folder.
     const roots = childProjects(projects, null);
     if (roots.length) {
-      host.appendChild(el('div', { class: 'libtiles' }, roots.map((p) => projectTile(p, list, projects, actions))));
+      // Counted from every song, not the filtered list: a folder holding
+      // only the app's own loops would otherwise read as empty.
+      host.appendChild(el('div', { class: 'libtiles' }, roots.map((p) => projectTile(p, songs.list, projects, actions))));
     } else {
       host.appendChild(
         el('p', { class: 'hint dim', text: 'A project is a folder of songs, and can hold folders of its own. Deleting one never deletes the songs in it.' }),
