@@ -34,6 +34,7 @@
           "release": 0.01
         },
         "accentGain": 1.5,
+        "gateNotes": true,
         "polyphony": 16,
         "voicesAtOnce": 3,
         "lanes": [
@@ -243,7 +244,7 @@
     },
     {
       "id": "growlybass",
-      "name": "Jazz Bass",
+      "name": "Growly Bass",
       "family": "bass",
       "kind": "pitched",
       "version": "1.0.0",
@@ -257,7 +258,7 @@
       },
       "manifest": {
         "id": "growlybass",
-        "name": "Jazz Bass",
+        "name": "Growly Bass",
         "version": "1.0.0",
         "family": "bass",
         "kind": "pitched",
@@ -388,7 +389,7 @@
     },
     {
       "id": "uprightkw",
-      "name": "Upright",
+      "name": "Kawai Upright",
       "family": "keys",
       "kind": "pitched",
       "version": "1.0.0",
@@ -402,7 +403,7 @@
       },
       "manifest": {
         "id": "uprightkw",
-        "name": "Upright",
+        "name": "Kawai Upright",
         "version": "1.0.0",
         "family": "keys",
         "kind": "pitched",
@@ -422,7 +423,7 @@
         },
         "envelope": {
           "attack": 0.002,
-          "release": 0.6
+          "release": 0.18
         },
         "trim": 1,
         "accentGain": 1.5,
