@@ -1085,7 +1085,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-20 from src/. */
+/* PocketDAW - phase 2. Built 2026-09-20 16:38 from src/. */
 (function () {
 'use strict';
 
@@ -13277,7 +13277,7 @@ function softCeilingCurve(knee = CEILING_KNEE, n = 2049) {
   return curve;
 }
 
-function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers , doc = globalThis.document, preferMedia = true , onOutputFallback, output: providedOutput = null, takeCue }) {
+function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers , doc = globalThis.document, preferMedia = true , onOutputFallback, output: providedOutput = null, takeCue, onPlayingChange }) {
   const loader = createKitLoader({ ctx, fetchAudio });
   const master = ctx.createGain();
   /**
@@ -13863,6 +13863,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       // Reaching the end of a song stops the transport without anyone
       // pressing anything, and that stop has to release the route too.
       if (output.setActive) output.setActive(false);
+      if (onPlayingChange) onPlayingChange(false);
     },
   });
 
@@ -13900,6 +13901,9 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
      * phantom track on the lock screen of an idle phone.
      */
     if (output.setActive) output.setActive(true);
+    // Said before the first note, so the platform knows this page is playing
+    // something and keeps it audible past the ring switch.
+    if (onPlayingChange) onPlayingChange(true);
     await ensureAll();
     transport.play();
   }
@@ -13907,6 +13911,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
   function stop() {
     transport.stop();
     if (output.setActive) output.setActive(false);
+    if (onPlayingChange) onPlayingChange(false);
   }
 
   function dispose() {
@@ -13988,6 +13993,31 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
  * No hacks alongside it. If the API is missing the app says so, once. See
  * docs/audio-session-plan.md for the reasoning and how to read the report.
  */
+/**
+ * Give the session type back when nothing is playing.
+ *
+ * Declaring `playback` is what makes the ring switch stop applying — and it
+ * is also what tells iOS this page is a media app, which puts a Now Playing
+ * entry on the lock screen with a pause button that pauses nothing. It was
+ * declared once, at startup, and never withdrawn, so an idle grid sat on the
+ * lock screen for the whole session.
+ *
+ * `auto` hands the decision back to the browser. The cost is that the ring
+ * switch applies again while idle, so a tap on a note is silent on a
+ * silenced phone until play is pressed; that is the same trade the media
+ * route makes, and the quieter of the two failures.
+ */
+function releasePlaybackSession(nav = globalThis.navigator) {
+  const session = nav && nav.audioSession;
+  if (!session) return { api: 'missing', requested: null };
+  try {
+    session.type = 'auto';
+    return { api: 'supported', requested: 'auto' };
+  } catch (err) {
+    return { api: 'supported', requested: null, error: err && err.message };
+  }
+}
+
 function requestPlaybackSession(nav = globalThis.navigator) {
   const session = nav && nav.audioSession;
   if (!session) return { api: 'missing', requested: null };
@@ -14098,7 +14128,19 @@ function createAudioSession({
     };
   }
 
+  /**
+   * Called whenever playback starts or stops. `playback` while sounding, so
+   * the ring switch is ignored and the sound survives the lock screen;
+   * `auto` the rest of the time, so the phone does not think this page is
+   * playing something.
+   */
+  function setPlaying(playing) {
+    requested = playing ? requestPlaybackSession(nav) : releasePlaybackSession(nav);
+    return requested;
+  }
+
   return {
+    setPlaying,
     get context() {
       return ctx;
     },
@@ -16093,7 +16135,7 @@ function expandRemoteSong(doc) {
  * the current one and behaves like neither. Song settings shows this, so
  * "which build am I actually running" is a two-second question.
  */
-const BUILD_STAMP = '2026-09-20';
+const BUILD_STAMP = '2026-09-20 16:38';
 
 
 /* ---- src/ui/app.js ---- */
@@ -16332,6 +16374,16 @@ function mountApp(root, options = {}) {
          * starts this play and no other. The re-render is what takes the
          * marker and its guide line off the grid.
          */
+        /**
+         * Keep the platform's idea of "is this page playing" in step with
+         * the transport. Declaring playback is what ignores the ring
+         * switch; leaving it declared is what leaves a player on the lock
+         * screen of an idle phone.
+         */
+        onPlayingChange: (playing) => {
+          if (session.setPlaying) session.setPlaying(playing);
+          render();
+        },
         takeCue: () => {
           const tick = store.state.view.cueTick || 0;
           if (tick) {
@@ -16445,6 +16497,7 @@ function mountApp(root, options = {}) {
     if (engine && engine.transport && engine.transport.playing) return;
     const out = output;
     if (out && out.releaseNow) out.releaseNow();
+    if (session.setPlaying) session.setPlaying(false);
   }
 
   /**
