@@ -10,11 +10,11 @@
   --ink: #000;
   --panel: #161616;
   --panel2: #1f1f1f;
-  --cell: #1c1c1c;
-  --line: #2a2a2a;
-  --beat: #3a3a3a;
-  --bar: #5a5a5a;
-  --root: #221f3a;
+  --cell: #242424;
+  --line: #484848;
+  --beat: #6e6e6e;
+  --bar: #a8a8a8;
+  --root: #2a2650;
   --text: #f1efe8;
   --text2: #b4b2a9;
   --text3: #5f5e5a;
@@ -86,20 +86,35 @@ html, body {
 
 .transport { display: flex; align-items: center; gap: 18px; }
 
+/**
+ * The transport. Half again the size it was: the glyph and the tap target
+ * both, so a bigger symbol is also an easier one to hit. The bar grows from
+ * 40px to 60px, which is about two-thirds of a grid row given back to the
+ * header — deliberate, and the reason play is treated separately below.
+ */
 .icon {
   background: none;
   border: 0;
   color: var(--text2);
-  font-size: 17px;
+  font-size: 25.5px;
   line-height: 1;
-  padding: 8px;
-  min-width: 40px;
-  min-height: 40px;
-  border-radius: 10px;
+  padding: 12px;
+  min-width: 60px;
+  min-height: 60px;
+  border-radius: 14px;
   font-family: inherit;
 }
 .icon:active { background: var(--panel2); }
-.icon.big { color: var(--purple-light); font-size: 20px; }
+.icon.big {
+  color: var(--purple-light);
+  /* Play grows by a quarter rather than a half: it starts larger than its
+     neighbours, and at +50% it dominated the bar. */
+  font-size: 25px;
+  min-width: 50px;
+  min-height: 50px;
+  padding: 10px;
+  border-radius: 12px;
+}
 .icon.big.playing { background: var(--on-purple); }
 .modechip { flex: 0 0 auto; }
 .sectionrow-on { outline: 1px solid var(--purple-dark); }
@@ -4731,7 +4746,12 @@ const MAX_ZOOM_X = 320;
 const SLIVER_HEIGHT = 7;
 const LABEL_WIDTH_PITCHED = 40;
 const LABEL_WIDTH_DRUM = 86;
-const HEADER_HEIGHT = 22;
+/**
+ * The ruler strip. 28px rather than 22: it is a tap target now — tapping it
+ * cues where play starts — and 22px is a mean thing to ask of a thumb. The
+ * six pixels come out of the grid.
+ */
+const HEADER_HEIGHT = 28;
 
 /**
  * Turns song plus view state into everything both the renderer and the gesture
@@ -4874,12 +4894,21 @@ const theme = {
   ink: '#000000',
   panel: '#161616',
   panel2: '#1F1F1F',
-  cell: '#1C1C1C',
-  cellAlt: '#181818',
-  line: '#2A2A2A',
-  beat: '#3A3A3A',
-  bar: '#5A5A5A',
-  root: '#221F3A',
+  /**
+   * The grid's lines used to sit at 1.19:1 (step), 1.50:1 (beat) and 2.47:1
+   * (bar) against the cell, which is why it read as a wash rather than as
+   * countable cells. Lifting the lines alone runs out of headroom on a
+   * near-black cell, so the cells come up too and the lines sit on
+   * something: now 1.54, 2.71 and 6.06 to one.
+   */
+  cell: '#242424',
+  cellAlt: '#202020',
+  line: '#484848',
+  beat: '#6E6E6E',
+  bar: '#A8A8A8',
+  /** Between rows. A half-pixel of pure black was almost nothing. */
+  rowLine: '#101010',
+  root: '#2A2650',
   text: '#F1EFE8',
   text2: '#B4B2A9',
   text3: '#5F5E5A',
@@ -4903,22 +4932,28 @@ const theme = {
  * The interface accent stays purple (play, selection, playhead) so a track's
  * colour never competes with the app talking to you.
  */
+/**
+ * Root-row tints. Lifted with the cells: at the old near-black cell a tint of
+ * about 1.10:1 was enough to mark the tonic, and against the new #242424 the
+ * same colours measured 1.01 — the row had vanished. Each is scaled back to
+ * roughly 1.13:1, hue untouched.
+ */
 const SHADES = {
-  violet: { base: '#8077DC', light: '#C1B8EB', dark: '#4B489C', tint: '#24203B' },
-  orchid: { base: '#B96FC7', light: '#DEBBE3', dark: '#7E418B', tint: '#301C34' },
-  magenta: { base: '#D761AC', light: '#F0B5D7', dark: '#973174', tint: '#38192C' },
-  rose: { base: '#E8648A', light: '#FBBBC9', dark: '#A53559', tint: '#3C1822' },
-  red: { base: '#E7605A', light: '#FEB4AC', dark: '#A23031', tint: '#3C1A17' },
-  orange: { base: '#E87F40', light: '#FFCDB2', dark: '#A65019', tint: '#371D0D' },
-  amber: { base: '#E2A53C', light: '#FFE4C3', dark: '#A47312', tint: '#302105' },
-  yellow: { base: '#E2CD52', light: '#F8E8AB', dark: '#A7972A', tint: '#292404' },
-  lime: { base: '#A7C754', light: '#E1EFB5', dark: '#73902C', tint: '#1F2609' },
-  green: { base: '#51AE58', light: '#B8E2B6', dark: '#23772F', tint: '#122913' },
-  teal: { base: '#07AE9A', light: '#B0E1D6', dark: '#007667', tint: '#002A23' },
-  cyan: { base: '#05B1C5', light: '#B1E6F0', dark: '#007887', tint: '#00292F' },
-  blue: { base: '#0092E0', light: '#AAC9EF', dark: '#005E92', tint: '#02263E' },
-  indigo: { base: '#4F81E5', light: '#B0BCF0', dark: '#0B50A3', tint: '#19233D' },
-  silver: { base: '#D4D2C8', light: '#EDEBE3', dark: '#929188', tint: '#292824' },
+  violet: { base: '#8077DC', light: '#C1B8EB', dark: '#4B489C', tint: '#2E2949' },
+  orchid: { base: '#B96FC7', light: '#DEBBE3', dark: '#7E418B', tint: '#3D2442' },
+  magenta: { base: '#D761AC', light: '#F0B5D7', dark: '#973174', tint: '#472138' },
+  rose: { base: '#E8648A', light: '#FBBBC9', dark: '#A53559', tint: '#4B1F2B' },
+  red: { base: '#E7605A', light: '#FEB4AC', dark: '#A23031', tint: '#4B221E' },
+  orange: { base: '#E87F40', light: '#FFCDB2', dark: '#A65019', tint: '#452612' },
+  amber: { base: '#E2A53C', light: '#FFE4C3', dark: '#A47312', tint: '#3D2A08' },
+  yellow: { base: '#E2CD52', light: '#F8E8AB', dark: '#A7972A', tint: '#342E07' },
+  lime: { base: '#A7C754', light: '#E1EFB5', dark: '#73902C', tint: '#28310D' },
+  green: { base: '#51AE58', light: '#B8E2B6', dark: '#23772F', tint: '#183419' },
+  teal: { base: '#07AE9A', light: '#B0E1D6', dark: '#007667', tint: '#02342C' },
+  cyan: { base: '#05B1C5', light: '#B1E6F0', dark: '#007887', tint: '#02333A' },
+  blue: { base: '#0092E0', light: '#AAC9EF', dark: '#005E92', tint: '#04304C' },
+  indigo: { base: '#4F81E5', light: '#B0BCF0', dark: '#0B50A3', tint: '#212D4D' },
+  silver: { base: '#D4D2C8', light: '#EDEBE3', dark: '#929188', tint: '#2F2E29' },
 };
 
 /**
@@ -5000,11 +5035,11 @@ function drawGrid(canvas, { song, view, kit, shade: shadeName, clip, layout, scr
     if (row.y + row.height < top - ROW_HEIGHT || row.y > bottom + ROW_HEIGHT) return;
     ctx.fillStyle = row.isRoot ? rootTint : theme.cell;
     ctx.fillRect(gridLeft, row.y, gridRight - gridLeft, row.height);
-    ctx.fillStyle = theme.ink;
-    ctx.fillRect(gridLeft, row.y + row.height - 0.5, gridRight - gridLeft, 0.5);
+    ctx.fillStyle = theme.rowLine;
+    ctx.fillRect(gridLeft, row.y + row.height - 1, gridRight - gridLeft, 1);
     if (row.groupStart) {
       ctx.fillStyle = theme.beat;
-      ctx.fillRect(gridLeft, row.y, gridRight - gridLeft, 1);
+      ctx.fillRect(gridLeft, row.y, gridRight - gridLeft, 1.5);
     }
   });
 
@@ -5021,11 +5056,12 @@ function drawGrid(canvas, { song, view, kit, shade: shadeName, clip, layout, scr
     ctx.lineTo(x, contentBottom);
     if (isBar) {
       ctx.strokeStyle = theme.bar;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 3;
       ctx.setLineDash([]);
     } else if (isBeat) {
+      // The beat is what a player counts, so it is drawn to be counted.
       ctx.strokeStyle = theme.beat;
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 2;
       ctx.setLineDash([]);
     } else {
       ctx.strokeStyle = theme.line;
@@ -5035,6 +5071,25 @@ function drawGrid(canvas, { song, view, kit, shade: shadeName, clip, layout, scr
     ctx.stroke();
   }
   ctx.setLineDash([]);
+
+  /**
+   * The cue, continued down the grid. Dashed so it is never mistaken for a
+   * bar line or for the playhead, both of which are solid.
+   */
+  if (Number.isFinite(view.cueTick) && view.cueTick > 0) {
+    const cx = Math.round(layout.tickToX(view.cueTick)) + 0.5;
+    if (cx >= gridLeft - 2 && cx <= gridRight + 2) {
+      ctx.save();
+      ctx.setLineDash([3, 4]);
+      ctx.strokeStyle = theme.purple;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(cx, contentTop);
+      ctx.lineTo(cx, contentBottom);
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
 
   // Notes
   // With the automation lane showing, the notes ghost back: you place
@@ -5168,17 +5223,46 @@ function drawGrid(canvas, { song, view, kit, shade: shadeName, clip, layout, scr
   // Header: bar numbers
   ctx.fillStyle = theme.ink;
   ctx.fillRect(0, 0, cssW, HEADER_HEIGHT);
-  ctx.fillStyle = theme.text3;
-  ctx.font = '11px system-ui, -apple-system, sans-serif';
+  /**
+   * The bar marks read as the grid's own bar lines continued upwards: same
+   * colour, same 3px, full height rather than inset. The numerals are half
+   * again the size they were and take the line's colour, so the ruler and
+   * the grid are one thing rather than two.
+   */
+  ctx.fillStyle = theme.bar;
+  ctx.font = '600 17px system-ui, -apple-system, sans-serif';
+  // Centred in the strip. The baseline is set here rather than relied on
+  // from elsewhere: the row labels set it too, and which of them runs first
+  // is not something this block should depend on.
+  ctx.textBaseline = 'middle';
   const bars = Math.round(layout.totalTicks / tpBar);
   for (let b = 0; b < bars; b++) {
     const x = layout.tickToX(b * tpBar);
     if (x < layout.labelWidth - 20 || x > cssW) continue;
-    ctx.fillText(String(b + 1), x + 4, HEADER_HEIGHT / 2);
-    ctx.fillStyle = theme.beat;
-    ctx.fillRect(Math.round(x) + 0.5, 4, 1, HEADER_HEIGHT - 8);
-    ctx.fillStyle = theme.text3;
+    ctx.fillRect(Math.round(x) - 1, 0, 3, HEADER_HEIGHT);
+    ctx.fillText(String(b + 1), x + 6, HEADER_HEIGHT / 2);
   }
+  /**
+   * Where the next press of play will start. Drawn last in the header so it
+   * sits over the bar marks, and clipped away behind the row labels like
+   * everything else that scrolls.
+   */
+  if (Number.isFinite(view.cueTick) && view.cueTick > 0) {
+    const cx = layout.tickToX(view.cueTick);
+    if (cx >= layout.labelWidth - 8 && cx <= cssW + 8) {
+      ctx.fillStyle = theme.purple;
+      ctx.beginPath();
+      ctx.moveTo(cx - 7, HEADER_HEIGHT - 12);
+      ctx.lineTo(cx + 7, HEADER_HEIGHT - 12);
+      ctx.lineTo(cx, HEADER_HEIGHT);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = theme.purpleLight;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+  }
+
   ctx.fillStyle = theme.ink;
   ctx.fillRect(0, 0, layout.labelWidth, HEADER_HEIGHT);
 
@@ -7029,7 +7113,13 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     const layout = getLayout();
 
     if (p.y < HEADER_HEIGHT) {
+      /**
+       * The ruler still pans, because that is how you get to bar nine. A tap
+       * that never became a drag sets the cue instead, on lift — the same
+       * shape as tapping empty grid to clear a selection.
+       */
       drag = beginPan(p, 'x');
+      drag.cueAt = p.x;
       return;
     }
 
@@ -7324,7 +7414,18 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     }
 
     if (!drag.moved) {
-      if (drag.kind === 'pan' && drag.clearOnTap) {
+      if (drag.kind === 'pan' && drag.cueAt != null) {
+        const layout = getLayout();
+        const g = layout.gridTicks;
+        const tick = snapDown(layout.xToTick(drag.cueAt) + g / 2, g);
+        const current = store.state.view.cueTick || 0;
+        // Tapping the marker again, or the downbeat, clears it: a cue at the
+        // start of the loop is the same as no cue, so it should not sit
+        // there looking like a setting.
+        const near = current > 0 && Math.abs(layout.tickToX(current) - drag.cueAt) < 16;
+        const next = near || tick <= 0 || tick >= layout.totalTicks ? 0 : tick;
+        store.setView({ cueTick: next });
+      } else if (drag.kind === 'pan' && drag.clearOnTap) {
         store.setView({ selection: [], selectedNoteId: null });
         store.setUi({ selectionMenu: false });
       } else if (drag.kind === 'pan' && drag.create) {
@@ -12088,6 +12189,30 @@ const RUMBLE_OPEN_SECONDS = 0.12;
  * silences it, a slide can pick it up. `voice.stopped` means "a release has
  * been scheduled", and `voice.releaseAt` says when.
  */
+/**
+ * How long a gated drum takes to fade.
+ *
+ * A thirty-second note at the song's tempo — 62 ms at 120 bpm — and a
+ * sixty-fourth for the shortest notes. Tempo-relative rather than fixed,
+ * because the point is that the fade is short *musically*: the same 62 ms is
+ * a blink at 200 bpm and an audible slur at 60.
+ *
+ * The second rate exists because at a sixteenth or below the fade stops
+ * being the end of the hit and becomes a large part of it: a 32nd at 120 bpm
+ * lasts 62 ms, exactly a 32nd-note fade, so the note would be nothing but
+ * its own decay. At or under a sixteenth the fade halves and the hit gets
+ * its attack back. An eighth triplet is longer than a sixteenth, so it keeps
+ * the slower fade.
+ */
+function gateReleaseFor(bpm, durationSeconds = null) {
+  const perBeat = 60 / Math.max(20, Math.min(300, bpm || 120));
+  // A sixteenth, a quarter of a beat. Slightly over, so a duration computed
+  // in ticks and rounded still counts as one.
+  const shortest = (perBeat / 4) * 1.02;
+  const short = Number.isFinite(durationSeconds) && durationSeconds > 0 && durationSeconds <= shortest;
+  return perBeat / (short ? 64 / 4 : 32 / 4);
+}
+
 function createSampler(ctx, kit, zones) {
   const output = ctx.createGain();
   output.gain.value = 1;
@@ -12136,11 +12261,12 @@ function createSampler(ctx, kit, zones) {
       g.cancelScheduledValues(t);
       g.setValueAtTime(voice.peak, t);
     }
-    g.linearRampToValueAtTime(0, t + release);
+    const fade = voice.release ?? release;
+    g.linearRampToValueAtTime(0, t + fade);
     try {
       // A source's stop can be set once. Moving a release earlier leaves the
       // original stop in place; the gain is already at zero by then.
-      voice.source.stop(t + release + 0.01);
+      voice.source.stop(t + fade + 0.01);
     } catch (e) {
       // Already stopped or stop already scheduled: harmless.
     }
@@ -12299,10 +12425,26 @@ function createSampler(ctx, kit, zones) {
       if (lastVoice === voice) lastVoice = null;
     };
 
-    // Looped and pitched voices end when the note does; drum one-shots ring out.
-    // Drums ring out; anything sustaining or looping is held for as long as
-    // the note is written, and no longer.
-    if (held && (zone.loopFrames || !isDrum)) stopVoice(voice, time + held);
+    /**
+     * Anything sustaining or looping is held for as long as the note is
+     * written, and no longer. A drum one-shot normally rings out instead —
+     * its sample's length *is* its decay — which is right for a machine
+     * whose sounds are short, and wrong for a close-miked acoustic kit whose
+     * cymbals carry six seconds of room.
+     *
+     * `gateNotes` on the kit lets such a kit be played from the grid: the hit
+     * stops when the note does, so the room is there when a note is long and
+     * out of the way when it is short. Off by default, because turning it on
+     * for the 808 would chop its kick from a second to the length of a 1/16.
+     */
+    const gated = kit.gateNotes && isDrum;
+    if (held && (zone.loopFrames || !isDrum || gated)) {
+      // A 10 ms drum release cuts a ringing cymbal off like a switch, so a
+      // gated voice fades over whatever the caller says a short note is
+      // worth — a 1/32 at the song's tempo — and never less than its own.
+      if (gated && opts.gateRelease) voice.release = Math.max(release, opts.gateRelease);
+      stopVoice(voice, time + held);
+    }
     return voice;
   }
 
@@ -12674,6 +12816,16 @@ function createTransport({
   ctx,
   getSong,
   getSectionId,
+  /**
+   * Where this press of play should start, and clearing it as it is read.
+   *
+   * The cue is consumed rather than kept: it answers "start from here, this
+   * once", so the next press goes back to the top of the loop. Reading and
+   * clearing in one call is what makes that true even if play is pressed
+   * twice quickly — there is no window where the cue has been used but not
+   * yet cleared.
+   */
+  takeCue = () => 0,
   onEvent,
   onStop,
   timers = hostTimers(),
@@ -12847,7 +12999,8 @@ function createTransport({
      * arrangement was painful to edit. Section mode already plays only its
      * own section, so this only concerns the song.
      */
-    anchorTick = mode === 'song' ? songStartTick() : 0;
+    const cue = Math.max(0, Number(takeCue()) || 0);
+    anchorTick = (mode === 'song' ? songStartTick() : 0) + cue;
     ensureMap();
     scheduledUpTo = 0;
     tick();
@@ -13030,7 +13183,7 @@ function softCeilingCurve(knee = CEILING_KNEE, n = 2049) {
   return curve;
 }
 
-function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers , doc = globalThis.document, preferMedia = true , onOutputFallback, output: providedOutput = null }) {
+function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers , doc = globalThis.document, preferMedia = true , onOutputFallback, output: providedOutput = null, takeCue }) {
   const loader = createKitLoader({ ctx, fetchAudio });
   const master = ctx.createGain();
   /**
@@ -13566,6 +13719,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     ctx,
     getSong,
     getSectionId,
+    takeCue,
     timers,
     onEvent: (ev) => {
       if (ev.kind === 'segment') {
@@ -13605,6 +13759,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
 
       player.sampler.noteOn(ev.note.pitch, ev.note.velocity, at, {
         duration: ev.durationSeconds,
+        gateRelease: gateReleaseFor(getSong().bpm, ev.durationSeconds),
         accent: ev.note.flags && ev.note.flags.accent,
         slide: ev.note.flags && ev.note.flags.slide,
       });
@@ -13624,7 +13779,10 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     if (!track) return;
     const player = ensurePlayer(track);
     const duration = player.kit.kind === 'drum' ? undefined : seconds;
-    const fire = (sampler) => sampler.noteOn(pitch, velocity, ctx.currentTime, { duration });
+    const fire = (sampler) => sampler.noteOn(pitch, velocity, ctx.currentTime, {
+      duration,
+      gateRelease: gateReleaseFor(getSong().bpm),
+    });
     if (player.sampler) {
       fire(player.sampler);
       return;
@@ -15086,6 +15244,7 @@ async function renderSong({
     if (!player || !player.sampler) continue;
     player.sampler.noteOn(event.note.pitch, event.note.velocity, event.tick * secondsPerTick, {
       duration: event.duration * secondsPerTick,
+      gateRelease: gateReleaseFor(song.bpm, event.duration * secondsPerTick),
       accent: event.note.flags && event.note.flags.accent,
       slide: event.note.flags && event.note.flags.slide,
     });
@@ -16039,6 +16198,19 @@ function mountApp(root, options = {}) {
         ctx,
         getSong: () => store.state.song,
         getSectionId: () => store.state.view.activeSectionId,
+        /**
+         * The cue set by tapping the ruler, read and cleared in one go: it
+         * starts this play and no other. The re-render is what takes the
+         * marker and its guide line off the grid.
+         */
+        takeCue: () => {
+          const tick = store.state.view.cueTick || 0;
+          if (tick) {
+            store.setView({ cueTick: 0 });
+            render();
+          }
+          return tick;
+        },
         fetchAudio,
         // The document is a seam: tests hand in one whose media element
         // refuses to play, which is what a spent gesture looks like.
@@ -16150,10 +16322,16 @@ function mountApp(root, options = {}) {
       elementPlaying: Boolean(out && out.playing),
       recoveries: out ? out.recoveries : 0,
       content: content ? content.report() : 'off',
-      // Every pack that is actually loaded, so the credits are what is
-      // playing rather than what might be.
-      credits: allKits()
-        .filter((k) => k.license && k.license.credit && k.zones.some((z) => z.file))
+      /**
+       * The credits for the kits **this song is using**, not every kit the
+       * app could load. Read from the song's own tracks, so a pack added to
+       * the catalog tomorrow appears here the first time a track plays it
+       * and never before — no list to maintain, nothing to change in the
+       * app when a pack is added.
+       */
+      credits: [...new Set(store.state.song.tracks.map((t) => t.kitId))]
+        .map((id) => kitById(id, store.state.song.tracks.find((t) => t.kitId === id)))
+        .filter((k) => k && k.license && k.license.credit && k.zones.some((z) => z.file))
         .map((k) => ({ name: k.name, credit: k.license.credit, source: k.license.source })),
     };
   }
