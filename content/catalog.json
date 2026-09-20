@@ -289,10 +289,10 @@
       "name": "Growly Bass",
       "family": "bass",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/growlybass-1.0.0.zip",
-      "bytes": 411864,
-      "crc32": 3981003844,
+      "version": "1.1.0",
+      "file": "packs/growlybass-1.1.0.zip",
+      "bytes": 411717,
+      "crc32": 2892544235,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sfzinstruments/karoryfer.growlybass",
@@ -301,7 +301,7 @@
       "manifest": {
         "id": "growlybass",
         "name": "Growly Bass",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "bass",
         "kind": "pitched",
         "range": {
@@ -336,7 +336,7 @@
             "placeholder": "saw303"
           },
           {
-            "file": "growlybass/e2_f_rr1.m4a",
+            "file": "growlybass/e2_f_rr4.m4a",
             "rootNote": 28,
             "lo": 27,
             "hi": 28,
@@ -371,7 +371,7 @@
             "placeholder": "saw303"
           },
           {
-            "file": "growlybass/gb3_f_rr1.m4a",
+            "file": "growlybass/gb3_f_rr4.m4a",
             "rootNote": 42,
             "lo": 41,
             "hi": 43,
