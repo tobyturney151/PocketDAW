@@ -10280,6 +10280,7 @@ function songSheet(store, onChange, audioReport, onLive) {
       : null,
     audioLine ? el('p', { class: 'hint dim audioline', text: audioLine }) : null,
     audio && audio.content ? el('p', { class: 'hint dim audioline', text: `Content: ${audio.content}` }) : null,
+    audio && audio.build ? el('p', { class: 'hint dim audioline', text: `Build: ${audio.build}` }) : null,
     /**
      * The credits were generated into `assets/samples/CREDITS.md` and never
      * shown anywhere in the app. Now that packs arrive from the network,
@@ -12696,6 +12697,23 @@ function createOutput(ctx, {
     return false;
   }
 
+  /**
+   * Give the route back this instant, without waiting out the idle delay.
+   *
+   * The delay exists so stop-start-stop does not rebuild the element, and it
+   * runs on a timer — which iOS throttles once the page is hidden. So
+   * leaving the app calls this instead, or the lock screen keeps showing a
+   * track until the page is opened again.
+   */
+  function releaseNow() {
+    if (idleTimer) {
+      clearTimeout(idleTimer);
+      idleTimer = null;
+    }
+    if (route === 'media') useDirect();
+    else releaseSession('none');
+  }
+
   /** Back to the plain output, tearing the element down as we go. */
   function useDirect() {
     wanted = false;
@@ -12734,6 +12752,7 @@ function createOutput(ctx, {
     useMedia,
     useDirect,
     setActive,
+    releaseNow,
     dispose: () => {
       if (idleTimer) clearTimeout(idleTimer);
       idleTimer = null;
@@ -16062,6 +16081,21 @@ function expandRemoteSong(doc) {
 }
 
 
+/* ---- src/core/build.js ---- */
+/**
+ * Which build this is.
+ *
+ * `tools/build.js` rewrites the string below as it bundles, so the shipped
+ * file knows its own date. It stays `dev` when the source is run directly.
+ *
+ * This exists because a stale file is invisible: the app served from a
+ * cache, or an `index.html` that was never re-uploaded, looks exactly like
+ * the current one and behaves like neither. Song settings shows this, so
+ * "which build am I actually running" is a two-second question.
+ */
+const BUILD_STAMP = '2026-09-20';
+
+
 /* ---- src/ui/app.js ---- */
 /**
  * @param {HTMLElement} root
@@ -16141,7 +16175,16 @@ function mountApp(root, options = {}) {
     title: 'Play',
     onClick: () => {
       // First, in the gesture itself: the media element can only start here.
-      claimMedia();
+      const out = claimMedia();
+      /**
+       * Arm the release straight away. Claiming the route is unconditional —
+       * it has to happen inside the gesture — but releasing it used to
+       * depend on a later stop event, so any path that claimed and then did
+       * not play left the element running and a phantom track on the lock
+       * screen for the rest of the session. `engine.play()` cancels this
+       * within the same tick; nothing else does.
+       */
+      if (out && out.setActive) out.setActive(false);
       togglePlay().catch((err) => flash(`Play failed: ${err && err.message ? err.message : err}`, 6000));
     },
   });
@@ -16395,6 +16438,16 @@ function mountApp(root, options = {}) {
 
 
   /**
+   * Hand the media route back now, if nothing is playing. Safe to call at
+   * any time: while playing it does nothing.
+   */
+  function releaseIdleOutput() {
+    if (engine && engine.transport && engine.transport.playing) return;
+    const out = output;
+    if (out && out.releaseNow) out.releaseNow();
+  }
+
+  /**
    * Everything needed to answer "why is it silent" from the phone: which
    * category the platform put us in, and which way the sound is leaving.
    */
@@ -16408,6 +16461,7 @@ function mountApp(root, options = {}) {
       elementPlaying: Boolean(out && out.playing),
       recoveries: out ? out.recoveries : 0,
       content: content ? content.report() : 'off',
+      build: BUILD_STAMP,
       /**
        * The credits for the kits **this song is using**, not every kit the
        * app could load. Read from the song's own tracks, so a pack added to
@@ -18481,6 +18535,15 @@ function mountApp(root, options = {}) {
   window.addEventListener('resize', render);
   if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
     document.addEventListener('visibilitychange', () => {
+      /**
+       * Leaving the page while stopped hands the media route back at once,
+       * rather than on the four-second timer: iOS throttles timers in a
+       * hidden page, so the timer may not run until the app is opened
+       * again — and in the meantime the lock screen shows a track that is
+       * not playing. This runs before the storage check below, because it
+       * matters even when there is nothing to save.
+       */
+      if (document.visibilityState === 'hidden') releaseIdleOutput();
       if (!songStore || !restored) return;
       if (document.visibilityState === 'hidden') songStore.flush(store.state.song).catch(() => {});
       else saveOnReturn();
