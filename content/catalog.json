@@ -1,17 +1,17 @@
 {
   "format": "pocketdaw.catalog",
   "version": 1,
-  "built": "2026-09-19",
+  "built": "2026-09-20",
   "packs": [
     {
       "id": "bigrusty",
       "name": "Big Rusty",
       "family": "drums",
       "kind": "drum",
-      "version": "1.0.0",
-      "file": "packs/bigrusty-1.0.0.zip",
-      "bytes": 461004,
-      "crc32": 1226615050,
+      "version": "1.1.0",
+      "file": "packs/bigrusty-1.1.0.zip",
+      "bytes": 674586,
+      "crc32": 276016463,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sfzinstruments/karoryfer.big-rusty-drums",
@@ -20,7 +20,7 @@
       "manifest": {
         "id": "bigrusty",
         "name": "Big Rusty",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "drums",
         "kind": "drum",
         "shade": "silver",
@@ -49,31 +49,46 @@
             "group": "cymbal"
           },
           {
+            "midi": 53,
+            "label": "Bell",
+            "group": "cymbal"
+          },
+          {
             "midi": 51,
             "label": "Ride",
             "group": "cymbal"
           },
           {
-            "midi": 46,
-            "label": "Open hat",
+            "midi": 22,
+            "label": "Hat Shank",
             "group": "hat",
             "chokeGroup": "hat"
           },
           {
             "midi": 42,
-            "label": "Closed hat",
+            "label": "Hat Tip",
             "group": "hat",
             "chokeGroup": "hat"
           },
           {
             "midi": 44,
-            "label": "Pedal hat",
+            "label": "Hat Chik",
             "group": "hat",
             "chokeGroup": "hat"
           },
           {
-            "midi": 38,
-            "label": "Snare",
+            "midi": 31,
+            "label": "Rim Click",
+            "group": "perc"
+          },
+          {
+            "midi": 32,
+            "label": "Shell Click",
+            "group": "perc"
+          },
+          {
+            "midi": 37,
+            "label": "Cross Stick",
             "group": "snare"
           },
           {
@@ -82,8 +97,8 @@
             "group": "snare"
           },
           {
-            "midi": 37,
-            "label": "Sidestick",
+            "midi": 38,
+            "label": "Snare",
             "group": "snare"
           },
           {
@@ -119,7 +134,7 @@
             "rootNote": 49,
             "lo": 49,
             "hi": 49,
-            "gain": 1.04,
+            "gain": 1.62,
             "click": null
           },
           {
@@ -128,7 +143,16 @@
             "rootNote": 52,
             "lo": 52,
             "hi": 52,
-            "gain": 1.02,
+            "gain": 3.27,
+            "click": null
+          },
+          {
+            "file": "bigrusty/53-bell.m4a",
+            "placeholder": "ride",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "gain": 1.68,
             "click": null
           },
           {
@@ -137,43 +161,61 @@
             "rootNote": 51,
             "lo": 51,
             "hi": 51,
-            "gain": 0.84,
+            "gain": 3.59,
             "click": null
           },
           {
-            "file": "bigrusty/46-openhat.m4a",
-            "placeholder": "openHat",
-            "rootNote": 46,
-            "lo": 46,
-            "hi": 46,
-            "gain": 2.6,
+            "file": "bigrusty/22-hatshank.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 22,
+            "lo": 22,
+            "hi": 22,
+            "gain": 2.4,
             "click": null
           },
           {
-            "file": "bigrusty/42-closedhat.m4a",
+            "file": "bigrusty/42-hattip.m4a",
             "placeholder": "closedHat",
             "rootNote": 42,
             "lo": 42,
             "hi": 42,
-            "gain": 1.68,
+            "gain": 3.35,
             "click": null
           },
           {
-            "file": "bigrusty/44-pedalhat.m4a",
+            "file": "bigrusty/44-hatchik.m4a",
             "placeholder": "closedHat",
             "rootNote": 44,
             "lo": 44,
             "hi": 44,
-            "gain": 1.14,
+            "gain": 1.01,
             "click": null
           },
           {
-            "file": "bigrusty/38-snare.m4a",
-            "placeholder": "snare",
-            "rootNote": 38,
-            "lo": 38,
-            "hi": 38,
-            "gain": 2.4,
+            "file": "bigrusty/31-rimclick.m4a",
+            "placeholder": "rimshot",
+            "rootNote": 31,
+            "lo": 31,
+            "hi": 31,
+            "gain": 1.95,
+            "click": null
+          },
+          {
+            "file": "bigrusty/32-shellclick.m4a",
+            "placeholder": "rimshot",
+            "rootNote": 32,
+            "lo": 32,
+            "hi": 32,
+            "gain": 2.95,
+            "click": null
+          },
+          {
+            "file": "bigrusty/37-crossstick.m4a",
+            "placeholder": "rimshot",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "gain": 2.14,
             "click": null
           },
           {
@@ -186,12 +228,12 @@
             "click": null
           },
           {
-            "file": "bigrusty/37-sidestick.m4a",
-            "placeholder": "rimshot",
-            "rootNote": 37,
-            "lo": 37,
-            "hi": 37,
-            "gain": 2.69,
+            "file": "bigrusty/38-snare.m4a",
+            "placeholder": "snare",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "gain": 2.4,
             "click": null
           },
           {
@@ -200,7 +242,7 @@
             "rootNote": 50,
             "lo": 50,
             "hi": 50,
-            "gain": 1.6,
+            "gain": 3.31,
             "click": null
           },
           {
@@ -209,7 +251,7 @@
             "rootNote": 47,
             "lo": 47,
             "hi": 47,
-            "gain": 1.43,
+            "gain": 2.45,
             "click": null
           },
           {
@@ -218,7 +260,7 @@
             "rootNote": 45,
             "lo": 45,
             "hi": 45,
-            "gain": 1.16,
+            "gain": 2.19,
             "click": null
           },
           {
@@ -227,7 +269,7 @@
             "rootNote": 41,
             "lo": 41,
             "hi": 41,
-            "gain": 1.2,
+            "gain": 2,
             "click": null
           },
           {
