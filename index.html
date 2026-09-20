@@ -1085,7 +1085,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-19 from src/. */
+/* PocketDAW - phase 2. Built 2026-09-20 from src/. */
 (function () {
 'use strict';
 
@@ -4463,16 +4463,23 @@ function createStore(initialSong) {
  * is anyone's property. Cross-checked against Ian Ring's catalogue, whose
  * invented names are deliberately not used.
  */
-const SCALE_FAMILIES = ['Common', 'Harmonic minor', 'Melodic minor', 'Harmonic major', 'Symmetric', 'World'];
+/**
+ * The modes of the major scale have a tab of their own. They were in Common
+ * — they are ordinary enough — but they made that list twelve rows long
+ * while every other family had its own tab, so the everyday choice was
+ * buried among them. Major and Minor stay in Common: they are Ionian and
+ * Aeolian, but nobody reaches for them by those names.
+ */
+const SCALE_FAMILIES = ['Common', 'Modes', 'Harmonic minor', 'Melodic minor', 'Harmonic major', 'Symmetric', 'World'];
 
 const SCALES = [
   { id: 'major', name: 'Major', family: 'Common', intervals: [0, 2, 4, 5, 7, 9, 11] },
   { id: 'naturalMinor', name: 'Minor', family: 'Common', intervals: [0, 2, 3, 5, 7, 8, 10] },
-  { id: 'dorian', name: 'Dorian', family: 'Common', intervals: [0, 2, 3, 5, 7, 9, 10] },
-  { id: 'phrygian', name: 'Phrygian', family: 'Common', intervals: [0, 1, 3, 5, 7, 8, 10] },
-  { id: 'lydian', name: 'Lydian', family: 'Common', intervals: [0, 2, 4, 6, 7, 9, 11] },
-  { id: 'mixolydian', name: 'Mixolydian', family: 'Common', intervals: [0, 2, 4, 5, 7, 9, 10] },
-  { id: 'locrian', name: 'Locrian', family: 'Common', intervals: [0, 1, 3, 5, 6, 8, 10] },
+  { id: 'dorian', name: 'Dorian', family: 'Modes', intervals: [0, 2, 3, 5, 7, 9, 10] },
+  { id: 'phrygian', name: 'Phrygian', family: 'Modes', intervals: [0, 1, 3, 5, 7, 8, 10] },
+  { id: 'lydian', name: 'Lydian', family: 'Modes', intervals: [0, 2, 4, 6, 7, 9, 11] },
+  { id: 'mixolydian', name: 'Mixolydian', family: 'Modes', intervals: [0, 2, 4, 5, 7, 9, 10] },
+  { id: 'locrian', name: 'Locrian', family: 'Modes', intervals: [0, 1, 3, 5, 6, 8, 10] },
   { id: 'pentatonicMajor', name: 'Pentatonic major', family: 'Common', intervals: [0, 2, 4, 7, 9], chordScaleId: 'major' },
   { id: 'pentatonicMinor', name: 'Pentatonic minor', family: 'Common', intervals: [0, 3, 5, 7, 10], chordScaleId: 'naturalMinor' },
   { id: 'blues', name: 'Blues', family: 'Common', intervals: [0, 3, 5, 6, 7, 10], chordScaleId: 'naturalMinor' },
@@ -12501,6 +12508,8 @@ function createSampler(ctx, kit, zones) {
  * settings sheet shows both. A route that produces nothing must never be a
  * dead end.
  */
+const IDLE_RELEASE_MS = 4000;
+
 function createOutput(ctx, {
   doc = globalThis.document,
   preferMedia = true,
@@ -12515,6 +12524,12 @@ function createOutput(ctx, {
   let wanted = false; // whether the element is supposed to be playing
   let watchdog = null;
   let recoveries = 0;
+  /**
+   * How long the media route is held open after playback stops. Long enough
+   * that pressing stop and play again does not rebuild it, short enough that
+   * a phone left on the grid is not showing a lock-screen player.
+   */
+  let idleTimer = null;
 
   // Everything in the engine connects here, so the tail can be swapped
   // without the graph above it knowing.
@@ -12627,10 +12642,65 @@ function createOutput(ctx, {
     }
   }
 
+  /**
+   * Hand the system's Now Playing session back.
+   *
+   * iOS registers any playing media element with the lock screen, so the
+   * silent element that carries our sound past the ring switch also puts a
+   * phantom track up there with a pause button — sitting on the lock screen
+   * of a phone that is playing nothing. Saying so explicitly is what takes
+   * it down; letting the element pause is not always enough.
+   */
+  function releaseSession(state) {
+    const nav = typeof navigator === 'undefined' ? null : navigator;
+    if (!nav || !nav.mediaSession) return;
+    try {
+      nav.mediaSession.playbackState = state;
+      if (state === 'none') nav.mediaSession.metadata = null;
+    } catch (err) {
+      // Not every engine has a settable mediaSession; it is decoration.
+    }
+  }
+
+  /**
+   * Whether the media route is wanted at all right now.
+   *
+   * It exists so that playback survives the ring switch, which only matters
+   * while something is playing. Held open for a few seconds after stopping
+   * so that stop-start-stop does not tear it down and rebuild it — and
+   * because restarting needs a gesture, which a second press of play is.
+   */
+  function setActive(active) {
+    if (idleTimer) {
+      clearTimeout(idleTimer);
+      idleTimer = null;
+    }
+    if (active) {
+      /**
+       * Only marks it wanted. Starting the element belongs to the tap
+       * handler, which runs inside the gesture — one attempt per press, so
+       * a refusal is retried by pressing play again rather than twice in
+       * the same press.
+       */
+      releaseSession('playing');
+      return route === 'media';
+    }
+    if (route !== 'media') {
+      releaseSession('none');
+      return false;
+    }
+    idleTimer = setTimeout(() => {
+      idleTimer = null;
+      if (route === 'media') useDirect();
+    }, IDLE_RELEASE_MS);
+    return false;
+  }
+
   /** Back to the plain output, tearing the element down as we go. */
   function useDirect() {
     wanted = false;
     stopWatchdog();
+    releaseSession('none');
     if (element) {
       try {
         element.pause();
@@ -12663,7 +12733,12 @@ function createOutput(ctx, {
     recover,
     useMedia,
     useDirect,
-    dispose: useDirect,
+    setActive,
+    dispose: () => {
+      if (idleTimer) clearTimeout(idleTimer);
+      idleTimer = null;
+      useDirect();
+    },
   };
 }
 
@@ -13766,6 +13841,9 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     },
     onStop: (time) => {
       for (const p of players.values()) if (p.sampler) p.sampler.allNotesOff(time);
+      // Reaching the end of a song stops the transport without anyone
+      // pressing anything, and that stop has to release the route too.
+      if (output.setActive) output.setActive(false);
     },
   });
 
@@ -13796,12 +13874,20 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
   }
 
   async function play() {
+    /**
+     * Claim the media route here, inside the gesture that pressed play. It
+     * carries sound past the ring switch, and it is only wanted while
+     * something is actually sounding — an element left playing puts a
+     * phantom track on the lock screen of an idle phone.
+     */
+    if (output.setActive) output.setActive(true);
     await ensureAll();
     transport.play();
   }
 
   function stop() {
     transport.stop();
+    if (output.setActive) output.setActive(false);
   }
 
   function dispose() {
