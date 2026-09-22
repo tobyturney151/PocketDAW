@@ -1085,7 +1085,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-22 07:19 from src/. */
+/* PocketDAW - phase 2. Built 2026-09-22 15:21 from src/. */
 (function () {
 'use strict';
 
@@ -16759,7 +16759,7 @@ function expandRemoteSong(doc) {
  * the current one and behaves like neither. Song settings shows this, so
  * "which build am I actually running" is a two-second question.
  */
-const BUILD_STAMP = '2026-09-22 07:19';
+const BUILD_STAMP = '2026-09-22 15:21';
 
 
 /* ---- src/ui/app.js ---- */
@@ -19117,7 +19117,13 @@ function mountApp(root, options = {}) {
     if (content) {
       content.setStorage(storage);
       content.loadCatalog().then((cat) => {
-        if (cat) render();
+        /**
+         * Rebuild the library's lists, not just redraw them. The lists are
+         * built from storage at startup, which answers long before the
+         * catalog arrives over the network — and a redraw alone left the
+         * remote songs fetched, counted in song settings, and never shown.
+         */
+        if (cat) withList().catch(() => render());
       }).catch(() => {});
     }
     songStore = createSongStore({
