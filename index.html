@@ -1085,7 +1085,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-20 16:38 from src/. */
+/* PocketDAW - phase 2. Built 2026-09-22 07:19 from src/. */
 (function () {
 'use strict';
 
@@ -4121,6 +4121,12 @@ function buildExampleSong(piece) {
   song.description = piece.description || null;
 
   const keys = song.tracks.find((t) => t.family === 'keys');
+  /**
+   * The kit a piece is written for. Clair de Lune plays on the jRhodes that
+   * ships in the file; pieces from the content repo name the Kawai Upright,
+   * which the app downloads before opening them.
+   */
+  if (piece.kitId) keys.kitId = piece.kitId;
   song.tracks = [keys];
   song.sections = {};
   song.sectionOrder = [];
@@ -4742,6 +4748,25 @@ function transposeBySteps(midi, key, scaleId, steps) {
 /** How many scale steps from one pitch to another, for moving things in key. */
 function stepsBetween(from, to, key, scaleId) {
   return scaleStepOf(to, key, scaleId).step - scaleStepOf(from, key, scaleId).step;
+}
+
+/**
+ * Whether a scale is major or minor in feel, from its third.
+ *
+ * Read from the intervals rather than the name, so it is right for all
+ * forty-six scales without a list to maintain: a minor third and no major
+ * third is minor, the reverse is major. Scales with both or neither — the
+ * blues scales, chromatic, the symmetric ones, some Japanese pentatonics —
+ * answer `null`, because calling them either would be a guess.
+ */
+function scaleMode(id) {
+  const scale = scaleById(id);
+  if (!scale) return null;
+  const minor = scale.intervals.includes(3);
+  const major = scale.intervals.includes(4);
+  if (minor && !major) return 'minor';
+  if (major && !minor) return 'major';
+  return null;
 }
 
 
@@ -8427,6 +8452,523 @@ function coverShades(songs) {
   });
   if (seen.length >= 2) return seen.slice(0, 4);
   return seen.concat(SHADE_NAMES.filter((s) => !seen.includes(s)).slice(0, 3 - seen.length));
+}
+
+// ---- a project's cover --------------------------------------------------------
+
+/**
+ * Twelve of the app's shades, walking the hue circle, for pitched notes.
+ * Yellow and lime are left out: fine on one track chip, but a whole cover
+ * built from them goes olive. Silver is not here either — percussion is
+ * coloured by which drum it is, from the warm end, so drums and melody never
+ * share a hue even when both are dense.
+ */
+const WHEEL = ['violet', 'indigo', 'blue', 'cyan', 'teal', 'green', 'amber', 'orange', 'red', 'rose', 'magenta', 'orchid'];
+const FIFTHS = [0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5];
+
+/** The four tones of a shade, straight from the palette the app draws with. */
+function shadeSetOf(name) {
+  return SHADES[name] || SHADES.violet;
+}
+
+/** Which drum a note is, by its GM number, so a kick is red on any kit. */
+function drumShade(pitch) {
+  if (pitch === 35 || pitch === 36) return 'red';
+  if (pitch >= 37 && pitch <= 40) return 'orange';
+  if (pitch === 42 || pitch === 44 || pitch === 46 || pitch === 22) return 'amber';
+  if ([41, 43, 45, 47, 48, 50].includes(pitch)) return 'rose';
+  if ([49, 51, 52, 53, 55, 57, 59].includes(pitch)) return 'magenta';
+  return 'orchid';
+}
+
+/**
+ * How strong a beat a mark lands on: downbeat, beat, off-eighth, off-
+ * sixteenth. Rhythm becomes light and shade, so four-on-the-floor reads as
+ * four bright marks and a clave as a scatter of light and dark.
+ */
+function metricWeight(x, bars) {
+  const inBar = ((x * Math.max(1, bars)) % 1 + 1) % 1;
+  const six = Math.round(inBar * 16) % 16;
+  if (six === 0) return 3;
+  if (six % 4 === 0) return 2;
+  if (six % 2 === 0) return 1;
+  return 0;
+}
+
+/** Blend two `#rrggbb` colours; `t` is how far from `a` toward `b`. */
+function blend(a, b, t) {
+  const x = parseInt(a.slice(1), 16);
+  const y = parseInt(b.slice(1), 16);
+  const k = Math.max(0, Math.min(1, t));
+  const ch = (shift) => Math.round(((x >> shift) & 255) + (((y >> shift) & 255) - ((x >> shift) & 255)) * k);
+  return `#${[16, 8, 0].map((sh) => ch(sh).toString(16).padStart(2, '0')).join('')}`;
+}
+
+/**
+ * How far major lifts a note's tone and minor sinks it, in octaves of
+ * register. Chosen from previews at six strengths: at this one a minor
+ * passage reads as a deliberate shadow across its arc of the wheel, where
+ * weaker settings barely separated it from the major music either side.
+ */
+const MODE_BIAS = 1.2;
+
+/**
+ * How far the field behind the wheel is taken from the key's tint toward
+ * black: fully. Chosen after seeing 0.6, 0.82, 0.9 and 1.0 side by side —
+ * a pure black field gives the notes all the colour and the crispest edges.
+ * The key still shows, in the notes and in the hub's ring. Kept as a
+ * parameter of the drawing so a preview can compare through this exact code.
+ */
+const FIELD_DARKNESS = 1;
+
+/**
+ * A pitched note's colour. The hue is its pitch class, rotated so the tonic
+ * of *its own section* lands on violet. The tone is a continuous ramp from
+ * the shade's dark through base to light, set by register and pushed by the
+ * section's mode — up for major, down for minor, not at all for a scale that
+ * is neither.
+ */
+function noteColour(pitch, span) {
+  const set = shadeSetOf(pitchShade(pitch, span.key));
+  const push = span.mode === 'minor' ? -MODE_BIAS : span.mode === 'major' ? MODE_BIAS : 0;
+  const t = Math.max(0, Math.min(1, ((pitch - 60) / 12 + push + 1.2) / 2.1));
+  return t < 0.5 ? blend(set.dark, set.base, t * 2) : blend(set.base, set.light, (t - 0.5) * 2);
+}
+
+/** A pitch class picks a shade, rotated so the given key's tonic is violet. */
+function pitchShade(pitch, key) {
+  const pc = ((pitch % 12) + 12) % 12;
+  const step = FIFTHS.indexOf(pc);
+  const rot = FIFTHS.indexOf(((key % 12) + 12) % 12);
+  return WHEEL[((step - rot) % 12 + 12) % 12];
+}
+
+/** Which section a mark falls in, from its position along the song. */
+function spanAt(shape, x) {
+  const spans = shape.spans;
+  if (!spans || !spans.length) return { key: shape.key || 0, mode: null };
+  for (const span of spans) if (x < span.to) return span;
+  return spans[spans.length - 1];
+}
+
+/**
+ * How the radius is split between a song's tracks: half an equal share, half
+ * proportional to how many notes each one plays. Equal alone gave a
+ * three-note bass as much room as a fifteen-hundred-note piano; fully
+ * proportional made the bass a sliver and the ensemble impossible to count.
+ * Every share is floored so a sparse track is never invisible.
+ */
+function ringShares(tracks) {
+  const n = tracks.length;
+  if (!n) return [];
+  const counts = tracks.map((t) => Math.max(1, t.count || t.marks.length));
+  const total = counts.reduce((a, b) => a + b, 0);
+  const raw = counts.map((c) => 0.5 * (1 / n) + 0.5 * (c / total));
+  const floored = raw.map((v) => Math.max(0.08, v));
+  const sum = floored.reduce((a, b) => a + b, 0);
+  return floored.map((v) => v / sum);
+}
+
+/** Drums innermost, then bass, then everything pitched above them. */
+const FAMILY_ORDER = { drums: 0, bass: 1, keys: 2 };
+function ringOrder(tracks) {
+  return [...tracks].sort((a, b) => (FAMILY_ORDER[a.family] ?? 2) - (FAMILY_ORDER[b.family] ?? 2));
+}
+
+/**
+ * A folder's cover: the app's own song shape, bent into a circle.
+ *
+ * Time is the angle, a track is a ring, pitch is the radius within that ring.
+ * Each song in the folder takes a wedge, in the folder's order, so the cover
+ * is a table of contents rather than a texture — and a folder of four loops
+ * is visibly four. The gap between wedges is the only divider; a drawn rule
+ * made the wheel look broken.
+ */
+/**
+ * The shade of a key's tonic, *unrotated*: C is violet, G indigo, and so on
+ * round the circle of fifths. The notes themselves are rotated so every
+ * song's tonic lands on violet, which means the key is never directly
+ * visible in them — this is where it becomes visible, on the outside of a
+ * mark, so a wedge in G carries a different rim from one in C.
+ */
+function tonicShade(key) {
+  return shadeSetOf(WHEEL[FIFTHS.indexOf(((key % 12) + 12) % 12)]);
+}
+
+/**
+ * How a note is drawn. `bar` is the arc along the ring the app has shipped
+ * with; the others are point marks, each spending further retinal variables
+ * (Bertin's term) on things the bar could not say.
+ *
+ * Every point mark is *shaded*, Hobbs-fashion, and the shading is where the
+ * extra meaning lives. The centre of a mark is exactly the note's colour as
+ * the bar would draw it. Around that:
+ *
+ *   highlight  a light core offset up and to the left, so each mark reads as
+ *              a lit object rather than a flat disc;
+ *   exterior   the outer ring of the mark, graded into the *key's* shade,
+ *              unrotated — the one place the key is directly visible, since
+ *              the notes are rotated so every tonic is violet;
+ *   thickness  of that exterior is the *beat*: a downbeat is nearly all
+ *              clean colour, an off-sixteenth is heavily shadowed.
+ *
+ *   dot        a shaded disc.
+ *   celestial  shape is the instrument: keys a four-pointed star, bass a
+ *              ringed planet, drums a spark — a small bright core with rays.
+ *   comet      a shaded head at the onset with a tail the note's length,
+ *              so duration reads as motion round the wheel.
+ */
+const MARK_STYLES = ['bar', 'dot', 'celestial', 'comet', 'sprite'];
+
+/**
+ * Which picture a note becomes, in the `sprite` style: melody a star, bass a
+ * ringed planet, and each drum its own body — the kick a moon, the snare
+ * family a burst, hats sparkles, toms a sun, cymbals a comet.
+ */
+function spriteFor(kind, family, pitch) {
+  if (kind !== 'drum') return family === 'bass' ? 'planet' : 'star';
+  if (pitch === 35 || pitch === 36) return 'moon';
+  if (pitch >= 37 && pitch <= 40) return 'burst';
+  if (pitch === 42 || pitch === 44 || pitch === 46 || pitch === 22) return 'sparkles';
+  if ([41, 43, 45, 47, 48, 50].includes(pitch)) return 'sun';
+  if ([49, 51, 52, 53, 55, 57, 59].includes(pitch)) return 'comet';
+  return 'burst';
+}
+
+const tintCache = new Map();
+
+/**
+ * A picture recoloured to a note's colour without losing its own lighting.
+ *
+ * The `color` blend takes hue and saturation from the fill and luminosity
+ * from what is underneath, so every highlight, crater and shadow in the
+ * artwork survives and only its colour changes. The pitch colouring — the
+ * thing the whole scheme is built on — is kept exactly; the picture only
+ * supplies form. Cached, since a folder repeats the same few combinations.
+ */
+function tinted(image, colour, px, makeCanvas) {
+  const key = `${image.src || image.width}|${colour}|${px}`;
+  if (tintCache.has(key)) return tintCache.get(key);
+  const c = makeCanvas(px, px);
+  const x = c.getContext('2d');
+  x.drawImage(image, 0, 0, px, px);
+  x.globalCompositeOperation = 'color';
+  x.fillStyle = colour;
+  x.fillRect(0, 0, px, px);
+  /**
+   * The blend keeps the picture's own lightness, which would throw away the
+   * note's tone — register, and the darkening of a minor section. So the
+   * tone goes back on as a veil: dark notes shaded toward black, light ones
+   * lifted toward white, in proportion to how far they sit from mid.
+   */
+  const n = parseInt(colour.slice(1), 16);
+  const lum = (0.2126 * ((n >> 16) & 255) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255)) / 255;
+  x.globalCompositeOperation = 'source-atop';
+  if (lum < 0.5) {
+    x.fillStyle = `rgba(0,0,0,${Math.min(0.6, (0.5 - lum) * 1.3)})`;
+    x.fillRect(0, 0, px, px);
+  } else if (lum > 0.68) {
+    x.fillStyle = `rgba(255,255,255,${Math.min(0.4, (lum - 0.68) * 1.2)})`;
+    x.fillRect(0, 0, px, px);
+  }
+  // The fill covered the transparent corners too; cut back to the picture.
+  x.globalCompositeOperation = 'destination-in';
+  x.drawImage(image, 0, 0, px, px);
+  x.globalCompositeOperation = 'source-over';
+  if (tintCache.size > 400) tintCache.clear();
+  tintCache.set(key, c);
+  return c;
+}
+
+
+/** The note's own colour at the centre, the key's shade at the edge. */
+function shadedFill(ctx, x, y, r, colour, edge, weight) {
+  const g = ctx.createRadialGradient && ctx.createRadialGradient(x - r * 0.35, y - r * 0.35, 0, x, y, r);
+  if (!g || !g.addColorStop) return colour;
+  // How much of the radius is clean colour before the shadow starts: nearly
+  // all of it on a downbeat, barely half on an off-sixteenth.
+  const clean = [0.5, 0.62, 0.74, 0.86][weight];
+  g.addColorStop(0, blend(colour, '#ffffff', 0.45));
+  g.addColorStop(0.28, colour);
+  g.addColorStop(clean, colour);
+  g.addColorStop(1, edge);
+  return g;
+}
+
+function starPath(ctx, x, y, long, short, turn) {
+  ctx.beginPath();
+  for (let i = 0; i < 8; i++) {
+    const ang = turn + (i * Math.PI) / 4;
+    const r = i % 2 ? short : long;
+    const px = x + Math.cos(ang) * r;
+    const py = y + Math.sin(ang) * r;
+    if (i === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
+  }
+  ctx.closePath();
+}
+
+function paintMark(ctx, style, g) {
+  const { cx, cy, radius, a0, a1, lw, colour, alpha, weight, kind, family, key, size } = g;
+  if (style === 'bar' || !style) {
+    ctx.strokeStyle = colour;
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = lw;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, a0, Math.max(a1, a0 + 0.012));
+    ctx.stroke();
+    return;
+  }
+  const head = style === 'comet' ? a0 : (a0 + Math.max(a1, a0 + 0.012)) / 2;
+  const x = cx + Math.cos(head) * radius;
+  const y = cy + Math.sin(head) * radius;
+  // The exterior is the key's shade, dark, so it reads as shadow and as key.
+  const edge = kind === 'drum' ? SHADES.silver.tint : tonicShade(key).dark;
+  ctx.globalAlpha = kind === 'drum' && weight === 0 ? 0.7 : 1;
+
+  if (style === 'comet') {
+    /**
+     * The tail trails *behind* the head, against the direction time runs
+     * round the wheel, and is at least a few head-widths long so a short
+     * note still reads as moving. The first version ran the tail forward at
+     * a fraction of the note's length and faded from half opacity; on a
+     * phone it was invisible and the comet looked exactly like the dot.
+     */
+    const noteArc = Math.max(a1 - a0, 0);
+    const minArc = (size * 4.5) / Math.max(1, radius);
+    const length = Math.max(noteArc, minArc);
+    const steps = 8;
+    for (let i = 0; i < steps; i++) {
+      const t0 = a0 - (length * i) / steps;
+      const t1 = a0 - (length * (i + 1)) / steps;
+      const fade = 1 - i / steps;
+      ctx.globalAlpha = 0.9 * fade * fade;
+      ctx.strokeStyle = colour;
+      ctx.lineWidth = Math.max(0.7, size * 1.5 * fade);
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, t1, t0 + 0.002);
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  if (style === 'celestial' && kind === 'drum') {
+    // A spark: rays first, then a small hot core. Rays grow with the beat.
+    const ray = size * (1.2 + weight * 0.35);
+    ctx.strokeStyle = colour;
+    ctx.lineWidth = Math.max(0.7, size * 0.22);
+    ctx.beginPath();
+    for (let i = 0; i < 4; i++) {
+      const ang = head + (i * Math.PI) / 2 + Math.PI / 4;
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + Math.cos(ang) * ray, y + Math.sin(ang) * ray);
+    }
+    ctx.stroke();
+    ctx.fillStyle = shadedFill(ctx, x, y, size * 0.6, colour, edge, weight);
+    ctx.beginPath();
+    ctx.arc(x, y, size * 0.6, 0, Math.PI * 2);
+    ctx.fill();
+    return;
+  }
+
+  if (style === 'celestial' && family === 'bass') {
+    // A planet: a shaded disc behind its ring. The ring is tilted the same
+    // way on every planet, so the silhouette survives at a few pixels.
+    ctx.fillStyle = shadedFill(ctx, x, y, size, colour, edge, weight);
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fill();
+    if (ctx.ellipse) {
+      ctx.strokeStyle = blend(colour, '#ffffff', 0.35);
+      ctx.lineWidth = Math.max(0.7, size * 0.2);
+      ctx.beginPath();
+      ctx.ellipse(x, y, size * 1.75, size * 0.55, -0.45, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    return;
+  }
+
+  if (style === 'celestial') {
+    // A star, leaning along the ring so a wedge of them reads as one field.
+    ctx.fillStyle = shadedFill(ctx, x, y, size * 1.5, colour, edge, weight);
+    starPath(ctx, x, y, size * 1.6, size * 0.5, head);
+    ctx.fill();
+    return;
+  }
+
+  // dot, and the comet's head
+  ctx.fillStyle = shadedFill(ctx, x, y, size, colour, edge, weight);
+  ctx.beginPath();
+  ctx.arc(x, y, size, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawProjectWheel(canvas, {
+  shapes, width, height, fieldDarkness = FIELD_DARKNESS, markStyle = 'bar',
+  sprites = null, makeCanvas = (w, h) => Object.assign(document.createElement('canvas'), { width: w, height: h }),
+}) {
+  const ctx = prepare(canvas, width, height);
+  const songs = (shapes || []).filter((s) => s && s.tracks && s.tracks.some((t) => t.marks.length));
+  const key = songs.length ? songs[0].key || 0 : 0;
+  /**
+   * The crisp field: the key's tint taken most of the way to black. The
+   * notes carry all the colour; the field behind them only has to be dark
+   * enough that the lightest tone never glares and the darkest still reads.
+   */
+  ctx.fillStyle = blend(shadeSetOf(pitchShade(key, key)).tint, '#000000', fieldDarkness);
+  ctx.fillRect(0, 0, width, height);
+  if (!songs.length) return;
+
+  /**
+   * Stroke discipline, from the platform's own advice for icons: no thin
+   * lines or fine detail at small sizes. A folder tile is an icon, so below
+   * about 110 px every stroke is at least 1.6 px, the faint lane wash is
+   * dropped (it reads as noise, not structure), and arc ends are snapped so
+   * neighbouring marks do not shimmer against each other.
+   */
+  const small = Math.min(width, height) <= 110;
+  const minStroke = small ? 1.6 : 1.1;
+  const snap = (a) => (small ? Math.round(a * 200) / 200 : a);
+
+  const cx = width / 2;
+  const cy = height / 2;
+  const R = Math.min(width, height) * 0.47;
+  // The hub: a single, centred point of focus with the rings as its frame.
+  const r0 = R * 0.36;
+  const span = R - r0;
+  const n = songs.length;
+  const gap = n > 1 ? 0.055 : 0;
+  ctx.lineCap = 'butt';
+
+  const useSprites = markStyle === 'sprite' && sprites;
+  const spriteBudget = small ? 30 : 90;
+  const totalMarks = songs.reduce((sum, sh) => sum + sh.tracks.reduce((a, t) => a + t.marks.length, 0), 0);
+  /**
+   * Each track keeps its own share of the budget, and never fewer than four.
+   * A single folder-wide stride let a busy piano crowd out a sparse bass:
+   * eight bass notes thinned by the piano's rate left two planets.
+   */
+  const strideFor = (track) => {
+    if (!useSprites) return 1;
+    const share = Math.max(4, Math.round((spriteBudget * track.marks.length) / Math.max(1, totalMarks)));
+    return Math.max(1, Math.ceil(track.marks.length / share));
+  };
+
+  songs.forEach((shape, s) => {
+    const from = (s / n) * Math.PI * 2 - Math.PI / 2 + gap / 2;
+    const to = ((s + 1) / n) * Math.PI * 2 - Math.PI / 2 - gap / 2;
+    const tracks = ringOrder(shape.tracks.filter((t) => t.marks.length));
+    const shares = ringShares(tracks);
+    let at = r0;
+    tracks.forEach((track, i) => {
+      const band = span * shares[i];
+      const inner = at;
+      at += band;
+      if (!small) {
+        ctx.strokeStyle = 'rgba(255,255,255,0.035)';
+        ctx.lineWidth = band * 0.92;
+        ctx.beginPath();
+        ctx.arc(cx, cy, inner + band / 2, from, to);
+        ctx.stroke();
+      }
+      const rungs = new Set(track.marks.map((m) => m.p)).size;
+      const lw = Math.max(minStroke, ((band - 3) / Math.max(1.6, Math.min(8, rungs))) * 0.9);
+      /**
+       * A point mark's radius. The bar's line width is the wrong measure —
+       * it is built to fill a band, so a sparse drum track made discs half a
+       * ring wide that merged into one blob. Instead: a share of the band,
+       * scaled by the note's length, and never more than half the gap to the
+       * next mark along the ring, so neighbours can touch but not swallow
+       * each other.
+       */
+      const xs = track.marks.map((m) => m.x).sort((a, b) => a - b);
+      const gaps = xs.slice(1).map((v, i) => v - xs[i]).filter((d) => d > 0.0005).sort((a, b) => a - b);
+      const typicalGap = gaps.length ? gaps[Math.floor(gaps.length / 2)] : 0.25;
+      const room = typicalGap * (to - from) * (inner + band / 2) * 0.5;
+      const pointMax = Math.max(small ? 1.6 : 1.2, Math.min(band * 0.26, room));
+      const keepEvery = strideFor(track);
+      track.marks.forEach((mark, mi) => {
+        if (useSprites && mi % keepEvery) return;
+        const radius = inner + 1.5 + (1 - mark.y) * (band - 3);
+        const a0 = snap(from + mark.x * (to - from));
+        const a1 = snap(from + Math.min(1, mark.x + Math.max(mark.w, 0.004)) * (to - from));
+        const span = spanAt(shape, mark.x);
+        const weight = metricWeight(mark.x, shape.bars);
+        let colour;
+        let alpha = 0.95;
+        if (track.kind === 'drum') {
+          // Drums keep their own scheme: hue from which drum, tone from the beat.
+          const set = shadeSetOf(drumShade(mark.p));
+          colour = weight === 3 ? set.light : weight === 2 ? set.base : set.dark;
+          alpha = weight === 0 ? 0.55 : 0.95;
+        } else {
+          // Each mark takes its own section's key and mode, so a song's
+          // wedge is coloured as that song plays — not in the folder's
+          // first song's key, which is what it did before.
+          colour = noteColour(mark.p, span);
+        }
+        const size = Math.max(small ? 1.6 : 1.2, pointMax * (0.6 + Math.min(1, mark.w * 8) * 0.4));
+        if (useSprites) {
+          const name = spriteFor(track.kind, track.family, mark.p);
+          const image = sprites[name] || sprites.star;
+          if (image) {
+            const mid = (a0 + Math.max(a1, a0 + 0.012)) / 2;
+            // Large enough to read as a picture; the downbeat a size up.
+            const floor = small ? 9 : 14;
+            const px = Math.round(Math.max(floor, Math.min(band * 0.62, floor * 1.9)) * (weight === 3 ? 1.25 : 1));
+            const dpr = globalThis.devicePixelRatio || 1;
+            const art = tinted(image, colour, Math.round(px * dpr), makeCanvas);
+            const x = cx + Math.cos(mid) * radius;
+            const y = cy + Math.sin(mid) * radius;
+            // The beat is brightness: off-beats recede, downbeats come forward.
+            ctx.globalAlpha = [0.72, 0.84, 0.94, 1][weight];
+            if (weight === 3 && ctx.createRadialGradient) {
+              const glow = ctx.createRadialGradient(x, y, 0, x, y, px * 0.9);
+              if (glow && glow.addColorStop) {
+                glow.addColorStop(0, blend(tonicShade(span.key).base, '#000000', 0.2));
+                glow.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = glow;
+                ctx.beginPath();
+                ctx.arc(x, y, px * 0.9, 0, Math.PI * 2);
+                ctx.globalAlpha = 0.35;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+              }
+            }
+            ctx.drawImage(art, x - px / 2, y - px / 2, px, px);
+            ctx.globalAlpha = 1;
+            return;
+          }
+        }
+        paintMark(ctx, markStyle, {
+          cx, cy, radius, a0, a1, lw, colour, alpha, weight, band, size,
+          kind: track.kind, family: track.family, key: span.key,
+        });
+      });
+      ctx.globalAlpha = 1;
+    });
+  });
+
+  // The hub itself, carrying how many songs the folder holds.
+  const hub = r0 * 0.86;
+  ctx.fillStyle = 'rgba(0,0,0,0.45)';
+  ctx.beginPath();
+  ctx.arc(cx, cy, hub, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = shadeSetOf(pitchShade(key, key)).base;
+  ctx.globalAlpha = 0.5;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.arc(cx, cy, hub, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+  if (ctx.fillText) {
+    ctx.fillStyle = theme.text;
+    ctx.font = `600 ${Math.round(hub * 0.8)}px system-ui, -apple-system, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(String(n), cx, cy + 1);
+  }
 }
 
 
@@ -14429,28 +14971,68 @@ function createContent({
    * which is what lets a song that names an undownloaded kit still draw the
    * right grid.
    */
+  /**
+   * Two catalogs, read independently.
+   *
+   *   catalog.json       instrument packs   — written by `tools/pack.js`
+   *   song-catalog.json  songs and folders  — written by `tools/pack-songs.js`
+   *
+   * They were one file, which meant two sessions working at once could not
+   * both publish: each would upload a catalog holding only its own work, and
+   * whichever landed last silently deleted the other's. Split, each session
+   * owns one file and neither can overwrite the other.
+   *
+   * Either may be missing or broken without affecting the other — a song
+   * catalog that fails to parse must not take the instruments with it.
+   */
+  let songCatalog = null;
+  async function loadPackCatalog() {
+    try {
+      const doc = JSON.parse(decodeText(await get('catalog.json')));
+      if (!doc || doc.format !== 'pocketdaw.catalog') throw new Error('That is not a PocketDAW catalog');
+      const refused = [];
+      (doc.packs || []).forEach((pack) => {
+        if (!pack.manifest) return;
+        const result = registerKit({ ...pack.manifest, version: pack.version });
+        if (!result.ok) refused.push(`${pack.id}: ${result.problems[0]}`);
+      });
+      if (refused.length) say('refused', { refused });
+      lastError = null;
+      return doc;
+    } catch (err) {
+      reachable = false;
+      lastError = err;
+      say('unreachable', { error: err });
+      return null;
+    }
+  }
+  async function loadSongCatalog() {
+    try {
+      const doc = JSON.parse(decodeText(await get('song-catalog.json')));
+      if (!doc || doc.format !== 'pocketdaw.song-catalog') throw new Error('That is not a PocketDAW song catalog');
+      return doc;
+    } catch (err) {
+      // No songs is a normal state — there may simply be none published yet.
+      return null;
+    }
+  }
   async function loadCatalog() {
     return once('catalog', async () => {
-      try {
-        const bytes = await get('catalog.json');
-        const doc = JSON.parse(decodeText(bytes));
-        if (!doc || doc.format !== 'pocketdaw.catalog') throw new Error('That is not a PocketDAW catalog');
-        catalog = doc;
-        const refused = [];
-        (doc.packs || []).forEach((pack) => {
-          if (!pack.manifest) return;
-          const result = registerKit({ ...pack.manifest, version: pack.version });
-          if (!result.ok) refused.push(`${pack.id}: ${result.problems[0]}`);
-        });
-        if (refused.length) say('refused', { refused });
-        lastError = null;
-        return catalog;
-      } catch (err) {
-        reachable = false;
-        lastError = err;
-        say('unreachable', { error: err });
-        return null;
-      }
+      const [packDoc, songDoc] = await Promise.all([loadPackCatalog(), loadSongCatalog()]);
+      songCatalog = songDoc;
+      if (!packDoc && !songDoc) return null;
+      /**
+       * One view for the rest of the app, so the library and the opener do
+       * not need to know there are two files. Songs and folders come only
+       * from the song catalog: a pack catalog written before the split may
+       * still list songs, and reading both would show them twice.
+       */
+      catalog = {
+        ...(packDoc || { format: 'pocketdaw.catalog', packs: [] }),
+        songs: songDoc ? songDoc.songs || [] : [],
+        projects: songDoc ? songDoc.projects || [] : [],
+      };
+      return catalog;
     });
   }
 
@@ -14564,7 +15146,8 @@ function createContent({
     if (!reachable) return `unreachable${lastError ? ` (${lastError.message})` : ''}`;
     const ready = [...packs.keys()];
     const total = catalog ? (catalog.packs || []).length : 0;
-    return `reachable, ${ready.length}/${total} packs loaded${ready.length ? `: ${ready.join(', ')}` : ''}`;
+    const songs = songCatalog ? (songCatalog.songs || []).length : 0;
+    return `reachable, ${ready.length}/${total} packs loaded${ready.length ? `: ${ready.join(', ')}` : ''}, ${songs} songs`;
   }
 
   return {
@@ -14885,7 +15468,13 @@ function projectTile(project, list, projects, actions) {
   const inside = songsUnder(list, projects, project.id);
   const folders = childProjects(projects, project.id);
   const canvas = el('canvas', { class: 'tilecover' });
-  drawMosaic(canvas, { seed: project.id, shades: coverShades(inside), width: TILE, height: TILE });
+  /**
+   * The folder's own songs, drawn as a wheel: one wedge each, in the
+   * folder's order. The mosaic it replaces was seeded from the project id,
+   * so it said nothing about the music and every folder of 808 loops came
+   * out the same.
+   */
+  drawProjectWheel(canvas, { shapes: inside.map((entry) => entry.shape), width: TILE, height: TILE });
   const counts = [`${inside.length} song${inside.length === 1 ? '' : 's'}`];
   if (folders.length) counts.push(`${folders.length} folder${folders.length === 1 ? '' : 's'}`);
   // The name sits on the cover itself, on a dark scrim, so the tile stays
@@ -14911,7 +15500,7 @@ function renderProjectPage(host, store, songs, actions, project) {
   const path = projectPath(projects, project.id);
   const parent = path.length > 1 ? path[path.length - 2] : null;
   const cover = el('canvas', { class: 'projcover' });
-  drawMosaic(cover, { seed: project.id, shades: coverShades(beneath), width: 340, height: 170, tiles: 12 });
+  drawProjectWheel(cover, { shapes: beneath.map((entry) => entry.shape), width: 340, height: 170 });
 
   host.appendChild(
     el('div', { class: 'libhead' }, [
@@ -15534,6 +16123,14 @@ function isFromNewerBuild(song) {
 const MAX_MARKS = 90;
 
 /**
+ * Which generation of shape this is. The shape has grown fields as covers
+ * learned to say more (pitch, family, key, section spans), and a shape
+ * computed by an older build can sit in the content catalog long after. The
+ * drawing tolerates missing fields; this says which ones to expect.
+ */
+const SHAPE_VERSION = 2;
+
+/**
  * The shape of a song: enough to draw it small, and nothing else.
  *
  * A library of twenty songs would otherwise mean holding twenty full note
@@ -15585,17 +16182,44 @@ function songShape(song) {
       x: m.x,
       w: m.w,
       y: height ? 1 - (m.pitch - bottom) / height : 0.5,
+      /**
+       * The note itself, kept alongside its scaled position. A folder's
+       * cover colours every mark by its pitch and groups drum voices by
+       * which drum they are, and neither can be recovered from `y`, which
+       * is normalised to whatever range the track happens to use.
+       */
+      p: m.pitch,
     }));
 
     return {
       shade: track.shade,
       kind: track.kind,
+      // Drums nearest the middle of a wheel, then bass, then the rest.
+      family: kitById(track.kitId, track).family,
       marks: thin(scaled, MAX_MARKS),
       count: marks.length,
     };
   });
 
-  return { sections: order.length, bars: total / sectionTicks(1), tracks };
+  // The key rotates a cover's palette, so two songs in different keys can
+  // never share a colour scheme.
+  /**
+   * Each section's span of the timeline, with the key and mode it actually
+   * plays in. A song is not one key: Clair de Lune spends bars 37–42 in
+   * D-flat minor, and a cover that read only `song.key` coloured that
+   * passage as if it were still major. `settingsFor` is the same answer the
+   * grid and the scheduler use, so the cover cannot disagree with what plays.
+   */
+  const spans = order.map((id, i) => {
+    const settings = settingsFor(song, song.sections[id]);
+    return {
+      from: offsets[i] / total,
+      to: (offsets[i] + lengths[i]) / total,
+      key: settings.key || 0,
+      mode: scaleMode(settings.scaleId),
+    };
+  });
+  return { v: SHAPE_VERSION, sections: order.length, bars: total / sectionTicks(1), key: song.key || 0, spans, tracks };
 }
 
 /** Keep an even spread rather than the first N, so the end is not empty. */
@@ -16135,7 +16759,7 @@ function expandRemoteSong(doc) {
  * the current one and behaves like neither. Song settings shows this, so
  * "which build am I actually running" is a two-second question.
  */
-const BUILD_STAMP = '2026-09-20 16:38';
+const BUILD_STAMP = '2026-09-22 07:19';
 
 
 /* ---- src/ui/app.js ---- */
