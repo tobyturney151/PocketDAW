@@ -4,6 +4,169 @@
   "built": "2026-09-23",
   "packs": [
     {
+      "id": "ambichoir",
+      "name": "Ambi Choir",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/ambichoir-1.0.0.zip",
+      "bytes": 28751,
+      "crc32": 4048647905,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample ambi_choir, from Freesound: https://freesound.org/people/Exsomniel/sounds/207809/, CC0"
+      },
+      "manifest": {
+        "id": "ambichoir",
+        "name": "Ambi Choir",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 49,
+          "hi": 73
+        },
+        "defaultView": {
+          "lo": 49,
+          "hi": 73
+        },
+        "shade": "rose",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample ambi_choir, from Freesound: https://freesound.org/people/Exsomniel/sounds/207809/, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "ambichoir/ambi_choir.m4a",
+            "rootNote": 61,
+            "lo": 49,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 1.919
+          }
+        ]
+      }
+    },
+    {
+      "id": "ambidrone",
+      "name": "Ambi Drone",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/ambidrone-1.0.0.zip",
+      "bytes": 64662,
+      "crc32": 2913032354,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample ambi_drone, from Freesound: https://freesound.org/people/Autistic%20Lucario/sounds/195341/, CC0"
+      },
+      "manifest": {
+        "id": "ambidrone",
+        "name": "Ambi Drone",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 36,
+          "hi": 60
+        },
+        "defaultView": {
+          "lo": 36,
+          "hi": 60
+        },
+        "shade": "teal",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample ambi_drone, from Freesound: https://freesound.org/people/Autistic%20Lucario/sounds/195341/, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "ambidrone/ambi_drone.m4a",
+            "rootNote": 48,
+            "lo": 36,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 2.514
+          }
+        ]
+      }
+    },
+    {
+      "id": "bass808",
+      "name": "808 Bass",
+      "family": "bass",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/bass808-1.0.0.zip",
+      "bytes": 46340,
+      "crc32": 3556855921,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/tidalcycles/sounds-tr808-fischer",
+        "credit": "Michael Fischer, TR-808 Sound Sample Set 1.0.0 (1994), BD2510 retuned, click and drive baked in, CC0 via TidalCycles"
+      },
+      "manifest": {
+        "id": "bass808",
+        "name": "808 Bass",
+        "version": "1.0.0",
+        "family": "bass",
+        "kind": "pitched",
+        "range": {
+          "lo": 21,
+          "hi": 50
+        },
+        "defaultView": {
+          "lo": 21,
+          "hi": 45
+        },
+        "shade": "red",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/tidalcycles/sounds-tr808-fischer",
+          "credit": "Michael Fischer, TR-808 Sound Sample Set 1.0.0 (1994), BD2510 retuned, click and drive baked in, CC0 via TidalCycles"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.06
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 1,
+        "voicesAtOnce": 1,
+        "slideSeconds": 0.1,
+        "zones": [
+          {
+            "file": "bass808/bd808_G1.m4a",
+            "rootNote": 31,
+            "lo": 21,
+            "hi": 50,
+            "placeholder": "saw303",
+            "gain": 0.172
+          }
+        ]
+      }
+    },
+    {
       "id": "basslead",
       "name": "SynthBass Lead",
       "family": "keys",
@@ -15,7 +178,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/synth-bass-lead",
-        "credit": "FreePats Synth Bass & Lead \u2014 Surge, samples by Elf of Happy and Love, CC0"
+        "credit": "FreePats Synth Bass & Lead — Surge, samples by Elf of Happy and Love, CC0"
       },
       "manifest": {
         "id": "basslead",
@@ -35,7 +198,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/synth-bass-lead",
-          "credit": "FreePats Synth Bass & Lead \u2014 Surge, samples by Elf of Happy and Love, CC0"
+          "credit": "FreePats Synth Bass & Lead — Surge, samples by Elf of Happy and Love, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -265,7 +428,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sfzinstruments/karoryfer.big-little-bass",
-        "credit": "Karoryfer Samples, Big Little Bass \u2014 a Washburn AB95 hollowbody, f layer, CC0"
+        "credit": "Karoryfer Samples, Big Little Bass — a Washburn AB95 hollowbody, f layer, CC0"
       },
       "manifest": {
         "id": "biglittle",
@@ -274,7 +437,7 @@
         "family": "bass",
         "kind": "pitched",
         "range": {
-          "lo": 23,
+          "lo": 21,
           "hi": 65
         },
         "defaultView": {
@@ -285,7 +448,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sfzinstruments/karoryfer.big-little-bass",
-          "credit": "Karoryfer Samples, Big Little Bass \u2014 a Washburn AB95 hollowbody, f layer, CC0"
+          "credit": "Karoryfer Samples, Big Little Bass — a Washburn AB95 hollowbody, f layer, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -937,7 +1100,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/synth-pad-choir",
-        "credit": "FreePats Synth Pad Choir \u2014 ZynAddSubFX, samples by Elf of Happy and Love, CC0"
+        "credit": "FreePats Synth Pad Choir — ZynAddSubFX, samples by Elf of Happy and Love, CC0"
       },
       "manifest": {
         "id": "choirpad",
@@ -957,7 +1120,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/synth-pad-choir",
-          "credit": "FreePats Synth Pad Choir \u2014 ZynAddSubFX, samples by Elf of Happy and Love, CC0"
+          "credit": "FreePats Synth Pad Choir — ZynAddSubFX, samples by Elf of Happy and Love, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -1116,42 +1279,42 @@
       }
     },
     {
-      "id": "clavisynth",
-      "name": "Clavisynth",
+      "id": "concertharp",
+      "name": "Concert Harp",
       "family": "keys",
       "kind": "pitched",
       "version": "1.0.0",
-      "file": "packs/clavisynth-1.0.0.zip",
-      "bytes": 455019,
-      "crc32": 3569893037,
+      "file": "packs/concertharp-1.0.0.zip",
+      "bytes": 1031584,
+      "crc32": 3531360144,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, Yamaha TX81Z 'Clavisynth' patch, layer vl2, CC0"
+        "credit": "VCSL, concert harp — layer f1, CC0"
       },
       "manifest": {
-        "id": "clavisynth",
-        "name": "Clavisynth",
+        "id": "concertharp",
+        "name": "Concert Harp",
         "version": "1.0.0",
         "family": "keys",
         "kind": "pitched",
         "range": {
-          "lo": 36,
-          "hi": 100
+          "lo": 26,
+          "hi": 103
         },
         "defaultView": {
-          "lo": 56,
-          "hi": 80
+          "lo": 52,
+          "hi": 76
         },
-        "shade": "lime",
+        "shade": "yellow",
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, Yamaha TX81Z 'Clavisynth' patch, layer vl2, CC0"
+          "credit": "VCSL, concert harp — layer f1, CC0"
         },
         "envelope": {
           "attack": 0.002,
-          "release": 0.3
+          "release": 0.5
         },
         "trim": 1,
         "accentGain": 1.5,
@@ -1159,140 +1322,235 @@
         "voicesAtOnce": 4,
         "zones": [
           {
-            "file": "clavisynth/Clavisynth_C0_vl2.m4a",
-            "rootNote": 36,
-            "lo": 36,
-            "hi": 38,
+            "file": "concertharp/KSHarp_E1_f1.m4a",
+            "rootNote": 28,
+            "lo": 26,
+            "hi": 29,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_E0_vl2.m4a",
-            "rootNote": 40,
-            "lo": 39,
-            "hi": 42,
+            "file": "concertharp/KSHarp_G1_f1.m4a",
+            "rootNote": 31,
+            "lo": 30,
+            "hi": 33,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_Gs0_vl2.m4a",
-            "rootNote": 44,
-            "lo": 43,
-            "hi": 46,
+            "file": "concertharp/KSHarp_B1_f1.m4a",
+            "rootNote": 35,
+            "lo": 34,
+            "hi": 36,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_C1_vl2.m4a",
-            "rootNote": 48,
-            "lo": 47,
-            "hi": 50,
+            "file": "concertharp/KSHarp_D2_f1.m4a",
+            "rootNote": 38,
+            "lo": 37,
+            "hi": 39,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_E1_vl2.m4a",
+            "file": "concertharp/KSHarp_F2_f1.m4a",
+            "rootNote": 41,
+            "lo": 40,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 3.282
+          },
+          {
+            "file": "concertharp/KSHarp_A2_f1.m4a",
+            "rootNote": 45,
+            "lo": 44,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 3.282
+          },
+          {
+            "file": "concertharp/KSHarp_E3_f1.m4a",
             "rootNote": 52,
-            "lo": 51,
-            "hi": 54,
+            "lo": 49,
+            "hi": 53,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_Gs1_vl2.m4a",
-            "rootNote": 56,
-            "lo": 55,
-            "hi": 58,
+            "file": "concertharp/KSHarp_G3_f1.m4a",
+            "rootNote": 55,
+            "lo": 54,
+            "hi": 57,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_C2_vl2.m4a",
-            "rootNote": 60,
-            "lo": 59,
-            "hi": 62,
+            "file": "concertharp/KSHarp_B3_f1.m4a",
+            "rootNote": 59,
+            "lo": 58,
+            "hi": 60,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_E2_vl2.m4a",
-            "rootNote": 64,
-            "lo": 63,
-            "hi": 66,
+            "file": "concertharp/KSHarp_D4_f1.m4a",
+            "rootNote": 62,
+            "lo": 61,
+            "hi": 63,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_Gs2_vl2.m4a",
-            "rootNote": 68,
-            "lo": 67,
+            "file": "concertharp/KSHarp_F4_f1.m4a",
+            "rootNote": 65,
+            "lo": 64,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 3.282
+          },
+          {
+            "file": "concertharp/KSHarp_A4_f1.m4a",
+            "rootNote": 69,
+            "lo": 68,
             "hi": 70,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_C3_vl2.m4a",
+            "file": "concertharp/KSHarp_C5_f1.m4a",
             "rootNote": 72,
             "lo": 71,
             "hi": 74,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_E3_vl2.m4a",
+            "file": "concertharp/KSHarp_E5_f1.m4a",
             "rootNote": 76,
             "lo": 75,
-            "hi": 78,
+            "hi": 77,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_Gs3_vl2.m4a",
-            "rootNote": 80,
-            "lo": 79,
-            "hi": 82,
+            "file": "concertharp/KSHarp_G5_f1.m4a",
+            "rootNote": 79,
+            "lo": 78,
+            "hi": 81,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_C4_vl2.m4a",
-            "rootNote": 84,
-            "lo": 83,
-            "hi": 86,
+            "file": "concertharp/KSHarp_B5_f1.m4a",
+            "rootNote": 83,
+            "lo": 82,
+            "hi": 84,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_E4_vl2.m4a",
-            "rootNote": 88,
-            "lo": 87,
-            "hi": 90,
+            "file": "concertharp/KSHarp_D6_f1.m4a",
+            "rootNote": 86,
+            "lo": 85,
+            "hi": 87,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_Gs4_vl2.m4a",
-            "rootNote": 92,
-            "lo": 91,
+            "file": "concertharp/KSHarp_F6_f1.m4a",
+            "rootNote": 89,
+            "lo": 88,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 3.282
+          },
+          {
+            "file": "concertharp/KSHarp_A6_f1.m4a",
+            "rootNote": 93,
+            "lo": 92,
             "hi": 94,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_C5_vl2.m4a",
-            "rootNote": 96,
+            "file": "concertharp/KSHarp_B6_f1.m4a",
+            "rootNote": 95,
             "lo": 95,
-            "hi": 98,
+            "hi": 96,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
           },
           {
-            "file": "clavisynth/Clavisynth_E5_vl2.m4a",
-            "rootNote": 100,
-            "lo": 99,
-            "hi": 100,
+            "file": "concertharp/KSHarp_D7_f1.m4a",
+            "rootNote": 98,
+            "lo": 97,
+            "hi": 99,
             "placeholder": "organ",
-            "gain": 8.091
+            "gain": 3.282
+          },
+          {
+            "file": "concertharp/KSHarp_F7_f1.m4a",
+            "rootNote": 101,
+            "lo": 100,
+            "hi": 103,
+            "placeholder": "organ",
+            "gain": 3.282
+          }
+        ]
+      }
+    },
+    {
+      "id": "dnbbass",
+      "name": "DnB Bass",
+      "family": "bass",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/dnbbass-1.0.0.zip",
+      "bytes": 21017,
+      "crc32": 894641776,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample bass_dnb_f, from Freesound: https://freesound.org/people/Exsomniel/sounds/206134/, CC0"
+      },
+      "manifest": {
+        "id": "dnbbass",
+        "name": "DnB Bass",
+        "version": "1.0.0",
+        "family": "bass",
+        "kind": "pitched",
+        "range": {
+          "lo": 21,
+          "hi": 67
+        },
+        "defaultView": {
+          "lo": 21,
+          "hi": 45
+        },
+        "shade": "indigo",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample bass_dnb_f, from Freesound: https://freesound.org/people/Exsomniel/sounds/206134/, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.12
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 1,
+        "voicesAtOnce": 1,
+        "slideSeconds": 0.06,
+        "zones": [
+          {
+            "file": "dnbbass/bass_dnb_f.m4a",
+            "rootNote": 29,
+            "lo": 21,
+            "hi": 67,
+            "placeholder": "saw303",
+            "gain": 0.314
           }
         ]
       }
@@ -1309,7 +1567,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/synth-fifths",
-        "credit": "FreePats Synth Fifths \u2014 Surge, samples by Elf of Happy and Love, CC0"
+        "credit": "FreePats Synth Fifths — Surge, samples by Elf of Happy and Love, CC0"
       },
       "manifest": {
         "id": "fifths",
@@ -1329,7 +1587,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/synth-fifths",
-          "credit": "FreePats Synth Fifths \u2014 Surge, samples by Elf of Happy and Love, CC0"
+          "credit": "FreePats Synth Fifths — Surge, samples by Elf of Happy and Love, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -1535,7 +1793,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/electric-bass-YR",
-        "credit": "Electric Bass YR (fingered) \u2014 a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
+        "credit": "Electric Bass YR (fingered) — a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
       },
       "manifest": {
         "id": "fingeryr",
@@ -1544,7 +1802,7 @@
         "family": "bass",
         "kind": "pitched",
         "range": {
-          "lo": 28,
+          "lo": 21,
           "hi": 45
         },
         "defaultView": {
@@ -1555,7 +1813,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/electric-bass-YR",
-          "credit": "Electric Bass YR (fingered) \u2014 a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
+          "credit": "Electric Bass YR (fingered) — a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -1667,6 +1925,284 @@
       }
     },
     {
+      "id": "folkharp",
+      "name": "Folk Harp",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/folkharp-1.0.0.zip",
+      "bytes": 1463242,
+      "crc32": 705609672,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, folk harp — normal plucks, layer v3, CC0"
+      },
+      "manifest": {
+        "id": "folkharp",
+        "name": "Folk Harp",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 34,
+          "hi": 94
+        },
+        "defaultView": {
+          "lo": 52,
+          "hi": 76
+        },
+        "shade": "lime",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, folk harp — normal plucks, layer v3, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.5
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "folkharp/EWHarp_Normal_C1_v3_RR1.m4a",
+            "rootNote": 36,
+            "lo": 34,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_D1_v3_RR1.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_E1_v3_RR1.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_Fs1_v3_RR1.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_Gs1_v3_RR1.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_As1_v3_RR1.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_C2_v3_RR1.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_D2_v3_RR1.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_E2_v3_RR1.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_Fs2_v3_RR1.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_Gs2_v3_RR1.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_As2_v3_RR1.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_C3_v3_RR1.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_D3_v3_RR1.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_E3_v3_RR1.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_Fs3_v3_RR1.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_Gs3_v3_RR1.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_As3_v3_RR1.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_C4_v3_RR1.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_D4_v3_RR1.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_E4_v3_RR1.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_Fs4_v3_RR1.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_Gs4_v3_RR1.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_As4_v3_RR1.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_C5_v3_RR1.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_D5_v3_RR1.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_E5_v3_RR1.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_Fs5_v3_RR1.m4a",
+            "rootNote": 90,
+            "lo": 90,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 1.574
+          },
+          {
+            "file": "folkharp/EWHarp_Normal_Gs5_v3_RR1.m4a",
+            "rootNote": 92,
+            "lo": 92,
+            "hi": 94,
+            "placeholder": "organ",
+            "gain": 1.574
+          }
+        ]
+      }
+    },
+    {
       "id": "glass",
       "name": "Glass Taps",
       "family": "keys",
@@ -1678,7 +2214,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/glass",
-        "credit": "FreePats Glasses of water \u2014 recorded by Roberto (zenvoid.org), CC0"
+        "credit": "FreePats Glasses of water — recorded by Roberto (zenvoid.org), CC0"
       },
       "manifest": {
         "id": "glass",
@@ -1698,7 +2234,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/glass",
-          "credit": "FreePats Glasses of water \u2014 recorded by Roberto (zenvoid.org), CC0"
+          "credit": "FreePats Glasses of water — recorded by Roberto (zenvoid.org), CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -1873,146 +2409,203 @@
       }
     },
     {
-      "id": "growlybass",
-      "name": "Growly Bass",
-      "family": "bass",
+      "id": "glasshum",
+      "name": "Glass Hum",
+      "family": "keys",
       "kind": "pitched",
-      "version": "1.1.0",
-      "file": "packs/growlybass-1.1.0.zip",
-      "bytes": 411717,
-      "crc32": 2892544235,
+      "version": "1.0.0",
+      "file": "packs/glasshum-1.0.0.zip",
+      "bytes": 131785,
+      "crc32": 3455724186,
       "license": {
         "spdx": "CC0-1.0",
-        "source": "https://github.com/sfzinstruments/karoryfer.growlybass",
-        "credit": "Karoryfer Samples, Growlybass \u2014 a Squier Jazz Bass recorded direct, CC0"
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample ambi_glass_hum, from Freesound: https://freesound.org/people/kaligari/sounds/35391/, CC0"
       },
       "manifest": {
-        "id": "growlybass",
-        "name": "Growly Bass",
-        "version": "1.1.0",
-        "family": "bass",
+        "id": "glasshum",
+        "name": "Glass Hum",
+        "version": "1.0.0",
+        "family": "keys",
         "kind": "pitched",
         "range": {
-          "lo": 24,
-          "hi": 67
+          "lo": 33,
+          "hi": 57
         },
         "defaultView": {
-          "lo": 36,
-          "hi": 60
+          "lo": 33,
+          "hi": 57
         },
-        "shade": "grape",
+        "shade": "cyan",
         "license": {
           "spdx": "CC0-1.0",
-          "source": "https://github.com/sfzinstruments/karoryfer.growlybass",
-          "credit": "Karoryfer Samples, Growlybass \u2014 a Squier Jazz Bass recorded direct, CC0"
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample ambi_glass_hum, from Freesound: https://freesound.org/people/kaligari/sounds/35391/, CC0"
         },
         "envelope": {
-          "attack": 0.002,
-          "release": 0.12
+          "attack": 0.01,
+          "release": 1
         },
         "trim": 1,
         "accentGain": 1.5,
-        "polyphony": 1,
-        "voicesAtOnce": 1,
-        "slideSeconds": 0.06,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
         "zones": [
           {
-            "file": "growlybass/db2_f_rr1.m4a",
-            "rootNote": 25,
-            "lo": 24,
-            "hi": 26,
-            "placeholder": "saw303"
-          },
-          {
-            "file": "growlybass/e2_f_rr4.m4a",
-            "rootNote": 28,
-            "lo": 27,
-            "hi": 28,
-            "placeholder": "saw303"
-          },
-          {
-            "file": "growlybass/gb2_f_rr1.m4a",
-            "rootNote": 30,
-            "lo": 29,
-            "hi": 31,
-            "placeholder": "saw303"
-          },
-          {
-            "file": "growlybass/a2_f_rr1.m4a",
-            "rootNote": 33,
-            "lo": 32,
-            "hi": 34,
-            "placeholder": "saw303"
-          },
-          {
-            "file": "growlybass/c3_f_rr1.m4a",
-            "rootNote": 36,
-            "lo": 35,
-            "hi": 37,
-            "placeholder": "saw303"
-          },
-          {
-            "file": "growlybass/eb3_f_rr1.m4a",
-            "rootNote": 39,
-            "lo": 38,
-            "hi": 40,
-            "placeholder": "saw303"
-          },
-          {
-            "file": "growlybass/gb3_f_rr4.m4a",
-            "rootNote": 42,
-            "lo": 41,
-            "hi": 43,
-            "placeholder": "saw303"
-          },
-          {
-            "file": "growlybass/a3_f_rr1.m4a",
+            "file": "glasshum/ambi_glass_hum.m4a",
             "rootNote": 45,
-            "lo": 44,
-            "hi": 46,
-            "placeholder": "saw303"
+            "lo": 33,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 2.929
+          }
+        ]
+      }
+    },
+    {
+      "id": "glassrub",
+      "name": "Glass Rub",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/glassrub-1.0.0.zip",
+      "bytes": 48232,
+      "crc32": 4172992638,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample ambi_glass_rub, from Freesound: https://freesound.org/people/ani_music/sounds/198403/, CC0"
+      },
+      "manifest": {
+        "id": "glassrub",
+        "name": "Glass Rub",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 66,
+          "hi": 90
+        },
+        "defaultView": {
+          "lo": 66,
+          "hi": 90
+        },
+        "shade": "silver",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample ambi_glass_rub, from Freesound: https://freesound.org/people/ani_music/sounds/198403/, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "glassrub/ambi_glass_rub.m4a",
+            "rootNote": 78,
+            "lo": 66,
+            "hi": 90,
+            "placeholder": "organ",
+            "gain": 0.996
+          }
+        ]
+      }
+    },
+    {
+      "id": "glockenspiel",
+      "name": "Glockenspiel",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/glockenspiel-1.0.0.zip",
+      "bytes": 203401,
+      "crc32": 821985569,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, glockenspiel — medium strikes, CC0"
+      },
+      "manifest": {
+        "id": "glockenspiel",
+        "name": "Glockenspiel",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 77,
+          "hi": 108
+        },
+        "defaultView": {
+          "lo": 80,
+          "hi": 104
+        },
+        "shade": "cyan",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, glockenspiel — medium strikes, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.5
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "glockenspiel/glock_medium_G4_01.m4a",
+            "rootNote": 79,
+            "lo": 77,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 19.087
           },
           {
-            "file": "growlybass/c4_f_rr1.m4a",
-            "rootNote": 48,
-            "lo": 47,
-            "hi": 49,
-            "placeholder": "saw303"
+            "file": "glockenspiel/glock_medium_C5_01.m4a",
+            "rootNote": 84,
+            "lo": 82,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 19.087
           },
           {
-            "file": "growlybass/eb4_f_rr1.m4a",
-            "rootNote": 51,
-            "lo": 50,
-            "hi": 52,
-            "placeholder": "saw303"
+            "file": "glockenspiel/glock_medium_G5_01.m4a",
+            "rootNote": 91,
+            "lo": 88,
+            "hi": 93,
+            "placeholder": "organ",
+            "gain": 19.087
           },
           {
-            "file": "growlybass/gb4_f_rr1.m4a",
-            "rootNote": 54,
-            "lo": 53,
-            "hi": 55,
-            "placeholder": "saw303"
+            "file": "glockenspiel/glock_medium_C6_01.m4a",
+            "rootNote": 96,
+            "lo": 94,
+            "hi": 99,
+            "placeholder": "organ",
+            "gain": 19.087
           },
           {
-            "file": "growlybass/a4_f_rr1.m4a",
-            "rootNote": 57,
-            "lo": 56,
-            "hi": 58,
-            "placeholder": "saw303"
+            "file": "glockenspiel/glock_medium_G6_01.m4a",
+            "rootNote": 103,
+            "lo": 100,
+            "hi": 105,
+            "placeholder": "organ",
+            "gain": 19.087
           },
           {
-            "file": "growlybass/c5_f_rr1.m4a",
-            "rootNote": 60,
-            "lo": 59,
-            "hi": 61,
-            "placeholder": "saw303"
-          },
-          {
-            "file": "growlybass/eb5_f_rr1.m4a",
-            "rootNote": 63,
-            "lo": 62,
-            "hi": 67,
-            "placeholder": "saw303"
+            "file": "glockenspiel/glock_medium_C7_01.m4a",
+            "rootNote": 108,
+            "lo": 106,
+            "hi": 108,
+            "placeholder": "organ",
+            "gain": 19.087
           }
         ]
       }
@@ -2029,7 +2622,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, hand chimes \u2014 sustained strikes, CC0"
+        "credit": "VCSL, hand chimes — sustained strikes, CC0"
       },
       "manifest": {
         "id": "handchimes",
@@ -2049,7 +2642,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, hand chimes \u2014 sustained strikes, CC0"
+          "credit": "VCSL, hand chimes — sustained strikes, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -2227,7 +2820,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/hang-D-minor",
-        "credit": "FreePats Hang tuned in D minor \u2014 played by Mar, recorded at Medialab-Prado, CC0"
+        "credit": "FreePats Hang tuned in D minor — played by Mar, recorded at Medialab-Prado, CC0"
       },
       "manifest": {
         "id": "hang",
@@ -2247,7 +2840,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/hang-D-minor",
-          "credit": "FreePats Hang tuned in D minor \u2014 played by Mar, recorded at Medialab-Prado, CC0"
+          "credit": "FreePats Hang tuned in D minor — played by Mar, recorded at Medialab-Prado, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -2334,6 +2927,1115 @@
       }
     },
     {
+      "id": "hardbass",
+      "name": "Hard Bass",
+      "family": "bass",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/hardbass-1.0.0.zip",
+      "bytes": 28826,
+      "crc32": 1686616785,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample bass_hard_c, from Freesound: https://freesound.org/people/ani_music/sounds/165309/, CC0"
+      },
+      "manifest": {
+        "id": "hardbass",
+        "name": "Hard Bass",
+        "version": "1.0.0",
+        "family": "bass",
+        "kind": "pitched",
+        "range": {
+          "lo": 21,
+          "hi": 67
+        },
+        "defaultView": {
+          "lo": 21,
+          "hi": 45
+        },
+        "shade": "red",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample bass_hard_c, from Freesound: https://freesound.org/people/ani_music/sounds/165309/, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.12
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 1,
+        "voicesAtOnce": 1,
+        "slideSeconds": 0.06,
+        "zones": [
+          {
+            "file": "hardbass/bass_hard_c.m4a",
+            "rootNote": 24,
+            "lo": 21,
+            "hi": 67,
+            "placeholder": "saw303",
+            "gain": 0.224
+          }
+        ]
+      }
+    },
+    {
+      "id": "hauntedhum",
+      "name": "Haunted Hum",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/hauntedhum-1.0.0.zip",
+      "bytes": 127650,
+      "crc32": 2256860443,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample ambi_haunted_hum, from Freesound: https://freesound.org/people/kaligari/sounds/35392/, CC0"
+      },
+      "manifest": {
+        "id": "hauntedhum",
+        "name": "Haunted Hum",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 38,
+          "hi": 62
+        },
+        "defaultView": {
+          "lo": 38,
+          "hi": 62
+        },
+        "shade": "violet",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample ambi_haunted_hum, from Freesound: https://freesound.org/people/kaligari/sounds/35392/, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "hauntedhum/ambi_haunted_hum.m4a",
+            "rootNote": 50,
+            "lo": 38,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 3.488
+          }
+        ]
+      }
+    },
+    {
+      "id": "kawaigrand",
+      "name": "Kawai Grand",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/kawaigrand-1.0.0.zip",
+      "bytes": 2102774,
+      "crc32": 1104760625,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, Kawai grand — player position, layer v3, CC0"
+      },
+      "manifest": {
+        "id": "kawaigrand",
+        "name": "Kawai Grand",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 21,
+          "hi": 108
+        },
+        "defaultView": {
+          "lo": 52,
+          "hi": 76
+        },
+        "shade": "amber",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, Kawai grand — player position, layer v3, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.18
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "kawaigrand/GPiano_sus_As-1_v3_rr1_Player.m4a",
+            "rootNote": 22,
+            "lo": 21,
+            "hi": 23,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_C0_v3_rr1_Player.m4a",
+            "rootNote": 24,
+            "lo": 24,
+            "hi": 25,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Ds0_v3_rr1_Player.m4a",
+            "rootNote": 27,
+            "lo": 26,
+            "hi": 28,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Fs0_v3_rr1_Player.m4a",
+            "rootNote": 30,
+            "lo": 29,
+            "hi": 31,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_A0_v3_rr1_Player.m4a",
+            "rootNote": 33,
+            "lo": 32,
+            "hi": 34,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_C1_v3_rr1_Player.m4a",
+            "rootNote": 36,
+            "lo": 35,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Ds1_v3_rr1_Player.m4a",
+            "rootNote": 39,
+            "lo": 38,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Fs1_v3_rr1_Player.m4a",
+            "rootNote": 42,
+            "lo": 41,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_A1_v3_rr1_Player.m4a",
+            "rootNote": 45,
+            "lo": 44,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_C2_v3_rr1_Player.m4a",
+            "rootNote": 48,
+            "lo": 47,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_D2_v3_rr1_Player.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_E2_v3_rr1_Player.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Fs2_v3_rr1_Player.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Gs2_v3_rr1_Player.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_As2_v3_rr1_Player.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_C3_v3_rr1_Player.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_D3_v3_rr1_Player.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_E3_v3_rr1_Player.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Fs3_v3_rr1_Player.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Gs3_v3_rr1_Player.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_As3_v3_rr1_Player.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_C4_v3_rr1_Player.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_D4_v3_rr1_Player.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_E4_v3_rr1_Player.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Fs4_v3_rr1_Player.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Gs4_v3_rr1_Player.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_As4_v3_rr1_Player.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_B4_v3_rr1_Player.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_C5_v3_rr1_Player.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Ds5_v3_rr1_Player.m4a",
+            "rootNote": 87,
+            "lo": 86,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Fs5_v3_rr1_Player.m4a",
+            "rootNote": 90,
+            "lo": 89,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_A5_v3_rr1_Player.m4a",
+            "rootNote": 93,
+            "lo": 92,
+            "hi": 94,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_C6_v3_rr1_Player.m4a",
+            "rootNote": 96,
+            "lo": 95,
+            "hi": 97,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Ds6_v3_rr1_Player.m4a",
+            "rootNote": 99,
+            "lo": 98,
+            "hi": 100,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_Fs6_v3_rr1_Player.m4a",
+            "rootNote": 102,
+            "lo": 101,
+            "hi": 103,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_A6_v3_rr1_Player.m4a",
+            "rootNote": 105,
+            "lo": 104,
+            "hi": 106,
+            "placeholder": "organ",
+            "gain": 4.204
+          },
+          {
+            "file": "kawaigrand/GPiano_sus_C7_v3_rr1_Player.m4a",
+            "rootNote": 108,
+            "lo": 107,
+            "hi": 108,
+            "placeholder": "organ",
+            "gain": 4.204
+          }
+        ]
+      }
+    },
+    {
+      "id": "kawailegacy",
+      "name": "Kawai Legacy",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/kawailegacy-1.0.0.zip",
+      "bytes": 1008927,
+      "crc32": 4185194590,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, Kawai grand (legacy set) — main mics, layer v3, CC0"
+      },
+      "manifest": {
+        "id": "kawailegacy",
+        "name": "Kawai Legacy",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 22,
+          "hi": 108
+        },
+        "defaultView": {
+          "lo": 53,
+          "hi": 77
+        },
+        "shade": "orange",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, Kawai grand (legacy set) — main mics, layer v3, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.18
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_C0_v3_rr1.m4a",
+            "rootNote": 24,
+            "lo": 22,
+            "hi": 27,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_G0_v3_rr1.m4a",
+            "rootNote": 31,
+            "lo": 28,
+            "hi": 33,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_C1_v3_rr1.m4a",
+            "rootNote": 36,
+            "lo": 34,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_G1_v3_rr1.m4a",
+            "rootNote": 43,
+            "lo": 40,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_C2_v3_rr1.m4a",
+            "rootNote": 48,
+            "lo": 46,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_F2_v3_rr1.m4a",
+            "rootNote": 53,
+            "lo": 51,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_A2_v3_rr1.m4a",
+            "rootNote": 57,
+            "lo": 56,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_C3_v3_rr1.m4a",
+            "rootNote": 60,
+            "lo": 59,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_E3_v3_rr1.m4a",
+            "rootNote": 64,
+            "lo": 63,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_G3_v3_rr1.m4a",
+            "rootNote": 67,
+            "lo": 66,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_B3_v3_rr1.m4a",
+            "rootNote": 71,
+            "lo": 70,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_D4_v3_rr1.m4a",
+            "rootNote": 74,
+            "lo": 73,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_F4_v3_rr1.m4a",
+            "rootNote": 77,
+            "lo": 76,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_A4_v3_rr1.m4a",
+            "rootNote": 81,
+            "lo": 80,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_C5_v3_rr1.m4a",
+            "rootNote": 84,
+            "lo": 83,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_G5_v3_rr1.m4a",
+            "rootNote": 91,
+            "lo": 88,
+            "hi": 93,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_C6_v3_rr1.m4a",
+            "rootNote": 96,
+            "lo": 94,
+            "hi": 99,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_G6_v3_rr1.m4a",
+            "rootNote": 103,
+            "lo": 100,
+            "hi": 105,
+            "placeholder": "organ",
+            "gain": 0.867
+          },
+          {
+            "file": "kawailegacy/GrandPno_Main_Sus_C7_v3_rr1.m4a",
+            "rootNote": 108,
+            "lo": 106,
+            "hi": 108,
+            "placeholder": "organ",
+            "gain": 0.867
+          }
+        ]
+      }
+    },
+    {
+      "id": "knightupright",
+      "name": "Knight Upright",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/knightupright-1.0.0.zip",
+      "bytes": 2556366,
+      "crc32": 2838845923,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, Knight upright — player position, layer vl2, CC0"
+      },
+      "manifest": {
+        "id": "knightupright",
+        "name": "Knight Upright",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 21,
+          "hi": 108
+        },
+        "defaultView": {
+          "lo": 52,
+          "hi": 76
+        },
+        "shade": "rose",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, Knight upright — player position, layer vl2, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.18
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "knightupright/Player_vl2_rr1_A-1.m4a",
+            "rootNote": 21,
+            "lo": 21,
+            "hi": 22,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_B-1.m4a",
+            "rootNote": 23,
+            "lo": 23,
+            "hi": 24,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Cs0.m4a",
+            "rootNote": 25,
+            "lo": 25,
+            "hi": 26,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Ds0.m4a",
+            "rootNote": 27,
+            "lo": 27,
+            "hi": 28,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_F0.m4a",
+            "rootNote": 29,
+            "lo": 29,
+            "hi": 30,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_G0.m4a",
+            "rootNote": 31,
+            "lo": 31,
+            "hi": 32,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_A0.m4a",
+            "rootNote": 33,
+            "lo": 33,
+            "hi": 34,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_B0.m4a",
+            "rootNote": 35,
+            "lo": 35,
+            "hi": 36,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Cs1.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Ds1.m4a",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_F1.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_G1.m4a",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_A1.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_B1.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Cs2.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Ds2.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_F2.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_G2.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_A2.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_B2.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Cs3.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Ds3.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_F3.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_G3.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_A3.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_B3.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Cs4.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Ds4.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_F4.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_G4.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_A4.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_B4.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Cs5.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Ds5.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_F5.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 90,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_G5.m4a",
+            "rootNote": 91,
+            "lo": 91,
+            "hi": 92,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_A5.m4a",
+            "rootNote": 93,
+            "lo": 93,
+            "hi": 94,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_B5.m4a",
+            "rootNote": 95,
+            "lo": 95,
+            "hi": 96,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Cs6.m4a",
+            "rootNote": 97,
+            "lo": 97,
+            "hi": 98,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_Ds6.m4a",
+            "rootNote": 99,
+            "lo": 99,
+            "hi": 100,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_F6.m4a",
+            "rootNote": 101,
+            "lo": 101,
+            "hi": 102,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_G6.m4a",
+            "rootNote": 103,
+            "lo": 103,
+            "hi": 104,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_A6.m4a",
+            "rootNote": 105,
+            "lo": 105,
+            "hi": 106,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_B6.m4a",
+            "rootNote": 107,
+            "lo": 107,
+            "hi": 107,
+            "placeholder": "organ",
+            "gain": 1.65
+          },
+          {
+            "file": "knightupright/Player_vl2_rr1_C7.m4a",
+            "rootNote": 108,
+            "lo": 108,
+            "hi": 108,
+            "placeholder": "organ",
+            "gain": 1.65
+          }
+        ]
+      }
+    },
+    {
+      "id": "lunarland",
+      "name": "Lunar Land",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/lunarland-1.0.0.zip",
+      "bytes": 100235,
+      "crc32": 2455924146,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample ambi_lunar_land, from Freesound: https://freesound.org/people/maqsim/sounds/172157/, CC0"
+      },
+      "manifest": {
+        "id": "lunarland",
+        "name": "Lunar Land",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 70,
+          "hi": 94
+        },
+        "defaultView": {
+          "lo": 70,
+          "hi": 94
+        },
+        "shade": "yellow",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample ambi_lunar_land, from Freesound: https://freesound.org/people/maqsim/sounds/172157/, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "lunarland/ambi_lunar_land.m4a",
+            "rootNote": 82,
+            "lo": 70,
+            "hi": 94,
+            "placeholder": "organ",
+            "gain": 1.652
+          }
+        ]
+      }
+    },
+    {
       "id": "pickedyr",
       "name": "Picked Bass YR",
       "family": "bass",
@@ -2345,7 +4047,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/electric-bass-YR",
-        "credit": "Electric Bass YR (picked) \u2014 a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
+        "credit": "Electric Bass YR (picked) — a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
       },
       "manifest": {
         "id": "pickedyr",
@@ -2354,7 +4056,7 @@
         "family": "bass",
         "kind": "pitched",
         "range": {
-          "lo": 28,
+          "lo": 21,
           "hi": 46
         },
         "defaultView": {
@@ -2365,7 +4067,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/electric-bass-YR",
-          "credit": "Electric Bass YR (picked) \u2014 a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
+          "credit": "Electric Bass YR (picked) — a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -2480,6 +4182,220 @@
             "hi": 46,
             "placeholder": "saw303",
             "gain": 0.8
+          }
+        ]
+      }
+    },
+    {
+      "id": "pipeorgan",
+      "name": "Pipe Organ",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/pipeorgan-1.0.0.zip",
+      "bytes": 2086624,
+      "crc32": 2806960611,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, pipe organ — loud pedal division to F#4, loud manual above, CC0"
+      },
+      "manifest": {
+        "id": "pipeorgan",
+        "name": "Pipe Organ",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 34,
+          "hi": 98
+        },
+        "defaultView": {
+          "lo": 54,
+          "hi": 78
+        },
+        "shade": "violet",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, pipe organ — loud pedal division to F#4, loud manual above, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.12
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "pipeorgan/Rode_Pedal_C1.m4a",
+            "rootNote": 36,
+            "lo": 34,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Pedal_Ds1.m4a",
+            "rootNote": 39,
+            "lo": 38,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Pedal_Fs1.m4a",
+            "rootNote": 42,
+            "lo": 41,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Pedal_A1.m4a",
+            "rootNote": 45,
+            "lo": 44,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Pedal_C2.m4a",
+            "rootNote": 48,
+            "lo": 47,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Pedal_Ds2.m4a",
+            "rootNote": 51,
+            "lo": 50,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Pedal_Fs2.m4a",
+            "rootNote": 54,
+            "lo": 53,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Pedal_A2.m4a",
+            "rootNote": 57,
+            "lo": 56,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Pedal_C3.m4a",
+            "rootNote": 60,
+            "lo": 59,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Pedal_Ds3.m4a",
+            "rootNote": 63,
+            "lo": 62,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Pedal_Fs3.m4a",
+            "rootNote": 66,
+            "lo": 65,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Man3Open_A3.m4a",
+            "rootNote": 69,
+            "lo": 68,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Man3Open_C4.m4a",
+            "rootNote": 72,
+            "lo": 71,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Man3Open_Ds4.m4a",
+            "rootNote": 75,
+            "lo": 74,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Man3Open_Fs4.m4a",
+            "rootNote": 78,
+            "lo": 77,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Man3Open_A4.m4a",
+            "rootNote": 81,
+            "lo": 80,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Man3Open_C5.m4a",
+            "rootNote": 84,
+            "lo": 83,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Man3Open_Ds5.m4a",
+            "rootNote": 87,
+            "lo": 86,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Man3Open_Fs5.m4a",
+            "rootNote": 90,
+            "lo": 89,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Man3Open_A5.m4a",
+            "rootNote": 93,
+            "lo": 92,
+            "hi": 94,
+            "placeholder": "organ",
+            "gain": 1.702
+          },
+          {
+            "file": "pipeorgan/Rode_Man3Open_C6.m4a",
+            "rootNote": 96,
+            "lo": 95,
+            "hi": 98,
+            "placeholder": "organ",
+            "gain": 1.702
           }
         ]
       }
@@ -2659,6 +4575,292 @@
       }
     },
     {
+      "id": "salamander",
+      "name": "Salamander",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/salamander-1.0.0.zip",
+      "bytes": 1824935,
+      "crc32": 360981755,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://rytmenpinne.wordpress.com/sounds-and-such/salamander-grandpiano/",
+        "credit": "Alexander Holm, Salamander Grand Piano V3 (Yamaha C5), layer v10 — dedicated to the public domain by the author, 4 March 2022"
+      },
+      "manifest": {
+        "id": "salamander",
+        "name": "Salamander",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 21,
+          "hi": 108
+        },
+        "defaultView": {
+          "lo": 52,
+          "hi": 76
+        },
+        "shade": "indigo",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://rytmenpinne.wordpress.com/sounds-and-such/salamander-grandpiano/",
+          "credit": "Alexander Holm, Salamander Grand Piano V3 (Yamaha C5), layer v10 — dedicated to the public domain by the author, 4 March 2022"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.18
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "salamander/A0v10.m4a",
+            "rootNote": 21,
+            "lo": 21,
+            "hi": 22,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/C1v10.m4a",
+            "rootNote": 24,
+            "lo": 23,
+            "hi": 25,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Ds1v10.m4a",
+            "rootNote": 27,
+            "lo": 26,
+            "hi": 28,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Fs1v10.m4a",
+            "rootNote": 30,
+            "lo": 29,
+            "hi": 31,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/A1v10.m4a",
+            "rootNote": 33,
+            "lo": 32,
+            "hi": 34,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/C2v10.m4a",
+            "rootNote": 36,
+            "lo": 35,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Ds2v10.m4a",
+            "rootNote": 39,
+            "lo": 38,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Fs2v10.m4a",
+            "rootNote": 42,
+            "lo": 41,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/A2v10.m4a",
+            "rootNote": 45,
+            "lo": 44,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/C3v10.m4a",
+            "rootNote": 48,
+            "lo": 47,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Ds3v10.m4a",
+            "rootNote": 51,
+            "lo": 50,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Fs3v10.m4a",
+            "rootNote": 54,
+            "lo": 53,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/A3v10.m4a",
+            "rootNote": 57,
+            "lo": 56,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/C4v10.m4a",
+            "rootNote": 60,
+            "lo": 59,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Ds4v10.m4a",
+            "rootNote": 63,
+            "lo": 62,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Fs4v10.m4a",
+            "rootNote": 66,
+            "lo": 65,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/A4v10.m4a",
+            "rootNote": 69,
+            "lo": 68,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/C5v10.m4a",
+            "rootNote": 72,
+            "lo": 71,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Ds5v10.m4a",
+            "rootNote": 75,
+            "lo": 74,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Fs5v10.m4a",
+            "rootNote": 78,
+            "lo": 77,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/A5v10.m4a",
+            "rootNote": 81,
+            "lo": 80,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/C6v10.m4a",
+            "rootNote": 84,
+            "lo": 83,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Ds6v10.m4a",
+            "rootNote": 87,
+            "lo": 86,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Fs6v10.m4a",
+            "rootNote": 90,
+            "lo": 89,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/A6v10.m4a",
+            "rootNote": 93,
+            "lo": 92,
+            "hi": 94,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/C7v10.m4a",
+            "rootNote": 96,
+            "lo": 95,
+            "hi": 97,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Ds7v10.m4a",
+            "rootNote": 99,
+            "lo": 98,
+            "hi": 100,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/Fs7v10.m4a",
+            "rootNote": 102,
+            "lo": 101,
+            "hi": 103,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/A7v10.m4a",
+            "rootNote": 105,
+            "lo": 104,
+            "hi": 106,
+            "placeholder": "organ",
+            "gain": 2.4
+          },
+          {
+            "file": "salamander/C8v10.m4a",
+            "rootNote": 108,
+            "lo": 107,
+            "hi": 108,
+            "placeholder": "organ",
+            "gain": 2.4
+          }
+        ]
+      }
+    },
+    {
       "id": "soundtrack",
       "name": "Soundtrack Synth",
       "family": "keys",
@@ -2670,7 +4872,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/synth-soundtrack",
-        "credit": "FreePats Synth Soundtrack \u2014 ZynAddSubFX, samples by Elf of Happy and Love, CC0"
+        "credit": "FreePats Synth Soundtrack — ZynAddSubFX, samples by Elf of Happy and Love, CC0"
       },
       "manifest": {
         "id": "soundtrack",
@@ -2690,7 +4892,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/synth-soundtrack",
-          "credit": "FreePats Synth Soundtrack \u2014 ZynAddSubFX, samples by Elf of Happy and Love, CC0"
+          "credit": "FreePats Synth Soundtrack — ZynAddSubFX, samples by Elf of Happy and Love, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -2896,7 +5098,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/spanish-classical-guitar",
-        "credit": "FreePats Spanish classical guitar \u2014 nylon strings, CC0"
+        "credit": "FreePats Spanish classical guitar — nylon strings, CC0"
       },
       "manifest": {
         "id": "spanish",
@@ -2916,7 +5118,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/spanish-classical-guitar",
-          "credit": "FreePats Spanish classical guitar \u2014 nylon strings, CC0"
+          "credit": "FreePats Spanish classical guitar — nylon strings, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -3259,6 +5461,711 @@
       }
     },
     {
+      "id": "spdrums",
+      "name": "SonicPi Drums",
+      "family": "drums",
+      "kind": "drum",
+      "version": "1.0.0",
+      "file": "packs/spdrums-1.0.0.zip",
+      "bytes": 390695,
+      "crc32": 1911742094,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi's acoustic drum kit — Freesound recordings collected by Sonic Pi, CC0"
+      },
+      "manifest": {
+        "id": "spdrums",
+        "name": "SonicPi Drums",
+        "version": "1.0.0",
+        "family": "drums",
+        "kind": "drum",
+        "shade": "lime",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi's acoustic drum kit — Freesound recordings collected by Sonic Pi, CC0"
+        },
+        "envelope": {
+          "attack": 0.001,
+          "release": 0.01
+        },
+        "accentGain": 1.5,
+        "gateNotes": true,
+        "polyphony": 16,
+        "voicesAtOnce": 3,
+        "lanes": [
+          {
+            "midi": 49,
+            "label": "Crash",
+            "group": "cymbal"
+          },
+          {
+            "midi": 57,
+            "label": "Crash Soft",
+            "group": "cymbal"
+          },
+          {
+            "midi": 55,
+            "label": "Splash",
+            "group": "cymbal"
+          },
+          {
+            "midi": 52,
+            "label": "Splash Soft",
+            "group": "cymbal"
+          },
+          {
+            "midi": 46,
+            "label": "Hat Open",
+            "group": "hat",
+            "chokeGroup": "hat"
+          },
+          {
+            "midi": 42,
+            "label": "Hat Closed",
+            "group": "hat",
+            "chokeGroup": "hat"
+          },
+          {
+            "midi": 44,
+            "label": "Hat Pedal",
+            "group": "hat",
+            "chokeGroup": "hat"
+          },
+          {
+            "midi": 56,
+            "label": "Cowbell",
+            "group": "perc"
+          },
+          {
+            "midi": 25,
+            "label": "Snare Roll",
+            "group": "snare"
+          },
+          {
+            "midi": 38,
+            "label": "Snare",
+            "group": "snare"
+          },
+          {
+            "midi": 40,
+            "label": "Snare Soft",
+            "group": "snare"
+          },
+          {
+            "midi": 50,
+            "label": "Hi Tom",
+            "group": "tom"
+          },
+          {
+            "midi": 48,
+            "label": "Hi Tom Soft",
+            "group": "tom"
+          },
+          {
+            "midi": 47,
+            "label": "Mid Tom",
+            "group": "tom"
+          },
+          {
+            "midi": 43,
+            "label": "Mid Tom Soft",
+            "group": "tom"
+          },
+          {
+            "midi": 45,
+            "label": "Lo Tom",
+            "group": "tom"
+          },
+          {
+            "midi": 41,
+            "label": "Lo Tom Soft",
+            "group": "tom"
+          },
+          {
+            "midi": 34,
+            "label": "Heavy Kick",
+            "group": "kick"
+          },
+          {
+            "midi": 36,
+            "label": "Kick",
+            "group": "kick"
+          },
+          {
+            "midi": 35,
+            "label": "Kick Soft",
+            "group": "kick"
+          }
+        ],
+        "zones": [
+          {
+            "file": "spdrums/49-crash.m4a",
+            "placeholder": "crash",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "gain": 0.41,
+            "click": null
+          },
+          {
+            "file": "spdrums/57-crashsoft.m4a",
+            "placeholder": "crash",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "gain": 0.41,
+            "click": null
+          },
+          {
+            "file": "spdrums/55-splash.m4a",
+            "placeholder": "crash",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "gain": 0.37,
+            "click": null
+          },
+          {
+            "file": "spdrums/52-splashsoft.m4a",
+            "placeholder": "crash",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "gain": 0.37,
+            "click": null
+          },
+          {
+            "file": "spdrums/46-hatopen.m4a",
+            "placeholder": "openHat",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "gain": 0.28,
+            "click": null
+          },
+          {
+            "file": "spdrums/42-hatclosed.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "gain": 0.41,
+            "click": null
+          },
+          {
+            "file": "spdrums/44-hatpedal.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "gain": 0.34,
+            "click": null
+          },
+          {
+            "file": "spdrums/56-cowbell.m4a",
+            "placeholder": "cowbell",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "gain": 0.32,
+            "click": null
+          },
+          {
+            "file": "spdrums/25-snareroll.m4a",
+            "placeholder": "snare",
+            "rootNote": 25,
+            "lo": 25,
+            "hi": 25,
+            "gain": 0.72,
+            "click": null
+          },
+          {
+            "file": "spdrums/38-snare.m4a",
+            "placeholder": "snare",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "gain": 0.36,
+            "click": null
+          },
+          {
+            "file": "spdrums/40-snaresoft.m4a",
+            "placeholder": "snare",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "gain": 0.36,
+            "click": null
+          },
+          {
+            "file": "spdrums/50-hitom.m4a",
+            "placeholder": "hiTom",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "gain": 0.55,
+            "click": null
+          },
+          {
+            "file": "spdrums/48-hitomsoft.m4a",
+            "placeholder": "hiTom",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "gain": 0.55,
+            "click": null
+          },
+          {
+            "file": "spdrums/47-midtom.m4a",
+            "placeholder": "midTom",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "gain": 0.48,
+            "click": null
+          },
+          {
+            "file": "spdrums/43-midtomsoft.m4a",
+            "placeholder": "midTom",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "gain": 0.48,
+            "click": null
+          },
+          {
+            "file": "spdrums/45-lotom.m4a",
+            "placeholder": "loTom",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "gain": 0.37,
+            "click": null
+          },
+          {
+            "file": "spdrums/41-lotomsoft.m4a",
+            "placeholder": "loTom",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "gain": 0.37,
+            "click": null
+          },
+          {
+            "file": "spdrums/34-heavykick.m4a",
+            "placeholder": "kick",
+            "rootNote": 34,
+            "lo": 34,
+            "hi": 34,
+            "gain": 0.54,
+            "click": null
+          },
+          {
+            "file": "spdrums/36-kick.m4a",
+            "placeholder": "kick",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "gain": 0.65,
+            "click": null
+          },
+          {
+            "file": "spdrums/35-kicksoft.m4a",
+            "placeholder": "kick",
+            "rootNote": 35,
+            "lo": 35,
+            "hi": 35,
+            "gain": 0.65,
+            "click": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "steinwayb",
+      "name": "Steinway B",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/steinwayb-1.0.0.zip",
+      "bytes": 2410359,
+      "crc32": 550450586,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, Steinway B grand — close mics, no sustain pedal, layer vl3, CC0"
+      },
+      "manifest": {
+        "id": "steinwayb",
+        "name": "Steinway B",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 21,
+          "hi": 106
+        },
+        "defaultView": {
+          "lo": 51,
+          "hi": 75
+        },
+        "shade": "silver",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, Steinway B grand — close mics, no sustain pedal, layer vl3, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.18
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_As0_vl3_rr1.m4a",
+            "rootNote": 22,
+            "lo": 21,
+            "hi": 23,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_C1_vl3_rr1.m4a",
+            "rootNote": 24,
+            "lo": 24,
+            "hi": 25,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_D1_vl3_rr1.m4a",
+            "rootNote": 26,
+            "lo": 26,
+            "hi": 27,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_E1_vl3_rr1.m4a",
+            "rootNote": 28,
+            "lo": 28,
+            "hi": 29,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Fs1_vl3_rr1.m4a",
+            "rootNote": 30,
+            "lo": 30,
+            "hi": 31,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Gs1_vl3_rr1.m4a",
+            "rootNote": 32,
+            "lo": 32,
+            "hi": 33,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_As1_vl3_rr1.m4a",
+            "rootNote": 34,
+            "lo": 34,
+            "hi": 35,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_C2_vl3_rr1.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_D2_vl3_rr1.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_E2_vl3_rr1.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Fs2_vl3_rr1.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Gs2_vl3_rr1.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_As2_vl3_rr1.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_C3_vl3_rr1.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_D3_vl3_rr1.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_E3_vl3_rr1.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Fs3_vl3_rr1.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Gs3_vl3_rr1.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_As3_vl3_rr1.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_C4_vl3_rr1.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_D4_vl3_rr1.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_E4_vl3_rr1.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Fs4_vl3_rr1.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Gs4_vl3_rr1.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_As4_vl3_rr1.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_C5_vl3_rr1.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_D5_vl3_rr1.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_E5_vl3_rr1.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Fs5_vl3_rr1.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Gs5_vl3_rr1.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_As5_vl3_rr1.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_C6_vl3_rr1.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_D6_vl3_rr1.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_E6_vl3_rr1.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Fs6_vl3_rr1.m4a",
+            "rootNote": 90,
+            "lo": 90,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Gs6_vl3_rr1.m4a",
+            "rootNote": 92,
+            "lo": 92,
+            "hi": 93,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_As6_vl3_rr1.m4a",
+            "rootNote": 94,
+            "lo": 94,
+            "hi": 95,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_C7_vl3_rr1.m4a",
+            "rootNote": 96,
+            "lo": 96,
+            "hi": 97,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_D7_vl3_rr1.m4a",
+            "rootNote": 98,
+            "lo": 98,
+            "hi": 99,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_E7_vl3_rr1.m4a",
+            "rootNote": 100,
+            "lo": 100,
+            "hi": 101,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Fs7_vl3_rr1.m4a",
+            "rootNote": 102,
+            "lo": 102,
+            "hi": 103,
+            "placeholder": "organ",
+            "gain": 1.163
+          },
+          {
+            "file": "steinwayb/JHPiano_NoSus_Close_Gs7_vl3_rr1.m4a",
+            "rootNote": 104,
+            "lo": 104,
+            "hi": 106,
+            "placeholder": "organ",
+            "gain": 1.163
+          }
+        ]
+      }
+    },
+    {
       "id": "swagbass",
       "name": "Swag Bass",
       "family": "bass",
@@ -3270,7 +6177,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sfzinstruments/karoryfer.swagbass",
-        "credit": "Karoryfer Samples, Swagbass \u2014 f layer from swagbass_shiny.sfz, CC0"
+        "credit": "Karoryfer Samples, Swagbass — f layer from swagbass_shiny.sfz, CC0"
       },
       "manifest": {
         "id": "swagbass",
@@ -3290,7 +6197,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sfzinstruments/karoryfer.swagbass",
-          "credit": "Karoryfer Samples, Swagbass \u2014 f layer from swagbass_shiny.sfz, CC0"
+          "credit": "Karoryfer Samples, Swagbass — f layer from swagbass_shiny.sfz, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -3413,7 +6320,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/sweep-pad",
-        "credit": "FreePats Sweep Pad \u2014 ZynAddSubFX / Yoshimi, by Roberto (zenvoid.org), CC0"
+        "credit": "FreePats Sweep Pad — ZynAddSubFX / Yoshimi, by Roberto (zenvoid.org), CC0"
       },
       "manifest": {
         "id": "sweeppad",
@@ -3433,7 +6340,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/sweep-pad",
-          "credit": "FreePats Sweep Pad \u2014 ZynAddSubFX / Yoshimi, by Roberto (zenvoid.org), CC0"
+          "credit": "FreePats Sweep Pad — ZynAddSubFX / Yoshimi, by Roberto (zenvoid.org), CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -3599,6 +6506,116 @@
             },
             "placeholder": "organ",
             "gain": 0.448
+          }
+        ]
+      }
+    },
+    {
+      "id": "thickbass",
+      "name": "Thick Bass",
+      "family": "bass",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/thickbass-1.0.0.zip",
+      "bytes": 58210,
+      "crc32": 221899377,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample bass_thick_c, from Freesound: https://freesound.org/people/ani_music/sounds/165314/, CC0"
+      },
+      "manifest": {
+        "id": "thickbass",
+        "name": "Thick Bass",
+        "version": "1.0.0",
+        "family": "bass",
+        "kind": "pitched",
+        "range": {
+          "lo": 21,
+          "hi": 67
+        },
+        "defaultView": {
+          "lo": 21,
+          "hi": 45
+        },
+        "shade": "orange",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample bass_thick_c, from Freesound: https://freesound.org/people/ani_music/sounds/165314/, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.12
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 1,
+        "voicesAtOnce": 1,
+        "slideSeconds": 0.06,
+        "zones": [
+          {
+            "file": "thickbass/bass_thick_c.m4a",
+            "rootNote": 36,
+            "lo": 21,
+            "hi": 67,
+            "placeholder": "saw303",
+            "gain": 0.218
+          }
+        ]
+      }
+    },
+    {
+      "id": "trancebass",
+      "name": "Trance Bass",
+      "family": "bass",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/trancebass-1.0.0.zip",
+      "bytes": 53921,
+      "crc32": 1069683091,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample bass_trance_c, from Freesound: https://freesound.org/people/ani_music/sounds/165329/, CC0"
+      },
+      "manifest": {
+        "id": "trancebass",
+        "name": "Trance Bass",
+        "version": "1.0.0",
+        "family": "bass",
+        "kind": "pitched",
+        "range": {
+          "lo": 21,
+          "hi": 67
+        },
+        "defaultView": {
+          "lo": 21,
+          "hi": 45
+        },
+        "shade": "magenta",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample bass_trance_c, from Freesound: https://freesound.org/people/ani_music/sounds/165329/, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.12
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 1,
+        "voicesAtOnce": 1,
+        "slideSeconds": 0.06,
+        "zones": [
+          {
+            "file": "trancebass/bass_trance_c.m4a",
+            "rootNote": 36,
+            "lo": 21,
+            "hi": 67,
+            "placeholder": "saw303",
+            "gain": 0.224
           }
         ]
       }
@@ -3781,7 +6798,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/upright-piano-KW",
-        "credit": "Upright Piano KW \u2014 a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
+        "credit": "Upright Piano KW — a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
       },
       "manifest": {
         "id": "uprightkw",
@@ -3801,7 +6818,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/upright-piano-KW",
-          "credit": "Upright Piano KW \u2014 a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
+          "credit": "Upright Piano KW — a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -4080,7 +7097,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, vibraphone \u2014 hard mallets, layer v3, CC0"
+        "credit": "VCSL, vibraphone — hard mallets, layer v3, CC0"
       },
       "manifest": {
         "id": "vibes",
@@ -4100,7 +7117,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, vibraphone \u2014 hard mallets, layer v3, CC0"
+          "credit": "VCSL, vibraphone — hard mallets, layer v3, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -4901,7 +7918,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 cello section, sustain vibrato, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — cello section, sustain vibrato, CC0"
       },
       "manifest": {
         "id": "vscocellos",
@@ -4921,7 +7938,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 cello section, sustain vibrato, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — cello section, sustain vibrato, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -5051,7 +8068,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 viola section, sustain vibrato, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — viola section, sustain vibrato, CC0"
       },
       "manifest": {
         "id": "vscoviolas",
@@ -5071,7 +8088,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 viola section, sustain vibrato, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — viola section, sustain vibrato, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -5201,7 +8218,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 violin section, sustain vibrato, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — violin section, sustain vibrato, CC0"
       },
       "manifest": {
         "id": "vscoviolins",
@@ -5221,7 +8238,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 violin section, sustain vibrato, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — violin section, sustain vibrato, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -5335,7 +8352,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, wine glasses \u2014 bowed rims, slow sustains, CC0"
+        "credit": "VCSL, wine glasses — bowed rims, slow sustains, CC0"
       },
       "manifest": {
         "id": "wineglass",
@@ -5355,7 +8372,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, wine glasses \u2014 bowed rims, slow sustains, CC0"
+          "credit": "VCSL, wine glasses — bowed rims, slow sustains, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -5397,6 +8414,211 @@
             "hi": 89,
             "placeholder": "organ",
             "gain": 45.757
+          }
+        ]
+      }
+    },
+    {
+      "id": "woodsybass",
+      "name": "Woodsy Bass",
+      "family": "bass",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/woodsybass-1.0.0.zip",
+      "bytes": 49726,
+      "crc32": 2958445405,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample bass_woodsy_c, from Freesound: https://freesound.org/people/ani_music/sounds/165322/, CC0"
+      },
+      "manifest": {
+        "id": "woodsybass",
+        "name": "Woodsy Bass",
+        "version": "1.0.0",
+        "family": "bass",
+        "kind": "pitched",
+        "range": {
+          "lo": 21,
+          "hi": 67
+        },
+        "defaultView": {
+          "lo": 21,
+          "hi": 45
+        },
+        "shade": "green",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample bass_woodsy_c, from Freesound: https://freesound.org/people/ani_music/sounds/165322/, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.12
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 1,
+        "voicesAtOnce": 1,
+        "slideSeconds": 0.06,
+        "zones": [
+          {
+            "file": "woodsybass/bass_woodsy_c.m4a",
+            "rootNote": 36,
+            "lo": 21,
+            "hi": 67,
+            "placeholder": "saw303",
+            "gain": 0.145
+          }
+        ]
+      }
+    },
+    {
+      "id": "yamahaupright",
+      "name": "Yamaha Upright",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/yamahaupright-1.0.0.zip",
+      "bytes": 682264,
+      "crc32": 739156824,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, Yamaha upright — layer vl2, CC0"
+      },
+      "manifest": {
+        "id": "yamahaupright",
+        "name": "Yamaha Upright",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 22,
+          "hi": 98
+        },
+        "defaultView": {
+          "lo": 48,
+          "hi": 72
+        },
+        "shade": "teal",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, Yamaha upright — layer vl2, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.18
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "yamahaupright/Upright1_Sus_C0_vl2_rr1.m4a",
+            "rootNote": 24,
+            "lo": 22,
+            "hi": 27,
+            "placeholder": "organ",
+            "gain": 4.009
+          },
+          {
+            "file": "yamahaupright/Upright1_Sus_G0_vl2_rr1.m4a",
+            "rootNote": 31,
+            "lo": 28,
+            "hi": 33,
+            "placeholder": "organ",
+            "gain": 4.009
+          },
+          {
+            "file": "yamahaupright/Upright1_Sus_C1_vl2_rr1.m4a",
+            "rootNote": 36,
+            "lo": 34,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 4.009
+          },
+          {
+            "file": "yamahaupright/Upright1_Sus_G1_vl2_rr1.m4a",
+            "rootNote": 43,
+            "lo": 40,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 4.009
+          },
+          {
+            "file": "yamahaupright/Upright1_Sus_C2_vl2_rr1.m4a",
+            "rootNote": 48,
+            "lo": 46,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 4.009
+          },
+          {
+            "file": "yamahaupright/Upright1_Sus_G2_vl2_rr1.m4a",
+            "rootNote": 55,
+            "lo": 52,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 4.009
+          },
+          {
+            "file": "yamahaupright/Upright1_Sus_C3_vl2_rr1.m4a",
+            "rootNote": 60,
+            "lo": 58,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 4.009
+          },
+          {
+            "file": "yamahaupright/Upright1_Sus_G3_vl2_rr1.m4a",
+            "rootNote": 67,
+            "lo": 64,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 4.009
+          },
+          {
+            "file": "yamahaupright/Upright1_Sus_C4_vl2_rr1.m4a",
+            "rootNote": 72,
+            "lo": 70,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 4.009
+          },
+          {
+            "file": "yamahaupright/Upright1_Sus_G4_vl2_rr1.m4a",
+            "rootNote": 79,
+            "lo": 76,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 4.009
+          },
+          {
+            "file": "yamahaupright/Upright1_Sus_C5_vl2_rr1.m4a",
+            "rootNote": 84,
+            "lo": 82,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 4.009
+          },
+          {
+            "file": "yamahaupright/Upright1_Sus_G5_vl2_rr1.m4a",
+            "rootNote": 91,
+            "lo": 88,
+            "hi": 93,
+            "placeholder": "organ",
+            "gain": 4.009
+          },
+          {
+            "file": "yamahaupright/Upright1_Sus_C6_vl2_rr1.m4a",
+            "rootNote": 96,
+            "lo": 94,
+            "hi": 98,
+            "placeholder": "organ",
+            "gain": 4.009
           }
         ]
       }
