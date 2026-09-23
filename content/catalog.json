@@ -15,7 +15,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/synth-bass-lead",
-        "credit": "FreePats Synth Bass & Lead — Surge, samples by Elf of Happy and Love, CC0"
+        "credit": "FreePats Synth Bass & Lead \u2014 Surge, samples by Elf of Happy and Love, CC0"
       },
       "manifest": {
         "id": "basslead",
@@ -35,7 +35,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/synth-bass-lead",
-          "credit": "FreePats Synth Bass & Lead — Surge, samples by Elf of Happy and Love, CC0"
+          "credit": "FreePats Synth Bass & Lead \u2014 Surge, samples by Elf of Happy and Love, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -265,7 +265,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sfzinstruments/karoryfer.big-little-bass",
-        "credit": "Karoryfer Samples, Big Little Bass — a Washburn AB95 hollowbody, f layer, CC0"
+        "credit": "Karoryfer Samples, Big Little Bass \u2014 a Washburn AB95 hollowbody, f layer, CC0"
       },
       "manifest": {
         "id": "biglittle",
@@ -285,7 +285,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sfzinstruments/karoryfer.big-little-bass",
-          "credit": "Karoryfer Samples, Big Little Bass — a Washburn AB95 hollowbody, f layer, CC0"
+          "credit": "Karoryfer Samples, Big Little Bass \u2014 a Washburn AB95 hollowbody, f layer, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -937,7 +937,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/synth-pad-choir",
-        "credit": "FreePats Synth Pad Choir — ZynAddSubFX, samples by Elf of Happy and Love, CC0"
+        "credit": "FreePats Synth Pad Choir \u2014 ZynAddSubFX, samples by Elf of Happy and Love, CC0"
       },
       "manifest": {
         "id": "choirpad",
@@ -957,7 +957,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/synth-pad-choir",
-          "credit": "FreePats Synth Pad Choir — ZynAddSubFX, samples by Elf of Happy and Love, CC0"
+          "credit": "FreePats Synth Pad Choir \u2014 ZynAddSubFX, samples by Elf of Happy and Love, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -1309,7 +1309,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/synth-fifths",
-        "credit": "FreePats Synth Fifths — Surge, samples by Elf of Happy and Love, CC0"
+        "credit": "FreePats Synth Fifths \u2014 Surge, samples by Elf of Happy and Love, CC0"
       },
       "manifest": {
         "id": "fifths",
@@ -1329,7 +1329,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/synth-fifths",
-          "credit": "FreePats Synth Fifths — Surge, samples by Elf of Happy and Love, CC0"
+          "credit": "FreePats Synth Fifths \u2014 Surge, samples by Elf of Happy and Love, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -1535,7 +1535,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/electric-bass-YR",
-        "credit": "Electric Bass YR (fingered) — a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
+        "credit": "Electric Bass YR (fingered) \u2014 a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
       },
       "manifest": {
         "id": "fingeryr",
@@ -1555,7 +1555,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/electric-bass-YR",
-          "credit": "Electric Bass YR (fingered) — a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
+          "credit": "Electric Bass YR (fingered) \u2014 a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -1678,7 +1678,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/glass",
-        "credit": "FreePats Glasses of water — recorded by Roberto (zenvoid.org), CC0"
+        "credit": "FreePats Glasses of water \u2014 recorded by Roberto (zenvoid.org), CC0"
       },
       "manifest": {
         "id": "glass",
@@ -1698,7 +1698,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/glass",
-          "credit": "FreePats Glasses of water — recorded by Roberto (zenvoid.org), CC0"
+          "credit": "FreePats Glasses of water \u2014 recorded by Roberto (zenvoid.org), CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -1873,850 +1873,6 @@
       }
     },
     {
-      "id": "gretschstaccato",
-      "name": "Gretsch Staccato",
-      "family": "keys",
-      "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/gretschstaccato-1.0.0.zip",
-      "bytes": 407783,
-      "crc32": 2019743176,
-      "license": {
-        "spdx": "CC0-1.0",
-        "source": "https://github.com/sfzinstruments/karoryfer.black-and-green-guitars",
-        "credit": "Karoryfer Samples, Black And Green Guitars — Gretsch Anniversary, staccato, CC0"
-      },
-      "manifest": {
-        "id": "gretschstaccato",
-        "name": "Gretsch Staccato",
-        "version": "1.0.0",
-        "family": "keys",
-        "kind": "pitched",
-        "range": {
-          "lo": 40,
-          "hi": 86
-        },
-        "defaultView": {
-          "lo": 51,
-          "hi": 75
-        },
-        "shade": "green",
-        "license": {
-          "spdx": "CC0-1.0",
-          "source": "https://github.com/sfzinstruments/karoryfer.black-and-green-guitars",
-          "credit": "Karoryfer Samples, Black And Green Guitars — Gretsch Anniversary, staccato, CC0"
-        },
-        "envelope": {
-          "attack": 0.002,
-          "release": 0.25
-        },
-        "trim": 1,
-        "accentGain": 1.5,
-        "polyphony": 8,
-        "voicesAtOnce": 4,
-        "zones": [
-          {
-            "file": "gretschstaccato/e3.m4a",
-            "rootNote": 40,
-            "lo": 40,
-            "hi": 40,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/f3.m4a",
-            "rootNote": 41,
-            "lo": 41,
-            "hi": 41,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/gb3.m4a",
-            "rootNote": 42,
-            "lo": 42,
-            "hi": 42,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/g3.m4a",
-            "rootNote": 43,
-            "lo": 43,
-            "hi": 43,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/ab3.m4a",
-            "rootNote": 44,
-            "lo": 44,
-            "hi": 44,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/a3.m4a",
-            "rootNote": 45,
-            "lo": 45,
-            "hi": 45,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/bb3.m4a",
-            "rootNote": 46,
-            "lo": 46,
-            "hi": 46,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/b3.m4a",
-            "rootNote": 47,
-            "lo": 47,
-            "hi": 47,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/c4.m4a",
-            "rootNote": 48,
-            "lo": 48,
-            "hi": 48,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/db4.m4a",
-            "rootNote": 49,
-            "lo": 49,
-            "hi": 49,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/d4.m4a",
-            "rootNote": 50,
-            "lo": 50,
-            "hi": 50,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/eb4.m4a",
-            "rootNote": 51,
-            "lo": 51,
-            "hi": 51,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/e4.m4a",
-            "rootNote": 52,
-            "lo": 52,
-            "hi": 52,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/f4.m4a",
-            "rootNote": 53,
-            "lo": 53,
-            "hi": 53,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/gb4.m4a",
-            "rootNote": 54,
-            "lo": 54,
-            "hi": 54,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/g4.m4a",
-            "rootNote": 55,
-            "lo": 55,
-            "hi": 55,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/ab4.m4a",
-            "rootNote": 56,
-            "lo": 56,
-            "hi": 56,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/a4.m4a",
-            "rootNote": 57,
-            "lo": 57,
-            "hi": 57,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/bb4.m4a",
-            "rootNote": 58,
-            "lo": 58,
-            "hi": 58,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/b4.m4a",
-            "rootNote": 59,
-            "lo": 59,
-            "hi": 59,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/c5.m4a",
-            "rootNote": 60,
-            "lo": 60,
-            "hi": 60,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/db5.m4a",
-            "rootNote": 61,
-            "lo": 61,
-            "hi": 61,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/d5.m4a",
-            "rootNote": 62,
-            "lo": 62,
-            "hi": 62,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/eb5.m4a",
-            "rootNote": 63,
-            "lo": 63,
-            "hi": 63,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/e5.m4a",
-            "rootNote": 64,
-            "lo": 64,
-            "hi": 64,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/f5.m4a",
-            "rootNote": 65,
-            "lo": 65,
-            "hi": 65,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/gb5.m4a",
-            "rootNote": 66,
-            "lo": 66,
-            "hi": 66,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/g5.m4a",
-            "rootNote": 67,
-            "lo": 67,
-            "hi": 67,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/ab5.m4a",
-            "rootNote": 68,
-            "lo": 68,
-            "hi": 68,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/a5.m4a",
-            "rootNote": 69,
-            "lo": 69,
-            "hi": 69,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/bb5.m4a",
-            "rootNote": 70,
-            "lo": 70,
-            "hi": 70,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/b5.m4a",
-            "rootNote": 71,
-            "lo": 71,
-            "hi": 71,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/c6.m4a",
-            "rootNote": 72,
-            "lo": 72,
-            "hi": 72,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/db6.m4a",
-            "rootNote": 73,
-            "lo": 73,
-            "hi": 73,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/d6.m4a",
-            "rootNote": 74,
-            "lo": 74,
-            "hi": 74,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/eb6.m4a",
-            "rootNote": 75,
-            "lo": 75,
-            "hi": 75,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/e6.m4a",
-            "rootNote": 76,
-            "lo": 76,
-            "hi": 76,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/f6.m4a",
-            "rootNote": 77,
-            "lo": 77,
-            "hi": 77,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/gb6.m4a",
-            "rootNote": 78,
-            "lo": 78,
-            "hi": 78,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/g6.m4a",
-            "rootNote": 79,
-            "lo": 79,
-            "hi": 79,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/ab6.m4a",
-            "rootNote": 80,
-            "lo": 80,
-            "hi": 80,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/a6.m4a",
-            "rootNote": 81,
-            "lo": 81,
-            "hi": 81,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/bb6.m4a",
-            "rootNote": 82,
-            "lo": 82,
-            "hi": 82,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/b6.m4a",
-            "rootNote": 83,
-            "lo": 83,
-            "hi": 83,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/c7.m4a",
-            "rootNote": 84,
-            "lo": 84,
-            "hi": 84,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/db7.m4a",
-            "rootNote": 85,
-            "lo": 85,
-            "hi": 85,
-            "placeholder": "organ",
-            "gain": 0.911
-          },
-          {
-            "file": "gretschstaccato/d7.m4a",
-            "rootNote": 86,
-            "lo": 86,
-            "hi": 86,
-            "placeholder": "organ",
-            "gain": 0.911
-          }
-        ]
-      }
-    },
-    {
-      "id": "gretschtwang",
-      "name": "Gretsch Twang",
-      "family": "keys",
-      "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/gretschtwang-1.0.0.zip",
-      "bytes": 2192090,
-      "crc32": 1118041468,
-      "license": {
-        "spdx": "CC0-1.0",
-        "source": "https://github.com/sfzinstruments/karoryfer.black-and-green-guitars",
-        "credit": "Karoryfer Samples, Black And Green Guitars — Gretsch Anniversary, twang, mf layer, CC0"
-      },
-      "manifest": {
-        "id": "gretschtwang",
-        "name": "Gretsch Twang",
-        "version": "1.0.0",
-        "family": "keys",
-        "kind": "pitched",
-        "range": {
-          "lo": 40,
-          "hi": 86
-        },
-        "defaultView": {
-          "lo": 51,
-          "hi": 75
-        },
-        "shade": "green",
-        "license": {
-          "spdx": "CC0-1.0",
-          "source": "https://github.com/sfzinstruments/karoryfer.black-and-green-guitars",
-          "credit": "Karoryfer Samples, Black And Green Guitars — Gretsch Anniversary, twang, mf layer, CC0"
-        },
-        "envelope": {
-          "attack": 0.002,
-          "release": 0.3
-        },
-        "trim": 1,
-        "accentGain": 1.5,
-        "polyphony": 8,
-        "voicesAtOnce": 4,
-        "zones": [
-          {
-            "file": "gretschtwang/e3.m4a",
-            "rootNote": 40,
-            "lo": 40,
-            "hi": 40,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/f3.m4a",
-            "rootNote": 41,
-            "lo": 41,
-            "hi": 41,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/gb3.m4a",
-            "rootNote": 42,
-            "lo": 42,
-            "hi": 42,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/g3.m4a",
-            "rootNote": 43,
-            "lo": 43,
-            "hi": 43,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/ab3.m4a",
-            "rootNote": 44,
-            "lo": 44,
-            "hi": 44,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/a3.m4a",
-            "rootNote": 45,
-            "lo": 45,
-            "hi": 45,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/bb3.m4a",
-            "rootNote": 46,
-            "lo": 46,
-            "hi": 46,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/b3.m4a",
-            "rootNote": 47,
-            "lo": 47,
-            "hi": 47,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/c4.m4a",
-            "rootNote": 48,
-            "lo": 48,
-            "hi": 48,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/db4.m4a",
-            "rootNote": 49,
-            "lo": 49,
-            "hi": 49,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/d4.m4a",
-            "rootNote": 50,
-            "lo": 50,
-            "hi": 50,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/eb4.m4a",
-            "rootNote": 51,
-            "lo": 51,
-            "hi": 51,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/e4.m4a",
-            "rootNote": 52,
-            "lo": 52,
-            "hi": 52,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/f4.m4a",
-            "rootNote": 53,
-            "lo": 53,
-            "hi": 53,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/gb4.m4a",
-            "rootNote": 54,
-            "lo": 54,
-            "hi": 54,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/g4.m4a",
-            "rootNote": 55,
-            "lo": 55,
-            "hi": 55,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/ab4.m4a",
-            "rootNote": 56,
-            "lo": 56,
-            "hi": 56,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/a4.m4a",
-            "rootNote": 57,
-            "lo": 57,
-            "hi": 57,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/bb4.m4a",
-            "rootNote": 58,
-            "lo": 58,
-            "hi": 58,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/b4.m4a",
-            "rootNote": 59,
-            "lo": 59,
-            "hi": 59,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/c5.m4a",
-            "rootNote": 60,
-            "lo": 60,
-            "hi": 60,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/db5.m4a",
-            "rootNote": 61,
-            "lo": 61,
-            "hi": 61,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/d5.m4a",
-            "rootNote": 62,
-            "lo": 62,
-            "hi": 62,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/eb5.m4a",
-            "rootNote": 63,
-            "lo": 63,
-            "hi": 63,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/e5.m4a",
-            "rootNote": 64,
-            "lo": 64,
-            "hi": 64,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/f5.m4a",
-            "rootNote": 65,
-            "lo": 65,
-            "hi": 65,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/gb5.m4a",
-            "rootNote": 66,
-            "lo": 66,
-            "hi": 66,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/g5.m4a",
-            "rootNote": 67,
-            "lo": 67,
-            "hi": 67,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/ab5.m4a",
-            "rootNote": 68,
-            "lo": 68,
-            "hi": 68,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/a5.m4a",
-            "rootNote": 69,
-            "lo": 69,
-            "hi": 69,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/bb5.m4a",
-            "rootNote": 70,
-            "lo": 70,
-            "hi": 70,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/b5.m4a",
-            "rootNote": 71,
-            "lo": 71,
-            "hi": 71,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/c6.m4a",
-            "rootNote": 72,
-            "lo": 72,
-            "hi": 72,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/db6.m4a",
-            "rootNote": 73,
-            "lo": 73,
-            "hi": 73,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/d6.m4a",
-            "rootNote": 74,
-            "lo": 74,
-            "hi": 74,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/eb6.m4a",
-            "rootNote": 75,
-            "lo": 75,
-            "hi": 75,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/e6.m4a",
-            "rootNote": 76,
-            "lo": 76,
-            "hi": 76,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/f6.m4a",
-            "rootNote": 77,
-            "lo": 77,
-            "hi": 77,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/gb6.m4a",
-            "rootNote": 78,
-            "lo": 78,
-            "hi": 78,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/g6.m4a",
-            "rootNote": 79,
-            "lo": 79,
-            "hi": 79,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/ab6.m4a",
-            "rootNote": 80,
-            "lo": 80,
-            "hi": 80,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/a6.m4a",
-            "rootNote": 81,
-            "lo": 81,
-            "hi": 81,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/bb6.m4a",
-            "rootNote": 82,
-            "lo": 82,
-            "hi": 82,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/b6.m4a",
-            "rootNote": 83,
-            "lo": 83,
-            "hi": 83,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/c7.m4a",
-            "rootNote": 84,
-            "lo": 84,
-            "hi": 84,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/db7.m4a",
-            "rootNote": 85,
-            "lo": 85,
-            "hi": 85,
-            "placeholder": "organ",
-            "gain": 4.864
-          },
-          {
-            "file": "gretschtwang/d7.m4a",
-            "rootNote": 86,
-            "lo": 86,
-            "hi": 86,
-            "placeholder": "organ",
-            "gain": 4.864
-          }
-        ]
-      }
-    },
-    {
       "id": "growlybass",
       "name": "Growly Bass",
       "family": "bass",
@@ -2728,7 +1884,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sfzinstruments/karoryfer.growlybass",
-        "credit": "Karoryfer Samples, Growlybass — a Squier Jazz Bass recorded direct, CC0"
+        "credit": "Karoryfer Samples, Growlybass \u2014 a Squier Jazz Bass recorded direct, CC0"
       },
       "manifest": {
         "id": "growlybass",
@@ -2748,7 +1904,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sfzinstruments/karoryfer.growlybass",
-          "credit": "Karoryfer Samples, Growlybass — a Squier Jazz Bass recorded direct, CC0"
+          "credit": "Karoryfer Samples, Growlybass \u2014 a Squier Jazz Bass recorded direct, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -2873,7 +2029,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, hand chimes — sustained strikes, CC0"
+        "credit": "VCSL, hand chimes \u2014 sustained strikes, CC0"
       },
       "manifest": {
         "id": "handchimes",
@@ -2893,7 +2049,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, hand chimes — sustained strikes, CC0"
+          "credit": "VCSL, hand chimes \u2014 sustained strikes, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -3071,7 +2227,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/hang-D-minor",
-        "credit": "FreePats Hang tuned in D minor — played by Mar, recorded at Medialab-Prado, CC0"
+        "credit": "FreePats Hang tuned in D minor \u2014 played by Mar, recorded at Medialab-Prado, CC0"
       },
       "manifest": {
         "id": "hang",
@@ -3091,7 +2247,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/hang-D-minor",
-          "credit": "FreePats Hang tuned in D minor — played by Mar, recorded at Medialab-Prado, CC0"
+          "credit": "FreePats Hang tuned in D minor \u2014 played by Mar, recorded at Medialab-Prado, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -3178,1016 +2334,6 @@
       }
     },
     {
-      "id": "hofnerstaccato",
-      "name": "Hofner Staccato",
-      "family": "keys",
-      "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/hofnerstaccato-1.0.0.zip",
-      "bytes": 472391,
-      "crc32": 1758062781,
-      "license": {
-        "spdx": "CC0-1.0",
-        "source": "https://github.com/sfzinstruments/karoryfer.black-and-green-guitars",
-        "credit": "Karoryfer Samples, Black And Green Guitars — Hofner Club, staccato, CC0"
-      },
-      "manifest": {
-        "id": "hofnerstaccato",
-        "name": "Hofner Staccato",
-        "version": "1.0.0",
-        "family": "keys",
-        "kind": "pitched",
-        "range": {
-          "lo": 40,
-          "hi": 86
-        },
-        "defaultView": {
-          "lo": 51,
-          "hi": 75
-        },
-        "shade": "silver",
-        "license": {
-          "spdx": "CC0-1.0",
-          "source": "https://github.com/sfzinstruments/karoryfer.black-and-green-guitars",
-          "credit": "Karoryfer Samples, Black And Green Guitars — Hofner Club, staccato, CC0"
-        },
-        "envelope": {
-          "attack": 0.002,
-          "release": 0.25
-        },
-        "trim": 1,
-        "accentGain": 1.5,
-        "polyphony": 8,
-        "voicesAtOnce": 4,
-        "zones": [
-          {
-            "file": "hofnerstaccato/e3.m4a",
-            "rootNote": 40,
-            "lo": 40,
-            "hi": 40,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/f3.m4a",
-            "rootNote": 41,
-            "lo": 41,
-            "hi": 41,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/gb3.m4a",
-            "rootNote": 42,
-            "lo": 42,
-            "hi": 42,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/g3.m4a",
-            "rootNote": 43,
-            "lo": 43,
-            "hi": 43,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/ab3.m4a",
-            "rootNote": 44,
-            "lo": 44,
-            "hi": 44,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/a3.m4a",
-            "rootNote": 45,
-            "lo": 45,
-            "hi": 45,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/bb3.m4a",
-            "rootNote": 46,
-            "lo": 46,
-            "hi": 46,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/b3.m4a",
-            "rootNote": 47,
-            "lo": 47,
-            "hi": 47,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/c4.m4a",
-            "rootNote": 48,
-            "lo": 48,
-            "hi": 48,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/db4.m4a",
-            "rootNote": 49,
-            "lo": 49,
-            "hi": 49,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/d4.m4a",
-            "rootNote": 50,
-            "lo": 50,
-            "hi": 50,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/eb4.m4a",
-            "rootNote": 51,
-            "lo": 51,
-            "hi": 51,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/e4.m4a",
-            "rootNote": 52,
-            "lo": 52,
-            "hi": 52,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/f4.m4a",
-            "rootNote": 53,
-            "lo": 53,
-            "hi": 53,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/gb4.m4a",
-            "rootNote": 54,
-            "lo": 54,
-            "hi": 54,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/g4.m4a",
-            "rootNote": 55,
-            "lo": 55,
-            "hi": 55,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/ab4.m4a",
-            "rootNote": 56,
-            "lo": 56,
-            "hi": 56,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/a4.m4a",
-            "rootNote": 57,
-            "lo": 57,
-            "hi": 57,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/bb4.m4a",
-            "rootNote": 58,
-            "lo": 58,
-            "hi": 58,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/b4.m4a",
-            "rootNote": 59,
-            "lo": 59,
-            "hi": 59,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/c5.m4a",
-            "rootNote": 60,
-            "lo": 60,
-            "hi": 60,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/db5.m4a",
-            "rootNote": 61,
-            "lo": 61,
-            "hi": 61,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/d5.m4a",
-            "rootNote": 62,
-            "lo": 62,
-            "hi": 62,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/eb5.m4a",
-            "rootNote": 63,
-            "lo": 63,
-            "hi": 63,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/e5.m4a",
-            "rootNote": 64,
-            "lo": 64,
-            "hi": 64,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/f5.m4a",
-            "rootNote": 65,
-            "lo": 65,
-            "hi": 65,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/gb5.m4a",
-            "rootNote": 66,
-            "lo": 66,
-            "hi": 66,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/g5.m4a",
-            "rootNote": 67,
-            "lo": 67,
-            "hi": 67,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/ab5.m4a",
-            "rootNote": 68,
-            "lo": 68,
-            "hi": 68,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/a5.m4a",
-            "rootNote": 69,
-            "lo": 69,
-            "hi": 69,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/bb5.m4a",
-            "rootNote": 70,
-            "lo": 70,
-            "hi": 70,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/b5.m4a",
-            "rootNote": 71,
-            "lo": 71,
-            "hi": 71,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/c6.m4a",
-            "rootNote": 72,
-            "lo": 72,
-            "hi": 72,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/db6.m4a",
-            "rootNote": 73,
-            "lo": 73,
-            "hi": 73,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/d6.m4a",
-            "rootNote": 74,
-            "lo": 74,
-            "hi": 74,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/eb6.m4a",
-            "rootNote": 75,
-            "lo": 75,
-            "hi": 75,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/e6.m4a",
-            "rootNote": 76,
-            "lo": 76,
-            "hi": 76,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/f6.m4a",
-            "rootNote": 77,
-            "lo": 77,
-            "hi": 77,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/gb6.m4a",
-            "rootNote": 78,
-            "lo": 78,
-            "hi": 78,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/g6.m4a",
-            "rootNote": 79,
-            "lo": 79,
-            "hi": 79,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/ab6.m4a",
-            "rootNote": 80,
-            "lo": 80,
-            "hi": 80,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/a6.m4a",
-            "rootNote": 81,
-            "lo": 81,
-            "hi": 81,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/bb6.m4a",
-            "rootNote": 82,
-            "lo": 82,
-            "hi": 82,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/b6.m4a",
-            "rootNote": 83,
-            "lo": 83,
-            "hi": 83,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/c7.m4a",
-            "rootNote": 84,
-            "lo": 84,
-            "hi": 84,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/db7.m4a",
-            "rootNote": 85,
-            "lo": 85,
-            "hi": 85,
-            "placeholder": "organ",
-            "gain": 0.884
-          },
-          {
-            "file": "hofnerstaccato/d7.m4a",
-            "rootNote": 86,
-            "lo": 86,
-            "hi": 86,
-            "placeholder": "organ",
-            "gain": 0.884
-          }
-        ]
-      }
-    },
-    {
-      "id": "hofnertwang",
-      "name": "Hofner Twang",
-      "family": "keys",
-      "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/hofnertwang-1.0.0.zip",
-      "bytes": 1595650,
-      "crc32": 1110354776,
-      "license": {
-        "spdx": "CC0-1.0",
-        "source": "https://github.com/sfzinstruments/karoryfer.black-and-green-guitars",
-        "credit": "Karoryfer Samples, Black And Green Guitars — Hofner Club, twang, mf layer, CC0"
-      },
-      "manifest": {
-        "id": "hofnertwang",
-        "name": "Hofner Twang",
-        "version": "1.0.0",
-        "family": "keys",
-        "kind": "pitched",
-        "range": {
-          "lo": 40,
-          "hi": 86
-        },
-        "defaultView": {
-          "lo": 51,
-          "hi": 75
-        },
-        "shade": "silver",
-        "license": {
-          "spdx": "CC0-1.0",
-          "source": "https://github.com/sfzinstruments/karoryfer.black-and-green-guitars",
-          "credit": "Karoryfer Samples, Black And Green Guitars — Hofner Club, twang, mf layer, CC0"
-        },
-        "envelope": {
-          "attack": 0.002,
-          "release": 0.3
-        },
-        "trim": 1,
-        "accentGain": 1.5,
-        "polyphony": 8,
-        "voicesAtOnce": 4,
-        "zones": [
-          {
-            "file": "hofnertwang/e3.m4a",
-            "rootNote": 40,
-            "lo": 40,
-            "hi": 40,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/f3.m4a",
-            "rootNote": 41,
-            "lo": 41,
-            "hi": 41,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/gb3.m4a",
-            "rootNote": 42,
-            "lo": 42,
-            "hi": 42,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/g3.m4a",
-            "rootNote": 43,
-            "lo": 43,
-            "hi": 43,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/ab3.m4a",
-            "rootNote": 44,
-            "lo": 44,
-            "hi": 44,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/a3.m4a",
-            "rootNote": 45,
-            "lo": 45,
-            "hi": 45,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/bb3.m4a",
-            "rootNote": 46,
-            "lo": 46,
-            "hi": 46,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/b3.m4a",
-            "rootNote": 47,
-            "lo": 47,
-            "hi": 47,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/c4.m4a",
-            "rootNote": 48,
-            "lo": 48,
-            "hi": 48,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/db4.m4a",
-            "rootNote": 49,
-            "lo": 49,
-            "hi": 49,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/d4.m4a",
-            "rootNote": 50,
-            "lo": 50,
-            "hi": 50,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/eb4.m4a",
-            "rootNote": 51,
-            "lo": 51,
-            "hi": 51,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/e4.m4a",
-            "rootNote": 52,
-            "lo": 52,
-            "hi": 52,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/f4.m4a",
-            "rootNote": 53,
-            "lo": 53,
-            "hi": 53,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/gb4.m4a",
-            "rootNote": 54,
-            "lo": 54,
-            "hi": 54,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/g4.m4a",
-            "rootNote": 55,
-            "lo": 55,
-            "hi": 55,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/ab4.m4a",
-            "rootNote": 56,
-            "lo": 56,
-            "hi": 56,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/a4.m4a",
-            "rootNote": 57,
-            "lo": 57,
-            "hi": 57,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/bb4.m4a",
-            "rootNote": 58,
-            "lo": 58,
-            "hi": 58,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/b4.m4a",
-            "rootNote": 59,
-            "lo": 59,
-            "hi": 59,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/c5.m4a",
-            "rootNote": 60,
-            "lo": 60,
-            "hi": 60,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/db5.m4a",
-            "rootNote": 61,
-            "lo": 61,
-            "hi": 61,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/d5.m4a",
-            "rootNote": 62,
-            "lo": 62,
-            "hi": 62,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/eb5.m4a",
-            "rootNote": 63,
-            "lo": 63,
-            "hi": 63,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/e5.m4a",
-            "rootNote": 64,
-            "lo": 64,
-            "hi": 64,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/f5.m4a",
-            "rootNote": 65,
-            "lo": 65,
-            "hi": 65,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/gb5.m4a",
-            "rootNote": 66,
-            "lo": 66,
-            "hi": 66,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/g5.m4a",
-            "rootNote": 67,
-            "lo": 67,
-            "hi": 67,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/ab5.m4a",
-            "rootNote": 68,
-            "lo": 68,
-            "hi": 68,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/a5.m4a",
-            "rootNote": 69,
-            "lo": 69,
-            "hi": 69,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/bb5.m4a",
-            "rootNote": 70,
-            "lo": 70,
-            "hi": 70,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/b5.m4a",
-            "rootNote": 71,
-            "lo": 71,
-            "hi": 71,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/c6.m4a",
-            "rootNote": 72,
-            "lo": 72,
-            "hi": 72,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/db6.m4a",
-            "rootNote": 73,
-            "lo": 73,
-            "hi": 73,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/d6.m4a",
-            "rootNote": 74,
-            "lo": 74,
-            "hi": 74,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/eb6.m4a",
-            "rootNote": 75,
-            "lo": 75,
-            "hi": 75,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/e6.m4a",
-            "rootNote": 76,
-            "lo": 76,
-            "hi": 76,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/f6.m4a",
-            "rootNote": 77,
-            "lo": 77,
-            "hi": 77,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/gb6.m4a",
-            "rootNote": 78,
-            "lo": 78,
-            "hi": 78,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/g6.m4a",
-            "rootNote": 79,
-            "lo": 79,
-            "hi": 79,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/ab6.m4a",
-            "rootNote": 80,
-            "lo": 80,
-            "hi": 80,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/a6.m4a",
-            "rootNote": 81,
-            "lo": 81,
-            "hi": 81,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/bb6.m4a",
-            "rootNote": 82,
-            "lo": 82,
-            "hi": 82,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/b6.m4a",
-            "rootNote": 83,
-            "lo": 83,
-            "hi": 83,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/c7.m4a",
-            "rootNote": 84,
-            "lo": 84,
-            "hi": 84,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/db7.m4a",
-            "rootNote": 85,
-            "lo": 85,
-            "hi": 85,
-            "placeholder": "organ",
-            "gain": 3.187
-          },
-          {
-            "file": "hofnertwang/d7.m4a",
-            "rootNote": 86,
-            "lo": 86,
-            "hi": 86,
-            "placeholder": "organ",
-            "gain": 3.187
-          }
-        ]
-      }
-    },
-    {
-      "id": "martingm2",
-      "name": "MartinGM2",
-      "family": "keys",
-      "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/martingm2-1.0.0.zip",
-      "bytes": 450666,
-      "crc32": 3406036538,
-      "license": {
-        "spdx": "CC0-1.0",
-        "source": "https://github.com/sfzinstruments/Discord-SFZ-GM-Bank",
-        "credit": "Jeff Learman, 2017 Martin HD28 Vintage Series, Discord SFZ GM Bank slot 026, CC0"
-      },
-      "manifest": {
-        "id": "martingm2",
-        "name": "MartinGM2",
-        "version": "1.0.0",
-        "family": "keys",
-        "kind": "pitched",
-        "range": {
-          "lo": 37,
-          "hi": 86
-        },
-        "defaultView": {
-          "lo": 49,
-          "hi": 73
-        },
-        "shade": "amber",
-        "license": {
-          "spdx": "CC0-1.0",
-          "source": "https://github.com/sfzinstruments/Discord-SFZ-GM-Bank",
-          "credit": "Jeff Learman, 2017 Martin HD28 Vintage Series, Discord SFZ GM Bank slot 026, CC0"
-        },
-        "envelope": {
-          "attack": 0.002,
-          "release": 0.4
-        },
-        "trim": 1,
-        "accentGain": 1.5,
-        "polyphony": 8,
-        "voicesAtOnce": 4,
-        "zones": [
-          {
-            "file": "martingm2/MartinGM2_040__E2_1.m4a",
-            "rootNote": 40,
-            "lo": 37,
-            "hi": 41,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_043__G2_1.m4a",
-            "rootNote": 43,
-            "lo": 42,
-            "hi": 44,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_046_Bb2_1.m4a",
-            "rootNote": 46,
-            "lo": 45,
-            "hi": 47,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_049_Db3_1.m4a",
-            "rootNote": 49,
-            "lo": 48,
-            "hi": 50,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_052__E3_1.m4a",
-            "rootNote": 52,
-            "lo": 51,
-            "hi": 53,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_055__G3_1.m4a",
-            "rootNote": 55,
-            "lo": 54,
-            "hi": 56,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_058_Bb3_1.m4a",
-            "rootNote": 58,
-            "lo": 57,
-            "hi": 59,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_061_Db4_1.m4a",
-            "rootNote": 61,
-            "lo": 60,
-            "hi": 62,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_064__E4_1.m4a",
-            "rootNote": 64,
-            "lo": 63,
-            "hi": 66,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_068_Ab4_1.m4a",
-            "rootNote": 68,
-            "lo": 67,
-            "hi": 69,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_071__B4_1.m4a",
-            "rootNote": 71,
-            "lo": 70,
-            "hi": 72,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_074__D5_1.m4a",
-            "rootNote": 74,
-            "lo": 73,
-            "hi": 75,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_077__F5_1.m4a",
-            "rootNote": 77,
-            "lo": 76,
-            "hi": 78,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_080_Ab5_1.m4a",
-            "rootNote": 80,
-            "lo": 79,
-            "hi": 81,
-            "placeholder": "organ",
-            "gain": 0.922
-          },
-          {
-            "file": "martingm2/MartinGM2_083__B5_1.m4a",
-            "rootNote": 83,
-            "lo": 82,
-            "hi": 86,
-            "placeholder": "organ",
-            "gain": 0.922
-          }
-        ]
-      }
-    },
-    {
       "id": "pickedyr",
       "name": "Picked Bass YR",
       "family": "bass",
@@ -4199,7 +2345,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/electric-bass-YR",
-        "credit": "Electric Bass YR (picked) — a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
+        "credit": "Electric Bass YR (picked) \u2014 a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
       },
       "manifest": {
         "id": "pickedyr",
@@ -4219,7 +2365,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/electric-bass-YR",
-          "credit": "Electric Bass YR (picked) — a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
+          "credit": "Electric Bass YR (picked) \u2014 a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -4340,7 +2486,7 @@
     },
     {
       "id": "pizzstrings",
-      "name": "Pizzicato",
+      "name": "Plucked Strings",
       "family": "keys",
       "kind": "pitched",
       "version": "1.0.0",
@@ -4354,7 +2500,7 @@
       },
       "manifest": {
         "id": "pizzstrings",
-        "name": "Pizzicato",
+        "name": "Plucked Strings",
         "version": "1.0.0",
         "family": "keys",
         "kind": "pitched",
@@ -4513,188 +2659,6 @@
       }
     },
     {
-      "id": "shinyguitar",
-      "name": "Shinyguitar",
-      "family": "keys",
-      "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/shinyguitar-1.0.0.zip",
-      "bytes": 633170,
-      "crc32": 974348426,
-      "license": {
-        "spdx": "CC0-1.0",
-        "source": "https://github.com/sfzinstruments/karoryfer.shinyguitar",
-        "credit": "Karoryfer Samples, Shinyguitar — archtop, microphone signal, softest layer (vl1), CC0"
-      },
-      "manifest": {
-        "id": "shinyguitar",
-        "name": "Shinyguitar",
-        "version": "1.0.0",
-        "family": "keys",
-        "kind": "pitched",
-        "range": {
-          "lo": 37,
-          "hi": 86
-        },
-        "defaultView": {
-          "lo": 49,
-          "hi": 73
-        },
-        "shade": "teal",
-        "license": {
-          "spdx": "CC0-1.0",
-          "source": "https://github.com/sfzinstruments/karoryfer.shinyguitar",
-          "credit": "Karoryfer Samples, Shinyguitar — archtop, microphone signal, softest layer (vl1), CC0"
-        },
-        "envelope": {
-          "attack": 0.002,
-          "release": 0.3
-        },
-        "trim": 1,
-        "accentGain": 1.5,
-        "polyphony": 8,
-        "voicesAtOnce": 4,
-        "zones": [
-          {
-            "file": "shinyguitar/db2.m4a",
-            "rootNote": 37,
-            "lo": 37,
-            "hi": 38,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/e2.m4a",
-            "rootNote": 40,
-            "lo": 39,
-            "hi": 41,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/gb2.m4a",
-            "rootNote": 42,
-            "lo": 42,
-            "hi": 43,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/a2.m4a",
-            "rootNote": 45,
-            "lo": 44,
-            "hi": 46,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/c3.m4a",
-            "rootNote": 48,
-            "lo": 47,
-            "hi": 49,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/eb3.m4a",
-            "rootNote": 51,
-            "lo": 50,
-            "hi": 52,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/gb3.m4a",
-            "rootNote": 54,
-            "lo": 53,
-            "hi": 55,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/a3.m4a",
-            "rootNote": 57,
-            "lo": 56,
-            "hi": 58,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/c4.m4a",
-            "rootNote": 60,
-            "lo": 59,
-            "hi": 61,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/eb4.m4a",
-            "rootNote": 63,
-            "lo": 62,
-            "hi": 64,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/gb4.m4a",
-            "rootNote": 66,
-            "lo": 65,
-            "hi": 67,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/a4.m4a",
-            "rootNote": 69,
-            "lo": 68,
-            "hi": 70,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/c5.m4a",
-            "rootNote": 72,
-            "lo": 71,
-            "hi": 73,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/eb5.m4a",
-            "rootNote": 75,
-            "lo": 74,
-            "hi": 76,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/gb5.m4a",
-            "rootNote": 78,
-            "lo": 77,
-            "hi": 79,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/a5.m4a",
-            "rootNote": 81,
-            "lo": 80,
-            "hi": 82,
-            "placeholder": "organ",
-            "gain": 3.813
-          },
-          {
-            "file": "shinyguitar/c6.m4a",
-            "rootNote": 84,
-            "lo": 83,
-            "hi": 86,
-            "placeholder": "organ",
-            "gain": 3.813
-          }
-        ]
-      }
-    },
-    {
       "id": "soundtrack",
       "name": "Soundtrack Synth",
       "family": "keys",
@@ -4706,7 +2670,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/synth-soundtrack",
-        "credit": "FreePats Synth Soundtrack — ZynAddSubFX, samples by Elf of Happy and Love, CC0"
+        "credit": "FreePats Synth Soundtrack \u2014 ZynAddSubFX, samples by Elf of Happy and Love, CC0"
       },
       "manifest": {
         "id": "soundtrack",
@@ -4726,7 +2690,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/synth-soundtrack",
-          "credit": "FreePats Synth Soundtrack — ZynAddSubFX, samples by Elf of Happy and Love, CC0"
+          "credit": "FreePats Synth Soundtrack \u2014 ZynAddSubFX, samples by Elf of Happy and Love, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -4932,7 +2896,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/spanish-classical-guitar",
-        "credit": "FreePats Spanish classical guitar — nylon strings, CC0"
+        "credit": "FreePats Spanish classical guitar \u2014 nylon strings, CC0"
       },
       "manifest": {
         "id": "spanish",
@@ -4952,7 +2916,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/spanish-classical-guitar",
-          "credit": "FreePats Spanish classical guitar — nylon strings, CC0"
+          "credit": "FreePats Spanish classical guitar \u2014 nylon strings, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -5306,7 +3270,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sfzinstruments/karoryfer.swagbass",
-        "credit": "Karoryfer Samples, Swagbass — f layer from swagbass_shiny.sfz, CC0"
+        "credit": "Karoryfer Samples, Swagbass \u2014 f layer from swagbass_shiny.sfz, CC0"
       },
       "manifest": {
         "id": "swagbass",
@@ -5326,7 +3290,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sfzinstruments/karoryfer.swagbass",
-          "credit": "Karoryfer Samples, Swagbass — f layer from swagbass_shiny.sfz, CC0"
+          "credit": "Karoryfer Samples, Swagbass \u2014 f layer from swagbass_shiny.sfz, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -5449,7 +3413,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/sweep-pad",
-        "credit": "FreePats Sweep Pad — ZynAddSubFX / Yoshimi, by Roberto (zenvoid.org), CC0"
+        "credit": "FreePats Sweep Pad \u2014 ZynAddSubFX / Yoshimi, by Roberto (zenvoid.org), CC0"
       },
       "manifest": {
         "id": "sweeppad",
@@ -5469,7 +3433,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/sweep-pad",
-          "credit": "FreePats Sweep Pad — ZynAddSubFX / Yoshimi, by Roberto (zenvoid.org), CC0"
+          "credit": "FreePats Sweep Pad \u2014 ZynAddSubFX / Yoshimi, by Roberto (zenvoid.org), CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -5641,7 +3605,7 @@
     },
     {
       "id": "tremstrings",
-      "name": "Tremolo",
+      "name": "Tremolo Strings",
       "family": "keys",
       "kind": "pitched",
       "version": "1.0.0",
@@ -5655,7 +3619,7 @@
       },
       "manifest": {
         "id": "tremstrings",
-        "name": "Tremolo",
+        "name": "Tremolo Strings",
         "version": "1.0.0",
         "family": "keys",
         "kind": "pitched",
@@ -5817,7 +3781,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/upright-piano-KW",
-        "credit": "Upright Piano KW — a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
+        "credit": "Upright Piano KW \u2014 a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
       },
       "manifest": {
         "id": "uprightkw",
@@ -5837,7 +3801,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/upright-piano-KW",
-          "credit": "Upright Piano KW — a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
+          "credit": "Upright Piano KW \u2014 a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -6116,7 +4080,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, vibraphone — hard mallets, layer v3, CC0"
+        "credit": "VCSL, vibraphone \u2014 hard mallets, layer v3, CC0"
       },
       "manifest": {
         "id": "vibes",
@@ -6136,7 +4100,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, vibraphone — hard mallets, layer v3, CC0"
+          "credit": "VCSL, vibraphone \u2014 hard mallets, layer v3, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -6937,7 +4901,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition — cello section, sustain vibrato, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 cello section, sustain vibrato, CC0"
       },
       "manifest": {
         "id": "vscocellos",
@@ -6957,7 +4921,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition — cello section, sustain vibrato, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 cello section, sustain vibrato, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -7087,7 +5051,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition — viola section, sustain vibrato, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 viola section, sustain vibrato, CC0"
       },
       "manifest": {
         "id": "vscoviolas",
@@ -7107,7 +5071,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition — viola section, sustain vibrato, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 viola section, sustain vibrato, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -7237,7 +5201,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition — violin section, sustain vibrato, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 violin section, sustain vibrato, CC0"
       },
       "manifest": {
         "id": "vscoviolins",
@@ -7257,7 +5221,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition — violin section, sustain vibrato, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 violin section, sustain vibrato, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -7371,7 +5335,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, wine glasses — bowed rims, slow sustains, CC0"
+        "credit": "VCSL, wine glasses \u2014 bowed rims, slow sustains, CC0"
       },
       "manifest": {
         "id": "wineglass",
@@ -7391,7 +5355,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, wine glasses — bowed rims, slow sustains, CC0"
+          "credit": "VCSL, wine glasses \u2014 bowed rims, slow sustains, CC0"
         },
         "envelope": {
           "attack": 0.002,
