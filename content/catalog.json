@@ -2172,6 +2172,64 @@
       }
     },
     {
+      "id": "droneloop",
+      "name": "Drone Loop",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/droneloop-1.0.0.zip",
+      "bytes": 73418,
+      "crc32": 3627423908,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample loop_drone_g_97, from Freesound: https://freesound.org/people/hullum/sounds/415570/, CC0"
+      },
+      "manifest": {
+        "id": "droneloop",
+        "name": "Drone Loop",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 19,
+          "hi": 43
+        },
+        "defaultView": {
+          "lo": 19,
+          "hi": 43
+        },
+        "shade": "silver",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample loop_drone_g_97, from Freesound: https://freesound.org/people/hullum/sounds/415570/, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "droneloop/loop_drone_g_97.m4a",
+            "rootNote": 31,
+            "lo": 19,
+            "hi": 43,
+            "loop": {
+              "start": 6615,
+              "end": 217596
+            },
+            "placeholder": "organ",
+            "gain": 1.663
+          }
+        ]
+      }
+    },
+    {
       "id": "fifths",
       "name": "Synth Fifths",
       "family": "keys",
@@ -7248,6 +7306,222 @@
             },
             "placeholder": "organ",
             "gain": 0.448
+          }
+        ]
+      }
+    },
+    {
+      "id": "tbdpad1",
+      "name": "TBD Minor Pad 1",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/tbdpad1-1.0.0.zip",
+      "bytes": 34218,
+      "crc32": 1408474764,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample tbd_pad_1, by The Black Dog, CC0"
+      },
+      "manifest": {
+        "id": "tbdpad1",
+        "name": "TBD Minor Pad 1",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 31,
+          "hi": 55
+        },
+        "defaultView": {
+          "lo": 31,
+          "hi": 55
+        },
+        "shade": "indigo",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample tbd_pad_1, by The Black Dog, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "tbdpad1/tbd_pad_1.m4a",
+            "rootNote": 43,
+            "lo": 31,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 2.61
+          }
+        ]
+      }
+    },
+    {
+      "id": "tbdpad2",
+      "name": "TBD Minor Pad 2",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/tbdpad2-1.0.0.zip",
+      "bytes": 49270,
+      "crc32": 1134891868,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample tbd_pad_2, by The Black Dog, CC0"
+      },
+      "manifest": {
+        "id": "tbdpad2",
+        "name": "TBD Minor Pad 2",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 31,
+          "hi": 55
+        },
+        "defaultView": {
+          "lo": 31,
+          "hi": 55
+        },
+        "shade": "violet",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample tbd_pad_2, by The Black Dog, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "tbdpad2/tbd_pad_2.m4a",
+            "rootNote": 43,
+            "lo": 31,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 2.419
+          }
+        ]
+      }
+    },
+    {
+      "id": "tbdpad3",
+      "name": "TBD Minor Pad 3",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/tbdpad3-1.0.0.zip",
+      "bytes": 46444,
+      "crc32": 1595942298,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample tbd_pad_3, by The Black Dog, CC0"
+      },
+      "manifest": {
+        "id": "tbdpad3",
+        "name": "TBD Minor Pad 3",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 50,
+          "hi": 74
+        },
+        "defaultView": {
+          "lo": 50,
+          "hi": 74
+        },
+        "shade": "teal",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample tbd_pad_3, by The Black Dog, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "tbdpad3/tbd_pad_3.m4a",
+            "rootNote": 62,
+            "lo": 50,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 1.581
+          }
+        ]
+      }
+    },
+    {
+      "id": "tbdpad4",
+      "name": "TBD Minor Pad 4",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/tbdpad4-1.0.0.zip",
+      "bytes": 40373,
+      "crc32": 2605382360,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+        "credit": "Sonic Pi sample tbd_pad_4, by The Black Dog, CC0"
+      },
+      "manifest": {
+        "id": "tbdpad4",
+        "name": "TBD Minor Pad 4",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 39,
+          "hi": 63
+        },
+        "defaultView": {
+          "lo": 39,
+          "hi": 63
+        },
+        "shade": "rose",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
+          "credit": "Sonic Pi sample tbd_pad_4, by The Black Dog, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "tbdpad4/tbd_pad_4.m4a",
+            "rootNote": 51,
+            "lo": 39,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 1.475
           }
         ]
       }
