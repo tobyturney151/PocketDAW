@@ -1,7 +1,7 @@
 {
   "format": "pocketdaw.catalog",
   "version": 1,
-  "built": "2026-09-23",
+  "built": "2026-09-24",
   "packs": [
     {
       "id": "ambichoir",
@@ -107,6 +107,100 @@
             "hi": 60,
             "placeholder": "organ",
             "gain": 2.514
+          }
+        ]
+      }
+    },
+    {
+      "id": "balafon",
+      "name": "Balafon",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/balafon-1.0.0.zip",
+      "bytes": 55928,
+      "crc32": 900936487,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, balafon — traditional mallet, layer vl2, CC0"
+      },
+      "manifest": {
+        "id": "balafon",
+        "name": "Balafon",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 59,
+          "hi": 91
+        },
+        "defaultView": {
+          "lo": 63,
+          "hi": 87
+        },
+        "shade": "lime",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, balafon — traditional mallet, layer vl2, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.3
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "balafon/EthnicXylo_tradM_Cs3_vl2_rr1_Mid.m4a",
+            "rootNote": 61,
+            "lo": 59,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 10.491
+          },
+          {
+            "file": "balafon/EthnicXylo_tradM_F3_vl2_rr1_Mid.m4a",
+            "rootNote": 65,
+            "lo": 64,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 10.491
+          },
+          {
+            "file": "balafon/EthnicXylo_tradM_C4_vl2_rr1_Mid.m4a",
+            "rootNote": 72,
+            "lo": 69,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 10.491
+          },
+          {
+            "file": "balafon/EthnicXylo_tradM_F4_vl2_rr1_Mid.m4a",
+            "rootNote": 77,
+            "lo": 75,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 10.491
+          },
+          {
+            "file": "balafon/EthnicXylo_tradM_C5_vl2_rr1_Mid.m4a",
+            "rootNote": 84,
+            "lo": 81,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 10.491
+          },
+          {
+            "file": "balafon/EthnicXylo_tradM_F5_vl2_rr1_Mid.m4a",
+            "rootNote": 89,
+            "lo": 87,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 10.491
           }
         ]
       }
@@ -1496,6 +1590,528 @@
             "hi": 103,
             "placeholder": "organ",
             "gain": 3.282
+          }
+        ]
+      }
+    },
+    {
+      "id": "dantranhplucked",
+      "name": "Dan Tranh Plucked",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/dantranhplucked-1.0.0.zip",
+      "bytes": 661968,
+      "crc32": 4176820474,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, đàn tranh — normal plucks, layer f, CC0"
+      },
+      "manifest": {
+        "id": "dantranhplucked",
+        "name": "Dan Tranh Plucked",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 45,
+          "hi": 85
+        },
+        "defaultView": {
+          "lo": 53,
+          "hi": 77
+        },
+        "shade": "amber",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, đàn tranh — normal plucks, layer f, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "dantranhplucked/B1_f_1.m4a",
+            "rootNote": 47,
+            "lo": 45,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/Cs2_f_1.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/Ds2_f_1.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/Fs2_f_1.m4a",
+            "rootNote": 54,
+            "lo": 53,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/Gs2_f_1.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/B2_f_1.m4a",
+            "rootNote": 59,
+            "lo": 58,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/Cs3_f_1.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/Ds3_f_1.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/Fs3_f_1.m4a",
+            "rootNote": 66,
+            "lo": 65,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/Gs3_f_1.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/B3_f_1.m4a",
+            "rootNote": 71,
+            "lo": 70,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/Cs4_f_1.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/Ds4_f_1.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/Fs4_f_1.m4a",
+            "rootNote": 78,
+            "lo": 77,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/Gs4_f_1.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 5.722
+          },
+          {
+            "file": "dantranhplucked/B4_f_1.m4a",
+            "rootNote": 83,
+            "lo": 82,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 5.722
+          }
+        ]
+      }
+    },
+    {
+      "id": "dantranhtrem",
+      "name": "Dan Tranh Trem",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/dantranhtrem-1.0.0.zip",
+      "bytes": 810030,
+      "crc32": 3345864159,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, đàn tranh — tremolo, CC0"
+      },
+      "manifest": {
+        "id": "dantranhtrem",
+        "name": "Dan Tranh Trem",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 45,
+          "hi": 85
+        },
+        "defaultView": {
+          "lo": 53,
+          "hi": 77
+        },
+        "shade": "orange",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, đàn tranh — tremolo, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.3
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "dantranhtrem/B1_Trem_1.m4a",
+            "rootNote": 47,
+            "lo": 45,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/Cs2_Trem_1.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/Ds2_Trem_1.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/Fs2_Trem_1.m4a",
+            "rootNote": 54,
+            "lo": 53,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/Gs2_Trem_1.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/B2_Trem_1.m4a",
+            "rootNote": 59,
+            "lo": 58,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/Cs3_Trem_1.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/Ds3_Trem_1.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/Fs3_Trem_1.m4a",
+            "rootNote": 66,
+            "lo": 65,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/Gs3_Trem_1.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/B3_Trem_1.m4a",
+            "rootNote": 71,
+            "lo": 70,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/Cs4_Trem_1.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/Ds4_Trem_1.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/Fs4_Trem_1.m4a",
+            "rootNote": 78,
+            "lo": 77,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/Gs4_Trem_1.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 2.355
+          },
+          {
+            "file": "dantranhtrem/B4_Trem_1.m4a",
+            "rootNote": 83,
+            "lo": 82,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 2.355
+          }
+        ]
+      }
+    },
+    {
+      "id": "dantranhvib",
+      "name": "Dan Tranh Vib",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/dantranhvib-1.0.0.zip",
+      "bytes": 724588,
+      "crc32": 2661594751,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, đàn tranh — vibrato, layer ff, CC0"
+      },
+      "manifest": {
+        "id": "dantranhvib",
+        "name": "Dan Tranh Vib",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 45,
+          "hi": 85
+        },
+        "defaultView": {
+          "lo": 53,
+          "hi": 77
+        },
+        "shade": "yellow",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, đàn tranh — vibrato, layer ff, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "dantranhvib/B1_vib_ff_1.m4a",
+            "rootNote": 47,
+            "lo": 45,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/Cs2_vib_ff_1.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/Ds2_vib_ff_1.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/Fs2_vib_ff_1.m4a",
+            "rootNote": 54,
+            "lo": 53,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/Gs2_vib_ff_1.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/B2_vib_ff_1.m4a",
+            "rootNote": 59,
+            "lo": 58,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/Cs3_vib_ff_1.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/Ds3_vib_ff_1.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/Fs3_vib_ff_1.m4a",
+            "rootNote": 66,
+            "lo": 65,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/Gs3_vib_ff_1.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/B3_vib_ff_1.m4a",
+            "rootNote": 71,
+            "lo": 70,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/Cs4_vib_ff_1.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/Ds4_vib_ff_1.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/Fs4_vib_ff_1.m4a",
+            "rootNote": 78,
+            "lo": 77,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/Gs4_vib_ff_1.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 2.011
+          },
+          {
+            "file": "dantranhvib/B4_vib_ff_1.m4a",
+            "rootNote": 83,
+            "lo": 82,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 2.011
           }
         ]
       }
@@ -4031,6 +4647,132 @@
             "hi": 94,
             "placeholder": "organ",
             "gain": 1.652
+          }
+        ]
+      }
+    },
+    {
+      "id": "marimba",
+      "name": "Marimba",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/marimba-1.0.0.zip",
+      "bytes": 226530,
+      "crc32": 1203245751,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, marimba — med layer, CC0"
+      },
+      "manifest": {
+        "id": "marimba",
+        "name": "Marimba",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 39,
+          "hi": 98
+        },
+        "defaultView": {
+          "lo": 56,
+          "hi": 80
+        },
+        "shade": "red",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, marimba — med layer, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "marimba/Marimba_hit_Outrigger_F1_med_01.m4a",
+            "rootNote": 41,
+            "lo": 39,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 44.898
+          },
+          {
+            "file": "marimba/Marimba_hit_Outrigger_C2_med_01.m4a",
+            "rootNote": 48,
+            "lo": 45,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 44.898
+          },
+          {
+            "file": "marimba/Marimba_hit_Outrigger_G2_med_01.m4a",
+            "rootNote": 55,
+            "lo": 52,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 44.898
+          },
+          {
+            "file": "marimba/Marimba_hit_Outrigger_B2_med_01.m4a",
+            "rootNote": 59,
+            "lo": 58,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 44.898
+          },
+          {
+            "file": "marimba/Marimba_hit_Outrigger_F3_med_01.m4a",
+            "rootNote": 65,
+            "lo": 63,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 44.898
+          },
+          {
+            "file": "marimba/Marimba_hit_Outrigger_C4_med_01.m4a",
+            "rootNote": 72,
+            "lo": 69,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 44.898
+          },
+          {
+            "file": "marimba/Marimba_hit_Outrigger_G4_med_01.m4a",
+            "rootNote": 79,
+            "lo": 76,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 44.898
+          },
+          {
+            "file": "marimba/Marimba_hit_Outrigger_B4_med_01.m4a",
+            "rootNote": 83,
+            "lo": 82,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 44.898
+          },
+          {
+            "file": "marimba/Marimba_hit_Outrigger_F5_med_01.m4a",
+            "rootNote": 89,
+            "lo": 87,
+            "hi": 92,
+            "placeholder": "organ",
+            "gain": 44.898
+          },
+          {
+            "file": "marimba/Marimba_hit_Outrigger_C6_med_01.m4a",
+            "rootNote": 96,
+            "lo": 93,
+            "hi": 98,
+            "placeholder": "organ",
+            "gain": 44.898
           }
         ]
       }
@@ -6787,6 +7529,360 @@
       }
     },
     {
+      "id": "tubularbells1",
+      "name": "Tubular Bells 1",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/tubularbells1-1.0.0.zip",
+      "bytes": 529291,
+      "crc32": 3665439087,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, tubular bells (set 1) — ff, CC0"
+      },
+      "manifest": {
+        "id": "tubularbells1",
+        "name": "Tubular Bells 1",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 60,
+          "hi": 78
+        },
+        "defaultView": {
+          "lo": 60,
+          "hi": 78
+        },
+        "shade": "silver",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, tubular bells (set 1) — ff, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "tubularbells1/chimes_D3_ff_rr1.m4a",
+            "rootNote": 62,
+            "lo": 60,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 1.284
+          },
+          {
+            "file": "tubularbells1/chimes_E3_ff_rr2.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 1.284
+          },
+          {
+            "file": "tubularbells1/chimes_Gs3_ff_rr1.m4a",
+            "rootNote": 68,
+            "lo": 67,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 1.284
+          },
+          {
+            "file": "tubularbells1/chimes_As3_ff_rr1.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 1.284
+          },
+          {
+            "file": "tubularbells1/chimes_C4_ff_rr2.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 1.284
+          },
+          {
+            "file": "tubularbells1/chimes_D4_ff_rr2.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 1.284
+          },
+          {
+            "file": "tubularbells1/chimes_E4_ff_rr2.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 1.284
+          }
+        ]
+      }
+    },
+    {
+      "id": "tubularbells2",
+      "name": "Tubular Bells 2",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/tubularbells2-1.0.0.zip",
+      "bytes": 822777,
+      "crc32": 1498206159,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, tubular bells (set 2) — layer v2, CC0"
+      },
+      "manifest": {
+        "id": "tubularbells2",
+        "name": "Tubular Bells 2",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 58,
+          "hi": 79
+        },
+        "defaultView": {
+          "lo": 58,
+          "hi": 78
+        },
+        "shade": "teal",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, tubular bells (set 2) — layer v2, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "tubularbells2/TB_hit_C4_v2_1.m4a",
+            "rootNote": 60,
+            "lo": 58,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 6.331
+          },
+          {
+            "file": "tubularbells2/TB_hit_D4_v2_1.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 6.331
+          },
+          {
+            "file": "tubularbells2/TB_hit_E4_v2_1.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 6.331
+          },
+          {
+            "file": "tubularbells2/TB_hit_F4_v2_2.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 6.331
+          },
+          {
+            "file": "tubularbells2/TB_hit_G4_v2_1.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 6.331
+          },
+          {
+            "file": "tubularbells2/TB_hit_A4_v2_1.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 6.331
+          },
+          {
+            "file": "tubularbells2/TB_hit_B4_v2_1.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 6.331
+          },
+          {
+            "file": "tubularbells2/TB_hit_C5_v2_1.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 6.331
+          },
+          {
+            "file": "tubularbells2/TB_hit_D5_v2_2.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 6.331
+          },
+          {
+            "file": "tubularbells2/TB_hit_E5_v2_1.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 6.331
+          },
+          {
+            "file": "tubularbells2/TB_hit_F5_v2_2.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 6.331
+          }
+        ]
+      }
+    },
+    {
+      "id": "tubularglock",
+      "name": "Tubular Glock",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/tubularglock-1.0.0.zip",
+      "bytes": 321129,
+      "crc32": 702712198,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, tubular glockenspiel — medium strikes, CC0"
+      },
+      "manifest": {
+        "id": "tubularglock",
+        "name": "Tubular Glock",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 89,
+          "hi": 107
+        },
+        "defaultView": {
+          "lo": 89,
+          "hi": 107
+        },
+        "shade": "violet",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, tubular glockenspiel — medium strikes, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.6
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "tubularglock/G0_medium1.m4a",
+            "rootNote": 91,
+            "lo": 89,
+            "hi": 92,
+            "placeholder": "organ",
+            "gain": 4.916
+          },
+          {
+            "file": "tubularglock/A0_medium1.m4a",
+            "rootNote": 93,
+            "lo": 93,
+            "hi": 94,
+            "placeholder": "organ",
+            "gain": 4.916
+          },
+          {
+            "file": "tubularglock/B0_medium1.m4a",
+            "rootNote": 95,
+            "lo": 95,
+            "hi": 95,
+            "placeholder": "organ",
+            "gain": 4.916
+          },
+          {
+            "file": "tubularglock/C1_medium1.m4a",
+            "rootNote": 96,
+            "lo": 96,
+            "hi": 97,
+            "placeholder": "organ",
+            "gain": 4.916
+          },
+          {
+            "file": "tubularglock/D1_medium1.m4a",
+            "rootNote": 98,
+            "lo": 98,
+            "hi": 99,
+            "placeholder": "organ",
+            "gain": 4.916
+          },
+          {
+            "file": "tubularglock/E1_medium1.m4a",
+            "rootNote": 100,
+            "lo": 100,
+            "hi": 101,
+            "placeholder": "organ",
+            "gain": 4.916
+          },
+          {
+            "file": "tubularglock/Fs1_medium1.m4a",
+            "rootNote": 102,
+            "lo": 102,
+            "hi": 102,
+            "placeholder": "organ",
+            "gain": 4.916
+          },
+          {
+            "file": "tubularglock/G1_medium1.m4a",
+            "rootNote": 103,
+            "lo": 103,
+            "hi": 104,
+            "placeholder": "organ",
+            "gain": 4.916
+          },
+          {
+            "file": "tubularglock/A1_medium1.m4a",
+            "rootNote": 105,
+            "lo": 105,
+            "hi": 107,
+            "placeholder": "organ",
+            "gain": 4.916
+          }
+        ]
+      }
+    },
+    {
       "id": "uprightkw",
       "name": "Kawai Upright",
       "family": "keys",
@@ -8469,6 +9565,116 @@
             "hi": 67,
             "placeholder": "saw303",
             "gain": 0.145
+          }
+        ]
+      }
+    },
+    {
+      "id": "xylophone",
+      "name": "Xylophone",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/xylophone-1.0.0.zip",
+      "bytes": 122713,
+      "crc32": 409126042,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "VCSL, xylophone — soft mallets, ff, CC0"
+      },
+      "manifest": {
+        "id": "xylophone",
+        "name": "Xylophone",
+        "version": "1.0.0",
+        "family": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 65,
+          "hi": 108
+        },
+        "defaultView": {
+          "lo": 74,
+          "hi": 98
+        },
+        "shade": "cyan",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "VCSL, xylophone — soft mallets, ff, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.3
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "xylophone/Xylo_Soft_G3_ff_01_far.m4a",
+            "rootNote": 67,
+            "lo": 65,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 2.578
+          },
+          {
+            "file": "xylophone/Xylo_Soft_C4_ff_01_far.m4a",
+            "rootNote": 72,
+            "lo": 70,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 2.578
+          },
+          {
+            "file": "xylophone/Xylo_Soft_G4_ff_01_far.m4a",
+            "rootNote": 79,
+            "lo": 76,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 2.578
+          },
+          {
+            "file": "xylophone/Xylo_Soft_C5_ff_01_far.m4a",
+            "rootNote": 84,
+            "lo": 82,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 2.578
+          },
+          {
+            "file": "xylophone/Xylo_Soft_G5_ff_01_far.m4a",
+            "rootNote": 91,
+            "lo": 88,
+            "hi": 93,
+            "placeholder": "organ",
+            "gain": 2.578
+          },
+          {
+            "file": "xylophone/Xylo_Soft_C6_ff_01_far.m4a",
+            "rootNote": 96,
+            "lo": 94,
+            "hi": 99,
+            "placeholder": "organ",
+            "gain": 2.578
+          },
+          {
+            "file": "xylophone/Xylo_Soft_G6_ff_01_far.m4a",
+            "rootNote": 103,
+            "lo": 100,
+            "hi": 105,
+            "placeholder": "organ",
+            "gain": 2.578
+          },
+          {
+            "file": "xylophone/Xylo_Soft_C7_ff_01_far.m4a",
+            "rootNote": 108,
+            "lo": 106,
+            "hi": 108,
+            "placeholder": "organ",
+            "gain": 2.578
           }
         ]
       }
