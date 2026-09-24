@@ -1085,7 +1085,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-22 15:21 from src/. */
+/* PocketDAW - phase 2. Built 2026-09-24 02:16 from src/. */
 (function () {
 'use strict';
 
@@ -2435,6 +2435,7 @@ function hiddenNoteCount(clip, lengthBars) {
 const EXAMPLE_SONGS = [
   {
     name: "Clair de Lune",
+    folder: 'p_builtin_classical',
     bpm: 40,
     key: 1,
     gridResolutionId: "1/8T",
@@ -4023,6 +4024,13 @@ const FULL_LOOPS_PROJECT_ID = 'p_builtin_fullloops';
 const CHORDS_PROJECT_ID = 'p_builtin_chordprogs';
 const MELODIES_PROJECT_ID = 'p_builtin_melodies';
 const EXAMPLES_PROJECT_ID = 'p_builtin_examples';
+/**
+ * Classical sits in the file rather than in the content catalog, because
+ * Clair de Lune lives here and has to have a folder even with no network.
+ * The catalog's classical pieces name this same id and join it when they
+ * arrive; Ragtime is wholly remote, so its folder comes with its songs.
+ */
+const CLASSICAL_PROJECT_ID = 'p_builtin_classical';
 const STARTER_FOLDERS = { parent: 'Samples', child: 'Drum Loops' };
 
 /** Built-in things carry this, and the app refuses to delete them. */
@@ -4116,7 +4124,7 @@ function buildExampleSong(piece) {
   song.key = piece.key;
   song.scaleId = piece.scaleId;
   song.gridResolutionId = piece.gridResolutionId || undefined;
-  song.projectId = EXAMPLES_PROJECT_ID;
+  song.projectId = piece.folder || EXAMPLES_PROJECT_ID;
   song.builtIn = BUILT_IN;
   song.description = piece.description || null;
 
@@ -4195,6 +4203,7 @@ function buildStarterContent() {
      * declare no `forKind` so the loop picker never offers them.
      */
     folder(EXAMPLES_PROJECT_ID, 'Example Songs', null, null),
+    folder(CLASSICAL_PROJECT_ID, 'Classical', EXAMPLES_PROJECT_ID, null),
   ];
   const songs = [
     ...STARTER_LOOPS.map((loop) => buildStarterSong(loop, loop.folder)),
@@ -6772,11 +6781,14 @@ function copyNotesData(song, ctx, ids) {
   if (!clip) return null;
   const notes = clip.notes.filter((n) => ids.includes(n.id));
   if (!notes.length) return null;
-  // Anchored at the bottom-right corner of the block: the *latest* start
-  // and the bottom-most row. The cell tapped on paste becomes that corner,
-  // so the block lands to the left of and above the finger — which is where
-  // the finger is not, and so where the result can be seen.
-  const originTick = Math.max(...notes.map((n) => n.start));
+  /**
+   * Anchored at the bottom-left corner of the block: the *earliest* start
+   * and the bottom-most row. The held cell becomes that corner and the
+   * block runs right and up from it, which is the way it was read when it
+   * was copied. It used to anchor bottom-right, so a pattern landed behind
+   * the finger and a block copied at bar 1 could not be pasted at bar 1.
+   */
+  const originTick = Math.min(...notes.map((n) => n.start));
   const lanes = drumLanes(song, ctx);
   // On a drum kit the bottom row is not the lowest note: the lanes run
   // Crash down to Kick, and Kick is 36 while Rimshot, halfway up, is 37.
@@ -6905,7 +6917,7 @@ const LONG_PRESS_MS = 480;
  * views and embedded frames swallow multi-touch often enough that a two-finger
  * requirement means a stuck app on someone's phone.
  */
-function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChange, audition, onLongPress, setMarquee = () => {}, setFloating = () => {}, timers = hostTimers(), chordFor = null, onPasteHere = null }) {
+function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChange, onDraw = null, audition, onLongPress, setMarquee = () => {}, setFloating = () => {}, timers = hostTimers(), chordFor = null, onPasteHere = null }) {
   const pointers = new Map();
   let drag = null;
   let pinch = null;
@@ -7008,6 +7020,92 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     const tick = snapDown(layout.xToTick(drag.startX), layout.gridTicks);
     if (tick < 0 || tick >= layout.totalTicks) return null;
     return { tick, pitch: row.midi, x: drag.startX, y: drag.startY };
+  }
+
+  /**
+   * Hold a selection against the edge and the grid scrolls under it, so a
+   * box can cover more than one screenful. The box's anchor is moved by the
+   * same amount as the scroll, so the corner stays on the music it was put
+   * on rather than on the glass.
+   */
+  /**
+   * The edge band, how fast it can go, and how quickly it gets there.
+   *
+   * 56 px was too narrow and the ramp too steep: full speed arrived only at
+   * the literal rim, so a thumb — which is wide, and cannot reach the last
+   * few pixels under the transport bar — spent the whole gesture in the slow
+   * part. A wider band, a higher ceiling, and full speed two-thirds of the
+   * way in, with a floor so it never merely creeps.
+   */
+  const EDGE = 92;
+  const MAX_STEP = 26;
+  const MIN_STEP = 4;
+  const FULL_AT = 0.62;
+  const FRAME_MS = 16;
+  function autoScroll(drag) {
+    const width = canvas.clientWidth || 0;
+    const height = canvas.clientHeight || 0;
+    /**
+     * How fast, from how far past the edge the finger is: a touch at the
+     * boundary creeps, one pressed to the rim moves at a pan's speed. The
+     * first version stepped a flat 16 px every 40 ms, which is 25 jumps a
+     * second — it read as catching on every note rather than scrolling.
+     */
+    const past = (value, low, high) => (value < low ? (value - low) / EDGE : value > high ? (value - high) / EDGE : 0);
+    const ax = past(drag.x, EDGE, width - EDGE);
+    const ay = past(drag.y, EDGE, height - EDGE);
+    const ease = (t) => {
+      if (!t) return 0;
+      const amount = Math.min(1, Math.abs(t) / FULL_AT) ** 1.2;
+      return Math.sign(t) * Math.max(MIN_STEP, amount * MAX_STEP);
+    };
+    const dx = Math.round(ease(ax));
+    const dy = Math.round(ease(ay));
+    if (!dx && !dy) {
+      if (drag.scrollTimer) {
+        timers.clearTimeout(drag.scrollTimer);
+        drag.scrollTimer = null;
+      }
+      return;
+    }
+    if (drag.scrollTimer) return;
+    const step = () => {
+      drag.scrollTimer = null;
+      if (!drag || drag.kind !== 'marquee') return;
+      const before = getScroll();
+      setScroll({ x: before.x + dx, y: before.y + dy });
+      const after = getScroll();
+      const movedX = after.x - before.x;
+      const movedY = after.y - before.y;
+      // At the end of the grid there is nowhere left to go; stop rather than
+      // spin a timer that does nothing.
+      if (!movedX && !movedY) return;
+      drag.startX -= movedX;
+      drag.startY -= movedY;
+      setMarquee({ x1: drag.startX, y1: drag.startY, x2: drag.x, y2: drag.y });
+      /**
+       * A frame of scrolling repaints the grid and nothing else. Publishing
+       * the selection rebuilds the whole page, so it happens a few times a
+       * second rather than sixty — which is often enough to watch the box
+       * fill, and the release recomputes it exactly.
+       */
+      drag.sinceSelect = (drag.sinceSelect || 0) + 1;
+      if (drag.sinceSelect >= 4) {
+        drag.sinceSelect = 0;
+        const next = marqueeSelection(drag, getLayout());
+        const now = store.state.view.selection || [];
+        if (next.length !== now.length || next.some((id, i) => id !== now[i])) store.setView({ selection: next });
+      }
+      /**
+       * Always paint. Nothing in this app redraws because state changed, so
+       * a frame that updated the selection and returned drew nothing at all:
+       * the grid froze for that frame and jumped on the next — a stall every
+       * fourth frame, which is what the scrolling stutter was.
+       */
+      (onDraw || onChange)();
+      autoScroll(drag);
+    };
+    drag.scrollTimer = timers.setTimeout(guard(step, 'grid.marqueeScroll'), FRAME_MS);
   }
 
   function marqueeSelection(drag, layout) {
@@ -7127,6 +7225,12 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
   }
 
   function onDown(e) {
+    /**
+     * Clear any box left over from a gesture that never ended. A web view
+     * can take a touch away without sending pointercancel, and the box then
+     * sat on the grid with no way to dismiss it.
+     */
+    if (!drag && !pointers.size) setMarquee(null);
     if (canvas.setPointerCapture) canvas.setPointerCapture(e.pointerId);
     pointers.set(e.pointerId, localPoint(e));
 
@@ -7203,6 +7307,13 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
         drag = beginMarquee(p, layout);
         drag.moved = true; // the box exists from here, however little it grows
         drag.grew = false; // ...but whether it was dragged is a separate question
+        /**
+         * What was selected before the hold. A hold that ends up gathering
+         * nothing — usually a hold meant as "paste here" — puts it back, so
+         * pointing at a spot no longer throws away a selection that had not
+         * been copied yet.
+         */
+        drag.priorSelection = store.state.view.selection || [];
         setMarquee({ x1: p.x, y1: p.y, x2: p.x, y2: p.y });
         store.setView({ selection: [], selectedNoteId: null });
         store.setUi({ selectionMenu: false });
@@ -7320,8 +7431,23 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
       drag.x = p.x;
       drag.y = p.y;
       setMarquee({ x1: drag.startX, y1: drag.startY, x2: p.x, y2: p.y });
-      store.setView({ selection: marqueeSelection(drag, layout) });
-      onChange();
+      /**
+       * Grid only, and the selection a few times a second.
+       *
+       * This handler ran a full page rebuild on every pointermove. A thumb
+       * held against the edge is never still — it produces a stream of
+       * one-pixel moves — so the rebuilds landed on top of the scrolling
+       * frames and swamped them. Worse sideways, where a thumb wanders most.
+       */
+      drag.sinceSelect = (drag.sinceSelect || 0) + 1;
+      if (drag.sinceSelect >= 4) {
+        drag.sinceSelect = 0;
+        const next = marqueeSelection(drag, layout);
+        const now = store.state.view.selection || [];
+        if (next.length !== now.length || next.some((id, i) => id !== now[i])) store.setView({ selection: next });
+      }
+      autoScroll(drag);
+      (onDraw || onChange)();
       return;
     }
 
@@ -7391,19 +7517,30 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     }
 
     if (drag.kind === 'marquee') {
+      if (drag.scrollTimer) timers.clearTimeout(drag.scrollTimer);
       setMarquee(null);
+      // Recomputed here because scrolling only publishes every few frames.
+      if (drag.grew) store.setView({ selection: marqueeSelection(drag, getLayout()) });
       const chosen = store.state.view.selection || [];
       // A hold that gathered nothing, with notes on the clipboard, is an
       // offer to paste them here: the finger is already pointing at the
       // place, which is the one thing an automatic paste cannot know.
-      if (!chosen.length && !drag.grew && onPasteHere) {
+      /**
+       * A box that gathered nothing is an offer to paste, however much the
+       * finger wandered while holding. `grew` used to veto this, and it is
+       * set by the first pointermove of any size — so a hold with a pixel of
+       * wobble silently lost the offer, which looked like paste appearing
+       * only sometimes.
+       */
+      if (!chosen.length && onPasteHere) {
         const spot = pasteSpot(drag, getLayout());
+        const prior = drag.priorSelection || [];
         drag = null;
         store.setView({ selectedNoteId: null });
-        if (spot && onPasteHere(spot)) {
-          onChange();
-          return;
-        }
+        const offered = spot ? onPasteHere(spot) : false;
+        // Nothing gathered: give back whatever was selected before the hold.
+        if (prior.length) store.setView({ selection: prior });
+        if (!offered && prior.length) store.setUi({ selectionMenu: true });
         onChange();
         return;
       }
@@ -16369,25 +16506,34 @@ function createSongStore({ storage, timers = hostTimers(), debounceMs = 800, onE
     }
   }
 
+  /**
+   * A song as the library lists it. Shared with the in-memory fallback the
+   * app uses when storage will not take the built-in content, so a listed
+   * song is the same shape however it got there.
+   */
+  function entryOf(s) {
+    return {
+      id: s.id,
+      name: s.name,
+      projectId: s.projectId || null,
+      bpm: s.bpm,
+      updatedAt: s.updatedAt,
+      sections: s.sectionOrder.length,
+      tracks: s.tracks.length,
+      // The library draws every song, so it needs their shapes; the full
+      // documents are already in hand here and are dropped straight after.
+      shape: songShape(s),
+      shades: s.tracks.map((t) => t.shade),
+    };
+  }
+
   async function list() {
     const keys = await storage.keys();
     const ids = keys.filter((k) => k.startsWith(SONG_PREFIX)).map((k) => k.slice(SONG_PREFIX.length));
     const songs = await Promise.all(ids.map((id) => storage.get(key(id))));
     return songs
       .filter(Boolean)
-      .map((s) => ({
-        id: s.id,
-        name: s.name,
-        projectId: s.projectId || null,
-        bpm: s.bpm,
-        updatedAt: s.updatedAt,
-        sections: s.sectionOrder.length,
-        tracks: s.tracks.length,
-        // The library draws every song, so it needs their shapes; the full
-        // documents are already in hand here and are dropped straight after.
-        shape: songShape(s),
-        shades: s.tracks.map((t) => t.shade),
-      }))
+      .map(entryOf)
       .sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
   }
 
@@ -16470,6 +16616,7 @@ function createSongStore({ storage, timers = hostTimers(), debounceMs = 800, onE
 
   return {
     restoreBuiltIn,
+    entryOf,
     save,
     saveSoon,
     flush,
@@ -16759,7 +16906,7 @@ function expandRemoteSong(doc) {
  * the current one and behaves like neither. Song settings shows this, so
  * "which build am I actually running" is a two-second question.
  */
-const BUILD_STAMP = '2026-09-22 15:21';
+const BUILD_STAMP = '2026-09-24 02:16';
 
 
 /* ---- src/ui/app.js ---- */
@@ -17337,12 +17484,21 @@ function mountApp(root, options = {}) {
       Object.assign(scroll, clampScroll(v));
     },
     onChange: render,
+    // A grid-only repaint, for frames where nothing but the view moved.
+    onDraw: () => { Object.assign(scroll, clampScroll(scroll)); paintGrid(); },
     audition,
     // The same timers the rest of the app uses, so a test can drive the
     // long press instead of waiting half a second for it.
     timers,
     setMarquee: (box) => {
-      marquee = box;
+      /**
+       * Remember where it was drawn. A box left behind by a lost touch used
+       * to survive a move to another section and hang there unremovable;
+       * now it is simply not drawn anywhere but where it was made.
+       */
+      marquee = box
+        ? { ...box, sectionId: store.state.view.activeSectionId, trackId: store.state.view.activeTrackId }
+        : null;
     },
     setFloating: (positions) => {
       floating = positions;
@@ -17978,14 +18134,17 @@ function mountApp(root, options = {}) {
         /**
          * Copy only copies. It used to also drop a duplicate straight after
          * the selection, which made "paste where I point" impossible: the
-         * paste had already happened. The next tap on the grid places the
-         * block with its bottom-right corner on the tapped cell.
+         * paste had already happened. The next hold on the grid places the
+         * block with its bottom-left corner on the held cell.
          */
         const selection = selectionIds();
         const data = copyNotesData(store.state.song, ctx(), selection);
         store.setUi({ clipboard: data, selectionMenu: false });
         store.setView({ selection: [], selectedNoteId: null });
-        if (data) flash(`Copied ${data.notes.length} note${data.notes.length === 1 ? '' : 's'} \u2014 hold a cell to paste`, 4000);
+        // Short, and gone quickly: the old message named a count and gave
+        // instructions, and sat over the lower rows for four seconds —
+        // exactly where a paste is usually aimed.
+        if (data) flash('Copied to clipboard', 800);
         render();
       }],
       ['Duplicate', () => {
@@ -18035,6 +18194,14 @@ function mountApp(root, options = {}) {
    * changes it, because the sheet is rebuilt from this snapshot.
    */
   let songList = [];
+  /**
+   * The built-in content, held in memory for a session in which storage
+   * could not take it. A single failed read at boot used to skip seeding
+   * for the whole session, leaving a library with nothing in it but the
+   * song being edited — and the downloaded file, previewed out of Files,
+   * hits exactly that. Shown, never written; storage gets it next launch.
+   */
+  let sessionStarter = null;
   let projectList = [];
 
   /**
@@ -18318,6 +18485,20 @@ function mountApp(root, options = {}) {
       if (work) await work();
       const stored = songStore ? await songStore.list() : [];
       const storedProjects = songStore ? await songStore.listProjects() : [];
+      /**
+       * Anything storage could not keep, added back by id so that a later
+       * successful seed does not show everything twice.
+       */
+      if (sessionStarter) {
+        const haveSongs = new Set(stored.map((e) => e.id));
+        const haveProjects = new Set(storedProjects.map((p) => p.id));
+        sessionStarter.songs.forEach((song) => {
+          if (!haveSongs.has(song.id)) stored.push(songStore ? songStore.entryOf(song) : song);
+        });
+        sessionStarter.projects.forEach((project) => {
+          if (!haveProjects.has(project.id)) storedProjects.push(project);
+        });
+      }
       /**
        * The catalog's songs and folders sit alongside the stored ones rather
        * than being written into storage. A remote song the user has copied
@@ -19008,6 +19189,35 @@ function mountApp(root, options = {}) {
   }
 
 
+  /**
+   * Redraw the grid and nothing else.
+   *
+   * `render()` rebuilds almost the whole page, which is right when something
+   * has changed and far too much sixty times a second. Dragging a selection
+   * box past the edge does exactly that, and the full rebuild showed as the
+   * scroll stalling every few frames while the browser caught up.
+   */
+  function paintGrid() {
+    const { song, view } = store.state;
+    drawGrid(canvas, {
+      song,
+      view,
+      shade: store.activeTrack().shade,
+      kit: store.activeKit(),
+      clip: currentClip(),
+      layout: layout(),
+      scrollY: scroll.y,
+      automation: automationLayer(),
+      // Only where it was drawn: a stale box cannot follow you to another
+      // section or track.
+      marquee: marquee
+        && marquee.sectionId === store.state.view.activeSectionId
+        && marquee.trackId === store.state.view.activeTrackId
+        ? marquee : null,
+      floating,
+    });
+  }
+
   function render() {
     /**
      * Whatever is being typed into survives the rebuild.
@@ -19041,19 +19251,7 @@ function mountApp(root, options = {}) {
     });
     renderMenu(menuHost, store, { onChange: render });
     Object.assign(scroll, clampScroll(scroll));
-    const { song, view } = store.state;
-    drawGrid(canvas, {
-      song,
-      view,
-      shade: store.activeTrack().shade,
-      kit: store.activeKit(),
-      clip: currentClip(),
-      layout: layout(),
-      scrollY: scroll.y,
-      automation: automationLayer(),
-      marquee,
-      floating,
-    });
+    paintGrid();
     if (playhead.running && engine) playhead.draw(engine.transport.positionTick(), { follow: false });
     if (store.state.ui.toast) {
       flash(store.state.ui.toast);
@@ -19185,19 +19383,27 @@ function mountApp(root, options = {}) {
      * reads first. In its own `try`, because a library without the starter
      * loops is still a library.
      */
-    if (options.seedStarter && !blockAutosave) {
+    if (options.seedStarter) {
       try {
+        if (blockAutosave) throw new Error('storage is not taking writes');
         await songStore.restoreBuiltIn(buildStarterContent);
+        sessionStarter = null;
       } catch {
-        // Nothing to do: the app works without them.
+        // Storage would not take them, so keep them for this session only.
+        // A library without its own loops and songs looks broken.
+        try {
+          sessionStarter = buildStarterContent();
+        } catch {
+          // Nothing to do: the app works without them.
+        }
       }
     }
 
 
     buildSongsApi();
-    songList = await songStore.list();
-    projectList = await songStore.listProjects();
-    publishLibrary();
+    // Through `withList`, so this path gets the catalog's songs and the
+    // in-memory built-ins as well, rather than only what storage returned.
+    await withList();
     autosave();
     // The app opens on the library: what you have, then what you were doing.
     // Unless the user got there first — restoring is asynchronous, and
@@ -19256,6 +19462,8 @@ function mountApp(root, options = {}) {
   return {
     store,
     render,
+    // Exposed so a test can count frames drawn during a gesture.
+    paintGrid,
     scroll,
     /** Extra listener for auditions, alongside the engine. */
     setAudition: (fn) => { auditionFn = fn; },
