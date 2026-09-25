@@ -1096,7 +1096,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-25 00:50 from src/. */
+/* PocketDAW - phase 2. Built 2026-09-25 05:55 from src/. */
 (function () {
 'use strict';
 
@@ -6098,6 +6098,85 @@ function restoreSongFrom(song, backup) {
   return { label: 'Restore from a backup', undo: () => become(before), redo: () => become(after) };
 }
 
+function laneKey(label) {
+  return String(label || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(' ').sort().join(' ');
+}
+
+function laneAcrossKits(from, kit) {
+  const lanes = (kit && kit.lanes) || [];
+  if (!lanes.length) return from.midi;
+  const wanted = laneKey(from.label);
+  const byName = wanted && lanes.find((l) => laneKey(l.label) === wanted);
+  if (byName) return byName.midi;
+  const same = lanes.find((l) => l.midi === from.midi && l.group === from.group);
+  if (same) return same.midi;
+  const group = lanes.filter((l) => l.group && l.group === from.group);
+  const nearest = (pool) => pool.reduce((best, l) => (Math.abs(l.midi - from.midi) < Math.abs(best.midi - from.midi) ? l : best), pool[0]);
+  if (group.length) return nearest(group).midi;
+  const anyMidi = lanes.find((l) => l.midi === from.midi);
+  if (anyMidi) return anyMidi.midi;
+  return nearest(lanes).midi;
+}
+
+function setTrackKit(song, trackId, kitId) {
+  const track = trackById(song, trackId);
+  if (!track || track.kitId === kitId) return null;
+  const from = kitById(track.kitId);
+  const to = kitById(kitId);
+  const before = { kitId: track.kitId, kind: track.kind, duck: track.duck ? JSON.parse(JSON.stringify(track.duck)) : undefined };
+  const clipsBefore = {};
+  let moved = 0;
+  const drums = from && to && from.kind === 'drum' && to.kind === 'drum' && to.lanes && to.lanes.length;
+  if (drums) {
+    const fromLane = (midi) => (from.lanes || []).find((l) => l.midi === midi) || { midi, label: '', group: null };
+    const place = (midi, home) => {
+      if (home && home.kitId === to.id && to.lanes.some((l) => l.midi === home.midi)) return { midi: home.midi, home: undefined };
+      const lane = laneAcrossKits(fromLane(midi), to);
+      if (lane === midi) return { midi, home };
+      return { midi: lane, home: home || { kitId: from.id, midi } };
+    };
+    song.sectionOrder.forEach((sid) => {
+      const clip = song.sections[sid].clips[trackId];
+      if (!clip) return;
+      clipsBefore[sid] = JSON.parse(JSON.stringify(clip));
+      clip.notes = clip.notes.map((n) => {
+        const { midi, home } = place(n.pitch, n.home);
+        if (midi !== n.pitch) moved += 1;
+        const out = { ...n, pitch: midi };
+        if (home) out.home = home;
+        else delete out.home;
+        return out;
+      });
+      (clip.hidden || []).forEach((h) => {
+        const { midi, home } = place(h.note.pitch, h.note.home);
+        h.note = { ...h.note, pitch: midi };
+        if (home) h.note.home = home;
+        else delete h.note.home;
+      });
+    });
+    if (track.duck && track.duck.trigger && Number.isInteger(track.duck.trigger.lane)) {
+      track.duck.trigger.lane = place(track.duck.trigger.lane, null).midi;
+    }
+  }
+  track.kitId = kitId;
+  track.kind = to ? to.kind : track.kind;
+  const clipsAfter = {};
+  Object.keys(clipsBefore).forEach((sid) => { clipsAfter[sid] = JSON.parse(JSON.stringify(song.sections[sid].clips[trackId])); });
+  const duckAfter = track.duck ? JSON.parse(JSON.stringify(track.duck)) : undefined;
+  const apply = (kit, kind, duck, clips) => {
+    track.kitId = kit;
+    track.kind = kind;
+    if (duck !== undefined) track.duck = JSON.parse(JSON.stringify(duck));
+    Object.keys(clips).forEach((sid) => { song.sections[sid].clips[trackId] = JSON.parse(JSON.stringify(clips[sid])); });
+  };
+  return {
+    label: `Change kit to ${to ? to.name : kitId}`,
+    moved,
+    undo: () => apply(before.kitId, before.kind, before.duck, clipsBefore),
+    redo: () => apply(kitId, track.kind, duckAfter, clipsAfter),
+  };
+}
+
 const TAP_SLOP = 7;
 const LONG_PRESS_MS = 480;
 
@@ -9169,10 +9248,9 @@ function trackSheet(store, onChange, onLive) {
         active: k.id === track.kitId,
         small: true,
         onClick: () => {
-          track.kitId = k.id;
-          track.kind = k.kind;
+          const step = store.run((s) => setTrackKit(s, track.id, k.id));
+          if (step && step.moved) store.setUi({ toast: `${step.moved} hit${step.moved === 1 ? '' : 's'} moved to the nearest lane` });
           if (k.defaultView) store.setView({ viewLo: k.defaultView.lo, viewHi: k.defaultView.hi });
-          store.emit();
           onChange();
           if (store.downloadKit) store.downloadKit(k.id);
         },
@@ -14002,7 +14080,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-09-25 00:50';
+const BUILD_STAMP = '2026-09-25 05:55';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -14781,14 +14859,18 @@ function mountApp(root, options = {}) {
     const track = store.activeTrack();
     const kit = kitById(kitId);
     if (track.kitId !== kitId) {
-      track.kitId = kitId;
-      track.kind = kit.kind;
-      store.emit();
+      const step = store.run((s) => setTrackKit(s, track.id, kitId));
+      if (step && step.moved) {
+        flash(`${kit.name} \u2014 ${step.moved} hit${step.moved === 1 ? '' : 's'} moved to the nearest lane`, 3000);
+      } else {
+        flash(kit.name);
+      }
+    } else {
+      flash(kit.name);
     }
     scroll.y = 0;
     showFullRange();
     if (engine) engine.ensureAll().catch(() => {});
-    flash(kit.name);
     render();
     
     downloadKit(kitId).then((ok) => {
