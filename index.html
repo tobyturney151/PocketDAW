@@ -1096,7 +1096,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-24 07:38 from src/. */
+/* PocketDAW - phase 2. Built 2026-09-25 00:50 from src/. */
 (function () {
 'use strict';
 
@@ -3764,17 +3764,32 @@ function buildExampleSong(piece) {
   song.builtIn = BUILT_IN;
   song.description = piece.description || null;
 
-  const keys = song.tracks.find((t) => t.family === 'keys');
   
-  if (piece.kitId) keys.kitId = piece.kitId;
-  song.tracks = [keys];
+  let tracks;
+  if (Array.isArray(piece.tracks) && piece.tracks.length) {
+    tracks = piece.tracks.map((t) => createTrack({ name: t.name || undefined, kitId: t.kitId }));
+  } else {
+    const keys = song.tracks.find((t) => t.family === 'keys');
+    if (piece.kitId) keys.kitId = piece.kitId;
+    tracks = [keys];
+  }
+  song.tracks = tracks;
   song.sections = {};
   song.sectionOrder = [];
   piece.sections.forEach((part, i) => {
     const id = `s_builtin_${slug(piece.name)}_${i}`;
-    const scaleId = part.minor ? 'naturalMinor' : 'major';
     
+    const scaleId = part.scaleId || (part.minor ? 'naturalMinor' : 'major');
     const differs = part.key !== piece.key || scaleId !== piece.scaleId;
+    const lists = Array.isArray(part.parts) ? part.parts : [part.notes];
+    const clips = {};
+    tracks.forEach((track, t) => {
+      clips[track.id] = {
+        id: `c_builtin_${slug(piece.name)}_${i}${tracks.length > 1 ? `_${t}` : ''}`,
+        notes: (lists[t] || []).map(([pitch, start, duration, velocity]) =>
+          createNote({ pitch, start, duration, velocity: velocity / 100 })),
+      };
+    });
     song.sections[id] = {
       id,
       name: `Bars ${part.fromBar + 1}\u2013${part.fromBar + part.bars}`,
@@ -3782,13 +3797,7 @@ function buildExampleSong(piece) {
       unlocked: differs || undefined,
       key: differs ? part.key : undefined,
       scaleId: differs ? scaleId : undefined,
-      clips: {
-        [keys.id]: {
-          id: `c_builtin_${slug(piece.name)}_${i}`,
-          notes: part.notes.map(([pitch, start, duration, velocity]) =>
-            createNote({ pitch, start, duration, velocity: velocity / 100 })),
-        },
-      },
+      clips,
     };
     song.sectionOrder.push(id);
   });
@@ -6220,11 +6229,12 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     const step = () => {
       drag.scrollTimer = null;
       if (!drag || drag.kind !== 'marquee') return;
-      const before = getScroll();
-      setScroll({ x: before.x + dx, y: before.y + dy });
+      
+      const { x: beforeX, y: beforeY } = getScroll();
+      setScroll({ x: beforeX + dx, y: beforeY + dy });
       const after = getScroll();
-      const movedX = after.x - before.x;
-      const movedY = after.y - before.y;
+      const movedX = after.x - beforeX;
+      const movedY = after.y - beforeY;
       if (!movedX && !movedY) return;
       drag.startX -= movedX;
       drag.startY -= movedY;
@@ -6257,13 +6267,13 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     });
     if (!pitches.length) return [];
     
-    const inBox = new Set(pitches);
+    const inBox = layout.isDrum ? new Set(pitches) : null;
     return notesInBox(currentClip(store), {
       fromTick: layout.xToTick(x1),
       toTick: layout.xToTick(x2),
       loPitch: Math.min(...pitches),
       hiPitch: Math.max(...pitches),
-    }).filter((n) => inBox.has(n.pitch)).map((n) => n.id);
+    }).filter((n) => !inBox || inBox.has(n.pitch)).map((n) => n.id);
   }
 
   
@@ -13662,9 +13672,9 @@ function keyOf(parsed, notes) {
   return { key: best.key, minor: best.minor, source: 'guessed from the notes' };
 }
 
-function planImport(parsed) {
+function planImport(parsed, { metre: given = null } = {}) {
   const app = parsed.pocketdaw && parsed.pocketdaw.v === 1 ? parsed.pocketdaw : null;
-  const metre = app ? { beatsPerBar: app.beatsPerBar || 4, timeScale: 1, warning: null } : metreOf(parsed.timeSignature);
+  const metre = given || (app ? { beatsPerBar: app.beatsPerBar || 4, timeScale: 1, warning: null } : metreOf(parsed.timeSignature));
   const scale = metre.timeScale;
   const all = parsed.notes.map((n) => ({ ...n, start: Math.round(n.start * scale), duration: Math.max(1, Math.round(n.duration * scale)) }));
   const names = new Map((parsed.tracks || []).map((t) => [t.index, t]));
@@ -13728,7 +13738,7 @@ function laneFor(pitch, lanes) {
   return pool.reduce((best, l) => (Math.abs(l.midi - pitch) < Math.abs(best.midi - pitch) ? l : best), pool[0]).midi;
 }
 
-function buildImportedSong(parsed, plan, choices = {}, { name = 'Imported' } = {}) {
+function buildImportedSong(parsed, plan, choices = {}, { name = 'Imported', barsPerSection = 8 } = {}) {
   const song = createSong({ name });
   song.tracks = [];
   song.bpm = plan.bpm;
@@ -13745,7 +13755,7 @@ function buildImportedSong(parsed, plan, choices = {}, { name = 'Imported' } = {
   } else {
     const changes = keyChanges((parsed.keySignatures || []).map((k) => ({ ...k, tick: Math.round(k.tick * plan.timeScale) })), bar).map((k) => k.bar);
     const cuts = new Set([0, ...changes.filter((b) => b > 0 && b < plan.bars)]);
-    for (let b = 8; b < plan.bars; b += 8) cuts.add(b);
+    for (let b = barsPerSection; b < plan.bars; b += barsPerSection) cuts.add(b);
     const sorted = [...cuts].sort((a, b) => a - b);
     spans = sorted.map((b, i) => {
       const next = i + 1 < sorted.length ? sorted[i + 1] : plan.bars;
@@ -13992,7 +14002,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-09-24 07:38';
+const BUILD_STAMP = '2026-09-25 00:50';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -16175,6 +16185,7 @@ function mountApp(root, options = {}) {
     store,
     render,
     paintGrid,
+    marqueeNow: () => marquee,
     scroll,
     
     setAudition: (fn) => { auditionFn = fn; },
