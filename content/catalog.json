@@ -1,7 +1,7 @@
 {
   "format": "pocketdaw.catalog",
   "version": 1,
-  "built": "2026-09-24",
+  "built": "2026-09-25",
   "packs": [
     {
       "id": "ambichoir",
@@ -1599,10 +1599,10 @@
       "name": "Dan Tranh Plucked",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/dantranhplucked-1.0.0.zip",
-      "bytes": 661968,
-      "crc32": 4176820474,
+      "version": "1.0.1",
+      "file": "packs/dantranhplucked-1.0.1.zip",
+      "bytes": 612958,
+      "crc32": 3655480010,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
@@ -1611,7 +1611,7 @@
       "manifest": {
         "id": "dantranhplucked",
         "name": "Dan Tranh Plucked",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "family": "keys",
         "kind": "pitched",
         "range": {
@@ -1681,22 +1681,14 @@
             "file": "dantranhplucked/B2_f_1.m4a",
             "rootNote": 59,
             "lo": 58,
-            "hi": 60,
-            "placeholder": "organ",
-            "gain": 5.722
-          },
-          {
-            "file": "dantranhplucked/Cs3_f_1.m4a",
-            "rootNote": 61,
-            "lo": 61,
-            "hi": 62,
+            "hi": 61,
             "placeholder": "organ",
             "gain": 5.722
           },
           {
             "file": "dantranhplucked/Ds3_f_1.m4a",
             "rootNote": 63,
-            "lo": 63,
+            "lo": 62,
             "hi": 64,
             "placeholder": "organ",
             "gain": 5.722
@@ -1773,10 +1765,10 @@
       "name": "Dan Tranh Trem",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/dantranhtrem-1.0.0.zip",
-      "bytes": 810030,
-      "crc32": 3345864159,
+      "version": "1.0.1",
+      "file": "packs/dantranhtrem-1.0.1.zip",
+      "bytes": 659973,
+      "crc32": 1331345273,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
@@ -1785,7 +1777,7 @@
       "manifest": {
         "id": "dantranhtrem",
         "name": "Dan Tranh Trem",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "family": "keys",
         "kind": "pitched",
         "range": {
@@ -1815,38 +1807,22 @@
             "file": "dantranhtrem/B1_Trem_1.m4a",
             "rootNote": 47,
             "lo": 45,
-            "hi": 48,
-            "placeholder": "organ",
-            "gain": 2.355
-          },
-          {
-            "file": "dantranhtrem/Cs2_Trem_1.m4a",
-            "rootNote": 49,
-            "lo": 49,
-            "hi": 50,
+            "hi": 49,
             "placeholder": "organ",
             "gain": 2.355
           },
           {
             "file": "dantranhtrem/Ds2_Trem_1.m4a",
             "rootNote": 51,
-            "lo": 51,
-            "hi": 52,
-            "placeholder": "organ",
-            "gain": 2.355
-          },
-          {
-            "file": "dantranhtrem/Fs2_Trem_1.m4a",
-            "rootNote": 54,
-            "lo": 53,
-            "hi": 55,
+            "lo": 50,
+            "hi": 53,
             "placeholder": "organ",
             "gain": 2.355
           },
           {
             "file": "dantranhtrem/Gs2_Trem_1.m4a",
             "rootNote": 56,
-            "lo": 56,
+            "lo": 54,
             "hi": 57,
             "placeholder": "organ",
             "gain": 2.355
@@ -1919,22 +1895,14 @@
             "file": "dantranhtrem/Fs4_Trem_1.m4a",
             "rootNote": 78,
             "lo": 77,
-            "hi": 79,
-            "placeholder": "organ",
-            "gain": 2.355
-          },
-          {
-            "file": "dantranhtrem/Gs4_Trem_1.m4a",
-            "rootNote": 80,
-            "lo": 80,
-            "hi": 81,
+            "hi": 80,
             "placeholder": "organ",
             "gain": 2.355
           },
           {
             "file": "dantranhtrem/B4_Trem_1.m4a",
             "rootNote": 83,
-            "lo": 82,
+            "lo": 81,
             "hi": 85,
             "placeholder": "organ",
             "gain": 2.355
