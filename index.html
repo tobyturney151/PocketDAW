@@ -1057,6 +1057,19 @@ html, body {
 .beatsmsg { margin: 4px 2px 0; }
 .beatsmsg-bad { color: #e8b04b; }
 
+/* The arrangement's start strip: as tall as the editor's ruler. */
+.arrstart { margin-top: 6px; }
+.arrlabel-start { display: flex; align-items: center; min-height: 28px; }
+.arrstrip { position: relative; height: 28px; background: #0b0b0b; border-radius: 6px; flex: 0 0 auto; cursor: pointer; overflow: hidden; }
+.arrtick { position: absolute; bottom: 4px; width: 1px; height: 7px; background: var(--line, #484848); pointer-events: none; }
+.arrtick-bar { height: 17px; background: var(--bar, #a8a8a8); }
+.arrbarnum { position: absolute; top: 3px; font-size: 9px; color: var(--text3, #5f5e5a); pointer-events: none; }
+.arrcuemark { position: absolute; top: 2px; width: 0; height: 0; margin-left: -6px; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid var(--purple, #7f77dd); pointer-events: none; }
+.arrcue { position: absolute; top: 0; bottom: 0; left: 0; width: 0; border-left: 2px dashed var(--purple, #7f77dd); pointer-events: none; z-index: 3; }
+/* A menu item with a second line, e.g. how much of a paste fits. */
+.popitem-hinted { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+.popitem-hint { font-size: 12px; color: #e8b04b; }
+
 </style>
 </head>
 <body>
@@ -1096,7 +1109,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-25 05:55 from src/. */
+/* PocketDAW - phase 2. Built 2026-09-26 06:34 from src/. */
 (function () {
 'use strict';
 
@@ -1875,6 +1888,20 @@ const stubs = new Map(); // key -> stub kit, so the same one comes back each tim
 
 const ALLOWED_KIT_LICENCES = ['CC0-1.0'];
 
+const OWN_RECORDINGS = { spdx: 'LicenseRef-All-Rights-Reserved', owner: 'tobyturney151' };
+
+function licenceProblem(license, verb = 'loaded') {
+  const spdx = license && license.spdx;
+  if (ALLOWED_KIT_LICENCES.includes(spdx)) return null;
+  if (spdx === OWN_RECORDINGS.spdx) {
+    if (license.ownRecording !== true) return `licence is "${spdx}" but not marked ownRecording: true`;
+    if (license.owner !== OWN_RECORDINGS.owner) return `licence is "${spdx}" but the owner is "${license.owner}", not ${OWN_RECORDINGS.owner}`;
+    if (!license.credit) return 'an own recording needs a credit to show in the app';
+    return null;
+  }
+  return `licence is "${spdx}"; only ${ALLOWED_KIT_LICENCES.join(', ')}, or ${OWN_RECORDINGS.owner}'s own recordings (${OWN_RECORDINGS.spdx}, ownRecording: true), may be ${verb}`;
+}
+
 function validateKitManifest(manifest) {
   const problems = [];
   const m = manifest;
@@ -1885,8 +1912,8 @@ function validateKitManifest(manifest) {
   if (m.kind !== 'pitched' && m.kind !== 'drum') problems.push(`unknown kind "${m.kind}"`);
   const fam = FAMILIES.find((f) => f.id === m.family);
   if (fam && m.kind && fam.kind !== m.kind) problems.push(`kind "${m.kind}" does not match family ${fam.id}`);
-  const spdx = m.license && m.license.spdx;
-  if (!ALLOWED_KIT_LICENCES.includes(spdx)) problems.push(`licence is "${spdx}", only ${ALLOWED_KIT_LICENCES.join(', ')} may be loaded`);
+  const licence = licenceProblem(m.license, 'loaded');
+  if (licence) problems.push(licence);
   if (!Array.isArray(m.zones) || !m.zones.length) problems.push('no zones');
   if (m.kind === 'drum' && (!Array.isArray(m.lanes) || !m.lanes.length)) problems.push('a drum kit needs lanes');
   if (m.kind === 'pitched' && (!m.range || !Number.isFinite(m.range.lo) || !Number.isFinite(m.range.hi))) {
@@ -3767,7 +3794,19 @@ function buildExampleSong(piece) {
   
   let tracks;
   if (Array.isArray(piece.tracks) && piece.tracks.length) {
-    tracks = piece.tracks.map((t) => createTrack({ name: t.name || undefined, kitId: t.kitId }));
+    tracks = piece.tracks.map((t) => {
+      
+      const track = createTrack({ name: t.name || undefined, family: t.family, kitId: t.kitId });
+      track.kitId = t.kitId;
+      if (t.family) track.family = t.family;
+      if (t.kind) track.kind = t.kind;
+      if (t.duck) track.duck = JSON.parse(JSON.stringify(t.duck));
+      if (Number.isFinite(t.gain)) track.gain = t.gain;
+      if (Number.isFinite(t.pan)) track.pan = t.pan;
+      if (Number.isFinite(t.timing)) track.timing = t.timing;
+      if (Number.isFinite(t.reverb) && t.reverb > 0) track.sends = { ...(track.sends || {}), reverb: t.reverb };
+      return track;
+    });
   } else {
     const keys = song.tracks.find((t) => t.family === 'keys');
     if (piece.kitId) keys.kitId = piece.kitId;
@@ -3780,7 +3819,10 @@ function buildExampleSong(piece) {
     const id = `s_builtin_${slug(piece.name)}_${i}`;
     
     const scaleId = part.scaleId || (part.minor ? 'naturalMinor' : 'major');
-    const differs = part.key !== piece.key || scaleId !== piece.scaleId;
+    
+    const ownTempo = Number.isFinite(part.bpm) ? part.bpm : undefined;
+    const ownBeats = Number.isInteger(part.beatsPerBar) ? part.beatsPerBar : undefined;
+    const differs = part.key !== piece.key || scaleId !== piece.scaleId || ownTempo !== undefined || ownBeats !== undefined;
     const lists = Array.isArray(part.parts) ? part.parts : [part.notes];
     const clips = {};
     tracks.forEach((track, t) => {
@@ -3789,6 +3831,11 @@ function buildExampleSong(piece) {
         notes: (lists[t] || []).map(([pitch, start, duration, velocity]) =>
           createNote({ pitch, start, duration, velocity: velocity / 100 })),
       };
+      const lanes = part.automation && part.automation[t];
+      if (lanes) {
+        clips[track.id].automation = Object.fromEntries(Object.entries(lanes)
+          .map(([paramId, points]) => [paramId, points.map(([tick, value]) => ({ tick, value }))]));
+      }
     });
     song.sections[id] = {
       id,
@@ -3797,6 +3844,8 @@ function buildExampleSong(piece) {
       unlocked: differs || undefined,
       key: differs ? part.key : undefined,
       scaleId: differs ? scaleId : undefined,
+      ...(ownTempo !== undefined ? { bpm: ownTempo } : {}),
+      ...(ownBeats !== undefined ? { beatsPerBar: ownBeats } : {}),
       clips,
     };
     song.sectionOrder.push(id);
@@ -4459,7 +4508,7 @@ function handleColor(name) {
   return shade(name).dark;
 }
 
-function drawGrid(canvas, { song, view, kit, shade: shadeName, clip, layout, scrollY, drag, marquee, floating, automation }) {
+function drawGrid(canvas, { song, view, kit, shade: shadeName, clip, layout, scrollY, drag, marquee, floating, automation, ghost = null }) {
   const dpr = window.devicePixelRatio || 1;
   const cssW = canvas.clientWidth;
   const cssH = canvas.clientHeight;
@@ -4599,6 +4648,56 @@ function drawGrid(canvas, { song, view, kit, shade: shadeName, clip, layout, scr
     }
     if (lifted) ctx.globalAlpha = 1;
   });
+
+  
+  if (ghost) {
+    ctx.save();
+    ghost.notes.forEach((target) => {
+      const box = noteBoxFor(layout, target.pitch);
+      if (!box || target.start >= layout.totalTicks) return;
+      const x = layout.tickToX(target.start) + 1;
+      const w = Math.max(3, Math.min(target.duration, layout.totalTicks - target.start) * layout.pxPerTick - 2);
+      if (x + w < gridLeft || x > gridRight) return;
+      ctx.fillStyle = rootText;
+      ctx.globalAlpha = 0.45;
+      roundRect(ctx, x, box.y, w, box.height, box.offScale ? 1.5 : 3);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = theme.text;
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([4, 3]);
+      roundRect(ctx, x + 0.75, box.y + 0.75, w - 1.5, box.height - 1.5, box.offScale ? 1 : 3);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    });
+    if (ghost.ring) {
+      const box = noteBoxFor(layout, ghost.ring.pitch);
+      if (box) {
+        const x = layout.tickToX(ghost.ring.tick);
+        ctx.strokeStyle = theme.accent || '#7F77DD';
+        ctx.lineWidth = 2.5;
+        roundRect(ctx, x + 0.5, box.y - 1, Math.max(8, layout.pxPerTick * (ghost.ring.step || 240)) - 1, box.height + 2, 4);
+        ctx.stroke();
+      }
+    }
+    const edge = layout.tickToX(layout.totalTicks);
+    (ghost.overflow || []).forEach((pitch) => {
+      const box = noteBoxFor(layout, pitch);
+      if (!box || edge < gridLeft || edge > gridRight + 12) return;
+      ctx.fillStyle = '#E8B04B';
+      ctx.globalAlpha = 0.5;
+      roundRect(ctx, edge - 12, box.y, 10, box.height, 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.beginPath();
+      ctx.moveTo(edge + 2, box.y + 3);
+      ctx.lineTo(edge + 8, box.y + box.height / 2);
+      ctx.lineTo(edge + 2, box.y + box.height - 3);
+      ctx.closePath();
+      ctx.fill();
+    });
+    ctx.restore();
+  }
 
   if (floating) {
     ctx.save();
@@ -5864,9 +5963,11 @@ function copyNotesData(song, ctx, ids) {
   
   const originTick = Math.min(...notes.map((n) => n.start));
   const lanes = drumLanes(song, ctx);
+  
+  const first = notes.filter((n) => n.start === originTick);
   const anchorPitch = lanes
-    ? notes.reduce((low, n) => (lanes.indexOf(n.pitch) > lanes.indexOf(low.pitch) ? n : low), notes[0]).pitch
-    : Math.min(...notes.map((n) => n.pitch));
+    ? first.reduce((low, n) => (lanes.indexOf(n.pitch) > lanes.indexOf(low.pitch) ? n : low), first[0]).pitch
+    : Math.min(...first.map((n) => n.pitch));
   return {
     kind: 'notes',
     anchorPitch,
@@ -8041,6 +8142,51 @@ function arrangementMatrix(store, onChange, {
   const lanes = el('div', { class: 'arrlanes' }, [...rows, playhead]);
 
   
+  
+  const cueSection = store.state.view.cueTick ? store.state.view.activeSectionId : null;
+  const strips = song.sectionOrder.map((sectionId, index) => {
+    const section = song.sections[sectionId];
+    const width = widthOf(song, section);
+    const beats = sectionBeats(song, section);
+    const total = section.lengthBars * beats;
+    const marks = [];
+    for (let b = 0; b <= total; b++) {
+      const isBar = b % beats === 0;
+      marks.push(el('span', { class: `arrtick${isBar ? ' arrtick-bar' : ''}`, style: `left:${(b / total) * 100}%` }));
+      const bar = b / beats;
+      if (isBar && b < total && (section.lengthBars <= 4 || bar % 2 === 0)) {
+        marks.push(el('span', { class: 'arrbarnum', style: `left:calc(${(b / total) * 100}% + 3px)`, text: String(bar + 1) }));
+      }
+    }
+    const lengthTicks = sectionLengthTicks(song, section);
+    if (cueSection === sectionId) {
+      const frac = Math.min(1, store.state.view.cueTick / lengthTicks);
+      marks.push(el('span', { class: 'arrcuemark', style: `left:${frac * 100}%` }));
+    }
+    const strip = el('div', { class: 'arrstrip', style: `width:${width}px`, title: 'Tap to start playing from here' }, marks);
+    strip.addEventListener('click', (e) => {
+      const rect = typeof strip.getBoundingClientRect === 'function' ? strip.getBoundingClientRect() : { left: 0, width };
+      const x = Math.max(0, Math.min(width, (e.clientX || 0) - rect.left));
+      const beatTicks = lengthTicks / total;
+      const tick = Math.min(lengthTicks - beatTicks, Math.round(((x / width) * lengthTicks) / beatTicks) * beatTicks);
+      store.setView({ activeSectionId: sectionId, cueTick: Math.max(0, tick), selectedNoteId: null });
+      onChange();
+    });
+    void index;
+    return strip;
+  });
+  const startRow = el('div', { class: 'arrrow arrstart' }, [
+    el('div', { class: 'arrlabel arrlabel-corner arrlabel-start', style: `width:${LABEL_WIDTH}px` }, [el('span', { class: 'arrcorner', text: 'Start' })]),
+    el('div', { class: 'arrcells' }, strips),
+  ]);
+  if (cueSection) {
+    const index = song.sectionOrder.indexOf(cueSection);
+    const section = song.sections[cueSection];
+    const frac = Math.min(1, store.state.view.cueTick / sectionLengthTicks(song, section));
+    const x = columnLeft(song, index) + Math.round(frac * (widthOf(song, section) - 2));
+    lanes.appendChild(el('div', { class: 'arrcue', 'aria-hidden': 'true', style: `transform:translateX(${x}px)` }));
+  }
+
   const body = el('div', { class: 'arrscroll' }, [
     el('div', { class: 'arrrow arrheader' }, [
       el('div', { class: 'arrlabel arrlabel-corner', style: `width:${LABEL_WIDTH}px` }, [
@@ -8062,6 +8208,7 @@ function arrangementMatrix(store, onChange, {
         }),
       ]),
     ]),
+    startRow,
     lanes,
     addTrackRow,
   ].filter(Boolean));
@@ -8099,7 +8246,9 @@ function arrangementMatrix(store, onChange, {
       const x = left + Math.round(within * (width - 2));
       playhead.style.display = 'block';
       playhead.style.transform = `translateX(${x}px)`;
-      if (index !== lastIndex) {
+      if (lastIndex === -1) {
+        lastIndex = index;
+      } else if (index !== lastIndex) {
         lastIndex = index;
         const viewLeft = (body.scrollLeft || 0) + LABEL_WIDTH + GAP;
         const viewRight = (body.scrollLeft || 0) + (body.clientWidth || 0);
@@ -12200,16 +12349,26 @@ function createContent({
       return null;
     }
   }
+  
+  async function loadSampleCatalog() {
+    try {
+      const doc = JSON.parse(decodeText(await get('sample-catalog.json')));
+      if (!doc || doc.format !== 'pocketdaw.sample-catalog') throw new Error('That is not a PocketDAW sample catalog');
+      return doc;
+    } catch (err) {
+      return null;
+    }
+  }
   async function loadCatalog() {
     return once('catalog', async () => {
-      const [packDoc, songDoc] = await Promise.all([loadPackCatalog(), loadSongCatalog()]);
+      const [packDoc, songDoc, sampleDoc] = await Promise.all([loadPackCatalog(), loadSongCatalog(), loadSampleCatalog()]);
       songCatalog = songDoc;
-      if (!packDoc && !songDoc) return null;
+      if (!packDoc && !songDoc && !sampleDoc) return null;
       
       catalog = {
         ...(packDoc || { format: 'pocketdaw.catalog', packs: [] }),
-        songs: songDoc ? songDoc.songs || [] : [],
-        projects: songDoc ? songDoc.projects || [] : [],
+        songs: [...(songDoc ? songDoc.songs || [] : []), ...(sampleDoc ? sampleDoc.samples || [] : [])],
+        projects: [...(songDoc ? songDoc.projects || [] : []), ...(sampleDoc ? sampleDoc.projects || [] : [])],
       };
       return catalog;
     });
@@ -13849,7 +14008,10 @@ function buildImportedSong(parsed, plan, choices = {}, { name = 'Imported', bars
       return;
     }
     const kit = kitById(kitId);
-    const track = createTrack({ name: part.name, kitId: kit.id });
+    const track = createTrack({ name: part.name, family: part.family, kitId });
+    track.kitId = kitId;
+    track.family = kit && kit.id === kitId ? kit.family : part.family;
+    track.kind = track.family === 'drums' ? 'drum' : 'pitched';
     let notes = applySustain(part.notes, (parsed.controls || [])
       .filter((c) => c.channel === part.channel && (c.track === undefined || c.track === part.track))
       .map((c) => ({ ...c, tick: Math.round(c.tick * plan.timeScale) })));
@@ -14080,7 +14242,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-09-25 05:55';
+const BUILD_STAMP = '2026-09-26 06:34';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -14112,6 +14274,7 @@ function mountApp(root, options = {}) {
   const canvas = el('canvas', { class: 'grid-canvas' });
   let marquee = null;
   let floating = null;
+  let pasteGhost = null;
   const playheadCanvas = el('canvas', { class: 'playhead-canvas' });
   const trackStrip = el('div', { class: 'strip trackstrip' });
   const contextStrip = el('div', { class: 'strip contextstrip' });
@@ -14543,15 +14706,44 @@ function mountApp(root, options = {}) {
         render();
         return Boolean(step);
       };
+      
+      const trial = (bars) => {
+        const copy = JSON.parse(JSON.stringify(store.state.song));
+        const section = copy.sections[store.state.view.activeSectionId];
+        if (bars) section.lengthBars = bars;
+        return pasteNotesAt(copy, ctx(), clipboard, {
+          tick: spot.tick, pitch: spot.pitch, key: settings.key, scaleId: settings.scaleId, lengthBars: section.lengthBars,
+        });
+      };
+      const fits = trial(0);
+      const all = trial(999);
+      const endTick = sectionLengthTicks(store.state.song, store.activeSection());
+      const overflow = all ? all.notes.filter((n) => n.start >= endTick) : [];
+      pasteGhost = {
+        notes: fits ? fits.notes.map((n) => ({ pitch: n.pitch, start: n.start, duration: n.duration })) : [],
+        ring: { tick: spot.tick, pitch: spot.pitch },
+        overflow: overflow.map((n) => n.pitch),
+      };
+      paintGrid();
+      const count = clipboard.notes.length;
+      const landing = fits ? fits.notes.length : 0;
       popoverMenu(
         { getBoundingClientRect: () => ({ left: spot.x, top: spot.y, width: 0, height: 0 }) },
         [
           {
-            label: `Paste ${clipboard.notes.length} note${clipboard.notes.length === 1 ? '' : 's'} here`,
+            label: `Paste ${count} note${count === 1 ? '' : 's'} here`,
+            hint: overflow.length ? `${landing} fit this bar \u00b7 ${overflow.length} would run past it` : null,
             onSelect: doPaste,
           },
+          { label: 'Cancel', onSelect: () => {} },
         ],
         gridHost,
+        {
+          onClose: () => {
+            pasteGhost = null;
+            paintGrid();
+          },
+        },
       );
       return true;
     },
@@ -15326,7 +15518,12 @@ function mountApp(root, options = {}) {
 
   
   async function loadAnySong(id) {
-    if (!isRemoteSongId(id)) return songStore.load(id);
+    if (!isRemoteSongId(id)) {
+      const found = await songStore.load(id);
+      if (found && found.song) return found;
+      const own = sessionStarter && sessionStarter.songs.find((x) => x.id === id);
+      return own ? { song: JSON.parse(JSON.stringify(own)) } : found;
+    }
     if (!content) return { song: null, problem: 'Content is not available here.' };
     try {
       const doc = await content.loadSong(id);
@@ -15687,8 +15884,8 @@ function mountApp(root, options = {}) {
   async function importLoop(loopSongId, how) {
     try {
       
-      const loaded = await songStore.load(loopSongId);
-      if (!loaded) { flash(`That loop is not in storage (${loopSongId})`, 8000); return; }
+      const loaded = await loadAnySong(loopSongId);
+      if (!loaded) { flash(`That loop ${isRemoteSongId(loopSongId) ? 'could not be loaded' : 'is not in storage'} (${loopSongId})`, 8000); return; }
       if (!loaded.song) { flash(`Could not read that loop: ${loaded.problem}`, 8000); return; }
       const loop = loaded.song;
       const firstSection = loop.sections[loop.sectionOrder[0]];
@@ -15782,22 +15979,28 @@ function mountApp(root, options = {}) {
   }
 
   
-  function holdable(node, onHold) {
+  
+  function holdable(node, onHold, { delay = LONG_PRESS_MS, slop = 0 } = {}) {
     let timer = null;
     let moved = false;
     const cancel = () => {
       if (timer) timers.clearTimeout(timer);
       timer = null;
     };
-    node.addEventListener('pointerdown', () => {
+    let downX = 0;
+    let downY = 0;
+    node.addEventListener('pointerdown', (e) => {
+      downX = e.clientX || 0;
+      downY = e.clientY || 0;
       moved = false;
       cancel();
       timer = timers.setTimeout(() => {
         timer = null;
         if (!moved) onHold();
-      }, LONG_PRESS_MS);
+      }, delay);
     });
-    node.addEventListener('pointermove', () => {
+    node.addEventListener('pointermove', (e) => {
+      if (slop && Math.hypot((e.clientX || 0) - downX, (e.clientY || 0) - downY) <= slop) return;
       moved = true;
       cancel();
     });
@@ -15831,7 +16034,7 @@ function mountApp(root, options = {}) {
         },
         onAddTrack: () => openAddTrackMenu(),
         openMix,
-        onHoldCell: (node, sectionId, trackId) => holdable(node, () => openCellMenu(node, sectionId, trackId)),
+        onHoldCell: (node, sectionId, trackId) => holdable(node, () => openCellMenu(node, sectionId, trackId), { delay: 260, slop: 10 }),
         
         onCopyToMine: () => songsApi.copyToMine(store.state.song.id),
         onHoldTrack: (node, trackId) => holdable(node, () => {
@@ -15873,25 +16076,29 @@ function mountApp(root, options = {}) {
   }
 
   
-  function popoverMenu(anchor, items, host) {
+  function popoverMenu(anchor, items, host, { onClose = null } = {}) {
     const scrim = el('div', { class: 'popscrim', onClick: () => close() });
     const menu = el('div', { class: 'popmenu popmenu-lib' });
+    let closed = false;
     const close = () => {
       if (scrim.parentNode) scrim.parentNode.removeChild(scrim);
       if (menu.parentNode) menu.parentNode.removeChild(menu);
+      if (!closed && onClose) {
+        closed = true;
+        onClose();
+      }
     };
-    items.forEach(({ label, danger, onSelect }) => {
-      menu.appendChild(
-        el('button', {
-          class: `popitem${danger ? ' popitem-danger' : ''}`,
-          type: 'button',
-          text: label,
-          onClick: () => {
-            close();
-            onSelect();
-          },
-        }),
-      );
+    items.forEach(({ label, hint, danger, onSelect }) => {
+      const button = el('button', {
+        class: `popitem${danger ? ' popitem-danger' : ''}${hint ? ' popitem-hinted' : ''}`,
+        type: 'button',
+        onClick: () => {
+          close();
+          onSelect();
+        },
+      }, hint ? [el('span', { class: 'popitem-label', text: label }), el('span', { class: 'popitem-hint', text: hint })] : []);
+      if (!hint) button.textContent = label;
+      menu.appendChild(button);
     });
     host.appendChild(scrim);
     host.appendChild(menu);
@@ -16089,6 +16296,7 @@ function mountApp(root, options = {}) {
       layout: layout(),
       scrollY: scroll.y,
       automation: automationLayer(),
+      ghost: pasteGhost,
       marquee: marquee
         && marquee.sectionId === store.state.view.activeSectionId
         && marquee.trackId === store.state.view.activeTrackId
@@ -16207,10 +16415,15 @@ function mountApp(root, options = {}) {
 
     
     if (options.seedStarter) {
+      
+      try {
+        sessionStarter = buildStarterContent();
+      } catch {
+        sessionStarter = null;
+      }
       try {
         if (blockAutosave) throw new Error('storage is not taking writes');
         await songStore.restoreBuiltIn(buildStarterContent);
-        sessionStarter = null;
       } catch {
         try {
           sessionStarter = buildStarterContent();
@@ -16268,6 +16481,7 @@ function mountApp(root, options = {}) {
     render,
     paintGrid,
     marqueeNow: () => marquee,
+    ghostForTest: () => pasteGhost,
     scroll,
     
     setAudition: (fn) => { auditionFn = fn; },
