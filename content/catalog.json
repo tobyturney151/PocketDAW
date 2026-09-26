@@ -1,7 +1,7 @@
 {
   "format": "pocketdaw.catalog",
   "version": 1,
-  "built": "2026-09-25",
+  "built": "2026-09-26",
   "packs": [
     {
       "id": "ambichoir",
@@ -7545,6 +7545,216 @@
             "hi": 67,
             "placeholder": "saw303",
             "gain": 0.218
+          }
+        ]
+      }
+    },
+    {
+      "id": "toby-wallys",
+      "name": "Toby Wallys",
+      "family": "drums",
+      "kind": "drum",
+      "version": "1.2.0",
+      "file": "packs/toby-wallys-1.2.0.zip",
+      "bytes": 233972,
+      "crc32": 713986844,
+      "license": {
+        "spdx": "UNLICENSED",
+        "source": "Space Goat multitrack sessions at Wally's (private)",
+        "credit": "Toby Turney, Space Goat — all rights reserved"
+      },
+      "manifest": {
+        "id": "toby-wallys",
+        "name": "Toby Wallys",
+        "version": "1.2.0",
+        "family": "drums",
+        "kind": "drum",
+        "shade": "red",
+        "license": {
+          "spdx": "UNLICENSED",
+          "source": "Space Goat multitrack sessions at Wally's (private)",
+          "credit": "Toby Turney, Space Goat — all rights reserved"
+        },
+        "envelope": {
+          "attack": 0.001,
+          "release": 0.01
+        },
+        "accentGain": 1.5,
+        "gateNotes": true,
+        "polyphony": 16,
+        "voicesAtOnce": 3,
+        "lanes": [
+          {
+            "midi": 49,
+            "label": "Crash",
+            "group": "cymbal"
+          },
+          {
+            "midi": 51,
+            "label": "Ride",
+            "group": "cymbal"
+          },
+          {
+            "midi": 46,
+            "label": "Hat Open",
+            "group": "hat",
+            "chokeGroup": "hat"
+          },
+          {
+            "midi": 42,
+            "label": "Hat Closed",
+            "group": "hat",
+            "chokeGroup": "hat"
+          },
+          {
+            "midi": 56,
+            "label": "Cowbell",
+            "group": "perc"
+          },
+          {
+            "midi": 29,
+            "label": "Cowbell Soft",
+            "group": "perc"
+          },
+          {
+            "midi": 38,
+            "label": "Snare",
+            "group": "snare"
+          },
+          {
+            "midi": 40,
+            "label": "Snare Soft",
+            "group": "snare"
+          },
+          {
+            "midi": 50,
+            "label": "Rack Tom",
+            "group": "tom"
+          },
+          {
+            "midi": 45,
+            "label": "Floor Tom",
+            "group": "tom"
+          },
+          {
+            "midi": 35,
+            "label": "Kick Soft",
+            "group": "kick"
+          },
+          {
+            "midi": 36,
+            "label": "Kick",
+            "group": "kick"
+          }
+        ],
+        "zones": [
+          {
+            "file": "toby-wallys/49-crash.m4a",
+            "placeholder": "crash",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "gain": 0.568,
+            "click": null
+          },
+          {
+            "file": "toby-wallys/51-ride.m4a",
+            "placeholder": "ride",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "gain": 0.498,
+            "click": null
+          },
+          {
+            "file": "toby-wallys/46-hatopen.m4a",
+            "placeholder": "openHat",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "gain": 0.51,
+            "click": null
+          },
+          {
+            "file": "toby-wallys/42-hatclosed.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "gain": 0.53,
+            "click": null
+          },
+          {
+            "file": "toby-wallys/56-cowbell.m4a",
+            "placeholder": "cowbell",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "gain": 0.413,
+            "click": null
+          },
+          {
+            "file": "toby-wallys/29-cowbellsoft.m4a",
+            "placeholder": "cowbell",
+            "rootNote": 29,
+            "lo": 29,
+            "hi": 29,
+            "gain": 0.413,
+            "click": null
+          },
+          {
+            "file": "toby-wallys/38-snare.m4a",
+            "placeholder": "snare",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "gain": 0.825,
+            "click": null
+          },
+          {
+            "file": "toby-wallys/40-snaresoft.m4a",
+            "placeholder": "snare",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "gain": 0.825,
+            "click": null
+          },
+          {
+            "file": "toby-wallys/50-racktom.m4a",
+            "placeholder": "hiTom",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "gain": 0.842,
+            "click": null
+          },
+          {
+            "file": "toby-wallys/45-floortom.m4a",
+            "placeholder": "loTom",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "gain": 0.858,
+            "click": null
+          },
+          {
+            "file": "toby-wallys/35-kicksoft.m4a",
+            "placeholder": "kick",
+            "rootNote": 35,
+            "lo": 35,
+            "hi": 35,
+            "gain": 0.943,
+            "click": null
+          },
+          {
+            "file": "toby-wallys/36-kick.m4a",
+            "placeholder": "kick",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "gain": 0.943,
+            "click": null
           }
         ]
       }
