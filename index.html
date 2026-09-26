@@ -1109,7 +1109,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-26 06:34 from src/. */
+/* PocketDAW - phase 2. Built 2026-09-26 19:40 from src/. */
 (function () {
 'use strict';
 
@@ -1886,20 +1886,12 @@ const registered = new Map(); // id -> manifest
 const aliases = new Map(); // old id -> current id
 const stubs = new Map(); // key -> stub kit, so the same one comes back each time
 
-const ALLOWED_KIT_LICENCES = ['CC0-1.0'];
-
-const OWN_RECORDINGS = { spdx: 'LicenseRef-All-Rights-Reserved', owner: 'tobyturney151' };
-
-function licenceProblem(license, verb = 'loaded') {
+function licenceLabel(license) {
   const spdx = license && license.spdx;
-  if (ALLOWED_KIT_LICENCES.includes(spdx)) return null;
-  if (spdx === OWN_RECORDINGS.spdx) {
-    if (license.ownRecording !== true) return `licence is "${spdx}" but not marked ownRecording: true`;
-    if (license.owner !== OWN_RECORDINGS.owner) return `licence is "${spdx}" but the owner is "${license.owner}", not ${OWN_RECORDINGS.owner}`;
-    if (!license.credit) return 'an own recording needs a credit to show in the app';
-    return null;
-  }
-  return `licence is "${spdx}"; only ${ALLOWED_KIT_LICENCES.join(', ')}, or ${OWN_RECORDINGS.owner}'s own recordings (${OWN_RECORDINGS.spdx}, ownRecording: true), may be ${verb}`;
+  if (!spdx) return 'Licence not stated';
+  if (spdx === 'CC0-1.0') return 'CC0';
+  if (spdx === 'UNLICENSED' || /all.?rights.?reserved/i.test(spdx)) return 'All rights reserved';
+  return spdx;
 }
 
 function validateKitManifest(manifest) {
@@ -1912,8 +1904,7 @@ function validateKitManifest(manifest) {
   if (m.kind !== 'pitched' && m.kind !== 'drum') problems.push(`unknown kind "${m.kind}"`);
   const fam = FAMILIES.find((f) => f.id === m.family);
   if (fam && m.kind && fam.kind !== m.kind) problems.push(`kind "${m.kind}" does not match family ${fam.id}`);
-  const licence = licenceProblem(m.license, 'loaded');
-  if (licence) problems.push(licence);
+
   if (!Array.isArray(m.zones) || !m.zones.length) problems.push('no zones');
   if (m.kind === 'drum' && (!Array.isArray(m.lanes) || !m.lanes.length)) problems.push('a drum kit needs lanes');
   if (m.kind === 'pitched' && (!m.range || !Number.isFinite(m.range.lo) || !Number.isFinite(m.range.hi))) {
@@ -9190,7 +9181,7 @@ function songSheet(store, onChange, audioReport, onLive) {
     ...(audio && audio.credits && audio.credits.length
       ? [
         el('div', { class: 'label', text: 'Sounds' }),
-        ...audio.credits.map((c) => el('p', { class: 'hint dim', text: `${c.name} \u2014 ${c.credit}` })),
+        ...audio.credits.map((c) => el('p', { class: 'hint dim', text: `${c.name} \u2014 ${c.credit}${c.licence ? ` \u00b7 ${c.licence}` : ''}` })),
       ]
       : []),
   ]);
@@ -9538,7 +9529,7 @@ function trackSheet(store, onChange, onLive) {
       class: 'hint dim',
       text: kitUsesPlaceholders(kit)
         ? 'Stand-in sounds until a CC0 sample pack is ingested for this kit.'
-        : `Sampled: ${kit.license.credit || kit.license.source}`,
+        : `Sampled: ${kit.license.credit || kit.license.source} \u00b7 ${licenceLabel(kit.license)}`,
     }),
   ]);
 }
@@ -14242,7 +14233,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-09-26 06:34';
+const BUILD_STAMP = '2026-09-26 19:40';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -14523,7 +14514,7 @@ function mountApp(root, options = {}) {
       credits: [...new Set(store.state.song.tracks.map((t) => t.kitId))]
         .map((id) => kitById(id, store.state.song.tracks.find((t) => t.kitId === id)))
         .filter((k) => k && k.license && k.license.credit && k.zones.some((z) => z.file))
-        .map((k) => ({ name: k.name, credit: k.license.credit, source: k.license.source })),
+        .map((k) => ({ name: k.name, credit: k.license.credit, source: k.license.source, licence: licenceLabel(k.license) })),
     };
   }
 
