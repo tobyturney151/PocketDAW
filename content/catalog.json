@@ -7654,7 +7654,7 @@
             "rootNote": 49,
             "lo": 49,
             "hi": 49,
-            "gain": 0.0757,
+            "gain": 0.1426,
             "click": null
           },
           {
@@ -7663,7 +7663,7 @@
             "rootNote": 51,
             "lo": 51,
             "hi": 51,
-            "gain": 0.0664,
+            "gain": 0.1251,
             "click": null
           },
           {
@@ -7672,7 +7672,7 @@
             "rootNote": 46,
             "lo": 46,
             "hi": 46,
-            "gain": 0.0361,
+            "gain": 0.0203,
             "click": null
           },
           {
@@ -7681,7 +7681,7 @@
             "rootNote": 42,
             "lo": 42,
             "hi": 42,
-            "gain": 0.0793,
+            "gain": 0.0472,
             "click": null
           },
           {
@@ -7690,7 +7690,7 @@
             "rootNote": 56,
             "lo": 56,
             "hi": 56,
-            "gain": 0.0583,
+            "gain": 0.2321,
             "click": null
           },
           {
@@ -7699,7 +7699,7 @@
             "rootNote": 29,
             "lo": 29,
             "hi": 29,
-            "gain": 0.0437,
+            "gain": 0.174,
             "click": null
           },
           {
@@ -9385,7 +9385,7 @@
             "rootNote": 39,
             "lo": 39,
             "hi": 39,
-            "gain": 2.0318,
+            "gain": 3.2202,
             "click": null
           },
           {
@@ -9394,7 +9394,7 @@
             "rootNote": 37,
             "lo": 37,
             "hi": 37,
-            "gain": 1.1753,
+            "gain": 1.3187,
             "click": null
           },
           {
