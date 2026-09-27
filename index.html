@@ -810,7 +810,12 @@ html, body {
 .cardmeta { padding: 8px 2px 2px; }
 .cardname { display: block; font-size: 13px; font-weight: 500; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cardsub { display: block; font-size: 11px; color: var(--text2); margin-top: 2px; }
-.cardmore { position: absolute; right: 6px; bottom: 8px; color: var(--text3); font-size: 14px; padding: 4px 8px; }
+/* The card's menu: a thumb-sized target with dots big enough to see. It was
+   14 px text in a small box, easy to miss and easier to mistap. */
+.cardmore { position: absolute; right: 2px; bottom: 2px; min-width: 44px; min-height: 40px; display: flex; align-items: center;
+  justify-content: center; color: var(--text2); font-size: 24px; font-weight: 700; letter-spacing: 1px; line-height: 1;
+  padding: 0 8px 8px; border-radius: 12px; }
+.cardmore:active { background: rgba(255, 255, 255, 0.08); }
 
 .projcover { display: block; width: 100%; height: 170px; border-radius: 18px; margin-top: 4px; }
 .projhead { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin: 14px 0 18px; }
@@ -1109,7 +1114,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-26 19:40 from src/. */
+/* PocketDAW - phase 2. Built 2026-09-27 22:25 from src/. */
 (function () {
 'use strict';
 
@@ -10928,7 +10933,8 @@ function createSampler(ctx, kit, zones) {
     };
 
     
-    const gated = kit.gateNotes && isDrum;
+    const lane = isDrum && kit.lanes ? kit.lanes.find((l) => l.midi === pitch) : null;
+    const gated = Boolean(lane && (lane.gate === true || /\broll\b/i.test(lane.label || '')));
     if (held && (zone.loopFrames || !isDrum || gated)) {
       if (gated && opts.gateRelease) voice.release = Math.max(release, opts.gateRelease);
       stopVoice(voice, time + held);
@@ -11255,6 +11261,7 @@ function createTransport({
   takeCue = () => 0,
   onEvent,
   onStop,
+  onSectionChange = null,
   timers = hostTimers(),
   lookAhead = LOOK_AHEAD_SECONDS,
   intervalMs = TIMER_INTERVAL_MS,
@@ -11349,8 +11356,16 @@ function createTransport({
   }
 
   
+  let loopedSection = null;
+
+  
   function tick() {
     if (!playing) return;
+    if (mode === 'section') {
+      const current = getSectionId();
+      if (loopedSection !== null && current !== loopedSection && onSectionChange) onSectionChange(ctx.currentTime);
+      loopedSection = current;
+    }
     const song = getSong();
     const m = ensureMap();
     const horizon = ctx.currentTime + lookAhead;
@@ -11393,6 +11408,7 @@ function createTransport({
 
     anchorTime = ctx.currentTime + 0.03;
     
+    loopedSection = null;
     const cue = Math.max(0, Number(takeCue()) || 0);
     anchorTick = (mode === 'song' ? songStartTick() : 0) + cue;
     ensureMap();
@@ -11921,6 +11937,9 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
         accent: ev.note.flags && ev.note.flags.accent,
         slide: ev.note.flags && ev.note.flags.slide,
       });
+    },
+    onSectionChange: (time) => {
+      for (const p of players.values()) if (p.sampler) p.sampler.allNotesOff(time);
     },
     onStop: (time) => {
       for (const p of players.values()) if (p.sampler) p.sampler.allNotesOff(time);
@@ -13966,7 +13985,7 @@ function laneFor(pitch, lanes) {
   return pool.reduce((best, l) => (Math.abs(l.midi - pitch) < Math.abs(best.midi - pitch) ? l : best), pool[0]).midi;
 }
 
-function buildImportedSong(parsed, plan, choices = {}, { name = 'Imported', barsPerSection = 8 } = {}) {
+function buildImportedSong(parsed, plan, choices = {}, { name = 'Imported', barsPerSection = 4 } = {}) {
   const song = createSong({ name });
   song.tracks = [];
   song.bpm = plan.bpm;
@@ -14233,7 +14252,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-09-26 19:40';
+const BUILD_STAMP = '2026-09-27 22:25';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
