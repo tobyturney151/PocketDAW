@@ -2,7 +2,14 @@
   "format": "pocketdaw.sample-catalog",
   "version": 1,
   "built": "2026-09-27",
-  "projects": [],
+  "projects": [
+    {
+      "id": "p_remote_afro-latin-patterns",
+      "name": "Afro-Latin Patterns",
+      "parentId": "p_builtin_drumloops",
+      "forKind": "drum"
+    }
+  ],
   "samples": [
     {
       "id": "song_remote_12-8-shuffle",
@@ -169,6 +176,351 @@
               }
             ],
             "count": 20
+          }
+        ]
+      }
+    },
+    {
+      "id": "song_remote_2-3-samba-agogo",
+      "name": "2-3 Samba Agogô",
+      "folder": "p_remote_afro-latin-patterns",
+      "version": "1.0.0",
+      "file": "samples/2-3-samba-agogo-1_0_0.json",
+      "bytes": 570,
+      "bpm": 100,
+      "key": 5,
+      "scaleId": "major",
+      "bars": 1,
+      "sections": 1,
+      "tracks": 1,
+      "shades": [
+        "silver"
+      ],
+      "noteCount": 9,
+      "requires": [
+        "virtperc"
+      ],
+      "description": "The common 2-3 samba agogô pattern on Virt Percussion",
+      "shapeVersion": 2,
+      "shape": {
+        "v": 2,
+        "sections": 1,
+        "bars": 1,
+        "key": 5,
+        "spans": [
+          {
+            "from": 0,
+            "to": 1,
+            "key": 5,
+            "mode": "major",
+            "bars": 1,
+            "beats": 4
+          }
+        ],
+        "tracks": [
+          {
+            "shade": "silver",
+            "kind": "drum",
+            "family": "drums",
+            "marks": [
+              {
+                "x": 0,
+                "w": 0.0625,
+                "y": 0.45833333333333337,
+                "p": 68
+              },
+              {
+                "x": 0.125,
+                "w": 0.0625,
+                "y": 0.5416666666666667,
+                "p": 67
+              },
+              {
+                "x": 0.25,
+                "w": 0.0625,
+                "y": 0.5416666666666667,
+                "p": 67
+              },
+              {
+                "x": 0.375,
+                "w": 0.0625,
+                "y": 0.45833333333333337,
+                "p": 68
+              },
+              {
+                "x": 0.4375,
+                "w": 0.0625,
+                "y": 0.45833333333333337,
+                "p": 68
+              },
+              {
+                "x": 0.5625,
+                "w": 0.0625,
+                "y": 0.5416666666666667,
+                "p": 67
+              },
+              {
+                "x": 0.6875,
+                "w": 0.0625,
+                "y": 0.5416666666666667,
+                "p": 67
+              },
+              {
+                "x": 0.75,
+                "w": 0.0625,
+                "y": 0.5416666666666667,
+                "p": 67
+              },
+              {
+                "x": 0.875,
+                "w": 0.0625,
+                "y": 0.45833333333333337,
+                "p": 68
+              }
+            ],
+            "count": 9
+          }
+        ]
+      }
+    },
+    {
+      "id": "song_remote_funk",
+      "name": "Funk",
+      "folder": "p_builtin_fullloops",
+      "version": "1.0.0",
+      "file": "samples/funk-1_0_0.json",
+      "bytes": 650,
+      "bpm": 100,
+      "key": 5,
+      "scaleId": "major",
+      "bars": 1,
+      "sections": 1,
+      "tracks": 1,
+      "shades": [
+        "silver"
+      ],
+      "noteCount": 16,
+      "requires": [
+        "toby-wallys"
+      ],
+      "description": "A funk groove with ghost notes on Toby Wallys",
+      "shapeVersion": 2,
+      "shape": {
+        "v": 2,
+        "sections": 1,
+        "bars": 1,
+        "key": 5,
+        "spans": [
+          {
+            "from": 0,
+            "to": 1,
+            "key": 5,
+            "mode": "major",
+            "bars": 1,
+            "beats": 4
+          }
+        ],
+        "tracks": [
+          {
+            "shade": "silver",
+            "kind": "drum",
+            "family": "drums",
+            "marks": [
+              {
+                "x": 0,
+                "w": 0.125,
+                "y": 0.7083333333333333,
+                "p": 36
+              },
+              {
+                "x": 0.25,
+                "w": 0.25,
+                "y": 0.5416666666666667,
+                "p": 38
+              },
+              {
+                "x": 0.5,
+                "w": 0.125,
+                "y": 0.7083333333333333,
+                "p": 36
+              },
+              {
+                "x": 0.625,
+                "w": 0.125,
+                "y": 0.7083333333333333,
+                "p": 36
+              },
+              {
+                "x": 0.4375,
+                "w": 0.125,
+                "y": 0.375,
+                "p": 40
+              },
+              {
+                "x": 0.5625,
+                "w": 0.125,
+                "y": 0.375,
+                "p": 40
+              },
+              {
+                "x": 0.75,
+                "w": 0.25,
+                "y": 0.5416666666666667,
+                "p": 38
+              },
+              {
+                "x": 0.9375,
+                "w": 0.0625,
+                "y": 0.7916666666666666,
+                "p": 35
+              },
+              {
+                "x": 0,
+                "w": 0.125,
+                "y": 0.20833333333333337,
+                "p": 42
+              },
+              {
+                "x": 0.125,
+                "w": 0.125,
+                "y": 0.20833333333333337,
+                "p": 42
+              },
+              {
+                "x": 0.25,
+                "w": 0.125,
+                "y": 0.20833333333333337,
+                "p": 42
+              },
+              {
+                "x": 0.375,
+                "w": 0.125,
+                "y": 0.20833333333333337,
+                "p": 42
+              },
+              {
+                "x": 0.5,
+                "w": 0.125,
+                "y": 0.20833333333333337,
+                "p": 42
+              },
+              {
+                "x": 0.625,
+                "w": 0.125,
+                "y": 0.20833333333333337,
+                "p": 42
+              },
+              {
+                "x": 0.75,
+                "w": 0.125,
+                "y": 0.20833333333333337,
+                "p": 42
+              },
+              {
+                "x": 0.875,
+                "w": 0.125,
+                "y": 0.20833333333333337,
+                "p": 42
+              }
+            ],
+            "count": 16
+          }
+        ]
+      }
+    },
+    {
+      "id": "song_remote_one-drop",
+      "name": "One Drop",
+      "folder": "p_builtin_fullloops",
+      "version": "1.0.0",
+      "file": "samples/one-drop-1_0_0.json",
+      "bytes": 575,
+      "bpm": 92,
+      "key": 5,
+      "scaleId": "major",
+      "bars": 1,
+      "sections": 1,
+      "tracks": 1,
+      "shades": [
+        "silver"
+      ],
+      "noteCount": 8,
+      "requires": [
+        "bigrusty"
+      ],
+      "description": "A reggae one drop on Big Rusty",
+      "shapeVersion": 2,
+      "shape": {
+        "v": 2,
+        "sections": 1,
+        "bars": 1,
+        "key": 5,
+        "spans": [
+          {
+            "from": 0,
+            "to": 1,
+            "key": 5,
+            "mode": "major",
+            "bars": 1,
+            "beats": 4
+          }
+        ],
+        "tracks": [
+          {
+            "shade": "silver",
+            "kind": "drum",
+            "family": "drums",
+            "marks": [
+              {
+                "x": 0.25,
+                "w": 0.25,
+                "y": 0,
+                "p": 37
+              },
+              {
+                "x": 0.75,
+                "w": 0.25,
+                "y": 0,
+                "p": 37
+              },
+              {
+                "x": 0.75,
+                "w": 0.25,
+                "y": 0.06666666666666665,
+                "p": 36
+              },
+              {
+                "x": 0.25,
+                "w": 0.25,
+                "y": 0.06666666666666665,
+                "p": 36
+              },
+              {
+                "x": 0.125,
+                "w": 0.0625,
+                "y": 1,
+                "p": 22
+              },
+              {
+                "x": 0.375,
+                "w": 0.0625,
+                "y": 1,
+                "p": 22
+              },
+              {
+                "x": 0.625,
+                "w": 0.0625,
+                "y": 1,
+                "p": 22
+              },
+              {
+                "x": 0.875,
+                "w": 0.0625,
+                "y": 1,
+                "p": 22
+              }
+            ],
+            "count": 8
           }
         ]
       }
