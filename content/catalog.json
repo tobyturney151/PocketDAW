@@ -1113,7 +1113,7 @@
             "rootNote": 37,
             "lo": 37,
             "hi": 37,
-            "gain": 0.7593,
+            "gain": 2.2668,
             "click": null
           },
           {
@@ -1122,7 +1122,7 @@
             "rootNote": 40,
             "lo": 40,
             "hi": 40,
-            "gain": 0.6373,
+            "gain": 1.2716,
             "click": null
           },
           {
@@ -1131,7 +1131,7 @@
             "rootNote": 38,
             "lo": 38,
             "hi": 38,
-            "gain": 0.8516,
+            "gain": 1.5144,
             "click": null
           },
           {
@@ -6455,7 +6455,7 @@
             "rootNote": 38,
             "lo": 38,
             "hi": 38,
-            "gain": 0.0806,
+            "gain": 0.1433,
             "click": null
           },
           {
@@ -6464,7 +6464,7 @@
             "rootNote": 40,
             "lo": 40,
             "hi": 40,
-            "gain": 0.0854,
+            "gain": 0.1704,
             "click": null
           },
           {
@@ -6527,7 +6527,7 @@
             "rootNote": 34,
             "lo": 34,
             "hi": 34,
-            "gain": 0.215,
+            "gain": 0.3609,
             "click": null
           },
           {
@@ -7708,7 +7708,7 @@
             "rootNote": 38,
             "lo": 38,
             "hi": 38,
-            "gain": 0.2609,
+            "gain": 0.3904,
             "click": null
           },
           {
@@ -7717,7 +7717,7 @@
             "rootNote": 40,
             "lo": 40,
             "hi": 40,
-            "gain": 0.3479,
+            "gain": 0.5841,
             "click": null
           },
           {
@@ -9385,7 +9385,7 @@
             "rootNote": 39,
             "lo": 39,
             "hi": 39,
-            "gain": 3.2202,
+            "gain": 1.2103,
             "click": null
           },
           {
@@ -9394,7 +9394,7 @@
             "rootNote": 37,
             "lo": 37,
             "hi": 37,
-            "gain": 1.3187,
+            "gain": 2.09,
             "click": null
           },
           {
@@ -9403,7 +9403,7 @@
             "rootNote": 33,
             "lo": 33,
             "hi": 33,
-            "gain": 0.757,
+            "gain": 1.3462,
             "click": null
           },
           {
@@ -9412,7 +9412,7 @@
             "rootNote": 40,
             "lo": 40,
             "hi": 40,
-            "gain": 0.3702,
+            "gain": 0.7386,
             "click": null
           },
           {
@@ -9421,7 +9421,7 @@
             "rootNote": 38,
             "lo": 38,
             "hi": 38,
-            "gain": 0.5762,
+            "gain": 1.0246,
             "click": null
           },
           {
