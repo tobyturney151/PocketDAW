@@ -1,7 +1,7 @@
 {
   "format": "pocketdaw.sample-catalog",
   "version": 1,
-  "built": "2026-09-25",
+  "built": "2026-09-27",
   "projects": [],
   "samples": [
     {
@@ -9,7 +9,7 @@
       "name": "12/8 Shuffle",
       "folder": "p_builtin_fullloops",
       "version": "1.0.0",
-      "file": "samples/12-8-shuffle-1.0.0.json",
+      "file": "samples/12-8-shuffle-1_0_0.json",
       "bytes": 787,
       "bpm": 60,
       "key": 5,
