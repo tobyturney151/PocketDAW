@@ -1,7 +1,7 @@
 {
   "format": "pocketdaw.catalog",
   "version": 1,
-  "built": "2026-09-26",
+  "built": "2026-09-27",
   "packs": [
     {
       "id": "ambichoir",
@@ -1032,7 +1032,7 @@
             "rootNote": 49,
             "lo": 49,
             "hi": 49,
-            "gain": 1.62,
+            "gain": 0.3627,
             "click": null
           },
           {
@@ -1041,7 +1041,7 @@
             "rootNote": 52,
             "lo": 52,
             "hi": 52,
-            "gain": 3.27,
+            "gain": 0.4117,
             "click": null
           },
           {
@@ -1050,7 +1050,7 @@
             "rootNote": 53,
             "lo": 53,
             "hi": 53,
-            "gain": 1.68,
+            "gain": 0.3165,
             "click": null
           },
           {
@@ -1059,7 +1059,7 @@
             "rootNote": 51,
             "lo": 51,
             "hi": 51,
-            "gain": 3.59,
+            "gain": 0.32,
             "click": null
           },
           {
@@ -1068,7 +1068,7 @@
             "rootNote": 22,
             "lo": 22,
             "hi": 22,
-            "gain": 2.4,
+            "gain": 0.2852,
             "click": null
           },
           {
@@ -1077,7 +1077,7 @@
             "rootNote": 42,
             "lo": 42,
             "hi": 42,
-            "gain": 3.35,
+            "gain": 0.3163,
             "click": null
           },
           {
@@ -1086,7 +1086,7 @@
             "rootNote": 44,
             "lo": 44,
             "hi": 44,
-            "gain": 1.01,
+            "gain": 0.0536,
             "click": null
           },
           {
@@ -1095,7 +1095,7 @@
             "rootNote": 31,
             "lo": 31,
             "hi": 31,
-            "gain": 1.95,
+            "gain": 0.6532,
             "click": null
           },
           {
@@ -1104,7 +1104,7 @@
             "rootNote": 32,
             "lo": 32,
             "hi": 32,
-            "gain": 2.95,
+            "gain": 1.244,
             "click": null
           },
           {
@@ -1113,7 +1113,7 @@
             "rootNote": 37,
             "lo": 37,
             "hi": 37,
-            "gain": 2.14,
+            "gain": 0.7593,
             "click": null
           },
           {
@@ -1122,7 +1122,7 @@
             "rootNote": 40,
             "lo": 40,
             "hi": 40,
-            "gain": 1.01,
+            "gain": 0.6373,
             "click": null
           },
           {
@@ -1131,7 +1131,7 @@
             "rootNote": 38,
             "lo": 38,
             "hi": 38,
-            "gain": 2.4,
+            "gain": 0.8516,
             "click": null
           },
           {
@@ -1140,7 +1140,7 @@
             "rootNote": 50,
             "lo": 50,
             "hi": 50,
-            "gain": 3.31,
+            "gain": 0.9329,
             "click": null
           },
           {
@@ -1149,7 +1149,7 @@
             "rootNote": 47,
             "lo": 47,
             "hi": 47,
-            "gain": 2.45,
+            "gain": 0.6519,
             "click": null
           },
           {
@@ -1158,7 +1158,7 @@
             "rootNote": 45,
             "lo": 45,
             "hi": 45,
-            "gain": 2.19,
+            "gain": 0.7336,
             "click": null
           },
           {
@@ -1167,7 +1167,7 @@
             "rootNote": 41,
             "lo": 41,
             "hi": 41,
-            "gain": 2,
+            "gain": 1.2619,
             "click": null
           },
           {
@@ -1176,7 +1176,7 @@
             "rootNote": 36,
             "lo": 36,
             "hi": 36,
-            "gain": 1.1,
+            "gain": 0.9255,
             "click": null
           }
         ]
@@ -6374,7 +6374,7 @@
             "rootNote": 49,
             "lo": 49,
             "hi": 49,
-            "gain": 0.41,
+            "gain": 0.0547,
             "click": null
           },
           {
@@ -6383,7 +6383,7 @@
             "rootNote": 57,
             "lo": 57,
             "hi": 57,
-            "gain": 0.41,
+            "gain": 0.0547,
             "click": null
           },
           {
@@ -6392,7 +6392,7 @@
             "rootNote": 55,
             "lo": 55,
             "hi": 55,
-            "gain": 0.37,
+            "gain": 0.0415,
             "click": null
           },
           {
@@ -6401,7 +6401,7 @@
             "rootNote": 52,
             "lo": 52,
             "hi": 52,
-            "gain": 0.37,
+            "gain": 0.0586,
             "click": null
           },
           {
@@ -6410,7 +6410,7 @@
             "rootNote": 46,
             "lo": 46,
             "hi": 46,
-            "gain": 0.28,
+            "gain": 0.025,
             "click": null
           },
           {
@@ -6419,7 +6419,7 @@
             "rootNote": 42,
             "lo": 42,
             "hi": 42,
-            "gain": 0.41,
+            "gain": 0.0818,
             "click": null
           },
           {
@@ -6428,7 +6428,7 @@
             "rootNote": 44,
             "lo": 44,
             "hi": 44,
-            "gain": 0.34,
+            "gain": 0.0321,
             "click": null
           },
           {
@@ -6437,7 +6437,7 @@
             "rootNote": 56,
             "lo": 56,
             "hi": 56,
-            "gain": 0.32,
+            "gain": 0.0285,
             "click": null
           },
           {
@@ -6446,7 +6446,7 @@
             "rootNote": 25,
             "lo": 25,
             "hi": 25,
-            "gain": 0.72,
+            "gain": 0.0808,
             "click": null
           },
           {
@@ -6455,7 +6455,7 @@
             "rootNote": 38,
             "lo": 38,
             "hi": 38,
-            "gain": 0.36,
+            "gain": 0.0806,
             "click": null
           },
           {
@@ -6464,7 +6464,7 @@
             "rootNote": 40,
             "lo": 40,
             "hi": 40,
-            "gain": 0.36,
+            "gain": 0.0854,
             "click": null
           },
           {
@@ -6473,7 +6473,7 @@
             "rootNote": 50,
             "lo": 50,
             "hi": 50,
-            "gain": 0.55,
+            "gain": 0.1162,
             "click": null
           },
           {
@@ -6482,7 +6482,7 @@
             "rootNote": 48,
             "lo": 48,
             "hi": 48,
-            "gain": 0.55,
+            "gain": 0.0978,
             "click": null
           },
           {
@@ -6491,7 +6491,7 @@
             "rootNote": 47,
             "lo": 47,
             "hi": 47,
-            "gain": 0.48,
+            "gain": 0.1075,
             "click": null
           },
           {
@@ -6500,7 +6500,7 @@
             "rootNote": 43,
             "lo": 43,
             "hi": 43,
-            "gain": 0.48,
+            "gain": 0.0604,
             "click": null
           },
           {
@@ -6509,7 +6509,7 @@
             "rootNote": 45,
             "lo": 45,
             "hi": 45,
-            "gain": 0.37,
+            "gain": 0.0984,
             "click": null
           },
           {
@@ -6518,7 +6518,7 @@
             "rootNote": 41,
             "lo": 41,
             "hi": 41,
-            "gain": 0.37,
+            "gain": 0.0877,
             "click": null
           },
           {
@@ -6527,7 +6527,7 @@
             "rootNote": 34,
             "lo": 34,
             "hi": 34,
-            "gain": 0.54,
+            "gain": 0.215,
             "click": null
           },
           {
@@ -6536,7 +6536,7 @@
             "rootNote": 36,
             "lo": 36,
             "hi": 36,
-            "gain": 0.65,
+            "gain": 0.2588,
             "click": null
           },
           {
@@ -6545,7 +6545,7 @@
             "rootNote": 35,
             "lo": 35,
             "hi": 35,
-            "gain": 0.65,
+            "gain": 0.1541,
             "click": null
           }
         ]
@@ -7654,7 +7654,7 @@
             "rootNote": 49,
             "lo": 49,
             "hi": 49,
-            "gain": 0.568,
+            "gain": 0.0757,
             "click": null
           },
           {
@@ -7663,7 +7663,7 @@
             "rootNote": 51,
             "lo": 51,
             "hi": 51,
-            "gain": 0.498,
+            "gain": 0.0664,
             "click": null
           },
           {
@@ -7672,7 +7672,7 @@
             "rootNote": 46,
             "lo": 46,
             "hi": 46,
-            "gain": 0.51,
+            "gain": 0.0361,
             "click": null
           },
           {
@@ -7681,7 +7681,7 @@
             "rootNote": 42,
             "lo": 42,
             "hi": 42,
-            "gain": 0.53,
+            "gain": 0.0793,
             "click": null
           },
           {
@@ -7690,7 +7690,7 @@
             "rootNote": 56,
             "lo": 56,
             "hi": 56,
-            "gain": 0.413,
+            "gain": 0.0583,
             "click": null
           },
           {
@@ -7699,7 +7699,7 @@
             "rootNote": 29,
             "lo": 29,
             "hi": 29,
-            "gain": 0.413,
+            "gain": 0.0437,
             "click": null
           },
           {
@@ -7708,7 +7708,7 @@
             "rootNote": 38,
             "lo": 38,
             "hi": 38,
-            "gain": 0.825,
+            "gain": 0.2609,
             "click": null
           },
           {
@@ -7717,7 +7717,7 @@
             "rootNote": 40,
             "lo": 40,
             "hi": 40,
-            "gain": 0.825,
+            "gain": 0.3479,
             "click": null
           },
           {
@@ -7726,7 +7726,7 @@
             "rootNote": 50,
             "lo": 50,
             "hi": 50,
-            "gain": 0.842,
+            "gain": 0.282,
             "click": null
           },
           {
@@ -7735,7 +7735,7 @@
             "rootNote": 45,
             "lo": 45,
             "hi": 45,
-            "gain": 0.858,
+            "gain": 0.5734,
             "click": null
           },
           {
@@ -7744,7 +7744,7 @@
             "rootNote": 35,
             "lo": 35,
             "hi": 35,
-            "gain": 0.943,
+            "gain": 0.7491,
             "click": null
           },
           {
@@ -9313,7 +9313,7 @@
             "rootNote": 49,
             "lo": 49,
             "hi": 49,
-            "gain": 9.7,
+            "gain": 0.97,
             "click": null
           },
           {
@@ -9322,7 +9322,7 @@
             "rootNote": 52,
             "lo": 52,
             "hi": 52,
-            "gain": 12.3,
+            "gain": 1.5485,
             "click": null
           },
           {
@@ -9331,7 +9331,7 @@
             "rootNote": 51,
             "lo": 51,
             "hi": 51,
-            "gain": 3.79,
+            "gain": 0.4771,
             "click": null
           },
           {
@@ -9340,7 +9340,7 @@
             "rootNote": 53,
             "lo": 53,
             "hi": 53,
-            "gain": 6.92,
+            "gain": 1.0967,
             "click": null
           },
           {
@@ -9349,7 +9349,7 @@
             "rootNote": 59,
             "lo": 59,
             "hi": 59,
-            "gain": 3.27,
+            "gain": 0.3669,
             "click": null
           },
           {
@@ -9358,7 +9358,7 @@
             "rootNote": 42,
             "lo": 42,
             "hi": 42,
-            "gain": 33.1,
+            "gain": 3.9339,
             "click": null
           },
           {
@@ -9367,7 +9367,7 @@
             "rootNote": 22,
             "lo": 22,
             "hi": 22,
-            "gain": 5.96,
+            "gain": 1.8847,
             "click": null
           },
           {
@@ -9376,7 +9376,7 @@
             "rootNote": 44,
             "lo": 44,
             "hi": 44,
-            "gain": 5.74,
+            "gain": 0.3622,
             "click": null
           },
           {
@@ -9385,7 +9385,7 @@
             "rootNote": 39,
             "lo": 39,
             "hi": 39,
-            "gain": 2.87,
+            "gain": 2.0318,
             "click": null
           },
           {
@@ -9394,7 +9394,7 @@
             "rootNote": 37,
             "lo": 37,
             "hi": 37,
-            "gain": 2.09,
+            "gain": 1.1753,
             "click": null
           },
           {
@@ -9403,7 +9403,7 @@
             "rootNote": 33,
             "lo": 33,
             "hi": 33,
-            "gain": 2.26,
+            "gain": 0.757,
             "click": null
           },
           {
@@ -9412,7 +9412,7 @@
             "rootNote": 40,
             "lo": 40,
             "hi": 40,
-            "gain": 0.93,
+            "gain": 0.3702,
             "click": null
           },
           {
@@ -9421,7 +9421,7 @@
             "rootNote": 38,
             "lo": 38,
             "hi": 38,
-            "gain": 1.93,
+            "gain": 0.5762,
             "click": null
           },
           {
@@ -9430,7 +9430,7 @@
             "rootNote": 50,
             "lo": 50,
             "hi": 50,
-            "gain": 2.51,
+            "gain": 0.7493,
             "click": null
           },
           {
@@ -9439,7 +9439,7 @@
             "rootNote": 45,
             "lo": 45,
             "hi": 45,
-            "gain": 2.48,
+            "gain": 0.6599,
             "click": null
           },
           {
@@ -9448,7 +9448,7 @@
             "rootNote": 36,
             "lo": 36,
             "hi": 36,
-            "gain": 1.73,
+            "gain": 0.8186,
             "click": null
           }
         ]
