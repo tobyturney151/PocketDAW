@@ -22,6 +22,7 @@
         "name": "Ambi Choir",
         "version": "1.0.0",
         "family": "keys",
+        "category": "drone",
         "kind": "pitched",
         "range": {
           "lo": 49,
@@ -76,6 +77,7 @@
         "name": "Ambi Drone",
         "version": "1.0.0",
         "family": "keys",
+        "category": "drone",
         "kind": "pitched",
         "range": {
           "lo": 36,
@@ -130,6 +132,7 @@
         "name": "Balafon",
         "version": "1.0.0",
         "family": "keys",
+        "category": "mallets",
         "kind": "pitched",
         "range": {
           "lo": 59,
@@ -224,6 +227,7 @@
         "name": "808 Bass",
         "version": "1.0.0",
         "family": "bass",
+        "category": "bass",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -279,6 +283,7 @@
         "name": "SynthBass Lead",
         "version": "1.0.0",
         "family": "keys",
+        "category": "lead",
         "kind": "pitched",
         "range": {
           "lo": 26,
@@ -529,6 +534,7 @@
         "name": "Big Little Bass",
         "version": "1.0.0",
         "family": "bass",
+        "category": "bass",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -920,6 +926,7 @@
         "name": "Big Rusty",
         "version": "1.1.0",
         "family": "drums",
+        "category": "drums",
         "kind": "drum",
         "shade": "silver",
         "license": {
@@ -1201,6 +1208,7 @@
         "name": "Choir Pad",
         "version": "1.0.0",
         "family": "keys",
+        "category": "pad",
         "kind": "pitched",
         "range": {
           "lo": 33,
@@ -1391,6 +1399,7 @@
         "name": "Concert Harp",
         "version": "1.0.0",
         "family": "keys",
+        "category": "plucked",
         "kind": "pitched",
         "range": {
           "lo": 26,
@@ -1613,6 +1622,7 @@
         "name": "Dan Tranh Plucked",
         "version": "1.0.1",
         "family": "keys",
+        "category": "plucked",
         "kind": "pitched",
         "range": {
           "lo": 45,
@@ -1779,6 +1789,7 @@
         "name": "Dan Tranh Trem",
         "version": "1.0.1",
         "family": "keys",
+        "category": "plucked",
         "kind": "pitched",
         "range": {
           "lo": 45,
@@ -1929,6 +1940,7 @@
         "name": "Dan Tranh Vib",
         "version": "1.0.0",
         "family": "keys",
+        "category": "plucked",
         "kind": "pitched",
         "range": {
           "lo": 45,
@@ -2103,6 +2115,7 @@
         "name": "DnB Bass",
         "version": "1.0.0",
         "family": "bass",
+        "category": "bass",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -2158,6 +2171,7 @@
         "name": "Drone Loop",
         "version": "1.0.0",
         "family": "keys",
+        "category": "drone",
         "kind": "pitched",
         "range": {
           "lo": 19,
@@ -2216,6 +2230,7 @@
         "name": "Synth Fifths",
         "version": "1.0.0",
         "family": "keys",
+        "category": "lead",
         "kind": "pitched",
         "range": {
           "lo": 37,
@@ -2442,6 +2457,7 @@
         "name": "Finger Bass YR",
         "version": "1.0.0",
         "family": "bass",
+        "category": "bass",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -2585,6 +2601,7 @@
         "name": "Folk Harp",
         "version": "1.0.0",
         "family": "keys",
+        "category": "plucked",
         "kind": "pitched",
         "range": {
           "lo": 34,
@@ -2863,6 +2880,7 @@
         "name": "Glass Taps",
         "version": "1.0.0",
         "family": "keys",
+        "category": "mallets",
         "kind": "pitched",
         "range": {
           "lo": 69,
@@ -3069,6 +3087,7 @@
         "name": "Glass Hum",
         "version": "1.0.0",
         "family": "keys",
+        "category": "drone",
         "kind": "pitched",
         "range": {
           "lo": 33,
@@ -3123,6 +3142,7 @@
         "name": "Glass Rub",
         "version": "1.0.0",
         "family": "keys",
+        "category": "drone",
         "kind": "pitched",
         "range": {
           "lo": 66,
@@ -3177,6 +3197,7 @@
         "name": "Glockenspiel",
         "version": "1.0.0",
         "family": "keys",
+        "category": "mallets",
         "kind": "pitched",
         "range": {
           "lo": 77,
@@ -3271,6 +3292,7 @@
         "name": "Hand Chimes",
         "version": "1.0.0",
         "family": "keys",
+        "category": "mallets",
         "kind": "pitched",
         "range": {
           "lo": 60,
@@ -3469,6 +3491,7 @@
         "name": "Hang Drum",
         "version": "1.0.0",
         "family": "keys",
+        "category": "mallets",
         "kind": "pitched",
         "range": {
           "lo": 57,
@@ -3587,6 +3610,7 @@
         "name": "Hard Bass",
         "version": "1.0.0",
         "family": "bass",
+        "category": "bass",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -3642,6 +3666,7 @@
         "name": "Haunted Hum",
         "version": "1.0.0",
         "family": "keys",
+        "category": "drone",
         "kind": "pitched",
         "range": {
           "lo": 38,
@@ -3696,6 +3721,7 @@
         "name": "Kawai Grand",
         "version": "1.0.0",
         "family": "keys",
+        "category": "keys",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -4038,6 +4064,7 @@
         "name": "Kawai Legacy",
         "version": "1.0.0",
         "family": "keys",
+        "category": "keys",
         "kind": "pitched",
         "range": {
           "lo": 22,
@@ -4236,6 +4263,7 @@
         "name": "Knight Upright",
         "version": "1.0.0",
         "family": "keys",
+        "category": "keys",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -4642,6 +4670,7 @@
         "name": "Lunar Land",
         "version": "1.0.0",
         "family": "keys",
+        "category": "pad",
         "kind": "pitched",
         "range": {
           "lo": 70,
@@ -4696,6 +4725,7 @@
         "name": "Marimba",
         "version": "1.0.0",
         "family": "keys",
+        "category": "mallets",
         "kind": "pitched",
         "range": {
           "lo": 39,
@@ -4822,6 +4852,7 @@
         "name": "Picked Bass YR",
         "version": "1.0.0",
         "family": "bass",
+        "category": "bass",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -4973,6 +5004,7 @@
         "name": "Pipe Organ",
         "version": "1.0.0",
         "family": "keys",
+        "category": "keys",
         "kind": "pitched",
         "range": {
           "lo": 34,
@@ -5187,6 +5219,7 @@
         "name": "Plucked Strings",
         "version": "1.0.0",
         "family": "keys",
+        "category": "strings",
         "kind": "pitched",
         "range": {
           "lo": 28,
@@ -5361,6 +5394,7 @@
         "name": "Salamander",
         "version": "1.0.0",
         "family": "keys",
+        "category": "keys",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -5647,6 +5681,7 @@
         "name": "Soundtrack Synth",
         "version": "1.0.0",
         "family": "keys",
+        "category": "lead",
         "kind": "pitched",
         "range": {
           "lo": 33,
@@ -5873,6 +5908,7 @@
         "name": "FP Spanish Guitar",
         "version": "1.0.0",
         "family": "keys",
+        "category": "guitar",
         "kind": "pitched",
         "range": {
           "lo": 38,
@@ -6247,6 +6283,7 @@
         "name": "SonicPi Drums",
         "version": "1.0.0",
         "family": "drums",
+        "category": "drums",
         "kind": "drum",
         "shade": "lime",
         "license": {
@@ -6570,6 +6607,7 @@
         "name": "Steinway B",
         "version": "1.0.0",
         "family": "keys",
+        "category": "keys",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -6952,6 +6990,7 @@
         "name": "Swag Bass",
         "version": "1.0.0",
         "family": "bass",
+        "category": "bass",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -7095,6 +7134,7 @@
         "name": "Sweep Pad",
         "version": "1.0.0",
         "family": "keys",
+        "category": "pad",
         "kind": "pitched",
         "range": {
           "lo": 33,
@@ -7297,6 +7337,7 @@
         "name": "TBD Minor Pad 1",
         "version": "1.0.0",
         "family": "keys",
+        "category": "pad",
         "kind": "pitched",
         "range": {
           "lo": 31,
@@ -7351,6 +7392,7 @@
         "name": "TBD Minor Pad 2",
         "version": "1.0.0",
         "family": "keys",
+        "category": "pad",
         "kind": "pitched",
         "range": {
           "lo": 31,
@@ -7405,6 +7447,7 @@
         "name": "TBD Minor Pad 3",
         "version": "1.0.0",
         "family": "keys",
+        "category": "pad",
         "kind": "pitched",
         "range": {
           "lo": 50,
@@ -7459,6 +7502,7 @@
         "name": "TBD Minor Pad 4",
         "version": "1.0.0",
         "family": "keys",
+        "category": "pad",
         "kind": "pitched",
         "range": {
           "lo": 39,
@@ -7513,6 +7557,7 @@
         "name": "Thick Bass",
         "version": "1.0.0",
         "family": "bass",
+        "category": "bass",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -7568,6 +7613,7 @@
         "name": "Toby Wallys",
         "version": "1.2.0",
         "family": "drums",
+        "category": "drums",
         "kind": "drum",
         "shade": "red",
         "license": {
@@ -7778,6 +7824,7 @@
         "name": "Trance Bass",
         "version": "1.0.0",
         "family": "bass",
+        "category": "bass",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -7833,6 +7880,7 @@
         "name": "Tremolo Strings",
         "version": "1.0.0",
         "family": "keys",
+        "category": "strings",
         "kind": "pitched",
         "range": {
           "lo": 28,
@@ -7999,6 +8047,7 @@
         "name": "Tubular Bells 1",
         "version": "1.0.0",
         "family": "keys",
+        "category": "mallets",
         "kind": "pitched",
         "range": {
           "lo": 60,
@@ -8101,6 +8150,7 @@
         "name": "Tubular Bells 2",
         "version": "1.0.0",
         "family": "keys",
+        "category": "mallets",
         "kind": "pitched",
         "range": {
           "lo": 58,
@@ -8235,6 +8285,7 @@
         "name": "Tubular Glock",
         "version": "1.0.0",
         "family": "keys",
+        "category": "mallets",
         "kind": "pitched",
         "range": {
           "lo": 89,
@@ -8353,6 +8404,7 @@
         "name": "Kawai Upright",
         "version": "1.0.0",
         "family": "keys",
+        "category": "keys",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -8652,6 +8704,7 @@
         "name": "Vibraphone",
         "version": "1.0.0",
         "family": "keys",
+        "category": "mallets",
         "kind": "pitched",
         "range": {
           "lo": 53,
@@ -8786,6 +8839,7 @@
         "name": "Virt Percussion",
         "version": "1.0.0",
         "family": "drums",
+        "category": "drums",
         "kind": "drum",
         "shade": "orange",
         "license": {
@@ -9206,6 +9260,7 @@
         "name": "Virtuosity Drums",
         "version": "1.0.0",
         "family": "drums",
+        "category": "drums",
         "kind": "drum",
         "shade": "teal",
         "license": {
@@ -9473,6 +9528,7 @@
         "name": "Cellos",
         "version": "1.0.0",
         "family": "keys",
+        "category": "strings",
         "kind": "pitched",
         "range": {
           "lo": 36,
@@ -9623,6 +9679,7 @@
         "name": "Violas",
         "version": "1.0.0",
         "family": "keys",
+        "category": "strings",
         "kind": "pitched",
         "range": {
           "lo": 48,
@@ -9773,6 +9830,7 @@
         "name": "Violins",
         "version": "1.0.0",
         "family": "keys",
+        "category": "strings",
         "kind": "pitched",
         "range": {
           "lo": 55,
@@ -9907,6 +9965,7 @@
         "name": "Glass Rims",
         "version": "1.0.0",
         "family": "keys",
+        "category": "drone",
         "kind": "pitched",
         "range": {
           "lo": 72,
@@ -9985,6 +10044,7 @@
         "name": "Woodsy Bass",
         "version": "1.0.0",
         "family": "bass",
+        "category": "bass",
         "kind": "pitched",
         "range": {
           "lo": 21,
@@ -10040,6 +10100,7 @@
         "name": "Xylophone",
         "version": "1.0.0",
         "family": "keys",
+        "category": "mallets",
         "kind": "pitched",
         "range": {
           "lo": 65,
@@ -10150,6 +10211,7 @@
         "name": "Yamaha Upright",
         "version": "1.0.0",
         "family": "keys",
+        "category": "keys",
         "kind": "pitched",
         "range": {
           "lo": 22,
