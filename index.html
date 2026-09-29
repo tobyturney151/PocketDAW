@@ -1082,9 +1082,12 @@ html, body {
 .menu-group { display: flex; align-items: center; gap: 8px; margin: 14px 4px 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
 .menu-group-name { flex: 1; }
 .menu-group-count { color: var(--text3); font-weight: 400; }
-.menu-jump { display: flex; justify-content: space-between; gap: 2px; margin: 4px 0 6px; padding: 4px; }
-.menu-jump-btn { background: none; border: 0; width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; opacity: 0.8; }
-.menu-jump-on { background: rgba(255, 255, 255, 0.08); opacity: 1; }
+/* The picker's header: title and category filter, pinned while the list
+   scrolls beneath it. */
+.menu-head-pinned { position: sticky; top: 0; z-index: 3; background: var(--panel, #161616); padding-bottom: 6px; margin: 0 -2px; }
+.menu-filter { display: grid; gap: 6px; margin: 6px 0 2px; }
+.menu-filter-btn { background: var(--chip, #1f1f1f); color: var(--text2); border: 0; height: 40px; border-radius: 11px; display: flex; align-items: center; justify-content: center; opacity: 0.85; }
+.menu-filter-on { background: rgba(255, 255, 255, 0.12); opacity: 1; box-shadow: inset 0 0 0 1.5px currentColor; }
 .soundrow { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; border: 0; }
 .soundrow-name { flex: 1; color: var(--text); font-size: 15px; }
 .soundrow-cat { color: var(--text3); font-size: 12px; }
@@ -1130,7 +1133,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-28 14:54 from src/. */
+/* PocketDAW - phase 2. Built 2026-09-29 03:56 from src/. */
 (function () {
 'use strict';
 
@@ -6301,9 +6304,36 @@ function setTrackKit(song, trackId, kitId) {
   const drums = from && to && from.kind === 'drum' && to.kind === 'drum' && to.lanes && to.lanes.length;
   if (drums) {
     const fromLane = (midi) => (from.lanes || []).find((l) => l.midi === midi) || { midi, label: '', group: null };
+    
+    const used = new Set();
+    song.sectionOrder.forEach((sid) => {
+      const clip = song.sections[sid].clips[trackId];
+      if (!clip) return;
+      clip.notes.forEach((n) => used.add(n.pitch));
+      (clip.hidden || []).forEach((h) => used.add(h.note.pitch));
+    });
+    const mapping = new Map();
+    const settled = [];
+    [...used].sort((a, b) => a - b).forEach((midi) => {
+      const src = fromLane(midi);
+      const lane = laneAcrossKits(src, to);
+      const target = to.lanes.find((l) => l.midi === lane);
+      const exact = lane === midi || (target && laneKey(target.label) === laneKey(src.label) && laneKey(src.label));
+      mapping.set(midi, lane);
+      if (!exact) settled.push({ midi, group: target && target.group });
+    });
+    const taken = new Set([...mapping.entries()].filter(([m]) => !settled.some((x) => x.midi === m)).map(([, l]) => l));
+    settled.forEach(({ midi, group }) => {
+      const wanted = mapping.get(midi);
+      if (!taken.has(wanted)) { taken.add(wanted); return; }
+      const free = to.lanes.filter((l) => l.group === group && !taken.has(l.midi))
+        .sort((a, b) => Math.abs(a.midi - midi) - Math.abs(b.midi - midi))[0];
+      if (free) mapping.set(midi, free.midi);
+      taken.add(mapping.get(midi));
+    });
     const place = (midi, home) => {
       if (home && home.kitId === to.id && to.lanes.some((l) => l.midi === home.midi)) return { midi: home.midi, home: undefined };
-      const lane = laneAcrossKits(fromLane(midi), to);
+      const lane = mapping.has(midi) ? mapping.get(midi) : laneAcrossKits(fromLane(midi), to);
       if (lane === midi) return { midi, home };
       return { midi: lane, home: home || { kitId: from.id, midi } };
     };
@@ -7772,6 +7802,7 @@ function drawProjectWheel(canvas, { shapes, width, height, fieldDarkness = FIELD
 
 const F = 'fill="currentColor" stroke="none"';
 const PATHS = {
+  all: `<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>`,
   bass: `<path d="M5 9C5 3.5 15 3.5 15 9.5C15 15 10 18 5 20"/><circle cx="6.5" cy="9.5" r="1.6" ${F}/><circle cx="19" cy="7.5" r="1.4" ${F}/><circle cx="19" cy="12.5" r="1.4" ${F}/>`,
   drone: `<path d="M2.5 12C3.4 8.4 4.3 15.4 5.3 12S7.2 10.3 8.2 12L10.5 12H21.5"/><path d="M12 16.5H21.5" opacity=".45"/>`,
   drums: `<ellipse cx="12" cy="10" rx="8" ry="3"/><path d="M4 10V17A8 3 0 0 0 20 17V10"/><path d="M9 7.5L4 2.5M15 7.5L20 2.5"/>`,
@@ -7835,6 +7866,7 @@ function renderMenu(host, store, { onChange }) {
   let items;
   let jump = null;
   const heads = {};
+  const itemGroups = [];
   if (grouped) {
     const order = [];
     const byGroup = new Map();
@@ -7855,19 +7887,38 @@ function renderMenu(host, store, { onChange }) {
       ]);
       heads[cat.id] = head;
       items.push(head);
-      byGroup.get(cat.id).slice().sort((a, b) => a.label.localeCompare(b.label)).forEach((o) => items.push(itemFor(o)));
+      itemGroups.push({ node: head, group: cat.id });
+      byGroup.get(cat.id).slice().sort((a, b) => a.label.localeCompare(b.label)).forEach((o) => {
+        const node = itemFor(o);
+        itemGroups.push({ node, group: cat.id });
+        items.push(node);
+      });
     });
     (byGroup.get('') || []).forEach((o) => items.push(itemFor(o)));
+    
     if (groups.length > 1) {
-      const currentGroup = (menu.options.find((o) => o.id === menu.current) || {}).group;
-      jump = el('div', { class: 'menu-jump' }, groups.map((cat) => el('button', {
-        class: `menu-jump-btn${cat.id === currentGroup ? ' menu-jump-on' : ''}`,
-        type: 'button',
-        title: cat.name,
-        style: `color:${shadeColor(cat.shade)}`,
-        html: categoryIcon(cat.id, 18),
-        onClick: () => { if (heads[cat.id] && heads[cat.id].scrollIntoView) heads[cat.id].scrollIntoView({ block: 'start', behavior: 'smooth' }); },
-      })));
+      const buttons = [];
+      const show = (filter) => {
+        itemGroups.forEach(({ node, group }) => { node.style.display = filter === 'all' || group === filter ? '' : 'none'; });
+        buttons.forEach(({ node, id }) => { node.className = `menu-filter-btn${id === filter ? ' menu-filter-on' : ''}`; });
+        menu.filter = filter;
+      };
+      const entries = [{ id: 'all', name: 'All', shade: null }, ...groups];
+      const perRow = Math.ceil(entries.length / 2);
+      jump = el('div', { class: 'menu-filter', style: `grid-template-columns:repeat(${perRow}, 1fr)` }, entries.map((cat) => {
+        const node = el('button', {
+          class: 'menu-filter-btn',
+          type: 'button',
+          title: cat.name,
+          'aria-label': cat.name,
+          style: cat.shade ? `color:${shadeColor(cat.shade)}` : '',
+          html: categoryIcon(cat.id, 20),
+          onClick: () => show(cat.id),
+        });
+        buttons.push({ node, id: cat.id });
+        return node;
+      }));
+      show(menu.filter || 'all');
     }
   } else {
     items = menu.options.map(itemFor);
@@ -7877,9 +7928,11 @@ function renderMenu(host, store, { onChange }) {
   host.appendChild(
     el('div', { class: 'sheet menu-sheet' }, [
       el('div', { class: 'grabber' }),
-      el('h2', { text: menu.title }),
-      menu.body || null,
-      jump,
+      el('div', { class: `menu-head${jump ? ' menu-head-pinned' : ''}` }, [
+        el('h2', { text: menu.title }),
+        menu.body || null,
+        jump,
+      ]),
       el('div', { class: 'menu-list' }, items),
       menu.footer
         ? el('button', {
@@ -7991,6 +8044,7 @@ function arrangementMatrix(store, onChange, {
   onHoldTrack,
   onLive,
   onPlayhead,
+  onPickSection = null,
   hint = true,
 }) {
   const { song, view } = store.state;
@@ -8139,6 +8193,7 @@ function arrangementMatrix(store, onChange, {
           } else {
             store.setView({ activeSectionId: sectionId, selectedNoteId: null });
             store.setUi({ sectionMenu: null });
+            if (onPickSection) onPickSection(sectionId);
           }
           onChange();
         },
@@ -8607,6 +8662,7 @@ function arrangementScreen(store, onChange, {
   togglePlay,
   songMode,
   toggleMode,
+  onPickSection = null,
   openSongMenu,
   openMix,
   onSongSettings,
@@ -8679,7 +8735,7 @@ function arrangementScreen(store, onChange, {
     songControls(store, onChange, onSongSettings),
     
     el('div', { class: 'arrscreen-body' }, [
-      arrangementMatrix(store, onChange, { onCell, onTrack, onAddTrack, onHoldCell, onHoldTrack, onLive, onPlayhead, hint: false }),
+      arrangementMatrix(store, onChange, { onPickSection, onCell, onTrack, onAddTrack, onHoldCell, onHoldTrack, onLive, onPlayhead, hint: false }),
     ]),
     menuOpen
       ? null
@@ -14441,7 +14497,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-09-28 14:54';
+const BUILD_STAMP = '2026-09-29 03:56';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -14749,6 +14805,14 @@ function mountApp(root, options = {}) {
     return songMode && store.state.ui.screen !== 'editor' ? 'song' : 'section';
   }
 
+  
+  function pickSection(sectionId) {
+    if (!engine || !engine.transport.playing || playMode() !== 'song') return;
+    store.setView({ activeSectionId: sectionId, selectedNoteId: null });
+    engine.transport.stop();
+    engine.transport.play();
+  }
+
   function toggleMode() {
     songMode = !songMode;
     if (engine) engine.setMode(songMode ? 'song' : 'section');
@@ -14764,7 +14828,8 @@ function mountApp(root, options = {}) {
   }
 
   function followSection(tick) {
-    if (!songMode || !engine || pointerDown || store.state.ui.sheet) return;
+    
+    if (playMode() !== 'song' || !engine || pointerDown || store.state.ui.sheet) return;
     const timeline = songTimeline(store.state.song);
     if (!timeline.totalTicks) return;
     const seg = segmentAt(timeline, tick % timeline.totalTicks);
@@ -16266,6 +16331,7 @@ function mountApp(root, options = {}) {
         togglePlay: () => togglePlay(),
         songMode,
         toggleMode: () => toggleMode(),
+        onPickSection: (id) => pickSection(id),
         onSongSettings: () => {
           store.setUi({ sheet: 'song' });
           render();
