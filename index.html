@@ -1084,7 +1084,9 @@ html, body {
 .menu-group-count { color: var(--text3); font-weight: 400; }
 /* The picker's header: title and category filter, pinned while the list
    scrolls beneath it. */
-.menu-head-pinned { position: sticky; top: 0; z-index: 3; background: var(--panel, #161616); padding-bottom: 6px; margin: 0 -2px; }
+/* Pinned 10px higher, with 10px of its own background, to cover the sheet's
+   top padding: pinned at 0 it left a strip the list scrolled through. */
+.menu-head-pinned { position: sticky; top: -10px; z-index: 3; background: var(--panel, #161616); padding: 10px 2px 6px; margin: 0 -2px; }
 .menu-filter { display: grid; gap: 6px; margin: 6px 0 2px; }
 .menu-filter-btn { background: var(--chip, #1f1f1f); color: var(--text2); border: 0; height: 40px; border-radius: 11px; display: flex; align-items: center; justify-content: center; opacity: 0.85; }
 .menu-filter-on { background: rgba(255, 255, 255, 0.12); opacity: 1; box-shadow: inset 0 0 0 1.5px currentColor; }
@@ -1133,7 +1135,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-29 03:56 from src/. */
+/* PocketDAW - phase 2. Built 2026-09-30 03:57 from src/. */
 (function () {
 'use strict';
 
@@ -1345,6 +1347,46 @@ function restoreFocus(root, keep) {
     } catch (err) {
     }
   }
+}
+
+const CATEGORIES = [
+  { id: 'bass', name: 'Bass', shade: 'teal' },
+  { id: 'drone', name: 'Drone', shade: 'orchid' },
+  { id: 'drums', name: 'Drums', shade: 'silver' },
+  { id: 'guitar', name: 'Guitar', shade: 'orange' },
+  { id: 'keys', name: 'Keys', shade: 'violet' },
+  { id: 'lead', name: 'Lead Synth', shade: 'cyan' },
+  { id: 'mallets', name: 'Mallets', shade: 'yellow' },
+  { id: 'pad', name: 'Pad', shade: 'indigo' },
+  { id: 'plucked', name: 'Plucked', shade: 'amber' },
+  { id: 'strings', name: 'Strings', shade: 'red' },
+];
+
+const CATEGORY_IDS = CATEGORIES.map((c) => c.id);
+const KNOWN = new Set(CATEGORY_IDS);
+
+function categoryById(id) {
+  return CATEGORIES.find((c) => c.id === id) || CATEGORIES.find((c) => c.id === 'keys');
+}
+
+function categoryOf(kit) {
+  if (!kit) return 'keys';
+  if (KNOWN.has(kit.category)) return kit.category;
+  if (kit.family === 'drums' || kit.kind === 'drum') return 'drums';
+  if (kit.family === 'bass') return 'bass';
+  return 'keys';
+}
+
+function shadeForCategory(categoryId, usedShades = []) {
+  const base = categoryById(categoryId).shade;
+  const used = new Set(usedShades);
+  for (const name of [base, `${base}~light`, `${base}~dark`]) if (!used.has(name)) return name;
+  return base;
+}
+
+function isCategoryShade(shade, categoryId) {
+  const base = categoryById(categoryId).shade;
+  return shade === base || shade === `${base}~light` || shade === `${base}~dark`;
 }
 
 const PPQ = 960;
@@ -1927,7 +1969,7 @@ function validateKitManifest(manifest) {
   if (!m || typeof m !== 'object') return ['not an object'];
   if (!m.id || typeof m.id !== 'string') problems.push('no id');
   if (!m.name) problems.push('no name');
-  if (!FAMILIES.some((f) => f.id === m.family)) problems.push(`unknown family "${m.family}"`);
+  if (m.family !== undefined && !FAMILIES.some((f) => f.id === m.family)) problems.push(`unknown family "${m.family}"`);
   if (m.kind !== 'pitched' && m.kind !== 'drum') problems.push(`unknown kind "${m.kind}"`);
   const fam = FAMILIES.find((f) => f.id === m.family);
   if (fam && m.kind && fam.kind !== m.kind) problems.push(`kind "${m.kind}" does not match family ${fam.id}`);
@@ -1954,7 +1996,9 @@ function registerKit(manifest) {
   const problems = validateKitManifest(manifest);
   if (problems.length) return { ok: false, problems };
   if (KITS.some((k) => k.id === manifest.id)) return { ok: false, problems: [`${manifest.id} is built in`] };
-  registered.set(manifest.id, manifest);
+  const family = manifest.family
+    || (manifest.kind === 'drum' ? 'drums' : manifest.category === 'bass' ? 'bass' : 'keys');
+  registered.set(manifest.id, manifest.family ? manifest : { ...manifest, family });
   (manifest.aliases || []).forEach((old) => {
     if (!KITS.some((k) => k.id === old)) aliases.set(old, manifest.id);
   });
@@ -2042,9 +2086,16 @@ function createClip() {
   return { id: newId('c'), notes: [] };
 }
 
+function familyOfKit(kit) {
+  if (!kit) return 'keys';
+  if (kit.kind === 'drum') return 'drums';
+  if (kit.category === 'bass' || (!kit.category && kit.family === 'bass')) return 'bass';
+  return 'keys';
+}
+
 function createTrack({ name, family, kitId, shade }) {
-  const fam = familyById(family || (kitId ? kitById(kitId).family : 'keys'));
-  const kit = kitById(kitId || kitsInFamily(fam.id)[0].id);
+  const kit = kitById(kitId || kitsInFamily(familyById(family || 'keys').id)[0].id);
+  const fam = familyById(familyOfKit(kit));
   return {
     id: newId('t'),
     name: name || null,
@@ -2060,7 +2111,7 @@ function createTrack({ name, family, kitId, shade }) {
     pan: 0,
     mute: false,
     solo: false,
-    shade: shade || fam.shade,
+    shade: shade || categoryById(categoryOf(kit)).shade,
   };
 }
 
@@ -3776,7 +3827,7 @@ function buildStarterSong(loop, projectId) {
   song.projectId = projectId || loop.folder || DRUM_LOOPS_PROJECT_ID;
   song.builtIn = BUILT_IN;
 
-  const drums = song.tracks.find((t) => t.family === 'drums');
+  const drums = song.tracks.find((t) => t.kind === 'drum');
   song.tracks = [drums];
   const sectionId = song.sectionOrder[0];
   const section = song.sections[sectionId];
@@ -3826,7 +3877,7 @@ function buildExampleSong(piece) {
       return track;
     });
   } else {
-    const keys = song.tracks.find((t) => t.family === 'keys');
+    const keys = song.tracks.find((t) => t.kind !== 'drum' && categoryOf(kitById(t.kitId, t)) === 'keys');
     if (piece.kitId) keys.kitId = piece.kitId;
     tracks = [keys];
   }
@@ -5011,46 +5062,6 @@ function pointAt(lane, tick, tolerance) {
   return -1;
 }
 
-const CATEGORIES = [
-  { id: 'bass', name: 'Bass', shade: 'teal' },
-  { id: 'drone', name: 'Drone', shade: 'orchid' },
-  { id: 'drums', name: 'Drums', shade: 'silver' },
-  { id: 'guitar', name: 'Guitar', shade: 'orange' },
-  { id: 'keys', name: 'Keys', shade: 'violet' },
-  { id: 'lead', name: 'Lead Synth', shade: 'cyan' },
-  { id: 'mallets', name: 'Mallets', shade: 'yellow' },
-  { id: 'pad', name: 'Pad', shade: 'indigo' },
-  { id: 'plucked', name: 'Plucked', shade: 'amber' },
-  { id: 'strings', name: 'Strings', shade: 'red' },
-];
-
-const CATEGORY_IDS = CATEGORIES.map((c) => c.id);
-const KNOWN = new Set(CATEGORY_IDS);
-
-function categoryById(id) {
-  return CATEGORIES.find((c) => c.id === id) || CATEGORIES.find((c) => c.id === 'keys');
-}
-
-function categoryOf(kit) {
-  if (!kit) return 'keys';
-  if (KNOWN.has(kit.category)) return kit.category;
-  if (kit.family === 'drums' || kit.kind === 'drum') return 'drums';
-  if (kit.family === 'bass') return 'bass';
-  return 'keys';
-}
-
-function shadeForCategory(categoryId, usedShades = []) {
-  const base = categoryById(categoryId).shade;
-  const used = new Set(usedShades);
-  for (const name of [base, `${base}~light`, `${base}~dark`]) if (!used.has(name)) return name;
-  return base;
-}
-
-function isCategoryShade(shade, categoryId) {
-  const base = categoryById(categoryId).shade;
-  return shade === base || shade === `${base}~light` || shade === `${base}~dark`;
-}
-
 function withDefaults(song, ctx, spec) {
   const track = ctx && ctx.trackId ? trackById(song, ctx.trackId) : null;
   const defaults = (track && track.noteDefaults) || song.noteDefaults || {};
@@ -5827,8 +5838,7 @@ function fitIntoRange(specs, range) {
 function drumLanes(song, ctx) {
   const track = trackById(song, ctx.trackId);
   if (!track) return null;
-  const family = familyById(track.family);
-  if (!family || family.kind !== 'drum') return null;
+  if (track.kind !== 'drum') return null;
   const kit = kitById(track.kitId, track);
   return kit && kit.lanes ? kit.lanes.map((lane) => lane.midi) : null;
 }
@@ -6363,7 +6373,7 @@ function setTrackKit(song, trackId, kitId) {
   track.kitId = kitId;
   track.kind = to ? to.kind : track.kind;
   
-  if (to && to.family) track.family = to.family;
+  if (to) track.family = familyOfKit(to);
   const fromCategory = categoryOf(from);
   const toCategory = categoryOf(to);
   if (to && fromCategory !== toCategory && !track.shadeChosen && isCategoryShade(track.shade, fromCategory)) {
@@ -7706,9 +7716,10 @@ function ringShares(tracks) {
   return floored.map((v) => v / sum);
 }
 
-const FAMILY_ORDER = { drums: 0, bass: 1, keys: 2 };
+const RING_ORDER = { drums: 0, bass: 1 };
 function ringOrder(tracks) {
-  return [...tracks].sort((a, b) => (FAMILY_ORDER[a.family] ?? 2) - (FAMILY_ORDER[b.family] ?? 2));
+  const rank = (t) => RING_ORDER[t.category || t.family] ?? 2;
+  return [...tracks].sort((a, b) => rank(a) - rank(b));
 }
 
 function drawProjectWheel(canvas, { shapes, width, height, fieldDarkness = FIELD_DARKNESS }) {
@@ -10181,9 +10192,9 @@ function mixSheet(store, onChange, onLive) {
             onChange();
           },
         }, [
-          el('span', { class: 'dot', style: `background:${shadeColor(track.shade)}` }),
+          el('span', { class: 'caticon', style: `color:${shadeColor(track.shade)}`, html: categoryIcon(categoryOf(kit), 16) }),
           el('span', { class: 'mixtitle', text: trackTitle(track) }),
-          el('span', { class: 'mixkit', text: track.name ? kit.name : familyById(track.family).label }),
+          el('span', { class: 'mixkit', text: track.name ? kit.name : categoryById(categoryOf(kit)).name }),
         ]),
         el('div', { class: 'mixflags' }, [
           track.duck && track.duck.on ? el('span', { class: 'fxbadge', text: 'duck' }) : null,
@@ -11107,6 +11118,11 @@ function createSampler(ctx, kit, zones) {
 
     stealIfNeeded(time);
 
+    
+    const lane = isDrum && kit.lanes ? kit.lanes.find((l) => l.midi === pitch) : null;
+    const loops = Boolean(lane && lane.loop === true);
+    const gated = Boolean(lane && (lane.gate === true || loops));
+
     const source = ctx.createBufferSource();
     source.buffer = zone.buffer;
     source.playbackRate.value = rate;
@@ -11114,6 +11130,12 @@ function createSampler(ctx, kit, zones) {
       source.loop = true;
       source.loopStart = zone.loopFrames.start / zone.buffer.sampleRate;
       source.loopEnd = zone.loopFrames.end / zone.buffer.sampleRate;
+    } else if (loops) {
+      
+      const length = zone.buffer.duration || zone.buffer.length / zone.buffer.sampleRate;
+      source.loop = true;
+      source.loopStart = Number.isFinite(lane.loopStart) ? lane.loopStart : Math.min(0.08, length * 0.2);
+      source.loopEnd = Number.isFinite(lane.loopEnd) ? lane.loopEnd : length * 0.95;
     }
 
     const gain = ctx.createGain();
@@ -11160,9 +11182,6 @@ function createSampler(ctx, kit, zones) {
       if (lastVoice === voice) lastVoice = null;
     };
 
-    
-    const lane = isDrum && kit.lanes ? kit.lanes.find((l) => l.midi === pitch) : null;
-    const gated = Boolean(lane && (lane.gate === true || /\broll\b/i.test(lane.label || '')));
     if (held && (zone.loopFrames || !isDrum || gated)) {
       if (gated && opts.gateRelease) voice.release = Math.max(release, opts.gateRelease);
       stopVoice(voice, time + held);
@@ -11659,6 +11678,20 @@ function createTransport({
     return playing;
   }
 
+  
+  function jump() {
+    if (!playing) return;
+    if (onSectionChange) onSectionChange(ctx.currentTime);
+    map = null;
+    mapKey = '';
+    anchorTime = ctx.currentTime + 0.03;
+    anchorTick = mode === 'song' ? songStartTick() : 0;
+    loopedSection = mode === 'section' ? getSectionId() : null;
+    ensureMap();
+    scheduledUpTo = 0;
+    tick();
+  }
+
   function setMode(next) {
     if (next === mode) return;
     const wasPlaying = playing;
@@ -11673,6 +11706,7 @@ function createTransport({
     toggle,
     tick,
     setMode,
+    jump,
     currentSectionId,
     get mode() {
       return mode;
@@ -13514,6 +13548,7 @@ function songShape(song) {
       shade: track.shade,
       kind: track.kind,
       family: kitById(track.kitId, track).family,
+      category: categoryOf(kitById(track.kitId, track)),
       marks: thin(scaled, MAX_MARKS),
       count: marks.length,
     };
@@ -14190,7 +14225,7 @@ function planImport(parsed, { metre: given = null } = {}) {
     if (app) {
       const own = app.tracks[track - 1] || {};
       const kit = kitById(own.kitId || defaultKit('keys'));
-      return { id, track, channel, name: own.name || info.name || kit.name, notes, family: kit.family, kitId: kit.id, reason: 'as PocketDAW saved it' };
+      return { id, track, channel, name: own.name || info.name || kit.name, notes, family: familyOfKit(kit), kitId: kit.id, reason: 'as PocketDAW saved it' };
     }
     const cleaned = String(info.name || '').replace(/[:\s]+$/, '');
     const base = cleaned || `Channel ${channel + 1}`;
@@ -14263,10 +14298,12 @@ function buildImportedSong(parsed, plan, choices = {}, { name = 'Imported', bars
       return;
     }
     const kit = kitById(kitId);
-    const track = createTrack({ name: part.name, family: part.family, kitId });
+    const known = kit && kit.id === kitId;
+    const category = known ? categoryOf(kit) : (part.family === 'drums' ? 'drums' : part.family === 'bass' ? 'bass' : 'keys');
+    const track = createTrack({ name: part.name, family: part.family, kitId, shade: shadeForCategory(category, tracks.map((t) => t.track.shade)) });
     track.kitId = kitId;
-    track.family = kit && kit.id === kitId ? kit.family : part.family;
-    track.kind = track.family === 'drums' ? 'drum' : 'pitched';
+    track.family = known ? familyOfKit(kit) : part.family;
+    track.kind = known ? kit.kind : (part.family === 'drums' ? 'drum' : 'pitched');
     let notes = applySustain(part.notes, (parsed.controls || [])
       .filter((c) => c.channel === part.channel && (c.track === undefined || c.track === part.track))
       .map((c) => ({ ...c, tick: Math.round(c.tick * plan.timeScale) })));
@@ -14410,8 +14447,7 @@ function flattenTrack(song, track) {
 }
 
 function instrumentTrack(song, track, channel) {
-  const family = familyById(track.family);
-  const isDrum = Boolean(family && family.kind === 'drum');
+  const isDrum = track.kind === 'drum';
   const ch = isDrum ? 9 : channel;
   const notes = flattenTrack(song, track);
 
@@ -14439,8 +14475,7 @@ function toMidiFile(song) {
   const chunks = [tempoTrack(song)];
   let channel = 0;
   tracks.forEach((track) => {
-    const family = familyById(track.family);
-    const isDrum = Boolean(family && family.kind === 'drum');
+    const isDrum = track.kind === 'drum';
     chunks.push(instrumentTrack(song, track, channel));
     if (!isDrum) {
       channel += 1;
@@ -14497,7 +14532,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-09-29 03:56';
+const BUILD_STAMP = '2026-09-30 03:57';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -14809,8 +14844,7 @@ function mountApp(root, options = {}) {
   function pickSection(sectionId) {
     if (!engine || !engine.transport.playing || playMode() !== 'song') return;
     store.setView({ activeSectionId: sectionId, selectedNoteId: null });
-    engine.transport.stop();
-    engine.transport.play();
+    engine.transport.jump();
   }
 
   function toggleMode() {
@@ -15029,7 +15063,7 @@ function mountApp(root, options = {}) {
           store.setUi({ menu: null });
           const kit = kitById(kitId);
           const used = store.state.song.tracks.map((t) => t.shade);
-          const step = store.run((s) => addTrack(s, { family: kit.family, kitId, shade: shadeForCategory(categoryOf(kit), used) }));
+          const step = store.run((s) => addTrack(s, { kitId, shade: shadeForCategory(categoryOf(kit), used) }));
           if (step && store.downloadKit) store.downloadKit(kitId);
           if (step) {
             store.setView({ activeTrackId: step.track.id, selectedNoteId: null });
