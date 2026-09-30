@@ -6324,7 +6324,8 @@
             "midi": 46,
             "label": "Hat Open",
             "group": "hat",
-            "chokeGroup": "hat"
+            "chokeGroup": "hat",
+            "gate": true
           },
           {
             "midi": 42,
@@ -6346,7 +6347,9 @@
           {
             "midi": 25,
             "label": "Snare Roll",
-            "group": "snare"
+            "group": "snare",
+            "gate": true,
+            "loop": true
           },
           {
             "midi": 38,
@@ -8884,12 +8887,14 @@
           {
             "midi": 70,
             "label": "Shaker Up",
-            "group": "perc"
+            "group": "perc",
+            "gate": true
           },
           {
             "midi": 82,
             "label": "Shaker Down",
-            "group": "perc"
+            "group": "perc",
+            "gate": true
           },
           {
             "midi": 69,
@@ -8899,12 +8904,14 @@
           {
             "midi": 74,
             "label": "Guiro Long",
-            "group": "perc"
+            "group": "perc",
+            "gate": true
           },
           {
             "midi": 73,
             "label": "Guiro Short",
-            "group": "perc"
+            "group": "perc",
+            "gate": true
           },
           {
             "midi": 75,
