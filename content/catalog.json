@@ -6349,7 +6349,9 @@
             "label": "Snare Roll",
             "group": "snare",
             "gate": true,
-            "loop": true
+            "loop": true,
+            "loopStart": 1.0062,
+            "loopEnd": 3.0274
           },
           {
             "midi": 38,
