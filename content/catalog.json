@@ -1,7 +1,7 @@
 {
   "format": "pocketdaw.catalog",
   "version": 1,
-  "built": "2026-09-27",
+  "built": "2026-09-30",
   "packs": [
     {
       "id": "ambichoir",
@@ -4831,6 +4831,258 @@
             "gain": 44.898
           }
         ]
+      }
+    },
+    {
+      "id": "naturesounds",
+      "name": "Nature Sounds",
+      "family": "drums",
+      "kind": "drum",
+      "version": "1.0.0",
+      "file": "packs/naturesounds-1_0_0.zip",
+      "bytes": 1749532,
+      "crc32": 2219743216,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://freesound.org/people/BurghRecords/packs/24672/",
+        "credit": "BurghRecords, Nature Sounds Of Edinburgh (Freesound), and Sonic Pi's samples — CC0"
+      },
+      "manifest": {
+        "id": "naturesounds",
+        "name": "Nature Sounds",
+        "version": "1.0.0",
+        "family": "drums",
+        "kind": "drum",
+        "shade": "green",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://freesound.org/people/BurghRecords/packs/24672/",
+          "credit": "BurghRecords, Nature Sounds Of Edinburgh (Freesound), and Sonic Pi's samples — CC0"
+        },
+        "envelope": {
+          "attack": 0.001,
+          "release": 0.01
+        },
+        "accentGain": 1.5,
+        "polyphony": 16,
+        "voicesAtOnce": 2,
+        "lanes": [
+          {
+            "midi": 36,
+            "label": "Spring",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.26,
+            "loopEnd": 10.98
+          },
+          {
+            "midi": 37,
+            "label": "Morning",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.52,
+            "loopEnd": 9.14
+          },
+          {
+            "midi": 38,
+            "label": "Forest",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.9,
+            "loopEnd": 10.74
+          },
+          {
+            "midi": 39,
+            "label": "Woodland",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.94,
+            "loopEnd": 8.04
+          },
+          {
+            "midi": 40,
+            "label": "Birdsong",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.58,
+            "loopEnd": 10.66
+          },
+          {
+            "midi": 41,
+            "label": "Treetops",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.9,
+            "loopEnd": 8.88
+          },
+          {
+            "midi": 42,
+            "label": "Outdoors",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 2.32,
+            "loopEnd": 9.18
+          },
+          {
+            "midi": 43,
+            "label": "Winter",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.96,
+            "loopEnd": 5.143
+          },
+          {
+            "midi": 44,
+            "label": "Stream",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.96,
+            "loopEnd": 10.14
+          },
+          {
+            "midi": 45,
+            "label": "Rain",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.04,
+            "loopEnd": 10.86
+          },
+          {
+            "midi": 46,
+            "label": "Sauna",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1,
+            "loopEnd": 6.5
+          },
+          {
+            "midi": 47,
+            "label": "Crow",
+            "group": "perc"
+          }
+        ],
+        "zones": [
+          {
+            "file": "naturesounds/36-spring.m4a",
+            "placeholder": "crash",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "gain": 2.57,
+            "click": null
+          },
+          {
+            "file": "naturesounds/37-morning.m4a",
+            "placeholder": "crash",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "gain": 2.884,
+            "click": null
+          },
+          {
+            "file": "naturesounds/38-forest.m4a",
+            "placeholder": "crash",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "gain": 3.162,
+            "click": null
+          },
+          {
+            "file": "naturesounds/39-woodland.m4a",
+            "placeholder": "crash",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "gain": 2.042,
+            "click": null
+          },
+          {
+            "file": "naturesounds/40-birdsong.m4a",
+            "placeholder": "crash",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "gain": 1.259,
+            "click": null
+          },
+          {
+            "file": "naturesounds/41-treetops.m4a",
+            "placeholder": "crash",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "gain": 2.113,
+            "click": null
+          },
+          {
+            "file": "naturesounds/42-outdoors.m4a",
+            "placeholder": "crash",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "gain": 2.692,
+            "click": null
+          },
+          {
+            "file": "naturesounds/43-winter.m4a",
+            "placeholder": "crash",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "gain": 4.571,
+            "click": null
+          },
+          {
+            "file": "naturesounds/44-stream.m4a",
+            "placeholder": "crash",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "gain": 1.396,
+            "click": null
+          },
+          {
+            "file": "naturesounds/45-rain.m4a",
+            "placeholder": "crash",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "gain": 6.323,
+            "click": null
+          },
+          {
+            "file": "naturesounds/46-sauna.m4a",
+            "placeholder": "crash",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "gain": 0.204,
+            "click": null
+          },
+          {
+            "file": "naturesounds/47-crow.m4a",
+            "placeholder": "clap",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "gain": 0.245,
+            "click": null
+          }
+        ],
+        "category": "nature"
       }
     },
     {
