@@ -1135,7 +1135,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-09-30 21:10 from src/. */
+/* PocketDAW - phase 2. Built 2026-10-01 15:21 from src/. */
 (function () {
 'use strict';
 
@@ -11045,17 +11045,31 @@ function createSampler(ctx, kit, zones) {
   }
 
   
+  
+  function levelAt(voice, t) {
+    const attackEnd = voice.startedAt + attack;
+    if (t < attackEnd) return null;
+    if (voice.fadeEnd != null) {
+      const f = Math.min(1, Math.max(0, (t - attackEnd) / ((voice.fadeEnd - attackEnd) || 1)));
+      return voice.peak * (1 - f);
+    }
+    return voice.peak;
+  }
+
   function stopVoice(voice, time) {
     const t = Math.max(time, ctx.currentTime);
     if (voice.releaseAt != null && voice.releaseAt <= t) return;
     voice.stopped = true;
     voice.releaseAt = t;
     const g = voice.gain.gain;
+    
+    const level = levelAt(voice, t);
     if (typeof g.cancelAndHoldAtTime === 'function') {
       g.cancelAndHoldAtTime(t);
+      if (level !== null) g.setValueAtTime(level, t);
     } else {
       g.cancelScheduledValues(t);
-      g.setValueAtTime(voice.peak, t);
+      g.setValueAtTime(level ?? voice.peak, t);
     }
     const fade = voice.release ?? release;
     g.linearRampToValueAtTime(0, t + fade);
@@ -11190,6 +11204,11 @@ function createSampler(ctx, kit, zones) {
 
     if (held && (zone.loopFrames || !isDrum || gated)) {
       if (gated && opts.gateRelease) voice.release = Math.max(release, opts.gateRelease);
+      
+      if (isDrum && gated && !loops) {
+        voice.fadeEnd = time + held + (voice.release ?? release);
+        gain.gain.linearRampToValueAtTime(0, voice.fadeEnd);
+      }
       stopVoice(voice, time + held);
     }
     return voice;
@@ -11803,6 +11822,9 @@ function softCeilingCurve(knee = CEILING_KNEE, n = 2049) {
   return curve;
 }
 
+const PREVIEW_SECONDS = 2;
+const PREVIEW_FADE = 0.4;
+
 function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers , doc = globalThis.document, preferMedia = true , onOutputFallback, output: providedOutput = null, takeCue, onPlayingChange }) {
   const loader = createKitLoader({ ctx, fetchAudio });
   const master = ctx.createGain();
@@ -12222,10 +12244,19 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     if (!track) return;
     const player = ensurePlayer(track);
     const duration = player.kit.kind === 'drum' ? undefined : seconds;
-    const fire = (sampler) => sampler.noteOn(pitch, velocity, ctx.currentTime, {
-      duration,
-      gateRelease: gateReleaseFor(getSong().bpm),
-    });
+    const fire = (sampler) => {
+      const now = ctx.currentTime;
+      const voice = sampler.noteOn(pitch, velocity, now, {
+        duration,
+        gateRelease: gateReleaseFor(getSong().bpm),
+      });
+      
+      if (voice) {
+        voice.release = Math.max(voice.release ?? 0, PREVIEW_FADE);
+        sampler.noteOff(voice, now + PREVIEW_SECONDS - PREVIEW_FADE);
+      }
+      return voice;
+    };
     if (player.sampler) {
       fire(player.sampler);
       return;
@@ -14538,7 +14569,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-09-30 21:10';
+const BUILD_STAMP = '2026-10-01 15:21';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
