@@ -5915,6 +5915,387 @@
       }
     },
     {
+      "id": "sigkit",
+      "name": "Signature Kit",
+      "family": "drums",
+      "kind": "drum",
+      "version": "1.0.0",
+      "file": "packs/sigkit-1_0_0.zip",
+      "bytes": 158725,
+      "crc32": 3696682275,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://signaturesounds.org/",
+        "credit": "Signature Sounds (Phil), \"Fred Again Styled Drum Kit\" — CC0"
+      },
+      "manifest": {
+        "id": "sigkit",
+        "name": "Signature Kit",
+        "version": "1.0.0",
+        "family": "drums",
+        "kind": "drum",
+        "shade": "rose",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://signaturesounds.org/",
+          "credit": "Signature Sounds (Phil), \"Fred Again Styled Drum Kit\" — CC0"
+        },
+        "envelope": {
+          "attack": 0.001,
+          "release": 0.01
+        },
+        "accentGain": 1.5,
+        "polyphony": 16,
+        "voicesAtOnce": 3,
+        "lanes": [
+          {
+            "midi": 46,
+            "label": "Hat Open",
+            "group": "hat",
+            "chokeGroup": "hat",
+            "gate": true
+          },
+          {
+            "midi": 42,
+            "label": "Hat Closed",
+            "group": "hat",
+            "chokeGroup": "hat"
+          },
+          {
+            "midi": 44,
+            "label": "Hat 1",
+            "group": "hat",
+            "chokeGroup": "hat"
+          },
+          {
+            "midi": 84,
+            "label": "Hat 2",
+            "group": "hat",
+            "chokeGroup": "hat"
+          },
+          {
+            "midi": 85,
+            "label": "Clap 1",
+            "group": "snare"
+          },
+          {
+            "midi": 86,
+            "label": "Clap 2",
+            "group": "snare"
+          },
+          {
+            "midi": 87,
+            "label": "Clap 3",
+            "group": "snare"
+          },
+          {
+            "midi": 39,
+            "label": "Clap 4",
+            "group": "snare"
+          },
+          {
+            "midi": 88,
+            "label": "Clap 5",
+            "group": "snare"
+          },
+          {
+            "midi": 89,
+            "label": "Clap 6",
+            "group": "snare"
+          },
+          {
+            "midi": 90,
+            "label": "Clap 7",
+            "group": "snare"
+          },
+          {
+            "midi": 91,
+            "label": "Clap 8",
+            "group": "snare"
+          },
+          {
+            "midi": 38,
+            "label": "Snare 1",
+            "group": "snare"
+          },
+          {
+            "midi": 92,
+            "label": "Snare 2",
+            "group": "snare"
+          },
+          {
+            "midi": 93,
+            "label": "Snare 3",
+            "group": "snare"
+          },
+          {
+            "midi": 94,
+            "label": "Snare 4",
+            "group": "snare"
+          },
+          {
+            "midi": 95,
+            "label": "Snare 5",
+            "group": "snare"
+          },
+          {
+            "midi": 96,
+            "label": "Kick 1",
+            "group": "kick"
+          },
+          {
+            "midi": 97,
+            "label": "Kick 1b",
+            "group": "kick"
+          },
+          {
+            "midi": 98,
+            "label": "Kick 2",
+            "group": "kick"
+          },
+          {
+            "midi": 36,
+            "label": "Kick 3",
+            "group": "kick"
+          },
+          {
+            "midi": 99,
+            "label": "Kick 4",
+            "group": "kick"
+          },
+          {
+            "midi": 100,
+            "label": "Kick 5",
+            "group": "kick"
+          },
+          {
+            "midi": 101,
+            "label": "Kick 6",
+            "group": "kick"
+          }
+        ],
+        "zones": [
+          {
+            "file": "sigkit/46-hatopen.m4a",
+            "placeholder": "openHat",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "gain": 0.0791,
+            "click": null
+          },
+          {
+            "file": "sigkit/42-hatclosed.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "gain": 0.0604,
+            "click": null
+          },
+          {
+            "file": "sigkit/44-hat1.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "gain": 0.0887,
+            "click": null
+          },
+          {
+            "file": "sigkit/84-hat2.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "gain": 0.0763,
+            "click": null
+          },
+          {
+            "file": "sigkit/85-clap1.m4a",
+            "placeholder": "clap",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "gain": 0.3709,
+            "click": null
+          },
+          {
+            "file": "sigkit/86-clap2.m4a",
+            "placeholder": "clap",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "gain": 0.2805,
+            "click": null
+          },
+          {
+            "file": "sigkit/87-clap3.m4a",
+            "placeholder": "clap",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "gain": 0.2641,
+            "click": null
+          },
+          {
+            "file": "sigkit/39-clap4.m4a",
+            "placeholder": "clap",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "gain": 0.1707,
+            "click": null
+          },
+          {
+            "file": "sigkit/88-clap5.m4a",
+            "placeholder": "clap",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "gain": 0.2362,
+            "click": null
+          },
+          {
+            "file": "sigkit/89-clap6.m4a",
+            "placeholder": "clap",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "gain": 0.2822,
+            "click": null
+          },
+          {
+            "file": "sigkit/90-clap7.m4a",
+            "placeholder": "clap",
+            "rootNote": 90,
+            "lo": 90,
+            "hi": 90,
+            "gain": 0.2706,
+            "click": null
+          },
+          {
+            "file": "sigkit/91-clap8.m4a",
+            "placeholder": "clap",
+            "rootNote": 91,
+            "lo": 91,
+            "hi": 91,
+            "gain": 0.2576,
+            "click": null
+          },
+          {
+            "file": "sigkit/38-snare1.m4a",
+            "placeholder": "snare",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "gain": 0.345,
+            "click": null
+          },
+          {
+            "file": "sigkit/92-snare2.m4a",
+            "placeholder": "snare",
+            "rootNote": 92,
+            "lo": 92,
+            "hi": 92,
+            "gain": 0.4424,
+            "click": null
+          },
+          {
+            "file": "sigkit/93-snare3.m4a",
+            "placeholder": "snare",
+            "rootNote": 93,
+            "lo": 93,
+            "hi": 93,
+            "gain": 0.3595,
+            "click": null
+          },
+          {
+            "file": "sigkit/94-snare4.m4a",
+            "placeholder": "snare",
+            "rootNote": 94,
+            "lo": 94,
+            "hi": 94,
+            "gain": 0.54,
+            "click": null
+          },
+          {
+            "file": "sigkit/95-snare5.m4a",
+            "placeholder": "snare",
+            "rootNote": 95,
+            "lo": 95,
+            "hi": 95,
+            "gain": 0.3543,
+            "click": null
+          },
+          {
+            "file": "sigkit/96-kick1.m4a",
+            "placeholder": "kick",
+            "rootNote": 96,
+            "lo": 96,
+            "hi": 96,
+            "gain": 0.2867,
+            "click": null
+          },
+          {
+            "file": "sigkit/97-kick1b.m4a",
+            "placeholder": "kick",
+            "rootNote": 97,
+            "lo": 97,
+            "hi": 97,
+            "gain": 0.2819,
+            "click": null
+          },
+          {
+            "file": "sigkit/98-kick2.m4a",
+            "placeholder": "kick",
+            "rootNote": 98,
+            "lo": 98,
+            "hi": 98,
+            "gain": 0.2723,
+            "click": null
+          },
+          {
+            "file": "sigkit/36-kick3.m4a",
+            "placeholder": "kick",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "gain": 0.2654,
+            "click": null
+          },
+          {
+            "file": "sigkit/99-kick4.m4a",
+            "placeholder": "kick",
+            "rootNote": 99,
+            "lo": 99,
+            "hi": 99,
+            "gain": 0.3261,
+            "click": null
+          },
+          {
+            "file": "sigkit/100-kick5.m4a",
+            "placeholder": "kick",
+            "rootNote": 100,
+            "lo": 100,
+            "hi": 100,
+            "gain": 0.2867,
+            "click": null
+          },
+          {
+            "file": "sigkit/101-kick6.m4a",
+            "placeholder": "kick",
+            "rootNote": 101,
+            "lo": 101,
+            "hi": 101,
+            "gain": 0.3198,
+            "click": null
+          }
+        ],
+        "category": "drums"
+      }
+    },
+    {
       "id": "soundtrack",
       "name": "Soundtrack Synth",
       "family": "keys",
