@@ -1,7 +1,7 @@
 {
   "format": "pocketdaw.catalog",
   "version": 1,
-  "built": "2026-09-30",
+  "built": "2026-10-02",
   "packs": [
     {
       "id": "ambichoir",
@@ -8640,6 +8640,366 @@
             "gain": 4.916
           }
         ]
+      }
+    },
+    {
+      "id": "uprightbass",
+      "name": "Upright-Bass",
+      "family": "bass",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/uprightbass-1_0_0.zip",
+      "bytes": 1567474,
+      "crc32": 3125715777,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://freesound.org/people/pjcohen/packs/21521/",
+        "credit": "pjcohen, Standup Upright Acoustic Double Bass (Freesound pack 21521), normal pizzicato, CC0"
+      },
+      "manifest": {
+        "id": "uprightbass",
+        "name": "Upright-Bass",
+        "version": "1.0.0",
+        "family": "bass",
+        "kind": "pitched",
+        "range": {
+          "lo": 21,
+          "hi": 67
+        },
+        "defaultView": {
+          "lo": 28,
+          "hi": 52
+        },
+        "shade": "amber",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://freesound.org/people/pjcohen/packs/21521/",
+          "credit": "pjcohen, Standup Upright Acoustic Double Bass (Freesound pack 21521), normal pizzicato, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.12
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 1,
+        "voicesAtOnce": 1,
+        "slideSeconds": 0.06,
+        "zones": [
+          {
+            "file": "uprightbass/E1.m4a",
+            "rootNote": 28,
+            "lo": 21,
+            "hi": 28,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/F1.m4a",
+            "rootNote": 29,
+            "lo": 29,
+            "hi": 29,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Fs1.m4a",
+            "rootNote": 30,
+            "lo": 30,
+            "hi": 30,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/G1.m4a",
+            "rootNote": 31,
+            "lo": 31,
+            "hi": 31,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Gs1.m4a",
+            "rootNote": 32,
+            "lo": 32,
+            "hi": 32,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/A1.m4a",
+            "rootNote": 33,
+            "lo": 33,
+            "hi": 33,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/As1.m4a",
+            "rootNote": 34,
+            "lo": 34,
+            "hi": 34,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/B1.m4a",
+            "rootNote": 35,
+            "lo": 35,
+            "hi": 35,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/D2.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Ds2.m4a",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/G2.m4a",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "saw303",
+            "gain": 0.448
+          },
+          {
+            "file": "uprightbass/Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 67,
+            "placeholder": "saw303",
+            "gain": 0.448
+          }
+        ],
+        "category": "bass"
       }
     },
     {
