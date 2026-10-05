@@ -500,7 +500,9 @@ html, body {
 .arrscroll {
   overflow-x: auto;
   overflow-y: hidden;
-  touch-action: pan-x;
+  /* Both ways: it scrolls sideways itself, and a vertical swipe on it goes on
+     to the page. pan-x alone meant only the strip beside it scrolled. */
+  touch-action: pan-x pan-y;
   overscroll-behavior: contain;
   scrollbar-width: none;
   padding-bottom: 4px;
@@ -1096,6 +1098,28 @@ html, body {
 .soundrow-caret { color: var(--text3); }
 .importpick { display: inline-flex; align-items: center; gap: 6px; background: var(--chip, #1f1f1f); color: var(--text); border: 0; border-radius: 10px; padding: 8px 10px; font-size: 13px; }
 
+/* An instrument too small for a track's notes: shown, greyed, and explains itself when tapped. */
+.menu-item-off { opacity: 0.38; }
+
+/* Reordering tracks: the others glide aside; the one under the finger is lifted and follows it exactly. */
+.arrlanes > .arrrow { transition: transform 140ms ease; }
+.arrlanes > .arrrow.arrrow-dragging { transition: none; position: relative; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.55)); }
+
+/* The track card, 100 x 96: the name; level and pan bars the card's width,
+   the value inside them; mute, solo, and the instrument's icon in the corner,
+   which is also the place to hold. */
+.arrlabel.arrlabel-card { justify-content: space-between; gap: 5px; padding: 6px 7px; border-radius: 12px; }
+.arrbar { position: relative; height: 16px; border-radius: 5px; background: #2e2e2e; overflow: hidden; touch-action: pan-y; cursor: ew-resize; flex: 0 0 auto; }
+.arrbar-text { position: absolute; top: 0; left: 0; width: 100%; height: 16px; line-height: 16px; text-align: center; font-size: 10.5px; font-weight: 700; color: #e8e6df; white-space: nowrap; pointer-events: none; font-variant-numeric: tabular-nums; }
+.arrbar-fill { position: absolute; top: 0; bottom: 0; overflow: hidden; pointer-events: none; }
+.arrbar-fill .arrbar-text-dark { color: #141414; }
+.arrbar-mark { position: absolute; top: 0; bottom: 0; width: 1px; pointer-events: none; }
+.arrbtns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; flex: 0 0 auto; }
+.arrbtns .arrtoggle { width: auto; height: 20px; border-radius: 6px; }
+.arrgrip { height: 20px; display: flex; align-items: center; justify-content: center; touch-action: none; cursor: grab; }
+.arrlabel-card .arrname { min-height: 16px; }
+.arrlabel-off .arrbar, .arrlabel-off .arrgrip { opacity: 0.45; }
+
 </style>
 </head>
 <body>
@@ -1135,7 +1159,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-10-01 15:21 from src/. */
+/* PocketDAW - phase 2. Built 2026-10-05 06:24 from src/. */
 (function () {
 'use strict';
 
@@ -1277,12 +1301,19 @@ function containScroll(node, axis = 'y') {
     return false;
   };
   let skip = false;
+  
+  let startX = 0;
+  let startY = 0;
+  let way = null; // 'along' | 'across' | null (not yet known)
 
   node.addEventListener('touchstart', guard((e) => {
     skip = ownsItsGesture(e.target);
     if (skip) return;
     const t = point(e);
     last = t ? (axis === 'y' ? t.clientY : t.clientX) : 0;
+    startX = t ? t.clientX : 0;
+    startY = t ? t.clientY : 0;
+    way = null;
     const max = maxOf();
     if (!(max > 0)) return;
     if (posOf() <= 0) {
@@ -1298,6 +1329,12 @@ function containScroll(node, axis = 'y') {
     if (skip || ownsItsGesture(e.target)) return;
     const t = point(e);
     if (!t) return;
+    if (way === null) {
+      const along = Math.abs(axis === 'y' ? t.clientY - startY : t.clientX - startX);
+      const across = Math.abs(axis === 'y' ? t.clientX - startX : t.clientY - startY);
+      if (Math.max(along, across) >= 6) way = along >= across ? 'along' : 'across';
+    }
+    if (way === 'across') return;
     const at = axis === 'y' ? t.clientY : t.clientX;
     const delta = at - last;
     last = at;
@@ -5067,6 +5104,28 @@ function pointAt(lane, tick, tolerance) {
   return -1;
 }
 
+function trackSpan(song, trackId) {
+  let lo = Infinity;
+  let hi = -Infinity;
+  song.sectionOrder.forEach((sid) => {
+    const clip = song.sections[sid] && song.sections[sid].clips[trackId];
+    if (!clip) return;
+    const pitches = clip.notes.map((n) => n.pitch).concat((clip.hidden || []).map((h) => h.note.pitch));
+    pitches.forEach((p) => { if (p < lo) lo = p; if (p > hi) hi = p; });
+  });
+  return lo === Infinity ? null : { lo, hi };
+}
+
+function octaveShiftToFit(span, range) {
+  if (!span || !range) return 0;
+  if (span.hi - span.lo > range.hi - range.lo) return null;
+  const least = Math.ceil((range.lo - span.lo) / 12);   // octaves needed to lift the lowest note in
+  const most = Math.floor((range.hi - span.hi) / 12);   // octaves allowed before the highest goes out
+  if (least > most) return null;                         // fits by width, but no whole octave lines it up
+  if (least <= 0 && most >= 0) return 0;
+  return least > 0 ? least : most;
+}
+
 function withDefaults(song, ctx, spec) {
   const track = ctx && ctx.trackId ? trackById(song, ctx.trackId) : null;
   const defaults = (track && track.noteDefaults) || song.noteDefaults || {};
@@ -5635,6 +5694,18 @@ function removeSection(song, sectionId) {
       song.sectionOrder.splice(song.sectionOrder.indexOf(sectionId), 1);
     },
   };
+}
+
+function moveTrack(song, trackId, toIndex) {
+  const from = song.tracks.findIndex((t) => t.id === trackId);
+  const to = Math.max(0, Math.min(song.tracks.length - 1, toIndex));
+  if (from < 0 || from === to) return null;
+  const order = [...song.tracks];
+  const [track] = song.tracks.splice(from, 1);
+  song.tracks.splice(to, 0, track);
+  const after = [...song.tracks];
+  const put = (list) => { song.tracks.length = 0; song.tracks.push(...list); };
+  return { label: 'Move track', undo: () => put(order), redo: () => put(after) };
 }
 
 function moveSection(song, sectionId, toIndex) {
@@ -6375,6 +6446,21 @@ function setTrackKit(song, trackId, kitId) {
       track.duck.trigger.lane = place(track.duck.trigger.lane, null).midi;
     }
   }
+  
+  let shifted = 0;
+  if (from && to && from.kind !== 'drum' && to.kind !== 'drum' && to.range) {
+    const octaves = octaveShiftToFit(trackSpan(song, trackId), to.range);
+    if (octaves) {
+      shifted = octaves;
+      song.sectionOrder.forEach((sid) => {
+        const clip = song.sections[sid].clips[trackId];
+        if (!clip) return;
+        if (!clipsBefore[sid]) clipsBefore[sid] = JSON.parse(JSON.stringify(clip));
+        clip.notes.forEach((n) => { n.pitch += 12 * octaves; });
+        (clip.hidden || []).forEach((h) => { h.note.pitch += 12 * octaves; });
+      });
+    }
+  }
   track.kitId = kitId;
   track.kind = to ? to.kind : track.kind;
   
@@ -6398,9 +6484,123 @@ function setTrackKit(song, trackId, kitId) {
   return {
     label: `Change kit to ${to ? to.name : kitId}`,
     moved,
+    shifted,
     undo: () => apply(before.kitId, before.kind, before.duck, clipsBefore, before),
     redo: () => apply(kitId, to ? to.kind : before.kind, duckAfter, clipsAfter, after),
   };
+}
+
+function duplicateTrack(song, trackId) {
+  const at = song.tracks.findIndex((t) => t.id === trackId);
+  if (at < 0) return null;
+  const src = song.tracks[at];
+  const copy = JSON.parse(JSON.stringify(src));
+  copy.id = newId('t');
+  copy.solo = false;
+  if (!src.shadeChosen) copy.shade = shadeForCategory(categoryOf(kitById(src.kitId, src)), song.tracks.map((t) => t.shade));
+  const clips = {};
+  song.sectionOrder.forEach((sid) => {
+    const c = song.sections[sid].clips[trackId];
+    const cc = c ? JSON.parse(JSON.stringify(c)) : createClip();
+    cc.id = newId('c');
+    cc.notes = (cc.notes || []).map((n) => ({ ...n, id: newId('n') }));
+    (cc.hidden || []).forEach((h) => { h.note = { ...h.note, id: newId('n') }; });
+    clips[sid] = cc;
+  });
+  const add = () => {
+    song.tracks.splice(at + 1, 0, copy);
+    Object.entries(clips).forEach(([sid, c]) => { song.sections[sid].clips[copy.id] = JSON.parse(JSON.stringify(c)); });
+  };
+  const remove = () => {
+    const j = song.tracks.findIndex((t) => t.id === copy.id);
+    if (j >= 0) song.tracks.splice(j, 1);
+    Object.keys(clips).forEach((sid) => { delete song.sections[sid].clips[copy.id]; });
+  };
+  add();
+  return { label: 'Duplicate track', trackId: copy.id, undo: remove, redo: add };
+}
+
+function copyTrackNotes(song, trackId) {
+  const track = song.tracks.find((t) => t.id === trackId);
+  if (!track) return null;
+  const sections = song.sectionOrder.map((sid) => {
+    const clip = song.sections[sid].clips[trackId];
+    return (clip ? clip.notes : []).map(({ pitch, start, duration, velocity, flags }) => ({ pitch, start, duration, velocity, flags }));
+  });
+  return { kind: track.kind, kitId: track.kitId, sections, count: sections.reduce((n, s) => n + s.length, 0) };
+}
+
+function drumLaneMap(from, to, pitches) {
+  const fromLane = (midi) => ((from && from.lanes) || []).find((l) => l.midi === midi) || { midi, label: '', group: '' };
+  const map = new Map();
+  const taken = new Set();
+  const settled = [];
+  [...pitches].sort((a, b) => a - b).forEach((midi) => {
+    const src = fromLane(midi);
+    const lane = laneAcrossKits(src, to);
+    const target = to.lanes.find((l) => l.midi === lane);
+    const exact = lane === midi || (target && src.label && laneKey(target.label) === laneKey(src.label));
+    map.set(midi, lane);
+    if (exact) taken.add(lane);
+    else settled.push({ midi, group: target && target.group });
+  });
+  settled.forEach(({ midi, group }) => {
+    if (!taken.has(map.get(midi))) { taken.add(map.get(midi)); return; }
+    const free = to.lanes.filter((l) => l.group === group && !taken.has(l.midi)).sort((a, b) => Math.abs(a.midi - midi) - Math.abs(b.midi - midi))[0];
+    if (free) map.set(midi, free.midi);
+    taken.add(map.get(midi));
+  });
+  return map;
+}
+
+function pasteProblem(song, trackId, copied) {
+  const track = song.tracks.find((t) => t.id === trackId);
+  if (!track || !copied) return 'nothing';
+  if ((track.kind === 'drum') !== (copied.kind === 'drum')) return 'kind';
+  if (track.kind === 'drum') return null;
+  const to = kitById(track.kitId, track);
+  const all = copied.sections.flat();
+  if (!all.length || !to.range) return null;
+  const span = { lo: Math.min(...all.map((n) => n.pitch)), hi: Math.max(...all.map((n) => n.pitch)) };
+  return octaveShiftToFit(span, to.range) === null ? 'fit' : null;
+}
+
+function pasteTrackNotes(song, trackId, copied) {
+  if (pasteProblem(song, trackId, copied)) return null;
+  const track = song.tracks.find((t) => t.id === trackId);
+  const to = kitById(track.kitId, track);
+  const all = copied.sections.flat();
+  let map = (p) => p;
+  let shifted = 0;
+  if (track.kind === 'drum') {
+    const from = kitById(copied.kitId);
+    if (from && from.id !== to.id && to.lanes) {
+      const lanes = drumLaneMap(from, to, new Set(all.map((n) => n.pitch)));
+      map = (p) => (lanes.has(p) ? lanes.get(p) : p);
+    }
+  } else if (to.range && all.length) {
+    shifted = octaveShiftToFit({ lo: Math.min(...all.map((n) => n.pitch)), hi: Math.max(...all.map((n) => n.pitch)) }, to.range) || 0;
+    map = (p) => p + 12 * shifted;
+  }
+  const before = {};
+  const after = {};
+  let pasted = 0;
+  song.sectionOrder.forEach((sid, i) => {
+    if (i >= copied.sections.length) return;
+    const section = song.sections[sid];
+    const clip = section.clips[trackId];
+    if (!clip) return;
+    before[sid] = JSON.parse(JSON.stringify(clip));
+    const end = sectionLengthTicks(song, section);
+    clip.notes = copied.sections[i]
+      .filter((n) => n.start < end)
+      .map((n) => createNote({ pitch: map(n.pitch), start: n.start, duration: Math.min(n.duration, end - n.start), velocity: n.velocity, flags: n.flags || {} }));
+    clip.hidden = [];
+    pasted += clip.notes.length;
+    after[sid] = JSON.parse(JSON.stringify(clip));
+  });
+  const put = (snap) => Object.entries(snap).forEach(([sid, c]) => { song.sections[sid].clips[trackId] = JSON.parse(JSON.stringify(c)); });
+  return { label: 'Paste notes', shifted, pasted, left: copied.count - pasted, undo: () => put(before), redo: () => put(after) };
 }
 
 const TAP_SLOP = 7;
@@ -7866,9 +8066,10 @@ function renderMenu(host, store, { onChange }) {
     const node = el(
       'button',
       {
-        class: `menu-item${option.id === menu.current ? ' menu-item-on' : ''}`,
+        class: `menu-item${option.id === menu.current ? ' menu-item-on' : ''}${option.disabled ? ' menu-item-off' : ''}`,
         type: 'button',
-        onClick: () => menu.onSelect(option.id),
+        'aria-disabled': option.disabled ? 'true' : null,
+        onClick: () => (option.disabled ? menu.onDisabled && menu.onDisabled(option) : menu.onSelect(option.id)),
       },
       [
         el('span', { class: 'menu-item-label', text: option.label }),
@@ -7967,6 +8168,72 @@ function renderMenu(host, store, { onChange }) {
   }
 }
 
+const UNITY_GAIN = 0.8;
+const MAX_GAIN = 1.2;
+const TAPER = [[-48, 0.06], [-24, 0.24], [-12, 0.44], [-6, 0.59], [0, 0.8], [20 * Math.log10(MAX_GAIN / UNITY_GAIN), 1]];
+const dbOfGain = (g) => (g > 0 ? 20 * Math.log10(g / UNITY_GAIN) : -Infinity);
+const gainOfDb = (db) => UNITY_GAIN * 10 ** (db / 20);
+
+function levelPosition(gain) {
+  if (!(gain > 0)) return 0;
+  const db = dbOfGain(gain);
+  if (db <= TAPER[0][0]) return TAPER[0][1] * (gain / gainOfDb(TAPER[0][0]));
+  for (let i = 1; i < TAPER.length; i++) {
+    if (db <= TAPER[i][0]) {
+      const [d0, p0] = TAPER[i - 1];
+      const [d1, p1] = TAPER[i];
+      return p0 + ((p1 - p0) * (db - d0)) / (d1 - d0);
+    }
+  }
+  return 1;
+}
+
+function gainAtPosition(pos) {
+  if (pos <= 0) return 0;
+  if (pos <= TAPER[0][1]) return gainOfDb(TAPER[0][0]) * (pos / TAPER[0][1]);
+  for (let i = 1; i < TAPER.length; i++) {
+    if (pos <= TAPER[i][1]) {
+      const [d0, p0] = TAPER[i - 1];
+      const [d1, p1] = TAPER[i];
+      const db = d0 + ((d1 - d0) * (pos - p0)) / (p1 - p0);
+      return Math.abs(db) < 0.25 ? UNITY_GAIN : Math.min(MAX_GAIN, gainOfDb(db));
+    }
+  }
+  return MAX_GAIN;
+}
+
+function levelText(gain) {
+  const db = dbOfGain(gain);
+  if (db <= -60) return '\u2212\u221e dB';
+  const r = Math.round(db * 10) / 10;
+  return `${r > 0 ? '+' : r < 0 ? '\u2212' : ''}${Math.abs(r).toFixed(1)} dB`;
+}
+
+function panText(pan) {
+  const v = Math.round(Math.abs(pan || 0) * 50);
+  return v === 0 ? 'C' : `${v}${pan < 0 ? 'L' : 'R'}`;
+}
+
+function parseLevel(text) {
+  const t = String(text).trim().toLowerCase().replace(/\u2212/g, '-').replace(/db$/, '').trim();
+  if (/^-?\s*(inf|\u221e)/.test(t)) return 0;
+  const db = Number(t);
+  if (!Number.isFinite(db)) return null;
+  return Math.max(0, Math.min(MAX_GAIN, gainOfDb(db)));
+}
+
+const LEVEL_STEPS = 1000;
+function levelFader(gain) {
+  return {
+    min: 0,
+    max: LEVEL_STEPS,
+    value: Math.round(levelPosition(gain) * LEVEL_STEPS),
+    format: (v) => levelText(gainAtPosition(v / LEVEL_STEPS)),
+    parse: (text) => { const g = parseLevel(text); return g === null ? null : levelPosition(g) * LEVEL_STEPS; },
+  };
+}
+const gainOf = (v) => gainAtPosition(v / LEVEL_STEPS);
+
 const CELL_WIDTH = 100;
 const BAR_WIDTH = 25;
 
@@ -7980,7 +8247,7 @@ function cellWidth(lengthBars, beatsPerBar = 4) {
 function widthOf(song, section) {
   return section ? cellWidth(section.lengthBars, sectionBeats(song, section)) : MIN_CELL;
 }
-const CELL_HEIGHT = 48;
+const CELL_HEIGHT = 96;
 const LABEL_WIDTH = 100;
 const GAP = 6;
 
@@ -8021,7 +8288,11 @@ function drawClipPreview(canvas, { clip, lengthBars, beatsPerBar = 4, shade, isD
   } else {
     lo = Math.min(...notes.map((n) => n.pitch));
     hi = Math.max(...notes.map((n) => n.pitch));
-    if (hi - lo < 11) {
+    if (kit && kit.range) {
+      
+      lo = Math.min(lo, kit.range.lo);
+      hi = Math.max(hi, kit.range.hi);
+    } else if (hi - lo < 11) {
       const middle = (lo + hi) / 2;
       lo = middle - 6;
       hi = middle + 6;
@@ -8053,18 +8324,79 @@ function arrangementSheet(store, onChange) {
   });
 }
 
+const lastTaps = new Map();
+
+function makeBar({ kind, key, width, colour, value, fill, mark, text, valueAt, write, reset, onLive, onChange, ariaLabel }) {
+  const base = el('span', { class: 'arrbar-text' });
+  const dark = el('span', { class: 'arrbar-text arrbar-text-dark', style: `width:${width}px` });
+  const fillNode = el('span', { class: 'arrbar-fill', style: `background:${colour}` }, [dark]);
+  const markNode = el('span', { class: 'arrbar-mark' });
+  const node = el('div', { class: `arrbar arrbar-${kind}`, role: 'slider', 'aria-label': ariaLabel, style: `width:${width}px` }, [base, fillNode, markNode]);
+  const show = (v) => {
+    const { left, w } = fill(v);
+    fillNode.style.left = `${left}px`;
+    fillNode.style.width = `${w}px`;
+    dark.style.left = `${-left}px`;
+    base.textContent = text(v);
+    dark.textContent = text(v);
+    markNode.style.left = `${mark}px`;
+    markNode.style.background = mark > left && mark < left + w ? 'rgba(0,0,0,0.28)' : 'rgba(255,255,255,0.22)';
+    node.setAttribute('aria-valuetext', text(v));
+  };
+  show(value);
+  let pressed = false;
+  let dragging = false;
+  let downX = 0;
+  const fracAt = (e) => {
+    const r = typeof node.getBoundingClientRect === 'function' ? node.getBoundingClientRect() : { left: 0 };
+    return Math.max(0, Math.min(1, ((e.clientX || 0) - (r.left || 0)) / width));
+  };
+  const set = (v) => { write(v); show(v); if (onLive) onLive(); };
+  node.addEventListener('pointerdown', (e) => {
+    if (e.stopPropagation) e.stopPropagation();
+    pressed = true;
+    dragging = false;
+    downX = e.clientX || 0;
+    try { if (node.setPointerCapture && e.pointerId != null) node.setPointerCapture(e.pointerId); } catch (err) { void err; }
+  });
+  node.addEventListener('pointermove', (e) => {
+    if (!pressed) return;
+    if (!dragging && Math.abs((e.clientX || 0) - downX) < 4) return;
+    dragging = true;
+    set(valueAt(fracAt(e)));
+  });
+  const end = (e, cancelled) => {
+    if (!pressed) return;
+    pressed = false;
+    if (!cancelled && !dragging) {
+      const now = Date.now();
+      if (now - (lastTaps.get(key) || 0) < 320) { lastTaps.delete(key); reset(); return; }
+      lastTaps.set(key, now);
+      set(valueAt(fracAt(e)));
+    }
+    onChange();
+  };
+  node.addEventListener('pointerup', (e) => end(e, false));
+  node.addEventListener('pointercancel', (e) => end(e, true));
+  return node;
+}
+
 function arrangementMatrix(store, onChange, {
   onCell,
   onTrack,
   onAddTrack,
   onHoldCell,
   onHoldTrack,
+  onTrackMenu = null,
   onLive,
   onPlayhead,
   onPickSection = null,
   hint = true,
 }) {
   const { song, view } = store.state;
+  const trackButtons = {};
+  const trackGrips = {};
+  const suppressTap = {};
   const run = (factory) => {
     store.run(factory);
     onChange();
@@ -8279,30 +8611,40 @@ function arrangementMatrix(store, onChange, {
     const soloing = song.tracks.some((t) => t.solo);
     const silenced = track.mute || (soloing && !track.solo);
     const name = el('div', { class: 'arrname' }, [
-      el('span', { class: 'caticon arrdot-icon', style: `color:${shade}`, html: categoryIcon(categoryOf(kitById(track.kitId, track)), 15) }),
       el('span', { class: 'arrtrack', text: trackTitle(track) }),
     ]);
 
-    const percent = Math.round(track.gain * 100);
-    const writeLevel = (value) => store.run((s) => setTrackField(s, track.id, 'gain', value / 100), { coalesce: true });
-    const level = fader({
-      min: 0,
-      max: 120,
-      value: percent,
-      ariaLabel: `${trackTitle(track)} level`,
-      number: false,
-      sliderClass: 'arrlevel',
-      onDrag: (value, node) => {
-        writeLevel(value);
-        node.style.setProperty('--fill', levelFill(value));
-        if (onLive) onLive();
-      },
-      onCommit: () => onChange(),
+    const BAR_W = LABEL_WIDTH - 14;
+    const writeField = (field, v) => store.run((s) => setTrackField(s, track.id, field, v), { coalesce: true });
+    const levelBar = makeBar({
+      kind: 'level', key: `${track.id}:gain`, width: BAR_W, colour: shade, value: track.gain,
+      fill: (g) => ({ left: 0, w: Math.round(levelPosition(g) * BAR_W) }),
+      mark: Math.round(levelPosition(UNITY_GAIN) * BAR_W),
+      text: levelText, valueAt: gainAtPosition,
+      write: (g) => writeField('gain', g),
+      reset: () => run((s) => setTrackField(s, track.id, 'gain', UNITY_GAIN)),
+      onLive, onChange, ariaLabel: `${trackTitle(track)} level`,
     });
-    level.setAttribute('style', `--fill:${levelFill(percent)};--fill-color:${shade}`);
+    const panBar = makeBar({
+      kind: 'pan', key: `${track.id}:pan`, width: BAR_W, colour: shade, value: track.pan || 0,
+      fill: (p) => {
+        const mid = BAR_W / 2;
+        const at = mid + (p || 0) * mid;
+        return { left: Math.round(Math.min(mid, at)), w: Math.round(Math.abs(at - mid)) };
+      },
+      mark: Math.round(BAR_W / 2), text: panText,
+      valueAt: (f) => { const p = f * 2 - 1; return Math.abs(p) < 0.03 ? 0 : Math.round(p * 50) / 50; },
+      write: (p) => writeField('pan', p),
+      reset: () => run((s) => setTrackField(s, track.id, 'pan', 0)),
+      onLive, onChange, ariaLabel: `${trackTitle(track)} pan`,
+    });
+    const grip = el('div', { class: 'arrgrip', title: 'Hold to move this track, or for its options' }, [
+      el('span', { class: 'caticon arrdot-icon', style: `color:${shade}`, html: categoryIcon(categoryOf(kitById(track.kitId, track)), 15) }),
+    ]);
+    if (onTrackMenu) trackGrips[track.id] = grip;
 
     const label = el('div', {
-      class: `arrlabel${silenced ? ' arrlabel-off' : ''}`,
+      class: `arrlabel arrlabel-card${silenced ? ' arrlabel-off' : ''}`,
       style: `width:${LABEL_WIDTH}px;height:${CELL_HEIGHT}px`,
     }, [
       onTrack
@@ -8310,14 +8652,17 @@ function arrangementMatrix(store, onChange, {
             const button = el('button', {
               class: 'arrname-button',
               type: 'button',
-              title: `${trackTitle(track)} settings \u2014 hold for more`,
-              onClick: () => onTrack(track.id),
+              title: `${trackTitle(track)} settings \u2014 hold to move, or for more`,
+              onClick: () => { if (suppressTap[track.id]) { suppressTap[track.id] = false; return; } onTrack(track.id); },
             }, [name]);
-            if (onHoldTrack) onHoldTrack(button, track.id);
+            if (onTrackMenu) trackButtons[track.id] = button;
+            else if (onHoldTrack) onHoldTrack(button, track.id);
             return button;
           })()
         : name,
-      el('div', { class: 'arrmix' }, [
+      levelBar,
+      panBar,
+      el('div', { class: 'arrbtns' }, [
         el('button', {
           class: `arrtoggle${track.mute ? ' arrtoggle-mute' : ''}`,
           type: 'button',
@@ -8332,14 +8677,7 @@ function arrangementMatrix(store, onChange, {
           text: 'S',
           onClick: () => run((s) => setTrackField(s, track.id, 'solo', !track.solo)),
         }),
-        level,
-      ]),
-      el('div', { class: 'arrpan' }, [
-        el('span', {
-          class: `arrpantick${track.pan ? ' arrpantick-off' : ''}`,
-          style: `left:${Math.round(50 + (track.pan || 0) * 50)}%`,
-          title: `Pan ${track.pan ? Math.round(Math.abs(track.pan * 100)) : ''}${track.pan ? (track.pan < 0 ? ' left' : ' right') : 'centred'}`,
-        }),
+        grip,
       ]),
     ]);
 
@@ -8361,6 +8699,72 @@ function arrangementMatrix(store, onChange, {
     : null;
 
   const playhead = el('div', { class: 'arrplayhead', 'aria-hidden': 'true' });
+  
+  const rowOf = (node) => { let n = node; while (n && !(n.className && String(n.className).split(' ').includes('arrrow'))) n = n.parentNode; return n; };
+  song.tracks.forEach((track) => {
+    const button = trackButtons[track.id];
+    if (!button) return;
+    const on = (type, fn) => [button, trackGrips[track.id]].filter(Boolean).forEach((n) => n.addEventListener(type, fn));
+    let timer = null;
+    let dragging = false;
+    let moved = false;
+    let originY = 0;
+    let target = 0;
+    const rowsNow = () => song.tracks.map((t) => trackButtons[t.id] && rowOf(trackButtons[t.id]));
+    const pitch = () => {
+      const rows = rowsNow().filter(Boolean);
+      if (rows.length > 1 && Number.isFinite(rows[1].offsetTop) && Number.isFinite(rows[0].offsetTop)) {
+        const d = rows[1].offsetTop - rows[0].offsetTop;
+        if (d > 0) return d;
+      }
+      const row = rowOf(button);
+      return ((row && row.offsetHeight) || CELL_HEIGHT) + 6;
+    };
+    const clear = () => rowsNow().forEach((r) => { if (r) { r.style.transform = ''; r.style.zIndex = ''; r.classList && r.classList.remove('arrrow-dragging'); } });
+    const finish = (commit) => {
+      if (timer) { clearTimeout(timer); timer = null; }
+      if (!dragging) return;
+      dragging = false;
+      const from = song.tracks.findIndex((t) => t.id === track.id);
+      clear();
+      suppressTap[track.id] = true;
+      if (commit && moved && target !== from) run((s) => moveTrack(s, track.id, target));
+      else if (commit && !moved && onTrackMenu) onTrackMenu(button, track.id);
+    };
+    on('pointerdown', (e) => {
+      originY = e.clientY || 0;
+      moved = false;
+      target = song.tracks.findIndex((t) => t.id === track.id);
+      timer = setTimeout(() => {
+        timer = null;
+        dragging = true;
+        const row = rowOf(button);
+        if (row) { row.style.zIndex = '5'; row.classList && row.classList.add('arrrow-dragging'); }
+      }, 300);
+    });
+    on('pointermove', (e) => {
+      const dy = (e.clientY || 0) - originY;
+      if (!dragging) {
+        if (timer && Math.abs(dy) > 10) { clearTimeout(timer); timer = null; }
+        return;
+      }
+      if (e.preventDefault) e.preventDefault();
+      if (Math.abs(dy) > 6) moved = true;
+      const from = song.tracks.findIndex((t) => t.id === track.id);
+      const step = pitch();
+      target = Math.max(0, Math.min(song.tracks.length - 1, from + Math.round(dy / step)));
+      rowsNow().forEach((r, i) => {
+        if (!r) return;
+        if (i === from) r.style.transform = `translateY(${dy}px)`;
+        else if (from < target && i > from && i <= target) r.style.transform = `translateY(${-step}px)`;
+        else if (from > target && i < from && i >= target) r.style.transform = `translateY(${step}px)`;
+        else r.style.transform = '';
+      });
+    });
+    on('pointerup', () => finish(true));
+    on('pointercancel', () => finish(false));
+  });
+
   const lanes = el('div', { class: 'arrlanes' }, [...rows, playhead]);
 
   
@@ -8658,10 +9062,6 @@ function arrangementMatrix(store, onChange, {
   ]);
 }
 
-function levelFill(percent) {
-  return `${Math.round((Math.max(0, Math.min(120, percent)) / 120) * 100)}%`;
-}
-
 let arrangeScrollLeft = 0;
 
 function queueRestore(fn) {
@@ -8686,6 +9086,7 @@ function arrangementScreen(store, onChange, {
   onHoldCell,
   onCopyToMine,
   onHoldTrack,
+  onTrackMenu = null,
   onLive,
   onPlayhead,
 }) {
@@ -8752,7 +9153,7 @@ function arrangementScreen(store, onChange, {
     songControls(store, onChange, onSongSettings),
     
     el('div', { class: 'arrscreen-body' }, [
-      arrangementMatrix(store, onChange, { onPickSection, onCell, onTrack, onAddTrack, onHoldCell, onHoldTrack, onLive, onPlayhead, hint: false }),
+      arrangementMatrix(store, onChange, { onPickSection, onTrackMenu, onCell, onTrack, onAddTrack, onHoldCell, onHoldTrack, onLive, onPlayhead, hint: false }),
     ]),
     menuOpen
       ? null
@@ -9644,16 +10045,14 @@ function trackSheet(store, onChange, onLive) {
   };
 
   const level = fader({
-    min: 0,
-    max: 120,
-    value: Math.round(track.gain * 100),
+    ...levelFader(track.gain),
     ariaLabel: 'Level',
     onDrag: (value) => {
-      store.run((s) => setTrackField(s, track.id, 'gain', value / 100), { coalesce: true });
+      store.run((s) => setTrackField(s, track.id, 'gain', gainOf(value)), { coalesce: true });
       if (onLive) onLive();
     },
     onCommit: (value) => {
-      store.run((s) => setTrackField(s, track.id, 'gain', value / 100), { coalesce: true });
+      store.run((s) => setTrackField(s, track.id, 'gain', gainOf(value)), { coalesce: true });
       if (onLive) onLive();
       onChange();
     },
@@ -10138,17 +10537,14 @@ function noteSheet(store, onChange) {
 function mixSheet(store, onChange, onLive) {
   const { song } = store.state;
   const soloing = song.tracks.some((t) => t.solo);
-  const toPercent = (gain) => Math.round(gain * 100);
 
   const rows = song.tracks.map((track) => {
     const kit = kitById(track.kitId, track);
     const silent = track.mute || (soloing && !track.solo);
 
-    const write = (value) => store.run((s) => setTrackField(s, track.id, 'gain', value / 100), { coalesce: true });
+    const write = (value) => store.run((s) => setTrackField(s, track.id, 'gain', gainOf(value)), { coalesce: true });
     const level = fader({
-      min: 0,
-      max: 120,
-      value: toPercent(track.gain),
+      ...levelFader(track.gain),
       ariaLabel: `${trackTitle(track)} level`,
       onDrag: (value) => {
         write(value);
@@ -10766,6 +11162,20 @@ function midiImportSheet(store, onChange, midiImport) {
     ]),
     el('p', { class: 'hint dim', text: 'For an exact copy of a PocketDAW song — automation, levels and names — export a backup instead.' }),
   ]);
+}
+
+function placeMenu({ left, right, top, bottom, menuW, menuH, width, height, minTop = 0, margin = 6, gap = 8 }) {
+  const maxX = Math.max(margin, width - menuW - margin);
+  const x = Math.max(margin, Math.min(maxX, (left + right) / 2 - menuW / 2));
+  const minY = minTop + margin;
+  const maxY = Math.max(minY, height - menuH - margin);
+  const above = top - menuH - gap;
+  const below = bottom + gap;
+  let y;
+  if (above >= minY) y = above;
+  else if (below <= maxY) y = below;
+  else y = Math.max(minY, Math.min(maxY, top)); // over the selection, on screen
+  return { x: Math.round(x), y: Math.round(Math.max(minY, Math.min(maxY, y))) };
 }
 
 function createPlayhead({
@@ -11684,7 +12094,7 @@ function createTransport({
     const cue = Math.max(0, Number(takeCue()) || 0);
     anchorTick = (mode === 'song' ? songStartTick() : 0) + cue;
     ensureMap();
-    scheduledUpTo = 0;
+    scheduledUpTo = anchorTick;
     tick();
     timer = timers.setInterval(tick, intervalMs);
   }
@@ -11713,7 +12123,7 @@ function createTransport({
     anchorTick = mode === 'song' ? songStartTick() : 0;
     loopedSection = mode === 'section' ? getSectionId() : null;
     ensureMap();
-    scheduledUpTo = 0;
+    scheduledUpTo = anchorTick;
     tick();
   }
 
@@ -14569,7 +14979,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-10-01 15:21';
+const BUILD_STAMP = '2026-10-05 06:24';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -14751,6 +15161,8 @@ function mountApp(root, options = {}) {
       const { fetchAudio } = createSampleFetcher({ ctx, content });
       engine = createEngine({
         ctx,
+        
+        preferMedia: options.preferMedia ?? ringerSwitchApplies(),
         getSong: () => store.state.song,
         getSectionId: () => store.state.view.activeSectionId,
         
@@ -15333,7 +15745,8 @@ function mountApp(root, options = {}) {
       menu: {
         title: `Sound for ${trackTitle(track)}`,
         current: track.kitId,
-        options: soundOptions(track.kind === 'drum' ? 'drum' : 'pitched'),
+        options: soundOptions(track.kind === 'drum' ? 'drum' : 'pitched', track),
+        onDisabled: (o) => flash(`${o.label} can't fit all the notes on this track`, 2500),
         onSelect: (id) => {
           store.setUi({ menu: null });
           selectKit(id);
@@ -15352,10 +15765,16 @@ function mountApp(root, options = {}) {
 
   
   
-  function soundOptions(kind) {
+  function soundOptions(kind, track = null) {
+    const span = track && kind === 'pitched' ? trackSpan(store.state.song, track.id) : null;
     return allKits()
       .filter((k) => (kind === 'any' ? true : kind === 'drum' ? k.kind === 'drum' : k.kind !== 'drum'))
-      .map((k) => ({ id: k.id, label: k.name, hint: kitHint(k), group: categoryOf(k) }));
+      .map((k) => {
+        const fits = !span || k.id === track.kitId || octaveShiftToFit(span, k.range) !== null;
+        return fits
+          ? { id: k.id, label: k.name, hint: kitHint(k), group: categoryOf(k) }
+          : { id: k.id, label: k.name, hint: 'too small for these notes', group: categoryOf(k), disabled: true };
+      });
   }
 
   function kitHint(kit) {
@@ -15389,7 +15808,10 @@ function mountApp(root, options = {}) {
     const kit = kitById(kitId);
     if (track.kitId !== kitId) {
       const step = store.run((s) => setTrackKit(s, track.id, kitId));
-      if (step && step.moved) {
+      if (step && step.shifted) {
+        const n = Math.abs(step.shifted);
+        flash(`${kit.name} \u2014 notes moved ${step.shifted > 0 ? 'up' : 'down'} ${n === 1 ? 'an octave' : `${n} octaves`} to fit`, 3000);
+      } else if (step && step.moved) {
         flash(`${kit.name} \u2014 ${step.moved} hit${step.moved === 1 ? '' : 's'} moved to the nearest lane`, 3000);
       } else {
         flash(kit.name);
@@ -15630,14 +16052,73 @@ function mountApp(root, options = {}) {
     });
 
     popover.style.display = 'flex';
-    const menuW = 150;
-    const menuH = 4 * 40 + 8;
-    const width = canvas.clientWidth || 380;
-    const centre = (left + right) / 2;
-    const x = Math.max(6, Math.min(width - menuW - 6, centre - menuW / 2));
-    const y = top - menuH - 8 >= HEADER_HEIGHT ? top - menuH - 8 : bottom + 8;
-    popover.style.left = `${Math.round(x)}px`;
-    popover.style.top = `${Math.round(y)}px`;
+    const { x, y } = placeMenu({
+      left, right, top, bottom,
+      menuW: popover.offsetWidth || 150,
+      menuH: popover.offsetHeight || popover.children.length * 40 + 8,
+      width: canvas.clientWidth || 380,
+      height: canvas.clientHeight || 600,
+      minTop: HEADER_HEIGHT,
+    });
+    popover.style.left = `${x}px`;
+    popover.style.top = `${y}px`;
+  }
+
+  let trackClipboard = null;
+
+  
+  function trackMenu(node, trackId) {
+      const track = store.state.song.tracks.find((t) => t.id === trackId);
+      if (!track) return;
+      const only = store.state.song.tracks.length <= 1;
+      const title = trackTitle(track);
+      popoverMenu(node, [
+        { label: 'Track settings', onSelect: () => { store.setView({ activeTrackId: trackId }); store.setUi({ sheet: 'track' }); render(); } },
+        {
+          label: 'Duplicate track',
+          onSelect: () => {
+            const step = store.run((s) => duplicateTrack(s, trackId));
+            if (step) { store.setView({ activeTrackId: step.trackId }); flash(`${title} duplicated`); }
+            render();
+          },
+        },
+        {
+          label: 'Copy notes',
+          onSelect: () => {
+            trackClipboard = { ...copyTrackNotes(store.state.song, trackId), name: title };
+            flash(`Copied ${trackClipboard.count} note${trackClipboard.count === 1 ? '' : 's'} from ${title}`);
+          },
+        },
+        trackClipboard
+          ? {
+            label: `Paste notes from ${trackClipboard.name}`,
+            onSelect: () => {
+              const problem = pasteProblem(store.state.song, trackId, trackClipboard);
+              if (problem === 'kind') { flash(trackClipboard.kind === 'drum' ? 'Drum hits can\u2019t go onto a pitched track' : 'Pitched notes can\u2019t go onto a drum track', 2500); return; }
+              if (problem === 'fit') { flash(`${title} can\u2019t fit all the copied notes`, 2500); return; }
+              const step = store.run((s) => pasteTrackNotes(s, trackId, trackClipboard));
+              if (step) {
+                const n = Math.abs(step.shifted);
+                const moved = step.shifted ? `, moved ${step.shifted > 0 ? 'up' : 'down'} ${n === 1 ? 'an octave' : `${n} octaves`} to fit` : '';
+                const left = step.left > 0 ? ` (${step.left} past the end of shorter sections left out)` : '';
+                flash(`Pasted ${step.pasted} note${step.pasted === 1 ? '' : 's'} onto ${title}${moved}${left}`, 3000);
+              }
+              render();
+            },
+          }
+          : { label: 'Paste notes \u2014 copy a track first', disabled: true },
+        only
+          ? { label: 'Remove track \u2014 the only one', disabled: true }
+          : {
+            label: `Remove ${trackTitle(track)}`,
+            onSelect: () => {
+              store.run((s) => removeTrack(s, trackId));
+              const next = store.state.song.tracks[0];
+              store.setView({ activeTrackId: next.id, selectedNoteId: null, selection: [] });
+              render();
+            },
+          },
+      ], arrangeHost);
   }
 
   function openArrangement() {
@@ -16374,25 +16855,8 @@ function mountApp(root, options = {}) {
         onHoldCell: (node, sectionId, trackId) => holdable(node, () => openCellMenu(node, sectionId, trackId), { delay: 260, slop: 10 }),
         
         onCopyToMine: () => songsApi.copyToMine(store.state.song.id),
-        onHoldTrack: (node, trackId) => holdable(node, () => {
-          const track = store.state.song.tracks.find((t) => t.id === trackId);
-          if (!track) return;
-          const only = store.state.song.tracks.length <= 1;
-          popoverMenu(node, [
-            { label: 'Track settings', onSelect: () => { store.setView({ activeTrackId: trackId }); store.setUi({ sheet: 'track' }); render(); } },
-            only
-              ? { label: 'Remove track \u2014 the only one', disabled: true }
-              : {
-                label: `Remove ${trackTitle(track)}`,
-                onSelect: () => {
-                  store.run((s) => removeTrack(s, trackId));
-                  const next = store.state.song.tracks[0];
-                  store.setView({ activeTrackId: next.id, selectedNoteId: null, selection: [] });
-                  render();
-                },
-              },
-          ], arrangeHost);
-        }),
+        onHoldTrack: (node, trackId) => holdable(node, () => trackMenu(node, trackId)),
+        onTrackMenu: (node, trackId) => trackMenu(node, trackId),
         onLive: () => {
           if (engine) engine.syncMix();
         },
