@@ -1,7 +1,7 @@
 {
   "format": "pocketdaw.catalog",
   "version": 1,
-  "built": "2026-10-02",
+  "built": "2026-10-04",
   "packs": [
     {
       "id": "ambichoir",
@@ -63,10 +63,10 @@
       "name": "Ambi Drone",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/ambidrone-1.0.0.zip",
-      "bytes": 64662,
-      "crc32": 2913032354,
+      "version": "1.1.0",
+      "file": "packs/ambidrone-1_1_0.zip",
+      "bytes": 68515,
+      "crc32": 4019837778,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
@@ -75,7 +75,7 @@
       "manifest": {
         "id": "ambidrone",
         "name": "Ambi Drone",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "drone",
         "kind": "pitched",
@@ -108,7 +108,11 @@
             "lo": 36,
             "hi": 60,
             "placeholder": "organ",
-            "gain": 2.514
+            "gain": 2.514,
+            "loop": {
+              "start": 29106,
+              "end": 196666
+            }
           }
         ]
       }
@@ -513,6 +517,438 @@
             "gain": 0.684
           }
         ]
+      }
+    },
+    {
+      "id": "beachrocks",
+      "name": "Beach Rocks",
+      "family": "drums",
+      "kind": "drum",
+      "version": "1.0.0",
+      "file": "packs/beachrocks-1_0_0.zip",
+      "bytes": 276495,
+      "crc32": 2926609358,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://signaturesounds.org/",
+        "credit": "Signature Sounds (Phil), Beach Rocks Percussions — CC0"
+      },
+      "manifest": {
+        "id": "beachrocks",
+        "name": "Beach Rocks",
+        "version": "1.0.0",
+        "family": "drums",
+        "kind": "drum",
+        "shade": "silver",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://signaturesounds.org/",
+          "credit": "Signature Sounds (Phil), Beach Rocks Percussions — CC0"
+        },
+        "envelope": {
+          "attack": 0.001,
+          "release": 0.01
+        },
+        "accentGain": 1.5,
+        "polyphony": 16,
+        "voicesAtOnce": 3,
+        "lanes": [
+          {
+            "midi": 36,
+            "label": "Rock 01",
+            "group": "perc"
+          },
+          {
+            "midi": 37,
+            "label": "Rock 02",
+            "group": "perc"
+          },
+          {
+            "midi": 38,
+            "label": "Rock 03",
+            "group": "perc"
+          },
+          {
+            "midi": 39,
+            "label": "Rock 04",
+            "group": "perc"
+          },
+          {
+            "midi": 40,
+            "label": "Rock 05",
+            "group": "perc"
+          },
+          {
+            "midi": 41,
+            "label": "Rock 06",
+            "group": "perc"
+          },
+          {
+            "midi": 42,
+            "label": "Rock 07",
+            "group": "perc"
+          },
+          {
+            "midi": 43,
+            "label": "Rock 08",
+            "group": "perc"
+          },
+          {
+            "midi": 44,
+            "label": "Rock 09",
+            "group": "perc"
+          },
+          {
+            "midi": 45,
+            "label": "Rock 10",
+            "group": "perc"
+          },
+          {
+            "midi": 46,
+            "label": "Rock 11",
+            "group": "perc"
+          },
+          {
+            "midi": 47,
+            "label": "Rock 12",
+            "group": "perc"
+          },
+          {
+            "midi": 48,
+            "label": "Rock 13",
+            "group": "perc"
+          },
+          {
+            "midi": 49,
+            "label": "Rock 14",
+            "group": "perc"
+          },
+          {
+            "midi": 50,
+            "label": "Rock 15",
+            "group": "perc"
+          },
+          {
+            "midi": 51,
+            "label": "Rock 16",
+            "group": "perc"
+          },
+          {
+            "midi": 52,
+            "label": "Rock 17",
+            "group": "perc"
+          },
+          {
+            "midi": 53,
+            "label": "Rock 18",
+            "group": "perc"
+          },
+          {
+            "midi": 54,
+            "label": "Rock 19",
+            "group": "perc"
+          },
+          {
+            "midi": 55,
+            "label": "Rock 20",
+            "group": "perc"
+          },
+          {
+            "midi": 56,
+            "label": "Rock 21",
+            "group": "perc"
+          },
+          {
+            "midi": 57,
+            "label": "Rock 22",
+            "group": "perc"
+          },
+          {
+            "midi": 58,
+            "label": "Rock 23",
+            "group": "perc"
+          },
+          {
+            "midi": 59,
+            "label": "Rock 24",
+            "group": "perc"
+          },
+          {
+            "midi": 60,
+            "label": "Rock 25",
+            "group": "perc"
+          },
+          {
+            "midi": 61,
+            "label": "Rock 26",
+            "group": "perc"
+          },
+          {
+            "midi": 62,
+            "label": "Rock 27",
+            "group": "perc"
+          },
+          {
+            "midi": 63,
+            "label": "Rock 28",
+            "group": "perc"
+          }
+        ],
+        "zones": [
+          {
+            "file": "beachrocks/36-rock01.m4a",
+            "placeholder": "clave",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "gain": 2.1196,
+            "click": null
+          },
+          {
+            "file": "beachrocks/37-rock02.m4a",
+            "placeholder": "clave",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "gain": 0.8571,
+            "click": null
+          },
+          {
+            "file": "beachrocks/38-rock03.m4a",
+            "placeholder": "clave",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "gain": 7.6024,
+            "click": null
+          },
+          {
+            "file": "beachrocks/39-rock04.m4a",
+            "placeholder": "clave",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "gain": 0.9591,
+            "click": null
+          },
+          {
+            "file": "beachrocks/40-rock05.m4a",
+            "placeholder": "clave",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "gain": 1.9487,
+            "click": null
+          },
+          {
+            "file": "beachrocks/41-rock06.m4a",
+            "placeholder": "clave",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "gain": 3.7135,
+            "click": null
+          },
+          {
+            "file": "beachrocks/42-rock07.m4a",
+            "placeholder": "clave",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "gain": 1.7732,
+            "click": null
+          },
+          {
+            "file": "beachrocks/43-rock08.m4a",
+            "placeholder": "clave",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "gain": 4.4772,
+            "click": null
+          },
+          {
+            "file": "beachrocks/44-rock09.m4a",
+            "placeholder": "clave",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "gain": 1.2408,
+            "click": null
+          },
+          {
+            "file": "beachrocks/45-rock10.m4a",
+            "placeholder": "clave",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "gain": 6.3362,
+            "click": null
+          },
+          {
+            "file": "beachrocks/46-rock11.m4a",
+            "placeholder": "clave",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "gain": 1.1395,
+            "click": null
+          },
+          {
+            "file": "beachrocks/47-rock12.m4a",
+            "placeholder": "clave",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "gain": 2.6422,
+            "click": null
+          },
+          {
+            "file": "beachrocks/48-rock13.m4a",
+            "placeholder": "clave",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "gain": 1.3033,
+            "click": null
+          },
+          {
+            "file": "beachrocks/49-rock14.m4a",
+            "placeholder": "clave",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "gain": 1.3838,
+            "click": null
+          },
+          {
+            "file": "beachrocks/50-rock15.m4a",
+            "placeholder": "clave",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "gain": 0.6053,
+            "click": null
+          },
+          {
+            "file": "beachrocks/51-rock16.m4a",
+            "placeholder": "clave",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "gain": 0.8494,
+            "click": null
+          },
+          {
+            "file": "beachrocks/52-rock17.m4a",
+            "placeholder": "clave",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "gain": 2.1038,
+            "click": null
+          },
+          {
+            "file": "beachrocks/53-rock18.m4a",
+            "placeholder": "clave",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "gain": 1.6784,
+            "click": null
+          },
+          {
+            "file": "beachrocks/54-rock19.m4a",
+            "placeholder": "clave",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "gain": 1.9485,
+            "click": null
+          },
+          {
+            "file": "beachrocks/55-rock20.m4a",
+            "placeholder": "clave",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "gain": 2.1237,
+            "click": null
+          },
+          {
+            "file": "beachrocks/56-rock21.m4a",
+            "placeholder": "clave",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "gain": 0.9157,
+            "click": null
+          },
+          {
+            "file": "beachrocks/57-rock22.m4a",
+            "placeholder": "clave",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "gain": 0.8098,
+            "click": null
+          },
+          {
+            "file": "beachrocks/58-rock23.m4a",
+            "placeholder": "clave",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "gain": 0.6745,
+            "click": null
+          },
+          {
+            "file": "beachrocks/59-rock24.m4a",
+            "placeholder": "clave",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "gain": 9.797,
+            "click": null
+          },
+          {
+            "file": "beachrocks/60-rock25.m4a",
+            "placeholder": "clave",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "gain": 0.9993,
+            "click": null
+          },
+          {
+            "file": "beachrocks/61-rock26.m4a",
+            "placeholder": "clave",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "gain": 1.4674,
+            "click": null
+          },
+          {
+            "file": "beachrocks/62-rock27.m4a",
+            "placeholder": "clave",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "gain": 0.5954,
+            "click": null
+          },
+          {
+            "file": "beachrocks/63-rock28.m4a",
+            "placeholder": "clave",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "gain": 0.6689,
+            "click": null
+          }
+        ],
+        "category": "drums"
       }
     },
     {
@@ -1039,7 +1475,7 @@
             "rootNote": 49,
             "lo": 49,
             "hi": 49,
-            "gain": 0.3627,
+            "gain": 1.147,
             "click": null
           },
           {
@@ -1048,7 +1484,7 @@
             "rootNote": 52,
             "lo": 52,
             "hi": 52,
-            "gain": 0.4117,
+            "gain": 1.639,
             "click": null
           },
           {
@@ -1057,7 +1493,7 @@
             "rootNote": 53,
             "lo": 53,
             "hi": 53,
-            "gain": 0.3165,
+            "gain": 1.0602,
             "click": null
           },
           {
@@ -1066,7 +1502,7 @@
             "rootNote": 51,
             "lo": 51,
             "hi": 51,
-            "gain": 0.32,
+            "gain": 1.2739,
             "click": null
           },
           {
@@ -1075,7 +1511,7 @@
             "rootNote": 22,
             "lo": 22,
             "hi": 22,
-            "gain": 0.2852,
+            "gain": 0.5372,
             "click": null
           },
           {
@@ -1084,7 +1520,7 @@
             "rootNote": 42,
             "lo": 42,
             "hi": 42,
-            "gain": 0.3163,
+            "gain": 1.2592,
             "click": null
           },
           {
@@ -1093,7 +1529,7 @@
             "rootNote": 44,
             "lo": 44,
             "hi": 44,
-            "gain": 0.0536,
+            "gain": 0.2134,
             "click": null
           },
           {
@@ -1102,7 +1538,7 @@
             "rootNote": 31,
             "lo": 31,
             "hi": 31,
-            "gain": 0.6532,
+            "gain": 2.6004,
             "click": null
           },
           {
@@ -1111,7 +1547,7 @@
             "rootNote": 32,
             "lo": 32,
             "hi": 32,
-            "gain": 1.244,
+            "gain": 4.9525,
             "click": null
           },
           {
@@ -1378,6 +1814,244 @@
             "gain": 0.893
           }
         ]
+      }
+    },
+    {
+      "id": "coastfalls",
+      "name": "Coast & Falls",
+      "family": "drums",
+      "kind": "drum",
+      "version": "1.0.0",
+      "file": "packs/coastfalls-1_0_0.zip",
+      "bytes": 1945612,
+      "crc32": 722946726,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://signaturesounds.org/",
+        "credit": "Signature Sounds (Phil) — field recordings, CC0"
+      },
+      "manifest": {
+        "id": "coastfalls",
+        "name": "Coast & Falls",
+        "version": "1.0.0",
+        "family": "drums",
+        "kind": "drum",
+        "shade": "green",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://signaturesounds.org/",
+          "credit": "Signature Sounds (Phil) — field recordings, CC0"
+        },
+        "envelope": {
+          "attack": 0.001,
+          "release": 0.01
+        },
+        "accentGain": 1.5,
+        "polyphony": 16,
+        "voicesAtOnce": 2,
+        "lanes": [
+          {
+            "midi": 36,
+            "label": "Beach 1",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.98,
+            "loopEnd": 10.06
+          },
+          {
+            "midi": 37,
+            "label": "Beach 2",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.7,
+            "loopEnd": 10.8
+          },
+          {
+            "midi": 38,
+            "label": "Beach 3",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.98,
+            "loopEnd": 10.8
+          },
+          {
+            "midi": 39,
+            "label": "Beach 4",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.98,
+            "loopEnd": 10.36
+          },
+          {
+            "midi": 40,
+            "label": "Stones",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 2.42,
+            "loopEnd": 10.4
+          },
+          {
+            "midi": 41,
+            "label": "Rock Shore",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.02,
+            "loopEnd": 10.98
+          },
+          {
+            "midi": 42,
+            "label": "Hermitage",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.3,
+            "loopEnd": 10.16
+          },
+          {
+            "midi": 43,
+            "label": "Hermitage 2",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1,
+            "loopEnd": 10.36
+          },
+          {
+            "midi": 44,
+            "label": "Hermitage 3",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.1,
+            "loopEnd": 10.56
+          },
+          {
+            "midi": 45,
+            "label": "Falls Far",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.2,
+            "loopEnd": 10.2
+          },
+          {
+            "midi": 46,
+            "label": "Falls Near",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.98,
+            "loopEnd": 10.98
+          }
+        ],
+        "zones": [
+          {
+            "file": "coastfalls/36-beach1.m4a",
+            "placeholder": "crash",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "gain": 2.63,
+            "click": null
+          },
+          {
+            "file": "coastfalls/37-beach2.m4a",
+            "placeholder": "crash",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "gain": 10.116,
+            "click": null
+          },
+          {
+            "file": "coastfalls/38-beach3.m4a",
+            "placeholder": "crash",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "gain": 11.22,
+            "click": null
+          },
+          {
+            "file": "coastfalls/39-beach4.m4a",
+            "placeholder": "crash",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "gain": 4.266,
+            "click": null
+          },
+          {
+            "file": "coastfalls/40-stones.m4a",
+            "placeholder": "crash",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "gain": 1.811,
+            "click": null
+          },
+          {
+            "file": "coastfalls/41-rockshore.m4a",
+            "placeholder": "crash",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "gain": 3.426,
+            "click": null
+          },
+          {
+            "file": "coastfalls/42-hermitage.m4a",
+            "placeholder": "crash",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "gain": 1.641,
+            "click": null
+          },
+          {
+            "file": "coastfalls/43-hermitage2.m4a",
+            "placeholder": "crash",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "gain": 2.512,
+            "click": null
+          },
+          {
+            "file": "coastfalls/44-hermitage3.m4a",
+            "placeholder": "crash",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "gain": 1.445,
+            "click": null
+          },
+          {
+            "file": "coastfalls/45-fallsfar.m4a",
+            "placeholder": "crash",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "gain": 0.776,
+            "click": null
+          },
+          {
+            "file": "coastfalls/46-fallsnear.m4a",
+            "placeholder": "crash",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "gain": 0.912,
+            "click": null
+          }
+        ],
+        "category": "nature"
       }
     },
     {
@@ -2209,6 +2883,244 @@
             "gain": 1.663
           }
         ]
+      }
+    },
+    {
+      "id": "fieldsparks",
+      "name": "Fields & Parks",
+      "family": "drums",
+      "kind": "drum",
+      "version": "1.0.0",
+      "file": "packs/fieldsparks-1_0_0.zip",
+      "bytes": 1882778,
+      "crc32": 1081271866,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://signaturesounds.org/",
+        "credit": "Signature Sounds (Phil) — field recordings, CC0"
+      },
+      "manifest": {
+        "id": "fieldsparks",
+        "name": "Fields & Parks",
+        "version": "1.0.0",
+        "family": "drums",
+        "kind": "drum",
+        "shade": "green",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://signaturesounds.org/",
+          "credit": "Signature Sounds (Phil) — field recordings, CC0"
+        },
+        "envelope": {
+          "attack": 0.001,
+          "release": 0.01
+        },
+        "accentGain": 1.5,
+        "polyphony": 16,
+        "voicesAtOnce": 2,
+        "lanes": [
+          {
+            "midi": 36,
+            "label": "Field 1",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.28,
+            "loopEnd": 10.5
+          },
+          {
+            "midi": 37,
+            "label": "Field 2",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.12,
+            "loopEnd": 10.96
+          },
+          {
+            "midi": 38,
+            "label": "Field 3",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.96,
+            "loopEnd": 9.9
+          },
+          {
+            "midi": 39,
+            "label": "Field 4",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.14,
+            "loopEnd": 10.76
+          },
+          {
+            "midi": 40,
+            "label": "Field 5",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.52,
+            "loopEnd": 9.62
+          },
+          {
+            "midi": 41,
+            "label": "Field 6",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.56,
+            "loopEnd": 10.86
+          },
+          {
+            "midi": 42,
+            "label": "Park 1",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.94,
+            "loopEnd": 10.94
+          },
+          {
+            "midi": 43,
+            "label": "Park 2",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.56,
+            "loopEnd": 9.94
+          },
+          {
+            "midi": 44,
+            "label": "Park 3",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 2,
+            "loopEnd": 10.94
+          },
+          {
+            "midi": 45,
+            "label": "Park 4",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.66,
+            "loopEnd": 10.38
+          },
+          {
+            "midi": 46,
+            "label": "Park 5",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.26,
+            "loopEnd": 10.32
+          }
+        ],
+        "zones": [
+          {
+            "file": "fieldsparks/36-field1.m4a",
+            "placeholder": "crash",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "gain": 12.162,
+            "click": null
+          },
+          {
+            "file": "fieldsparks/37-field2.m4a",
+            "placeholder": "crash",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "gain": 12.162,
+            "click": null
+          },
+          {
+            "file": "fieldsparks/38-field3.m4a",
+            "placeholder": "crash",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "gain": 11.614,
+            "click": null
+          },
+          {
+            "file": "fieldsparks/39-field4.m4a",
+            "placeholder": "crash",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "gain": 9.886,
+            "click": null
+          },
+          {
+            "file": "fieldsparks/40-field5.m4a",
+            "placeholder": "crash",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "gain": 8.913,
+            "click": null
+          },
+          {
+            "file": "fieldsparks/41-field6.m4a",
+            "placeholder": "crash",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "gain": 8.511,
+            "click": null
+          },
+          {
+            "file": "fieldsparks/42-park1.m4a",
+            "placeholder": "crash",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "gain": 11.35,
+            "click": null
+          },
+          {
+            "file": "fieldsparks/43-park2.m4a",
+            "placeholder": "crash",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "gain": 15.311,
+            "click": null
+          },
+          {
+            "file": "fieldsparks/44-park3.m4a",
+            "placeholder": "crash",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "gain": 15.849,
+            "click": null
+          },
+          {
+            "file": "fieldsparks/45-park4.m4a",
+            "placeholder": "crash",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "gain": 16.032,
+            "click": null
+          },
+          {
+            "file": "fieldsparks/46-park5.m4a",
+            "placeholder": "crash",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "gain": 14.289,
+            "click": null
+          }
+        ],
+        "category": "nature"
       }
     },
     {
@@ -3073,10 +3985,10 @@
       "name": "Glass Hum",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/glasshum-1.0.0.zip",
-      "bytes": 131785,
-      "crc32": 3455724186,
+      "version": "1.1.0",
+      "file": "packs/glasshum-1_1_0.zip",
+      "bytes": 68877,
+      "crc32": 1363060607,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
@@ -3085,7 +3997,7 @@
       "manifest": {
         "id": "glasshum",
         "name": "Glass Hum",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "drone",
         "kind": "pitched",
@@ -3118,7 +4030,11 @@
             "lo": 33,
             "hi": 57,
             "placeholder": "organ",
-            "gain": 2.929
+            "gain": 2.929,
+            "loop": {
+              "start": 73206,
+              "end": 200880
+            }
           }
         ]
       }
@@ -3128,10 +4044,10 @@
       "name": "Glass Rub",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/glassrub-1.0.0.zip",
-      "bytes": 48232,
-      "crc32": 4172992638,
+      "version": "1.1.0",
+      "file": "packs/glassrub-1_1_0.zip",
+      "bytes": 44199,
+      "crc32": 410536648,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
@@ -3140,7 +4056,7 @@
       "manifest": {
         "id": "glassrub",
         "name": "Glass Rub",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "drone",
         "kind": "pitched",
@@ -3173,7 +4089,11 @@
             "lo": 66,
             "hi": 90,
             "placeholder": "organ",
-            "gain": 0.996
+            "gain": 0.996,
+            "loop": {
+              "start": 31752,
+              "end": 111843
+            }
           }
         ]
       }
@@ -3652,10 +4572,10 @@
       "name": "Haunted Hum",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/hauntedhum-1.0.0.zip",
-      "bytes": 127650,
-      "crc32": 2256860443,
+      "version": "1.1.0",
+      "file": "packs/hauntedhum-1_1_0.zip",
+      "bytes": 60670,
+      "crc32": 3660760235,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
@@ -3664,7 +4584,7 @@
       "manifest": {
         "id": "hauntedhum",
         "name": "Haunted Hum",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "drone",
         "kind": "pitched",
@@ -3697,9 +4617,501 @@
             "lo": 38,
             "hi": 62,
             "placeholder": "organ",
-            "gain": 3.488
+            "gain": 3.488,
+            "loop": {
+              "start": 88200,
+              "end": 169808
+            }
           }
         ]
+      }
+    },
+    {
+      "id": "industrial",
+      "name": "Industrial Kit",
+      "family": "drums",
+      "kind": "drum",
+      "version": "1.0.0",
+      "file": "packs/industrial-1_0_0.zip",
+      "bytes": 751605,
+      "crc32": 3861089351,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://signaturesounds.org/store/p/industrial-percussions-kitfoley",
+        "credit": "Signature Sounds (Phil), Industrial Percussions Kit/Foley — CC0"
+      },
+      "manifest": {
+        "id": "industrial",
+        "name": "Industrial Kit",
+        "version": "1.0.0",
+        "family": "drums",
+        "kind": "drum",
+        "shade": "rose",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://signaturesounds.org/store/p/industrial-percussions-kitfoley",
+          "credit": "Signature Sounds (Phil), Industrial Percussions Kit/Foley — CC0"
+        },
+        "envelope": {
+          "attack": 0.001,
+          "release": 0.01
+        },
+        "accentGain": 1.5,
+        "polyphony": 16,
+        "voicesAtOnce": 3,
+        "lanes": [
+          {
+            "midi": 36,
+            "label": "Sub Boom",
+            "group": "perc"
+          },
+          {
+            "midi": 37,
+            "label": "Boom",
+            "group": "perc"
+          },
+          {
+            "midi": 38,
+            "label": "Thud 1",
+            "group": "perc"
+          },
+          {
+            "midi": 39,
+            "label": "Thud 2",
+            "group": "perc"
+          },
+          {
+            "midi": 40,
+            "label": "Thud 3",
+            "group": "perc"
+          },
+          {
+            "midi": 41,
+            "label": "Thud 4",
+            "group": "perc"
+          },
+          {
+            "midi": 42,
+            "label": "Hydraulic",
+            "group": "perc"
+          },
+          {
+            "midi": 43,
+            "label": "Barrel 1",
+            "group": "perc"
+          },
+          {
+            "midi": 44,
+            "label": "Barrel 2",
+            "group": "perc"
+          },
+          {
+            "midi": 45,
+            "label": "Barrel 3",
+            "group": "perc"
+          },
+          {
+            "midi": 46,
+            "label": "Barrel 4",
+            "group": "perc"
+          },
+          {
+            "midi": 47,
+            "label": "Barrel 5",
+            "group": "perc"
+          },
+          {
+            "midi": 48,
+            "label": "Barrel 6",
+            "group": "perc"
+          },
+          {
+            "midi": 49,
+            "label": "Barrel 7",
+            "group": "perc"
+          },
+          {
+            "midi": 50,
+            "label": "Pipe Clang",
+            "group": "perc"
+          },
+          {
+            "midi": 51,
+            "label": "Pipe Hit 1",
+            "group": "perc"
+          },
+          {
+            "midi": 52,
+            "label": "Pipe Hit 2",
+            "group": "perc"
+          },
+          {
+            "midi": 53,
+            "label": "Pipe Hit 3",
+            "group": "perc"
+          },
+          {
+            "midi": 54,
+            "label": "Pipe Ring",
+            "group": "perc"
+          },
+          {
+            "midi": 55,
+            "label": "Anvil Ring",
+            "group": "perc"
+          },
+          {
+            "midi": 56,
+            "label": "Clunk",
+            "group": "perc"
+          },
+          {
+            "midi": 57,
+            "label": "Metal Ring",
+            "group": "perc"
+          },
+          {
+            "midi": 58,
+            "label": "Screech",
+            "group": "perc"
+          },
+          {
+            "midi": 59,
+            "label": "Chain Rattle",
+            "group": "perc"
+          },
+          {
+            "midi": 60,
+            "label": "Clank 1",
+            "group": "perc"
+          },
+          {
+            "midi": 61,
+            "label": "Clank 2",
+            "group": "perc"
+          },
+          {
+            "midi": 62,
+            "label": "Clank 3",
+            "group": "perc"
+          },
+          {
+            "midi": 63,
+            "label": "Sheet Hit",
+            "group": "perc"
+          },
+          {
+            "midi": 64,
+            "label": "Scrape",
+            "group": "perc"
+          },
+          {
+            "midi": 65,
+            "label": "Rattle 1",
+            "group": "perc"
+          },
+          {
+            "midi": 66,
+            "label": "Rattle 2",
+            "group": "perc"
+          },
+          {
+            "midi": 67,
+            "label": "Tick",
+            "group": "perc"
+          }
+        ],
+        "zones": [
+          {
+            "file": "industrial/36-subboom.m4a",
+            "placeholder": "kick",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "gain": 0.3461,
+            "click": null
+          },
+          {
+            "file": "industrial/37-boom.m4a",
+            "placeholder": "kick",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "gain": 0.4452,
+            "click": null
+          },
+          {
+            "file": "industrial/38-thud1.m4a",
+            "placeholder": "kick",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "gain": 0.2269,
+            "click": null
+          },
+          {
+            "file": "industrial/39-thud2.m4a",
+            "placeholder": "kick",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "gain": 0.5439,
+            "click": null
+          },
+          {
+            "file": "industrial/40-thud3.m4a",
+            "placeholder": "kick",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "gain": 0.4371,
+            "click": null
+          },
+          {
+            "file": "industrial/41-thud4.m4a",
+            "placeholder": "kick",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "gain": 0.4009,
+            "click": null
+          },
+          {
+            "file": "industrial/42-hydraulic.m4a",
+            "placeholder": "kick",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "gain": 0.6331,
+            "click": null
+          },
+          {
+            "file": "industrial/43-barrel1.m4a",
+            "placeholder": "kick",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "gain": 0.3093,
+            "click": null
+          },
+          {
+            "file": "industrial/44-barrel2.m4a",
+            "placeholder": "kick",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "gain": 0.2787,
+            "click": null
+          },
+          {
+            "file": "industrial/45-barrel3.m4a",
+            "placeholder": "kick",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "gain": 0.3658,
+            "click": null
+          },
+          {
+            "file": "industrial/46-barrel4.m4a",
+            "placeholder": "kick",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "gain": 0.2516,
+            "click": null
+          },
+          {
+            "file": "industrial/47-barrel5.m4a",
+            "placeholder": "kick",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "gain": 0.4116,
+            "click": null
+          },
+          {
+            "file": "industrial/48-barrel6.m4a",
+            "placeholder": "clave",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "gain": 0.5603,
+            "click": null
+          },
+          {
+            "file": "industrial/49-barrel7.m4a",
+            "placeholder": "clave",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "gain": 0.176,
+            "click": null
+          },
+          {
+            "file": "industrial/50-pipeclang.m4a",
+            "placeholder": "kick",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "gain": 0.1242,
+            "click": null
+          },
+          {
+            "file": "industrial/51-pipehit1.m4a",
+            "placeholder": "clave",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "gain": 0.1935,
+            "click": null
+          },
+          {
+            "file": "industrial/52-pipehit2.m4a",
+            "placeholder": "clave",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "gain": 0.1425,
+            "click": null
+          },
+          {
+            "file": "industrial/53-pipehit3.m4a",
+            "placeholder": "clave",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "gain": 0.1057,
+            "click": null
+          },
+          {
+            "file": "industrial/54-pipering.m4a",
+            "placeholder": "clave",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "gain": 0.428,
+            "click": null
+          },
+          {
+            "file": "industrial/55-anvilring.m4a",
+            "placeholder": "clave",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "gain": 0.1734,
+            "click": null
+          },
+          {
+            "file": "industrial/56-clunk.m4a",
+            "placeholder": "clave",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "gain": 0.0841,
+            "click": null
+          },
+          {
+            "file": "industrial/57-metalring.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "gain": 0.113,
+            "click": null
+          },
+          {
+            "file": "industrial/58-screech.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "gain": 0.0519,
+            "click": null
+          },
+          {
+            "file": "industrial/59-chainrattle.m4a",
+            "placeholder": "clave",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "gain": 0.0682,
+            "click": null
+          },
+          {
+            "file": "industrial/60-clank1.m4a",
+            "placeholder": "clave",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "gain": 0.0534,
+            "click": null
+          },
+          {
+            "file": "industrial/61-clank2.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "gain": 0.0578,
+            "click": null
+          },
+          {
+            "file": "industrial/62-clank3.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "gain": 0.0887,
+            "click": null
+          },
+          {
+            "file": "industrial/63-sheethit.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "gain": 0.0732,
+            "click": null
+          },
+          {
+            "file": "industrial/64-scrape.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "gain": 0.544,
+            "click": null
+          },
+          {
+            "file": "industrial/65-rattle1.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "gain": 0.2128,
+            "click": null
+          },
+          {
+            "file": "industrial/66-rattle2.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "gain": 0.0762,
+            "click": null
+          },
+          {
+            "file": "industrial/67-tick.m4a",
+            "placeholder": "closedHat",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "gain": 0.0734,
+            "click": null
+          }
+        ],
+        "category": "drums"
       }
     },
     {
@@ -4835,7 +6247,7 @@
     },
     {
       "id": "naturesounds",
-      "name": "Nature Sounds",
+      "name": "Edinburgh Nature",
       "family": "drums",
       "kind": "drum",
       "version": "1.0.0",
@@ -4849,7 +6261,7 @@
       },
       "manifest": {
         "id": "naturesounds",
-        "name": "Nature Sounds",
+        "name": "Edinburgh Nature",
         "version": "1.0.0",
         "family": "drums",
         "kind": "drum",
@@ -5628,6 +7040,298 @@
       }
     },
     {
+      "id": "rainstorm",
+      "name": "Rain & Storm",
+      "family": "drums",
+      "kind": "drum",
+      "version": "1.0.0",
+      "file": "packs/rainstorm-1_0_0.zip",
+      "bytes": 2434345,
+      "crc32": 1759570736,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://signaturesounds.org/",
+        "credit": "Signature Sounds (Phil) — field recordings, CC0"
+      },
+      "manifest": {
+        "id": "rainstorm",
+        "name": "Rain & Storm",
+        "version": "1.0.0",
+        "family": "drums",
+        "kind": "drum",
+        "shade": "green",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://signaturesounds.org/",
+          "credit": "Signature Sounds (Phil) — field recordings, CC0"
+        },
+        "envelope": {
+          "attack": 0.001,
+          "release": 0.01
+        },
+        "accentGain": 1.5,
+        "polyphony": 16,
+        "voicesAtOnce": 2,
+        "lanes": [
+          {
+            "midi": 36,
+            "label": "Storm 1",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 2.04,
+            "loopEnd": 10.18
+          },
+          {
+            "midi": 37,
+            "label": "Storm 2",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.96,
+            "loopEnd": 10.82
+          },
+          {
+            "midi": 38,
+            "label": "Storm 3",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.22,
+            "loopEnd": 9.48
+          },
+          {
+            "midi": 39,
+            "label": "Soft Rain 1",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.02,
+            "loopEnd": 8.56
+          },
+          {
+            "midi": 40,
+            "label": "Soft Rain 2",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.96,
+            "loopEnd": 10.98
+          },
+          {
+            "midi": 41,
+            "label": "Soft Rain 3",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1,
+            "loopEnd": 10.14
+          },
+          {
+            "midi": 42,
+            "label": "Night Rain 1",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 0.96,
+            "loopEnd": 10
+          },
+          {
+            "midi": 43,
+            "label": "Night Rain 2",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.08,
+            "loopEnd": 10.58
+          },
+          {
+            "midi": 44,
+            "label": "Night Rain 3",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.32,
+            "loopEnd": 10.22
+          },
+          {
+            "midi": 45,
+            "label": "Window 1",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 2.28,
+            "loopEnd": 9.08
+          },
+          {
+            "midi": 46,
+            "label": "Window 2",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.16,
+            "loopEnd": 9.48
+          },
+          {
+            "midi": 47,
+            "label": "Dark Noise",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.34,
+            "loopEnd": 10.7
+          },
+          {
+            "midi": 48,
+            "label": "White Noise",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.16,
+            "loopEnd": 10.9
+          },
+          {
+            "midi": 49,
+            "label": "Bright Noise",
+            "group": "perc",
+            "gate": true,
+            "loop": true,
+            "loopStart": 1.26,
+            "loopEnd": 10.8
+          }
+        ],
+        "zones": [
+          {
+            "file": "rainstorm/36-storm1.m4a",
+            "placeholder": "crash",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "gain": 0.661,
+            "click": null
+          },
+          {
+            "file": "rainstorm/37-storm2.m4a",
+            "placeholder": "crash",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "gain": 0.668,
+            "click": null
+          },
+          {
+            "file": "rainstorm/38-storm3.m4a",
+            "placeholder": "crash",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "gain": 0.75,
+            "click": null
+          },
+          {
+            "file": "rainstorm/39-softrain1.m4a",
+            "placeholder": "crash",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "gain": 21.135,
+            "click": null
+          },
+          {
+            "file": "rainstorm/40-softrain2.m4a",
+            "placeholder": "crash",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "gain": 60.256,
+            "click": null
+          },
+          {
+            "file": "rainstorm/41-softrain3.m4a",
+            "placeholder": "crash",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "gain": 15.488,
+            "click": null
+          },
+          {
+            "file": "rainstorm/42-nightrain1.m4a",
+            "placeholder": "crash",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "gain": 14.174,
+            "click": null
+          },
+          {
+            "file": "rainstorm/43-nightrain2.m4a",
+            "placeholder": "crash",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "gain": 11.885,
+            "click": null
+          },
+          {
+            "file": "rainstorm/44-nightrain3.m4a",
+            "placeholder": "crash",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "gain": 6.426,
+            "click": null
+          },
+          {
+            "file": "rainstorm/45-window1.m4a",
+            "placeholder": "crash",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "gain": 6.839,
+            "click": null
+          },
+          {
+            "file": "rainstorm/46-window2.m4a",
+            "placeholder": "crash",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "gain": 6.31,
+            "click": null
+          },
+          {
+            "file": "rainstorm/47-darknoise.m4a",
+            "placeholder": "crash",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "gain": 2.786,
+            "click": null
+          },
+          {
+            "file": "rainstorm/48-whitenoise.m4a",
+            "placeholder": "crash",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "gain": 0.767,
+            "click": null
+          },
+          {
+            "file": "rainstorm/49-brightnoise.m4a",
+            "placeholder": "crash",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "gain": 0.468,
+            "click": null
+          }
+        ],
+        "category": "nature"
+      }
+    },
+    {
       "id": "salamander",
       "name": "Salamander",
       "family": "keys",
@@ -6081,7 +7785,7 @@
             "rootNote": 46,
             "lo": 46,
             "hi": 46,
-            "gain": 0.0791,
+            "gain": 0.148,
             "click": null
           },
           {
@@ -6090,7 +7794,7 @@
             "rootNote": 42,
             "lo": 42,
             "hi": 42,
-            "gain": 0.0604,
+            "gain": 0.1129,
             "click": null
           },
           {
@@ -6099,7 +7803,7 @@
             "rootNote": 44,
             "lo": 44,
             "hi": 44,
-            "gain": 0.0887,
+            "gain": 0.1659,
             "click": null
           },
           {
@@ -6108,7 +7812,7 @@
             "rootNote": 84,
             "lo": 84,
             "hi": 84,
-            "gain": 0.0763,
+            "gain": 0.1427,
             "click": null
           },
           {
@@ -6117,7 +7821,7 @@
             "rootNote": 85,
             "lo": 85,
             "hi": 85,
-            "gain": 0.3709,
+            "gain": 0.9242,
             "click": null
           },
           {
@@ -6126,7 +7830,7 @@
             "rootNote": 86,
             "lo": 86,
             "hi": 86,
-            "gain": 0.2805,
+            "gain": 0.2761,
             "click": null
           },
           {
@@ -6135,7 +7839,7 @@
             "rootNote": 87,
             "lo": 87,
             "hi": 87,
-            "gain": 0.2641,
+            "gain": 0.26,
             "click": null
           },
           {
@@ -6144,7 +7848,7 @@
             "rootNote": 39,
             "lo": 39,
             "hi": 39,
-            "gain": 0.1707,
+            "gain": 0.1681,
             "click": null
           },
           {
@@ -6153,7 +7857,7 @@
             "rootNote": 88,
             "lo": 88,
             "hi": 88,
-            "gain": 0.2362,
+            "gain": 0.2326,
             "click": null
           },
           {
@@ -6162,7 +7866,7 @@
             "rootNote": 89,
             "lo": 89,
             "hi": 89,
-            "gain": 0.2822,
+            "gain": 0.2778,
             "click": null
           },
           {
@@ -6171,7 +7875,7 @@
             "rootNote": 90,
             "lo": 90,
             "hi": 90,
-            "gain": 0.2706,
+            "gain": 0.2664,
             "click": null
           },
           {
@@ -6180,7 +7884,7 @@
             "rootNote": 91,
             "lo": 91,
             "hi": 91,
-            "gain": 0.2576,
+            "gain": 0.2537,
             "click": null
           },
           {
@@ -6189,7 +7893,7 @@
             "rootNote": 38,
             "lo": 38,
             "hi": 38,
-            "gain": 0.345,
+            "gain": 0.3397,
             "click": null
           },
           {
@@ -6198,7 +7902,7 @@
             "rootNote": 92,
             "lo": 92,
             "hi": 92,
-            "gain": 0.4424,
+            "gain": 0.4784,
             "click": null
           },
           {
@@ -6207,7 +7911,7 @@
             "rootNote": 93,
             "lo": 93,
             "hi": 93,
-            "gain": 0.3595,
+            "gain": 0.4502,
             "click": null
           },
           {
@@ -6216,7 +7920,7 @@
             "rootNote": 94,
             "lo": 94,
             "hi": 94,
-            "gain": 0.54,
+            "gain": 0.5348,
             "click": null
           },
           {
@@ -6225,7 +7929,7 @@
             "rootNote": 95,
             "lo": 95,
             "hi": 95,
-            "gain": 0.3543,
+            "gain": 0.3489,
             "click": null
           },
           {
@@ -6234,7 +7938,7 @@
             "rootNote": 96,
             "lo": 96,
             "hi": 96,
-            "gain": 0.2867,
+            "gain": 0.2834,
             "click": null
           },
           {
@@ -6243,7 +7947,7 @@
             "rootNote": 97,
             "lo": 97,
             "hi": 97,
-            "gain": 0.2819,
+            "gain": 0.2787,
             "click": null
           },
           {
@@ -6252,7 +7956,7 @@
             "rootNote": 98,
             "lo": 98,
             "hi": 98,
-            "gain": 0.2723,
+            "gain": 0.2692,
             "click": null
           },
           {
@@ -6261,7 +7965,7 @@
             "rootNote": 36,
             "lo": 36,
             "hi": 36,
-            "gain": 0.2654,
+            "gain": 0.2624,
             "click": null
           },
           {
@@ -6270,7 +7974,7 @@
             "rootNote": 99,
             "lo": 99,
             "hi": 99,
-            "gain": 0.3261,
+            "gain": 0.3224,
             "click": null
           },
           {
@@ -6279,7 +7983,7 @@
             "rootNote": 100,
             "lo": 100,
             "hi": 100,
-            "gain": 0.2867,
+            "gain": 0.2834,
             "click": null
           },
           {
@@ -6288,7 +7992,7 @@
             "rootNote": 101,
             "lo": 101,
             "hi": 101,
-            "gain": 0.3198,
+            "gain": 0.3161,
             "click": null
           }
         ],
@@ -6944,13 +8648,13 @@
             "group": "cymbal"
           },
           {
-            "midi": 55,
-            "label": "Splash",
+            "midi": 51,
+            "label": "Ride",
             "group": "cymbal"
           },
           {
-            "midi": 52,
-            "label": "Splash Soft",
+            "midi": 59,
+            "label": "Ride Soft",
             "group": "cymbal"
           },
           {
@@ -7045,38 +8749,38 @@
         "zones": [
           {
             "file": "spdrums/49-crash.m4a",
-            "placeholder": "crash",
-            "rootNote": 49,
-            "lo": 49,
-            "hi": 49,
-            "gain": 0.0547,
+            "placeholder": "ride",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "gain": 0.0535,
             "click": null
           },
           {
             "file": "spdrums/57-crashsoft.m4a",
-            "placeholder": "crash",
-            "rootNote": 57,
-            "lo": 57,
-            "hi": 57,
-            "gain": 0.0547,
+            "placeholder": "ride",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "gain": 0.0535,
             "click": null
           },
           {
             "file": "spdrums/55-splash.m4a",
             "placeholder": "crash",
-            "rootNote": 55,
-            "lo": 55,
-            "hi": 55,
-            "gain": 0.0415,
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "gain": 0.1282,
             "click": null
           },
           {
             "file": "spdrums/52-splashsoft.m4a",
             "placeholder": "crash",
-            "rootNote": 52,
-            "lo": 52,
-            "hi": 52,
-            "gain": 0.0586,
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "gain": 0.1811,
             "click": null
           },
           {
@@ -7085,7 +8789,7 @@
             "rootNote": 46,
             "lo": 46,
             "hi": 46,
-            "gain": 0.025,
+            "gain": 0.065,
             "click": null
           },
           {
@@ -7094,7 +8798,7 @@
             "rootNote": 42,
             "lo": 42,
             "hi": 42,
-            "gain": 0.0818,
+            "gain": 0.1422,
             "click": null
           },
           {
@@ -7103,7 +8807,7 @@
             "rootNote": 44,
             "lo": 44,
             "hi": 44,
-            "gain": 0.0321,
+            "gain": 0.1249,
             "click": null
           },
           {
@@ -7112,7 +8816,7 @@
             "rootNote": 56,
             "lo": 56,
             "hi": 56,
-            "gain": 0.0285,
+            "gain": 0.0556,
             "click": null
           },
           {
@@ -7121,7 +8825,7 @@
             "rootNote": 25,
             "lo": 25,
             "hi": 25,
-            "gain": 0.0808,
+            "gain": 0.1575,
             "click": null
           },
           {
@@ -7130,7 +8834,7 @@
             "rootNote": 38,
             "lo": 38,
             "hi": 38,
-            "gain": 0.1433,
+            "gain": 0.14,
             "click": null
           },
           {
@@ -7139,7 +8843,7 @@
             "rootNote": 40,
             "lo": 40,
             "hi": 40,
-            "gain": 0.1704,
+            "gain": 0.1665,
             "click": null
           },
           {
@@ -7148,7 +8852,7 @@
             "rootNote": 50,
             "lo": 50,
             "hi": 50,
-            "gain": 0.1162,
+            "gain": 0.1203,
             "click": null
           },
           {
@@ -7157,7 +8861,7 @@
             "rootNote": 48,
             "lo": 48,
             "hi": 48,
-            "gain": 0.0978,
+            "gain": 0.1203,
             "click": null
           },
           {
@@ -7166,7 +8870,7 @@
             "rootNote": 47,
             "lo": 47,
             "hi": 47,
-            "gain": 0.1075,
+            "gain": 0.1113,
             "click": null
           },
           {
@@ -7175,7 +8879,7 @@
             "rootNote": 43,
             "lo": 43,
             "hi": 43,
-            "gain": 0.0604,
+            "gain": 0.0702,
             "click": null
           },
           {
@@ -7184,7 +8888,7 @@
             "rootNote": 45,
             "lo": 45,
             "hi": 45,
-            "gain": 0.0984,
+            "gain": 0.1079,
             "click": null
           },
           {
@@ -7193,7 +8897,7 @@
             "rootNote": 41,
             "lo": 41,
             "hi": 41,
-            "gain": 0.0877,
+            "gain": 0.1018,
             "click": null
           },
           {
@@ -7202,7 +8906,7 @@
             "rootNote": 34,
             "lo": 34,
             "hi": 34,
-            "gain": 0.3609,
+            "gain": 0.3527,
             "click": null
           },
           {
@@ -7211,7 +8915,7 @@
             "rootNote": 36,
             "lo": 36,
             "hi": 36,
-            "gain": 0.2588,
+            "gain": 0.2529,
             "click": null
           },
           {
@@ -7220,7 +8924,7 @@
             "rootNote": 35,
             "lo": 35,
             "hi": 35,
-            "gain": 0.1541,
+            "gain": 0.169,
             "click": null
           }
         ]
@@ -7961,10 +9665,10 @@
       "name": "TBD Minor Pad 1",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/tbdpad1-1.0.0.zip",
-      "bytes": 34218,
-      "crc32": 1408474764,
+      "version": "1.1.0",
+      "file": "packs/tbdpad1-1_1_0.zip",
+      "bytes": 33105,
+      "crc32": 1807078731,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
@@ -7973,7 +9677,7 @@
       "manifest": {
         "id": "tbdpad1",
         "name": "TBD Minor Pad 1",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "pad",
         "kind": "pitched",
@@ -8006,7 +9710,11 @@
             "lo": 31,
             "hi": 55,
             "placeholder": "organ",
-            "gain": 2.61
+            "gain": 2.61,
+            "loop": {
+              "start": 22050,
+              "end": 71405
+            }
           }
         ]
       }
@@ -8016,10 +9724,10 @@
       "name": "TBD Minor Pad 2",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/tbdpad2-1.0.0.zip",
-      "bytes": 49270,
-      "crc32": 1134891868,
+      "version": "1.1.0",
+      "file": "packs/tbdpad2-1_1_0.zip",
+      "bytes": 40540,
+      "crc32": 2621031584,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
@@ -8028,7 +9736,7 @@
       "manifest": {
         "id": "tbdpad2",
         "name": "TBD Minor Pad 2",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "pad",
         "kind": "pitched",
@@ -8061,7 +9769,11 @@
             "lo": 31,
             "hi": 55,
             "placeholder": "organ",
-            "gain": 2.419
+            "gain": 2.419,
+            "loop": {
+              "start": 22491,
+              "end": 98075
+            }
           }
         ]
       }
@@ -8071,10 +9783,10 @@
       "name": "TBD Minor Pad 3",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/tbdpad3-1.0.0.zip",
-      "bytes": 46444,
-      "crc32": 1595942298,
+      "version": "1.1.0",
+      "file": "packs/tbdpad3-1_1_0.zip",
+      "bytes": 44748,
+      "crc32": 1994766990,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
@@ -8083,7 +9795,7 @@
       "manifest": {
         "id": "tbdpad3",
         "name": "TBD Minor Pad 3",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "pad",
         "kind": "pitched",
@@ -8116,7 +9828,11 @@
             "lo": 50,
             "hi": 74,
             "placeholder": "organ",
-            "gain": 1.581
+            "gain": 1.581,
+            "loop": {
+              "start": 37044,
+              "end": 113296
+            }
           }
         ]
       }
@@ -8126,10 +9842,10 @@
       "name": "TBD Minor Pad 4",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/tbdpad4-1.0.0.zip",
-      "bytes": 40373,
-      "crc32": 2605382360,
+      "version": "1.1.0",
+      "file": "packs/tbdpad4-1_1_0.zip",
+      "bytes": 39798,
+      "crc32": 2351369287,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
@@ -8138,7 +9854,7 @@
       "manifest": {
         "id": "tbdpad4",
         "name": "TBD Minor Pad 4",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "pad",
         "kind": "pitched",
@@ -8171,7 +9887,11 @@
             "lo": 39,
             "hi": 63,
             "placeholder": "organ",
-            "gain": 1.475
+            "gain": 1.475,
+            "loop": {
+              "start": 29106,
+              "end": 95602
+            }
           }
         ]
       }
@@ -8338,7 +10058,7 @@
             "rootNote": 49,
             "lo": 49,
             "hi": 49,
-            "gain": 0.1426,
+            "gain": 0.2062,
             "click": null
           },
           {
@@ -8347,7 +10067,7 @@
             "rootNote": 51,
             "lo": 51,
             "hi": 51,
-            "gain": 0.1251,
+            "gain": 0.1707,
             "click": null
           },
           {
@@ -8356,7 +10076,7 @@
             "rootNote": 46,
             "lo": 46,
             "hi": 46,
-            "gain": 0.0203,
+            "gain": 0.0781,
             "click": null
           },
           {
@@ -8365,7 +10085,7 @@
             "rootNote": 42,
             "lo": 42,
             "hi": 42,
-            "gain": 0.0472,
+            "gain": 0.1442,
             "click": null
           },
           {
@@ -8374,7 +10094,7 @@
             "rootNote": 56,
             "lo": 56,
             "hi": 56,
-            "gain": 0.2321,
+            "gain": 0.3355,
             "click": null
           },
           {
@@ -8383,7 +10103,7 @@
             "rootNote": 29,
             "lo": 29,
             "hi": 29,
-            "gain": 0.174,
+            "gain": 0.2822,
             "click": null
           },
           {
@@ -8392,7 +10112,7 @@
             "rootNote": 38,
             "lo": 38,
             "hi": 38,
-            "gain": 0.3904,
+            "gain": 0.3771,
             "click": null
           },
           {
@@ -8401,7 +10121,7 @@
             "rootNote": 40,
             "lo": 40,
             "hi": 40,
-            "gain": 0.5841,
+            "gain": 0.5643,
             "click": null
           },
           {
@@ -8410,7 +10130,7 @@
             "rootNote": 50,
             "lo": 50,
             "hi": 50,
-            "gain": 0.282,
+            "gain": 0.2724,
             "click": null
           },
           {
@@ -8419,7 +10139,7 @@
             "rootNote": 45,
             "lo": 45,
             "hi": 45,
-            "gain": 0.5734,
+            "gain": 0.5539,
             "click": null
           },
           {
@@ -8428,7 +10148,7 @@
             "rootNote": 35,
             "lo": 35,
             "hi": 35,
-            "gain": 0.7491,
+            "gain": 0.7237,
             "click": null
           },
           {
@@ -8437,7 +10157,7 @@
             "rootNote": 36,
             "lo": 36,
             "hi": 36,
-            "gain": 0.943,
+            "gain": 0.911,
             "click": null
           }
         ]
@@ -8504,10 +10224,10 @@
       "name": "Tremolo Strings",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/tremstrings-1.0.0.zip",
-      "bytes": 717977,
-      "crc32": 3038575981,
+      "version": "1.1.0",
+      "file": "packs/tremstrings-1_1_0.zip",
+      "bytes": 662370,
+      "crc32": 97414476,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sfzinstruments/Discord-SFZ-GM-Bank",
@@ -8516,7 +10236,7 @@
       "manifest": {
         "id": "tremstrings",
         "name": "Tremolo Strings",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "strings",
         "kind": "pitched",
@@ -8549,7 +10269,11 @@
             "lo": 28,
             "hi": 29,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 40320,
+              "end": 116142
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_Gs0.m4a",
@@ -8557,7 +10281,11 @@
             "lo": 30,
             "hi": 33,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 40320,
+              "end": 122100
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_C1.m4a",
@@ -8565,7 +10293,11 @@
             "lo": 34,
             "hi": 37,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 27840,
+              "end": 177129
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_E1.m4a",
@@ -8573,7 +10305,11 @@
             "lo": 38,
             "hi": 41,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 31680,
+              "end": 129055
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_Gs1.m4a",
@@ -8581,7 +10317,11 @@
             "lo": 42,
             "hi": 45,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 24000,
+              "end": 132794
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_C2.m4a",
@@ -8589,7 +10329,11 @@
             "lo": 46,
             "hi": 49,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 39360,
+              "end": 150794
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_E2.m4a",
@@ -8597,7 +10341,11 @@
             "lo": 50,
             "hi": 53,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 31680,
+              "end": 158409
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_Gs2.m4a",
@@ -8605,7 +10353,11 @@
             "lo": 54,
             "hi": 57,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 32640,
+              "end": 162219
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_C3.m4a",
@@ -8613,7 +10365,11 @@
             "lo": 58,
             "hi": 61,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 32640,
+              "end": 143213
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_E3.m4a",
@@ -8621,7 +10377,11 @@
             "lo": 62,
             "hi": 65,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 47040,
+              "end": 163463
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_Gs3.m4a",
@@ -8629,7 +10389,11 @@
             "lo": 66,
             "hi": 69,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 46080,
+              "end": 196297
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_C4.m4a",
@@ -8637,7 +10401,11 @@
             "lo": 70,
             "hi": 73,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 46080,
+              "end": 179206
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_E4.m4a",
@@ -8645,7 +10413,11 @@
             "lo": 74,
             "hi": 77,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 24960,
+              "end": 169005
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_Gs4.m4a",
@@ -8653,7 +10425,11 @@
             "lo": 78,
             "hi": 81,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 37440,
+              "end": 154575
+            }
           },
           {
             "file": "tremstrings/VS_TremStr_C5.m4a",
@@ -8661,7 +10437,11 @@
             "lo": 82,
             "hi": 84,
             "placeholder": "organ",
-            "gain": 1.338
+            "gain": 1.338,
+            "loop": {
+              "start": 33600,
+              "end": 153097
+            }
           }
         ]
       }
@@ -9025,7 +10805,7 @@
     },
     {
       "id": "uprightbass",
-      "name": "Upright-Bass",
+      "name": "Upright Bass",
       "family": "bass",
       "kind": "pitched",
       "version": "1.0.0",
@@ -9039,7 +10819,7 @@
       },
       "manifest": {
         "id": "uprightbass",
-        "name": "Upright-Bass",
+        "name": "Upright Bass",
         "version": "1.0.0",
         "family": "bass",
         "kind": "pitched",
@@ -10370,7 +12150,7 @@
             "rootNote": 49,
             "lo": 49,
             "hi": 49,
-            "gain": 0.97,
+            "gain": 2.9633,
             "click": null
           },
           {
@@ -10379,7 +12159,7 @@
             "rootNote": 52,
             "lo": 52,
             "hi": 52,
-            "gain": 1.5485,
+            "gain": 4.4659,
             "click": null
           },
           {
@@ -10388,7 +12168,7 @@
             "rootNote": 51,
             "lo": 51,
             "hi": 51,
-            "gain": 0.4771,
+            "gain": 1.7323,
             "click": null
           },
           {
@@ -10397,7 +12177,7 @@
             "rootNote": 53,
             "lo": 53,
             "hi": 53,
-            "gain": 1.0967,
+            "gain": 1.884,
             "click": null
           },
           {
@@ -10406,7 +12186,7 @@
             "rootNote": 59,
             "lo": 59,
             "hi": 59,
-            "gain": 0.3669,
+            "gain": 1.3322,
             "click": null
           },
           {
@@ -10415,7 +12195,7 @@
             "rootNote": 42,
             "lo": 42,
             "hi": 42,
-            "gain": 3.9339,
+            "gain": 14.2831,
             "click": null
           },
           {
@@ -10424,7 +12204,7 @@
             "rootNote": 22,
             "lo": 22,
             "hi": 22,
-            "gain": 1.8847,
+            "gain": 3.0566,
             "click": null
           },
           {
@@ -10433,7 +12213,7 @@
             "rootNote": 44,
             "lo": 44,
             "hi": 44,
-            "gain": 0.3622,
+            "gain": 1.315,
             "click": null
           },
           {
@@ -10442,7 +12222,7 @@
             "rootNote": 39,
             "lo": 39,
             "hi": 39,
-            "gain": 1.2103,
+            "gain": 2.0792,
             "click": null
           },
           {
@@ -10451,7 +12231,7 @@
             "rootNote": 37,
             "lo": 37,
             "hi": 37,
-            "gain": 2.09,
+            "gain": 2.6924,
             "click": null
           },
           {
@@ -10460,7 +12240,7 @@
             "rootNote": 33,
             "lo": 33,
             "hi": 33,
-            "gain": 1.3462,
+            "gain": 1.7343,
             "click": null
           },
           {
@@ -10469,7 +12249,7 @@
             "rootNote": 40,
             "lo": 40,
             "hi": 40,
-            "gain": 0.7386,
+            "gain": 0.6736,
             "click": null
           },
           {
@@ -10478,7 +12258,7 @@
             "rootNote": 38,
             "lo": 38,
             "hi": 38,
-            "gain": 1.0246,
+            "gain": 0.9344,
             "click": null
           },
           {
@@ -10487,7 +12267,7 @@
             "rootNote": 50,
             "lo": 50,
             "hi": 50,
-            "gain": 0.7493,
+            "gain": 0.7667,
             "click": null
           },
           {
@@ -10496,7 +12276,7 @@
             "rootNote": 45,
             "lo": 45,
             "hi": 45,
-            "gain": 0.6599,
+            "gain": 0.6753,
             "click": null
           },
           {
@@ -10505,7 +12285,7 @@
             "rootNote": 36,
             "lo": 36,
             "hi": 36,
-            "gain": 0.8186,
+            "gain": 0.7466,
             "click": null
           }
         ]
@@ -10516,10 +12296,10 @@
       "name": "Cellos",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/vscocellos-1.0.0.zip",
-      "bytes": 1136453,
-      "crc32": 1511340830,
+      "version": "1.1.0",
+      "file": "packs/vscocellos-1_1_0.zip",
+      "bytes": 747795,
+      "crc32": 1104215858,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
@@ -10528,7 +12308,7 @@
       "manifest": {
         "id": "vscocellos",
         "name": "Cellos",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "strings",
         "kind": "pitched",
@@ -10561,7 +12341,11 @@
             "lo": 36,
             "hi": 38,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 149940,
+              "end": 203606
+            }
           },
           {
             "file": "vscocellos/susvib_E1_v3_1.m4a",
@@ -10569,7 +12353,11 @@
             "lo": 39,
             "hi": 41,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 80262,
+              "end": 185586
+            }
           },
           {
             "file": "vscocellos/susvib_G1_v3_1.m4a",
@@ -10577,7 +12365,11 @@
             "lo": 42,
             "hi": 45,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 69678,
+              "end": 183770
+            }
           },
           {
             "file": "vscocellos/susvib_B1_v3_1.m4a",
@@ -10585,7 +12377,11 @@
             "lo": 46,
             "hi": 48,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 93492,
+              "end": 185042
+            }
           },
           {
             "file": "vscocellos/susvib_D2_v3_1.m4a",
@@ -10593,7 +12389,11 @@
             "lo": 49,
             "hi": 51,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 72324,
+              "end": 158697
+            }
           },
           {
             "file": "vscocellos/susvib_F2_v3_1.m4a",
@@ -10601,7 +12401,11 @@
             "lo": 52,
             "hi": 55,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 82026,
+              "end": 203420
+            }
           },
           {
             "file": "vscocellos/susvib_A2_v3_1.m4a",
@@ -10609,7 +12413,11 @@
             "lo": 56,
             "hi": 58,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 119952,
+              "end": 198912
+            }
           },
           {
             "file": "vscocellos/susvib_C3_v3_1.m4a",
@@ -10617,7 +12425,11 @@
             "lo": 59,
             "hi": 62,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 117306,
+              "end": 161912
+            }
           },
           {
             "file": "vscocellos/susvib_E3_v3_1.m4a",
@@ -10625,7 +12437,11 @@
             "lo": 63,
             "hi": 65,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 80262,
+              "end": 206830
+            }
           },
           {
             "file": "vscocellos/susvib_G3_v3_1.m4a",
@@ -10633,7 +12449,11 @@
             "lo": 66,
             "hi": 69,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 76734,
+              "end": 204240
+            }
           },
           {
             "file": "vscocellos/susvib_B3_v3_1.m4a",
@@ -10641,7 +12461,11 @@
             "lo": 70,
             "hi": 72,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 72324,
+              "end": 199842
+            }
           },
           {
             "file": "vscocellos/susvib_D4_v3_1.m4a",
@@ -10649,7 +12473,11 @@
             "lo": 73,
             "hi": 75,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 68796,
+              "end": 192793
+            }
           },
           {
             "file": "vscocellos/susvib_F4_v3_1.m4a",
@@ -10657,7 +12485,11 @@
             "lo": 76,
             "hi": 79,
             "placeholder": "organ",
-            "gain": 1.446
+            "gain": 1.446,
+            "loop": {
+              "start": 68796,
+              "end": 183558
+            }
           }
         ]
       }
@@ -10667,10 +12499,10 @@
       "name": "Violas",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/vscoviolas-1.0.0.zip",
-      "bytes": 1135902,
-      "crc32": 3124611732,
+      "version": "1.1.0",
+      "file": "packs/vscoviolas-1_1_0.zip",
+      "bytes": 1028942,
+      "crc32": 2084311723,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
@@ -10679,7 +12511,7 @@
       "manifest": {
         "id": "vscoviolas",
         "name": "Violas",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "strings",
         "kind": "pitched",
@@ -10712,7 +12544,11 @@
             "lo": 48,
             "hi": 49,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 61740,
+              "end": 247238
+            }
           },
           {
             "file": "vscoviolas/ViolaEns_susvib_D2_v2_1.m4a",
@@ -10720,7 +12556,11 @@
             "lo": 50,
             "hi": 51,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 32634,
+              "end": 279851
+            }
           },
           {
             "file": "vscoviolas/ViolaEns_susvib_E2_v2_1.m4a",
@@ -10728,7 +12568,11 @@
             "lo": 52,
             "hi": 53,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 37044,
+              "end": 222411
+            }
           },
           {
             "file": "vscoviolas/ViolaEns_susvib_G2_v2_1.m4a",
@@ -10736,7 +12580,11 @@
             "lo": 54,
             "hi": 57,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 33516,
+              "end": 259796
+            }
           },
           {
             "file": "vscoviolas/ViolaEns_susvib_B2_v2_1.m4a",
@@ -10744,7 +12592,11 @@
             "lo": 58,
             "hi": 60,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 80262,
+              "end": 279219
+            }
           },
           {
             "file": "vscoviolas/ViolaEns_susvib_D3_v2_1.m4a",
@@ -10752,7 +12604,11 @@
             "lo": 61,
             "hi": 63,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 44100,
+              "end": 282774
+            }
           },
           {
             "file": "vscoviolas/ViolaEns_susvib_F3_v2_1.m4a",
@@ -10760,7 +12616,11 @@
             "lo": 64,
             "hi": 67,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 39690,
+              "end": 294785
+            }
           },
           {
             "file": "vscoviolas/ViolaEns_susvib_A3_v2_1.m4a",
@@ -10768,7 +12628,11 @@
             "lo": 68,
             "hi": 70,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 49392,
+              "end": 277087
+            }
           },
           {
             "file": "vscoviolas/ViolaEns_susvib_C4_v2_1.m4a",
@@ -10776,7 +12640,11 @@
             "lo": 71,
             "hi": 74,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 67032,
+              "end": 229768
+            }
           },
           {
             "file": "vscoviolas/ViolaEns_susvib_E4_v2_1.m4a",
@@ -10784,7 +12652,11 @@
             "lo": 75,
             "hi": 77,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 78498,
+              "end": 289278
+            }
           },
           {
             "file": "vscoviolas/ViolaEns_susvib_G4_v2_1.m4a",
@@ -10792,7 +12664,11 @@
             "lo": 78,
             "hi": 81,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 84672,
+              "end": 265128
+            }
           },
           {
             "file": "vscoviolas/ViolaEns_susvib_B4_v2_1.m4a",
@@ -10800,7 +12676,11 @@
             "lo": 82,
             "hi": 84,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 66150,
+              "end": 266051
+            }
           },
           {
             "file": "vscoviolas/ViolaEns_susvib_D5_v2_1.m4a",
@@ -10808,7 +12688,11 @@
             "lo": 85,
             "hi": 86,
             "placeholder": "organ",
-            "gain": 1.776
+            "gain": 1.776,
+            "loop": {
+              "start": 44100,
+              "end": 290169
+            }
           }
         ]
       }
@@ -10818,10 +12702,10 @@
       "name": "Violins",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/vscoviolins-1.0.0.zip",
-      "bytes": 961857,
-      "crc32": 2323751328,
+      "version": "1.1.0",
+      "file": "packs/vscoviolins-1_1_0.zip",
+      "bytes": 890386,
+      "crc32": 270520044,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
@@ -10830,7 +12714,7 @@
       "manifest": {
         "id": "vscoviolins",
         "name": "Violins",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "strings",
         "kind": "pitched",
@@ -10863,7 +12747,11 @@
             "lo": 55,
             "hi": 56,
             "placeholder": "organ",
-            "gain": 4.71
+            "gain": 4.71,
+            "loop": {
+              "start": 58212,
+              "end": 291502
+            }
           },
           {
             "file": "vscoviolins/VlnEns_susVib_A2_v2.m4a",
@@ -10871,7 +12759,11 @@
             "lo": 57,
             "hi": 58,
             "placeholder": "organ",
-            "gain": 4.71
+            "gain": 4.71,
+            "loop": {
+              "start": 51156,
+              "end": 267697
+            }
           },
           {
             "file": "vscoviolins/VlnEns_susVib_B2_v2.m4a",
@@ -10879,7 +12771,11 @@
             "lo": 59,
             "hi": 60,
             "placeholder": "organ",
-            "gain": 4.71
+            "gain": 4.71,
+            "loop": {
+              "start": 70560,
+              "end": 287194
+            }
           },
           {
             "file": "vscoviolins/VlnEns_susVib_D3_v2.m4a",
@@ -10887,7 +12783,11 @@
             "lo": 61,
             "hi": 64,
             "placeholder": "organ",
-            "gain": 4.71
+            "gain": 4.71,
+            "loop": {
+              "start": 45864,
+              "end": 272206
+            }
           },
           {
             "file": "vscoviolins/VlnEns_susVib_Fs3_v2.m4a",
@@ -10895,7 +12795,11 @@
             "lo": 65,
             "hi": 67,
             "placeholder": "organ",
-            "gain": 4.71
+            "gain": 4.71,
+            "loop": {
+              "start": 89082,
+              "end": 274492
+            }
           },
           {
             "file": "vscoviolins/VlnEns_susVib_A3_v2.m4a",
@@ -10903,7 +12807,11 @@
             "lo": 68,
             "hi": 70,
             "placeholder": "organ",
-            "gain": 4.71
+            "gain": 4.71,
+            "loop": {
+              "start": 48510,
+              "end": 298569
+            }
           },
           {
             "file": "vscoviolins/VlnEns_susVib_C4_v2.m4a",
@@ -10911,7 +12819,11 @@
             "lo": 71,
             "hi": 74,
             "placeholder": "organ",
-            "gain": 4.71
+            "gain": 4.71,
+            "loop": {
+              "start": 125244,
+              "end": 297675
+            }
           },
           {
             "file": "vscoviolins/VlnEns_susVib_E4_v2.m4a",
@@ -10919,7 +12831,11 @@
             "lo": 75,
             "hi": 77,
             "placeholder": "organ",
-            "gain": 4.71
+            "gain": 4.71,
+            "loop": {
+              "start": 38808,
+              "end": 284402
+            }
           },
           {
             "file": "vscoviolins/VlnEns_susVib_G4_v2.m4a",
@@ -10927,7 +12843,11 @@
             "lo": 78,
             "hi": 81,
             "placeholder": "organ",
-            "gain": 4.71
+            "gain": 4.71,
+            "loop": {
+              "start": 53802,
+              "end": 243068
+            }
           },
           {
             "file": "vscoviolins/VlnEns_susVib_B4_v2.m4a",
@@ -10935,7 +12855,11 @@
             "lo": 82,
             "hi": 84,
             "placeholder": "organ",
-            "gain": 4.71
+            "gain": 4.71,
+            "loop": {
+              "start": 43218,
+              "end": 289047
+            }
           },
           {
             "file": "vscoviolins/VlnEns_susVib_D5_v2.m4a",
@@ -10943,7 +12867,11 @@
             "lo": 85,
             "hi": 89,
             "placeholder": "organ",
-            "gain": 4.71
+            "gain": 4.71,
+            "loop": {
+              "start": 49392,
+              "end": 207764
+            }
           }
         ]
       }
@@ -10953,10 +12881,10 @@
       "name": "Glass Rims",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/wineglass-1.0.0.zip",
-      "bytes": 402239,
-      "crc32": 1437136193,
+      "version": "1.1.0",
+      "file": "packs/wineglass-1_1_0.zip",
+      "bytes": 391765,
+      "crc32": 769668503,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
@@ -10965,7 +12893,7 @@
       "manifest": {
         "id": "wineglass",
         "name": "Glass Rims",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "drone",
         "kind": "pitched",
@@ -10998,7 +12926,11 @@
             "lo": 72,
             "hi": 76,
             "placeholder": "organ",
-            "gain": 45.757
+            "gain": 45.757,
+            "loop": {
+              "start": 29988,
+              "end": 321563
+            }
           },
           {
             "file": "wineglass/glass2_Fs4_Slow_1_Main.m4a",
@@ -11006,7 +12938,11 @@
             "lo": 77,
             "hi": 80,
             "placeholder": "organ",
-            "gain": 45.757
+            "gain": 45.757,
+            "loop": {
+              "start": 29106,
+              "end": 341738
+            }
           },
           {
             "file": "wineglass/glass3_As4_Slow_1_Main.m4a",
@@ -11014,7 +12950,11 @@
             "lo": 81,
             "hi": 84,
             "placeholder": "organ",
-            "gain": 45.757
+            "gain": 45.757,
+            "loop": {
+              "start": 26460,
+              "end": 325818
+            }
           },
           {
             "file": "wineglass/glass4_D5_Slow_2_Main.m4a",
@@ -11022,7 +12962,11 @@
             "lo": 85,
             "hi": 89,
             "placeholder": "organ",
-            "gain": 45.757
+            "gain": 45.757,
+            "loop": {
+              "start": 27342,
+              "end": 334337
+            }
           }
         ]
       }
