@@ -719,7 +719,8 @@ html, body {
   min-height: 40px;
 }
 .popitem:active { background: var(--on-purple); }
-.popitem-danger { color: #FEB4AC; }
+/* Anything that deletes, in red: menus, chips and buttons alike. */
+.popitem-danger, .chip.chip-danger, .menu-item-danger .menu-item-label, button.wide.danger { color: #FF6B60; }
 
 /* The library: a screen over the editor, not a sheet beside it. */
 .screen {
@@ -1120,6 +1121,21 @@ html, body {
 .arrlabel-card .arrname { min-height: 16px; }
 .arrlabel-off .arrbar, .arrlabel-off .arrgrip { opacity: 0.45; }
 
+/* A chip that cannot be used just now: shown, greyed, its reason in its title. */
+.chip.chip-off { opacity: 0.38; }
+.arrmerge { margin-top: 8px; }
+.popitem.popitem-off { opacity: 0.38; }
+
+/* The editor's Bars: a number to type, in a chip like its neighbours. */
+.bars-chip { gap: 6px; }
+.barsfield-chip { width: 2.6em; background: transparent; border: 0; color: var(--text); font: inherit; font-weight: 600; text-align: center; padding: 0; }
+
+/* The arrangement's header: undo, play, redo, Loop, Mix, more. The back label
+   gives way (with an ellipsis) before any button is pushed off the screen. */
+.arrscreen .libhead .libback { min-width: 0; flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.arrscreen .arrhead-actions { flex: 0 0 auto; gap: 6px; }
+.arrundo { width: 32px; min-width: 32px; padding: 0; font-size: 22px; }
+
 </style>
 </head>
 <body>
@@ -1159,7 +1175,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-10-05 06:24 from src/. */
+/* PocketDAW - phase 2. Built 2026-10-07 04:43 from src/. */
 (function () {
 'use strict';
 
@@ -1209,11 +1225,11 @@ function clear(node) {
   while (node.firstChild) node.removeChild(node.firstChild);
 }
 
-function chip(label, { active = false, onClick, small = false, title } = {}) {
+function chip(label, { active = false, onClick, small = false, title, danger = false } = {}) {
   return el(
     'button',
     {
-      class: `chip${active ? ' chip-on' : ''}${small ? ' chip-sm' : ''}`,
+      class: `chip${active ? ' chip-on' : ''}${small ? ' chip-sm' : ''}${danger ? ' chip-danger' : ''}`,
       onClick,
       title: title || label,
       type: 'button',
@@ -5150,11 +5166,13 @@ function addNote(song, ctx, { pitch, start, duration, velocity, flags }) {
     label: 'Add note',
     note,
     undo: () => {
-      const i = clip.notes.indexOf(note);
-      if (i >= 0) clip.notes.splice(i, 1);
+      const live = clipOf(song, ctx);
+      const i = live ? live.notes.findIndex((n) => n.id === note.id) : -1;
+      if (i >= 0) live.notes.splice(i, 1);
     },
     redo: () => {
-      clip.notes.push(note);
+      const live = clipOf(song, ctx);
+      if (live && !live.notes.some((n) => n.id === note.id)) live.notes.push(note);
     },
   };
 }
@@ -5846,11 +5864,19 @@ function removeNotes(song, ctx, ids) {
   return {
     label: 'Delete notes',
     count: removed.length,
-    undo: () => [...removed].sort((a, b) => a.index - b.index).forEach((r) => clip.notes.splice(r.index, 0, r.note)),
-    redo: () => removed.forEach((r) => {
-      const i = clip.notes.indexOf(r.note);
-      if (i >= 0) clip.notes.splice(i, 1);
-    }),
+    undo: () => {
+      const live = clipOf(song, ctx);
+      if (!live) return;
+      [...removed].sort((a, b) => a.index - b.index).forEach((r) => {
+        if (!live.notes.some((n) => n.id === r.note.id)) live.notes.splice(Math.min(r.index, live.notes.length), 0, r.note);
+      });
+    },
+    redo: () => {
+      const live = clipOf(song, ctx);
+      if (!live) return;
+      const ids = new Set(removed.map((r) => r.note.id));
+      live.notes = live.notes.filter((n) => !ids.has(n.id));
+    },
   };
 }
 
@@ -6106,12 +6132,15 @@ function addNotes(song, ctx, specs) {
     notes,
     note: notes[0],
     undo: () => {
-      notes.forEach((n) => {
-        const i = clip.notes.indexOf(n);
-        if (i >= 0) clip.notes.splice(i, 1);
-      });
+      const live = clipOf(song, ctx);
+      if (!live) return;
+      const ids = new Set(notes.map((n) => n.id));
+      live.notes = live.notes.filter((n) => !ids.has(n.id));
     },
-    redo: () => notes.forEach((n) => clip.notes.push(n)),
+    redo: () => {
+      const live = clipOf(song, ctx);
+      if (live) notes.forEach((n) => { if (!live.notes.some((m) => m.id === n.id)) live.notes.push(n); });
+    },
   };
 }
 
@@ -6287,12 +6316,25 @@ function setBeatsPerBar(song, { sectionId = null, beats }) {
   };
 }
 
+function restoreSection(section, snapshot, notes) {
+  Object.keys(section).forEach((k) => { if (k !== 'clips' && k !== 'id') delete section[k]; });
+  Object.entries(snapshot).forEach(([k, v]) => { if (k !== 'clips' && k !== 'id') section[k] = JSON.parse(JSON.stringify(v)); });
+  Object.entries(snapshot.clips).forEach(([trackId, snap]) => {
+    const clip = section.clips[trackId] || (section.clips[trackId] = createClip());
+    clip.notes = notes[trackId] ? [...notes[trackId]] : JSON.parse(JSON.stringify(snap.notes));
+    if (snap.hidden) clip.hidden = JSON.parse(JSON.stringify(snap.hidden)); else delete clip.hidden;
+    if (snap.automation) clip.automation = JSON.parse(JSON.stringify(snap.automation)); else delete clip.automation;
+  });
+  Object.keys(section.clips).forEach((trackId) => { if (!snapshot.clips[trackId]) delete section.clips[trackId]; });
+}
+
 function splitSection(song, sectionId, atBar) {
   const source = song.sections[sectionId];
   if (!source || !Number.isInteger(atBar) || atBar < 1 || atBar >= source.lengthBars) return null;
   const bar = sectionTicks(1, sectionBeats(song, source));
   const cut = atBar * bar;
   const before = JSON.parse(JSON.stringify(source));
+  const notesBefore = Object.fromEntries(Object.entries(source.clips).map(([t, c]) => [t, [...c.notes]]));
   const second = createSection({
     name: source.name ? `${source.name} 2` : null,
     lengthBars: source.lengthBars - atBar,
@@ -6329,16 +6371,17 @@ function splitSection(song, sectionId, atBar) {
   song.sections[second.id] = second;
   song.sectionOrder.splice(at, 0, second.id);
   const after = JSON.parse(JSON.stringify(source));
+  const notesAfter = Object.fromEntries(Object.entries(source.clips).map(([t, c]) => [t, [...c.notes]]));
   return {
     label: 'Split section',
     section: second,
     undo: () => {
-      song.sections[sectionId] = JSON.parse(JSON.stringify(before));
+      restoreSection(song.sections[sectionId], before, notesBefore);
       delete song.sections[second.id];
       song.sectionOrder.splice(song.sectionOrder.indexOf(second.id), 1);
     },
     redo: () => {
-      song.sections[sectionId] = JSON.parse(JSON.stringify(after));
+      restoreSection(song.sections[sectionId], after, notesAfter);
       song.sections[second.id] = second;
       song.sectionOrder.splice(at, 0, second.id);
     },
@@ -6601,6 +6644,86 @@ function pasteTrackNotes(song, trackId, copied) {
   });
   const put = (snap) => Object.entries(snap).forEach(([sid, c]) => { song.sections[sid].clips[trackId] = JSON.parse(JSON.stringify(c)); });
   return { label: 'Paste notes', shifted, pasted, left: copied.count - pasted, undo: () => put(before), redo: () => put(after) };
+}
+
+const MAX_SECTION_BARS = 16;
+function mergeProblem(song, sectionId, side) {
+  const at = song.sectionOrder.indexOf(sectionId);
+  const other = song.sectionOrder[side === 'left' ? at - 1 : at + 1];
+  if (at < 0 || !other) return 'edge';
+  const a = song.sections[sectionId];
+  const b = song.sections[other];
+  if (a.lengthBars + b.lengthBars > MAX_SECTION_BARS) return 'length';
+  const same = (f) => f(song, a) === f(song, b);
+  if (!same(sectionTempo) || !same(sectionKey) || !same(sectionScaleId) || !same(sectionBeats)) return 'settings';
+  return null;
+}
+
+function mergeSections(song, sectionId, side) {
+  if (mergeProblem(song, sectionId, side)) return null;
+  const at = song.sectionOrder.indexOf(sectionId);
+  const leftId = side === 'left' ? song.sectionOrder[at - 1] : sectionId;
+  const rightId = side === 'left' ? sectionId : song.sectionOrder[at + 1];
+  const left = song.sections[leftId];
+  const right = song.sections[rightId];
+  const before = { order: [...song.sectionOrder], left: JSON.parse(JSON.stringify(left)) };
+  const leftNotes = Object.fromEntries(Object.entries(left.clips).map(([t, c]) => [t, [...c.notes]]));
+  const offset = sectionLengthTicks(song, left);
+  const bars = left.lengthBars;
+  const trackIds = new Set([...Object.keys(left.clips), ...Object.keys(right.clips)]);
+  trackIds.forEach((trackId) => {
+    const into = left.clips[trackId] || (left.clips[trackId] = createClip());
+    const from = right.clips[trackId];
+    if (!from) return;
+    into.notes = into.notes.concat(from.notes.map((n) => ({ ...n, start: n.start + offset })));
+    if (from.hidden && from.hidden.length) into.hidden = (into.hidden || []).concat(from.hidden.map((h) => ({ ...h, bar: h.bar + bars })));
+    Object.entries(from.automation || {}).forEach(([paramId, lane]) => {
+      into.automation = into.automation || {};
+      into.automation[paramId] = (into.automation[paramId] || []).concat(lane.map((p) => ({ ...p, tick: p.tick + offset })));
+    });
+  });
+  left.lengthBars += right.lengthBars;
+  const after = { order: song.sectionOrder.filter((id) => id !== rightId), left: JSON.parse(JSON.stringify(left)) };
+  const mergedNotes = Object.fromEntries(Object.entries(left.clips).map(([t, c]) => [t, [...c.notes]]));
+  song.sectionOrder.splice(0, song.sectionOrder.length, ...after.order);
+  delete song.sections[rightId];
+  return {
+    label: 'Merge sections',
+    section: left,
+    undo: () => {
+      restoreSection(song.sections[leftId], before.left, leftNotes);
+      song.sections[rightId] = right;
+      song.sectionOrder.splice(0, song.sectionOrder.length, ...before.order);
+    },
+    redo: () => {
+      restoreSection(song.sections[leftId], after.left, mergedNotes);
+      delete song.sections[rightId];
+      song.sectionOrder.splice(0, song.sectionOrder.length, ...after.order);
+    },
+  };
+}
+
+function octaveRoom(song, trackId) {
+  const track = song.tracks.find((t) => t.id === trackId);
+  if (!track || track.kind === 'drum') return { up: false, down: false };
+  const span = trackSpan(song, trackId);
+  if (!span) return { up: false, down: false };
+  const range = kitById(track.kitId, track).range || { lo: 0, hi: 127 };
+  return { up: span.hi + 12 <= range.hi, down: span.lo - 12 >= range.lo };
+}
+
+function shiftTrackOctave(song, trackId, direction) {
+  const room = octaveRoom(song, trackId);
+  if (!(direction > 0 ? room.up : room.down)) return null;
+  const d = 12 * Math.sign(direction);
+  const move = (by) => song.sectionOrder.forEach((sid) => {
+    const clip = song.sections[sid].clips[trackId];
+    if (!clip) return;
+    clip.notes.forEach((n) => { n.pitch += by; });
+    (clip.hidden || []).forEach((h) => { h.note.pitch += by; });
+  });
+  move(d);
+  return { label: direction > 0 ? 'Up an octave' : 'Down an octave', undo: () => move(-d), redo: () => move(d) };
 }
 
 const TAP_SLOP = 7;
@@ -8066,7 +8189,7 @@ function renderMenu(host, store, { onChange }) {
     const node = el(
       'button',
       {
-        class: `menu-item${option.id === menu.current ? ' menu-item-on' : ''}${option.disabled ? ' menu-item-off' : ''}`,
+        class: `menu-item${option.id === menu.current ? ' menu-item-on' : ''}${option.disabled ? ' menu-item-off' : ''}${option.danger ? ' menu-item-danger' : ''}`,
         type: 'button',
         'aria-disabled': option.disabled ? 'true' : null,
         onClick: () => (option.disabled ? menu.onDisabled && menu.onDisabled(option) : menu.onSelect(option.id)),
@@ -8969,6 +9092,33 @@ function arrangementMatrix(store, onChange, {
       })()
     : null;
 
+  
+  const merger = menuFor
+    ? (() => {
+        const why = { edge: 'no section there', length: 'together over 16 bars', settings: 'different tempo, key or time' };
+        const button = (side, label) => {
+          const problem = mergeProblem(song, menuFor, side);
+          return chip(label, {
+            small: true,
+            title: problem ? `${label} \u2014 ${why[problem]}` : label,
+            onClick: () => {
+              if (problem) return;
+              const step = store.run((s) => mergeSections(s, menuFor, side));
+              if (step) store.setView({ activeSectionId: step.section.id, selectedNoteId: null });
+              store.setUi({ sectionMenu: null });
+              onChange();
+            },
+          });
+        };
+        const left = button('left', '\u2190 Merge with left');
+        const right = button('right', 'Merge with right \u2192');
+        [['left', left], ['right', right]].forEach(([side, node]) => {
+          if (mergeProblem(song, menuFor, side)) { node.className += ' chip-off'; node.setAttribute('aria-disabled', 'true'); }
+        });
+        return el('div', { class: 'chiprow wrap arrmerge' }, [left, right]);
+      })()
+    : null;
+
   const actions = menuFor
     ? el('div', { class: 'chiprow wrap arractions' }, [
         chip('Duplicate', {
@@ -9010,6 +9160,7 @@ function arrangementMatrix(store, onChange, {
         }),
         song.sectionOrder.length > 1
           ? chip('Delete', {
+            danger: true,
               small: true,
               onClick: () => {
                 store.run((s) => removeSection(s, menuFor));
@@ -9043,6 +9194,7 @@ function arrangementMatrix(store, onChange, {
         ]),
         lengths,
         splitter,
+        merger,
         actions,
         el('div', { class: 'label', text: 'Section name' }),
         nameField,
@@ -9103,7 +9255,15 @@ function arrangementScreen(store, onChange, {
   return el('div', { class: 'arrscreen' }, [
     el('div', { class: 'libhead' }, [
       el('button', { class: 'libback', type: 'button', text: `\u2039 ${backLabel}`, onClick: onBack }),
-      el('div', { class: 'libhead-actions' }, [
+      el('div', { class: 'libhead-actions arrhead-actions' }, [
+        el('button', {
+          class: 'icon arrundo',
+          type: 'button',
+          text: '\u21b6',
+          title: 'Undo',
+          'aria-label': 'Undo',
+          onClick: () => { store.undo(); onChange(); },
+        }),
         el('button', {
           class: `heroplay${playing ? ' heroplay-on' : ''}`,
           type: 'button',
@@ -9111,6 +9271,14 @@ function arrangementScreen(store, onChange, {
           'aria-label': playing ? 'Stop' : 'Play',
           text: playing ? '\u25a0' : '\u25b6',
           onClick: togglePlay,
+        }),
+        el('button', {
+          class: 'icon arrundo',
+          type: 'button',
+          text: '\u21b7',
+          title: 'Redo',
+          'aria-label': 'Redo',
+          onClick: () => { store.redo(); onChange(); },
         }),
         el('button', {
           class: `chip chip-sm${songMode ? ' chip-on' : ''}`,
@@ -10521,7 +10689,7 @@ function noteSheet(store, onChange) {
         : 'Accent plays this note harder.',
     }),
     el('button', {
-      class: 'wide',
+      class: 'wide danger',
       type: 'button',
       text: 'Delete note',
       onClick: () => {
@@ -10747,7 +10915,7 @@ function songsSheet(store, onChange, songs) {
             : null,
           projects.length ? chip('Move', { small: true, onClick: () => songs.moveToProject(entry.id) }) : null,
           chip('Copy', { small: true, onClick: () => songs.duplicate(entry.id) }),
-          list.length > 1 && !current ? chip('Delete', { small: true, onClick: () => songs.remove(entry.id) }) : null,
+          list.length > 1 && !current ? chip('Delete', { small: true, danger: true, onClick: () => songs.remove(entry.id) }) : null,
         ].filter(Boolean)),
       ]),
     ]);
@@ -10768,7 +10936,7 @@ function songsSheet(store, onChange, songs) {
             ? el('span', { class: 'fxbadge', text: 'fx' })
             : null,
             chip('Rename', { small: true, onClick: () => songs.renameProject(project.id) }),
-            chip('Delete', { small: true, onClick: () => songs.removeProject(project.id) }),
+            chip('Delete', { small: true, danger: true, onClick: () => songs.removeProject(project.id) }),
           ]),
         ]),
         inside.length
@@ -12127,12 +12295,11 @@ function createTransport({
     tick();
   }
 
+  
   function setMode(next) {
     if (next === mode) return;
-    const wasPlaying = playing;
-    if (wasPlaying) stop();
     mode = next;
-    if (wasPlaying) play();
+    if (playing) jump();
   }
 
   return {
@@ -14979,7 +15146,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-10-05 06:24';
+const BUILD_STAMP = '2026-10-07 04:43';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -15601,13 +15768,32 @@ function mountApp(root, options = {}) {
       );
     }
 
-    contextStrip.appendChild(
-      menuChip({
-        label: 'Bars',
-        value: `${section.lengthBars}`,
-        onOpen: () => openLoopMenu(),
-      }),
-    );
+    
+    const barsField = el('input', {
+      class: 'numfield barsfield barsfield-chip',
+      type: 'number',
+      inputmode: 'numeric',
+      min: '1',
+      max: '16',
+      step: '1',
+      value: String(section.lengthBars),
+      'aria-label': 'Bars in this section, 1 to 16',
+    });
+    const commitBars = () => {
+      const typed = Math.round(Number(barsField.value));
+      const bars = Math.max(1, Math.min(16, Number.isFinite(typed) ? typed : 1));
+      barsField.value = String(bars);
+      if (bars !== store.activeSection().lengthBars) {
+        store.run((song) => setSectionLength(song, section.id, bars));
+        render();
+      }
+    };
+    barsField.addEventListener('change', commitBars);
+    barsField.addEventListener('blur', commitBars);
+    contextStrip.appendChild(el('label', { class: 'chip chip-sm menu-chip bars-chip', title: 'Bars in this section, 1 to 16' }, [
+      el('span', { class: 'menu-chip-label', text: 'Bars' }),
+      barsField,
+    ]));
 
     if (kitById(track.kitId, track).kind === 'pitched') {
       const chordState = view.chord || { on: false, size: 3, inversion: 0 };
@@ -15880,26 +16066,6 @@ function mountApp(root, options = {}) {
     render();
   }
 
-  function openLoopMenu() {
-    const section = store.activeSection();
-    store.setUi({
-      menu: {
-        title: 'Section length',
-        current: String(section.lengthBars),
-        options: [1, 2, 4, 8, 16].map((n) => ({
-          id: String(n),
-          label: `${n} bar${n > 1 ? 's' : ''}`,
-        })),
-        onSelect: (id) => {
-          store.setUi({ menu: null });
-          store.run((song) => setSectionLength(song, section.id, Number(id)));
-          render();
-        },
-      },
-    });
-    render();
-  }
-
   
   function changeScale(scaleId) {
     const before = activeSettings(store.state);
@@ -16089,6 +16255,14 @@ function mountApp(root, options = {}) {
             flash(`Copied ${trackClipboard.count} note${trackClipboard.count === 1 ? '' : 's'} from ${title}`);
           },
         },
+        ...(track.kind === 'drum' ? [] : (() => {
+          const room = octaveRoom(store.state.song, trackId);
+          const shift = (dir) => () => { store.run((s) => shiftTrackOctave(s, trackId, dir)); flash(`${title} ${dir > 0 ? 'up' : 'down'} an octave`); render(); };
+          return [
+            room.up ? { label: 'Move up an octave', onSelect: shift(1) } : { label: 'Move up an octave', disabled: true },
+            room.down ? { label: 'Move down an octave', onSelect: shift(-1) } : { label: 'Move down an octave', disabled: true },
+          ];
+        })()),
         trackClipboard
           ? {
             label: `Paste notes from ${trackClipboard.name}`,
@@ -16111,6 +16285,7 @@ function mountApp(root, options = {}) {
           ? { label: 'Remove track \u2014 the only one', disabled: true }
           : {
             label: `Remove ${trackTitle(track)}`,
+            danger: true,
             onSelect: () => {
               store.run((s) => removeTrack(s, trackId));
               const next = store.state.song.tracks[0];
@@ -16281,7 +16456,7 @@ function mountApp(root, options = {}) {
             current: null,
             options: [
               { id: 'keep', label: 'Keep the songs', hint: 'they move to Unsorted' },
-              { id: 'all', label: `Delete the project and ${count}` },
+              { id: 'all', label: `Delete the project and ${count}`, danger: true },
             ],
             onSelect: (choice) => {
               store.setUi({ menu: null });
@@ -16890,11 +17065,13 @@ function mountApp(root, options = {}) {
         onClose();
       }
     };
-    items.forEach(({ label, hint, danger, onSelect }) => {
+    items.forEach(({ label, hint, danger, disabled, onSelect }) => {
       const button = el('button', {
-        class: `popitem${danger ? ' popitem-danger' : ''}${hint ? ' popitem-hinted' : ''}`,
+        class: `popitem${danger ? ' popitem-danger' : ''}${hint ? ' popitem-hinted' : ''}${disabled ? ' popitem-off' : ''}`,
         type: 'button',
+        'aria-disabled': disabled ? 'true' : null,
         onClick: () => {
+          if (disabled || !onSelect) return;
           close();
           onSelect();
         },
@@ -16913,6 +17090,14 @@ function mountApp(root, options = {}) {
       const width = host.clientWidth || 380;
       left = Math.max(8, Math.min(width - 158, a.left - h.left + a.width / 2 - 75));
       top = a.top - h.top + host.scrollTop + a.height / 2 - 20;
+      
+      const viewH = (globalThis.visualViewport && globalThis.visualViewport.height) || globalThis.innerHeight || 0;
+      if (viewH) {
+        const menuH = menu.offsetHeight || items.length * 46 + 12;
+        const visibleTop = Math.max(0, -h.top) + host.scrollTop;
+        const visibleBottom = Math.min(h.height || viewH, viewH - h.top) + host.scrollTop;
+        top = Math.max(visibleTop + 8, Math.min(visibleBottom - menuH - 8, top));
+      }
     }
     menu.style.left = `${Math.round(left)}px`;
     menu.style.top = `${Math.round(top)}px`;
@@ -17287,7 +17472,7 @@ function mountApp(root, options = {}) {
     scroll,
     
     setAudition: (fn) => { auditionFn = fn; },
-    openMenus: { grid: openGridMenu, key: openKeyMenu, loop: openLoopMenu, sound: openSoundMenu },
+    openMenus: { grid: openGridMenu, key: openKeyMenu, sound: openSoundMenu },
     selectKit,
     togglePlay,
     openMix,
