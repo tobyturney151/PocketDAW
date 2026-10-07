@@ -20764,6 +20764,353 @@
           }
         ]
       }
+    },
+    {
+      "id": "dizi",
+      "name": "Dizi Flute",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/dizi-1_0_0.zip",
+      "bytes": 2211602,
+      "crc32": 1219957152,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://freesound.org/people/Hypnotriod/packs/21613/",
+        "credit": "Hypnotriod, \"Flute Dizi C all notes + pitched semitones\" (Freesound pack 21613) \u2014 CC0"
+      },
+      "manifest": {
+        "id": "dizi",
+        "name": "Dizi Flute",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 67,
+          "hi": 91
+        },
+        "defaultView": {
+          "lo": 67,
+          "hi": 91
+        },
+        "shade": "orange",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://freesound.org/people/Hypnotriod/packs/21613/",
+          "credit": "Hypnotriod, \"Flute Dizi C all notes + pitched semitones\" (Freesound pack 21613) \u2014 CC0"
+        },
+        "envelope": {
+          "attack": 0.005,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "dizi/dizi_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.7712,
+            "loop": {
+              "start": 30870,
+              "end": 325416
+            }
+          },
+          {
+            "file": "dizi/dizi_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.778,
+            "loop": {
+              "start": 30870,
+              "end": 325479
+            }
+          },
+          {
+            "file": "dizi/dizi_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.8313,
+            "loop": {
+              "start": 22050,
+              "end": 267147
+            }
+          },
+          {
+            "file": "dizi/dizi_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.8386,
+            "loop": {
+              "start": 22050,
+              "end": 268189
+            }
+          },
+          {
+            "file": "dizi/dizi_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.8557,
+            "loop": {
+              "start": 29106,
+              "end": 281053
+            }
+          },
+          {
+            "file": "dizi/dizi_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.9143,
+            "loop": {
+              "start": 121716,
+              "end": 292509
+            }
+          },
+          {
+            "file": "dizi/dizi_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.9224,
+            "loop": {
+              "start": 121716,
+              "end": 293287
+            }
+          },
+          {
+            "file": "dizi/dizi_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.8389,
+            "loop": {
+              "start": 67914,
+              "end": 286517
+            }
+          },
+          {
+            "file": "dizi/dizi_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.9067,
+            "loop": {
+              "start": 67914,
+              "end": 286772
+            }
+          },
+          {
+            "file": "dizi/dizi_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.9468,
+            "loop": {
+              "start": 30870,
+              "end": 241544
+            }
+          },
+          {
+            "file": "dizi/dizi_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.9551,
+            "loop": {
+              "start": 30870,
+              "end": 241505
+            }
+          },
+          {
+            "file": "dizi/dizi_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.9096,
+            "loop": {
+              "start": 27342,
+              "end": 304694
+            }
+          },
+          {
+            "file": "dizi/dizi_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 1.0535,
+            "loop": {
+              "start": 57257,
+              "end": 323967
+            }
+          },
+          {
+            "file": "dizi/dizi_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 1.0627,
+            "loop": {
+              "start": 57257,
+              "end": 323962
+            }
+          },
+          {
+            "file": "dizi/dizi_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.8714,
+            "loop": {
+              "start": 22932,
+              "end": 216621
+            }
+          },
+          {
+            "file": "dizi/dizi_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.879,
+            "loop": {
+              "start": 22859,
+              "end": 216352
+            }
+          },
+          {
+            "file": "dizi/dizi_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.7812,
+            "loop": {
+              "start": 69605,
+              "end": 255274
+            }
+          },
+          {
+            "file": "dizi/dizi_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.8252,
+            "loop": {
+              "start": 28886,
+              "end": 322876
+            }
+          },
+          {
+            "file": "dizi/dizi_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.8229,
+            "loop": {
+              "start": 28886,
+              "end": 323136
+            }
+          },
+          {
+            "file": "dizi/dizi_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.8495,
+            "loop": {
+              "start": 39617,
+              "end": 351596
+            }
+          },
+          {
+            "file": "dizi/dizi_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.8471,
+            "loop": {
+              "start": 39617,
+              "end": 351574
+            }
+          },
+          {
+            "file": "dizi/dizi_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.7357,
+            "loop": {
+              "start": 41234,
+              "end": 390410
+            }
+          },
+          {
+            "file": "dizi/dizi_F6.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 0.7337,
+            "loop": {
+              "start": 41234,
+              "end": 390286
+            }
+          },
+          {
+            "file": "dizi/dizi_Fs6.m4a",
+            "rootNote": 90,
+            "lo": 90,
+            "hi": 90,
+            "placeholder": "organ",
+            "gain": 0.9001,
+            "loop": {
+              "start": 40352,
+              "end": 335015
+            }
+          },
+          {
+            "file": "dizi/dizi_G6.m4a",
+            "rootNote": 91,
+            "lo": 91,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 0.8377,
+            "loop": {
+              "start": 46601,
+              "end": 354489
+            }
+          }
+        ]
+      }
     }
   ],
   "songs": []
