@@ -1136,6 +1136,11 @@ html, body {
 .arrscreen .arrhead-actions { flex: 0 0 auto; gap: 6px; }
 .arrundo { width: 32px; min-width: 32px; padding: 0; font-size: 22px; }
 
+/* The Bars field sits inside its chip at the chip's height: the shared
+   .numfield is 34px tall, which made the chip 46px against its neighbours'
+   32px. 16px text, so Safari does not zoom the page when it is tapped. */
+.bars-chip .numfield.barsfield-chip { height: 20px; min-height: 0; line-height: 20px; font-size: 16px; padding: 0; margin: 0; }
+
 </style>
 </head>
 <body>
@@ -1175,7 +1180,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-10-07 04:43 from src/. */
+/* PocketDAW - phase 2. Built 2026-10-07 07:21 from src/. */
 (function () {
 'use strict';
 
@@ -1407,6 +1412,7 @@ const CATEGORIES = [
   { id: 'drone', name: 'Drone', shade: 'orchid', kind: 'pitched' },
   { id: 'drums', name: 'Drums', shade: 'silver', kind: 'drum' },
   { id: 'guitar', name: 'Guitar', shade: 'orange', kind: 'pitched' },
+  { id: 'winds', name: 'Horns and Woodwinds', short: 'Horns & Woodwinds', shade: 'bronze', kind: 'pitched' },
   { id: 'keys', name: 'Keys', shade: 'violet', kind: 'pitched' },
   { id: 'lead', name: 'Lead Synth', shade: 'cyan', kind: 'pitched' },
   { id: 'mallets', name: 'Mallets', shade: 'yellow', kind: 'pitched' },
@@ -2117,6 +2123,7 @@ function kitsInFamily(familyId) {
 const SHADE_NAMES = [
   'violet', 'silver', 'teal', 'orange', 'indigo', 'lime', 'magenta',
   'cyan', 'amber', 'green', 'rose', 'blue', 'yellow', 'orchid', 'red',
+  'bronze',
 ];
 
 function nextShade(usedShades) {
@@ -4597,6 +4604,7 @@ const SHADES = {
   magenta: { base: '#D761AC', light: '#F0B5D7', dark: '#973174', tint: '#472138' },
   rose: { base: '#E8648A', light: '#FBBBC9', dark: '#A53559', tint: '#4B1F2B' },
   red: { base: '#E7605A', light: '#FEB4AC', dark: '#A23031', tint: '#4B221E' },
+  bronze: { base: '#A8754F', light: '#E4C6AF', dark: '#704729', tint: '#2D1F15' },
   orange: { base: '#E87F40', light: '#FFCDB2', dark: '#A65019', tint: '#452612' },
   amber: { base: '#E2A53C', light: '#FFE4C3', dark: '#A47312', tint: '#3D2A08' },
   yellow: { base: '#E2CD52', light: '#F8E8AB', dark: '#A7972A', tint: '#342E07' },
@@ -8149,6 +8157,7 @@ const PATHS = {
   keys: `<rect x="3" y="5" width="18" height="14" rx="1"/><path d="M8 19V5M13.5 19V5"/><rect x="6.4" y="5" width="3" height="8" ${F}/><rect x="11.9" y="5" width="3" height="8" ${F}/><rect x="16.4" y="5" width="3" height="8" ${F}/>`,
   lead: `<path d="M2.5 16L7 7V16L12 7V16L17 7V16L21.5 9"/>`,
   nature: `<path d="M5.5 18.5C5 10.5 10.5 4.5 19.5 4.5C19.5 13 14 19 5.5 18.5Z"/><path d="M5.5 18.5L14.5 9.5"/><path d="M3.5 20.5L5.5 18.5"/>`,
+  winds: `<path d="M3 11.5H14"/><path d="M14 11.5C16.2 11.5 18.2 9.9 20.5 7.5V15.5C18.2 13.1 16.2 11.5 14 11.5Z"/><path d="M7.5 11.5V8.6M10 11.5V8.6M12.5 11.5V8.6"/><circle cx="7.5" cy="7.2" r="1" ${F}/><circle cx="10" cy="7.2" r="1" ${F}/><circle cx="12.5" cy="7.2" r="1" ${F}/><path d="M6 11.5V14.6C6 15.4 6.6 16 7.4 16H11.6C12.4 16 13 15.4 13 14.6V11.5"/><path d="M2.5 10.2V12.8"/>`,
   mallets: `<rect x="3" y="16" width="18" height="3.2"/><rect x="6" y="12" width="12" height="3.2"/><path d="M12 9.5L20 3"/><circle cx="10.8" cy="10.4" r="2" ${F}/>`,
   pad: `<path d="M2.5 9C5.7 5.6 8.9 5.6 12 9S18.3 12.4 21.5 9"/><path d="M2.5 15C5.7 11.6 8.9 11.6 12 15S18.3 18.4 21.5 15"/>`,
   plucked: `<path d="M5 21V3Q14 3 20 10L5 21"/><path d="M9 4.2V18.1M13 6V15.2M16.5 7.8V12.6"/>`,
@@ -10199,7 +10208,7 @@ function trackSheet(store, onChange, onLive) {
   }, [
     el('span', { class: 'caticon', style: `color:${shadeColor(track.shade)}`, html: categoryIcon(categoryOf(currentKit), 18) }),
     el('span', { class: 'soundrow-name', text: currentKit.name }),
-    el('span', { class: 'soundrow-cat', text: categoryById(categoryOf(currentKit)).name }),
+    el('span', { class: 'soundrow-cat', text: categoryById(categoryOf(currentKit)).short || categoryById(categoryOf(currentKit)).name }),
     el('span', { class: 'soundrow-caret', text: '\u25be' }),
   ]);
 
@@ -10764,7 +10773,7 @@ function mixSheet(store, onChange, onLive) {
         }, [
           el('span', { class: 'caticon', style: `color:${shadeColor(track.shade)}`, html: categoryIcon(categoryOf(kit), 16) }),
           el('span', { class: 'mixtitle', text: trackTitle(track) }),
-          el('span', { class: 'mixkit', text: track.name ? kit.name : categoryById(categoryOf(kit)).name }),
+          el('span', { class: 'mixkit', text: track.name ? kit.name : (categoryById(categoryOf(kit)).short || categoryById(categoryOf(kit)).name) }),
         ]),
         el('div', { class: 'mixflags' }, [
           track.duck && track.duck.on ? el('span', { class: 'fxbadge', text: 'duck' }) : null,
@@ -14740,8 +14749,9 @@ function categoryForProgram(program) {
   if (program === 110) return 'strings';                 // fiddle
   if (program === 108) return 'mallets';                 // kalimba
   if (program === 109) return 'drone';                   // bagpipe
+  if (program === 111) return 'winds';                   // shanai, a reed
   const bands = [[7, 'keys'], [15, 'mallets'], [23, 'keys'], [31, 'guitar'], [39, 'bass'], [51, 'strings'],
-    [54, 'drone'], [55, 'lead'], [79, 'lead'], [87, 'lead'], [95, 'pad'], [103, 'drone'], [111, 'plucked'], [119, 'drums'], [127, 'drone']];
+    [54, 'drone'], [55, 'lead'], [79, 'winds'], [87, 'lead'], [95, 'pad'], [103, 'drone'], [111, 'plucked'], [119, 'drums'], [127, 'drone']];
   return (bands.find(([top]) => program <= top) || [127, 'keys'])[1];
 }
 
@@ -15146,7 +15156,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-10-07 04:43';
+const BUILD_STAMP = '2026-10-07 07:21';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
