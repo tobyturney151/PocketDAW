@@ -1,7 +1,7 @@
 {
   "format": "pocketdaw.catalog",
   "version": 1,
-  "built": "2026-10-05",
+  "built": "2026-10-07",
   "packs": [
     {
       "id": "ambichoir",
@@ -2994,10 +2994,10 @@
       "name": "Dan Tranh Plucked",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.1.0",
-      "file": "packs/dantranhplucked-1_1_0.zip",
-      "bytes": 1663244,
-      "crc32": 1655639247,
+      "version": "1.2.0",
+      "file": "packs/dantranhplucked-1_2_0.zip",
+      "bytes": 1641123,
+      "crc32": 3803828504,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
@@ -3006,7 +3006,7 @@
       "manifest": {
         "id": "dantranhplucked",
         "name": "Dan Tranh Plucked",
-        "version": "1.1.0",
+        "version": "1.2.0",
         "family": "keys",
         "category": "plucked",
         "kind": "pitched",
@@ -3171,7 +3171,7 @@
           },
           {
             "placeholder": "organ",
-            "gain": 3.89,
+            "gain": 0.3614,
             "file": "dantranhplucked/dantranhplucked_D4.m4a",
             "rootNote": 62,
             "lo": 62,
@@ -3179,7 +3179,7 @@
           },
           {
             "placeholder": "organ",
-            "gain": 3.8087,
+            "gain": 0.5369,
             "file": "dantranhplucked/dantranhplucked_Ds4.m4a",
             "rootNote": 63,
             "lo": 63,
@@ -3187,7 +3187,7 @@
           },
           {
             "placeholder": "organ",
-            "gain": 3.8159,
+            "gain": 0.5649,
             "file": "dantranhplucked/dantranhplucked_E4.m4a",
             "rootNote": 64,
             "lo": 64,
