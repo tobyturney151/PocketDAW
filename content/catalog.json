@@ -1,7 +1,7 @@
 {
   "format": "pocketdaw.catalog",
   "version": 1,
-  "built": "2026-10-07",
+  "built": "2026-10-08",
   "packs": [
     {
       "id": "ambichoir",
@@ -11632,6 +11632,1734 @@
       }
     },
     {
+      "id": "soloviolin",
+      "name": "Solo Violin",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/soloviolin-1_0_0.zip",
+      "bytes": 4978147,
+      "crc32": 1790902234,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, arco vibrato, soft layer, CC0"
+      },
+      "manifest": {
+        "id": "soloviolin",
+        "name": "Solo Violin",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "strings",
+        "kind": "pitched",
+        "range": {
+          "lo": 55,
+          "hi": 96
+        },
+        "defaultView": {
+          "lo": 60,
+          "hi": 84
+        },
+        "shade": "rose",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, arco vibrato, soft layer, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.3
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "soloviolin/soloviolin_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.3321,
+            "loop": {
+              "start": 70029,
+              "end": 426525
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.3484,
+            "loop": {
+              "start": 70029,
+              "end": 426541
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.7814,
+            "loop": {
+              "start": 28517,
+              "end": 385999
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.7563,
+            "loop": {
+              "start": 28517,
+              "end": 385980
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.5617,
+            "loop": {
+              "start": 40924,
+              "end": 432785
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.5437,
+            "loop": {
+              "start": 40997,
+              "end": 432952
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.5639,
+            "loop": {
+              "start": 40997,
+              "end": 432024
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.5521,
+            "loop": {
+              "start": 40924,
+              "end": 432871
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.4873,
+            "loop": {
+              "start": 68119,
+              "end": 418559
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.4996,
+            "loop": {
+              "start": 68119,
+              "end": 418272
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.5242,
+            "loop": {
+              "start": 68193,
+              "end": 417864
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.6461,
+            "loop": {
+              "start": 102664,
+              "end": 395815
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.6326,
+            "loop": {
+              "start": 102664,
+              "end": 395792
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.5211,
+            "loop": {
+              "start": 102664,
+              "end": 395776
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.7375,
+            "loop": {
+              "start": 40042,
+              "end": 432798
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.8582,
+            "loop": {
+              "start": 39969,
+              "end": 432733
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.4948,
+            "loop": {
+              "start": 49743,
+              "end": 430975
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.5073,
+            "loop": {
+              "start": 49743,
+              "end": 431696
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.5769,
+            "loop": {
+              "start": 49743,
+              "end": 431282
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.4976,
+            "loop": {
+              "start": 49743,
+              "end": 431692
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.5404,
+            "loop": {
+              "start": 27694,
+              "end": 428309
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.4995,
+            "loop": {
+              "start": 27767,
+              "end": 428516
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.5362,
+            "loop": {
+              "start": 27694,
+              "end": 427729
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.9445,
+            "loop": {
+              "start": 98784,
+              "end": 385066
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.8933,
+            "loop": {
+              "start": 98784,
+              "end": 384953
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.8163,
+            "loop": {
+              "start": 98784,
+              "end": 385698
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 1.0658,
+            "loop": {
+              "start": 31222,
+              "end": 434507
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.9408,
+            "loop": {
+              "start": 31222,
+              "end": 434478
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.4947,
+            "loop": {
+              "start": 40410,
+              "end": 407535
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.4843,
+            "loop": {
+              "start": 40924,
+              "end": 408870
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.4581,
+            "loop": {
+              "start": 40410,
+              "end": 408245
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.4485,
+            "loop": {
+              "start": 40850,
+              "end": 407948
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 1.0295,
+            "loop": {
+              "start": 76204,
+              "end": 409027
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.8983,
+            "loop": {
+              "start": 76277,
+              "end": 409135
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_F6.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 0.8497,
+            "loop": {
+              "start": 76277,
+              "end": 409121
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Fs6.m4a",
+            "rootNote": 90,
+            "lo": 90,
+            "hi": 90,
+            "placeholder": "organ",
+            "gain": 0.7675,
+            "loop": {
+              "start": 40924,
+              "end": 435582
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_G6.m4a",
+            "rootNote": 91,
+            "lo": 91,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 0.647,
+            "loop": {
+              "start": 40924,
+              "end": 435475
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_Gs6.m4a",
+            "rootNote": 92,
+            "lo": 92,
+            "hi": 92,
+            "placeholder": "organ",
+            "gain": 0.6788,
+            "loop": {
+              "start": 40924,
+              "end": 435401
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_A6.m4a",
+            "rootNote": 93,
+            "lo": 93,
+            "hi": 93,
+            "placeholder": "organ",
+            "gain": 0.4815,
+            "loop": {
+              "start": 80613,
+              "end": 422725
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_As6.m4a",
+            "rootNote": 94,
+            "lo": 94,
+            "hi": 94,
+            "placeholder": "organ",
+            "gain": 0.4607,
+            "loop": {
+              "start": 80540,
+              "end": 422777
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_B6.m4a",
+            "rootNote": 95,
+            "lo": 95,
+            "hi": 95,
+            "placeholder": "organ",
+            "gain": 0.4209,
+            "loop": {
+              "start": 46216,
+              "end": 297931
+            }
+          },
+          {
+            "file": "soloviolin/soloviolin_C7.m4a",
+            "rootNote": 96,
+            "lo": 96,
+            "hi": 96,
+            "placeholder": "organ",
+            "gain": 0.3891,
+            "loop": {
+              "start": 46216,
+              "end": 297934
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "soloviolinpizz",
+      "name": "Solo Violin Pizzicato",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/soloviolinpizz-1_0_0.zip",
+      "bytes": 526815,
+      "crc32": 2192399698,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, pizzicato, soft layer, CC0"
+      },
+      "manifest": {
+        "id": "soloviolinpizz",
+        "name": "Solo Violin Pizzicato",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "strings",
+        "kind": "pitched",
+        "range": {
+          "lo": 55,
+          "hi": 83
+        },
+        "defaultView": {
+          "lo": 60,
+          "hi": 83
+        },
+        "shade": "rose",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, pizzicato, soft layer, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.3
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "soloviolinpizz/soloviolinpizz_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.2232
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.2421
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.258
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.3804
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.2479
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.219
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.2703
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.273
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.3257
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.296
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.3725
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.4108
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.4373
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.434
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.7484
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.6661
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.5504
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.6431
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.5551
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.6519
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.503
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.5195
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.5325
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.6435
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.68
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.691
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.785
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.7351
+          },
+          {
+            "file": "soloviolinpizz/soloviolinpizz_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.803
+          }
+        ]
+      }
+    },
+    {
+      "id": "soloviolinspiccato",
+      "name": "Solo Violin Spiccato",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/soloviolinspiccato-1_0_0.zip",
+      "bytes": 542571,
+      "crc32": 3274185096,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, spiccato, soft layer, CC0"
+      },
+      "manifest": {
+        "id": "soloviolinspiccato",
+        "name": "Solo Violin Spiccato",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "strings",
+        "kind": "pitched",
+        "range": {
+          "lo": 55,
+          "hi": 96
+        },
+        "defaultView": {
+          "lo": 60,
+          "hi": 84
+        },
+        "shade": "red",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, spiccato, soft layer, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.3
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.2681
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.257
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.379
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.3927
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.2951
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.2448
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.2793
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.2738
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.2854
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.2745
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.2657
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.3412
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.3761
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.4085
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.3822
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.3767
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.4779
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.3865
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.4659
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.4497
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.4362
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.4782
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.5065
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.2815
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.3005
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.364
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.3609
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.3788
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.4302
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.4322
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.4408
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.3843
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.6287
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.5049
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_F6.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 0.5523
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Fs6.m4a",
+            "rootNote": 90,
+            "lo": 90,
+            "hi": 90,
+            "placeholder": "organ",
+            "gain": 0.3868
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_G6.m4a",
+            "rootNote": 91,
+            "lo": 91,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 0.4163
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_Gs6.m4a",
+            "rootNote": 92,
+            "lo": 92,
+            "hi": 92,
+            "placeholder": "organ",
+            "gain": 0.4059
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_A6.m4a",
+            "rootNote": 93,
+            "lo": 93,
+            "hi": 93,
+            "placeholder": "organ",
+            "gain": 0.4867
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_As6.m4a",
+            "rootNote": 94,
+            "lo": 94,
+            "hi": 94,
+            "placeholder": "organ",
+            "gain": 0.5055
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_B6.m4a",
+            "rootNote": 95,
+            "lo": 95,
+            "hi": 95,
+            "placeholder": "organ",
+            "gain": 0.433
+          },
+          {
+            "file": "soloviolinspiccato/soloviolinspiccato_C7.m4a",
+            "rootNote": 96,
+            "lo": 96,
+            "hi": 96,
+            "placeholder": "organ",
+            "gain": 0.4263
+          }
+        ]
+      }
+    },
+    {
+      "id": "soloviolintrem",
+      "name": "Solo Violin Tremolo",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/soloviolintrem-1_0_0.zip",
+      "bytes": 2711560,
+      "crc32": 862050268,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, tremolo, soft layer, CC0"
+      },
+      "manifest": {
+        "id": "soloviolintrem",
+        "name": "Solo Violin Tremolo",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "strings",
+        "kind": "pitched",
+        "range": {
+          "lo": 55,
+          "hi": 93
+        },
+        "defaultView": {
+          "lo": 60,
+          "hi": 84
+        },
+        "shade": "magenta",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, tremolo, soft layer, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.3
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "soloviolintrem/soloviolintrem_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.6563,
+            "loop": {
+              "start": 57992,
+              "end": 191076
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.7144,
+            "loop": {
+              "start": 57992,
+              "end": 190928
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.4906,
+            "loop": {
+              "start": 23816,
+              "end": 234685
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.5992,
+            "loop": {
+              "start": 23816,
+              "end": 234771
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.5948,
+            "loop": {
+              "start": 37926,
+              "end": 236551
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.5904,
+            "loop": {
+              "start": 37926,
+              "end": 236501
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.5861,
+            "loop": {
+              "start": 37926,
+              "end": 236635
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.6307,
+            "loop": {
+              "start": 37926,
+              "end": 236583
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.5843,
+            "loop": {
+              "start": 42925,
+              "end": 273156
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.6215,
+            "loop": {
+              "start": 42998,
+              "end": 273338
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.6313,
+            "loop": {
+              "start": 42925,
+              "end": 273189
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.6487,
+            "loop": {
+              "start": 26240,
+              "end": 230396
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.5873,
+            "loop": {
+              "start": 26240,
+              "end": 230479
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.6105,
+            "loop": {
+              "start": 26240,
+              "end": 230462
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.6722,
+            "loop": {
+              "start": 24623,
+              "end": 262254
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.6227,
+            "loop": {
+              "start": 24696,
+              "end": 262309
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.6326,
+            "loop": {
+              "start": 50274,
+              "end": 250959
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.5532,
+            "loop": {
+              "start": 50274,
+              "end": 250990
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.5885,
+            "loop": {
+              "start": 50274,
+              "end": 250888
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.6405,
+            "loop": {
+              "start": 50274,
+              "end": 250962
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.8286,
+            "loop": {
+              "start": 38808,
+              "end": 160865
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.8515,
+            "loop": {
+              "start": 38808,
+              "end": 160761
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.9594,
+            "loop": {
+              "start": 38808,
+              "end": 160430
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.8106,
+            "loop": {
+              "start": 43071,
+              "end": 194310
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.9346,
+            "loop": {
+              "start": 42998,
+              "end": 194553
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.7988,
+            "loop": {
+              "start": 42998,
+              "end": 194211
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.8795,
+            "loop": {
+              "start": 33369,
+              "end": 252456
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.8631,
+            "loop": {
+              "start": 33369,
+              "end": 252135
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.8088,
+            "loop": {
+              "start": 39397,
+              "end": 178035
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.8505,
+            "loop": {
+              "start": 39397,
+              "end": 178160
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.8346,
+            "loop": {
+              "start": 39323,
+              "end": 177964
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.7556,
+            "loop": {
+              "start": 39397,
+              "end": 178016
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.6533,
+            "loop": {
+              "start": 61740,
+              "end": 226767
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.6949,
+            "loop": {
+              "start": 61740,
+              "end": 227183
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_F6.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 0.6741,
+            "loop": {
+              "start": 61740,
+              "end": 227630
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Fs6.m4a",
+            "rootNote": 90,
+            "lo": 90,
+            "hi": 90,
+            "placeholder": "organ",
+            "gain": 0.5896,
+            "loop": {
+              "start": 27269,
+              "end": 336995
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_G6.m4a",
+            "rootNote": 91,
+            "lo": 91,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 0.6059,
+            "loop": {
+              "start": 27195,
+              "end": 336915
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_Gs6.m4a",
+            "rootNote": 92,
+            "lo": 92,
+            "hi": 92,
+            "placeholder": "organ",
+            "gain": 0.6084,
+            "loop": {
+              "start": 27195,
+              "end": 336823
+            }
+          },
+          {
+            "file": "soloviolintrem/soloviolintrem_A6.m4a",
+            "rootNote": 93,
+            "lo": 93,
+            "hi": 93,
+            "placeholder": "organ",
+            "gain": 0.5902,
+            "loop": {
+              "start": 27269,
+              "end": 336528
+            }
+          }
+        ]
+      }
+    },
+    {
       "id": "soundtrack",
       "name": "Soundtrack Synth",
       "family": "keys",
@@ -20768,12 +22496,12 @@
     {
       "id": "dizi",
       "name": "Dizi Flute",
-      "family": "keys",
+      "category": "winds",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/dizi-1_0_0.zip",
-      "bytes": 2211602,
-      "crc32": 1219957152,
+      "version": "1.1.0",
+      "file": "packs/dizi-1_1_0.zip",
+      "bytes": 2114502,
+      "crc32": 2283220402,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://freesound.org/people/Hypnotriod/packs/21613/",
@@ -20782,7 +22510,7 @@
       "manifest": {
         "id": "dizi",
         "name": "Dizi Flute",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "winds",
         "kind": "pitched",
@@ -20794,7 +22522,7 @@
           "lo": 67,
           "hi": 91
         },
-        "shade": "orange",
+        "shade": "bronze",
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://freesound.org/people/Hypnotriod/packs/21613/",
@@ -20817,8 +22545,8 @@
             "placeholder": "organ",
             "gain": 0.7712,
             "loop": {
-              "start": 30870,
-              "end": 325416
+              "start": 19095,
+              "end": 313641
             }
           },
           {
@@ -20829,8 +22557,8 @@
             "placeholder": "organ",
             "gain": 0.778,
             "loop": {
-              "start": 30870,
-              "end": 325479
+              "start": 19095,
+              "end": 313704
             }
           },
           {
@@ -20841,8 +22569,8 @@
             "placeholder": "organ",
             "gain": 0.8313,
             "loop": {
-              "start": 22050,
-              "end": 267147
+              "start": 7842,
+              "end": 252939
             }
           },
           {
@@ -20853,8 +22581,8 @@
             "placeholder": "organ",
             "gain": 0.8386,
             "loop": {
-              "start": 22050,
-              "end": 268189
+              "start": 7970,
+              "end": 254109
             }
           },
           {
@@ -20865,8 +22593,8 @@
             "placeholder": "organ",
             "gain": 0.8557,
             "loop": {
-              "start": 29106,
-              "end": 281053
+              "start": 9138,
+              "end": 261085
             }
           },
           {
@@ -20877,8 +22605,8 @@
             "placeholder": "organ",
             "gain": 0.9143,
             "loop": {
-              "start": 121716,
-              "end": 292509
+              "start": 107892,
+              "end": 278685
             }
           },
           {
@@ -20889,8 +22617,8 @@
             "placeholder": "organ",
             "gain": 0.9224,
             "loop": {
-              "start": 121716,
-              "end": 293287
+              "start": 108404,
+              "end": 279975
             }
           },
           {
@@ -20901,8 +22629,8 @@
             "placeholder": "organ",
             "gain": 0.8389,
             "loop": {
-              "start": 67914,
-              "end": 286517
+              "start": 52938,
+              "end": 271541
             }
           },
           {
@@ -20913,8 +22641,8 @@
             "placeholder": "organ",
             "gain": 0.9067,
             "loop": {
-              "start": 67914,
-              "end": 286772
+              "start": 52810,
+              "end": 271668
             }
           },
           {
@@ -20925,8 +22653,8 @@
             "placeholder": "organ",
             "gain": 0.9468,
             "loop": {
-              "start": 30870,
-              "end": 241544
+              "start": 16662,
+              "end": 227336
             }
           },
           {
@@ -20937,8 +22665,8 @@
             "placeholder": "organ",
             "gain": 0.9551,
             "loop": {
-              "start": 30870,
-              "end": 241505
+              "start": 16918,
+              "end": 227553
             }
           },
           {
@@ -20949,8 +22677,8 @@
             "placeholder": "organ",
             "gain": 0.9096,
             "loop": {
-              "start": 27342,
-              "end": 304694
+              "start": 15054,
+              "end": 292406
             }
           },
           {
@@ -20961,8 +22689,8 @@
             "placeholder": "organ",
             "gain": 1.0535,
             "loop": {
-              "start": 57257,
-              "end": 323967
+              "start": 44329,
+              "end": 311039
             }
           },
           {
@@ -20973,8 +22701,8 @@
             "placeholder": "organ",
             "gain": 1.0627,
             "loop": {
-              "start": 57257,
-              "end": 323962
+              "start": 44585,
+              "end": 311290
             }
           },
           {
@@ -20985,8 +22713,8 @@
             "placeholder": "organ",
             "gain": 0.8714,
             "loop": {
-              "start": 22932,
-              "end": 216621
+              "start": 7828,
+              "end": 201517
             }
           },
           {
@@ -20997,8 +22725,8 @@
             "placeholder": "organ",
             "gain": 0.879,
             "loop": {
-              "start": 22859,
-              "end": 216352
+              "start": 7755,
+              "end": 201248
             }
           },
           {
@@ -21009,8 +22737,8 @@
             "placeholder": "organ",
             "gain": 0.7812,
             "loop": {
-              "start": 69605,
-              "end": 255274
+              "start": 48613,
+              "end": 234282
             }
           },
           {
@@ -21021,8 +22749,8 @@
             "placeholder": "organ",
             "gain": 0.8252,
             "loop": {
-              "start": 28886,
-              "end": 322876
+              "start": 18390,
+              "end": 312380
             }
           },
           {
@@ -21033,8 +22761,8 @@
             "placeholder": "organ",
             "gain": 0.8229,
             "loop": {
-              "start": 28886,
-              "end": 323136
+              "start": 18390,
+              "end": 312640
             }
           },
           {
@@ -21045,8 +22773,8 @@
             "placeholder": "organ",
             "gain": 0.8495,
             "loop": {
-              "start": 39617,
-              "end": 351596
+              "start": 30401,
+              "end": 342380
             }
           },
           {
@@ -21057,8 +22785,8 @@
             "placeholder": "organ",
             "gain": 0.8471,
             "loop": {
-              "start": 39617,
-              "end": 351574
+              "start": 30273,
+              "end": 342230
             }
           },
           {
@@ -21069,8 +22797,8 @@
             "placeholder": "organ",
             "gain": 0.7357,
             "loop": {
-              "start": 41234,
-              "end": 390410
+              "start": 16019,
+              "end": 365195
             }
           },
           {
@@ -21081,8 +22809,8 @@
             "placeholder": "organ",
             "gain": 0.7337,
             "loop": {
-              "start": 41234,
-              "end": 390286
+              "start": 15122,
+              "end": 364174
             }
           },
           {
@@ -21093,8 +22821,8 @@
             "placeholder": "organ",
             "gain": 0.9001,
             "loop": {
-              "start": 40352,
-              "end": 335015
+              "start": 38688,
+              "end": 333351
             }
           },
           {
@@ -21105,8 +22833,8 @@
             "placeholder": "organ",
             "gain": 0.8377,
             "loop": {
-              "start": 46601,
-              "end": 354489
+              "start": 25225,
+              "end": 333113
             }
           }
         ]
