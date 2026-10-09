@@ -1110,7 +1110,9 @@ html, body {
    the value inside them; mute, solo, and the instrument's icon in the corner,
    which is also the place to hold. */
 .arrlabel.arrlabel-card { justify-content: space-between; gap: 5px; padding: 6px 7px; border-radius: 12px; }
-.arrbar { position: relative; height: 16px; border-radius: 5px; background: #2e2e2e; overflow: hidden; touch-action: pan-y; cursor: ew-resize; flex: 0 0 auto; }
+/* touch-action none: a drag that strays up or down stays the bar's. With
+   pan-y the browser took any drag that wandered vertically and cancelled it. */
+.arrbar { position: relative; height: 16px; border-radius: 5px; background: #2e2e2e; overflow: hidden; touch-action: none; -webkit-user-select: none; user-select: none; cursor: ew-resize; flex: 0 0 auto; }
 .arrbar-text { position: absolute; top: 0; left: 0; width: 100%; height: 16px; line-height: 16px; text-align: center; font-size: 10.5px; font-weight: 700; color: #e8e6df; white-space: nowrap; pointer-events: none; font-variant-numeric: tabular-nums; }
 .arrbar-fill { position: absolute; top: 0; bottom: 0; overflow: hidden; pointer-events: none; }
 .arrbar-fill .arrbar-text-dark { color: #141414; }
@@ -1180,7 +1182,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-10-07 07:21 from src/. */
+/* PocketDAW - phase 2. Built 2026-10-09 10:22 from src/. */
 (function () {
 'use strict';
 
@@ -1310,6 +1312,7 @@ function containScroll(node, axis = 'y') {
 
   
   const isSlider = (at) => {
+    if (at && typeof at.className === 'string' && at.className.split(' ').includes('arrbar')) return true;
     if (!at || at.tagName !== 'INPUT') return false;
     const type = at.type || (at.attributes && at.attributes.type);
     const classes = typeof at.className === 'string' ? at.className.split(' ') : [];
@@ -4576,6 +4579,25 @@ function isOnResizeHandle(layout, note, x) {
   return x >= noteX + noteW - resizeHandleWidth(noteW);
 }
 
+const AUTO_RADIUS = 15;
+const AUTO_RADIUS_HELD = 17;
+function automationCircles({ lane, param, layout, width, height }) {
+  const usable = Math.max(1, height - HEADER_HEIGHT);
+  const toY = (value) => HEADER_HEIGHT + (1 - (value - param.min) / (param.max - param.min)) * usable;
+  const r = AUTO_RADIUS_HELD + 1.5;
+  return (lane || []).map((p) => {
+    const x = layout.tickToX(p.tick);
+    const y = toY(p.value);
+    const left = layout.labelWidth;
+    const atEdge = x >= left - r && x <= width + r;
+    return {
+      x, y,
+      cx: atEdge ? Math.max(left + r, Math.min(width - r, x)) : x,
+      cy: Math.max(HEADER_HEIGHT + r, Math.min(height - r, y)),
+    };
+  });
+}
+
 const theme = {
   ink: '#000000',
   panel: '#161616',
@@ -4657,6 +4679,121 @@ function shadeTint(name) {
 
 function handleColor(name) {
   return shade(name).dark;
+}
+
+const PARAMS = [
+  { id: 'volume', label: 'Volume', min: 0, max: 120, def: 100 },
+  { id: 'pan', label: 'Stereo', min: -100, max: 100, def: 0 },
+  { id: 'lowpass', label: 'Low pass', min: 0, max: 100, def: 100 },
+  { id: 'highpass', label: 'High pass', min: 0, max: 100, def: 0 },
+  { id: 'reverb', label: 'Reverb send', min: 0, max: 100, def: 0 },
+  { id: 'tremolo', label: 'Tremolo', min: 0, max: 100, def: 0 },
+  { id: 'timing', label: 'Timing', min: -100, max: 100, def: 0 },
+];
+
+const FILTER_LANES = ['lowpass', 'highpass', 'cutoff'];
+
+const LEGACY = { cutoff: { id: 'cutoff', label: 'Filter', min: 0, max: 100, def: 100 } };
+
+function cutoffHz(position) {
+  return Math.round(20 * Math.pow(1000, Math.max(0, Math.min(100, position)) / 100));
+}
+
+function cutoffPosition(hz) {
+  return Math.round((Math.log(Math.max(20, hz) / 20) / Math.log(1000)) * 100);
+}
+
+function paramById(id) {
+  return PARAMS.find((p) => p.id === id) || LEGACY[id] || PARAMS[0];
+}
+
+function filterLaneOf(clip) {
+  return FILTER_LANES.find((id) => laneOf(clip, id).length > 0) || null;
+}
+
+function clampValue(paramId, value) {
+  const p = paramById(paramId);
+  return Math.max(p.min, Math.min(p.max, Math.round(Number(value) || 0)));
+}
+
+function laneOf(clip, paramId) {
+  if (!clip || !clip.automation) return [];
+  const lane = clip.automation[paramId];
+  return Array.isArray(lane) ? lane : [];
+}
+
+function hasAutomation(clip, paramId) {
+  return laneOf(clip, paramId).length > 0;
+}
+
+function anyAutomation(clip) {
+  if (!clip || !clip.automation) return false;
+  return Object.keys(clip.automation).some((id) => laneOf(clip, id).length > 0);
+}
+
+function valueAt(lane, tick) {
+  if (!lane.length) return null;
+  if (tick <= lane[0].tick) return lane[0].value;
+  const last = lane[lane.length - 1];
+  if (tick >= last.tick) return last.value;
+  for (let i = 1; i < lane.length; i++) {
+    const a = lane[i - 1];
+    const b = lane[i];
+    if (tick <= b.tick) {
+      const span = b.tick - a.tick;
+      if (span <= 0) return b.value;
+      return a.value + ((tick - a.tick) / span) * (b.value - a.value);
+    }
+  }
+  return last.value;
+}
+
+function makeLane(paramId, totalTicks, value) {
+  const v = clampValue(paramId, value === undefined ? paramById(paramId).def : value);
+  return [{ tick: 0, value: v }, { tick: totalTicks, value: v }];
+}
+
+function isEndpoint(lane, index) {
+  return index === 0 || index === lane.length - 1;
+}
+
+function normaliseLane(lane, totalTicks) {
+  const sorted = [...lane].sort((a, b) => a.tick - b.tick);
+  if (!sorted.length) return sorted;
+  sorted[0] = { ...sorted[0], tick: 0 };
+  sorted[sorted.length - 1] = { ...sorted[sorted.length - 1], tick: totalTicks };
+  return sorted;
+}
+
+function refit(lane, fromTicks, toTicks) {
+  if (!lane.length || fromTicks === toTicks) return lane;
+  const atEnd = valueAt(lane, toTicks);
+  const kept = lane.filter((p) => p.tick < toTicks);
+  return normaliseLane([...kept, { tick: toTicks, value: atEnd }], toTicks);
+}
+
+function pointAt(lane, tick, tolerance) {
+  for (let i = 0; i < lane.length; i++) {
+    if (Math.abs(lane[i].tick - tick) <= tolerance) return i;
+  }
+  return -1;
+}
+
+function automationLabel(paramId, value) {
+  const v = Number(value) || 0;
+  if (paramId === 'volume') {
+    if (v <= 0) return '\u2212\u221e';
+    const db = Math.round(20 * Math.log10(v / 80) * 10) / 10;
+    if (db <= -60) return '\u2212\u221e';
+    const sign = db > 0 ? '+' : db < 0 ? '\u2212' : '';
+    return Math.abs(db) >= 10 ? `${sign}${Math.round(Math.abs(db))}` : `${sign}${Math.abs(db).toFixed(1)}`;
+  }
+  if (paramId === 'pan') {
+    const n = Math.round(Math.abs(v) / 2);
+    return n === 0 ? 'C' : `${n}${v < 0 ? 'L' : 'R'}`;
+  }
+  if (paramId === 'timing') return `${v > 0 ? '+' : v < 0 ? '\u2212' : ''}${Math.abs(Math.round(v))}`;
+  return String(Math.round(v));
 }
 
 function drawGrid(canvas, { song, view, kit, shade: shadeName, clip, layout, scrollY, drag, marquee, floating, automation, ghost = null }) {
@@ -4997,15 +5134,39 @@ function drawAutomation(ctx, { lane, layout, param, baseline, height, width, hel
   ctx.lineJoin = 'round';
   ctx.stroke();
 
-  points.forEach((p, i) => {
+  ctx.restore();
+
+  
+  const circles = automationCircles({ lane, param, layout, width, height });
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(layout.labelWidth, top, Math.max(0, width - layout.labelWidth), usable);
+  ctx.clip();
+  const order = circles.map((c, i) => i).sort((a, b) => (a === held) - (b === held));
+  order.forEach((i) => {
+    const c = circles[i];
     const on = i === held;
+    const r = on ? AUTO_RADIUS_HELD : AUTO_RADIUS;
+    if (c.cx !== c.x || c.cy !== c.y) {
+      ctx.beginPath();
+      ctx.moveTo(c.x, c.y);
+      ctx.lineTo(c.cx, c.cy);
+      ctx.strokeStyle = theme.purple;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+    }
     ctx.beginPath();
-    ctx.arc(p.x, p.y, on ? 9 : 7, 0, Math.PI * 2);
-    ctx.fillStyle = on ? theme.purpleLight : theme.ink;
+    ctx.arc(c.cx, c.cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = on ? theme.purpleLight : '#15132B';
     ctx.fill();
     ctx.strokeStyle = on ? theme.purple : theme.purpleLight;
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2.2;
     ctx.stroke();
+    ctx.fillStyle = on ? '#15132B' : theme.text;
+    ctx.font = `700 ${on ? 10.5 : 9.5}px system-ui, -apple-system, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(automationLabel(param.id, lane[i].value), c.cx, c.cy + 0.5);
   });
   ctx.restore();
 }
@@ -5028,104 +5189,6 @@ function hostTimers() {
     setInterval: (fn, ms) => setInterval(fn, ms),
     clearInterval: (id) => clearInterval(id),
   };
-}
-
-const PARAMS = [
-  { id: 'volume', label: 'Volume', min: 0, max: 120, def: 100 },
-  { id: 'pan', label: 'Stereo', min: -100, max: 100, def: 0 },
-  { id: 'lowpass', label: 'Low pass', min: 0, max: 100, def: 100 },
-  { id: 'highpass', label: 'High pass', min: 0, max: 100, def: 0 },
-  { id: 'reverb', label: 'Reverb send', min: 0, max: 100, def: 0 },
-  { id: 'tremolo', label: 'Tremolo', min: 0, max: 100, def: 0 },
-  { id: 'timing', label: 'Timing', min: -100, max: 100, def: 0 },
-];
-
-const FILTER_LANES = ['lowpass', 'highpass', 'cutoff'];
-
-const LEGACY = { cutoff: { id: 'cutoff', label: 'Filter', min: 0, max: 100, def: 100 } };
-
-function cutoffHz(position) {
-  return Math.round(20 * Math.pow(1000, Math.max(0, Math.min(100, position)) / 100));
-}
-
-function cutoffPosition(hz) {
-  return Math.round((Math.log(Math.max(20, hz) / 20) / Math.log(1000)) * 100);
-}
-
-function paramById(id) {
-  return PARAMS.find((p) => p.id === id) || LEGACY[id] || PARAMS[0];
-}
-
-function filterLaneOf(clip) {
-  return FILTER_LANES.find((id) => laneOf(clip, id).length > 0) || null;
-}
-
-function clampValue(paramId, value) {
-  const p = paramById(paramId);
-  return Math.max(p.min, Math.min(p.max, Math.round(Number(value) || 0)));
-}
-
-function laneOf(clip, paramId) {
-  if (!clip || !clip.automation) return [];
-  const lane = clip.automation[paramId];
-  return Array.isArray(lane) ? lane : [];
-}
-
-function hasAutomation(clip, paramId) {
-  return laneOf(clip, paramId).length > 0;
-}
-
-function anyAutomation(clip) {
-  if (!clip || !clip.automation) return false;
-  return Object.keys(clip.automation).some((id) => laneOf(clip, id).length > 0);
-}
-
-function valueAt(lane, tick) {
-  if (!lane.length) return null;
-  if (tick <= lane[0].tick) return lane[0].value;
-  const last = lane[lane.length - 1];
-  if (tick >= last.tick) return last.value;
-  for (let i = 1; i < lane.length; i++) {
-    const a = lane[i - 1];
-    const b = lane[i];
-    if (tick <= b.tick) {
-      const span = b.tick - a.tick;
-      if (span <= 0) return b.value;
-      return a.value + ((tick - a.tick) / span) * (b.value - a.value);
-    }
-  }
-  return last.value;
-}
-
-function makeLane(paramId, totalTicks, value) {
-  const v = clampValue(paramId, value === undefined ? paramById(paramId).def : value);
-  return [{ tick: 0, value: v }, { tick: totalTicks, value: v }];
-}
-
-function isEndpoint(lane, index) {
-  return index === 0 || index === lane.length - 1;
-}
-
-function normaliseLane(lane, totalTicks) {
-  const sorted = [...lane].sort((a, b) => a.tick - b.tick);
-  if (!sorted.length) return sorted;
-  sorted[0] = { ...sorted[0], tick: 0 };
-  sorted[sorted.length - 1] = { ...sorted[sorted.length - 1], tick: totalTicks };
-  return sorted;
-}
-
-function refit(lane, fromTicks, toTicks) {
-  if (!lane.length || fromTicks === toTicks) return lane;
-  const atEnd = valueAt(lane, toTicks);
-  const kept = lane.filter((p) => p.tick < toTicks);
-  return normaliseLane([...kept, { tick: toTicks, value: atEnd }], toTicks);
-}
-
-function pointAt(lane, tick, tolerance) {
-  for (let i = 0; i < lane.length; i++) {
-    if (Math.abs(lane[i].tick - tick) <= tolerance) return i;
-  }
-  return -1;
 }
 
 function trackSpan(song, trackId) {
@@ -6947,13 +7010,14 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     const tick = Math.max(0, Math.round(layout.xToTick(p.x)));
     const value = valueAtY(p.y, height);
 
-    const tolerance = layout.pxPerTick > 0 ? 14 / layout.pxPerTick : 0;
-    let index = lane.length ? pointAt(lane, tick, tolerance) : -1;
-    if (index >= 0) {
-      const param = paramById(paramId);
-      const usable = Math.max(1, height - HEADER_HEIGHT);
-      const pointY = HEADER_HEIGHT + (1 - (lane[index].value - param.min) / (param.max - param.min)) * usable;
-      if (Math.abs(pointY - p.y) > 22) index = -1;
+    let index = -1;
+    if (lane.length) {
+      const circles = automationCircles({ lane, param: paramById(paramId), layout, width: canvas.clientWidth || 380, height });
+      let best = AUTO_RADIUS + 6;
+      circles.forEach((c, i) => {
+        const d = Math.hypot(c.cx - p.x, c.cy - p.y);
+        if (d <= best) { best = d; index = i; }
+      });
     }
 
     if (index < 0) {
@@ -6965,6 +7029,7 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
       const step = store.run((s) => addAutomationPoint(s, automationCtx(), paramId, tick, value));
       if (step) {
         onChange();
+        const tolerance = layout.pxPerTick > 0 ? 14 / layout.pxPerTick : 1;
         index = pointAt(currentLane(), Math.max(1, tick), tolerance || 1);
       }
     }
@@ -8458,13 +8523,18 @@ function arrangementSheet(store, onChange) {
 
 const lastTaps = new Map();
 
-function makeBar({ kind, key, width, colour, value, fill, mark, text, valueAt, write, reset, onLive, onChange, ariaLabel }) {
+let barsHeld = 0;
+const barBusy = () => barsHeld > 0;
+
+function makeBar({ kind, key, width, colour, value, fill, mark, text, fracOf, valueAt, write, reset, onLive, onChange, ariaLabel }) {
   const base = el('span', { class: 'arrbar-text' });
   const dark = el('span', { class: 'arrbar-text arrbar-text-dark', style: `width:${width}px` });
   const fillNode = el('span', { class: 'arrbar-fill', style: `background:${colour}` }, [dark]);
   const markNode = el('span', { class: 'arrbar-mark' });
   const node = el('div', { class: `arrbar arrbar-${kind}`, role: 'slider', 'aria-label': ariaLabel, style: `width:${width}px` }, [base, fillNode, markNode]);
+  let current = value;
   const show = (v) => {
+    current = v;
     const { left, w } = fill(v);
     fillNode.style.left = `${left}px`;
     fillNode.style.width = `${w}px`;
@@ -8474,42 +8544,47 @@ function makeBar({ kind, key, width, colour, value, fill, mark, text, valueAt, w
     markNode.style.left = `${mark}px`;
     markNode.style.background = mark > left && mark < left + w ? 'rgba(0,0,0,0.28)' : 'rgba(255,255,255,0.22)';
     node.setAttribute('aria-valuetext', text(v));
+    node.setAttribute('data-pos', String(fracOf(v)));
   };
   show(value);
   let pressed = false;
   let dragging = false;
   let downX = 0;
-  const fracAt = (e) => {
-    const r = typeof node.getBoundingClientRect === 'function' ? node.getBoundingClientRect() : { left: 0 };
-    return Math.max(0, Math.min(1, ((e.clientX || 0) - (r.left || 0)) / width));
-  };
+  let startFrac = 0;
   const set = (v) => { write(v); show(v); if (onLive) onLive(); };
+  const release = () => { if (pressed) { pressed = false; barsHeld = Math.max(0, barsHeld - 1); } };
   node.addEventListener('pointerdown', (e) => {
     if (e.stopPropagation) e.stopPropagation();
+    if (e.preventDefault) e.preventDefault();
+    if (!pressed) barsHeld++;
     pressed = true;
     dragging = false;
     downX = e.clientX || 0;
+    startFrac = fracOf(current);
     try { if (node.setPointerCapture && e.pointerId != null) node.setPointerCapture(e.pointerId); } catch (err) { void err; }
   });
+  
   node.addEventListener('pointermove', (e) => {
     if (!pressed) return;
-    if (!dragging && Math.abs((e.clientX || 0) - downX) < 4) return;
+    const dx = (e.clientX || 0) - downX;
+    if (!dragging && Math.abs(dx) < 4) return;
     dragging = true;
-    set(valueAt(fracAt(e)));
+    if (e.preventDefault) e.preventDefault();
+    set(valueAt(Math.max(0, Math.min(1, startFrac + dx / width))));
   });
   const end = (e, cancelled) => {
     if (!pressed) return;
-    pressed = false;
+    release();
     if (!cancelled && !dragging) {
       const now = Date.now();
-      if (now - (lastTaps.get(key) || 0) < 320) { lastTaps.delete(key); reset(); return; }
+      if (now - (lastTaps.get(key) || 0) < 320) { lastTaps.delete(key); reset(); onChange(); return; }
       lastTaps.set(key, now);
-      set(valueAt(fracAt(e)));
     }
     onChange();
   };
   node.addEventListener('pointerup', (e) => end(e, false));
   node.addEventListener('pointercancel', (e) => end(e, true));
+  node.addEventListener('lostpointercapture', () => { if (pressed) end(null, true); });
   return node;
 }
 
@@ -8752,7 +8827,7 @@ function arrangementMatrix(store, onChange, {
       kind: 'level', key: `${track.id}:gain`, width: BAR_W, colour: shade, value: track.gain,
       fill: (g) => ({ left: 0, w: Math.round(levelPosition(g) * BAR_W) }),
       mark: Math.round(levelPosition(UNITY_GAIN) * BAR_W),
-      text: levelText, valueAt: gainAtPosition,
+      text: levelText, valueAt: gainAtPosition, fracOf: levelPosition,
       write: (g) => writeField('gain', g),
       reset: () => run((s) => setTrackField(s, track.id, 'gain', UNITY_GAIN)),
       onLive, onChange, ariaLabel: `${trackTitle(track)} level`,
@@ -8765,6 +8840,7 @@ function arrangementMatrix(store, onChange, {
         return { left: Math.round(Math.min(mid, at)), w: Math.round(Math.abs(at - mid)) };
       },
       mark: Math.round(BAR_W / 2), text: panText,
+      fracOf: (p) => ((p || 0) + 1) / 2,
       valueAt: (f) => { const p = f * 2 - 1; return Math.abs(p) < 0.03 ? 0 : Math.round(p * 50) / 50; },
       write: (p) => writeField('pan', p),
       reset: () => run((s) => setTrackField(s, track.id, 'pan', 0)),
@@ -15156,7 +15232,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-10-07 07:21';
+const BUILD_STAMP = '2026-10-09 10:22';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -17303,6 +17379,7 @@ function mountApp(root, options = {}) {
   }
 
   function render() {
+    if (barBusy()) return;
     
     const keepFocus = captureFocus();
 
