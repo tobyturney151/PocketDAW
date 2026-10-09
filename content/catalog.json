@@ -11636,19 +11636,19 @@
       "name": "Solo Violin",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/soloviolin-1_0_0.zip",
-      "bytes": 4978147,
-      "crc32": 1790902234,
+      "version": "1.1.0",
+      "file": "packs/soloviolin-1_1_0.zip",
+      "bytes": 5076079,
+      "crc32": 3956747899,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, arco vibrato, soft layer, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, arco vibrato, loud layer, CC0"
       },
       "manifest": {
         "id": "soloviolin",
         "name": "Solo Violin",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "family": "keys",
         "category": "strings",
         "kind": "pitched",
@@ -11664,7 +11664,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, arco vibrato, soft layer, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, arco vibrato, loud layer, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -11681,10 +11681,10 @@
             "lo": 55,
             "hi": 55,
             "placeholder": "organ",
-            "gain": 0.3321,
+            "gain": 0.4188,
             "loop": {
-              "start": 70029,
-              "end": 426525
+              "start": 28224,
+              "end": 438481
             }
           },
           {
@@ -11693,10 +11693,10 @@
             "lo": 56,
             "hi": 56,
             "placeholder": "organ",
-            "gain": 0.3484,
+            "gain": 0.4272,
             "loop": {
-              "start": 70029,
-              "end": 426541
+              "start": 28224,
+              "end": 438616
             }
           },
           {
@@ -11705,10 +11705,10 @@
             "lo": 57,
             "hi": 57,
             "placeholder": "organ",
-            "gain": 0.7814,
+            "gain": 0.4066,
             "loop": {
-              "start": 28517,
-              "end": 385999
+              "start": 33516,
+              "end": 432440
             }
           },
           {
@@ -11717,10 +11717,10 @@
             "lo": 58,
             "hi": 58,
             "placeholder": "organ",
-            "gain": 0.7563,
+            "gain": 0.4762,
             "loop": {
-              "start": 28517,
-              "end": 385980
+              "start": 33516,
+              "end": 432473
             }
           },
           {
@@ -11729,10 +11729,10 @@
             "lo": 59,
             "hi": 59,
             "placeholder": "organ",
-            "gain": 0.5617,
+            "gain": 0.5388,
             "loop": {
-              "start": 40924,
-              "end": 432785
+              "start": 89082,
+              "end": 437829
             }
           },
           {
@@ -11741,10 +11741,10 @@
             "lo": 60,
             "hi": 60,
             "placeholder": "organ",
-            "gain": 0.5437,
+            "gain": 0.5559,
             "loop": {
-              "start": 40997,
-              "end": 432952
+              "start": 89082,
+              "end": 437677
             }
           },
           {
@@ -11753,10 +11753,10 @@
             "lo": 61,
             "hi": 61,
             "placeholder": "organ",
-            "gain": 0.5639,
+            "gain": 0.5477,
             "loop": {
-              "start": 40997,
-              "end": 432024
+              "start": 89082,
+              "end": 438598
             }
           },
           {
@@ -11765,10 +11765,10 @@
             "lo": 62,
             "hi": 62,
             "placeholder": "organ",
-            "gain": 0.5521,
+            "gain": 0.5214,
             "loop": {
-              "start": 40924,
-              "end": 432871
+              "start": 89082,
+              "end": 437982
             }
           },
           {
@@ -11777,10 +11777,10 @@
             "lo": 63,
             "hi": 63,
             "placeholder": "organ",
-            "gain": 0.4873,
+            "gain": 0.6036,
             "loop": {
-              "start": 68119,
-              "end": 418559
+              "start": 76734,
+              "end": 440432
             }
           },
           {
@@ -11789,10 +11789,10 @@
             "lo": 64,
             "hi": 64,
             "placeholder": "organ",
-            "gain": 0.4996,
+            "gain": 0.5062,
             "loop": {
-              "start": 68119,
-              "end": 418272
+              "start": 76734,
+              "end": 440401
             }
           },
           {
@@ -11801,10 +11801,10 @@
             "lo": 65,
             "hi": 65,
             "placeholder": "organ",
-            "gain": 0.5242,
+            "gain": 0.5223,
             "loop": {
-              "start": 68193,
-              "end": 417864
+              "start": 76734,
+              "end": 440358
             }
           },
           {
@@ -11813,10 +11813,10 @@
             "lo": 66,
             "hi": 66,
             "placeholder": "organ",
-            "gain": 0.6461,
+            "gain": 0.4041,
             "loop": {
-              "start": 102664,
-              "end": 395815
+              "start": 35280,
+              "end": 425003
             }
           },
           {
@@ -11825,10 +11825,10 @@
             "lo": 67,
             "hi": 67,
             "placeholder": "organ",
-            "gain": 0.6326,
+            "gain": 0.3549,
             "loop": {
-              "start": 102664,
-              "end": 395792
+              "start": 35280,
+              "end": 425448
             }
           },
           {
@@ -11837,10 +11837,10 @@
             "lo": 68,
             "hi": 68,
             "placeholder": "organ",
-            "gain": 0.5211,
+            "gain": 0.3834,
             "loop": {
-              "start": 102664,
-              "end": 395776
+              "start": 35280,
+              "end": 425150
             }
           },
           {
@@ -11849,10 +11849,10 @@
             "lo": 69,
             "hi": 69,
             "placeholder": "organ",
-            "gain": 0.7375,
+            "gain": 0.4543,
             "loop": {
-              "start": 40042,
-              "end": 432798
+              "start": 28224,
+              "end": 395330
             }
           },
           {
@@ -11861,10 +11861,10 @@
             "lo": 70,
             "hi": 70,
             "placeholder": "organ",
-            "gain": 0.8582,
+            "gain": 0.458,
             "loop": {
-              "start": 39969,
-              "end": 432733
+              "start": 28224,
+              "end": 396298
             }
           },
           {
@@ -11873,10 +11873,10 @@
             "lo": 71,
             "hi": 71,
             "placeholder": "organ",
-            "gain": 0.4948,
+            "gain": 0.5302,
             "loop": {
-              "start": 49743,
-              "end": 430975
+              "start": 78498,
+              "end": 433316
             }
           },
           {
@@ -11885,10 +11885,10 @@
             "lo": 72,
             "hi": 72,
             "placeholder": "organ",
-            "gain": 0.5073,
+            "gain": 0.4396,
             "loop": {
-              "start": 49743,
-              "end": 431696
+              "start": 78498,
+              "end": 433460
             }
           },
           {
@@ -11897,10 +11897,10 @@
             "lo": 73,
             "hi": 73,
             "placeholder": "organ",
-            "gain": 0.5769,
+            "gain": 0.4695,
             "loop": {
-              "start": 49743,
-              "end": 431282
+              "start": 78498,
+              "end": 433753
             }
           },
           {
@@ -11909,10 +11909,10 @@
             "lo": 74,
             "hi": 74,
             "placeholder": "organ",
-            "gain": 0.4976,
+            "gain": 0.4626,
             "loop": {
-              "start": 49743,
-              "end": 431692
+              "start": 78498,
+              "end": 433641
             }
           },
           {
@@ -11921,10 +11921,10 @@
             "lo": 75,
             "hi": 75,
             "placeholder": "organ",
-            "gain": 0.5404,
+            "gain": 0.5115,
             "loop": {
-              "start": 27694,
-              "end": 428309
+              "start": 52920,
+              "end": 412991
             }
           },
           {
@@ -11933,10 +11933,10 @@
             "lo": 76,
             "hi": 76,
             "placeholder": "organ",
-            "gain": 0.4995,
+            "gain": 0.4596,
             "loop": {
-              "start": 27767,
-              "end": 428516
+              "start": 52920,
+              "end": 412978
             }
           },
           {
@@ -11945,10 +11945,10 @@
             "lo": 77,
             "hi": 77,
             "placeholder": "organ",
-            "gain": 0.5362,
+            "gain": 0.4797,
             "loop": {
-              "start": 27694,
-              "end": 427729
+              "start": 52920,
+              "end": 412997
             }
           },
           {
@@ -11957,10 +11957,10 @@
             "lo": 78,
             "hi": 78,
             "placeholder": "organ",
-            "gain": 0.9445,
+            "gain": 0.3932,
             "loop": {
-              "start": 98784,
-              "end": 385066
+              "start": 32634,
+              "end": 426315
             }
           },
           {
@@ -11969,10 +11969,10 @@
             "lo": 79,
             "hi": 79,
             "placeholder": "organ",
-            "gain": 0.8933,
+            "gain": 0.4605,
             "loop": {
-              "start": 98784,
-              "end": 384953
+              "start": 32634,
+              "end": 426038
             }
           },
           {
@@ -11981,10 +11981,10 @@
             "lo": 80,
             "hi": 80,
             "placeholder": "organ",
-            "gain": 0.8163,
+            "gain": 0.4485,
             "loop": {
-              "start": 98784,
-              "end": 385698
+              "start": 32634,
+              "end": 426321
             }
           },
           {
@@ -11993,10 +11993,10 @@
             "lo": 81,
             "hi": 81,
             "placeholder": "organ",
-            "gain": 1.0658,
+            "gain": 0.4319,
             "loop": {
-              "start": 31222,
-              "end": 434507
+              "start": 60858,
+              "end": 403380
             }
           },
           {
@@ -12005,10 +12005,10 @@
             "lo": 82,
             "hi": 82,
             "placeholder": "organ",
-            "gain": 0.9408,
+            "gain": 0.4666,
             "loop": {
-              "start": 31222,
-              "end": 434478
+              "start": 60858,
+              "end": 403172
             }
           },
           {
@@ -12017,10 +12017,10 @@
             "lo": 83,
             "hi": 83,
             "placeholder": "organ",
-            "gain": 0.4947,
+            "gain": 0.4814,
             "loop": {
-              "start": 40410,
-              "end": 407535
+              "start": 49392,
+              "end": 419126
             }
           },
           {
@@ -12029,10 +12029,10 @@
             "lo": 84,
             "hi": 84,
             "placeholder": "organ",
-            "gain": 0.4843,
+            "gain": 0.4799,
             "loop": {
-              "start": 40924,
-              "end": 408870
+              "start": 49392,
+              "end": 419154
             }
           },
           {
@@ -12041,10 +12041,10 @@
             "lo": 85,
             "hi": 85,
             "placeholder": "organ",
-            "gain": 0.4581,
+            "gain": 0.4839,
             "loop": {
-              "start": 40410,
-              "end": 408245
+              "start": 49392,
+              "end": 420162
             }
           },
           {
@@ -12053,10 +12053,10 @@
             "lo": 86,
             "hi": 86,
             "placeholder": "organ",
-            "gain": 0.4485,
+            "gain": 0.4935,
             "loop": {
-              "start": 40850,
-              "end": 407948
+              "start": 49392,
+              "end": 420174
             }
           },
           {
@@ -12065,10 +12065,10 @@
             "lo": 87,
             "hi": 87,
             "placeholder": "organ",
-            "gain": 1.0295,
+            "gain": 0.4236,
             "loop": {
-              "start": 76204,
-              "end": 409027
+              "start": 68796,
+              "end": 373112
             }
           },
           {
@@ -12077,10 +12077,10 @@
             "lo": 88,
             "hi": 88,
             "placeholder": "organ",
-            "gain": 0.8983,
+            "gain": 0.4271,
             "loop": {
-              "start": 76277,
-              "end": 409135
+              "start": 68796,
+              "end": 373104
             }
           },
           {
@@ -12089,10 +12089,10 @@
             "lo": 89,
             "hi": 89,
             "placeholder": "organ",
-            "gain": 0.8497,
+            "gain": 0.4887,
             "loop": {
-              "start": 76277,
-              "end": 409121
+              "start": 68796,
+              "end": 372495
             }
           },
           {
@@ -12101,10 +12101,10 @@
             "lo": 90,
             "hi": 90,
             "placeholder": "organ",
-            "gain": 0.7675,
+            "gain": 0.5593,
             "loop": {
-              "start": 40924,
-              "end": 435582
+              "start": 60858,
+              "end": 438832
             }
           },
           {
@@ -12113,10 +12113,10 @@
             "lo": 91,
             "hi": 91,
             "placeholder": "organ",
-            "gain": 0.647,
+            "gain": 0.4912,
             "loop": {
-              "start": 40924,
-              "end": 435475
+              "start": 60858,
+              "end": 438742
             }
           },
           {
@@ -12125,10 +12125,10 @@
             "lo": 92,
             "hi": 92,
             "placeholder": "organ",
-            "gain": 0.6788,
+            "gain": 0.5752,
             "loop": {
-              "start": 40924,
-              "end": 435401
+              "start": 60858,
+              "end": 438851
             }
           },
           {
@@ -12137,10 +12137,10 @@
             "lo": 93,
             "hi": 93,
             "placeholder": "organ",
-            "gain": 0.4815,
+            "gain": 0.5052,
             "loop": {
-              "start": 80613,
-              "end": 422725
+              "start": 43218,
+              "end": 435263
             }
           },
           {
@@ -12149,10 +12149,10 @@
             "lo": 94,
             "hi": 94,
             "placeholder": "organ",
-            "gain": 0.4607,
+            "gain": 0.4978,
             "loop": {
-              "start": 80540,
-              "end": 422777
+              "start": 43218,
+              "end": 435795
             }
           },
           {
@@ -12161,10 +12161,10 @@
             "lo": 95,
             "hi": 95,
             "placeholder": "organ",
-            "gain": 0.4209,
+            "gain": 0.3941,
             "loop": {
-              "start": 46216,
-              "end": 297931
+              "start": 51156,
+              "end": 361941
             }
           },
           {
@@ -12173,10 +12173,10 @@
             "lo": 96,
             "hi": 96,
             "placeholder": "organ",
-            "gain": 0.3891,
+            "gain": 0.3752,
             "loop": {
-              "start": 46216,
-              "end": 297934
+              "start": 51156,
+              "end": 361990
             }
           }
         ]
