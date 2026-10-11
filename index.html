@@ -1186,7 +1186,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-10-11 09:01 from src/. */
+/* PocketDAW - phase 2. Built 2026-10-11 16:07 from src/. */
 (function () {
 'use strict';
 
@@ -5517,10 +5517,12 @@ function addAutomationPoint(song, ctx, paramId, tick, value) {
   const lane = existing.length ? existing : makeLane(paramId, total, value);
   const before = snapshot(clip, paramId);
   const at = Math.max(1, Math.min(total - 1, Math.round(tick)));
-  const next = normaliseLane([...lane.map((p) => ({ ...p })), { tick: at, value: clampValue(paramId, value) }], total);
+  const added = { tick: at, value: clampValue(paramId, value) };
+  const next = normaliseLane([...lane.map((p) => ({ ...p })), added], total);
   writeLane(clip, paramId, next);
   return {
     label: 'Add point',
+    index: next.indexOf(added),
     undo: () => restore(clip, paramId, before),
     redo: () => writeLane(clip, paramId, next.map((p) => ({ ...p }))),
   };
@@ -5536,8 +5538,8 @@ function moveAutomationPoint(song, ctx, paramId, index, tick, value) {
   const before = snapshot(clip, paramId);
   const next = lane.map((p) => ({ ...p }));
   const pinned = isEndpoint(lane, index);
-  const lo = index > 0 ? next[index - 1].tick + 1 : 0;
-  const hi = index < lane.length - 1 ? next[index + 1].tick - 1 : total;
+  const lo = index > 0 ? next[index - 1].tick : 0;
+  const hi = index < lane.length - 1 ? next[index + 1].tick : total;
   next[index] = {
     tick: pinned ? next[index].tick : Math.max(lo, Math.min(hi, Math.round(tick))),
     value: clampValue(paramId, value),
@@ -7068,8 +7070,7 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
       const step = store.run((s) => addAutomationPoint(s, automationCtx(), paramId, tick, value));
       if (step) {
         onChange();
-        const tolerance = layout.pxPerTick > 0 ? 14 / layout.pxPerTick : 1;
-        index = pointAt(currentLane(), Math.max(1, tick), tolerance || 1);
+        index = step.index;
       }
     }
     if (index < 0) return null;
@@ -7230,9 +7231,6 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
       const tick = Math.max(0, Math.round(layout.xToTick(p.x)));
       const value = valueAtY(p.y, drag.height);
       store.run((s) => moveAutomationPoint(s, automationCtx(), drag.paramId, drag.index, tick, value), { coalesce: true });
-      const lane = currentLane();
-      const moved = pointAt(lane, tick, layout.pxPerTick > 0 ? 14 / layout.pxPerTick : 1);
-      if (moved >= 0) drag.index = moved;
       onChange();
       return;
     }
@@ -15277,7 +15275,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-10-11 09:01';
+const BUILD_STAMP = '2026-10-11 16:07';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
