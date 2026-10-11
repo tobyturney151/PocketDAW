@@ -1,7 +1,7 @@
 {
   "format": "pocketdaw.catalog",
   "version": 1,
-  "built": "2026-10-08",
+  "built": "2026-10-11",
   "packs": [
     {
       "id": "ambichoir",
@@ -688,6 +688,915 @@
             "hi": 91,
             "placeholder": "organ",
             "gain": 10.491
+          }
+        ]
+      }
+    },
+    {
+      "id": "barisax",
+      "name": "Bari Sax",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/barisax-1_0_0.zip",
+      "bytes": 2468365,
+      "crc32": 176395082,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sfzinstruments/karoryfer.bear-sax",
+        "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) \u2014 looped sustain, f, CC0"
+      },
+      "manifest": {
+        "id": "barisax",
+        "name": "Bari Sax",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 37,
+          "hi": 68
+        },
+        "defaultView": {
+          "lo": 40,
+          "hi": 64
+        },
+        "shade": "bronze",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sfzinstruments/karoryfer.bear-sax",
+          "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) \u2014 looped sustain, f, CC0"
+        },
+        "envelope": {
+          "attack": 0.005,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "barisax/barisax_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 0.3471,
+            "loop": {
+              "start": 47628,
+              "end": 167269
+            }
+          },
+          {
+            "file": "barisax/barisax_D2.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 0.3972,
+            "loop": {
+              "start": 30870,
+              "end": 167835
+            }
+          },
+          {
+            "file": "barisax/barisax_Ds2.m4a",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 0.4705,
+            "loop": {
+              "start": 26460,
+              "end": 177279
+            }
+          },
+          {
+            "file": "barisax/barisax_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 0.5835,
+            "loop": {
+              "start": 25578,
+              "end": 204857
+            }
+          },
+          {
+            "file": "barisax/barisax_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 0.6377,
+            "loop": {
+              "start": 45864,
+              "end": 213558
+            }
+          },
+          {
+            "file": "barisax/barisax_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 0.6355,
+            "loop": {
+              "start": 27342,
+              "end": 257620
+            }
+          },
+          {
+            "file": "barisax/barisax_G2.m4a",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.7356,
+            "loop": {
+              "start": 34398,
+              "end": 248152
+            }
+          },
+          {
+            "file": "barisax/barisax_Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 0.5823,
+            "loop": {
+              "start": 38808,
+              "end": 184501
+            }
+          },
+          {
+            "file": "barisax/barisax_A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 0.714,
+            "loop": {
+              "start": 44100,
+              "end": 222106
+            }
+          },
+          {
+            "file": "barisax/barisax_As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.5096,
+            "loop": {
+              "start": 65268,
+              "end": 189008
+            }
+          },
+          {
+            "file": "barisax/barisax_B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.5078,
+            "loop": {
+              "start": 72324,
+              "end": 189477
+            }
+          },
+          {
+            "file": "barisax/barisax_C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 0.555,
+            "loop": {
+              "start": 33516,
+              "end": 316708
+            }
+          },
+          {
+            "file": "barisax/barisax_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.566,
+            "loop": {
+              "start": 29988,
+              "end": 297914
+            }
+          },
+          {
+            "file": "barisax/barisax_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.4585,
+            "loop": {
+              "start": 35280,
+              "end": 151811
+            }
+          },
+          {
+            "file": "barisax/barisax_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.4953,
+            "loop": {
+              "start": 89082,
+              "end": 345646
+            }
+          },
+          {
+            "file": "barisax/barisax_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.3261,
+            "loop": {
+              "start": 114660,
+              "end": 248988
+            }
+          },
+          {
+            "file": "barisax/barisax_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.5583,
+            "loop": {
+              "start": 45864,
+              "end": 227761
+            }
+          },
+          {
+            "file": "barisax/barisax_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.6613,
+            "loop": {
+              "start": 22050,
+              "end": 272109
+            }
+          },
+          {
+            "file": "barisax/barisax_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.7226,
+            "loop": {
+              "start": 59094,
+              "end": 219295
+            }
+          },
+          {
+            "file": "barisax/barisax_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.5922,
+            "loop": {
+              "start": 24696,
+              "end": 304835
+            }
+          },
+          {
+            "file": "barisax/barisax_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.6622,
+            "loop": {
+              "start": 30870,
+              "end": 324981
+            }
+          },
+          {
+            "file": "barisax/barisax_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.6088,
+            "loop": {
+              "start": 120834,
+              "end": 349027
+            }
+          },
+          {
+            "file": "barisax/barisax_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.5598,
+            "loop": {
+              "start": 30870,
+              "end": 336428
+            }
+          },
+          {
+            "file": "barisax/barisax_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.4748,
+            "loop": {
+              "start": 85554,
+              "end": 344472
+            }
+          },
+          {
+            "file": "barisax/barisax_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.5249,
+            "loop": {
+              "start": 62622,
+              "end": 252576
+            }
+          },
+          {
+            "file": "barisax/barisax_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.4301,
+            "loop": {
+              "start": 63504,
+              "end": 259480
+            }
+          },
+          {
+            "file": "barisax/barisax_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.3214,
+            "loop": {
+              "start": 64386,
+              "end": 349026
+            }
+          },
+          {
+            "file": "barisax/barisax_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.3636,
+            "loop": {
+              "start": 37044,
+              "end": 285903
+            }
+          },
+          {
+            "file": "barisax/barisax_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.4257,
+            "loop": {
+              "start": 64386,
+              "end": 274410
+            }
+          },
+          {
+            "file": "barisax/barisax_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.3915,
+            "loop": {
+              "start": 82026,
+              "end": 306698
+            }
+          },
+          {
+            "file": "barisax/barisax_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.3245,
+            "loop": {
+              "start": 109368,
+              "end": 348670
+            }
+          },
+          {
+            "file": "barisax/barisax_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.2983,
+            "loop": {
+              "start": 82026,
+              "end": 312885
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "barisaxgrowl",
+      "name": "Bari Sax Growl",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/barisaxgrowl-1_0_0.zip",
+      "bytes": 438211,
+      "crc32": 2405486059,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sfzinstruments/karoryfer.bear-sax",
+        "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) \u2014 growl, CC0"
+      },
+      "manifest": {
+        "id": "barisaxgrowl",
+        "name": "Bari Sax Growl",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 44,
+          "hi": 59
+        },
+        "defaultView": {
+          "lo": 44,
+          "hi": 59
+        },
+        "shade": "bronze",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sfzinstruments/karoryfer.bear-sax",
+          "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) \u2014 growl, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "barisaxgrowl/barisaxgrowl_Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 0.3723
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 0.5796
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.5084
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.3721
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 0.3865
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.3611
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.4237
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.4011
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.4419
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.4719
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.4266
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.5176
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.6852
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.6412
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.5264
+          },
+          {
+            "file": "barisaxgrowl/barisaxgrowl_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.5558
+          }
+        ]
+      }
+    },
+    {
+      "id": "barisaxstaccato",
+      "name": "Bari Sax Staccato",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/barisaxstaccato-1_0_0.zip",
+      "bytes": 253810,
+      "crc32": 3958290371,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sfzinstruments/karoryfer.bear-sax",
+        "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) \u2014 staccato, layer vl3, CC0"
+      },
+      "manifest": {
+        "id": "barisaxstaccato",
+        "name": "Bari Sax Staccato",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 37,
+          "hi": 68
+        },
+        "defaultView": {
+          "lo": 40,
+          "hi": 64
+        },
+        "shade": "bronze",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sfzinstruments/karoryfer.bear-sax",
+          "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) \u2014 staccato, layer vl3, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "barisaxstaccato/barisaxstaccato_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 0.5921
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_D2.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 0.4886
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_Ds2.m4a",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 0.5495
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 0.5137
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 0.4964
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 0.6179
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_G2.m4a",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.7145
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 0.598
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 0.4851
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.4176
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.4821
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 0.403
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.3825
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.4444
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.3311
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.3905
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.3834
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.4038
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.3631
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.5486
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.4328
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.3418
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.3497
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.3501
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.4885
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.2797
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.356
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.3298
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.2757
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.2791
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.2643
+          },
+          {
+            "file": "barisaxstaccato/barisaxstaccato_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.3205
           }
         ]
       }
@@ -2524,6 +3433,900 @@
             },
             "placeholder": "organ",
             "gain": 0.893
+          }
+        ]
+      }
+    },
+    {
+      "id": "clarinet",
+      "name": "Clarinet",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/clarinet-1_0_0.zip",
+      "bytes": 3783419,
+      "crc32": 1978198784,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 B\u266d clarinet, sustain, layer v2, CC0"
+      },
+      "manifest": {
+        "id": "clarinet",
+        "name": "Clarinet",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 50,
+          "hi": 89
+        },
+        "defaultView": {
+          "lo": 57,
+          "hi": 81
+        },
+        "shade": "orange",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 B\u266d clarinet, sustain, layer v2, CC0"
+        },
+        "envelope": {
+          "attack": 0.005,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "clarinet/clarinet_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.1637,
+            "loop": {
+              "start": 56448,
+              "end": 323008
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.1654,
+            "loop": {
+              "start": 56448,
+              "end": 323230
+            }
+          },
+          {
+            "file": "clarinet/clarinet_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.1506,
+            "loop": {
+              "start": 38808,
+              "end": 295694
+            }
+          },
+          {
+            "file": "clarinet/clarinet_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.1629,
+            "loop": {
+              "start": 38808,
+              "end": 295489
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.1608,
+            "loop": {
+              "start": 38808,
+              "end": 294776
+            }
+          },
+          {
+            "file": "clarinet/clarinet_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.1551,
+            "loop": {
+              "start": 38808,
+              "end": 294865
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.1737,
+            "loop": {
+              "start": 52920,
+              "end": 336334
+            }
+          },
+          {
+            "file": "clarinet/clarinet_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.1902,
+            "loop": {
+              "start": 52920,
+              "end": 336332
+            }
+          },
+          {
+            "file": "clarinet/clarinet_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.1543,
+            "loop": {
+              "start": 52920,
+              "end": 336546
+            }
+          },
+          {
+            "file": "clarinet/clarinet_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.2253,
+            "loop": {
+              "start": 52920,
+              "end": 337214
+            }
+          },
+          {
+            "file": "clarinet/clarinet_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.2004,
+            "loop": {
+              "start": 52920,
+              "end": 336861
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.1589,
+            "loop": {
+              "start": 22932,
+              "end": 323890
+            }
+          },
+          {
+            "file": "clarinet/clarinet_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.17,
+            "loop": {
+              "start": 22932,
+              "end": 323953
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.164,
+            "loop": {
+              "start": 22932,
+              "end": 323928
+            }
+          },
+          {
+            "file": "clarinet/clarinet_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.1618,
+            "loop": {
+              "start": 110250,
+              "end": 350328
+            }
+          },
+          {
+            "file": "clarinet/clarinet_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.1751,
+            "loop": {
+              "start": 110250,
+              "end": 349543
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.1728,
+            "loop": {
+              "start": 110250,
+              "end": 349782
+            }
+          },
+          {
+            "file": "clarinet/clarinet_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.1786,
+            "loop": {
+              "start": 110250,
+              "end": 350405
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.1889,
+            "loop": {
+              "start": 131418,
+              "end": 350447
+            }
+          },
+          {
+            "file": "clarinet/clarinet_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.178,
+            "loop": {
+              "start": 131418,
+              "end": 350494
+            }
+          },
+          {
+            "file": "clarinet/clarinet_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.1697,
+            "loop": {
+              "start": 131418,
+              "end": 350300
+            }
+          },
+          {
+            "file": "clarinet/clarinet_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.2037,
+            "loop": {
+              "start": 131418,
+              "end": 349483
+            }
+          },
+          {
+            "file": "clarinet/clarinet_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.2154,
+            "loop": {
+              "start": 131418,
+              "end": 350432
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.2054,
+            "loop": {
+              "start": 84672,
+              "end": 265795
+            }
+          },
+          {
+            "file": "clarinet/clarinet_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.2354,
+            "loop": {
+              "start": 84672,
+              "end": 265982
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.2378,
+            "loop": {
+              "start": 84672,
+              "end": 265691
+            }
+          },
+          {
+            "file": "clarinet/clarinet_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.3277,
+            "loop": {
+              "start": 81144,
+              "end": 348682
+            }
+          },
+          {
+            "file": "clarinet/clarinet_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.2752,
+            "loop": {
+              "start": 81144,
+              "end": 347820
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.3266,
+            "loop": {
+              "start": 81144,
+              "end": 348700
+            }
+          },
+          {
+            "file": "clarinet/clarinet_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.3298,
+            "loop": {
+              "start": 81144,
+              "end": 347700
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.4051,
+            "loop": {
+              "start": 132300,
+              "end": 348723
+            }
+          },
+          {
+            "file": "clarinet/clarinet_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.4186,
+            "loop": {
+              "start": 132300,
+              "end": 347728
+            }
+          },
+          {
+            "file": "clarinet/clarinet_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.39,
+            "loop": {
+              "start": 132300,
+              "end": 348708
+            }
+          },
+          {
+            "file": "clarinet/clarinet_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.427,
+            "loop": {
+              "start": 132300,
+              "end": 347706
+            }
+          },
+          {
+            "file": "clarinet/clarinet_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.3887,
+            "loop": {
+              "start": 132300,
+              "end": 348692
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.3228,
+            "loop": {
+              "start": 22050,
+              "end": 318077
+            }
+          },
+          {
+            "file": "clarinet/clarinet_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.3008,
+            "loop": {
+              "start": 22050,
+              "end": 317715
+            }
+          },
+          {
+            "file": "clarinet/clarinet_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.3003,
+            "loop": {
+              "start": 22050,
+              "end": 318348
+            }
+          },
+          {
+            "file": "clarinet/clarinet_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.3287,
+            "loop": {
+              "start": 67914,
+              "end": 245351
+            }
+          },
+          {
+            "file": "clarinet/clarinet_F6.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 0.3358,
+            "loop": {
+              "start": 67914,
+              "end": 244492
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "clarinetstaccato",
+      "name": "Clarinet Staccato",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/clarinetstaccato-1_0_0.zip",
+      "bytes": 357642,
+      "crc32": 2079293160,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 B\u266d clarinet, staccato, layer v2, CC0"
+      },
+      "manifest": {
+        "id": "clarinetstaccato",
+        "name": "Clarinet Staccato",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 50,
+          "hi": 89
+        },
+        "defaultView": {
+          "lo": 57,
+          "hi": 81
+        },
+        "shade": "orange",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 B\u266d clarinet, staccato, layer v2, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "clarinetstaccato/clarinetstaccato_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.1647
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.1696
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.1396
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.2151
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.1991
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.1941
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.2122
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.2427
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.1873
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.1779
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.2348
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.172
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.2047
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.2118
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.1947
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.2048
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.2196
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.228
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.3098
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.2358
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.2944
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.3101
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.3007
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.3544
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.3922
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.3728
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.3693
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.4069
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.4887
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.5044
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.4676
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.4247
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.4038
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.4724
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.5207
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.4476
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.4958
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.4966
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.5418
+          },
+          {
+            "file": "clarinetstaccato/clarinetstaccato_F6.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 0.554
           }
         ]
       }
@@ -5594,6 +7397,768 @@
             "rootNote": 45,
             "lo": 45,
             "hi": 45
+          }
+        ]
+      }
+    },
+    {
+      "id": "flute",
+      "name": "Flute",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/flute-1_0_0.zip",
+      "bytes": 3390450,
+      "crc32": 1933470772,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 flute, sustain non-vibrato, layers v2/v3, CC0"
+      },
+      "manifest": {
+        "id": "flute",
+        "name": "Flute",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 60,
+          "hi": 96
+        },
+        "defaultView": {
+          "lo": 66,
+          "hi": 90
+        },
+        "shade": "amber",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 flute, sustain non-vibrato, layers v2/v3, CC0"
+        },
+        "envelope": {
+          "attack": 0.005,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "flute/flute_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.1624,
+            "loop": {
+              "start": 77616,
+              "end": 347716
+            }
+          },
+          {
+            "file": "flute/flute_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.1507,
+            "loop": {
+              "start": 77616,
+              "end": 348667
+            }
+          },
+          {
+            "file": "flute/flute_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.1623,
+            "loop": {
+              "start": 77616,
+              "end": 348643
+            }
+          },
+          {
+            "file": "flute/flute_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.1373,
+            "loop": {
+              "start": 51156,
+              "end": 312473
+            }
+          },
+          {
+            "file": "flute/flute_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.1161,
+            "loop": {
+              "start": 51156,
+              "end": 312453
+            }
+          },
+          {
+            "file": "flute/flute_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.1325,
+            "loop": {
+              "start": 51156,
+              "end": 313380
+            }
+          },
+          {
+            "file": "flute/flute_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.1287,
+            "loop": {
+              "start": 51156,
+              "end": 312450
+            }
+          },
+          {
+            "file": "flute/flute_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.1469,
+            "loop": {
+              "start": 63504,
+              "end": 332814
+            }
+          },
+          {
+            "file": "flute/flute_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.1529,
+            "loop": {
+              "start": 63504,
+              "end": 332703
+            }
+          },
+          {
+            "file": "flute/flute_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.1354,
+            "loop": {
+              "start": 63504,
+              "end": 332816
+            }
+          },
+          {
+            "file": "flute/flute_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.1637,
+            "loop": {
+              "start": 63504,
+              "end": 332860
+            }
+          },
+          {
+            "file": "flute/flute_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.1501,
+            "loop": {
+              "start": 26460,
+              "end": 335472
+            }
+          },
+          {
+            "file": "flute/flute_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.1424,
+            "loop": {
+              "start": 26460,
+              "end": 335428
+            }
+          },
+          {
+            "file": "flute/flute_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.1762,
+            "loop": {
+              "start": 26460,
+              "end": 335489
+            }
+          },
+          {
+            "file": "flute/flute_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.1771,
+            "loop": {
+              "start": 26460,
+              "end": 335443
+            }
+          },
+          {
+            "file": "flute/flute_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.1908,
+            "loop": {
+              "start": 116424,
+              "end": 310461
+            }
+          },
+          {
+            "file": "flute/flute_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.177,
+            "loop": {
+              "start": 116424,
+              "end": 309880
+            }
+          },
+          {
+            "file": "flute/flute_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.1997,
+            "loop": {
+              "start": 116424,
+              "end": 309796
+            }
+          },
+          {
+            "file": "flute/flute_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.2176,
+            "loop": {
+              "start": 116424,
+              "end": 310769
+            }
+          },
+          {
+            "file": "flute/flute_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.1819,
+            "loop": {
+              "start": 104958,
+              "end": 322709
+            }
+          },
+          {
+            "file": "flute/flute_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.1915,
+            "loop": {
+              "start": 104958,
+              "end": 322343
+            }
+          },
+          {
+            "file": "flute/flute_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.204,
+            "loop": {
+              "start": 104958,
+              "end": 322650
+            }
+          },
+          {
+            "file": "flute/flute_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.2051,
+            "loop": {
+              "start": 104958,
+              "end": 322116
+            }
+          },
+          {
+            "file": "flute/flute_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.2395,
+            "loop": {
+              "start": 57330,
+              "end": 331066
+            }
+          },
+          {
+            "file": "flute/flute_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.2701,
+            "loop": {
+              "start": 57330,
+              "end": 331078
+            }
+          },
+          {
+            "file": "flute/flute_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.2844,
+            "loop": {
+              "start": 57330,
+              "end": 331058
+            }
+          },
+          {
+            "file": "flute/flute_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.2892,
+            "loop": {
+              "start": 57330,
+              "end": 330456
+            }
+          },
+          {
+            "file": "flute/flute_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.2714,
+            "loop": {
+              "start": 37926,
+              "end": 295772
+            }
+          },
+          {
+            "file": "flute/flute_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.2792,
+            "loop": {
+              "start": 37926,
+              "end": 295774
+            }
+          },
+          {
+            "file": "flute/flute_F6.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 0.2775,
+            "loop": {
+              "start": 37926,
+              "end": 295788
+            }
+          },
+          {
+            "file": "flute/flute_Fs6.m4a",
+            "rootNote": 90,
+            "lo": 90,
+            "hi": 90,
+            "placeholder": "organ",
+            "gain": 0.2888,
+            "loop": {
+              "start": 37926,
+              "end": 294784
+            }
+          },
+          {
+            "file": "flute/flute_G6.m4a",
+            "rootNote": 91,
+            "lo": 91,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 0.3258,
+            "loop": {
+              "start": 49392,
+              "end": 307916
+            }
+          },
+          {
+            "file": "flute/flute_Gs6.m4a",
+            "rootNote": 92,
+            "lo": 92,
+            "hi": 92,
+            "placeholder": "organ",
+            "gain": 0.339,
+            "loop": {
+              "start": 49392,
+              "end": 308059
+            }
+          },
+          {
+            "file": "flute/flute_A6.m4a",
+            "rootNote": 93,
+            "lo": 93,
+            "hi": 93,
+            "placeholder": "organ",
+            "gain": 0.3409,
+            "loop": {
+              "start": 49392,
+              "end": 308003
+            }
+          },
+          {
+            "file": "flute/flute_As6.m4a",
+            "rootNote": 94,
+            "lo": 94,
+            "hi": 94,
+            "placeholder": "organ",
+            "gain": 0.3588,
+            "loop": {
+              "start": 49392,
+              "end": 307894
+            }
+          },
+          {
+            "file": "flute/flute_B6.m4a",
+            "rootNote": 95,
+            "lo": 95,
+            "hi": 95,
+            "placeholder": "organ",
+            "gain": 0.3608,
+            "loop": {
+              "start": 55566,
+              "end": 198994
+            }
+          },
+          {
+            "file": "flute/flute_C7.m4a",
+            "rootNote": 96,
+            "lo": 96,
+            "hi": 96,
+            "placeholder": "organ",
+            "gain": 0.3669,
+            "loop": {
+              "start": 55566,
+              "end": 198698
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "flutestaccato",
+      "name": "Flute Staccato",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/flutestaccato-1_0_0.zip",
+      "bytes": 238291,
+      "crc32": 3406241137,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 flute, staccato, layer v3, CC0"
+      },
+      "manifest": {
+        "id": "flutestaccato",
+        "name": "Flute Staccato",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 69,
+          "hi": 96
+        },
+        "defaultView": {
+          "lo": 70,
+          "hi": 94
+        },
+        "shade": "amber",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 flute, staccato, layer v3, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "flutestaccato/flutestaccato_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.0814
+          },
+          {
+            "file": "flutestaccato/flutestaccato_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.0852
+          },
+          {
+            "file": "flutestaccato/flutestaccato_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.0906
+          },
+          {
+            "file": "flutestaccato/flutestaccato_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.0932
+          },
+          {
+            "file": "flutestaccato/flutestaccato_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.1084
+          },
+          {
+            "file": "flutestaccato/flutestaccato_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.1079
+          },
+          {
+            "file": "flutestaccato/flutestaccato_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.1327
+          },
+          {
+            "file": "flutestaccato/flutestaccato_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.1434
+          },
+          {
+            "file": "flutestaccato/flutestaccato_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.1573
+          },
+          {
+            "file": "flutestaccato/flutestaccato_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.1463
+          },
+          {
+            "file": "flutestaccato/flutestaccato_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.1804
+          },
+          {
+            "file": "flutestaccato/flutestaccato_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.1882
+          },
+          {
+            "file": "flutestaccato/flutestaccato_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.1842
+          },
+          {
+            "file": "flutestaccato/flutestaccato_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.2185
+          },
+          {
+            "file": "flutestaccato/flutestaccato_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.2145
+          },
+          {
+            "file": "flutestaccato/flutestaccato_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.2356
+          },
+          {
+            "file": "flutestaccato/flutestaccato_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.2513
+          },
+          {
+            "file": "flutestaccato/flutestaccato_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.2733
+          },
+          {
+            "file": "flutestaccato/flutestaccato_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.3768
+          },
+          {
+            "file": "flutestaccato/flutestaccato_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.3964
+          },
+          {
+            "file": "flutestaccato/flutestaccato_F6.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 0.426
+          },
+          {
+            "file": "flutestaccato/flutestaccato_Fs6.m4a",
+            "rootNote": 90,
+            "lo": 90,
+            "hi": 90,
+            "placeholder": "organ",
+            "gain": 0.4976
+          },
+          {
+            "file": "flutestaccato/flutestaccato_G6.m4a",
+            "rootNote": 91,
+            "lo": 91,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 0.4087
+          },
+          {
+            "file": "flutestaccato/flutestaccato_Gs6.m4a",
+            "rootNote": 92,
+            "lo": 92,
+            "hi": 92,
+            "placeholder": "organ",
+            "gain": 0.4321
+          },
+          {
+            "file": "flutestaccato/flutestaccato_A6.m4a",
+            "rootNote": 93,
+            "lo": 93,
+            "hi": 93,
+            "placeholder": "organ",
+            "gain": 0.473
+          },
+          {
+            "file": "flutestaccato/flutestaccato_As6.m4a",
+            "rootNote": 94,
+            "lo": 94,
+            "hi": 94,
+            "placeholder": "organ",
+            "gain": 0.508
+          },
+          {
+            "file": "flutestaccato/flutestaccato_B6.m4a",
+            "rootNote": 95,
+            "lo": 95,
+            "hi": 95,
+            "placeholder": "organ",
+            "gain": 0.549
+          },
+          {
+            "file": "flutestaccato/flutestaccato_C7.m4a",
+            "rootNote": 96,
+            "lo": 96,
+            "hi": 96,
+            "placeholder": "organ",
+            "gain": 0.5614
           }
         ]
       }
@@ -16409,6 +18974,1000 @@
       }
     },
     {
+      "id": "tenorsax",
+      "name": "Tenor Sax",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/tenorsax-1_0_0.zip",
+      "bytes": 3352504,
+      "crc32": 3197650470,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "Versilian Studios, VCSL \u2014 tenor saxophone, non-vibrato, layer vl3, CC0"
+      },
+      "manifest": {
+        "id": "tenorsax",
+        "name": "Tenor Sax",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 44,
+          "hi": 88
+        },
+        "defaultView": {
+          "lo": 54,
+          "hi": 78
+        },
+        "shade": "yellow",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "Versilian Studios, VCSL \u2014 tenor saxophone, non-vibrato, layer vl3, CC0"
+        },
+        "envelope": {
+          "attack": 0.005,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "tenorsax/tenorsax_Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 0.1858,
+            "loop": {
+              "start": 54684,
+              "end": 244541
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 0.215,
+            "loop": {
+              "start": 54684,
+              "end": 245165
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.1534,
+            "loop": {
+              "start": 70560,
+              "end": 193540
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.2014,
+            "loop": {
+              "start": 70560,
+              "end": 193617
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 0.2497,
+            "loop": {
+              "start": 70560,
+              "end": 252597
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.3317,
+            "loop": {
+              "start": 70560,
+              "end": 253543
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.2422,
+            "loop": {
+              "start": 49392,
+              "end": 280642
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.2007,
+            "loop": {
+              "start": 49392,
+              "end": 279981
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.2217,
+            "loop": {
+              "start": 35280,
+              "end": 237042
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.2158,
+            "loop": {
+              "start": 35280,
+              "end": 237608
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.2278,
+            "loop": {
+              "start": 90846,
+              "end": 323986
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.1866,
+            "loop": {
+              "start": 90846,
+              "end": 324048
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.2313,
+            "loop": {
+              "start": 26460,
+              "end": 336534
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.2304,
+            "loop": {
+              "start": 26460,
+              "end": 336305
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.4741,
+            "loop": {
+              "start": 35280,
+              "end": 240190
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.5061,
+            "loop": {
+              "start": 35280,
+              "end": 239945
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.1939,
+            "loop": {
+              "start": 106722,
+              "end": 275239
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.2636,
+            "loop": {
+              "start": 106722,
+              "end": 274504
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.1796,
+            "loop": {
+              "start": 80262,
+              "end": 226242
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.2201,
+            "loop": {
+              "start": 80262,
+              "end": 226325
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.2118,
+            "loop": {
+              "start": 22050,
+              "end": 255365
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.2261,
+            "loop": {
+              "start": 22050,
+              "end": 255364
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.2226,
+            "loop": {
+              "start": 46746,
+              "end": 206584
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.276,
+            "loop": {
+              "start": 46746,
+              "end": 205967
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.2508,
+            "loop": {
+              "start": 24696,
+              "end": 257561
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.2031,
+            "loop": {
+              "start": 24696,
+              "end": 257631
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.2489,
+            "loop": {
+              "start": 28224,
+              "end": 281735
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.275,
+            "loop": {
+              "start": 28224,
+              "end": 281726
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.2771,
+            "loop": {
+              "start": 47628,
+              "end": 345221
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.2858,
+            "loop": {
+              "start": 47628,
+              "end": 346025
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.216,
+            "loop": {
+              "start": 87318,
+              "end": 286812
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.2305,
+            "loop": {
+              "start": 87318,
+              "end": 286125
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.2891,
+            "loop": {
+              "start": 39690,
+              "end": 301097
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.288,
+            "loop": {
+              "start": 39690,
+              "end": 301079
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.274,
+            "loop": {
+              "start": 41454,
+              "end": 249715
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.3207,
+            "loop": {
+              "start": 41454,
+              "end": 249593
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.3016,
+            "loop": {
+              "start": 76734,
+              "end": 191815
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.2936,
+            "loop": {
+              "start": 76734,
+              "end": 191553
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.2244,
+            "loop": {
+              "start": 60858,
+              "end": 219167
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.2314,
+            "loop": {
+              "start": 60858,
+              "end": 218347
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.2055,
+            "loop": {
+              "start": 41454,
+              "end": 195106
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.2297,
+            "loop": {
+              "start": 41454,
+              "end": 195057
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.3051,
+            "loop": {
+              "start": 82908,
+              "end": 192838
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.304,
+            "loop": {
+              "start": 82908,
+              "end": 192548
+            }
+          },
+          {
+            "file": "tenorsax/tenorsax_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.332,
+            "loop": {
+              "start": 32634,
+              "end": 184118
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "tenorsaxstaccato",
+      "name": "Tenor Sax Staccato",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/tenorsaxstaccato-1_0_0.zip",
+      "bytes": 368413,
+      "crc32": 1064079526,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "Versilian Studios, VCSL \u2014 tenor saxophone, staccato, layer vl2, CC0"
+      },
+      "manifest": {
+        "id": "tenorsaxstaccato",
+        "name": "Tenor Sax Staccato",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 44,
+          "hi": 88
+        },
+        "defaultView": {
+          "lo": 54,
+          "hi": 78
+        },
+        "shade": "yellow",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "Versilian Studios, VCSL \u2014 tenor saxophone, staccato, layer vl2, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 0.2291
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 0.2285
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.2002
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.2228
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 0.1896
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.2747
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.2564
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.2362
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.3206
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.2615
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.2739
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.3219
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.3118
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.3394
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.3564
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.218
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.2029
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.2343
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.2712
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.273
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.2303
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.2392
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.2046
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.2248
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.3005
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.3167
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.2771
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.3315
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.2141
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.2102
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.1966
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.2261
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.2772
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.2176
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.2446
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.254
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.2356
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.311
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.3035
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.2037
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.2331
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.221
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.2391
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.2351
+          },
+          {
+            "file": "tenorsaxstaccato/tenorsaxstaccato_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.2728
+          }
+        ]
+      }
+    },
+    {
       "id": "thickbass",
       "name": "Thick Bass",
       "family": "bass",
@@ -18218,6 +21777,2208 @@
             "rootNote": 86,
             "lo": 86,
             "hi": 86
+          }
+        ]
+      }
+    },
+    {
+      "id": "trombone",
+      "name": "Trombone",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/trombone-1_0_0.zip",
+      "bytes": 2728399,
+      "crc32": 176361755,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 tenor trombone, sustain, layer v2, CC0"
+      },
+      "manifest": {
+        "id": "trombone",
+        "name": "Trombone",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 34,
+          "hi": 65
+        },
+        "defaultView": {
+          "lo": 37,
+          "hi": 61
+        },
+        "shade": "orange",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 tenor trombone, sustain, layer v2, CC0"
+        },
+        "envelope": {
+          "attack": 0.005,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "trombone/trombone_As1.m4a",
+            "rootNote": 34,
+            "lo": 34,
+            "hi": 34,
+            "placeholder": "organ",
+            "gain": 0.2574,
+            "loop": {
+              "start": 26460,
+              "end": 132417
+            }
+          },
+          {
+            "file": "trombone/trombone_B1.m4a",
+            "rootNote": 35,
+            "lo": 35,
+            "hi": 35,
+            "placeholder": "organ",
+            "gain": 0.1548,
+            "loop": {
+              "start": 26460,
+              "end": 132498
+            }
+          },
+          {
+            "file": "trombone/trombone_C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "placeholder": "organ",
+            "gain": 0.1638,
+            "loop": {
+              "start": 37926,
+              "end": 155763
+            }
+          },
+          {
+            "file": "trombone/trombone_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 0.2475,
+            "loop": {
+              "start": 37926,
+              "end": 155656
+            }
+          },
+          {
+            "file": "trombone/trombone_D2.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 0.1651,
+            "loop": {
+              "start": 37926,
+              "end": 155328
+            }
+          },
+          {
+            "file": "trombone/trombone_Ds2.m4a",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 0.3,
+            "loop": {
+              "start": 25578,
+              "end": 214396
+            }
+          },
+          {
+            "file": "trombone/trombone_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 0.1805,
+            "loop": {
+              "start": 25578,
+              "end": 214435
+            }
+          },
+          {
+            "file": "trombone/trombone_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 0.3061,
+            "loop": {
+              "start": 71442,
+              "end": 287660
+            }
+          },
+          {
+            "file": "trombone/trombone_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 0.2292,
+            "loop": {
+              "start": 71442,
+              "end": 287758
+            }
+          },
+          {
+            "file": "trombone/trombone_G2.m4a",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.2982,
+            "loop": {
+              "start": 71442,
+              "end": 287818
+            }
+          },
+          {
+            "file": "trombone/trombone_Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 0.3379,
+            "loop": {
+              "start": 37926,
+              "end": 351257
+            }
+          },
+          {
+            "file": "trombone/trombone_A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 0.3374,
+            "loop": {
+              "start": 37926,
+              "end": 351363
+            }
+          },
+          {
+            "file": "trombone/trombone_As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.4192,
+            "loop": {
+              "start": 37926,
+              "end": 351256
+            }
+          },
+          {
+            "file": "trombone/trombone_B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.3563,
+            "loop": {
+              "start": 37926,
+              "end": 350585
+            }
+          },
+          {
+            "file": "trombone/trombone_C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 0.2858,
+            "loop": {
+              "start": 37926,
+              "end": 350647
+            }
+          },
+          {
+            "file": "trombone/trombone_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.3166,
+            "loop": {
+              "start": 30870,
+              "end": 297424
+            }
+          },
+          {
+            "file": "trombone/trombone_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.3629,
+            "loop": {
+              "start": 30870,
+              "end": 297273
+            }
+          },
+          {
+            "file": "trombone/trombone_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.3541,
+            "loop": {
+              "start": 30870,
+              "end": 297480
+            }
+          },
+          {
+            "file": "trombone/trombone_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.3535,
+            "loop": {
+              "start": 33516,
+              "end": 335980
+            }
+          },
+          {
+            "file": "trombone/trombone_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.341,
+            "loop": {
+              "start": 33516,
+              "end": 336080
+            }
+          },
+          {
+            "file": "trombone/trombone_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.3327,
+            "loop": {
+              "start": 33516,
+              "end": 335355
+            }
+          },
+          {
+            "file": "trombone/trombone_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.3136,
+            "loop": {
+              "start": 33516,
+              "end": 335753
+            }
+          },
+          {
+            "file": "trombone/trombone_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.4176,
+            "loop": {
+              "start": 33516,
+              "end": 335409
+            }
+          },
+          {
+            "file": "trombone/trombone_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.4028,
+            "loop": {
+              "start": 64386,
+              "end": 330990
+            }
+          },
+          {
+            "file": "trombone/trombone_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.4163,
+            "loop": {
+              "start": 64386,
+              "end": 331455
+            }
+          },
+          {
+            "file": "trombone/trombone_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.4302,
+            "loop": {
+              "start": 64386,
+              "end": 330959
+            }
+          },
+          {
+            "file": "trombone/trombone_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.4396,
+            "loop": {
+              "start": 64386,
+              "end": 331382
+            }
+          },
+          {
+            "file": "trombone/trombone_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.424,
+            "loop": {
+              "start": 23814,
+              "end": 299385
+            }
+          },
+          {
+            "file": "trombone/trombone_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.3997,
+            "loop": {
+              "start": 23814,
+              "end": 300115
+            }
+          },
+          {
+            "file": "trombone/trombone_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.4635,
+            "loop": {
+              "start": 52038,
+              "end": 336382
+            }
+          },
+          {
+            "file": "trombone/trombone_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.5961,
+            "loop": {
+              "start": 52038,
+              "end": 336279
+            }
+          },
+          {
+            "file": "trombone/trombone_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.5366,
+            "loop": {
+              "start": 23814,
+              "end": 351892
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "trombonestaccato",
+      "name": "Trombone Staccato",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/trombonestaccato-1_0_0.zip",
+      "bytes": 398091,
+      "crc32": 1952608136,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 tenor trombone, staccato, layer v3, CC0"
+      },
+      "manifest": {
+        "id": "trombonestaccato",
+        "name": "Trombone Staccato",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 34,
+          "hi": 65
+        },
+        "defaultView": {
+          "lo": 37,
+          "hi": 61
+        },
+        "shade": "orange",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 tenor trombone, staccato, layer v3, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "trombonestaccato/trombonestaccato_As1.m4a",
+            "rootNote": 34,
+            "lo": 34,
+            "hi": 34,
+            "placeholder": "organ",
+            "gain": 0.2967
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_B1.m4a",
+            "rootNote": 35,
+            "lo": 35,
+            "hi": 35,
+            "placeholder": "organ",
+            "gain": 0.1778
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "placeholder": "organ",
+            "gain": 0.1781
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 0.2066
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_D2.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 0.1825
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_Ds2.m4a",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 0.2168
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 0.2694
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 0.3761
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 0.2504
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_G2.m4a",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.2829
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 0.4023
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 0.4483
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.5002
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.3599
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 0.3184
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.3138
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.2688
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.3237
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.3217
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.3472
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.3092
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.3184
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.3802
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.545
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.5645
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.4675
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.3941
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.4565
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.4319
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.4989
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.5642
+          },
+          {
+            "file": "trombonestaccato/trombonestaccato_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.6092
+          }
+        ]
+      }
+    },
+    {
+      "id": "trumpet",
+      "name": "Trumpet",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/trumpet-1_0_0.zip",
+      "bytes": 2379560,
+      "crc32": 438050009,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 trumpet, sustain, layer v3, CC0"
+      },
+      "manifest": {
+        "id": "trumpet",
+        "name": "Trumpet",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 53,
+          "hi": 84
+        },
+        "defaultView": {
+          "lo": 56,
+          "hi": 80
+        },
+        "shade": "amber",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 trumpet, sustain, layer v3, CC0"
+        },
+        "envelope": {
+          "attack": 0.005,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "trumpet/trumpet_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.262,
+            "loop": {
+              "start": 33516,
+              "end": 122943
+            }
+          },
+          {
+            "file": "trumpet/trumpet_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.19,
+            "loop": {
+              "start": 33516,
+              "end": 122132
+            }
+          },
+          {
+            "file": "trumpet/trumpet_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.1817,
+            "loop": {
+              "start": 33516,
+              "end": 122206
+            }
+          },
+          {
+            "file": "trumpet/trumpet_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.1884,
+            "loop": {
+              "start": 28224,
+              "end": 181045
+            }
+          },
+          {
+            "file": "trumpet/trumpet_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.2696,
+            "loop": {
+              "start": 28224,
+              "end": 180222
+            }
+          },
+          {
+            "file": "trumpet/trumpet_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.2071,
+            "loop": {
+              "start": 28224,
+              "end": 180150
+            }
+          },
+          {
+            "file": "trumpet/trumpet_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.2552,
+            "loop": {
+              "start": 24696,
+              "end": 193328
+            }
+          },
+          {
+            "file": "trumpet/trumpet_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.2934,
+            "loop": {
+              "start": 24696,
+              "end": 193313
+            }
+          },
+          {
+            "file": "trumpet/trumpet_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.2255,
+            "loop": {
+              "start": 24696,
+              "end": 194628
+            }
+          },
+          {
+            "file": "trumpet/trumpet_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.1856,
+            "loop": {
+              "start": 22932,
+              "end": 346850
+            }
+          },
+          {
+            "file": "trumpet/trumpet_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.3015,
+            "loop": {
+              "start": 22932,
+              "end": 346946
+            }
+          },
+          {
+            "file": "trumpet/trumpet_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.2162,
+            "loop": {
+              "start": 22932,
+              "end": 346004
+            }
+          },
+          {
+            "file": "trumpet/trumpet_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.2429,
+            "loop": {
+              "start": 22932,
+              "end": 346819
+            }
+          },
+          {
+            "file": "trumpet/trumpet_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.2119,
+            "loop": {
+              "start": 30870,
+              "end": 275279
+            }
+          },
+          {
+            "file": "trumpet/trumpet_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.2797,
+            "loop": {
+              "start": 30870,
+              "end": 274596
+            }
+          },
+          {
+            "file": "trumpet/trumpet_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.2412,
+            "loop": {
+              "start": 30870,
+              "end": 275238
+            }
+          },
+          {
+            "file": "trumpet/trumpet_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.2773,
+            "loop": {
+              "start": 77616,
+              "end": 253387
+            }
+          },
+          {
+            "file": "trumpet/trumpet_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.3225,
+            "loop": {
+              "start": 77616,
+              "end": 254207
+            }
+          },
+          {
+            "file": "trumpet/trumpet_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.2717,
+            "loop": {
+              "start": 77616,
+              "end": 253314
+            }
+          },
+          {
+            "file": "trumpet/trumpet_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.2482,
+            "loop": {
+              "start": 77616,
+              "end": 253353
+            }
+          },
+          {
+            "file": "trumpet/trumpet_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.3022,
+            "loop": {
+              "start": 23814,
+              "end": 293149
+            }
+          },
+          {
+            "file": "trumpet/trumpet_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.2857,
+            "loop": {
+              "start": 23814,
+              "end": 293129
+            }
+          },
+          {
+            "file": "trumpet/trumpet_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.3101,
+            "loop": {
+              "start": 23814,
+              "end": 292122
+            }
+          },
+          {
+            "file": "trumpet/trumpet_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.3777,
+            "loop": {
+              "start": 80262,
+              "end": 231876
+            }
+          },
+          {
+            "file": "trumpet/trumpet_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.3782,
+            "loop": {
+              "start": 80262,
+              "end": 231281
+            }
+          },
+          {
+            "file": "trumpet/trumpet_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.3337,
+            "loop": {
+              "start": 80262,
+              "end": 232223
+            }
+          },
+          {
+            "file": "trumpet/trumpet_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.3664,
+            "loop": {
+              "start": 80262,
+              "end": 231248
+            }
+          },
+          {
+            "file": "trumpet/trumpet_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.3586,
+            "loop": {
+              "start": 47628,
+              "end": 324755
+            }
+          },
+          {
+            "file": "trumpet/trumpet_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.4367,
+            "loop": {
+              "start": 47628,
+              "end": 325481
+            }
+          },
+          {
+            "file": "trumpet/trumpet_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.4526,
+            "loop": {
+              "start": 47628,
+              "end": 325646
+            }
+          },
+          {
+            "file": "trumpet/trumpet_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.4379,
+            "loop": {
+              "start": 117306,
+              "end": 275034
+            }
+          },
+          {
+            "file": "trumpet/trumpet_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.5093,
+            "loop": {
+              "start": 117306,
+              "end": 274723
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "trumpetstaccato",
+      "name": "Trumpet Staccato",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/trumpetstaccato-1_0_0.zip",
+      "bytes": 521841,
+      "crc32": 2751731153,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 trumpet, staccato, layer v2, CC0"
+      },
+      "manifest": {
+        "id": "trumpetstaccato",
+        "name": "Trumpet Staccato",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 53,
+          "hi": 84
+        },
+        "defaultView": {
+          "lo": 56,
+          "hi": 80
+        },
+        "shade": "amber",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 trumpet, staccato, layer v2, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "trumpetstaccato/trumpetstaccato_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.1318
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.1053
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.1265
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.108
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.1198
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.1288
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.1517
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.1975
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.1929
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.1962
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.179
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.161
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.2098
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.2763
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.1934
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.203
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.2508
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.2778
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.3396
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.3019
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.2758
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.3483
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.2737
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.383
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.4691
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.3645
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.3858
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.3718
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.3813
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.4777
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.7906
+          },
+          {
+            "file": "trumpetstaccato/trumpetstaccato_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 1.1331
+          }
+        ]
+      }
+    },
+    {
+      "id": "tuba",
+      "name": "Tuba",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/tuba-1_0_0.zip",
+      "bytes": 2627221,
+      "crc32": 1002836549,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 tuba, sustain, layer v2, CC0"
+      },
+      "manifest": {
+        "id": "tuba",
+        "name": "Tuba",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 29,
+          "hi": 62
+        },
+        "defaultView": {
+          "lo": 33,
+          "hi": 57
+        },
+        "shade": "bronze",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 tuba, sustain, layer v2, CC0"
+        },
+        "envelope": {
+          "attack": 0.005,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "tuba/tuba_F1.m4a",
+            "rootNote": 29,
+            "lo": 29,
+            "hi": 29,
+            "placeholder": "organ",
+            "gain": 0.4981,
+            "loop": {
+              "start": 47628,
+              "end": 134039
+            }
+          },
+          {
+            "file": "tuba/tuba_Fs1.m4a",
+            "rootNote": 30,
+            "lo": 30,
+            "hi": 30,
+            "placeholder": "organ",
+            "gain": 0.3626,
+            "loop": {
+              "start": 47628,
+              "end": 134106
+            }
+          },
+          {
+            "file": "tuba/tuba_G1.m4a",
+            "rootNote": 31,
+            "lo": 31,
+            "hi": 31,
+            "placeholder": "organ",
+            "gain": 0.3138,
+            "loop": {
+              "start": 47628,
+              "end": 133785
+            }
+          },
+          {
+            "file": "tuba/tuba_Gs1.m4a",
+            "rootNote": 32,
+            "lo": 32,
+            "hi": 32,
+            "placeholder": "organ",
+            "gain": 0.2593,
+            "loop": {
+              "start": 43218,
+              "end": 259459
+            }
+          },
+          {
+            "file": "tuba/tuba_A1.m4a",
+            "rootNote": 33,
+            "lo": 33,
+            "hi": 33,
+            "placeholder": "organ",
+            "gain": 0.2666,
+            "loop": {
+              "start": 43218,
+              "end": 259819
+            }
+          },
+          {
+            "file": "tuba/tuba_As1.m4a",
+            "rootNote": 34,
+            "lo": 34,
+            "hi": 34,
+            "placeholder": "organ",
+            "gain": 0.2773,
+            "loop": {
+              "start": 43218,
+              "end": 260353
+            }
+          },
+          {
+            "file": "tuba/tuba_B1.m4a",
+            "rootNote": 35,
+            "lo": 35,
+            "hi": 35,
+            "placeholder": "organ",
+            "gain": 0.2214,
+            "loop": {
+              "start": 43218,
+              "end": 260328
+            }
+          },
+          {
+            "file": "tuba/tuba_C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "placeholder": "organ",
+            "gain": 0.2554,
+            "loop": {
+              "start": 43218,
+              "end": 259527
+            }
+          },
+          {
+            "file": "tuba/tuba_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 0.2185,
+            "loop": {
+              "start": 109368,
+              "end": 215345
+            }
+          },
+          {
+            "file": "tuba/tuba_D2.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 0.258,
+            "loop": {
+              "start": 109368,
+              "end": 215952
+            }
+          },
+          {
+            "file": "tuba/tuba_Ds2.m4a",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 0.3117,
+            "loop": {
+              "start": 109368,
+              "end": 215997
+            }
+          },
+          {
+            "file": "tuba/tuba_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 0.2991,
+            "loop": {
+              "start": 109368,
+              "end": 215221
+            }
+          },
+          {
+            "file": "tuba/tuba_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 0.3373,
+            "loop": {
+              "start": 34398,
+              "end": 144307
+            }
+          },
+          {
+            "file": "tuba/tuba_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 0.2787,
+            "loop": {
+              "start": 34398,
+              "end": 144215
+            }
+          },
+          {
+            "file": "tuba/tuba_G2.m4a",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.2584,
+            "loop": {
+              "start": 34398,
+              "end": 144196
+            }
+          },
+          {
+            "file": "tuba/tuba_Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 0.3122,
+            "loop": {
+              "start": 82026,
+              "end": 272007
+            }
+          },
+          {
+            "file": "tuba/tuba_A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 0.2764,
+            "loop": {
+              "start": 82026,
+              "end": 271334
+            }
+          },
+          {
+            "file": "tuba/tuba_As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.281,
+            "loop": {
+              "start": 82026,
+              "end": 271152
+            }
+          },
+          {
+            "file": "tuba/tuba_B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.2824,
+            "loop": {
+              "start": 82026,
+              "end": 270963
+            }
+          },
+          {
+            "file": "tuba/tuba_C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 0.2471,
+            "loop": {
+              "start": 82026,
+              "end": 271966
+            }
+          },
+          {
+            "file": "tuba/tuba_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.3549,
+            "loop": {
+              "start": 100548,
+              "end": 351195
+            }
+          },
+          {
+            "file": "tuba/tuba_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.365,
+            "loop": {
+              "start": 100548,
+              "end": 351004
+            }
+          },
+          {
+            "file": "tuba/tuba_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.3345,
+            "loop": {
+              "start": 100548,
+              "end": 351349
+            }
+          },
+          {
+            "file": "tuba/tuba_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.2861,
+            "loop": {
+              "start": 120834,
+              "end": 279872
+            }
+          },
+          {
+            "file": "tuba/tuba_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.2875,
+            "loop": {
+              "start": 120834,
+              "end": 279926
+            }
+          },
+          {
+            "file": "tuba/tuba_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.3096,
+            "loop": {
+              "start": 120834,
+              "end": 280603
+            }
+          },
+          {
+            "file": "tuba/tuba_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.2904,
+            "loop": {
+              "start": 120834,
+              "end": 280697
+            }
+          },
+          {
+            "file": "tuba/tuba_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.3055,
+            "loop": {
+              "start": 132300,
+              "end": 349190
+            }
+          },
+          {
+            "file": "tuba/tuba_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.3106,
+            "loop": {
+              "start": 132300,
+              "end": 348889
+            }
+          },
+          {
+            "file": "tuba/tuba_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.305,
+            "loop": {
+              "start": 132300,
+              "end": 348862
+            }
+          },
+          {
+            "file": "tuba/tuba_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.321,
+            "loop": {
+              "start": 132300,
+              "end": 348651
+            }
+          },
+          {
+            "file": "tuba/tuba_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.3378,
+            "loop": {
+              "start": 132300,
+              "end": 348784
+            }
+          },
+          {
+            "file": "tuba/tuba_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.4906,
+            "loop": {
+              "start": 34398,
+              "end": 293419
+            }
+          },
+          {
+            "file": "tuba/tuba_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.5104,
+            "loop": {
+              "start": 34398,
+              "end": 293998
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "tubastaccato",
+      "name": "Tuba Staccato",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/tubastaccato-1_0_0.zip",
+      "bytes": 360775,
+      "crc32": 2630659969,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VSCO-2-CE",
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 tuba, staccato, layer v2, CC0"
+      },
+      "manifest": {
+        "id": "tubastaccato",
+        "name": "Tuba Staccato",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 34,
+          "hi": 62
+        },
+        "defaultView": {
+          "lo": 36,
+          "hi": 60
+        },
+        "shade": "bronze",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VSCO-2-CE",
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 tuba, staccato, layer v2, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "tubastaccato/tubastaccato_As1.m4a",
+            "rootNote": 34,
+            "lo": 34,
+            "hi": 34,
+            "placeholder": "organ",
+            "gain": 0.2796
+          },
+          {
+            "file": "tubastaccato/tubastaccato_B1.m4a",
+            "rootNote": 35,
+            "lo": 35,
+            "hi": 35,
+            "placeholder": "organ",
+            "gain": 0.2871
+          },
+          {
+            "file": "tubastaccato/tubastaccato_C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "placeholder": "organ",
+            "gain": 0.2999
+          },
+          {
+            "file": "tubastaccato/tubastaccato_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 0.2599
+          },
+          {
+            "file": "tubastaccato/tubastaccato_D2.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 0.2812
+          },
+          {
+            "file": "tubastaccato/tubastaccato_Ds2.m4a",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 0.3084
+          },
+          {
+            "file": "tubastaccato/tubastaccato_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 0.2752
+          },
+          {
+            "file": "tubastaccato/tubastaccato_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 0.2825
+          },
+          {
+            "file": "tubastaccato/tubastaccato_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 0.2708
+          },
+          {
+            "file": "tubastaccato/tubastaccato_G2.m4a",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.2635
+          },
+          {
+            "file": "tubastaccato/tubastaccato_Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 0.3034
+          },
+          {
+            "file": "tubastaccato/tubastaccato_A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 0.2643
+          },
+          {
+            "file": "tubastaccato/tubastaccato_As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.3257
+          },
+          {
+            "file": "tubastaccato/tubastaccato_B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.2963
+          },
+          {
+            "file": "tubastaccato/tubastaccato_C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 0.3122
+          },
+          {
+            "file": "tubastaccato/tubastaccato_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.2673
+          },
+          {
+            "file": "tubastaccato/tubastaccato_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.2775
+          },
+          {
+            "file": "tubastaccato/tubastaccato_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.2526
+          },
+          {
+            "file": "tubastaccato/tubastaccato_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.2795
+          },
+          {
+            "file": "tubastaccato/tubastaccato_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.2825
+          },
+          {
+            "file": "tubastaccato/tubastaccato_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.2719
+          },
+          {
+            "file": "tubastaccato/tubastaccato_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.3121
+          },
+          {
+            "file": "tubastaccato/tubastaccato_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.2432
+          },
+          {
+            "file": "tubastaccato/tubastaccato_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.2424
+          },
+          {
+            "file": "tubastaccato/tubastaccato_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.2577
+          },
+          {
+            "file": "tubastaccato/tubastaccato_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.2468
+          },
+          {
+            "file": "tubastaccato/tubastaccato_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.2603
+          },
+          {
+            "file": "tubastaccato/tubastaccato_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.3079
+          },
+          {
+            "file": "tubastaccato/tubastaccato_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.2731
           }
         ]
       }
