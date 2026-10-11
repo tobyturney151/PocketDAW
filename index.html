@@ -1143,6 +1143,10 @@ html, body {
    32px. 16px text, so Safari does not zoom the page when it is tapped. */
 .bars-chip .numfield.barsfield-chip { height: 20px; min-height: 0; line-height: 20px; font-size: 16px; padding: 0; margin: 0; }
 
+/* A long press on a track's name or grip lifts the track; it must not also
+   select text or bring up the magnifier, which would take the touch. */
+.arrname-button, .arrgrip { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+
 </style>
 </head>
 <body>
@@ -1182,7 +1186,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-10-09 10:22 from src/. */
+/* PocketDAW - phase 2. Built 2026-10-11 09:01 from src/. */
 (function () {
 'use strict';
 
@@ -4087,7 +4091,33 @@ function createStore(initialSong) {
   const redoStack = [];
   const listeners = new Set();
 
+  
+  let lastSectionAt = 0;
+  let lastTrackAt = 0;
+
+  
+  function repairView() {
+    const { song, view } = state;
+    if (!song || !view) return;
+    const order = song.sectionOrder || [];
+    if (order.length && !song.sections[view.activeSectionId]) {
+      view.activeSectionId = order[Math.max(0, Math.min(order.length - 1, lastSectionAt - 1))];
+      view.selection = [];
+      view.selectedNoteId = null;
+      view.cueTick = 0;
+    }
+    const tracks = song.tracks || [];
+    if (tracks.length && !tracks.some((t) => t.id === view.activeTrackId)) {
+      view.activeTrackId = tracks[Math.max(0, Math.min(tracks.length - 1, lastTrackAt - 1))].id;
+      view.selection = [];
+      view.selectedNoteId = null;
+    }
+    lastSectionAt = Math.max(0, order.indexOf(view.activeSectionId));
+    lastTrackAt = Math.max(0, tracks.findIndex((t) => t.id === view.activeTrackId));
+  }
+
   function emit() {
+    repairView();
     listeners.forEach((fn) => fn(state));
   }
 
@@ -4713,7 +4743,16 @@ function filterLaneOf(clip) {
 
 function clampValue(paramId, value) {
   const p = paramById(paramId);
-  return Math.max(p.min, Math.min(p.max, Math.round(Number(value) || 0)));
+  return Math.max(p.min, Math.min(p.max, Math.round((Number(value) || 0) * 10000) / 10000));
+}
+
+function snapValue(paramId, value) {
+  const p = paramById(paramId);
+  const v = Math.max(p.min, Math.min(p.max, Number(value) || 0));
+  if (paramId !== 'volume') return Math.round(v);
+  if (v <= 0) return 0;
+  const db = Math.round(20 * Math.log10(v / 80) * 10) / 10;
+  return db <= -60 ? 0 : clampValue('volume', 80 * 10 ** (db / 20));
 }
 
 function laneOf(clip, paramId) {
@@ -6998,7 +7037,7 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     const param = paramById(store.state.view.automation.paramId);
     const usable = Math.max(1, height - HEADER_HEIGHT);
     const t = 1 - (y - HEADER_HEIGHT) / usable;
-    return Math.round(param.min + Math.max(0, Math.min(1, t)) * (param.max - param.min));
+    return snapValue(param.id, param.min + Math.max(0, Math.min(1, t)) * (param.max - param.min));
   }
 
   
@@ -8933,6 +8972,7 @@ function arrangementMatrix(store, onChange, {
       if (timer) { clearTimeout(timer); timer = null; }
       if (!dragging) return;
       dragging = false;
+      barsHeld = Math.max(0, barsHeld - 1);
       const from = song.tracks.findIndex((t) => t.id === track.id);
       clear();
       suppressTap[track.id] = true;
@@ -8946,10 +8986,15 @@ function arrangementMatrix(store, onChange, {
       timer = setTimeout(() => {
         timer = null;
         dragging = true;
+        barsHeld++;
         const row = rowOf(button);
         if (row) { row.style.zIndex = '5'; row.classList && row.classList.add('arrrow-dragging'); }
       }, 300);
     });
+    
+    [button, trackGrips[track.id]].filter(Boolean).forEach((n) => n.addEventListener('touchmove', (e) => {
+      if (dragging && e.cancelable !== false && e.preventDefault) e.preventDefault();
+    }, { passive: false }));
     on('pointermove', (e) => {
       const dy = (e.clientY || 0) - originY;
       if (!dragging) {
@@ -15232,7 +15277,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-10-09 10:22';
+const BUILD_STAMP = '2026-10-11 09:01';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -15943,7 +15988,7 @@ function mountApp(root, options = {}) {
     const track = store.activeTrack();
     const fx = (track.effects || []).find((e) => e.typeId === 'filter');
     switch (paramId) {
-      case 'pan': return Math.round((track.pan || 0) * 100);
+      case 'pan': return (track.pan || 0) * 100;
       case 'reverb': return Math.round((track.sends || {}).reverb || 0);
       case 'tremolo': return Math.round((track.tremolo || {}).depth || 0);
       case 'timing': return Math.round(track.timing || 0);
@@ -15952,7 +15997,7 @@ function mountApp(root, options = {}) {
         return cutoffPosition((fx && fx.params.cutoff) || 20000);
       case 'highpass':
         return fx && fx.params.mode === 'highpass' ? cutoffPosition(fx.params.cutoff || 20) : 0;
-      default: return Math.round(track.gain * 100);
+      default: return track.gain * 100;
     }
   }
 
@@ -16001,7 +16046,7 @@ function mountApp(root, options = {}) {
     if (!auto || !auto.on) return null;
     const track = store.activeTrack();
     const param = paramById(auto.paramId);
-    const baseline = auto.paramId === 'pan' ? Math.round((track.pan || 0) * 100) : Math.round(track.gain * 100);
+    const baseline = auto.paramId === 'pan' ? (track.pan || 0) * 100 : track.gain * 100;
     return {
       lane: laneOf(currentClip(), auto.paramId),
       param,
