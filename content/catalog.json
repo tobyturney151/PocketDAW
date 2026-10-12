@@ -3442,19 +3442,19 @@
       "name": "Clarinet",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.1.0",
-      "file": "packs/clarinet-1_1_0.zip",
-      "bytes": 3909968,
-      "crc32": 2459066943,
+      "version": "1.2.0",
+      "file": "packs/clarinet-1_2_0.zip",
+      "bytes": 3741995,
+      "crc32": 545663725,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 B\u266d clarinet, sustain, layer v3 (loudest), quiet lead-in trimmed, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 B\u266d clarinet, staccato v2 (breath between the harmonics lowered, lead-in trimmed) joined into sustain v3 (loudest), CC0"
       },
       "manifest": {
         "id": "clarinet",
         "name": "Clarinet",
-        "version": "1.1.0",
+        "version": "1.2.0",
         "family": "keys",
         "category": "winds",
         "kind": "pitched",
@@ -3470,11 +3470,11 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 B\u266d clarinet, sustain, layer v3 (loudest), quiet lead-in trimmed, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 B\u266d clarinet, staccato v2 (breath between the harmonics lowered, lead-in trimmed) joined into sustain v3 (loudest), CC0"
         },
         "envelope": {
-          "attack": 0.005,
-          "release": 0.25
+          "attack": 0.002,
+          "release": 0.12
         },
         "trim": 1,
         "accentGain": 1.5,
@@ -3487,10 +3487,10 @@
             "lo": 50,
             "hi": 50,
             "placeholder": "organ",
-            "gain": 0.168,
+            "gain": 0.1392,
             "loop": {
-              "start": 100548,
-              "end": 277026
+              "start": 52108,
+              "end": 228586
             }
           },
           {
@@ -3499,10 +3499,10 @@
             "lo": 51,
             "hi": 51,
             "placeholder": "organ",
-            "gain": 0.1821,
+            "gain": 0.1514,
             "loop": {
-              "start": 100548,
-              "end": 277596
+              "start": 53162,
+              "end": 230210
             }
           },
           {
@@ -3511,10 +3511,10 @@
             "lo": 52,
             "hi": 52,
             "placeholder": "organ",
-            "gain": 0.1843,
+            "gain": 0.1504,
             "loop": {
-              "start": 30870,
-              "end": 299191
+              "start": 22050,
+              "end": 290371
             }
           },
           {
@@ -3523,10 +3523,10 @@
             "lo": 53,
             "hi": 53,
             "placeholder": "organ",
-            "gain": 0.193,
+            "gain": 0.1576,
             "loop": {
-              "start": 30870,
-              "end": 298480
+              "start": 22050,
+              "end": 289660
             }
           },
           {
@@ -3535,10 +3535,10 @@
             "lo": 54,
             "hi": 54,
             "placeholder": "organ",
-            "gain": 0.2093,
+            "gain": 0.1708,
             "loop": {
-              "start": 30870,
-              "end": 299146
+              "start": 22050,
+              "end": 290326
             }
           },
           {
@@ -3547,10 +3547,10 @@
             "lo": 55,
             "hi": 55,
             "placeholder": "organ",
-            "gain": 0.1953,
+            "gain": 0.1573,
             "loop": {
-              "start": 30870,
-              "end": 298363
+              "start": 22050,
+              "end": 280774
             }
           },
           {
@@ -3559,10 +3559,10 @@
             "lo": 56,
             "hi": 56,
             "placeholder": "organ",
-            "gain": 0.207,
+            "gain": 0.1808,
             "loop": {
-              "start": 44982,
-              "end": 351234
+              "start": 32697,
+              "end": 338949
             }
           },
           {
@@ -3571,10 +3571,10 @@
             "lo": 57,
             "hi": 57,
             "placeholder": "organ",
-            "gain": 0.235,
+            "gain": 0.2062,
             "loop": {
-              "start": 44982,
-              "end": 351407
+              "start": 30062,
+              "end": 336487
             }
           },
           {
@@ -3583,10 +3583,10 @@
             "lo": 58,
             "hi": 58,
             "placeholder": "organ",
-            "gain": 0.2119,
+            "gain": 0.1856,
             "loop": {
-              "start": 44982,
-              "end": 352143
+              "start": 29541,
+              "end": 336702
             }
           },
           {
@@ -3595,10 +3595,10 @@
             "lo": 59,
             "hi": 59,
             "placeholder": "organ",
-            "gain": 0.2324,
+            "gain": 0.2033,
             "loop": {
-              "start": 44982,
-              "end": 352057
+              "start": 32830,
+              "end": 339905
             }
           },
           {
@@ -3607,10 +3607,10 @@
             "lo": 60,
             "hi": 60,
             "placeholder": "organ",
-            "gain": 0.2325,
+            "gain": 0.2031,
             "loop": {
-              "start": 44982,
-              "end": 351221
+              "start": 29388,
+              "end": 335627
             }
           },
           {
@@ -3619,10 +3619,10 @@
             "lo": 61,
             "hi": 61,
             "placeholder": "organ",
-            "gain": 0.1912,
+            "gain": 0.1561,
             "loop": {
-              "start": 29988,
-              "end": 352197
+              "start": 22050,
+              "end": 344100
             }
           },
           {
@@ -3631,10 +3631,10 @@
             "lo": 62,
             "hi": 62,
             "placeholder": "organ",
-            "gain": 0.198,
+            "gain": 0.1613,
             "loop": {
-              "start": 29988,
-              "end": 351387
+              "start": 22050,
+              "end": 342098
             }
           },
           {
@@ -3643,10 +3643,10 @@
             "lo": 63,
             "hi": 63,
             "placeholder": "organ",
-            "gain": 0.205,
+            "gain": 0.1696,
             "loop": {
-              "start": 29988,
-              "end": 351536
+              "start": 27342,
+              "end": 349457
             }
           },
           {
@@ -3655,10 +3655,10 @@
             "lo": 64,
             "hi": 64,
             "placeholder": "organ",
-            "gain": 0.1914,
+            "gain": 0.1673,
             "loop": {
               "start": 22050,
-              "end": 335214
+              "end": 325713
             }
           },
           {
@@ -3667,10 +3667,10 @@
             "lo": 65,
             "hi": 65,
             "placeholder": "organ",
-            "gain": 0.1746,
+            "gain": 0.1522,
             "loop": {
-              "start": 22050,
-              "end": 335479
+              "start": 29106,
+              "end": 324104
             }
           },
           {
@@ -3679,10 +3679,10 @@
             "lo": 66,
             "hi": 66,
             "placeholder": "organ",
-            "gain": 0.1982,
+            "gain": 0.1726,
             "loop": {
-              "start": 22050,
-              "end": 335418
+              "start": 24696,
+              "end": 324851
             }
           },
           {
@@ -3691,10 +3691,10 @@
             "lo": 67,
             "hi": 67,
             "placeholder": "organ",
-            "gain": 0.1916,
+            "gain": 0.1668,
             "loop": {
-              "start": 22050,
-              "end": 334480
+              "start": 24696,
+              "end": 325203
             }
           },
           {
@@ -3703,10 +3703,10 @@
             "lo": 68,
             "hi": 68,
             "placeholder": "organ",
-            "gain": 0.215,
+            "gain": 0.1784,
             "loop": {
-              "start": 23814,
-              "end": 349494
+              "start": 22050,
+              "end": 334688
             }
           },
           {
@@ -3715,10 +3715,10 @@
             "lo": 69,
             "hi": 69,
             "placeholder": "organ",
-            "gain": 0.2126,
+            "gain": 0.1825,
             "loop": {
-              "start": 23814,
-              "end": 349722
+              "start": 29106,
+              "end": 329064
             }
           },
           {
@@ -3727,10 +3727,10 @@
             "lo": 70,
             "hi": 70,
             "placeholder": "organ",
-            "gain": 0.1895,
+            "gain": 0.1674,
             "loop": {
-              "start": 23814,
-              "end": 350281
+              "start": 22050,
+              "end": 330843
             }
           },
           {
@@ -3739,10 +3739,10 @@
             "lo": 71,
             "hi": 71,
             "placeholder": "organ",
-            "gain": 0.2008,
+            "gain": 0.1767,
             "loop": {
-              "start": 23814,
-              "end": 349459
+              "start": 26460,
+              "end": 332139
             }
           },
           {
@@ -3751,10 +3751,10 @@
             "lo": 72,
             "hi": 72,
             "placeholder": "organ",
-            "gain": 0.2128,
+            "gain": 0.1866,
             "loop": {
-              "start": 23814,
-              "end": 350505
+              "start": 22050,
+              "end": 348741
             }
           },
           {
@@ -3763,10 +3763,10 @@
             "lo": 73,
             "hi": 73,
             "placeholder": "organ",
-            "gain": 0.2679,
+            "gain": 0.2007,
             "loop": {
-              "start": 24696,
-              "end": 342502
+              "start": 22050,
+              "end": 333653
             }
           },
           {
@@ -3775,10 +3775,10 @@
             "lo": 74,
             "hi": 74,
             "placeholder": "organ",
-            "gain": 0.2589,
+            "gain": 0.1904,
             "loop": {
-              "start": 24696,
-              "end": 343325
+              "start": 22050,
+              "end": 323583
             }
           },
           {
@@ -3787,10 +3787,10 @@
             "lo": 75,
             "hi": 75,
             "placeholder": "organ",
-            "gain": 0.2445,
+            "gain": 0.2109,
             "loop": {
-              "start": 24696,
-              "end": 342447
+              "start": 22050,
+              "end": 323526
             }
           },
           {
@@ -3799,10 +3799,10 @@
             "lo": 76,
             "hi": 76,
             "placeholder": "organ",
-            "gain": 0.3187,
+            "gain": 0.283,
             "loop": {
-              "start": 126126,
-              "end": 340663
+              "start": 108976,
+              "end": 323513
             }
           },
           {
@@ -3811,10 +3811,10 @@
             "lo": 77,
             "hi": 77,
             "placeholder": "organ",
-            "gain": 0.308,
+            "gain": 0.2687,
             "loop": {
-              "start": 126126,
-              "end": 340982
+              "start": 100881,
+              "end": 315737
             }
           },
           {
@@ -3823,10 +3823,10 @@
             "lo": 78,
             "hi": 78,
             "placeholder": "organ",
-            "gain": 0.3339,
+            "gain": 0.2953,
             "loop": {
-              "start": 126126,
-              "end": 341660
+              "start": 108976,
+              "end": 324510
             }
           },
           {
@@ -3835,10 +3835,10 @@
             "lo": 79,
             "hi": 79,
             "placeholder": "organ",
-            "gain": 0.3117,
+            "gain": 0.277,
             "loop": {
-              "start": 126126,
-              "end": 340732
+              "start": 109420,
+              "end": 324026
             }
           },
           {
@@ -3847,10 +3847,10 @@
             "lo": 80,
             "hi": 80,
             "placeholder": "organ",
-            "gain": 0.3459,
+            "gain": 0.2186,
             "loop": {
-              "start": 51156,
-              "end": 350827
+              "start": 27346,
+              "end": 327017
             }
           },
           {
@@ -3859,10 +3859,10 @@
             "lo": 81,
             "hi": 81,
             "placeholder": "organ",
-            "gain": 0.3155,
+            "gain": 0.2229,
             "loop": {
-              "start": 51156,
-              "end": 350465
+              "start": 28069,
+              "end": 327378
             }
           },
           {
@@ -3871,10 +3871,10 @@
             "lo": 82,
             "hi": 82,
             "placeholder": "organ",
-            "gain": 0.3156,
+            "gain": 0.2263,
             "loop": {
-              "start": 51156,
-              "end": 351191
+              "start": 26711,
+              "end": 326746
             }
           },
           {
@@ -3883,10 +3883,10 @@
             "lo": 83,
             "hi": 83,
             "placeholder": "organ",
-            "gain": 0.3194,
+            "gain": 0.2345,
             "loop": {
-              "start": 51156,
-              "end": 350363
+              "start": 26983,
+              "end": 326190
             }
           },
           {
@@ -3895,10 +3895,10 @@
             "lo": 84,
             "hi": 84,
             "placeholder": "organ",
-            "gain": 0.2688,
+            "gain": 0.2316,
             "loop": {
-              "start": 51156,
-              "end": 350357
+              "start": 26533,
+              "end": 325734
             }
           },
           {
@@ -3907,10 +3907,10 @@
             "lo": 85,
             "hi": 85,
             "placeholder": "organ",
-            "gain": 0.272,
+            "gain": 0.2489,
             "loop": {
-              "start": 59094,
-              "end": 338061
+              "start": 57338,
+              "end": 336305
             }
           },
           {
@@ -3919,10 +3919,10 @@
             "lo": 86,
             "hi": 86,
             "placeholder": "organ",
-            "gain": 0.2784,
+            "gain": 0.2524,
             "loop": {
-              "start": 59094,
-              "end": 337142
+              "start": 57777,
+              "end": 335825
             }
           },
           {
@@ -3931,10 +3931,10 @@
             "lo": 87,
             "hi": 87,
             "placeholder": "organ",
-            "gain": 0.2984,
+            "gain": 0.2723,
             "loop": {
-              "start": 59094,
-              "end": 337113
+              "start": 58854,
+              "end": 336873
             }
           },
           {
@@ -3943,10 +3943,10 @@
             "lo": 88,
             "hi": 88,
             "placeholder": "organ",
-            "gain": 0.2722,
+            "gain": 0.2356,
             "loop": {
-              "start": 55566,
-              "end": 328413
+              "start": 41714,
+              "end": 314561
             }
           },
           {
@@ -3955,378 +3955,11 @@
             "lo": 89,
             "hi": 89,
             "placeholder": "organ",
-            "gain": 0.3126,
+            "gain": 0.2735,
             "loop": {
-              "start": 55566,
-              "end": 328532
+              "start": 42352,
+              "end": 315318
             }
-          }
-        ]
-      }
-    },
-    {
-      "id": "clarinetstaccato",
-      "name": "Clarinet Staccato",
-      "family": "keys",
-      "kind": "pitched",
-      "version": "1.0.0",
-      "file": "packs/clarinetstaccato-1_0_0.zip",
-      "bytes": 357642,
-      "crc32": 2079293160,
-      "license": {
-        "spdx": "CC0-1.0",
-        "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 B\u266d clarinet, staccato, layer v2, CC0"
-      },
-      "manifest": {
-        "id": "clarinetstaccato",
-        "name": "Clarinet Staccato",
-        "version": "1.0.0",
-        "family": "keys",
-        "category": "winds",
-        "kind": "pitched",
-        "range": {
-          "lo": 50,
-          "hi": 89
-        },
-        "defaultView": {
-          "lo": 57,
-          "hi": 81
-        },
-        "shade": "orange",
-        "license": {
-          "spdx": "CC0-1.0",
-          "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 B\u266d clarinet, staccato, layer v2, CC0"
-        },
-        "envelope": {
-          "attack": 0.002,
-          "release": 0.25
-        },
-        "trim": 1,
-        "accentGain": 1.5,
-        "polyphony": 6,
-        "voicesAtOnce": 2,
-        "zones": [
-          {
-            "file": "clarinetstaccato/clarinetstaccato_D3.m4a",
-            "rootNote": 50,
-            "lo": 50,
-            "hi": 50,
-            "placeholder": "organ",
-            "gain": 0.1647
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Ds3.m4a",
-            "rootNote": 51,
-            "lo": 51,
-            "hi": 51,
-            "placeholder": "organ",
-            "gain": 0.1696
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_E3.m4a",
-            "rootNote": 52,
-            "lo": 52,
-            "hi": 52,
-            "placeholder": "organ",
-            "gain": 0.1396
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_F3.m4a",
-            "rootNote": 53,
-            "lo": 53,
-            "hi": 53,
-            "placeholder": "organ",
-            "gain": 0.2151
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Fs3.m4a",
-            "rootNote": 54,
-            "lo": 54,
-            "hi": 54,
-            "placeholder": "organ",
-            "gain": 0.1991
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_G3.m4a",
-            "rootNote": 55,
-            "lo": 55,
-            "hi": 55,
-            "placeholder": "organ",
-            "gain": 0.1941
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Gs3.m4a",
-            "rootNote": 56,
-            "lo": 56,
-            "hi": 56,
-            "placeholder": "organ",
-            "gain": 0.2122
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_A3.m4a",
-            "rootNote": 57,
-            "lo": 57,
-            "hi": 57,
-            "placeholder": "organ",
-            "gain": 0.2427
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_As3.m4a",
-            "rootNote": 58,
-            "lo": 58,
-            "hi": 58,
-            "placeholder": "organ",
-            "gain": 0.1873
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_B3.m4a",
-            "rootNote": 59,
-            "lo": 59,
-            "hi": 59,
-            "placeholder": "organ",
-            "gain": 0.1779
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_C4.m4a",
-            "rootNote": 60,
-            "lo": 60,
-            "hi": 60,
-            "placeholder": "organ",
-            "gain": 0.2348
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Cs4.m4a",
-            "rootNote": 61,
-            "lo": 61,
-            "hi": 61,
-            "placeholder": "organ",
-            "gain": 0.172
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_D4.m4a",
-            "rootNote": 62,
-            "lo": 62,
-            "hi": 62,
-            "placeholder": "organ",
-            "gain": 0.2047
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Ds4.m4a",
-            "rootNote": 63,
-            "lo": 63,
-            "hi": 63,
-            "placeholder": "organ",
-            "gain": 0.2118
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_E4.m4a",
-            "rootNote": 64,
-            "lo": 64,
-            "hi": 64,
-            "placeholder": "organ",
-            "gain": 0.1947
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_F4.m4a",
-            "rootNote": 65,
-            "lo": 65,
-            "hi": 65,
-            "placeholder": "organ",
-            "gain": 0.2048
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Fs4.m4a",
-            "rootNote": 66,
-            "lo": 66,
-            "hi": 66,
-            "placeholder": "organ",
-            "gain": 0.2196
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_G4.m4a",
-            "rootNote": 67,
-            "lo": 67,
-            "hi": 67,
-            "placeholder": "organ",
-            "gain": 0.228
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Gs4.m4a",
-            "rootNote": 68,
-            "lo": 68,
-            "hi": 68,
-            "placeholder": "organ",
-            "gain": 0.3098
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_A4.m4a",
-            "rootNote": 69,
-            "lo": 69,
-            "hi": 69,
-            "placeholder": "organ",
-            "gain": 0.2358
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_As4.m4a",
-            "rootNote": 70,
-            "lo": 70,
-            "hi": 70,
-            "placeholder": "organ",
-            "gain": 0.2944
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_B4.m4a",
-            "rootNote": 71,
-            "lo": 71,
-            "hi": 71,
-            "placeholder": "organ",
-            "gain": 0.3101
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_C5.m4a",
-            "rootNote": 72,
-            "lo": 72,
-            "hi": 72,
-            "placeholder": "organ",
-            "gain": 0.3007
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Cs5.m4a",
-            "rootNote": 73,
-            "lo": 73,
-            "hi": 73,
-            "placeholder": "organ",
-            "gain": 0.3544
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_D5.m4a",
-            "rootNote": 74,
-            "lo": 74,
-            "hi": 74,
-            "placeholder": "organ",
-            "gain": 0.3922
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Ds5.m4a",
-            "rootNote": 75,
-            "lo": 75,
-            "hi": 75,
-            "placeholder": "organ",
-            "gain": 0.3728
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_E5.m4a",
-            "rootNote": 76,
-            "lo": 76,
-            "hi": 76,
-            "placeholder": "organ",
-            "gain": 0.3693
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_F5.m4a",
-            "rootNote": 77,
-            "lo": 77,
-            "hi": 77,
-            "placeholder": "organ",
-            "gain": 0.4069
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Fs5.m4a",
-            "rootNote": 78,
-            "lo": 78,
-            "hi": 78,
-            "placeholder": "organ",
-            "gain": 0.4887
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_G5.m4a",
-            "rootNote": 79,
-            "lo": 79,
-            "hi": 79,
-            "placeholder": "organ",
-            "gain": 0.5044
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Gs5.m4a",
-            "rootNote": 80,
-            "lo": 80,
-            "hi": 80,
-            "placeholder": "organ",
-            "gain": 0.4676
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_A5.m4a",
-            "rootNote": 81,
-            "lo": 81,
-            "hi": 81,
-            "placeholder": "organ",
-            "gain": 0.4247
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_As5.m4a",
-            "rootNote": 82,
-            "lo": 82,
-            "hi": 82,
-            "placeholder": "organ",
-            "gain": 0.4038
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_B5.m4a",
-            "rootNote": 83,
-            "lo": 83,
-            "hi": 83,
-            "placeholder": "organ",
-            "gain": 0.4724
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_C6.m4a",
-            "rootNote": 84,
-            "lo": 84,
-            "hi": 84,
-            "placeholder": "organ",
-            "gain": 0.5207
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Cs6.m4a",
-            "rootNote": 85,
-            "lo": 85,
-            "hi": 85,
-            "placeholder": "organ",
-            "gain": 0.4476
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_D6.m4a",
-            "rootNote": 86,
-            "lo": 86,
-            "hi": 86,
-            "placeholder": "organ",
-            "gain": 0.4958
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_Ds6.m4a",
-            "rootNote": 87,
-            "lo": 87,
-            "hi": 87,
-            "placeholder": "organ",
-            "gain": 0.4966
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_E6.m4a",
-            "rootNote": 88,
-            "lo": 88,
-            "hi": 88,
-            "placeholder": "organ",
-            "gain": 0.5418
-          },
-          {
-            "file": "clarinetstaccato/clarinetstaccato_F6.m4a",
-            "rootNote": 89,
-            "lo": 89,
-            "hi": 89,
-            "placeholder": "organ",
-            "gain": 0.554
           }
         ]
       }
@@ -18978,19 +18611,19 @@
       "name": "Tenor Sax",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.1.0",
-      "file": "packs/tenorsax-1_1_0.zip",
-      "bytes": 3458095,
-      "crc32": 72500395,
+      "version": "1.2.0",
+      "file": "packs/tenorsax-1_2_0.zip",
+      "bytes": 3357856,
+      "crc32": 2508944527,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "Versilian Studios, VCSL \u2014 tenor saxophone, non-vibrato, layer vl2 (soft), CC0"
+        "credit": "Versilian Studios, VCSL \u2014 tenor saxophone, staccato vl1 (soft) joined into non-vibrato sustain vl2 (soft), CC0"
       },
       "manifest": {
         "id": "tenorsax",
         "name": "Tenor Sax",
-        "version": "1.1.0",
+        "version": "1.2.0",
         "family": "keys",
         "category": "winds",
         "kind": "pitched",
@@ -19006,11 +18639,11 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "Versilian Studios, VCSL \u2014 tenor saxophone, non-vibrato, layer vl2 (soft), CC0"
+          "credit": "Versilian Studios, VCSL \u2014 tenor saxophone, staccato vl1 (soft) joined into non-vibrato sustain vl2 (soft), CC0"
         },
         "envelope": {
-          "attack": 0.005,
-          "release": 0.25
+          "attack": 0.002,
+          "release": 0.12
         },
         "trim": 1,
         "accentGain": 1.5,
@@ -19023,10 +18656,10 @@
             "lo": 44,
             "hi": 44,
             "placeholder": "organ",
-            "gain": 0.1775,
+            "gain": 0.2071,
             "loop": {
-              "start": 77616,
-              "end": 295526
+              "start": 75013,
+              "end": 292923
             }
           },
           {
@@ -19035,10 +18668,10 @@
             "lo": 45,
             "hi": 45,
             "placeholder": "organ",
-            "gain": 0.242,
+            "gain": 0.2705,
             "loop": {
-              "start": 77616,
-              "end": 294949
+              "start": 75966,
+              "end": 293299
             }
           },
           {
@@ -19047,10 +18680,10 @@
             "lo": 46,
             "hi": 46,
             "placeholder": "organ",
-            "gain": 0.1509,
+            "gain": 0.1747,
             "loop": {
-              "start": 23814,
-              "end": 290982
+              "start": 22050,
+              "end": 289218
             }
           },
           {
@@ -19059,10 +18692,10 @@
             "lo": 47,
             "hi": 47,
             "placeholder": "organ",
-            "gain": 0.1525,
+            "gain": 0.2011,
             "loop": {
-              "start": 23814,
-              "end": 290284
+              "start": 25578,
+              "end": 292048
             }
           },
           {
@@ -19071,10 +18704,10 @@
             "lo": 48,
             "hi": 48,
             "placeholder": "organ",
-            "gain": 0.1919,
+            "gain": 0.1891,
             "loop": {
-              "start": 94374,
-              "end": 300010
+              "start": 91747,
+              "end": 297383
             }
           },
           {
@@ -19083,10 +18716,10 @@
             "lo": 49,
             "hi": 49,
             "placeholder": "organ",
-            "gain": 0.2054,
+            "gain": 0.254,
             "loop": {
-              "start": 94374,
-              "end": 299961
+              "start": 91565,
+              "end": 297152
             }
           },
           {
@@ -19095,10 +18728,10 @@
             "lo": 50,
             "hi": 50,
             "placeholder": "organ",
-            "gain": 0.1594,
+            "gain": 0.2134,
             "loop": {
-              "start": 101430,
-              "end": 319487
+              "start": 100961,
+              "end": 319018
             }
           },
           {
@@ -19107,10 +18740,10 @@
             "lo": 51,
             "hi": 51,
             "placeholder": "organ",
-            "gain": 0.1959,
+            "gain": 0.2052,
             "loop": {
-              "start": 101430,
-              "end": 319571
+              "start": 100981,
+              "end": 319122
             }
           },
           {
@@ -19119,10 +18752,10 @@
             "lo": 52,
             "hi": 52,
             "placeholder": "organ",
-            "gain": 0.1913,
+            "gain": 0.1734,
             "loop": {
-              "start": 29106,
-              "end": 304715
+              "start": 22050,
+              "end": 295519
             }
           },
           {
@@ -19131,10 +18764,10 @@
             "lo": 53,
             "hi": 53,
             "placeholder": "organ",
-            "gain": 0.2049,
+            "gain": 0.1992,
             "loop": {
-              "start": 29106,
-              "end": 304716
+              "start": 22050,
+              "end": 296399
             }
           },
           {
@@ -19143,10 +18776,10 @@
             "lo": 54,
             "hi": 54,
             "placeholder": "organ",
-            "gain": 0.1763,
+            "gain": 0.1743,
             "loop": {
-              "start": 37926,
-              "end": 314925
+              "start": 27818,
+              "end": 304817
             }
           },
           {
@@ -19155,10 +18788,10 @@
             "lo": 55,
             "hi": 55,
             "placeholder": "organ",
-            "gain": 0.1954,
+            "gain": 0.1922,
             "loop": {
-              "start": 37926,
-              "end": 314344
+              "start": 25705,
+              "end": 302123
             }
           },
           {
@@ -19167,10 +18800,10 @@
             "lo": 56,
             "hi": 56,
             "placeholder": "organ",
-            "gain": 0.2045,
+            "gain": 0.2083,
             "loop": {
-              "start": 115542,
-              "end": 260021
+              "start": 109450,
+              "end": 253929
             }
           },
           {
@@ -19179,10 +18812,10 @@
             "lo": 57,
             "hi": 57,
             "placeholder": "organ",
-            "gain": 0.2139,
+            "gain": 0.2219,
             "loop": {
-              "start": 115542,
-              "end": 259280
+              "start": 109293,
+              "end": 253031
             }
           },
           {
@@ -19191,10 +18824,10 @@
             "lo": 58,
             "hi": 58,
             "placeholder": "organ",
-            "gain": 0.2317,
+            "gain": 0.2179,
             "loop": {
-              "start": 72324,
-              "end": 258883
+              "start": 52663,
+              "end": 239222
             }
           },
           {
@@ -19203,10 +18836,10 @@
             "lo": 59,
             "hi": 59,
             "placeholder": "organ",
-            "gain": 0.2161,
+            "gain": 0.1854,
             "loop": {
-              "start": 72324,
-              "end": 258252
+              "start": 48175,
+              "end": 234103
             }
           },
           {
@@ -19215,10 +18848,10 @@
             "lo": 60,
             "hi": 60,
             "placeholder": "organ",
-            "gain": 0.2314,
+            "gain": 0.1987,
             "loop": {
-              "start": 126126,
-              "end": 253716
+              "start": 115583,
+              "end": 243173
             }
           },
           {
@@ -19227,10 +18860,10 @@
             "lo": 61,
             "hi": 61,
             "placeholder": "organ",
-            "gain": 0.2339,
+            "gain": 0.2091,
             "loop": {
-              "start": 126126,
-              "end": 253885
+              "start": 115575,
+              "end": 243334
             }
           },
           {
@@ -19239,10 +18872,10 @@
             "lo": 62,
             "hi": 62,
             "placeholder": "organ",
-            "gain": 0.2311,
+            "gain": 0.269,
             "loop": {
-              "start": 76734,
-              "end": 289680
+              "start": 74613,
+              "end": 287559
             }
           },
           {
@@ -19251,10 +18884,10 @@
             "lo": 63,
             "hi": 63,
             "placeholder": "organ",
-            "gain": 0.2309,
+            "gain": 0.2787,
             "loop": {
-              "start": 76734,
-              "end": 289480
+              "start": 75329,
+              "end": 288075
             }
           },
           {
@@ -19263,10 +18896,10 @@
             "lo": 64,
             "hi": 64,
             "placeholder": "organ",
-            "gain": 0.1672,
+            "gain": 0.1511,
             "loop": {
-              "start": 24696,
-              "end": 249045
+              "start": 23669,
+              "end": 248018
             }
           },
           {
@@ -19275,10 +18908,10 @@
             "lo": 65,
             "hi": 65,
             "placeholder": "organ",
-            "gain": 0.1918,
+            "gain": 0.1713,
             "loop": {
-              "start": 24696,
-              "end": 249940
+              "start": 29106,
+              "end": 254350
             }
           },
           {
@@ -19287,10 +18920,10 @@
             "lo": 66,
             "hi": 66,
             "placeholder": "organ",
-            "gain": 0.2176,
+            "gain": 0.1785,
             "loop": {
-              "start": 56448,
-              "end": 284337
+              "start": 45786,
+              "end": 273675
             }
           },
           {
@@ -19299,10 +18932,10 @@
             "lo": 67,
             "hi": 67,
             "placeholder": "organ",
-            "gain": 0.2251,
+            "gain": 0.1969,
             "loop": {
-              "start": 56448,
-              "end": 283397
+              "start": 46426,
+              "end": 273375
             }
           },
           {
@@ -19311,10 +18944,10 @@
             "lo": 68,
             "hi": 68,
             "placeholder": "organ",
-            "gain": 0.3214,
+            "gain": 0.2759,
             "loop": {
-              "start": 103194,
-              "end": 236453
+              "start": 95772,
+              "end": 229031
             }
           },
           {
@@ -19323,10 +18956,10 @@
             "lo": 69,
             "hi": 69,
             "placeholder": "organ",
-            "gain": 0.2671,
+            "gain": 0.2979,
             "loop": {
-              "start": 103194,
-              "end": 236501
+              "start": 96138,
+              "end": 229445
             }
           },
           {
@@ -19335,10 +18968,10 @@
             "lo": 70,
             "hi": 70,
             "placeholder": "organ",
-            "gain": 0.2463,
+            "gain": 0.2176,
             "loop": {
-              "start": 101430,
-              "end": 334617
+              "start": 95198,
+              "end": 328385
             }
           },
           {
@@ -19347,10 +18980,10 @@
             "lo": 71,
             "hi": 71,
             "placeholder": "organ",
-            "gain": 0.249,
+            "gain": 0.2322,
             "loop": {
-              "start": 101430,
-              "end": 335510
+              "start": 90634,
+              "end": 324714
             }
           },
           {
@@ -19359,10 +18992,10 @@
             "lo": 72,
             "hi": 72,
             "placeholder": "organ",
-            "gain": 0.2957,
+            "gain": 0.2412,
             "loop": {
-              "start": 42336,
-              "end": 235680
+              "start": 24557,
+              "end": 217901
             }
           },
           {
@@ -19371,10 +19004,10 @@
             "lo": 73,
             "hi": 73,
             "placeholder": "organ",
-            "gain": 0.3203,
+            "gain": 0.2407,
             "loop": {
-              "start": 42336,
-              "end": 234893
+              "start": 24702,
+              "end": 217259
             }
           },
           {
@@ -19383,10 +19016,10 @@
             "lo": 74,
             "hi": 74,
             "placeholder": "organ",
-            "gain": 0.2693,
+            "gain": 0.1959,
             "loop": {
-              "start": 107604,
-              "end": 278570
+              "start": 71808,
+              "end": 242774
             }
           },
           {
@@ -19395,10 +19028,10 @@
             "lo": 75,
             "hi": 75,
             "placeholder": "organ",
-            "gain": 0.257,
+            "gain": 0.1999,
             "loop": {
-              "start": 107604,
-              "end": 278721
+              "start": 71801,
+              "end": 242918
             }
           },
           {
@@ -19407,10 +19040,10 @@
             "lo": 76,
             "hi": 76,
             "placeholder": "organ",
-            "gain": 0.2263,
+            "gain": 0.2542,
             "loop": {
-              "start": 73206,
-              "end": 259500
+              "start": 55862,
+              "end": 242156
             }
           },
           {
@@ -19419,10 +19052,10 @@
             "lo": 77,
             "hi": 77,
             "placeholder": "organ",
-            "gain": 0.2341,
+            "gain": 0.195,
             "loop": {
-              "start": 73206,
-              "end": 259486
+              "start": 46625,
+              "end": 232905
             }
           },
           {
@@ -19431,10 +19064,10 @@
             "lo": 78,
             "hi": 78,
             "placeholder": "organ",
-            "gain": 0.2748,
+            "gain": 0.2085,
             "loop": {
-              "start": 29988,
-              "end": 177916
+              "start": 22050,
+              "end": 158356
             }
           },
           {
@@ -19443,10 +19076,10 @@
             "lo": 79,
             "hi": 79,
             "placeholder": "organ",
-            "gain": 0.3046,
+            "gain": 0.2596,
             "loop": {
-              "start": 29988,
-              "end": 177883
+              "start": 28438,
+              "end": 176333
             }
           },
           {
@@ -19455,10 +19088,10 @@
             "lo": 80,
             "hi": 80,
             "placeholder": "organ",
-            "gain": 0.2907,
+            "gain": 0.321,
             "loop": {
-              "start": 22050,
-              "end": 138267
+              "start": 23814,
+              "end": 140031
             }
           },
           {
@@ -19467,10 +19100,10 @@
             "lo": 81,
             "hi": 81,
             "placeholder": "organ",
-            "gain": 0.2711,
+            "gain": 0.2014,
             "loop": {
-              "start": 22050,
-              "end": 137884
+              "start": 22932,
+              "end": 138766
             }
           },
           {
@@ -19479,10 +19112,10 @@
             "lo": 82,
             "hi": 82,
             "placeholder": "organ",
-            "gain": 0.2709,
+            "gain": 0.2059,
             "loop": {
-              "start": 22050,
-              "end": 183572
+              "start": 22932,
+              "end": 184454
             }
           },
           {
@@ -19491,10 +19124,10 @@
             "lo": 83,
             "hi": 83,
             "placeholder": "organ",
-            "gain": 0.2739,
+            "gain": 0.2048,
             "loop": {
-              "start": 22050,
-              "end": 183649
+              "start": 68796,
+              "end": 171648
             }
           },
           {
@@ -19503,10 +19136,10 @@
             "lo": 84,
             "hi": 84,
             "placeholder": "organ",
-            "gain": 0.2705,
+            "gain": 0.1981,
             "loop": {
-              "start": 72324,
-              "end": 242652
+              "start": 67958,
+              "end": 238286
             }
           },
           {
@@ -19515,10 +19148,10 @@
             "lo": 85,
             "hi": 85,
             "placeholder": "organ",
-            "gain": 0.2673,
+            "gain": 0.2032,
             "loop": {
-              "start": 72324,
-              "end": 243427
+              "start": 67470,
+              "end": 238573
             }
           },
           {
@@ -19527,10 +19160,10 @@
             "lo": 86,
             "hi": 86,
             "placeholder": "organ",
-            "gain": 0.2797,
+            "gain": 0.2056,
             "loop": {
-              "start": 22050,
-              "end": 269360
+              "start": 25578,
+              "end": 272888
             }
           },
           {
@@ -19539,10 +19172,10 @@
             "lo": 87,
             "hi": 87,
             "placeholder": "organ",
-            "gain": 0.286,
+            "gain": 0.2214,
             "loop": {
-              "start": 22050,
-              "end": 269358
+              "start": 27342,
+              "end": 274650
             }
           },
           {
@@ -19551,418 +19184,11 @@
             "lo": 88,
             "hi": 88,
             "placeholder": "organ",
-            "gain": 0.4426,
+            "gain": 0.321,
             "loop": {
-              "start": 57330,
-              "end": 184993
+              "start": 52674,
+              "end": 180337
             }
-          }
-        ]
-      }
-    },
-    {
-      "id": "tenorsaxstaccato",
-      "name": "Tenor Sax Staccato",
-      "family": "keys",
-      "kind": "pitched",
-      "version": "1.1.0",
-      "file": "packs/tenorsaxstaccato-1_1_0.zip",
-      "bytes": 382074,
-      "crc32": 2585767369,
-      "license": {
-        "spdx": "CC0-1.0",
-        "source": "https://github.com/sgossner/VCSL",
-        "credit": "Versilian Studios, VCSL \u2014 tenor saxophone, staccato, layer vl1 (soft), CC0"
-      },
-      "manifest": {
-        "id": "tenorsaxstaccato",
-        "name": "Tenor Sax Staccato",
-        "version": "1.1.0",
-        "family": "keys",
-        "category": "winds",
-        "kind": "pitched",
-        "range": {
-          "lo": 44,
-          "hi": 88
-        },
-        "defaultView": {
-          "lo": 54,
-          "hi": 78
-        },
-        "shade": "yellow",
-        "license": {
-          "spdx": "CC0-1.0",
-          "source": "https://github.com/sgossner/VCSL",
-          "credit": "Versilian Studios, VCSL \u2014 tenor saxophone, staccato, layer vl1 (soft), CC0"
-        },
-        "envelope": {
-          "attack": 0.002,
-          "release": 0.25
-        },
-        "trim": 1,
-        "accentGain": 1.5,
-        "polyphony": 6,
-        "voicesAtOnce": 2,
-        "zones": [
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Gs2.m4a",
-            "rootNote": 44,
-            "lo": 44,
-            "hi": 44,
-            "placeholder": "organ",
-            "gain": 0.1703
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_A2.m4a",
-            "rootNote": 45,
-            "lo": 45,
-            "hi": 45,
-            "placeholder": "organ",
-            "gain": 0.1721
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_As2.m4a",
-            "rootNote": 46,
-            "lo": 46,
-            "hi": 46,
-            "placeholder": "organ",
-            "gain": 0.1529
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_B2.m4a",
-            "rootNote": 47,
-            "lo": 47,
-            "hi": 47,
-            "placeholder": "organ",
-            "gain": 0.1724
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_C3.m4a",
-            "rootNote": 48,
-            "lo": 48,
-            "hi": 48,
-            "placeholder": "organ",
-            "gain": 0.1487
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Cs3.m4a",
-            "rootNote": 49,
-            "lo": 49,
-            "hi": 49,
-            "placeholder": "organ",
-            "gain": 0.2184
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_D3.m4a",
-            "rootNote": 50,
-            "lo": 50,
-            "hi": 50,
-            "placeholder": "organ",
-            "gain": 0.2025
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Ds3.m4a",
-            "rootNote": 51,
-            "lo": 51,
-            "hi": 51,
-            "placeholder": "organ",
-            "gain": 0.2043
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_E3.m4a",
-            "rootNote": 52,
-            "lo": 52,
-            "hi": 52,
-            "placeholder": "organ",
-            "gain": 0.2098
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_F3.m4a",
-            "rootNote": 53,
-            "lo": 53,
-            "hi": 53,
-            "placeholder": "organ",
-            "gain": 0.2091
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Fs3.m4a",
-            "rootNote": 54,
-            "lo": 54,
-            "hi": 54,
-            "placeholder": "organ",
-            "gain": 0.2437
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_G3.m4a",
-            "rootNote": 55,
-            "lo": 55,
-            "hi": 55,
-            "placeholder": "organ",
-            "gain": 0.21
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Gs3.m4a",
-            "rootNote": 56,
-            "lo": 56,
-            "hi": 56,
-            "placeholder": "organ",
-            "gain": 0.2417
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_A3.m4a",
-            "rootNote": 57,
-            "lo": 57,
-            "hi": 57,
-            "placeholder": "organ",
-            "gain": 0.2656
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_As3.m4a",
-            "rootNote": 58,
-            "lo": 58,
-            "hi": 58,
-            "placeholder": "organ",
-            "gain": 0.2505
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_B3.m4a",
-            "rootNote": 59,
-            "lo": 59,
-            "hi": 59,
-            "placeholder": "organ",
-            "gain": 0.2538
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_C4.m4a",
-            "rootNote": 60,
-            "lo": 60,
-            "hi": 60,
-            "placeholder": "organ",
-            "gain": 0.2488
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Cs4.m4a",
-            "rootNote": 61,
-            "lo": 61,
-            "hi": 61,
-            "placeholder": "organ",
-            "gain": 0.283
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_D4.m4a",
-            "rootNote": 62,
-            "lo": 62,
-            "hi": 62,
-            "placeholder": "organ",
-            "gain": 0.2745
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Ds4.m4a",
-            "rootNote": 63,
-            "lo": 63,
-            "hi": 63,
-            "placeholder": "organ",
-            "gain": 0.2955
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_E4.m4a",
-            "rootNote": 64,
-            "lo": 64,
-            "hi": 64,
-            "placeholder": "organ",
-            "gain": 0.1883
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_F4.m4a",
-            "rootNote": 65,
-            "lo": 65,
-            "hi": 65,
-            "placeholder": "organ",
-            "gain": 0.2051
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Fs4.m4a",
-            "rootNote": 66,
-            "lo": 66,
-            "hi": 66,
-            "placeholder": "organ",
-            "gain": 0.2388
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_G4.m4a",
-            "rootNote": 67,
-            "lo": 67,
-            "hi": 67,
-            "placeholder": "organ",
-            "gain": 0.2583
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Gs4.m4a",
-            "rootNote": 68,
-            "lo": 68,
-            "hi": 68,
-            "placeholder": "organ",
-            "gain": 0.2891
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_A4.m4a",
-            "rootNote": 69,
-            "lo": 69,
-            "hi": 69,
-            "placeholder": "organ",
-            "gain": 0.3211
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_As4.m4a",
-            "rootNote": 70,
-            "lo": 70,
-            "hi": 70,
-            "placeholder": "organ",
-            "gain": 0.2436
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_B4.m4a",
-            "rootNote": 71,
-            "lo": 71,
-            "hi": 71,
-            "placeholder": "organ",
-            "gain": 0.2557
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_C5.m4a",
-            "rootNote": 72,
-            "lo": 72,
-            "hi": 72,
-            "placeholder": "organ",
-            "gain": 0.2225
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Cs5.m4a",
-            "rootNote": 73,
-            "lo": 73,
-            "hi": 73,
-            "placeholder": "organ",
-            "gain": 0.2855
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_D5.m4a",
-            "rootNote": 74,
-            "lo": 74,
-            "hi": 74,
-            "placeholder": "organ",
-            "gain": 0.246
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Ds5.m4a",
-            "rootNote": 75,
-            "lo": 75,
-            "hi": 75,
-            "placeholder": "organ",
-            "gain": 0.2219
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_E5.m4a",
-            "rootNote": 76,
-            "lo": 76,
-            "hi": 76,
-            "placeholder": "organ",
-            "gain": 0.3463
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_F5.m4a",
-            "rootNote": 77,
-            "lo": 77,
-            "hi": 77,
-            "placeholder": "organ",
-            "gain": 0.2758
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Fs5.m4a",
-            "rootNote": 78,
-            "lo": 78,
-            "hi": 78,
-            "placeholder": "organ",
-            "gain": 0.2516
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_G5.m4a",
-            "rootNote": 79,
-            "lo": 79,
-            "hi": 79,
-            "placeholder": "organ",
-            "gain": 0.3027
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Gs5.m4a",
-            "rootNote": 80,
-            "lo": 80,
-            "hi": 80,
-            "placeholder": "organ",
-            "gain": 0.2845
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_A5.m4a",
-            "rootNote": 81,
-            "lo": 81,
-            "hi": 81,
-            "placeholder": "organ",
-            "gain": 0.261
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_As5.m4a",
-            "rootNote": 82,
-            "lo": 82,
-            "hi": 82,
-            "placeholder": "organ",
-            "gain": 0.2836
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_B5.m4a",
-            "rootNote": 83,
-            "lo": 83,
-            "hi": 83,
-            "placeholder": "organ",
-            "gain": 0.2917
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_C6.m4a",
-            "rootNote": 84,
-            "lo": 84,
-            "hi": 84,
-            "placeholder": "organ",
-            "gain": 0.275
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Cs6.m4a",
-            "rootNote": 85,
-            "lo": 85,
-            "hi": 85,
-            "placeholder": "organ",
-            "gain": 0.2731
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_D6.m4a",
-            "rootNote": 86,
-            "lo": 86,
-            "hi": 86,
-            "placeholder": "organ",
-            "gain": 0.3132
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_Ds6.m4a",
-            "rootNote": 87,
-            "lo": 87,
-            "hi": 87,
-            "placeholder": "organ",
-            "gain": 0.3121
-          },
-          {
-            "file": "tenorsaxstaccato/tenorsaxstaccato_E6.m4a",
-            "rootNote": 88,
-            "lo": 88,
-            "hi": 88,
-            "placeholder": "organ",
-            "gain": 0.3671
           }
         ]
       }
@@ -22520,19 +21746,19 @@
       "name": "Trumpet",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.1.0",
-      "file": "packs/trumpet-1_1_0.zip",
-      "bytes": 3070021,
-      "crc32": 1331494999,
+      "version": "1.2.0",
+      "file": "packs/trumpet-1_2_0.zip",
+      "bytes": 3032262,
+      "crc32": 4154426632,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 trumpet, sustain, layer v1 (soft), CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 trumpet, staccato v1 (soft) joined into sustain v1 (soft), CC0"
       },
       "manifest": {
         "id": "trumpet",
         "name": "Trumpet",
-        "version": "1.1.0",
+        "version": "1.2.0",
         "family": "keys",
         "category": "winds",
         "kind": "pitched",
@@ -22548,11 +21774,11 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 trumpet, sustain, layer v1 (soft), CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 trumpet, staccato v1 (soft) joined into sustain v1 (soft), CC0"
         },
         "envelope": {
-          "attack": 0.005,
-          "release": 0.25
+          "attack": 0.002,
+          "release": 0.12
         },
         "trim": 1,
         "accentGain": 1.5,
@@ -22565,10 +21791,10 @@
             "lo": 53,
             "hi": 53,
             "placeholder": "organ",
-            "gain": 0.1109,
+            "gain": 0.1113,
             "loop": {
-              "start": 67914,
-              "end": 338946
+              "start": 63382,
+              "end": 334414
             }
           },
           {
@@ -22577,10 +21803,10 @@
             "lo": 54,
             "hi": 54,
             "placeholder": "organ",
-            "gain": 0.1257,
+            "gain": 0.0879,
             "loop": {
-              "start": 67914,
-              "end": 339760
+              "start": 63297,
+              "end": 335143
             }
           },
           {
@@ -22589,10 +21815,10 @@
             "lo": 55,
             "hi": 55,
             "placeholder": "organ",
-            "gain": 0.1132,
+            "gain": 0.1194,
             "loop": {
-              "start": 67914,
-              "end": 339517
+              "start": 67475,
+              "end": 339078
             }
           },
           {
@@ -22601,10 +21827,10 @@
             "lo": 56,
             "hi": 56,
             "placeholder": "organ",
-            "gain": 0.113,
+            "gain": 0.1808,
             "loop": {
-              "start": 46746,
-              "end": 338099
+              "start": 39927,
+              "end": 331280
             }
           },
           {
@@ -22613,10 +21839,10 @@
             "lo": 57,
             "hi": 57,
             "placeholder": "organ",
-            "gain": 0.1522,
+            "gain": 0.1877,
             "loop": {
-              "start": 46746,
-              "end": 338018
+              "start": 40126,
+              "end": 331398
             }
           },
           {
@@ -22625,10 +21851,10 @@
             "lo": 58,
             "hi": 58,
             "placeholder": "organ",
-            "gain": 0.1538,
+            "gain": 0.1751,
             "loop": {
-              "start": 46746,
-              "end": 338907
+              "start": 39765,
+              "end": 331926
             }
           },
           {
@@ -22637,10 +21863,10 @@
             "lo": 59,
             "hi": 59,
             "placeholder": "organ",
-            "gain": 0.122,
+            "gain": 0.1233,
             "loop": {
-              "start": 89082,
-              "end": 331674
+              "start": 89953,
+              "end": 332545
             }
           },
           {
@@ -22649,10 +21875,10 @@
             "lo": 60,
             "hi": 60,
             "placeholder": "organ",
-            "gain": 0.1569,
+            "gain": 0.178,
             "loop": {
-              "start": 89082,
-              "end": 331710
+              "start": 77298,
+              "end": 319926
             }
           },
           {
@@ -22661,10 +21887,10 @@
             "lo": 61,
             "hi": 61,
             "placeholder": "organ",
-            "gain": 0.1463,
+            "gain": 0.1244,
             "loop": {
-              "start": 89082,
-              "end": 331700
+              "start": 77298,
+              "end": 319916
             }
           },
           {
@@ -22673,10 +21899,10 @@
             "lo": 62,
             "hi": 62,
             "placeholder": "organ",
-            "gain": 0.1121,
+            "gain": 0.1187,
             "loop": {
-              "start": 23814,
-              "end": 340693
+              "start": 22509,
+              "end": 339388
             }
           },
           {
@@ -22685,10 +21911,10 @@
             "lo": 63,
             "hi": 63,
             "placeholder": "organ",
-            "gain": 0.133,
+            "gain": 0.141,
             "loop": {
-              "start": 23814,
-              "end": 340411
+              "start": 22702,
+              "end": 339299
             }
           },
           {
@@ -22697,10 +21923,10 @@
             "lo": 64,
             "hi": 64,
             "placeholder": "organ",
-            "gain": 0.1313,
+            "gain": 0.1405,
             "loop": {
-              "start": 23814,
-              "end": 339819
+              "start": 22229,
+              "end": 338234
             }
           },
           {
@@ -22709,10 +21935,10 @@
             "lo": 65,
             "hi": 65,
             "placeholder": "organ",
-            "gain": 0.1342,
+            "gain": 0.1493,
             "loop": {
-              "start": 23814,
-              "end": 340547
+              "start": 27342,
+              "end": 344075
             }
           },
           {
@@ -22721,10 +21947,10 @@
             "lo": 66,
             "hi": 66,
             "placeholder": "organ",
-            "gain": 0.1557,
+            "gain": 0.1759,
             "loop": {
-              "start": 104958,
-              "end": 341400
+              "start": 103949,
+              "end": 340391
             }
           },
           {
@@ -22733,10 +21959,10 @@
             "lo": 67,
             "hi": 67,
             "placeholder": "organ",
-            "gain": 0.1628,
+            "gain": 0.1806,
             "loop": {
-              "start": 104958,
-              "end": 340715
+              "start": 99548,
+              "end": 335305
             }
           },
           {
@@ -22745,10 +21971,10 @@
             "lo": 68,
             "hi": 68,
             "placeholder": "organ",
-            "gain": 0.191,
+            "gain": 0.2142,
             "loop": {
-              "start": 104958,
-              "end": 340747
+              "start": 85718,
+              "end": 321507
             }
           },
           {
@@ -22757,10 +21983,10 @@
             "lo": 69,
             "hi": 69,
             "placeholder": "organ",
-            "gain": 0.2573,
+            "gain": 0.2908,
             "loop": {
-              "start": 58212,
-              "end": 322194
+              "start": 54747,
+              "end": 318729
             }
           },
           {
@@ -22769,10 +21995,10 @@
             "lo": 70,
             "hi": 70,
             "placeholder": "organ",
-            "gain": 0.3757,
+            "gain": 0.4271,
             "loop": {
-              "start": 58212,
-              "end": 322149
+              "start": 54745,
+              "end": 318682
             }
           },
           {
@@ -22781,10 +22007,10 @@
             "lo": 71,
             "hi": 71,
             "placeholder": "organ",
-            "gain": 0.3501,
+            "gain": 0.3994,
             "loop": {
-              "start": 58212,
-              "end": 322171
+              "start": 56976,
+              "end": 320935
             }
           },
           {
@@ -22793,10 +22019,10 @@
             "lo": 72,
             "hi": 72,
             "placeholder": "organ",
-            "gain": 0.4155,
+            "gain": 0.4806,
             "loop": {
-              "start": 58212,
-              "end": 322180
+              "start": 56955,
+              "end": 320923
             }
           },
           {
@@ -22805,10 +22031,10 @@
             "lo": 73,
             "hi": 73,
             "placeholder": "organ",
-            "gain": 0.3873,
+            "gain": 0.4671,
             "loop": {
-              "start": 110250,
-              "end": 317776
+              "start": 107405,
+              "end": 314931
             }
           },
           {
@@ -22817,10 +22043,10 @@
             "lo": 74,
             "hi": 74,
             "placeholder": "organ",
-            "gain": 0.5463,
+            "gain": 0.6403,
             "loop": {
-              "start": 110250,
-              "end": 317781
+              "start": 107185,
+              "end": 314716
             }
           },
           {
@@ -22829,10 +22055,10 @@
             "lo": 75,
             "hi": 75,
             "placeholder": "organ",
-            "gain": 0.515,
+            "gain": 0.656,
             "loop": {
-              "start": 110250,
-              "end": 317128
+              "start": 107565,
+              "end": 314443
             }
           },
           {
@@ -22841,10 +22067,10 @@
             "lo": 76,
             "hi": 76,
             "placeholder": "organ",
-            "gain": 0.4085,
+            "gain": 0.4962,
             "loop": {
-              "start": 30870,
-              "end": 301101
+              "start": 29774,
+              "end": 300005
             }
           },
           {
@@ -22853,10 +22079,10 @@
             "lo": 77,
             "hi": 77,
             "placeholder": "organ",
-            "gain": 0.4738,
+            "gain": 0.572,
             "loop": {
-              "start": 30870,
-              "end": 300063
+              "start": 29979,
+              "end": 299172
             }
           },
           {
@@ -22865,10 +22091,10 @@
             "lo": 78,
             "hi": 78,
             "placeholder": "organ",
-            "gain": 0.4787,
+            "gain": 0.4903,
             "loop": {
-              "start": 30870,
-              "end": 301038
+              "start": 22583,
+              "end": 292751
             }
           },
           {
@@ -22877,10 +22103,10 @@
             "lo": 79,
             "hi": 79,
             "placeholder": "organ",
-            "gain": 0.4948,
+            "gain": 0.6021,
             "loop": {
-              "start": 30870,
-              "end": 301072
+              "start": 22321,
+              "end": 292523
             }
           },
           {
@@ -22889,10 +22115,10 @@
             "lo": 80,
             "hi": 80,
             "placeholder": "organ",
-            "gain": 0.6079,
+            "gain": 0.6856,
             "loop": {
-              "start": 112896,
-              "end": 351247
+              "start": 110260,
+              "end": 348611
             }
           },
           {
@@ -22901,10 +22127,10 @@
             "lo": 81,
             "hi": 81,
             "placeholder": "organ",
-            "gain": 0.6734,
+            "gain": 0.7977,
             "loop": {
-              "start": 112896,
-              "end": 351535
+              "start": 113351,
+              "end": 351990
             }
           },
           {
@@ -22913,10 +22139,10 @@
             "lo": 82,
             "hi": 82,
             "placeholder": "organ",
-            "gain": 0.6725,
+            "gain": 0.8469,
             "loop": {
-              "start": 112896,
-              "end": 351289
+              "start": 110264,
+              "end": 348657
             }
           },
           {
@@ -22925,10 +22151,10 @@
             "lo": 83,
             "hi": 83,
             "placeholder": "organ",
-            "gain": 0.927,
+            "gain": 1.0359,
             "loop": {
-              "start": 118188,
-              "end": 317266
+              "start": 104542,
+              "end": 303620
             }
           },
           {
@@ -22937,314 +22163,11 @@
             "lo": 84,
             "hi": 84,
             "placeholder": "organ",
-            "gain": 1.1259,
+            "gain": 1.2956,
             "loop": {
-              "start": 118188,
-              "end": 317642
+              "start": 104991,
+              "end": 304445
             }
-          }
-        ]
-      }
-    },
-    {
-      "id": "trumpetstaccato",
-      "name": "Trumpet Staccato",
-      "family": "keys",
-      "kind": "pitched",
-      "version": "1.1.0",
-      "file": "packs/trumpetstaccato-1_1_0.zip",
-      "bytes": 500967,
-      "crc32": 4022100281,
-      "license": {
-        "spdx": "CC0-1.0",
-        "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 trumpet, staccato, layer v1 (soft), CC0"
-      },
-      "manifest": {
-        "id": "trumpetstaccato",
-        "name": "Trumpet Staccato",
-        "version": "1.1.0",
-        "family": "keys",
-        "category": "winds",
-        "kind": "pitched",
-        "range": {
-          "lo": 53,
-          "hi": 84
-        },
-        "defaultView": {
-          "lo": 56,
-          "hi": 80
-        },
-        "shade": "amber",
-        "license": {
-          "spdx": "CC0-1.0",
-          "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 trumpet, staccato, layer v1 (soft), CC0"
-        },
-        "envelope": {
-          "attack": 0.002,
-          "release": 0.25
-        },
-        "trim": 1,
-        "accentGain": 1.5,
-        "polyphony": 6,
-        "voicesAtOnce": 2,
-        "zones": [
-          {
-            "file": "trumpetstaccato/trumpetstaccato_F3.m4a",
-            "rootNote": 53,
-            "lo": 53,
-            "hi": 53,
-            "placeholder": "organ",
-            "gain": 0.0573
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_Fs3.m4a",
-            "rootNote": 54,
-            "lo": 54,
-            "hi": 54,
-            "placeholder": "organ",
-            "gain": 0.0634
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_G3.m4a",
-            "rootNote": 55,
-            "lo": 55,
-            "hi": 55,
-            "placeholder": "organ",
-            "gain": 0.0714
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_Gs3.m4a",
-            "rootNote": 56,
-            "lo": 56,
-            "hi": 56,
-            "placeholder": "organ",
-            "gain": 0.1479
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_A3.m4a",
-            "rootNote": 57,
-            "lo": 57,
-            "hi": 57,
-            "placeholder": "organ",
-            "gain": 0.1475
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_As3.m4a",
-            "rootNote": 58,
-            "lo": 58,
-            "hi": 58,
-            "placeholder": "organ",
-            "gain": 0.1442
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_B3.m4a",
-            "rootNote": 59,
-            "lo": 59,
-            "hi": 59,
-            "placeholder": "organ",
-            "gain": 0.1364
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_C4.m4a",
-            "rootNote": 60,
-            "lo": 60,
-            "hi": 60,
-            "placeholder": "organ",
-            "gain": 0.1462
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_Cs4.m4a",
-            "rootNote": 61,
-            "lo": 61,
-            "hi": 61,
-            "placeholder": "organ",
-            "gain": 0.1353
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_D4.m4a",
-            "rootNote": 62,
-            "lo": 62,
-            "hi": 62,
-            "placeholder": "organ",
-            "gain": 0.147
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_Ds4.m4a",
-            "rootNote": 63,
-            "lo": 63,
-            "hi": 63,
-            "placeholder": "organ",
-            "gain": 0.1883
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_E4.m4a",
-            "rootNote": 64,
-            "lo": 64,
-            "hi": 64,
-            "placeholder": "organ",
-            "gain": 0.1852
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_F4.m4a",
-            "rootNote": 65,
-            "lo": 65,
-            "hi": 65,
-            "placeholder": "organ",
-            "gain": 0.1903
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_Fs4.m4a",
-            "rootNote": 66,
-            "lo": 66,
-            "hi": 66,
-            "placeholder": "organ",
-            "gain": 0.2893
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_G4.m4a",
-            "rootNote": 67,
-            "lo": 67,
-            "hi": 67,
-            "placeholder": "organ",
-            "gain": 0.2235
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_Gs4.m4a",
-            "rootNote": 68,
-            "lo": 68,
-            "hi": 68,
-            "placeholder": "organ",
-            "gain": 0.2217
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_A4.m4a",
-            "rootNote": 69,
-            "lo": 69,
-            "hi": 69,
-            "placeholder": "organ",
-            "gain": 0.3182
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_As4.m4a",
-            "rootNote": 70,
-            "lo": 70,
-            "hi": 70,
-            "placeholder": "organ",
-            "gain": 0.3406
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_B4.m4a",
-            "rootNote": 71,
-            "lo": 71,
-            "hi": 71,
-            "placeholder": "organ",
-            "gain": 0.3914
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_C5.m4a",
-            "rootNote": 72,
-            "lo": 72,
-            "hi": 72,
-            "placeholder": "organ",
-            "gain": 0.3275
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_Cs5.m4a",
-            "rootNote": 73,
-            "lo": 73,
-            "hi": 73,
-            "placeholder": "organ",
-            "gain": 0.5397
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_D5.m4a",
-            "rootNote": 74,
-            "lo": 74,
-            "hi": 74,
-            "placeholder": "organ",
-            "gain": 0.6033
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_Ds5.m4a",
-            "rootNote": 75,
-            "lo": 75,
-            "hi": 75,
-            "placeholder": "organ",
-            "gain": 0.7607
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_E5.m4a",
-            "rootNote": 76,
-            "lo": 76,
-            "hi": 76,
-            "placeholder": "organ",
-            "gain": 0.598
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_F5.m4a",
-            "rootNote": 77,
-            "lo": 77,
-            "hi": 77,
-            "placeholder": "organ",
-            "gain": 0.5759
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_Fs5.m4a",
-            "rootNote": 78,
-            "lo": 78,
-            "hi": 78,
-            "placeholder": "organ",
-            "gain": 0.5659
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_G5.m4a",
-            "rootNote": 79,
-            "lo": 79,
-            "hi": 79,
-            "placeholder": "organ",
-            "gain": 0.7566
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_Gs5.m4a",
-            "rootNote": 80,
-            "lo": 80,
-            "hi": 80,
-            "placeholder": "organ",
-            "gain": 0.7238
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_A5.m4a",
-            "rootNote": 81,
-            "lo": 81,
-            "hi": 81,
-            "placeholder": "organ",
-            "gain": 0.8768
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_As5.m4a",
-            "rootNote": 82,
-            "lo": 82,
-            "hi": 82,
-            "placeholder": "organ",
-            "gain": 0.9091
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_B5.m4a",
-            "rootNote": 83,
-            "lo": 83,
-            "hi": 83,
-            "placeholder": "organ",
-            "gain": 0.9435
-          },
-          {
-            "file": "trumpetstaccato/trumpetstaccato_C6.m4a",
-            "rootNote": 84,
-            "lo": 84,
-            "hi": 84,
-            "placeholder": "organ",
-            "gain": 1.0567
           }
         ]
       }
