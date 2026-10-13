@@ -26176,6 +26176,939 @@
       }
     },
     {
+      "id": "ukulelefret",
+      "name": "Ukulele - Fret Mic",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/ukulelefret-1_0_0.zip",
+      "bytes": 1775438,
+      "crc32": 3188992498,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://freesound.org/people/Sadiquecat/packs/40584/",
+        "credit": "Ukulele by Sadiquecat, Freesound pack 40584, CC0"
+      },
+      "manifest": {
+        "id": "ukulelefret",
+        "name": "Ukulele - Fret Mic",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 57,
+          "hi": 89
+        },
+        "defaultView": {
+          "lo": 61,
+          "hi": 85
+        },
+        "shade": "amber",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://freesound.org/people/Sadiquecat/packs/40584/",
+          "credit": "Ukulele by Sadiquecat, Freesound pack 40584, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "ukulelefret/ukulelefret_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 1.2786
+          },
+          {
+            "file": "ukulelefret/ukulelefret_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 1.0435
+          },
+          {
+            "file": "ukulelefret/ukulelefret_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 1.0071
+          },
+          {
+            "file": "ukulelefret/ukulelefret_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.9722
+          },
+          {
+            "file": "ukulelefret/ukulelefret_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 1.0458
+          },
+          {
+            "file": "ukulelefret/ukulelefret_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 1.0974
+          },
+          {
+            "file": "ukulelefret/ukulelefret_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 1.0604
+          },
+          {
+            "file": "ukulelefret/ukulelefret_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.88
+          },
+          {
+            "file": "ukulelefret/ukulelefret_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.9485
+          },
+          {
+            "file": "ukulelefret/ukulelefret_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.8387
+          },
+          {
+            "file": "ukulelefret/ukulelefret_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.5499
+          },
+          {
+            "file": "ukulelefret/ukulelefret_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.8215
+          },
+          {
+            "file": "ukulelefret/ukulelefret_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.6028
+          },
+          {
+            "file": "ukulelefret/ukulelefret_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.5754
+          },
+          {
+            "file": "ukulelefret/ukulelefret_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.6626
+          },
+          {
+            "file": "ukulelefret/ukulelefret_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.831
+          },
+          {
+            "file": "ukulelefret/ukulelefret_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.7898
+          },
+          {
+            "file": "ukulelefret/ukulelefret_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.853
+          },
+          {
+            "file": "ukulelefret/ukulelefret_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.753
+          },
+          {
+            "file": "ukulelefret/ukulelefret_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 1.0176
+          },
+          {
+            "file": "ukulelefret/ukulelefret_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.827
+          },
+          {
+            "file": "ukulelefret/ukulelefret_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.6981
+          },
+          {
+            "file": "ukulelefret/ukulelefret_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.6739
+          },
+          {
+            "file": "ukulelefret/ukulelefret_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.8651
+          },
+          {
+            "file": "ukulelefret/ukulelefret_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 1.0822
+          },
+          {
+            "file": "ukulelefret/ukulelefret_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 1.1333
+          },
+          {
+            "file": "ukulelefret/ukulelefret_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.8986
+          },
+          {
+            "file": "ukulelefret/ukulelefret_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 1.1697
+          },
+          {
+            "file": "ukulelefret/ukulelefret_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 1.0471
+          },
+          {
+            "file": "ukulelefret/ukulelefret_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.8495
+          },
+          {
+            "file": "ukulelefret/ukulelefret_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.791
+          },
+          {
+            "file": "ukulelefret/ukulelefret_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.8729
+          },
+          {
+            "file": "ukulelefret/ukulelefret_F6.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 0.914
+          }
+        ]
+      }
+    },
+    {
+      "id": "ukulelesoundhole",
+      "name": "Ukulele - Soundhole",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/ukulelesoundhole-1_0_0.zip",
+      "bytes": 1693451,
+      "crc32": 4036036978,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://freesound.org/people/Sadiquecat/packs/40584/",
+        "credit": "Ukulele by Sadiquecat, Freesound pack 40584, CC0"
+      },
+      "manifest": {
+        "id": "ukulelesoundhole",
+        "name": "Ukulele - Soundhole",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 57,
+          "hi": 89
+        },
+        "defaultView": {
+          "lo": 61,
+          "hi": 85
+        },
+        "shade": "amber",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://freesound.org/people/Sadiquecat/packs/40584/",
+          "credit": "Ukulele by Sadiquecat, Freesound pack 40584, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 1.2585
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 1.0385
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 1.063
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 1.0363
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 1.213
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 1.0806
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 1.1505
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.9422
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 1.0559
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.8631
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.6594
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.83
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.6952
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.6348
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.6831
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.9074
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.9393
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.9219
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.8257
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 1.0919
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 1.0375
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.7191
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.6303
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.8802
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.8779
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.9139
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.8776
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.8769
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.8605
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.8071
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.8049
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.8612
+          },
+          {
+            "file": "ukulelesoundhole/ukulelesoundhole_F6.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 0.7746
+          }
+        ]
+      }
+    },
+    {
+      "id": "ukulelezoom",
+      "name": "Ukulele - Zoom H5",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/ukulelezoom-1_0_0.zip",
+      "bytes": 2031208,
+      "crc32": 3455843226,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://freesound.org/people/Sadiquecat/packs/40584/",
+        "credit": "Ukulele by Sadiquecat, Freesound pack 40584, CC0"
+      },
+      "manifest": {
+        "id": "ukulelezoom",
+        "name": "Ukulele - Zoom H5",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 57,
+          "hi": 89
+        },
+        "defaultView": {
+          "lo": 61,
+          "hi": 85
+        },
+        "shade": "amber",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://freesound.org/people/Sadiquecat/packs/40584/",
+          "credit": "Ukulele by Sadiquecat, Freesound pack 40584, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "ukulelezoom/ukulelezoom_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 1.3082
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 1.0974
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 1.0945
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 1.0561
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.9755
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 1.0355
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.9586
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.7498
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 1.0193
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.7717
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.6833
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.883
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.7396
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.6542
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.7536
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.7735
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.94
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.8292
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.7905
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.9031
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 1.0633
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.7694
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.7304
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.9885
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 1.0493
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 1.0895
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.9631
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.8572
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 1.2109
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.8803
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.8115
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.8581
+          },
+          {
+            "file": "ukulelezoom/ukulelezoom_F6.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 0.8956
+          }
+        ]
+      }
+    },
+    {
       "id": "uprightbass",
       "name": "Upright Bass",
       "family": "bass",
