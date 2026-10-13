@@ -14091,6 +14091,317 @@
       }
     },
     {
+      "id": "oud",
+      "name": "Oud",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/oud-1_0_0.zip",
+      "bytes": 864061,
+      "crc32": 2622687169,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://freesound.org/people/--DeletedUser--/sounds/160461/",
+        "credit": "Oud.wav, Freesound sound 160461 (uploader's account since deleted), CC0"
+      },
+      "manifest": {
+        "id": "oud",
+        "name": "Oud",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 36,
+          "hi": 68
+        },
+        "defaultView": {
+          "lo": 40,
+          "hi": 64
+        },
+        "shade": "bronze",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://freesound.org/people/--DeletedUser--/sounds/160461/",
+          "credit": "Oud.wav, Freesound sound 160461 (uploader's account since deleted), CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "oud/oud_C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "placeholder": "organ",
+            "gain": 1.8667
+          },
+          {
+            "file": "oud/oud_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 1.8953
+          },
+          {
+            "file": "oud/oud_D2.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 1.5512
+          },
+          {
+            "file": "oud/oud_Ds2.m4a",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 1.6363
+          },
+          {
+            "file": "oud/oud_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 1.6834
+          },
+          {
+            "file": "oud/oud_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 1.5775
+          },
+          {
+            "file": "oud/oud_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 1.5686
+          },
+          {
+            "file": "oud/oud_G2.m4a",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 1.2998
+          },
+          {
+            "file": "oud/oud_Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 1.491
+          },
+          {
+            "file": "oud/oud_A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 1.3571
+          },
+          {
+            "file": "oud/oud_As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 1.0083
+          },
+          {
+            "file": "oud/oud_B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.9012
+          },
+          {
+            "file": "oud/oud_C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 0.9466
+          },
+          {
+            "file": "oud/oud_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 1.0678
+          },
+          {
+            "file": "oud/oud_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 1.1798
+          },
+          {
+            "file": "oud/oud_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 1.1157
+          },
+          {
+            "file": "oud/oud_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.997
+          },
+          {
+            "file": "oud/oud_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.8602
+          },
+          {
+            "file": "oud/oud_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.9259
+          },
+          {
+            "file": "oud/oud_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.8402
+          },
+          {
+            "file": "oud/oud_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.8256
+          },
+          {
+            "file": "oud/oud_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 1.1394
+          },
+          {
+            "file": "oud/oud_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.9519
+          },
+          {
+            "file": "oud/oud_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.9452
+          },
+          {
+            "file": "oud/oud_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.8361
+          },
+          {
+            "file": "oud/oud_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.8998
+          },
+          {
+            "file": "oud/oud_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.8874
+          },
+          {
+            "file": "oud/oud_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.9035
+          },
+          {
+            "file": "oud/oud_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 1.1938
+          },
+          {
+            "file": "oud/oud_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.9096
+          },
+          {
+            "file": "oud/oud_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 1.0095
+          },
+          {
+            "file": "oud/oud_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.9207
+          },
+          {
+            "file": "oud/oud_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 1.0691
+          }
+        ]
+      }
+    },
+    {
       "id": "piccolo",
       "name": "Piccolo",
       "family": "keys",
