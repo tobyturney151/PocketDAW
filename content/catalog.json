@@ -4,6 +4,868 @@
   "built": "2026-10-12",
   "packs": [
     {
+      "id": "accordion",
+      "name": "Accordion",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/accordion-1_0_0.zip",
+      "bytes": 1358533,
+      "crc32": 3054487233,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://freesound.org/people/hammondman/packs/18842/",
+        "credit": "hammondman, Accordion wav samples (Freesound pack 18842), CC0"
+      },
+      "manifest": {
+        "id": "accordion",
+        "name": "Accordion",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "keys",
+        "kind": "pitched",
+        "range": {
+          "lo": 57,
+          "hi": 88
+        },
+        "defaultView": {
+          "lo": 60,
+          "hi": 84
+        },
+        "shade": "red",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://freesound.org/people/hammondman/packs/18842/",
+          "credit": "hammondman, Accordion wav samples (Freesound pack 18842), CC0"
+        },
+        "envelope": {
+          "attack": 0.005,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "accordion/accordion_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.5532,
+            "loop": {
+              "start": 25578,
+              "end": 134635
+            }
+          },
+          {
+            "file": "accordion/accordion_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.6794,
+            "loop": {
+              "start": 25578,
+              "end": 135247
+            }
+          },
+          {
+            "file": "accordion/accordion_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.3214,
+            "loop": {
+              "start": 24696,
+              "end": 133465
+            }
+          },
+          {
+            "file": "accordion/accordion_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.3481,
+            "loop": {
+              "start": 24696,
+              "end": 133393
+            }
+          },
+          {
+            "file": "accordion/accordion_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.508,
+            "loop": {
+              "start": 25578,
+              "end": 130879
+            }
+          },
+          {
+            "file": "accordion/accordion_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.4042,
+            "loop": {
+              "start": 25578,
+              "end": 130801
+            }
+          },
+          {
+            "file": "accordion/accordion_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.4582,
+            "loop": {
+              "start": 25578,
+              "end": 145734
+            }
+          },
+          {
+            "file": "accordion/accordion_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.4771,
+            "loop": {
+              "start": 25578,
+              "end": 145220
+            }
+          },
+          {
+            "file": "accordion/accordion_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.4815,
+            "loop": {
+              "start": 25578,
+              "end": 145756
+            }
+          },
+          {
+            "file": "accordion/accordion_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.3953,
+            "loop": {
+              "start": 22932,
+              "end": 129850
+            }
+          },
+          {
+            "file": "accordion/accordion_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.351,
+            "loop": {
+              "start": 22932,
+              "end": 129839
+            }
+          },
+          {
+            "file": "accordion/accordion_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.398,
+            "loop": {
+              "start": 39690,
+              "end": 130332
+            }
+          },
+          {
+            "file": "accordion/accordion_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.3415,
+            "loop": {
+              "start": 39690,
+              "end": 129876
+            }
+          },
+          {
+            "file": "accordion/accordion_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.3352,
+            "loop": {
+              "start": 27342,
+              "end": 143201
+            }
+          },
+          {
+            "file": "accordion/accordion_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.3641,
+            "loop": {
+              "start": 27342,
+              "end": 143170
+            }
+          },
+          {
+            "file": "accordion/accordion_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.5907,
+            "loop": {
+              "start": 26460,
+              "end": 136008
+            }
+          },
+          {
+            "file": "accordion/accordion_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.5837,
+            "loop": {
+              "start": 26460,
+              "end": 136835
+            }
+          },
+          {
+            "file": "accordion/accordion_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.5834,
+            "loop": {
+              "start": 27342,
+              "end": 145877
+            }
+          },
+          {
+            "file": "accordion/accordion_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.5234,
+            "loop": {
+              "start": 27342,
+              "end": 145835
+            }
+          },
+          {
+            "file": "accordion/accordion_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.4421,
+            "loop": {
+              "start": 30870,
+              "end": 130885
+            }
+          },
+          {
+            "file": "accordion/accordion_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.4825,
+            "loop": {
+              "start": 27342,
+              "end": 135169
+            }
+          },
+          {
+            "file": "accordion/accordion_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.4922,
+            "loop": {
+              "start": 27342,
+              "end": 135173
+            }
+          },
+          {
+            "file": "accordion/accordion_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.7365,
+            "loop": {
+              "start": 46746,
+              "end": 133737
+            }
+          },
+          {
+            "file": "accordion/accordion_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.7539,
+            "loop": {
+              "start": 46746,
+              "end": 134267
+            }
+          },
+          {
+            "file": "accordion/accordion_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.6153,
+            "loop": {
+              "start": 22932,
+              "end": 139843
+            }
+          },
+          {
+            "file": "accordion/accordion_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.4992,
+            "loop": {
+              "start": 22932,
+              "end": 140523
+            }
+          },
+          {
+            "file": "accordion/accordion_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.7209,
+            "loop": {
+              "start": 27342,
+              "end": 129068
+            }
+          },
+          {
+            "file": "accordion/accordion_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.7662,
+            "loop": {
+              "start": 27342,
+              "end": 129352
+            }
+          },
+          {
+            "file": "accordion/accordion_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.6821,
+            "loop": {
+              "start": 27342,
+              "end": 129145
+            }
+          },
+          {
+            "file": "accordion/accordion_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.8001,
+            "loop": {
+              "start": 27342,
+              "end": 129125
+            }
+          },
+          {
+            "file": "accordion/accordion_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.5833,
+            "loop": {
+              "start": 22050,
+              "end": 143192
+            }
+          },
+          {
+            "file": "accordion/accordion_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.6278,
+            "loop": {
+              "start": 22050,
+              "end": 143590
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "altosax",
+      "name": "Alto Sax",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/altosax-1_0_0.zip",
+      "bytes": 2237815,
+      "crc32": 3427434635,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sfzinstruments/karoryfer.weresax",
+        "credit": "Karoryfer Samples, Weresax — alto saxophone, sustain, condenser microphone, p (soft), CC0"
+      },
+      "manifest": {
+        "id": "altosax",
+        "name": "Alto Sax",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 49,
+          "hi": 80
+        },
+        "defaultView": {
+          "lo": 52,
+          "hi": 76
+        },
+        "shade": "yellow",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sfzinstruments/karoryfer.weresax",
+          "credit": "Karoryfer Samples, Weresax — alto saxophone, sustain, condenser microphone, p (soft), CC0"
+        },
+        "envelope": {
+          "attack": 0.005,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "altosax/altosax_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.1606,
+            "loop": {
+              "start": 104958,
+              "end": 335331
+            }
+          },
+          {
+            "file": "altosax/altosax_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.2293,
+            "loop": {
+              "start": 47628,
+              "end": 192996
+            }
+          },
+          {
+            "file": "altosax/altosax_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.1786,
+            "loop": {
+              "start": 102312,
+              "end": 262481
+            }
+          },
+          {
+            "file": "altosax/altosax_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.1777,
+            "loop": {
+              "start": 40572,
+              "end": 277647
+            }
+          },
+          {
+            "file": "altosax/altosax_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.1608,
+            "loop": {
+              "start": 54684,
+              "end": 260270
+            }
+          },
+          {
+            "file": "altosax/altosax_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.1577,
+            "loop": {
+              "start": 47628,
+              "end": 246909
+            }
+          },
+          {
+            "file": "altosax/altosax_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.2174,
+            "loop": {
+              "start": 24696,
+              "end": 248342
+            }
+          },
+          {
+            "file": "altosax/altosax_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.1927,
+            "loop": {
+              "start": 34398,
+              "end": 276530
+            }
+          },
+          {
+            "file": "altosax/altosax_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.2297,
+            "loop": {
+              "start": 44982,
+              "end": 241030
+            }
+          },
+          {
+            "file": "altosax/altosax_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.1828,
+            "loop": {
+              "start": 22050,
+              "end": 240774
+            }
+          },
+          {
+            "file": "altosax/altosax_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.2178,
+            "loop": {
+              "start": 26460,
+              "end": 259774
+            }
+          },
+          {
+            "file": "altosax/altosax_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.1765,
+            "loop": {
+              "start": 29988,
+              "end": 216589
+            }
+          },
+          {
+            "file": "altosax/altosax_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.1857,
+            "loop": {
+              "start": 37926,
+              "end": 166954
+            }
+          },
+          {
+            "file": "altosax/altosax_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.1851,
+            "loop": {
+              "start": 45864,
+              "end": 250854
+            }
+          },
+          {
+            "file": "altosax/altosax_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.1878,
+            "loop": {
+              "start": 32634,
+              "end": 269284
+            }
+          },
+          {
+            "file": "altosax/altosax_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.1714,
+            "loop": {
+              "start": 34398,
+              "end": 207932
+            }
+          },
+          {
+            "file": "altosax/altosax_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.1868,
+            "loop": {
+              "start": 45864,
+              "end": 181870
+            }
+          },
+          {
+            "file": "altosax/altosax_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.2348,
+            "loop": {
+              "start": 44982,
+              "end": 220656
+            }
+          },
+          {
+            "file": "altosax/altosax_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.2409,
+            "loop": {
+              "start": 32634,
+              "end": 237724
+            }
+          },
+          {
+            "file": "altosax/altosax_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.215,
+            "loop": {
+              "start": 35280,
+              "end": 243636
+            }
+          },
+          {
+            "file": "altosax/altosax_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.2088,
+            "loop": {
+              "start": 34398,
+              "end": 190472
+            }
+          },
+          {
+            "file": "altosax/altosax_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.1704,
+            "loop": {
+              "start": 31752,
+              "end": 243393
+            }
+          },
+          {
+            "file": "altosax/altosax_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.258,
+            "loop": {
+              "start": 40572,
+              "end": 230785
+            }
+          },
+          {
+            "file": "altosax/altosax_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.2089,
+            "loop": {
+              "start": 82026,
+              "end": 253133
+            }
+          },
+          {
+            "file": "altosax/altosax_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.1785,
+            "loop": {
+              "start": 30870,
+              "end": 217021
+            }
+          },
+          {
+            "file": "altosax/altosax_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.2305,
+            "loop": {
+              "start": 22050,
+              "end": 202480
+            }
+          },
+          {
+            "file": "altosax/altosax_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.2305,
+            "loop": {
+              "start": 43218,
+              "end": 231328
+            }
+          },
+          {
+            "file": "altosax/altosax_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.2209,
+            "loop": {
+              "start": 22050,
+              "end": 179104
+            }
+          },
+          {
+            "file": "altosax/altosax_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.2003,
+            "loop": {
+              "start": 30870,
+              "end": 254701
+            }
+          },
+          {
+            "file": "altosax/altosax_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.2253,
+            "loop": {
+              "start": 42336,
+              "end": 231085
+            }
+          },
+          {
+            "file": "altosax/altosax_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.1941,
+            "loop": {
+              "start": 29988,
+              "end": 263076
+            }
+          },
+          {
+            "file": "altosax/altosax_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.195,
+            "loop": {
+              "start": 45864,
+              "end": 174516
+            }
+          }
+        ]
+      }
+    },
+    {
       "id": "ambichoir",
       "name": "Ambi Choir",
       "family": "keys",
@@ -609,7 +1471,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, balafon \u2014 traditional mallet, layer vl2, CC0"
+        "credit": "VCSL, balafon — traditional mallet, layer vl2, CC0"
       },
       "manifest": {
         "id": "balafon",
@@ -630,7 +1492,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, balafon \u2014 traditional mallet, layer vl2, CC0"
+          "credit": "VCSL, balafon — traditional mallet, layer vl2, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -704,7 +1566,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sfzinstruments/karoryfer.bear-sax",
-        "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) \u2014 staccato vl2 joined into looped sustain p, CC0"
+        "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) — staccato vl2 joined into looped sustain p, CC0"
       },
       "manifest": {
         "id": "barisax",
@@ -725,7 +1587,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sfzinstruments/karoryfer.bear-sax",
-          "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) \u2014 staccato vl2 joined into looped sustain p, CC0"
+          "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) — staccato vl2 joined into looped sustain p, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -1135,7 +1997,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sfzinstruments/karoryfer.bear-sax",
-        "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) \u2014 growl, CC0"
+        "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) — growl, CC0"
       },
       "manifest": {
         "id": "barisaxgrowl",
@@ -1156,7 +2018,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sfzinstruments/karoryfer.bear-sax",
-          "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) \u2014 growl, CC0"
+          "credit": "Karoryfer Samples, Bear Sax (1926 Conn baritone) — growl, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -1598,7 +2460,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/synth-bass-lead",
-        "credit": "FreePats Synth Bass & Lead \u2014 Surge, samples by Elf of Happy and Love, CC0"
+        "credit": "FreePats Synth Bass & Lead — Surge, samples by Elf of Happy and Love, CC0"
       },
       "manifest": {
         "id": "basslead",
@@ -1619,7 +2481,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/synth-bass-lead",
-          "credit": "FreePats Synth Bass & Lead \u2014 Surge, samples by Elf of Happy and Love, CC0"
+          "credit": "FreePats Synth Bass & Lead — Surge, samples by Elf of Happy and Love, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -1849,7 +2711,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://signaturesounds.org/",
-        "credit": "Signature Sounds (Phil), Beach Rocks Percussions \u2014 CC0"
+        "credit": "Signature Sounds (Phil), Beach Rocks Percussions — CC0"
       },
       "manifest": {
         "id": "beachrocks",
@@ -1861,7 +2723,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://signaturesounds.org/",
-          "credit": "Signature Sounds (Phil), Beach Rocks Percussions \u2014 CC0"
+          "credit": "Signature Sounds (Phil), Beach Rocks Percussions — CC0"
         },
         "envelope": {
           "attack": 0.001,
@@ -2281,7 +3143,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sfzinstruments/karoryfer.big-little-bass",
-        "credit": "Karoryfer Samples, Big Little Bass \u2014 a Washburn AB95 hollowbody, f layer, CC0"
+        "credit": "Karoryfer Samples, Big Little Bass — a Washburn AB95 hollowbody, f layer, CC0"
       },
       "manifest": {
         "id": "biglittle",
@@ -2302,7 +3164,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sfzinstruments/karoryfer.big-little-bass",
-          "credit": "Karoryfer Samples, Big Little Bass \u2014 a Washburn AB95 hollowbody, f layer, CC0"
+          "credit": "Karoryfer Samples, Big Little Bass — a Washburn AB95 hollowbody, f layer, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -2955,7 +3817,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/synth-pad-choir",
-        "credit": "FreePats Synth Pad Choir \u2014 ZynAddSubFX, samples by Elf of Happy and Love, CC0"
+        "credit": "FreePats Synth Pad Choir — ZynAddSubFX, samples by Elf of Happy and Love, CC0"
       },
       "manifest": {
         "id": "choirpad",
@@ -2976,7 +3838,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/synth-pad-choir",
-          "credit": "FreePats Synth Pad Choir \u2014 ZynAddSubFX, samples by Elf of Happy and Love, CC0"
+          "credit": "FreePats Synth Pad Choir — ZynAddSubFX, samples by Elf of Happy and Love, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -3146,7 +4008,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 B\u266d clarinet, staccato v2 (breath between the harmonics lowered, lead-in trimmed) joined into sustain v3 (loudest), CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — B♭ clarinet, staccato v2 (breath between the harmonics lowered, lead-in trimmed) joined into sustain v3 (loudest), CC0"
       },
       "manifest": {
         "id": "clarinet",
@@ -3167,7 +4029,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 B\u266d clarinet, staccato v2 (breath between the harmonics lowered, lead-in trimmed) joined into sustain v3 (loudest), CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — B♭ clarinet, staccato v2 (breath between the harmonics lowered, lead-in trimmed) joined into sustain v3 (loudest), CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -3673,7 +4535,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://signaturesounds.org/",
-        "credit": "Signature Sounds (Phil) \u2014 field recordings, CC0"
+        "credit": "Signature Sounds (Phil) — field recordings, CC0"
       },
       "manifest": {
         "id": "coastfalls",
@@ -3685,7 +4547,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://signaturesounds.org/",
-          "credit": "Signature Sounds (Phil) \u2014 field recordings, CC0"
+          "credit": "Signature Sounds (Phil) — field recordings, CC0"
         },
         "envelope": {
           "attack": 0.001,
@@ -3911,7 +4773,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, concert harp \u2014 layer f1, CC0"
+        "credit": "VCSL, concert harp — layer f1, CC0"
       },
       "manifest": {
         "id": "concertharp",
@@ -3932,7 +4794,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, concert harp \u2014 layer f1, CC0"
+          "credit": "VCSL, concert harp — layer f1, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -4134,7 +4996,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, \u0111\u00e0n tranh \u2014 normal plucks, layer f, CC0"
+        "credit": "VCSL, đàn tranh — normal plucks, layer f, CC0"
       },
       "manifest": {
         "id": "dantranhplucked",
@@ -4155,7 +5017,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, \u0111\u00e0n tranh \u2014 normal plucks, layer f, CC0"
+          "credit": "VCSL, đàn tranh — normal plucks, layer f, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -4509,7 +5371,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, \u0111\u00e0n tranh \u2014 tremolo, CC0"
+        "credit": "VCSL, đàn tranh — tremolo, CC0"
       },
       "manifest": {
         "id": "dantranhtrem",
@@ -4530,7 +5392,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, \u0111\u00e0n tranh \u2014 tremolo, CC0"
+          "credit": "VCSL, đàn tranh — tremolo, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -4884,7 +5746,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, \u0111\u00e0n tranh \u2014 vibrato, layer ff, CC0"
+        "credit": "VCSL, đàn tranh — vibrato, layer ff, CC0"
       },
       "manifest": {
         "id": "dantranhvib",
@@ -4905,7 +5767,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, \u0111\u00e0n tranh \u2014 vibrato, layer ff, CC0"
+          "credit": "VCSL, đàn tranh — vibrato, layer ff, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -5243,6 +6105,507 @@
             "rootNote": 85,
             "lo": 85,
             "hi": 85
+          }
+        ]
+      }
+    },
+    {
+      "id": "didgeridoo1",
+      "name": "Didgeridoo 1",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/didgeridoo1-1_0_0.zip",
+      "bytes": 1336579,
+      "crc32": 2699011530,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "Versilian Studios, VCSL — didgeridoo, sustain 2, CC0"
+      },
+      "manifest": {
+        "id": "didgeridoo1",
+        "name": "Didgeridoo 1",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "drone",
+        "kind": "pitched",
+        "range": {
+          "lo": 33,
+          "hi": 42
+        },
+        "defaultView": {
+          "lo": 33,
+          "hi": 42
+        },
+        "shade": "bronze",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "Versilian Studios, VCSL — didgeridoo, sustain 2, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "didgeridoo1/didgeridoo1_A1.m4a",
+            "rootNote": 33,
+            "lo": 33,
+            "hi": 33,
+            "placeholder": "organ",
+            "gain": 2.3295,
+            "loop": {
+              "start": 41454,
+              "end": 456614
+            }
+          },
+          {
+            "file": "didgeridoo1/didgeridoo1_As1.m4a",
+            "rootNote": 34,
+            "lo": 34,
+            "hi": 34,
+            "placeholder": "organ",
+            "gain": 2.2596,
+            "loop": {
+              "start": 41454,
+              "end": 454499
+            }
+          },
+          {
+            "file": "didgeridoo1/didgeridoo1_B1.m4a",
+            "rootNote": 35,
+            "lo": 35,
+            "hi": 35,
+            "placeholder": "organ",
+            "gain": 2.3305,
+            "loop": {
+              "start": 41454,
+              "end": 451258
+            }
+          },
+          {
+            "file": "didgeridoo1/didgeridoo1_C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "placeholder": "organ",
+            "gain": 1.8993,
+            "loop": {
+              "start": 41454,
+              "end": 455080
+            }
+          },
+          {
+            "file": "didgeridoo1/didgeridoo1_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 1.6831,
+            "loop": {
+              "start": 42336,
+              "end": 459164
+            }
+          },
+          {
+            "file": "didgeridoo1/didgeridoo1_D2.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 1.975,
+            "loop": {
+              "start": 24696,
+              "end": 497210
+            }
+          },
+          {
+            "file": "didgeridoo1/didgeridoo1_Ds2.m4a",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 1.8222,
+            "loop": {
+              "start": 36162,
+              "end": 495332
+            }
+          },
+          {
+            "file": "didgeridoo1/didgeridoo1_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 1.8604,
+            "loop": {
+              "start": 40572,
+              "end": 455317
+            }
+          },
+          {
+            "file": "didgeridoo1/didgeridoo1_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 1.4786,
+            "loop": {
+              "start": 40572,
+              "end": 455168
+            }
+          },
+          {
+            "file": "didgeridoo1/didgeridoo1_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 1.9881,
+            "loop": {
+              "start": 40572,
+              "end": 455251
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "didgeridoo2",
+      "name": "Didgeridoo 2",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/didgeridoo2-1_0_0.zip",
+      "bytes": 1118875,
+      "crc32": 615887618,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "Versilian Studios, VCSL — didgeridoo, sustain 3, CC0"
+      },
+      "manifest": {
+        "id": "didgeridoo2",
+        "name": "Didgeridoo 2",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "drone",
+        "kind": "pitched",
+        "range": {
+          "lo": 33,
+          "hi": 42
+        },
+        "defaultView": {
+          "lo": 33,
+          "hi": 42
+        },
+        "shade": "bronze",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "Versilian Studios, VCSL — didgeridoo, sustain 3, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "didgeridoo2/didgeridoo2_A1.m4a",
+            "rootNote": 33,
+            "lo": 33,
+            "hi": 33,
+            "placeholder": "organ",
+            "gain": 4.5978,
+            "loop": {
+              "start": 43218,
+              "end": 391458
+            }
+          },
+          {
+            "file": "didgeridoo2/didgeridoo2_As1.m4a",
+            "rootNote": 34,
+            "lo": 34,
+            "hi": 34,
+            "placeholder": "organ",
+            "gain": 4.644,
+            "loop": {
+              "start": 50274,
+              "end": 383104
+            }
+          },
+          {
+            "file": "didgeridoo2/didgeridoo2_B1.m4a",
+            "rootNote": 35,
+            "lo": 35,
+            "hi": 35,
+            "placeholder": "organ",
+            "gain": 4.8331,
+            "loop": {
+              "start": 44100,
+              "end": 393318
+            }
+          },
+          {
+            "file": "didgeridoo2/didgeridoo2_C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "placeholder": "organ",
+            "gain": 5.4463,
+            "loop": {
+              "start": 44100,
+              "end": 393104
+            }
+          },
+          {
+            "file": "didgeridoo2/didgeridoo2_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 5.343,
+            "loop": {
+              "start": 24696,
+              "end": 402543
+            }
+          },
+          {
+            "file": "didgeridoo2/didgeridoo2_D2.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 4.5066,
+            "loop": {
+              "start": 43218,
+              "end": 393587
+            }
+          },
+          {
+            "file": "didgeridoo2/didgeridoo2_Ds2.m4a",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 4.2819,
+            "loop": {
+              "start": 83790,
+              "end": 312331
+            }
+          },
+          {
+            "file": "didgeridoo2/didgeridoo2_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 3.5557,
+            "loop": {
+              "start": 44982,
+              "end": 393962
+            }
+          },
+          {
+            "file": "didgeridoo2/didgeridoo2_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 4.7627,
+            "loop": {
+              "start": 44100,
+              "end": 388897
+            }
+          },
+          {
+            "file": "didgeridoo2/didgeridoo2_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 4.2069,
+            "loop": {
+              "start": 43218,
+              "end": 396766
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "didgeridoo3",
+      "name": "Didgeridoo 3",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/didgeridoo3-1_0_0.zip",
+      "bytes": 1592352,
+      "crc32": 1637797181,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "Versilian Studios, VCSL — didgeridoo, sustain 8, CC0"
+      },
+      "manifest": {
+        "id": "didgeridoo3",
+        "name": "Didgeridoo 3",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "drone",
+        "kind": "pitched",
+        "range": {
+          "lo": 33,
+          "hi": 42
+        },
+        "defaultView": {
+          "lo": 33,
+          "hi": 42
+        },
+        "shade": "bronze",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "Versilian Studios, VCSL — didgeridoo, sustain 8, CC0"
+        },
+        "envelope": {
+          "attack": 0.01,
+          "release": 1
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "didgeridoo3/didgeridoo3_A1.m4a",
+            "rootNote": 33,
+            "lo": 33,
+            "hi": 33,
+            "placeholder": "organ",
+            "gain": 2.9455,
+            "loop": {
+              "start": 76734,
+              "end": 556395
+            }
+          },
+          {
+            "file": "didgeridoo3/didgeridoo3_As1.m4a",
+            "rootNote": 34,
+            "lo": 34,
+            "hi": 34,
+            "placeholder": "organ",
+            "gain": 3.0803,
+            "loop": {
+              "start": 78498,
+              "end": 555566
+            }
+          },
+          {
+            "file": "didgeridoo3/didgeridoo3_B1.m4a",
+            "rootNote": 35,
+            "lo": 35,
+            "hi": 35,
+            "placeholder": "organ",
+            "gain": 2.4281,
+            "loop": {
+              "start": 75852,
+              "end": 554954
+            }
+          },
+          {
+            "file": "didgeridoo3/didgeridoo3_C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 36,
+            "placeholder": "organ",
+            "gain": 2.5908,
+            "loop": {
+              "start": 78498,
+              "end": 556264
+            }
+          },
+          {
+            "file": "didgeridoo3/didgeridoo3_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 37,
+            "placeholder": "organ",
+            "gain": 2.8512,
+            "loop": {
+              "start": 78498,
+              "end": 556057
+            }
+          },
+          {
+            "file": "didgeridoo3/didgeridoo3_D2.m4a",
+            "rootNote": 38,
+            "lo": 38,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 2.7548,
+            "loop": {
+              "start": 76734,
+              "end": 556676
+            }
+          },
+          {
+            "file": "didgeridoo3/didgeridoo3_Ds2.m4a",
+            "rootNote": 39,
+            "lo": 39,
+            "hi": 39,
+            "placeholder": "organ",
+            "gain": 2.1843,
+            "loop": {
+              "start": 76734,
+              "end": 557949
+            }
+          },
+          {
+            "file": "didgeridoo3/didgeridoo3_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 2.516,
+            "loop": {
+              "start": 76734,
+              "end": 556865
+            }
+          },
+          {
+            "file": "didgeridoo3/didgeridoo3_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 2.471,
+            "loop": {
+              "start": 75852,
+              "end": 553897
+            }
+          },
+          {
+            "file": "didgeridoo3/didgeridoo3_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 1.874,
+            "loop": {
+              "start": 76734,
+              "end": 556634
+            }
           }
         ]
       }
@@ -6030,7 +7393,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://signaturesounds.org/",
-        "credit": "Signature Sounds (Phil) \u2014 field recordings, CC0"
+        "credit": "Signature Sounds (Phil) — field recordings, CC0"
       },
       "manifest": {
         "id": "fieldsparks",
@@ -6042,7 +7405,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://signaturesounds.org/",
-          "credit": "Signature Sounds (Phil) \u2014 field recordings, CC0"
+          "credit": "Signature Sounds (Phil) — field recordings, CC0"
         },
         "envelope": {
           "attack": 0.001,
@@ -6268,7 +7631,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/synth-fifths",
-        "credit": "FreePats Synth Fifths \u2014 Surge, samples by Elf of Happy and Love, CC0"
+        "credit": "FreePats Synth Fifths — Surge, samples by Elf of Happy and Love, CC0"
       },
       "manifest": {
         "id": "fifths",
@@ -6289,7 +7652,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/synth-fifths",
-          "credit": "FreePats Synth Fifths \u2014 Surge, samples by Elf of Happy and Love, CC0"
+          "credit": "FreePats Synth Fifths — Surge, samples by Elf of Happy and Love, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -6495,7 +7858,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/electric-bass-YR",
-        "credit": "Electric Bass YR (fingered) \u2014 a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
+        "credit": "Electric Bass YR (fingered) — a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
       },
       "manifest": {
         "id": "fingeryr",
@@ -6516,7 +7879,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/electric-bass-YR",
-          "credit": "Electric Bass YR (fingered) \u2014 a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
+          "credit": "Electric Bass YR (fingered) — a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -6743,7 +8106,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 flute, staccato v1 (breath lowered, lead-in trimmed) joined into sustain non-vibrato v1 (soft), CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — flute, staccato v1 (breath lowered, lead-in trimmed) joined into sustain non-vibrato v1 (soft), CC0"
       },
       "manifest": {
         "id": "flute",
@@ -6764,7 +8127,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 flute, staccato v1 (breath lowered, lead-in trimmed) joined into sustain non-vibrato v1 (soft), CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — flute, staccato v1 (breath lowered, lead-in trimmed) joined into sustain non-vibrato v1 (soft), CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -7234,7 +8597,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, folk harp \u2014 normal plucks, layer v3, CC0"
+        "credit": "VCSL, folk harp — normal plucks, layer v3, CC0"
       },
       "manifest": {
         "id": "folkharp",
@@ -7255,7 +8618,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, folk harp \u2014 normal plucks, layer v3, CC0"
+          "credit": "VCSL, folk harp — normal plucks, layer v3, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -7513,7 +8876,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 French horn, staccato v1 (breath lowered, lead-in trimmed) joined into sustain v1 (soft), CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — French horn, staccato v1 (breath lowered, lead-in trimmed) joined into sustain v1 (soft), CC0"
       },
       "manifest": {
         "id": "frenchhorn",
@@ -7534,7 +8897,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 French horn, staccato v1 (breath lowered, lead-in trimmed) joined into sustain v1 (soft), CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — French horn, staccato v1 (breath lowered, lead-in trimmed) joined into sustain v1 (soft), CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -8100,7 +9463,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/glass",
-        "credit": "FreePats Glasses of water \u2014 recorded by Roberto (zenvoid.org), CC0"
+        "credit": "FreePats Glasses of water — recorded by Roberto (zenvoid.org), CC0"
       },
       "manifest": {
         "id": "glass",
@@ -8121,7 +9484,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/glass",
-          "credit": "FreePats Glasses of water \u2014 recorded by Roberto (zenvoid.org), CC0"
+          "credit": "FreePats Glasses of water — recorded by Roberto (zenvoid.org), CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -9001,7 +10364,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, glockenspiel \u2014 medium strikes, CC0"
+        "credit": "VCSL, glockenspiel — medium strikes, CC0"
       },
       "manifest": {
         "id": "glockenspiel",
@@ -9022,7 +10385,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, glockenspiel \u2014 medium strikes, CC0"
+          "credit": "VCSL, glockenspiel — medium strikes, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -9096,7 +10459,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, hand chimes \u2014 sustained strikes, CC0"
+        "credit": "VCSL, hand chimes — sustained strikes, CC0"
       },
       "manifest": {
         "id": "handchimes",
@@ -9117,7 +10480,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, hand chimes \u2014 sustained strikes, CC0"
+          "credit": "VCSL, hand chimes — sustained strikes, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -9295,7 +10658,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/hang-D-minor",
-        "credit": "FreePats Hang tuned in D minor \u2014 played by Mar, recorded at Medialab-Prado, CC0"
+        "credit": "FreePats Hang tuned in D minor — played by Mar, recorded at Medialab-Prado, CC0"
       },
       "manifest": {
         "id": "hang",
@@ -9316,7 +10679,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/hang-D-minor",
-          "credit": "FreePats Hang tuned in D minor \u2014 played by Mar, recorded at Medialab-Prado, CC0"
+          "credit": "FreePats Hang tuned in D minor — played by Mar, recorded at Medialab-Prado, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -9827,6 +11190,497 @@
       }
     },
     {
+      "id": "harmonica",
+      "name": "Harmonica",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/harmonica-1_0_0.zip",
+      "bytes": 2296739,
+      "crc32": 884636187,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sgossner/VCSL",
+        "credit": "Versilian Studios, VCSL — Hohner Special 20 harmonica in C, soft, start trimmed, CC0"
+      },
+      "manifest": {
+        "id": "harmonica",
+        "name": "Harmonica",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "winds",
+        "kind": "pitched",
+        "range": {
+          "lo": 60,
+          "hi": 96
+        },
+        "defaultView": {
+          "lo": 66,
+          "hi": 90
+        },
+        "shade": "amber",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sgossner/VCSL",
+          "credit": "Versilian Studios, VCSL — Hohner Special 20 harmonica in C, soft, start trimmed, CC0"
+        },
+        "envelope": {
+          "attack": 0.005,
+          "release": 0.25
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 6,
+        "voicesAtOnce": 2,
+        "zones": [
+          {
+            "file": "harmonica/harmonica_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.131,
+            "loop": {
+              "start": 22050,
+              "end": 124033
+            }
+          },
+          {
+            "file": "harmonica/harmonica_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.1414,
+            "loop": {
+              "start": 22050,
+              "end": 124408
+            }
+          },
+          {
+            "file": "harmonica/harmonica_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.1514,
+            "loop": {
+              "start": 22050,
+              "end": 123549
+            }
+          },
+          {
+            "file": "harmonica/harmonica_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.1642,
+            "loop": {
+              "start": 22050,
+              "end": 227328
+            }
+          },
+          {
+            "file": "harmonica/harmonica_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.1658,
+            "loop": {
+              "start": 22050,
+              "end": 227158
+            }
+          },
+          {
+            "file": "harmonica/harmonica_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.1583,
+            "loop": {
+              "start": 22050,
+              "end": 226514
+            }
+          },
+          {
+            "file": "harmonica/harmonica_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.1637,
+            "loop": {
+              "start": 22050,
+              "end": 226336
+            }
+          },
+          {
+            "file": "harmonica/harmonica_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.1895,
+            "loop": {
+              "start": 22050,
+              "end": 227291
+            }
+          },
+          {
+            "file": "harmonica/harmonica_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.2169,
+            "loop": {
+              "start": 22050,
+              "end": 226475
+            }
+          },
+          {
+            "file": "harmonica/harmonica_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.1747,
+            "loop": {
+              "start": 22050,
+              "end": 227104
+            }
+          },
+          {
+            "file": "harmonica/harmonica_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.21,
+            "loop": {
+              "start": 29106,
+              "end": 227031
+            }
+          },
+          {
+            "file": "harmonica/harmonica_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.2437,
+            "loop": {
+              "start": 29106,
+              "end": 226215
+            }
+          },
+          {
+            "file": "harmonica/harmonica_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.1904,
+            "loop": {
+              "start": 29106,
+              "end": 226870
+            }
+          },
+          {
+            "file": "harmonica/harmonica_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.2272,
+            "loop": {
+              "start": 29106,
+              "end": 226727
+            }
+          },
+          {
+            "file": "harmonica/harmonica_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.2406,
+            "loop": {
+              "start": 29106,
+              "end": 226561
+            }
+          },
+          {
+            "file": "harmonica/harmonica_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.2366,
+            "loop": {
+              "start": 36162,
+              "end": 206627
+            }
+          },
+          {
+            "file": "harmonica/harmonica_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.2154,
+            "loop": {
+              "start": 36162,
+              "end": 206752
+            }
+          },
+          {
+            "file": "harmonica/harmonica_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.255,
+            "loop": {
+              "start": 36162,
+              "end": 207024
+            }
+          },
+          {
+            "file": "harmonica/harmonica_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.2571,
+            "loop": {
+              "start": 74088,
+              "end": 211929
+            }
+          },
+          {
+            "file": "harmonica/harmonica_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.1915,
+            "loop": {
+              "start": 74088,
+              "end": 211756
+            }
+          },
+          {
+            "file": "harmonica/harmonica_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.2398,
+            "loop": {
+              "start": 74088,
+              "end": 211562
+            }
+          },
+          {
+            "file": "harmonica/harmonica_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.2417,
+            "loop": {
+              "start": 74088,
+              "end": 210977
+            }
+          },
+          {
+            "file": "harmonica/harmonica_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.3479,
+            "loop": {
+              "start": 38808,
+              "end": 257948
+            }
+          },
+          {
+            "file": "harmonica/harmonica_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.3559,
+            "loop": {
+              "start": 38808,
+              "end": 258249
+            }
+          },
+          {
+            "file": "harmonica/harmonica_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.3706,
+            "loop": {
+              "start": 38808,
+              "end": 258071
+            }
+          },
+          {
+            "file": "harmonica/harmonica_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.3536,
+            "loop": {
+              "start": 38808,
+              "end": 258012
+            }
+          },
+          {
+            "file": "harmonica/harmonica_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.326,
+            "loop": {
+              "start": 38808,
+              "end": 257960
+            }
+          },
+          {
+            "file": "harmonica/harmonica_Ds6.m4a",
+            "rootNote": 87,
+            "lo": 87,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.2375,
+            "loop": {
+              "start": 69678,
+              "end": 225550
+            }
+          },
+          {
+            "file": "harmonica/harmonica_E6.m4a",
+            "rootNote": 88,
+            "lo": 88,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.2666,
+            "loop": {
+              "start": 69678,
+              "end": 225859
+            }
+          },
+          {
+            "file": "harmonica/harmonica_F6.m4a",
+            "rootNote": 89,
+            "lo": 89,
+            "hi": 89,
+            "placeholder": "organ",
+            "gain": 0.2535,
+            "loop": {
+              "start": 69678,
+              "end": 224917
+            }
+          },
+          {
+            "file": "harmonica/harmonica_Fs6.m4a",
+            "rootNote": 90,
+            "lo": 90,
+            "hi": 90,
+            "placeholder": "organ",
+            "gain": 0.2725,
+            "loop": {
+              "start": 32634,
+              "end": 201804
+            }
+          },
+          {
+            "file": "harmonica/harmonica_G6.m4a",
+            "rootNote": 91,
+            "lo": 91,
+            "hi": 91,
+            "placeholder": "organ",
+            "gain": 0.2442,
+            "loop": {
+              "start": 32634,
+              "end": 202799
+            }
+          },
+          {
+            "file": "harmonica/harmonica_Gs6.m4a",
+            "rootNote": 92,
+            "lo": 92,
+            "hi": 92,
+            "placeholder": "organ",
+            "gain": 0.2565,
+            "loop": {
+              "start": 32634,
+              "end": 201826
+            }
+          },
+          {
+            "file": "harmonica/harmonica_A6.m4a",
+            "rootNote": 93,
+            "lo": 93,
+            "hi": 93,
+            "placeholder": "organ",
+            "gain": 0.2616,
+            "loop": {
+              "start": 32634,
+              "end": 201796
+            }
+          },
+          {
+            "file": "harmonica/harmonica_As6.m4a",
+            "rootNote": 94,
+            "lo": 94,
+            "hi": 94,
+            "placeholder": "organ",
+            "gain": 0.479,
+            "loop": {
+              "start": 30870,
+              "end": 112810
+            }
+          },
+          {
+            "file": "harmonica/harmonica_B6.m4a",
+            "rootNote": 95,
+            "lo": 95,
+            "hi": 95,
+            "placeholder": "organ",
+            "gain": 0.4619,
+            "loop": {
+              "start": 30870,
+              "end": 113785
+            }
+          },
+          {
+            "file": "harmonica/harmonica_C7.m4a",
+            "rootNote": 96,
+            "lo": 96,
+            "hi": 96,
+            "placeholder": "organ",
+            "gain": 0.3924,
+            "loop": {
+              "start": 30870,
+              "end": 112978
+            }
+          }
+        ]
+      }
+    },
+    {
       "id": "hauntedhum",
       "name": "Haunted Hum",
       "family": "keys",
@@ -10185,7 +12039,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://signaturesounds.org/store/p/industrial-percussions-kitfoley",
-        "credit": "Signature Sounds (Phil), Industrial Percussions Kit/Foley \u2014 CC0"
+        "credit": "Signature Sounds (Phil), Industrial Percussions Kit/Foley — CC0"
       },
       "manifest": {
         "id": "industrial",
@@ -10197,7 +12051,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://signaturesounds.org/store/p/industrial-percussions-kitfoley",
-          "credit": "Signature Sounds (Phil), Industrial Percussions Kit/Foley \u2014 CC0"
+          "credit": "Signature Sounds (Phil), Industrial Percussions Kit/Foley — CC0"
         },
         "envelope": {
           "attack": 0.001,
@@ -10673,7 +12527,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, Kawai grand \u2014 player position, layer v3, CC0"
+        "credit": "VCSL, Kawai grand — player position, layer v3, CC0"
       },
       "manifest": {
         "id": "kawaigrand",
@@ -10694,7 +12548,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, Kawai grand \u2014 player position, layer v3, CC0"
+          "credit": "VCSL, Kawai grand — player position, layer v3, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -11016,7 +12870,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, Kawai grand (legacy set) \u2014 main mics, layer v3, CC0"
+        "credit": "VCSL, Kawai grand (legacy set) — main mics, layer v3, CC0"
       },
       "manifest": {
         "id": "kawailegacy",
@@ -11037,7 +12891,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, Kawai grand (legacy set) \u2014 main mics, layer v3, CC0"
+          "credit": "VCSL, Kawai grand (legacy set) — main mics, layer v3, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -11215,7 +13069,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, Knight upright \u2014 player position, layer vl2, CC0"
+        "credit": "VCSL, Knight upright — player position, layer vl2, CC0"
       },
       "manifest": {
         "id": "knightupright",
@@ -11236,7 +13090,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, Knight upright \u2014 player position, layer vl2, CC0"
+          "credit": "VCSL, Knight upright — player position, layer vl2, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -11869,7 +13723,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, marimba \u2014 med layer, CC0"
+        "credit": "VCSL, marimba — med layer, CC0"
       },
       "manifest": {
         "id": "marimba",
@@ -11890,7 +13744,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, marimba \u2014 med layer, CC0"
+          "credit": "VCSL, marimba — med layer, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -11996,7 +13850,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://freesound.org/people/BurghRecords/packs/24672/",
-        "credit": "BurghRecords, Nature Sounds Of Edinburgh (Freesound), and Sonic Pi's samples \u2014 CC0"
+        "credit": "BurghRecords, Nature Sounds Of Edinburgh (Freesound), and Sonic Pi's samples — CC0"
       },
       "manifest": {
         "id": "naturesounds",
@@ -12008,7 +13862,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://freesound.org/people/BurghRecords/packs/24672/",
-          "credit": "BurghRecords, Nature Sounds Of Edinburgh (Freesound), and Sonic Pi's samples \u2014 CC0"
+          "credit": "BurghRecords, Nature Sounds Of Edinburgh (Freesound), and Sonic Pi's samples — CC0"
         },
         "envelope": {
           "attack": 0.001,
@@ -12248,7 +14102,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 piccolo, staccato joined into sustain, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — piccolo, staccato joined into sustain, CC0"
       },
       "manifest": {
         "id": "piccolo",
@@ -12269,7 +14123,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 piccolo, staccato joined into sustain, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — piccolo, staccato joined into sustain, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -12595,7 +14449,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/electric-bass-YR",
-        "credit": "Electric Bass YR (picked) \u2014 a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
+        "credit": "Electric Bass YR (picked) — a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
       },
       "manifest": {
         "id": "pickedyr",
@@ -12616,7 +14470,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/electric-bass-YR",
-          "credit": "Electric Bass YR (picked) \u2014 a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
+          "credit": "Electric Bass YR (picked) — a Yamaha RBX sampled by Andrea Biasior for FreePats, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -12851,7 +14705,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, pipe organ \u2014 loud pedal division to F#4, loud manual above, CC0"
+        "credit": "VCSL, pipe organ — loud pedal division to F#4, loud manual above, CC0"
       },
       "manifest": {
         "id": "pipeorgan",
@@ -12872,7 +14726,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, pipe organ \u2014 loud pedal division to F#4, loud manual above, CC0"
+          "credit": "VCSL, pipe organ — loud pedal division to F#4, loud manual above, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -13241,7 +15095,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://signaturesounds.org/",
-        "credit": "Signature Sounds (Phil) \u2014 field recordings, CC0"
+        "credit": "Signature Sounds (Phil) — field recordings, CC0"
       },
       "manifest": {
         "id": "rainstorm",
@@ -13253,7 +15107,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://signaturesounds.org/",
-          "credit": "Signature Sounds (Phil) \u2014 field recordings, CC0"
+          "credit": "Signature Sounds (Phil) — field recordings, CC0"
         },
         "envelope": {
           "attack": 0.001,
@@ -13533,7 +15387,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://rytmenpinne.wordpress.com/sounds-and-such/salamander-grandpiano/",
-        "credit": "Alexander Holm, Salamander Grand Piano V3 (Yamaha C5), layer v10 \u2014 dedicated to the public domain by the author, 4 March 2022"
+        "credit": "Alexander Holm, Salamander Grand Piano V3 (Yamaha C5), layer v10 — dedicated to the public domain by the author, 4 March 2022"
       },
       "manifest": {
         "id": "salamander",
@@ -13554,7 +15408,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://rytmenpinne.wordpress.com/sounds-and-such/salamander-grandpiano/",
-          "credit": "Alexander Holm, Salamander Grand Piano V3 (Yamaha C5), layer v10 \u2014 dedicated to the public domain by the author, 4 March 2022"
+          "credit": "Alexander Holm, Salamander Grand Piano V3 (Yamaha C5), layer v10 — dedicated to the public domain by the author, 4 March 2022"
         },
         "envelope": {
           "attack": 0.002,
@@ -13820,7 +15674,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://signaturesounds.org/",
-        "credit": "Signature Sounds (Phil), \"Fred Again Styled Drum Kit\" \u2014 CC0"
+        "credit": "Signature Sounds (Phil), \"Fred Again Styled Drum Kit\" — CC0"
       },
       "manifest": {
         "id": "sigkit",
@@ -13832,7 +15686,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://signaturesounds.org/",
-          "credit": "Signature Sounds (Phil), \"Fred Again Styled Drum Kit\" \u2014 CC0"
+          "credit": "Signature Sounds (Phil), \"Fred Again Styled Drum Kit\" — CC0"
         },
         "envelope": {
           "attack": 0.001,
@@ -14201,7 +16055,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "Versilian Studios, VCSL \u2014 small ocarina, staccato joined into sustain, CC0"
+        "credit": "Versilian Studios, VCSL — small ocarina, staccato joined into sustain, CC0"
       },
       "manifest": {
         "id": "smallocarina",
@@ -14222,7 +16076,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "Versilian Studios, VCSL \u2014 small ocarina, staccato joined into sustain, CC0"
+          "credit": "Versilian Studios, VCSL — small ocarina, staccato joined into sustain, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -14488,7 +16342,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, arco vibrato, loud layer, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — solo violin, arco vibrato, loud layer, CC0"
       },
       "manifest": {
         "id": "soloviolin",
@@ -14509,7 +16363,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, arco vibrato, loud layer, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — solo violin, arco vibrato, loud layer, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -15039,7 +16893,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, pizzicato, soft layer, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — solo violin, pizzicato, soft layer, CC0"
       },
       "manifest": {
         "id": "soloviolinpizz",
@@ -15060,7 +16914,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, pizzicato, soft layer, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — solo violin, pizzicato, soft layer, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -15318,7 +17172,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, spiccato, soft layer, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — solo violin, spiccato, soft layer, CC0"
       },
       "manifest": {
         "id": "soloviolinspiccato",
@@ -15339,7 +17193,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, spiccato, soft layer, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — solo violin, spiccato, soft layer, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -15701,7 +17555,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, tremolo, soft layer, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — solo violin, tremolo, soft layer, CC0"
       },
       "manifest": {
         "id": "soloviolintrem",
@@ -15722,7 +17576,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 solo violin, tremolo, soft layer, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — solo violin, tremolo, soft layer, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -16216,7 +18070,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "Versilian Studios, VCSL \u2014 baroque soprano recorder, staccato joined into sustain, CC0"
+        "credit": "Versilian Studios, VCSL — baroque soprano recorder, staccato joined into sustain, CC0"
       },
       "manifest": {
         "id": "sopranorecorder",
@@ -16237,7 +18091,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "Versilian Studios, VCSL \u2014 baroque soprano recorder, staccato joined into sustain, CC0"
+          "credit": "Versilian Studios, VCSL — baroque soprano recorder, staccato joined into sustain, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -16563,7 +18417,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/synth-soundtrack",
-        "credit": "FreePats Synth Soundtrack \u2014 ZynAddSubFX, samples by Elf of Happy and Love, CC0"
+        "credit": "FreePats Synth Soundtrack — ZynAddSubFX, samples by Elf of Happy and Love, CC0"
       },
       "manifest": {
         "id": "soundtrack",
@@ -16584,7 +18438,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/synth-soundtrack",
-          "credit": "FreePats Synth Soundtrack \u2014 ZynAddSubFX, samples by Elf of Happy and Love, CC0"
+          "credit": "FreePats Synth Soundtrack — ZynAddSubFX, samples by Elf of Happy and Love, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -16790,7 +18644,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/spanish-classical-guitar",
-        "credit": "FreePats Spanish classical guitar \u2014 nylon strings, CC0"
+        "credit": "FreePats Spanish classical guitar — nylon strings, CC0"
       },
       "manifest": {
         "id": "spanish",
@@ -16811,7 +18665,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/spanish-classical-guitar",
-          "credit": "FreePats Spanish classical guitar \u2014 nylon strings, CC0"
+          "credit": "FreePats Spanish classical guitar — nylon strings, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -17165,7 +19019,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
-        "credit": "Sonic Pi's acoustic drum kit \u2014 Freesound recordings collected by Sonic Pi, CC0"
+        "credit": "Sonic Pi's acoustic drum kit — Freesound recordings collected by Sonic Pi, CC0"
       },
       "manifest": {
         "id": "spdrums",
@@ -17178,7 +19032,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sonic-pi-net/sonic-pi/tree/main/etc/samples",
-          "credit": "Sonic Pi's acoustic drum kit \u2014 Freesound recordings collected by Sonic Pi, CC0"
+          "credit": "Sonic Pi's acoustic drum kit — Freesound recordings collected by Sonic Pi, CC0"
         },
         "envelope": {
           "attack": 0.001,
@@ -17494,7 +19348,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, Steinway B grand \u2014 close mics, no sustain pedal, layer vl3, CC0"
+        "credit": "VCSL, Steinway B grand — close mics, no sustain pedal, layer vl3, CC0"
       },
       "manifest": {
         "id": "steinwayb",
@@ -17515,7 +19369,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, Steinway B grand \u2014 close mics, no sustain pedal, layer vl3, CC0"
+          "credit": "VCSL, Steinway B grand — close mics, no sustain pedal, layer vl3, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -17877,7 +19731,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sfzinstruments/karoryfer.swagbass",
-        "credit": "Karoryfer Samples, Swagbass \u2014 f layer from swagbass_shiny.sfz, CC0"
+        "credit": "Karoryfer Samples, Swagbass — f layer from swagbass_shiny.sfz, CC0"
       },
       "manifest": {
         "id": "swagbass",
@@ -17898,7 +19752,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sfzinstruments/karoryfer.swagbass",
-          "credit": "Karoryfer Samples, Swagbass \u2014 f layer from swagbass_shiny.sfz, CC0"
+          "credit": "Karoryfer Samples, Swagbass — f layer from swagbass_shiny.sfz, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -18021,7 +19875,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/sweep-pad",
-        "credit": "FreePats Sweep Pad \u2014 ZynAddSubFX / Yoshimi, by Roberto (zenvoid.org), CC0"
+        "credit": "FreePats Sweep Pad — ZynAddSubFX / Yoshimi, by Roberto (zenvoid.org), CC0"
       },
       "manifest": {
         "id": "sweeppad",
@@ -18042,7 +19896,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/sweep-pad",
-          "credit": "FreePats Sweep Pad \u2014 ZynAddSubFX / Yoshimi, by Roberto (zenvoid.org), CC0"
+          "credit": "FreePats Sweep Pad — ZynAddSubFX / Yoshimi, by Roberto (zenvoid.org), CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -19612,7 +21466,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "Versilian Studios, VCSL \u2014 baroque tenor recorder, staccato (breath lowered, lead-in trimmed) joined into sustain, CC0"
+        "credit": "Versilian Studios, VCSL — baroque tenor recorder, staccato (breath lowered, lead-in trimmed) joined into sustain, CC0"
       },
       "manifest": {
         "id": "tenorrecorder",
@@ -19633,7 +21487,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "Versilian Studios, VCSL \u2014 baroque tenor recorder, staccato (breath lowered, lead-in trimmed) joined into sustain, CC0"
+          "credit": "Versilian Studios, VCSL — baroque tenor recorder, staccato (breath lowered, lead-in trimmed) joined into sustain, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -19940,19 +21794,19 @@
       "name": "Tenor Sax",
       "family": "keys",
       "kind": "pitched",
-      "version": "1.3.0",
-      "file": "packs/tenorsax-1_3_0.zip",
-      "bytes": 3362403,
-      "crc32": 201284077,
+      "version": "1.4.0",
+      "file": "packs/tenorsax-1_4_0.zip",
+      "bytes": 3363994,
+      "crc32": 2415889968,
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "Versilian Studios, VCSL \u2014 tenor saxophone, staccato vl2 (loud) joined into non-vibrato sustain vl2 (soft), CC0"
+        "credit": "Versilian Studios, VCSL — tenor saxophone, staccato vl2 (loud) joined into non-vibrato sustain vl2 (soft), CC0"
       },
       "manifest": {
         "id": "tenorsax",
         "name": "Tenor Sax",
-        "version": "1.3.0",
+        "version": "1.4.0",
         "family": "keys",
         "category": "winds",
         "kind": "pitched",
@@ -19968,7 +21822,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "Versilian Studios, VCSL \u2014 tenor saxophone, staccato vl2 (loud) joined into non-vibrato sustain vl2 (soft), CC0"
+          "credit": "Versilian Studios, VCSL — tenor saxophone, staccato vl2 (loud) joined into non-vibrato sustain vl2 (soft), CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -19985,7 +21839,7 @@
             "lo": 44,
             "hi": 44,
             "placeholder": "organ",
-            "gain": 0.2225,
+            "gain": 0.2097,
             "loop": {
               "start": 75013,
               "end": 292923
@@ -19997,7 +21851,7 @@
             "lo": 45,
             "hi": 45,
             "placeholder": "organ",
-            "gain": 0.2898,
+            "gain": 0.2685,
             "loop": {
               "start": 75966,
               "end": 293299
@@ -20009,7 +21863,7 @@
             "lo": 46,
             "hi": 46,
             "placeholder": "organ",
-            "gain": 0.1866,
+            "gain": 0.2562,
             "loop": {
               "start": 22050,
               "end": 289218
@@ -20021,7 +21875,7 @@
             "lo": 47,
             "hi": 47,
             "placeholder": "organ",
-            "gain": 0.214,
+            "gain": 0.2773,
             "loop": {
               "start": 25578,
               "end": 292048
@@ -20033,7 +21887,7 @@
             "lo": 48,
             "hi": 48,
             "placeholder": "organ",
-            "gain": 0.2006,
+            "gain": 0.2082,
             "loop": {
               "start": 91747,
               "end": 297383
@@ -20045,7 +21899,7 @@
             "lo": 49,
             "hi": 49,
             "placeholder": "organ",
-            "gain": 0.2685,
+            "gain": 0.2674,
             "loop": {
               "start": 91565,
               "end": 297152
@@ -20057,7 +21911,7 @@
             "lo": 50,
             "hi": 50,
             "placeholder": "organ",
-            "gain": 0.2357,
+            "gain": 0.2906,
             "loop": {
               "start": 101084,
               "end": 319141
@@ -20069,7 +21923,7 @@
             "lo": 51,
             "hi": 51,
             "placeholder": "organ",
-            "gain": 0.2131,
+            "gain": 0.2432,
             "loop": {
               "start": 101660,
               "end": 319801
@@ -20081,7 +21935,7 @@
             "lo": 52,
             "hi": 52,
             "placeholder": "organ",
-            "gain": 0.2972,
+            "gain": 0.329,
             "loop": {
               "start": 24180,
               "end": 299789
@@ -20093,7 +21947,7 @@
             "lo": 53,
             "hi": 53,
             "placeholder": "organ",
-            "gain": 0.2353,
+            "gain": 0.259,
             "loop": {
               "start": 24704,
               "end": 300314
@@ -20105,7 +21959,7 @@
             "lo": 54,
             "hi": 54,
             "placeholder": "organ",
-            "gain": 0.2126,
+            "gain": 0.2391,
             "loop": {
               "start": 26249,
               "end": 303248
@@ -20117,7 +21971,7 @@
             "lo": 55,
             "hi": 55,
             "placeholder": "organ",
-            "gain": 0.2725,
+            "gain": 0.2756,
             "loop": {
               "start": 23510,
               "end": 299928
@@ -20129,7 +21983,7 @@
             "lo": 56,
             "hi": 56,
             "placeholder": "organ",
-            "gain": 0.278,
+            "gain": 0.2228,
             "loop": {
               "start": 108267,
               "end": 252746
@@ -20141,7 +21995,7 @@
             "lo": 57,
             "hi": 57,
             "placeholder": "organ",
-            "gain": 0.2803,
+            "gain": 0.2401,
             "loop": {
               "start": 98736,
               "end": 242474
@@ -20153,7 +22007,7 @@
             "lo": 58,
             "hi": 58,
             "placeholder": "organ",
-            "gain": 0.3294,
+            "gain": 0.2958,
             "loop": {
               "start": 52681,
               "end": 239240
@@ -20165,7 +22019,7 @@
             "lo": 59,
             "hi": 59,
             "placeholder": "organ",
-            "gain": 0.1902,
+            "gain": 0.2094,
             "loop": {
               "start": 46927,
               "end": 232855
@@ -20177,7 +22031,7 @@
             "lo": 60,
             "hi": 60,
             "placeholder": "organ",
-            "gain": 0.2054,
+            "gain": 0.2656,
             "loop": {
               "start": 114730,
               "end": 242320
@@ -20189,7 +22043,7 @@
             "lo": 61,
             "hi": 61,
             "placeholder": "organ",
-            "gain": 0.2179,
+            "gain": 0.2683,
             "loop": {
               "start": 114109,
               "end": 241868
@@ -20201,7 +22055,7 @@
             "lo": 62,
             "hi": 62,
             "placeholder": "organ",
-            "gain": 0.2728,
+            "gain": 0.2439,
             "loop": {
               "start": 49760,
               "end": 262706
@@ -20213,7 +22067,7 @@
             "lo": 63,
             "hi": 63,
             "placeholder": "organ",
-            "gain": 0.2888,
+            "gain": 0.1942,
             "loop": {
               "start": 73530,
               "end": 286276
@@ -20225,7 +22079,7 @@
             "lo": 64,
             "hi": 64,
             "placeholder": "organ",
-            "gain": 0.1728,
+            "gain": 0.2997,
             "loop": {
               "start": 22050,
               "end": 242518
@@ -20237,7 +22091,7 @@
             "lo": 65,
             "hi": 65,
             "placeholder": "organ",
-            "gain": 0.1913,
+            "gain": 0.3421,
             "loop": {
               "start": 26460,
               "end": 251704
@@ -20249,7 +22103,7 @@
             "lo": 66,
             "hi": 66,
             "placeholder": "organ",
-            "gain": 0.164,
+            "gain": 0.2014,
             "loop": {
               "start": 39395,
               "end": 267284
@@ -20261,7 +22115,7 @@
             "lo": 67,
             "hi": 67,
             "placeholder": "organ",
-            "gain": 0.1826,
+            "gain": 0.2153,
             "loop": {
               "start": 36346,
               "end": 263295
@@ -20273,7 +22127,7 @@
             "lo": 68,
             "hi": 68,
             "placeholder": "organ",
-            "gain": 0.2888,
+            "gain": 0.2296,
             "loop": {
               "start": 94869,
               "end": 228128
@@ -20285,7 +22139,7 @@
             "lo": 69,
             "hi": 69,
             "placeholder": "organ",
-            "gain": 0.3467,
+            "gain": 0.1889,
             "loop": {
               "start": 102777,
               "end": 236084
@@ -20297,7 +22151,7 @@
             "lo": 70,
             "hi": 70,
             "placeholder": "organ",
-            "gain": 0.2696,
+            "gain": 0.1905,
             "loop": {
               "start": 81491,
               "end": 314678
@@ -20309,7 +22163,7 @@
             "lo": 71,
             "hi": 71,
             "placeholder": "organ",
-            "gain": 0.3243,
+            "gain": 0.2242,
             "loop": {
               "start": 95927,
               "end": 330007
@@ -20321,7 +22175,7 @@
             "lo": 72,
             "hi": 72,
             "placeholder": "organ",
-            "gain": 0.2527,
+            "gain": 0.1774,
             "loop": {
               "start": 41508,
               "end": 234852
@@ -20333,7 +22187,7 @@
             "lo": 73,
             "hi": 73,
             "placeholder": "organ",
-            "gain": 0.289,
+            "gain": 0.1956,
             "loop": {
               "start": 41006,
               "end": 233563
@@ -20345,7 +22199,7 @@
             "lo": 74,
             "hi": 74,
             "placeholder": "organ",
-            "gain": 0.1907,
+            "gain": 0.1661,
             "loop": {
               "start": 72031,
               "end": 242997
@@ -20357,7 +22211,7 @@
             "lo": 75,
             "hi": 75,
             "placeholder": "organ",
-            "gain": 0.1938,
+            "gain": 0.1846,
             "loop": {
               "start": 72246,
               "end": 243363
@@ -20369,7 +22223,7 @@
             "lo": 76,
             "hi": 76,
             "placeholder": "organ",
-            "gain": 0.2391,
+            "gain": 0.2876,
             "loop": {
               "start": 55327,
               "end": 241621
@@ -20381,7 +22235,7 @@
             "lo": 77,
             "hi": 77,
             "placeholder": "organ",
-            "gain": 0.1815,
+            "gain": 0.2566,
             "loop": {
               "start": 48810,
               "end": 235090
@@ -20393,7 +22247,7 @@
             "lo": 78,
             "hi": 78,
             "placeholder": "organ",
-            "gain": 0.2098,
+            "gain": 0.1992,
             "loop": {
               "start": 31253,
               "end": 179181
@@ -20405,7 +22259,7 @@
             "lo": 79,
             "hi": 79,
             "placeholder": "organ",
-            "gain": 0.2488,
+            "gain": 0.1999,
             "loop": {
               "start": 28438,
               "end": 176333
@@ -20417,7 +22271,7 @@
             "lo": 80,
             "hi": 80,
             "placeholder": "organ",
-            "gain": 0.3066,
+            "gain": 0.2426,
             "loop": {
               "start": 23814,
               "end": 140031
@@ -20429,7 +22283,7 @@
             "lo": 81,
             "hi": 81,
             "placeholder": "organ",
-            "gain": 0.3146,
+            "gain": 0.2745,
             "loop": {
               "start": 22050,
               "end": 137483
@@ -20441,7 +22295,7 @@
             "lo": 82,
             "hi": 82,
             "placeholder": "organ",
-            "gain": 0.2075,
+            "gain": 0.2877,
             "loop": {
               "start": 22050,
               "end": 183572
@@ -20453,7 +22307,7 @@
             "lo": 83,
             "hi": 83,
             "placeholder": "organ",
-            "gain": 0.1979,
+            "gain": 0.2276,
             "loop": {
               "start": 23814,
               "end": 185279
@@ -20465,7 +22319,7 @@
             "lo": 84,
             "hi": 84,
             "placeholder": "organ",
-            "gain": 0.2029,
+            "gain": 0.2507,
             "loop": {
               "start": 73188,
               "end": 243516
@@ -20477,7 +22331,7 @@
             "lo": 85,
             "hi": 85,
             "placeholder": "organ",
-            "gain": 0.1913,
+            "gain": 0.2473,
             "loop": {
               "start": 72794,
               "end": 243897
@@ -20489,7 +22343,7 @@
             "lo": 86,
             "hi": 86,
             "placeholder": "organ",
-            "gain": 0.1926,
+            "gain": 0.2115,
             "loop": {
               "start": 25578,
               "end": 272888
@@ -20501,7 +22355,7 @@
             "lo": 87,
             "hi": 87,
             "placeholder": "organ",
-            "gain": 0.2067,
+            "gain": 0.2525,
             "loop": {
               "start": 27342,
               "end": 274650
@@ -20513,7 +22367,7 @@
             "lo": 88,
             "hi": 88,
             "placeholder": "organ",
-            "gain": 0.2987,
+            "gain": 0.3206,
             "loop": {
               "start": 52674,
               "end": 180337
@@ -20958,7 +22812,7 @@
       "license": {
         "spdx": "UNLICENSED",
         "source": "Space Goat multitrack sessions at Wally's (private)",
-        "credit": "Toby Turney, Space Goat \u2014 all rights reserved"
+        "credit": "Toby Turney, Space Goat — all rights reserved"
       },
       "manifest": {
         "id": "toby-wallys",
@@ -20971,7 +22825,7 @@
         "license": {
           "spdx": "UNLICENSED",
           "source": "Space Goat multitrack sessions at Wally's (private)",
-          "credit": "Toby Turney, Space Goat \u2014 all rights reserved"
+          "credit": "Toby Turney, Space Goat — all rights reserved"
         },
         "envelope": {
           "attack": 0.001,
@@ -22348,7 +24202,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 tenor trombone, staccato v2 joined into sustain v2, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — tenor trombone, staccato v2 joined into sustain v2, CC0"
       },
       "manifest": {
         "id": "trombone",
@@ -22369,7 +24223,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 tenor trombone, staccato v2 joined into sustain v2, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — tenor trombone, staccato v2 joined into sustain v2, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -22779,7 +24633,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 trumpet, staccato v1 (soft) joined into sustain v1 (soft), CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — trumpet, staccato v1 (soft) joined into sustain v1 (soft), CC0"
       },
       "manifest": {
         "id": "trumpet",
@@ -22800,7 +24654,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 trumpet, staccato v1 (soft) joined into sustain v1 (soft), CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — trumpet, staccato v1 (soft) joined into sustain v1 (soft), CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -23210,7 +25064,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 tuba, staccato v2 (breath lowered, lead-in trimmed) joined into sustain v1 (soft), CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — tuba, staccato v2 (breath lowered, lead-in trimmed) joined into sustain v1 (soft), CC0"
       },
       "manifest": {
         "id": "tuba",
@@ -23231,7 +25085,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 tuba, staccato v2 (breath lowered, lead-in trimmed) joined into sustain v1 (soft), CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — tuba, staccato v2 (breath lowered, lead-in trimmed) joined into sustain v1 (soft), CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -23665,7 +25519,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, tubular bells (set 1) \u2014 ff, CC0"
+        "credit": "VCSL, tubular bells (set 1) — ff, CC0"
       },
       "manifest": {
         "id": "tubularbells1",
@@ -23686,7 +25540,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, tubular bells (set 1) \u2014 ff, CC0"
+          "credit": "VCSL, tubular bells (set 1) — ff, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -23768,7 +25622,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, tubular bells (set 2) \u2014 layer v2, CC0"
+        "credit": "VCSL, tubular bells (set 2) — layer v2, CC0"
       },
       "manifest": {
         "id": "tubularbells2",
@@ -23789,7 +25643,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, tubular bells (set 2) \u2014 layer v2, CC0"
+          "credit": "VCSL, tubular bells (set 2) — layer v2, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -23903,7 +25757,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, tubular glockenspiel \u2014 medium strikes, CC0"
+        "credit": "VCSL, tubular glockenspiel — medium strikes, CC0"
       },
       "manifest": {
         "id": "tubularglock",
@@ -23924,7 +25778,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, tubular glockenspiel \u2014 medium strikes, CC0"
+          "credit": "VCSL, tubular glockenspiel — medium strikes, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -24446,7 +26300,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/freepats/upright-piano-KW",
-        "credit": "Upright Piano KW \u2014 a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
+        "credit": "Upright Piano KW — a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
       },
       "manifest": {
         "id": "uprightkw",
@@ -24467,7 +26321,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/freepats/upright-piano-KW",
-          "credit": "Upright Piano KW \u2014 a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
+          "credit": "Upright Piano KW — a Kawai upright recorded by Gonzalo and Roberto for FreePats, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -24746,7 +26600,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, vibraphone \u2014 hard mallets, layer v3, CC0"
+        "credit": "VCSL, vibraphone — hard mallets, layer v3, CC0"
       },
       "manifest": {
         "id": "vibes",
@@ -24767,7 +26621,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, vibraphone \u2014 hard mallets, layer v3, CC0"
+          "credit": "VCSL, vibraphone — hard mallets, layer v3, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -25574,7 +27428,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 cello section, sustain vibrato, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — cello section, sustain vibrato, CC0"
       },
       "manifest": {
         "id": "vscocellos",
@@ -25595,7 +27449,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 cello section, sustain vibrato, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — cello section, sustain vibrato, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -26149,7 +28003,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 viola section, sustain vibrato, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — viola section, sustain vibrato, CC0"
       },
       "manifest": {
         "id": "vscoviolas",
@@ -26170,7 +28024,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 viola section, sustain vibrato, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — viola section, sustain vibrato, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -26664,7 +28518,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VSCO-2-CE",
-        "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 violin section, sustain vibrato, CC0"
+        "credit": "Versilian Studios, VSCO 2 Community Edition — violin section, sustain vibrato, CC0"
       },
       "manifest": {
         "id": "vscoviolins",
@@ -26685,7 +28539,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VSCO-2-CE",
-          "credit": "Versilian Studios, VSCO 2 Community Edition \u2014 violin section, sustain vibrato, CC0"
+          "credit": "Versilian Studios, VSCO 2 Community Edition — violin section, sustain vibrato, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -27155,7 +29009,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, wine glasses \u2014 bowed rims, slow sustains, CC0"
+        "credit": "VCSL, wine glasses — bowed rims, slow sustains, CC0"
       },
       "manifest": {
         "id": "wineglass",
@@ -27176,7 +29030,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, wine glasses \u2014 bowed rims, slow sustains, CC0"
+          "credit": "VCSL, wine glasses — bowed rims, slow sustains, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -27674,7 +29528,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, xylophone \u2014 soft mallets, ff, CC0"
+        "credit": "VCSL, xylophone — soft mallets, ff, CC0"
       },
       "manifest": {
         "id": "xylophone",
@@ -27695,7 +29549,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, xylophone \u2014 soft mallets, ff, CC0"
+          "credit": "VCSL, xylophone — soft mallets, ff, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -27785,7 +29639,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://github.com/sgossner/VCSL",
-        "credit": "VCSL, Yamaha upright \u2014 layer vl2, CC0"
+        "credit": "VCSL, Yamaha upright — layer vl2, CC0"
       },
       "manifest": {
         "id": "yamahaupright",
@@ -27806,7 +29660,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://github.com/sgossner/VCSL",
-          "credit": "VCSL, Yamaha upright \u2014 layer vl2, CC0"
+          "credit": "VCSL, Yamaha upright — layer vl2, CC0"
         },
         "envelope": {
           "attack": 0.002,
@@ -27936,7 +29790,7 @@
       "license": {
         "spdx": "CC0-1.0",
         "source": "https://freesound.org/people/Hypnotriod/packs/21613/",
-        "credit": "Hypnotriod, \"Flute Dizi C all notes + pitched semitones\" (Freesound pack 21613) \u2014 CC0"
+        "credit": "Hypnotriod, \"Flute Dizi C all notes + pitched semitones\" (Freesound pack 21613) — CC0"
       },
       "manifest": {
         "id": "dizi",
@@ -27957,7 +29811,7 @@
         "license": {
           "spdx": "CC0-1.0",
           "source": "https://freesound.org/people/Hypnotriod/packs/21613/",
-          "credit": "Hypnotriod, \"Flute Dizi C all notes + pitched semitones\" (Freesound pack 21613) \u2014 CC0"
+          "credit": "Hypnotriod, \"Flute Dizi C all notes + pitched semitones\" (Freesound pack 21613) — CC0"
         },
         "envelope": {
           "attack": 0.005,
