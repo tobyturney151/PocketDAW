@@ -3806,6 +3806,436 @@
       }
     },
     {
+      "id": "blackhofner",
+      "name": "Black Hofner",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/blackhofner-1_0_0.zip",
+      "bytes": 3427206,
+      "crc32": 608777361,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sfzinstruments/karoryfer.black-and-green-guitars",
+        "credit": "Black And Green Guitars by Karoryfer Lecolds (recorded by Brian Wood), CC0"
+      },
+      "manifest": {
+        "id": "blackhofner",
+        "name": "Black Hofner",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 40,
+          "hi": 88
+        },
+        "defaultView": {
+          "lo": 52,
+          "hi": 76
+        },
+        "shade": "indigo",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sfzinstruments/karoryfer.black-and-green-guitars",
+          "credit": "Black And Green Guitars by Karoryfer Lecolds (recorded by Brian Wood), CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "blackhofner/blackhofner_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 0.7114
+          },
+          {
+            "file": "blackhofner/blackhofner_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 0.7692
+          },
+          {
+            "file": "blackhofner/blackhofner_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 0.8012
+          },
+          {
+            "file": "blackhofner/blackhofner_G2.m4a",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.8667
+          },
+          {
+            "file": "blackhofner/blackhofner_Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 0.8432
+          },
+          {
+            "file": "blackhofner/blackhofner_A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 0.7717
+          },
+          {
+            "file": "blackhofner/blackhofner_As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.6289
+          },
+          {
+            "file": "blackhofner/blackhofner_B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.5916
+          },
+          {
+            "file": "blackhofner/blackhofner_C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 0.6874
+          },
+          {
+            "file": "blackhofner/blackhofner_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.6698
+          },
+          {
+            "file": "blackhofner/blackhofner_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.8211
+          },
+          {
+            "file": "blackhofner/blackhofner_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.5491
+          },
+          {
+            "file": "blackhofner/blackhofner_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.7383
+          },
+          {
+            "file": "blackhofner/blackhofner_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.7874
+          },
+          {
+            "file": "blackhofner/blackhofner_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.8016
+          },
+          {
+            "file": "blackhofner/blackhofner_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.6216
+          },
+          {
+            "file": "blackhofner/blackhofner_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.624
+          },
+          {
+            "file": "blackhofner/blackhofner_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.6115
+          },
+          {
+            "file": "blackhofner/blackhofner_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.7657
+          },
+          {
+            "file": "blackhofner/blackhofner_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.8473
+          },
+          {
+            "file": "blackhofner/blackhofner_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.881
+          },
+          {
+            "file": "blackhofner/blackhofner_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.9528
+          },
+          {
+            "file": "blackhofner/blackhofner_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.8487
+          },
+          {
+            "file": "blackhofner/blackhofner_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 1.0283
+          },
+          {
+            "file": "blackhofner/blackhofner_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.7802
+          },
+          {
+            "file": "blackhofner/blackhofner_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 1.128
+          },
+          {
+            "file": "blackhofner/blackhofner_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 1.0512
+          },
+          {
+            "file": "blackhofner/blackhofner_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 1.0289
+          },
+          {
+            "file": "blackhofner/blackhofner_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 1.0644
+          },
+          {
+            "file": "blackhofner/blackhofner_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 1.011
+          },
+          {
+            "file": "blackhofner/blackhofner_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.967
+          },
+          {
+            "file": "blackhofner/blackhofner_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 1.0433
+          },
+          {
+            "file": "blackhofner/blackhofner_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 1.0602
+          },
+          {
+            "file": "blackhofner/blackhofner_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.9549
+          },
+          {
+            "file": "blackhofner/blackhofner_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 1.0854
+          },
+          {
+            "file": "blackhofner/blackhofner_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.9512
+          },
+          {
+            "file": "blackhofner/blackhofner_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 1.0198
+          },
+          {
+            "file": "blackhofner/blackhofner_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.7804
+          },
+          {
+            "file": "blackhofner/blackhofner_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.8593
+          },
+          {
+            "file": "blackhofner/blackhofner_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.6913
+          },
+          {
+            "file": "blackhofner/blackhofner_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.7647
+          },
+          {
+            "file": "blackhofner/blackhofner_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.8624
+          },
+          {
+            "file": "blackhofner/blackhofner_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.7281
+          },
+          {
+            "file": "blackhofner/blackhofner_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.8626
+          },
+          {
+            "file": "blackhofner/blackhofner_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.7843
+          },
+          {
+            "file": "blackhofner/blackhofner_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.7419
+          },
+          {
+            "file": "blackhofner/blackhofner_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.6279
+          }
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
+      }
+    },
+    {
       "id": "choirpad",
       "name": "Choir Pad",
       "family": "keys",
@@ -7382,6 +7812,1028 @@
       }
     },
     {
+      "id": "emilyguitar",
+      "name": "Emily Guitar",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/emilyguitar-1_0_0.zip",
+      "bytes": 1314786,
+      "crc32": 90176623,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sfzinstruments/karoryfer.emilyguitar",
+        "credit": "Emilyguitar by Karoryfer Lecolds (played and mapped by D. Smolken), CC0"
+      },
+      "manifest": {
+        "id": "emilyguitar",
+        "name": "Emily Guitar",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 37,
+          "hi": 88
+        },
+        "defaultView": {
+          "lo": 50,
+          "hi": 74
+        },
+        "shade": "rose",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sfzinstruments/karoryfer.emilyguitar",
+          "credit": "Emilyguitar by Karoryfer Lecolds (played and mapped by D. Smolken), CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "emilyguitar/emilyguitar_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 2.3678
+          },
+          {
+            "file": "emilyguitar/emilyguitar_E2.m4a",
+            "rootNote": 40,
+            "lo": 39,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 1.093
+          },
+          {
+            "file": "emilyguitar/emilyguitar_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 1.155
+          },
+          {
+            "file": "emilyguitar/emilyguitar_A2.m4a",
+            "rootNote": 45,
+            "lo": 44,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 1.0586
+          },
+          {
+            "file": "emilyguitar/emilyguitar_C3.m4a",
+            "rootNote": 48,
+            "lo": 47,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 1.0521
+          },
+          {
+            "file": "emilyguitar/emilyguitar_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 50,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.802
+          },
+          {
+            "file": "emilyguitar/emilyguitar_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 53,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.7863
+          },
+          {
+            "file": "emilyguitar/emilyguitar_A3.m4a",
+            "rootNote": 57,
+            "lo": 56,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.5735
+          },
+          {
+            "file": "emilyguitar/emilyguitar_C4.m4a",
+            "rootNote": 60,
+            "lo": 59,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.6374
+          },
+          {
+            "file": "emilyguitar/emilyguitar_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 62,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.385
+          },
+          {
+            "file": "emilyguitar/emilyguitar_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 65,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.4235
+          },
+          {
+            "file": "emilyguitar/emilyguitar_A4.m4a",
+            "rootNote": 69,
+            "lo": 68,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.4609
+          },
+          {
+            "file": "emilyguitar/emilyguitar_C5.m4a",
+            "rootNote": 72,
+            "lo": 71,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.5864
+          },
+          {
+            "file": "emilyguitar/emilyguitar_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 74,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.4614
+          },
+          {
+            "file": "emilyguitar/emilyguitar_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 77,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.8897
+          },
+          {
+            "file": "emilyguitar/emilyguitar_A5.m4a",
+            "rootNote": 81,
+            "lo": 80,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.5778
+          },
+          {
+            "file": "emilyguitar/emilyguitar_C6.m4a",
+            "rootNote": 84,
+            "lo": 83,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.7233
+          },
+          {
+            "file": "emilyguitar/emilyguitar_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.9522
+          }
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
+      }
+    },
+    {
+      "id": "fenderclean",
+      "name": "Fender - Clean",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/fenderclean-1_0_0.zip",
+      "bytes": 1553285,
+      "crc32": 3065209101,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/freepats/electric-guitar-FSBS-clean",
+        "credit": "Electric Guitar FSBS (clean) by FreePats, CC0"
+      },
+      "manifest": {
+        "id": "fenderclean",
+        "name": "Fender - Clean",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 36,
+          "hi": 87
+        },
+        "defaultView": {
+          "lo": 49,
+          "hi": 73
+        },
+        "shade": "red",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/freepats/electric-guitar-FSBS-clean",
+          "credit": "Electric Guitar FSBS (clean) by FreePats, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "fenderclean/fenderclean_C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 0.7845
+          },
+          {
+            "file": "fenderclean/fenderclean_E2.m4a",
+            "rootNote": 40,
+            "lo": 39,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 0.5308
+          },
+          {
+            "file": "fenderclean/fenderclean_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.4211
+          },
+          {
+            "file": "fenderclean/fenderclean_A2.m4a",
+            "rootNote": 45,
+            "lo": 44,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.4849
+          },
+          {
+            "file": "fenderclean/fenderclean_C3.m4a",
+            "rootNote": 48,
+            "lo": 47,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.5025
+          },
+          {
+            "file": "fenderclean/fenderclean_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.4586
+          },
+          {
+            "file": "fenderclean/fenderclean_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.3131
+          },
+          {
+            "file": "fenderclean/fenderclean_G3.m4a",
+            "rootNote": 55,
+            "lo": 54,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.2973
+          },
+          {
+            "file": "fenderclean/fenderclean_B3.m4a",
+            "rootNote": 59,
+            "lo": 58,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.4064
+          },
+          {
+            "file": "fenderclean/fenderclean_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.4
+          },
+          {
+            "file": "fenderclean/fenderclean_E4.m4a",
+            "rootNote": 64,
+            "lo": 63,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.254
+          },
+          {
+            "file": "fenderclean/fenderclean_G4.m4a",
+            "rootNote": 67,
+            "lo": 66,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.311
+          },
+          {
+            "file": "fenderclean/fenderclean_B4.m4a",
+            "rootNote": 71,
+            "lo": 70,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.2908
+          },
+          {
+            "file": "fenderclean/fenderclean_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.3388
+          },
+          {
+            "file": "fenderclean/fenderclean_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.2967
+          },
+          {
+            "file": "fenderclean/fenderclean_F5.m4a",
+            "rootNote": 77,
+            "lo": 76,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.2399
+          },
+          {
+            "file": "fenderclean/fenderclean_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 79,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.3465
+          },
+          {
+            "file": "fenderclean/fenderclean_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.2969
+          },
+          {
+            "file": "fenderclean/fenderclean_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 84,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.3676
+          }
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
+      }
+    },
+    {
+      "id": "fenderdirect",
+      "name": "Fender - Direct",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/fenderdirect-1_0_0.zip",
+      "bytes": 1426486,
+      "crc32": 1669482936,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/freepats/electric-guitar-FSBS-direct",
+        "credit": "Electric Guitar FSBS (direct) by FreePats, CC0"
+      },
+      "manifest": {
+        "id": "fenderdirect",
+        "name": "Fender - Direct",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 36,
+          "hi": 87
+        },
+        "defaultView": {
+          "lo": 49,
+          "hi": 73
+        },
+        "shade": "red",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/freepats/electric-guitar-FSBS-direct",
+          "credit": "Electric Guitar FSBS (direct) by FreePats, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "fenderdirect/fenderdirect_C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 0.6855
+          },
+          {
+            "file": "fenderdirect/fenderdirect_E2.m4a",
+            "rootNote": 40,
+            "lo": 39,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 0.5373
+          },
+          {
+            "file": "fenderdirect/fenderdirect_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.5206
+          },
+          {
+            "file": "fenderdirect/fenderdirect_A2.m4a",
+            "rootNote": 45,
+            "lo": 44,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.4517
+          },
+          {
+            "file": "fenderdirect/fenderdirect_C3.m4a",
+            "rootNote": 48,
+            "lo": 47,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.6013
+          },
+          {
+            "file": "fenderdirect/fenderdirect_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.4192
+          },
+          {
+            "file": "fenderdirect/fenderdirect_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.4215
+          },
+          {
+            "file": "fenderdirect/fenderdirect_G3.m4a",
+            "rootNote": 55,
+            "lo": 54,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.421
+          },
+          {
+            "file": "fenderdirect/fenderdirect_B3.m4a",
+            "rootNote": 59,
+            "lo": 58,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.3895
+          },
+          {
+            "file": "fenderdirect/fenderdirect_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.4891
+          },
+          {
+            "file": "fenderdirect/fenderdirect_E4.m4a",
+            "rootNote": 64,
+            "lo": 63,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.3135
+          },
+          {
+            "file": "fenderdirect/fenderdirect_G4.m4a",
+            "rootNote": 67,
+            "lo": 66,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.3557
+          },
+          {
+            "file": "fenderdirect/fenderdirect_B4.m4a",
+            "rootNote": 71,
+            "lo": 70,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.3028
+          },
+          {
+            "file": "fenderdirect/fenderdirect_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.3802
+          },
+          {
+            "file": "fenderdirect/fenderdirect_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.2836
+          },
+          {
+            "file": "fenderdirect/fenderdirect_F5.m4a",
+            "rootNote": 77,
+            "lo": 76,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.3199
+          },
+          {
+            "file": "fenderdirect/fenderdirect_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 79,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.3528
+          },
+          {
+            "file": "fenderdirect/fenderdirect_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.3275
+          },
+          {
+            "file": "fenderdirect/fenderdirect_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 84,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.6305
+          }
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
+      }
+    },
+    {
+      "id": "fenderdist1",
+      "name": "Fender - Distorted 1",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/fenderdist1-1_0_0.zip",
+      "bytes": 2045743,
+      "crc32": 2913933526,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/freepats/electric-guitar-FSBS-dist1",
+        "credit": "Electric Guitar FSBS (dist1) by FreePats, CC0"
+      },
+      "manifest": {
+        "id": "fenderdist1",
+        "name": "Fender - Distorted 1",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 36,
+          "hi": 87
+        },
+        "defaultView": {
+          "lo": 49,
+          "hi": 73
+        },
+        "shade": "red",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/freepats/electric-guitar-FSBS-dist1",
+          "credit": "Electric Guitar FSBS (dist1) by FreePats, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "fenderdist1/fenderdist1_C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 0.3477
+          },
+          {
+            "file": "fenderdist1/fenderdist1_E2.m4a",
+            "rootNote": 40,
+            "lo": 39,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 0.3426
+          },
+          {
+            "file": "fenderdist1/fenderdist1_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.3459
+          },
+          {
+            "file": "fenderdist1/fenderdist1_A2.m4a",
+            "rootNote": 45,
+            "lo": 44,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.3793
+          },
+          {
+            "file": "fenderdist1/fenderdist1_C3.m4a",
+            "rootNote": 48,
+            "lo": 47,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.2846
+          },
+          {
+            "file": "fenderdist1/fenderdist1_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.2894
+          },
+          {
+            "file": "fenderdist1/fenderdist1_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.3043
+          },
+          {
+            "file": "fenderdist1/fenderdist1_G3.m4a",
+            "rootNote": 55,
+            "lo": 54,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.2637
+          },
+          {
+            "file": "fenderdist1/fenderdist1_B3.m4a",
+            "rootNote": 59,
+            "lo": 58,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.2925
+          },
+          {
+            "file": "fenderdist1/fenderdist1_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.2492
+          },
+          {
+            "file": "fenderdist1/fenderdist1_E4.m4a",
+            "rootNote": 64,
+            "lo": 63,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.3698
+          },
+          {
+            "file": "fenderdist1/fenderdist1_G4.m4a",
+            "rootNote": 67,
+            "lo": 66,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.3206
+          },
+          {
+            "file": "fenderdist1/fenderdist1_B4.m4a",
+            "rootNote": 71,
+            "lo": 70,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.3004
+          },
+          {
+            "file": "fenderdist1/fenderdist1_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.4445
+          },
+          {
+            "file": "fenderdist1/fenderdist1_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.3158
+          },
+          {
+            "file": "fenderdist1/fenderdist1_F5.m4a",
+            "rootNote": 77,
+            "lo": 76,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.3496
+          },
+          {
+            "file": "fenderdist1/fenderdist1_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 79,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.566
+          },
+          {
+            "file": "fenderdist1/fenderdist1_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.5218
+          },
+          {
+            "file": "fenderdist1/fenderdist1_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 84,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.3779
+          }
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
+      }
+    },
+    {
+      "id": "fenderdist2",
+      "name": "Fender - Distorted 2",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/fenderdist2-1_0_0.zip",
+      "bytes": 2096821,
+      "crc32": 3186704641,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/freepats/electric-guitar-FSBS-dist2",
+        "credit": "Electric Guitar FSBS (dist2) by FreePats, CC0"
+      },
+      "manifest": {
+        "id": "fenderdist2",
+        "name": "Fender - Distorted 2",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 36,
+          "hi": 87
+        },
+        "defaultView": {
+          "lo": 49,
+          "hi": 73
+        },
+        "shade": "red",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/freepats/electric-guitar-FSBS-dist2",
+          "credit": "Electric Guitar FSBS (dist2) by FreePats, CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "fenderdist2/fenderdist2_C2.m4a",
+            "rootNote": 36,
+            "lo": 36,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 0.369
+          },
+          {
+            "file": "fenderdist2/fenderdist2_E2.m4a",
+            "rootNote": 40,
+            "lo": 39,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 0.3223
+          },
+          {
+            "file": "fenderdist2/fenderdist2_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.2965
+          },
+          {
+            "file": "fenderdist2/fenderdist2_A2.m4a",
+            "rootNote": 45,
+            "lo": 44,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.3375
+          },
+          {
+            "file": "fenderdist2/fenderdist2_C3.m4a",
+            "rootNote": 48,
+            "lo": 47,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.2989
+          },
+          {
+            "file": "fenderdist2/fenderdist2_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.215
+          },
+          {
+            "file": "fenderdist2/fenderdist2_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.2627
+          },
+          {
+            "file": "fenderdist2/fenderdist2_G3.m4a",
+            "rootNote": 55,
+            "lo": 54,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.2046
+          },
+          {
+            "file": "fenderdist2/fenderdist2_B3.m4a",
+            "rootNote": 59,
+            "lo": 58,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.1835
+          },
+          {
+            "file": "fenderdist2/fenderdist2_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.2128
+          },
+          {
+            "file": "fenderdist2/fenderdist2_E4.m4a",
+            "rootNote": 64,
+            "lo": 63,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.2186
+          },
+          {
+            "file": "fenderdist2/fenderdist2_G4.m4a",
+            "rootNote": 67,
+            "lo": 66,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.2212
+          },
+          {
+            "file": "fenderdist2/fenderdist2_B4.m4a",
+            "rootNote": 71,
+            "lo": 70,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.1945
+          },
+          {
+            "file": "fenderdist2/fenderdist2_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.2293
+          },
+          {
+            "file": "fenderdist2/fenderdist2_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.2333
+          },
+          {
+            "file": "fenderdist2/fenderdist2_F5.m4a",
+            "rootNote": 77,
+            "lo": 76,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.2183
+          },
+          {
+            "file": "fenderdist2/fenderdist2_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 79,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.3121
+          },
+          {
+            "file": "fenderdist2/fenderdist2_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.2549
+          },
+          {
+            "file": "fenderdist2/fenderdist2_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 84,
+            "hi": 87,
+            "placeholder": "organ",
+            "gain": 0.3239
+          }
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
+      }
+    },
+    {
       "id": "fieldsparks",
       "name": "Fields & Parks",
       "family": "drums",
@@ -10445,6 +11897,436 @@
             "gain": 36.3629
           }
         ]
+      }
+    },
+    {
+      "id": "greengretsch",
+      "name": "Green Gretsch",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/greengretsch-1_0_0.zip",
+      "bytes": 4111370,
+      "crc32": 1724490037,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sfzinstruments/karoryfer.black-and-green-guitars",
+        "credit": "Black And Green Guitars by Karoryfer Lecolds (recorded by Brian Wood), CC0"
+      },
+      "manifest": {
+        "id": "greengretsch",
+        "name": "Green Gretsch",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 40,
+          "hi": 88
+        },
+        "defaultView": {
+          "lo": 52,
+          "hi": 76
+        },
+        "shade": "green",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sfzinstruments/karoryfer.black-and-green-guitars",
+          "credit": "Black And Green Guitars by Karoryfer Lecolds (recorded by Brian Wood), CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "greengretsch/greengretsch_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 40,
+            "placeholder": "organ",
+            "gain": 0.7977
+          },
+          {
+            "file": "greengretsch/greengretsch_F2.m4a",
+            "rootNote": 41,
+            "lo": 41,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 0.8685
+          },
+          {
+            "file": "greengretsch/greengretsch_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 42,
+            "placeholder": "organ",
+            "gain": 0.9157
+          },
+          {
+            "file": "greengretsch/greengretsch_G2.m4a",
+            "rootNote": 43,
+            "lo": 43,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.9128
+          },
+          {
+            "file": "greengretsch/greengretsch_Gs2.m4a",
+            "rootNote": 44,
+            "lo": 44,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 0.851
+          },
+          {
+            "file": "greengretsch/greengretsch_A2.m4a",
+            "rootNote": 45,
+            "lo": 45,
+            "hi": 45,
+            "placeholder": "organ",
+            "gain": 0.805
+          },
+          {
+            "file": "greengretsch/greengretsch_As2.m4a",
+            "rootNote": 46,
+            "lo": 46,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.7364
+          },
+          {
+            "file": "greengretsch/greengretsch_B2.m4a",
+            "rootNote": 47,
+            "lo": 47,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.6974
+          },
+          {
+            "file": "greengretsch/greengretsch_C3.m4a",
+            "rootNote": 48,
+            "lo": 48,
+            "hi": 48,
+            "placeholder": "organ",
+            "gain": 0.712
+          },
+          {
+            "file": "greengretsch/greengretsch_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 49,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.7296
+          },
+          {
+            "file": "greengretsch/greengretsch_D3.m4a",
+            "rootNote": 50,
+            "lo": 50,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.5934
+          },
+          {
+            "file": "greengretsch/greengretsch_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 51,
+            "hi": 51,
+            "placeholder": "organ",
+            "gain": 0.6369
+          },
+          {
+            "file": "greengretsch/greengretsch_E3.m4a",
+            "rootNote": 52,
+            "lo": 52,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.5518
+          },
+          {
+            "file": "greengretsch/greengretsch_F3.m4a",
+            "rootNote": 53,
+            "lo": 53,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.5967
+          },
+          {
+            "file": "greengretsch/greengretsch_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 54,
+            "hi": 54,
+            "placeholder": "organ",
+            "gain": 0.6979
+          },
+          {
+            "file": "greengretsch/greengretsch_G3.m4a",
+            "rootNote": 55,
+            "lo": 55,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.5149
+          },
+          {
+            "file": "greengretsch/greengretsch_Gs3.m4a",
+            "rootNote": 56,
+            "lo": 56,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.5004
+          },
+          {
+            "file": "greengretsch/greengretsch_A3.m4a",
+            "rootNote": 57,
+            "lo": 57,
+            "hi": 57,
+            "placeholder": "organ",
+            "gain": 0.6952
+          },
+          {
+            "file": "greengretsch/greengretsch_As3.m4a",
+            "rootNote": 58,
+            "lo": 58,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.4746
+          },
+          {
+            "file": "greengretsch/greengretsch_B3.m4a",
+            "rootNote": 59,
+            "lo": 59,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.503
+          },
+          {
+            "file": "greengretsch/greengretsch_C4.m4a",
+            "rootNote": 60,
+            "lo": 60,
+            "hi": 60,
+            "placeholder": "organ",
+            "gain": 0.4032
+          },
+          {
+            "file": "greengretsch/greengretsch_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 61,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.4362
+          },
+          {
+            "file": "greengretsch/greengretsch_D4.m4a",
+            "rootNote": 62,
+            "lo": 62,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.3975
+          },
+          {
+            "file": "greengretsch/greengretsch_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 63,
+            "hi": 63,
+            "placeholder": "organ",
+            "gain": 0.3984
+          },
+          {
+            "file": "greengretsch/greengretsch_E4.m4a",
+            "rootNote": 64,
+            "lo": 64,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.4042
+          },
+          {
+            "file": "greengretsch/greengretsch_F4.m4a",
+            "rootNote": 65,
+            "lo": 65,
+            "hi": 65,
+            "placeholder": "organ",
+            "gain": 0.318
+          },
+          {
+            "file": "greengretsch/greengretsch_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 66,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.3269
+          },
+          {
+            "file": "greengretsch/greengretsch_G4.m4a",
+            "rootNote": 67,
+            "lo": 67,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.3242
+          },
+          {
+            "file": "greengretsch/greengretsch_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 68,
+            "hi": 68,
+            "placeholder": "organ",
+            "gain": 0.4095
+          },
+          {
+            "file": "greengretsch/greengretsch_A4.m4a",
+            "rootNote": 69,
+            "lo": 69,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.6132
+          },
+          {
+            "file": "greengretsch/greengretsch_As4.m4a",
+            "rootNote": 70,
+            "lo": 70,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.3367
+          },
+          {
+            "file": "greengretsch/greengretsch_B4.m4a",
+            "rootNote": 71,
+            "lo": 71,
+            "hi": 71,
+            "placeholder": "organ",
+            "gain": 0.5618
+          },
+          {
+            "file": "greengretsch/greengretsch_C5.m4a",
+            "rootNote": 72,
+            "lo": 72,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.6857
+          },
+          {
+            "file": "greengretsch/greengretsch_Cs5.m4a",
+            "rootNote": 73,
+            "lo": 73,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.6887
+          },
+          {
+            "file": "greengretsch/greengretsch_D5.m4a",
+            "rootNote": 74,
+            "lo": 74,
+            "hi": 74,
+            "placeholder": "organ",
+            "gain": 0.727
+          },
+          {
+            "file": "greengretsch/greengretsch_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 75,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.5086
+          },
+          {
+            "file": "greengretsch/greengretsch_E5.m4a",
+            "rootNote": 76,
+            "lo": 76,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.8259
+          },
+          {
+            "file": "greengretsch/greengretsch_F5.m4a",
+            "rootNote": 77,
+            "lo": 77,
+            "hi": 77,
+            "placeholder": "organ",
+            "gain": 0.9258
+          },
+          {
+            "file": "greengretsch/greengretsch_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 78,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.4256
+          },
+          {
+            "file": "greengretsch/greengretsch_G5.m4a",
+            "rootNote": 79,
+            "lo": 79,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.5103
+          },
+          {
+            "file": "greengretsch/greengretsch_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 80,
+            "hi": 80,
+            "placeholder": "organ",
+            "gain": 0.5939
+          },
+          {
+            "file": "greengretsch/greengretsch_A5.m4a",
+            "rootNote": 81,
+            "lo": 81,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.5456
+          },
+          {
+            "file": "greengretsch/greengretsch_As5.m4a",
+            "rootNote": 82,
+            "lo": 82,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.794
+          },
+          {
+            "file": "greengretsch/greengretsch_B5.m4a",
+            "rootNote": 83,
+            "lo": 83,
+            "hi": 83,
+            "placeholder": "organ",
+            "gain": 0.7552
+          },
+          {
+            "file": "greengretsch/greengretsch_C6.m4a",
+            "rootNote": 84,
+            "lo": 84,
+            "hi": 84,
+            "placeholder": "organ",
+            "gain": 0.5508
+          },
+          {
+            "file": "greengretsch/greengretsch_Cs6.m4a",
+            "rootNote": 85,
+            "lo": 85,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.4434
+          },
+          {
+            "file": "greengretsch/greengretsch_D6.m4a",
+            "rootNote": 86,
+            "lo": 86,
+            "hi": 88,
+            "placeholder": "organ",
+            "gain": 0.5963
+          }
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
       }
     },
     {
@@ -13839,6 +15721,180 @@
       }
     },
     {
+      "id": "martinhd28",
+      "name": "Martin HD-28",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/martinhd28-1_0_0.zip",
+      "bytes": 1237250,
+      "crc32": 1018709004,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sfzinstruments/Discord-SFZ-GM-Bank/tree/master/Discord%20GM/Melodic/026-Acoustic%20Guitar%20(steel)",
+        "credit": "Martin HD-28 by Jeff Learman, Discord SFZ GM Bank (026 Acoustic Guitar, steel), CC0"
+      },
+      "manifest": {
+        "id": "martinhd28",
+        "name": "Martin HD-28",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 40,
+          "hi": 85
+        },
+        "defaultView": {
+          "lo": 50,
+          "hi": 74
+        },
+        "shade": "yellow",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sfzinstruments/Discord-SFZ-GM-Bank/tree/master/Discord%20GM/Melodic/026-Acoustic%20Guitar%20(steel)",
+          "credit": "Martin HD-28 by Jeff Learman, Discord SFZ GM Bank (026 Acoustic Guitar, steel), CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "martinhd28/martinhd28_E2.m4a",
+            "rootNote": 40,
+            "lo": 40,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 0.468
+          },
+          {
+            "file": "martinhd28/martinhd28_G2.m4a",
+            "rootNote": 43,
+            "lo": 42,
+            "hi": 44,
+            "placeholder": "organ",
+            "gain": 0.58
+          },
+          {
+            "file": "martinhd28/martinhd28_As2.m4a",
+            "rootNote": 46,
+            "lo": 45,
+            "hi": 47,
+            "placeholder": "organ",
+            "gain": 0.5098
+          },
+          {
+            "file": "martinhd28/martinhd28_Cs3.m4a",
+            "rootNote": 49,
+            "lo": 48,
+            "hi": 50,
+            "placeholder": "organ",
+            "gain": 0.4295
+          },
+          {
+            "file": "martinhd28/martinhd28_E3.m4a",
+            "rootNote": 52,
+            "lo": 51,
+            "hi": 53,
+            "placeholder": "organ",
+            "gain": 0.437
+          },
+          {
+            "file": "martinhd28/martinhd28_G3.m4a",
+            "rootNote": 55,
+            "lo": 54,
+            "hi": 56,
+            "placeholder": "organ",
+            "gain": 0.5449
+          },
+          {
+            "file": "martinhd28/martinhd28_As3.m4a",
+            "rootNote": 58,
+            "lo": 57,
+            "hi": 59,
+            "placeholder": "organ",
+            "gain": 0.4615
+          },
+          {
+            "file": "martinhd28/martinhd28_Cs4.m4a",
+            "rootNote": 61,
+            "lo": 60,
+            "hi": 62,
+            "placeholder": "organ",
+            "gain": 0.4349
+          },
+          {
+            "file": "martinhd28/martinhd28_E4.m4a",
+            "rootNote": 64,
+            "lo": 63,
+            "hi": 66,
+            "placeholder": "organ",
+            "gain": 0.3202
+          },
+          {
+            "file": "martinhd28/martinhd28_Gs4.m4a",
+            "rootNote": 68,
+            "lo": 67,
+            "hi": 69,
+            "placeholder": "organ",
+            "gain": 0.4831
+          },
+          {
+            "file": "martinhd28/martinhd28_B4.m4a",
+            "rootNote": 71,
+            "lo": 70,
+            "hi": 72,
+            "placeholder": "organ",
+            "gain": 0.3597
+          },
+          {
+            "file": "martinhd28/martinhd28_D5.m4a",
+            "rootNote": 74,
+            "lo": 73,
+            "hi": 75,
+            "placeholder": "organ",
+            "gain": 0.561
+          },
+          {
+            "file": "martinhd28/martinhd28_F5.m4a",
+            "rootNote": 77,
+            "lo": 76,
+            "hi": 78,
+            "placeholder": "organ",
+            "gain": 0.3424
+          },
+          {
+            "file": "martinhd28/martinhd28_Gs5.m4a",
+            "rootNote": 80,
+            "lo": 79,
+            "hi": 81,
+            "placeholder": "organ",
+            "gain": 0.4728
+          },
+          {
+            "file": "martinhd28/martinhd28_B5.m4a",
+            "rootNote": 83,
+            "lo": 82,
+            "hi": 85,
+            "placeholder": "organ",
+            "gain": 0.4923
+          }
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
+      }
+    },
+    {
       "id": "naturesounds",
       "name": "Edinburgh Nature",
       "family": "drums",
@@ -14398,7 +16454,14 @@
             "placeholder": "organ",
             "gain": 0.4784
           }
-        ]
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
       }
     },
     {
@@ -15971,6 +18034,386 @@
             "gain": 4.0288
           }
         ]
+      }
+    },
+    {
+      "id": "shinymic",
+      "name": "Shiny Guitar - Mic",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/shinymic-1_0_0.zip",
+      "bytes": 1466236,
+      "crc32": 4193161790,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sfzinstruments/karoryfer.shinyguitar",
+        "credit": "Shinyguitar by Karoryfer Lecolds (played and mapped by D. Smolken), CC0"
+      },
+      "manifest": {
+        "id": "shinymic",
+        "name": "Shiny Guitar - Mic",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 37,
+          "hi": 86
+        },
+        "defaultView": {
+          "lo": 49,
+          "hi": 73
+        },
+        "shade": "silver",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sfzinstruments/karoryfer.shinyguitar",
+          "credit": "Shinyguitar by Karoryfer Lecolds (played and mapped by D. Smolken), CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "shinymic/shinymic_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 0.7641
+          },
+          {
+            "file": "shinymic/shinymic_E2.m4a",
+            "rootNote": 40,
+            "lo": 39,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 0.7185
+          },
+          {
+            "file": "shinymic/shinymic_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 0.6888
+          },
+          {
+            "file": "shinymic/shinymic_A2.m4a",
+            "rootNote": 45,
+            "lo": 44,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 0.6118
+          },
+          {
+            "file": "shinymic/shinymic_C3.m4a",
+            "rootNote": 48,
+            "lo": 47,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.4855
+          },
+          {
+            "file": "shinymic/shinymic_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 50,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.458
+          },
+          {
+            "file": "shinymic/shinymic_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 53,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.4626
+          },
+          {
+            "file": "shinymic/shinymic_A3.m4a",
+            "rootNote": 57,
+            "lo": 56,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.4195
+          },
+          {
+            "file": "shinymic/shinymic_C4.m4a",
+            "rootNote": 60,
+            "lo": 59,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.3461
+          },
+          {
+            "file": "shinymic/shinymic_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 62,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.3607
+          },
+          {
+            "file": "shinymic/shinymic_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 65,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.4268
+          },
+          {
+            "file": "shinymic/shinymic_A4.m4a",
+            "rootNote": 69,
+            "lo": 68,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.5979
+          },
+          {
+            "file": "shinymic/shinymic_C5.m4a",
+            "rootNote": 72,
+            "lo": 71,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.6984
+          },
+          {
+            "file": "shinymic/shinymic_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 74,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.5151
+          },
+          {
+            "file": "shinymic/shinymic_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 77,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.5696
+          },
+          {
+            "file": "shinymic/shinymic_A5.m4a",
+            "rootNote": 81,
+            "lo": 80,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.5538
+          },
+          {
+            "file": "shinymic/shinymic_C6.m4a",
+            "rootNote": 84,
+            "lo": 83,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.6194
+          }
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
+      }
+    },
+    {
+      "id": "shinypickup",
+      "name": "Shiny Guitar - Pickup",
+      "family": "keys",
+      "kind": "pitched",
+      "version": "1.0.0",
+      "file": "packs/shinypickup-1_0_0.zip",
+      "bytes": 1603675,
+      "crc32": 1798538149,
+      "license": {
+        "spdx": "CC0-1.0",
+        "source": "https://github.com/sfzinstruments/karoryfer.shinyguitar",
+        "credit": "Shinyguitar by Karoryfer Lecolds (played and mapped by D. Smolken), CC0"
+      },
+      "manifest": {
+        "id": "shinypickup",
+        "name": "Shiny Guitar - Pickup",
+        "version": "1.0.0",
+        "family": "keys",
+        "category": "guitar",
+        "kind": "pitched",
+        "range": {
+          "lo": 37,
+          "hi": 86
+        },
+        "defaultView": {
+          "lo": 49,
+          "hi": 73
+        },
+        "shade": "silver",
+        "license": {
+          "spdx": "CC0-1.0",
+          "source": "https://github.com/sfzinstruments/karoryfer.shinyguitar",
+          "credit": "Shinyguitar by Karoryfer Lecolds (played and mapped by D. Smolken), CC0"
+        },
+        "envelope": {
+          "attack": 0.002,
+          "release": 0.4
+        },
+        "trim": 1,
+        "accentGain": 1.5,
+        "polyphony": 8,
+        "voicesAtOnce": 4,
+        "zones": [
+          {
+            "file": "shinypickup/shinypickup_Cs2.m4a",
+            "rootNote": 37,
+            "lo": 37,
+            "hi": 38,
+            "placeholder": "organ",
+            "gain": 1.3135
+          },
+          {
+            "file": "shinypickup/shinypickup_E2.m4a",
+            "rootNote": 40,
+            "lo": 39,
+            "hi": 41,
+            "placeholder": "organ",
+            "gain": 1.0293
+          },
+          {
+            "file": "shinypickup/shinypickup_Fs2.m4a",
+            "rootNote": 42,
+            "lo": 42,
+            "hi": 43,
+            "placeholder": "organ",
+            "gain": 1.2494
+          },
+          {
+            "file": "shinypickup/shinypickup_A2.m4a",
+            "rootNote": 45,
+            "lo": 44,
+            "hi": 46,
+            "placeholder": "organ",
+            "gain": 1.0571
+          },
+          {
+            "file": "shinypickup/shinypickup_C3.m4a",
+            "rootNote": 48,
+            "lo": 47,
+            "hi": 49,
+            "placeholder": "organ",
+            "gain": 0.7491
+          },
+          {
+            "file": "shinypickup/shinypickup_Ds3.m4a",
+            "rootNote": 51,
+            "lo": 50,
+            "hi": 52,
+            "placeholder": "organ",
+            "gain": 0.5583
+          },
+          {
+            "file": "shinypickup/shinypickup_Fs3.m4a",
+            "rootNote": 54,
+            "lo": 53,
+            "hi": 55,
+            "placeholder": "organ",
+            "gain": 0.4546
+          },
+          {
+            "file": "shinypickup/shinypickup_A3.m4a",
+            "rootNote": 57,
+            "lo": 56,
+            "hi": 58,
+            "placeholder": "organ",
+            "gain": 0.4872
+          },
+          {
+            "file": "shinypickup/shinypickup_C4.m4a",
+            "rootNote": 60,
+            "lo": 59,
+            "hi": 61,
+            "placeholder": "organ",
+            "gain": 0.3728
+          },
+          {
+            "file": "shinypickup/shinypickup_Ds4.m4a",
+            "rootNote": 63,
+            "lo": 62,
+            "hi": 64,
+            "placeholder": "organ",
+            "gain": 0.3708
+          },
+          {
+            "file": "shinypickup/shinypickup_Fs4.m4a",
+            "rootNote": 66,
+            "lo": 65,
+            "hi": 67,
+            "placeholder": "organ",
+            "gain": 0.3723
+          },
+          {
+            "file": "shinypickup/shinypickup_A4.m4a",
+            "rootNote": 69,
+            "lo": 68,
+            "hi": 70,
+            "placeholder": "organ",
+            "gain": 0.572
+          },
+          {
+            "file": "shinypickup/shinypickup_C5.m4a",
+            "rootNote": 72,
+            "lo": 71,
+            "hi": 73,
+            "placeholder": "organ",
+            "gain": 0.4705
+          },
+          {
+            "file": "shinypickup/shinypickup_Ds5.m4a",
+            "rootNote": 75,
+            "lo": 74,
+            "hi": 76,
+            "placeholder": "organ",
+            "gain": 0.4089
+          },
+          {
+            "file": "shinypickup/shinypickup_Fs5.m4a",
+            "rootNote": 78,
+            "lo": 77,
+            "hi": 79,
+            "placeholder": "organ",
+            "gain": 0.4017
+          },
+          {
+            "file": "shinypickup/shinypickup_A5.m4a",
+            "rootNote": 81,
+            "lo": 80,
+            "hi": 82,
+            "placeholder": "organ",
+            "gain": 0.5282
+          },
+          {
+            "file": "shinypickup/shinypickup_C6.m4a",
+            "rootNote": 84,
+            "lo": 83,
+            "hi": 86,
+            "placeholder": "organ",
+            "gain": 0.4241
+          }
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
       }
     },
     {
@@ -19315,7 +21758,14 @@
             "placeholder": "organ",
             "gain": 0.8082
           }
-        ]
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
       }
     },
     {
@@ -26483,7 +28933,14 @@
             "placeholder": "organ",
             "gain": 0.546
           }
-        ]
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
       }
     },
     {
@@ -26794,7 +29251,14 @@
             "placeholder": "organ",
             "gain": 0.4844
           }
-        ]
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
       }
     },
     {
@@ -27105,7 +29569,14 @@
             "placeholder": "organ",
             "gain": 0.5191
           }
-        ]
+        ],
+        "strum": {
+          "downTime": 0.024,
+          "upTime": 0.018,
+          "upVelocity": 0.82,
+          "downTaper": 0.96,
+          "upTaper": 0.9
+        }
       }
     },
     {

@@ -12180,6 +12180,57 @@ function collectSongEvents({ song, fromTick, toTick, withSegments = false }) {
   return events;
 }
 
+// Strumming, for kits whose manifest sets `strum` (the Guitar category). Notes that start on the same tick on a track are one stroke
+// across the strings: low to high on a downstroke, high to low on an upstroke, the upstroke quicker and lighter. A stroke takes the same
+// time however many strings it has, so the strings of a six-string chord sit closer together than those of a three-note one.
+// Strokes strictly alternate, down then up, in time order through the clip, whatever the rhythm; a clip starts on a downstroke.
+// Single notes count as strokes too (alternate picking).
+const STRUM_DEFAULTS = Object.freeze({
+  downTime: 0.024, // seconds from the first string of a downstroke to its last, however many strings it has
+  upTime: 0.018, // the same for an upstroke, which is quicker
+  upVelocity: 0.82, // the first string of an upstroke, as a factor on the note's velocity
+  downTaper: 0.96, // each further string of a downstroke
+  upTaper: 0.9, // each further string of an upstroke
+});
+
+function strumSettings(strum) {
+  if (!strum) return null;
+  const s = { ...STRUM_DEFAULTS, ...(typeof strum === 'object' ? strum : {}) };
+  const num = (v, lo, hi, d) => (Number.isFinite(v) ? Math.max(lo, Math.min(hi, v)) : d);
+  return {
+    downTime: num(s.downTime, 0, 0.1, STRUM_DEFAULTS.downTime),
+    upTime: num(s.upTime, 0, 0.1, STRUM_DEFAULTS.upTime),
+    upVelocity: num(s.upVelocity, 0, 1, STRUM_DEFAULTS.upVelocity),
+    downTaper: num(s.downTaper, 0, 1, STRUM_DEFAULTS.downTaper),
+    upTaper: num(s.upTaper, 0, 1, STRUM_DEFAULTS.upTaper),
+  };
+}
+
+// Each note's place in its stroke: Map(note -> { down, delay: seconds after the note's own start, velocity: factor }).
+function strumPlan(notes, strum) {
+  const s = strumSettings(strum);
+  const plan = new Map();
+  if (!s || !notes || !notes.length) return plan;
+  const byStart = new Map();
+  for (const n of notes) {
+    if (!byStart.has(n.start)) byStart.set(n.start, []);
+    byStart.get(n.start).push(n);
+  }
+  [...byStart.keys()].sort((a, b) => a - b).forEach((start, i) => {
+    const down = i % 2 === 0;
+    const stroke = byStart.get(start).slice().sort((a, b) => (down ? a.pitch - b.pitch : b.pitch - a.pitch));
+    const step = stroke.length > 1 ? (down ? s.downTime : s.upTime) / (stroke.length - 1) : 0;
+    stroke.forEach((n, k) => {
+      plan.set(n, {
+        down,
+        delay: k * step,
+        velocity: (down ? 1 : s.upVelocity) * (down ? s.downTaper : s.upTaper) ** k,
+      });
+    });
+  });
+  return plan;
+}
+
 function collectSegment(song, sectionId, offset, lengthTicks, fromTick, toTick, iteration, events, withSegments) {
   const section = song.sections[sectionId];
   if (!section) return;
@@ -12192,9 +12243,11 @@ function collectSegment(song, sectionId, offset, lengthTicks, fromTick, toTick, 
     if (soloed && !track.solo) continue;
     const clip = section.clips[track.id];
     if (!clip) continue;
-    const slides = Boolean(kitById(track.kitId, track).slideSeconds);
+    const kit = kitById(track.kitId, track);
+    const slides = Boolean(kit.slideSeconds);
     const played = track.arp && track.arp.on ? arpeggiate(clip.notes, track.arp) : clip.notes;
     const sorted = slides ? [...played].sort((a, b) => a.start - b.start) : played;
+    const strokes = kit.strum ? strumPlan(played, kit.strum) : null;
     for (let i = 0; i < sorted.length; i++) {
       const note = sorted[i];
       if (note.start >= lengthTicks) continue;
@@ -12203,7 +12256,7 @@ function collectSegment(song, sectionId, offset, lengthTicks, fromTick, toTick, 
       const duration = Math.min(end, lengthTicks) - note.start;
       const at = offset + note.start;
       if (at >= fromTick && at < toTick) {
-        events.push({ trackId: track.id, note, tick: at, duration, iteration, sectionId });
+        events.push({ trackId: track.id, note, tick: at, duration, iteration, sectionId, strum: strokes ? strokes.get(note) || null : null });
       }
     }
   }
@@ -12924,9 +12977,10 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       
       
       const offset = timingTicks(timingFor(track, ev)) * (ev.secondsPerTick || 0);
-      const at = Number.isFinite(offset) ? Math.max(ctx.currentTime, ev.time - offset) : ev.time;
+      const stroke = ev.strum;
+      const at = (Number.isFinite(offset) ? Math.max(ctx.currentTime, ev.time - offset) : ev.time) + (stroke ? stroke.delay : 0);
 
-      player.sampler.noteOn(ev.note.pitch, ev.note.velocity, at, {
+      player.sampler.noteOn(ev.note.pitch, stroke ? ev.note.velocity * stroke.velocity : ev.note.velocity, at, {
         duration: ev.durationSeconds,
         gateRelease: gateReleaseFor(getSong().bpm, ev.durationSeconds),
         accent: ev.note.flags && ev.note.flags.accent,
@@ -14136,7 +14190,9 @@ async function renderSong({
   for (const event of events) {
     const player = engine.players.get(event.trackId);
     if (!player || !player.sampler) continue;
-    player.sampler.noteOn(event.note.pitch, event.note.velocity, event.tick * secondsPerTick, {
+    const stroke = event.strum;
+    player.sampler.noteOn(event.note.pitch, stroke ? event.note.velocity * stroke.velocity : event.note.velocity,
+      event.tick * secondsPerTick + (stroke ? stroke.delay : 0), {
       duration: event.duration * secondsPerTick,
       gateRelease: gateReleaseFor(song.bpm, event.duration * secondsPerTick),
       accent: event.note.flags && event.note.flags.accent,
