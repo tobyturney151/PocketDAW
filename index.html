@@ -1147,6 +1147,20 @@ html, body {
    select text or bring up the magnifier, which would take the touch. */
 .arrname-button, .arrgrip { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 
+/* The New notes block: Velocity and Strum share a label column, so their sliders line up. */
+.notelabel { flex: 0 0 52px; }
+/* Three words of different lengths: a grid keeps the middle one under the slider's middle. */
+.strumscale { display: grid; grid-template-columns: 1fr auto 1fr; }
+.strumscale span:last-child { text-align: right; }
+/* The strum card: slider and switch in one box, apart from Velocity above, as the Duck card is apart from the chips. */
+.strumcard { background: var(--cell); border-radius: 12px; margin-top: 10px; }
+.strumcard > .row { background: transparent; }
+.strumdivider { height: 1px; background: var(--line); opacity: 0.5; margin: 0 14px; }
+/* The strum box in an unlocked section: that section's own, tinted as the section sheet's unlock row is. */
+.strumcard-own { background: var(--on-purple); }
+.strumown { font-size: 11px; color: var(--purple-light); padding: 10px 14px 0; }
+.strumcard-own .strumdivider { background: var(--purple-light); opacity: 0.25; }
+
 </style>
 </head>
 <body>
@@ -1186,7 +1200,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-10-11 16:07 from src/. */
+/* PocketDAW - phase 2. Built 2026-10-25 17:07 from src/. */
 (function () {
 'use strict';
 
@@ -2278,6 +2292,52 @@ function validateSong(song) {
 function hiddenNoteCount(clip, lengthBars) {
   const end = sectionTicks(lengthBars);
   return clip.notes.filter((n) => n.start >= end).length;
+}
+
+const SPREAD_MAX = 4;
+
+const GUITAR_STRUM_DEFAULTS = Object.freeze({ spread: 1, alternate: true });
+const KEYS_STRUM_DEFAULTS = Object.freeze({ spread: 0, alternate: false });
+
+const KEYS_STRUM = Object.freeze({ downTime: 0.024, upTime: 0.018, upVelocity: 1, downTaper: 1, upTaper: 1 });
+
+function kitStrum(kit) {
+  if (!kit) return null;
+  if (kit.strum) return kit.strum;
+  return kit.kind !== 'drum' && categoryOf(kit) === 'keys' ? KEYS_STRUM : null;
+}
+
+function strumDefaultsFor(kit) {
+  return kit && kit.strum ? GUITAR_STRUM_DEFAULTS : KEYS_STRUM_DEFAULTS;
+}
+
+function strumIn(section, track) {
+  if (section && section.unlocked && section.strum && Object.prototype.hasOwnProperty.call(section.strum, track.id)) {
+    return section.strum[track.id] || null;
+  }
+  return (track && track.strum) || null;
+}
+
+function trackStrum(track, defaults = GUITAR_STRUM_DEFAULTS) {
+  const t = (track && track.strum) || {};
+  return {
+    spread: Number.isFinite(t.spread) ? Math.max(0, Math.min(SPREAD_MAX, t.spread)) : defaults.spread,
+    alternate: typeof t.alternate === 'boolean' ? t.alternate : defaults.alternate,
+  };
+}
+
+const spreadAt = (position) => (Math.max(0, Math.min(100, position)) / 50) ** 2;
+const positionOf = (spread) => 50 * Math.sqrt(Math.max(0, Math.min(SPREAD_MAX, spread)));
+const snapPosition = (position) => (Math.abs(position - 50) <= 3 ? 50 : position);
+
+const strumMs = (downTime, spread) => Math.round(downTime * spread * 1000);
+
+function storedStrum(strum) {
+  if (!strum || typeof strum !== 'object') return null;
+  const out = {};
+  if (Number.isFinite(strum.spread)) out.spread = Math.max(0, Math.min(SPREAD_MAX, strum.spread));
+  if (typeof strum.alternate === 'boolean') out.alternate = strum.alternate;
+  return Object.keys(out).length ? out : null;
 }
 
 const EXAMPLE_SONGS = [
@@ -3946,6 +4006,8 @@ function buildExampleSong(piece) {
       if (Number.isFinite(t.pan)) track.pan = t.pan;
       if (Number.isFinite(t.timing)) track.timing = t.timing;
       if (Number.isFinite(t.reverb) && t.reverb > 0) track.sends = { ...(track.sends || {}), reverb: t.reverb };
+      const strum = storedStrum(t.strum);
+      if (strum) track.strum = strum;
       return track;
     });
   } else {
@@ -3963,7 +4025,8 @@ function buildExampleSong(piece) {
     
     const ownTempo = Number.isFinite(part.bpm) ? part.bpm : undefined;
     const ownBeats = Number.isInteger(part.beatsPerBar) ? part.beatsPerBar : undefined;
-    const differs = part.key !== piece.key || scaleId !== piece.scaleId || ownTempo !== undefined || ownBeats !== undefined;
+    const ownStrum = part.strum && typeof part.strum === 'object' ? part.strum : undefined;
+    const differs = part.key !== piece.key || scaleId !== piece.scaleId || ownTempo !== undefined || ownBeats !== undefined || ownStrum !== undefined;
     const lists = Array.isArray(part.parts) ? part.parts : [part.notes];
     const clips = {};
     tracks.forEach((track, t) => {
@@ -3987,6 +4050,7 @@ function buildExampleSong(piece) {
       scaleId: differs ? scaleId : undefined,
       ...(ownTempo !== undefined ? { bpm: ownTempo } : {}),
       ...(ownBeats !== undefined ? { beatsPerBar: ownBeats } : {}),
+      ...(ownStrum !== undefined ? { strum: Object.fromEntries(tracks.map((track, t) => [track.id, storedStrum(ownStrum[t])])) } : {}),
       clips,
     };
     song.sectionOrder.push(id);
@@ -6087,16 +6151,33 @@ function setNotesFlag(song, ctx, ids, flag, value) {
 function setSectionUnlocked(song, sectionId, unlocked) {
   const section = song.sections[sectionId];
   if (!section || Boolean(section.unlocked) === Boolean(unlocked)) return null;
-  const before = { unlocked: section.unlocked, bpm: section.bpm, key: section.key, scaleId: section.scaleId };
+  const before = { unlocked: section.unlocked, bpm: section.bpm, key: section.key, scaleId: section.scaleId, strum: section.strum };
+  const strum = Object.fromEntries(song.tracks.map((t) => [t.id, t.strum ? JSON.parse(JSON.stringify(t.strum)) : null]));
   const after = unlocked
-    ? { unlocked: true, bpm: sectionTempo(song, section), key: sectionKey(song, section), scaleId: sectionScaleId(song, section) }
-    : { unlocked: false, bpm: undefined, key: undefined, scaleId: undefined };
+    ? { unlocked: true, bpm: sectionTempo(song, section), key: sectionKey(song, section), scaleId: sectionScaleId(song, section), strum }
+    : { unlocked: false, bpm: undefined, key: undefined, scaleId: undefined, strum: undefined };
   Object.assign(section, after);
   return {
     label: unlocked ? 'Unlock section' : 'Lock section to the song',
     undo: () => Object.assign(section, before),
     redo: () => Object.assign(section, after),
   };
+}
+
+function setStrum(song, sectionId, trackId, value) {
+  const section = song.sections[sectionId];
+  if (section && section.unlocked) {
+    const before = section.strum;
+    const after = { ...(section.strum || {}), [trackId]: value };
+    section.strum = after;
+    return {
+      label: 'Change strum',
+      coalesceKey: `section:${sectionId}:strum:${trackId}`,
+      undo: () => { section.strum = before; },
+      redo: () => { section.strum = after; },
+    };
+  }
+  return setTrackField(song, trackId, 'strum', value);
 }
 
 function setSectionSetting(song, sectionId, field, value) {
@@ -6455,6 +6536,7 @@ function splitSection(song, sectionId, atBar) {
   ['unlocked', 'bpm', 'key', 'scaleId', 'beatsPerBar'].forEach((f) => {
     if (source[f] !== undefined) second[f] = source[f];
   });
+  if (source.strum !== undefined) second.strum = JSON.parse(JSON.stringify(source.strum));
   Object.entries(source.clips).forEach(([trackId, clip]) => {
     const tail = createClip();
     tail.notes = clip.notes.filter((n) => n.start >= cut).map((n) => ({ ...n, start: n.start - cut }));
@@ -6662,14 +6744,25 @@ function duplicateTrack(song, trackId) {
     (cc.hidden || []).forEach((h) => { h.note = { ...h.note, id: newId('n') }; });
     clips[sid] = cc;
   });
+  const strums = Object.fromEntries(song.sectionOrder
+    .filter((sid) => song.sections[sid].strum && Object.prototype.hasOwnProperty.call(song.sections[sid].strum, trackId))
+    .map((sid) => [sid, song.sections[sid].strum[trackId]]));
   const add = () => {
     song.tracks.splice(at + 1, 0, copy);
     Object.entries(clips).forEach(([sid, c]) => { song.sections[sid].clips[copy.id] = JSON.parse(JSON.stringify(c)); });
+    Object.entries(strums).forEach(([sid, value]) => {
+      song.sections[sid].strum = { ...song.sections[sid].strum, [copy.id]: value ? JSON.parse(JSON.stringify(value)) : null };
+    });
   };
   const remove = () => {
     const j = song.tracks.findIndex((t) => t.id === copy.id);
     if (j >= 0) song.tracks.splice(j, 1);
     Object.keys(clips).forEach((sid) => { delete song.sections[sid].clips[copy.id]; });
+    Object.keys(strums).forEach((sid) => {
+      const own = { ...song.sections[sid].strum };
+      delete own[copy.id];
+      song.sections[sid].strum = own;
+    });
   };
   add();
   return { label: 'Duplicate track', trackId: copy.id, undo: remove, redo: add };
@@ -8560,8 +8653,21 @@ function arrangementSheet(store, onChange) {
 
 const lastTaps = new Map();
 
-let barsHeld = 0;
-const barBusy = () => barsHeld > 0;
+const holds = new Set();
+const barBusy = () => holds.size > 0;
+function takeHold() {
+  const token = {};
+  holds.add(token);
+  return () => { holds.delete(token); };
+}
+
+function dropHolds() {
+  const had = holds.size > 0;
+  holds.clear();
+  return had;
+}
+
+let drawing = 0;
 
 function makeBar({ kind, key, width, colour, value, fill, mark, text, fracOf, valueAt, write, reset, onLive, onChange, ariaLabel }) {
   const base = el('span', { class: 'arrbar-text' });
@@ -8585,15 +8691,20 @@ function makeBar({ kind, key, width, colour, value, fill, mark, text, fracOf, va
   };
   show(value);
   let pressed = false;
+  let letGo = null;
   let dragging = false;
   let downX = 0;
   let startFrac = 0;
   const set = (v) => { write(v); show(v); if (onLive) onLive(); };
-  const release = () => { if (pressed) { pressed = false; barsHeld = Math.max(0, barsHeld - 1); } };
+  const release = () => {
+    pressed = false;
+    if (letGo) { letGo(); letGo = null; }
+  };
   node.addEventListener('pointerdown', (e) => {
     if (e.stopPropagation) e.stopPropagation();
     if (e.preventDefault) e.preventDefault();
-    if (!pressed) barsHeld++;
+    if (letGo) letGo();
+    letGo = takeHold();
     pressed = true;
     dragging = false;
     downX = e.clientX || 0;
@@ -8638,6 +8749,7 @@ function arrangementMatrix(store, onChange, {
   hint = true,
 }) {
   const { song, view } = store.state;
+  const mine = ++drawing;
   const trackButtons = {};
   const trackGrips = {};
   const suppressTap = {};
@@ -8952,6 +9064,7 @@ function arrangementMatrix(store, onChange, {
     const on = (type, fn) => [button, trackGrips[track.id]].filter(Boolean).forEach((n) => n.addEventListener(type, fn));
     let timer = null;
     let dragging = false;
+    let letGo = null;
     let moved = false;
     let originY = 0;
     let target = 0;
@@ -8968,23 +9081,32 @@ function arrangementMatrix(store, onChange, {
     const clear = () => rowsNow().forEach((r) => { if (r) { r.style.transform = ''; r.style.zIndex = ''; r.classList && r.classList.remove('arrrow-dragging'); } });
     const finish = (commit) => {
       if (timer) { clearTimeout(timer); timer = null; }
+      if (letGo) { letGo(); letGo = null; }
       if (!dragging) return;
       dragging = false;
-      barsHeld = Math.max(0, barsHeld - 1);
       const from = song.tracks.findIndex((t) => t.id === track.id);
       clear();
       suppressTap[track.id] = true;
       if (commit && moved && target !== from) run((s) => moveTrack(s, track.id, target));
       else if (commit && !moved && onTrackMenu) onTrackMenu(button, track.id);
+      else if (!commit) onChange();
     };
     on('pointerdown', (e) => {
       originY = e.clientY || 0;
       moved = false;
+      if (timer) clearTimeout(timer);
+      if (letGo) { letGo(); letGo = null; }
+      dragging = false;
       target = song.tracks.findIndex((t) => t.id === track.id);
+      
+      letGo = takeHold();
       timer = setTimeout(() => {
         timer = null;
+        if (mine !== drawing) {
+          if (letGo) { letGo(); letGo = null; }
+          return;
+        }
         dragging = true;
-        barsHeld++;
         const row = rowOf(button);
         if (row) { row.style.zIndex = '5'; row.classList && row.classList.add('arrrow-dragging'); }
       }, 300);
@@ -8996,7 +9118,11 @@ function arrangementMatrix(store, onChange, {
     on('pointermove', (e) => {
       const dy = (e.clientY || 0) - originY;
       if (!dragging) {
-        if (timer && Math.abs(dy) > 10) { clearTimeout(timer); timer = null; }
+        if (timer && Math.abs(dy) > 10) {
+          clearTimeout(timer);
+          timer = null;
+          if (letGo) { letGo(); letGo = null; }
+        }
         return;
       }
       if (e.preventDefault) e.preventDefault();
@@ -9369,8 +9495,19 @@ function arrangementScreen(store, onChange, {
   onTrackMenu = null,
   onLive,
   onPlayhead,
+  onPlayButton = null,
 }) {
   const { song } = store.state;
+  
+  const hero = el('button', { class: 'heroplay', type: 'button', onClick: togglePlay });
+  const paintPlay = (on) => {
+    hero.className = `heroplay${on ? ' heroplay-on' : ''}`;
+    hero.setAttribute('title', on ? 'Stop' : 'Play');
+    hero.setAttribute('aria-label', on ? 'Stop' : 'Play');
+    hero.textContent = on ? '\u25a0' : '\u25b6';
+  };
+  paintPlay(playing);
+  if (onPlayButton) onPlayButton(paintPlay);
   const seconds = song.sectionOrder.reduce((t, id) => {
     const sec = song.sections[id];
     if (!sec) return t;
@@ -9392,14 +9529,7 @@ function arrangementScreen(store, onChange, {
           'aria-label': 'Undo',
           onClick: () => { store.undo(); onChange(); },
         }),
-        el('button', {
-          class: `heroplay${playing ? ' heroplay-on' : ''}`,
-          type: 'button',
-          title: playing ? 'Stop' : 'Play',
-          'aria-label': playing ? 'Stop' : 'Play',
-          text: playing ? '\u25a0' : '\u25b6',
-          onClick: togglePlay,
-        }),
+        hero,
         el('button', {
           class: 'icon arrundo',
           type: 'button',
@@ -9799,6 +9929,137 @@ function tremoloCurve({ seconds, cycleSeconds, depth, shape, depthAt = null }) {
   return curve;
 }
 
+function collectEvents({ song, sectionId, fromTick, toTick, withSegments = false }) {
+  const section = song.sections[sectionId];
+  if (!section || toTick <= fromTick) return [];
+  const loopTicks = sectionLengthTicks(song, section);
+  const events = [];
+  const firstIteration = Math.floor(fromTick / loopTicks);
+  const lastIteration = Math.floor((toTick - 1) / loopTicks);
+  for (let k = firstIteration; k <= lastIteration; k++) {
+    collectSegment(song, sectionId, k * loopTicks, loopTicks, fromTick, toTick, k, events, withSegments);
+  }
+  events.sort((a, b) => a.tick - b.tick);
+  return events;
+}
+
+function collectSongEvents({ song, fromTick, toTick, withSegments = false }) {
+  if (toTick <= fromTick) return [];
+  const timeline = songTimeline(song);
+  if (!timeline.totalTicks) return [];
+  const events = [];
+  const firstIteration = Math.floor(fromTick / timeline.totalTicks);
+  const lastIteration = Math.floor((toTick - 1) / timeline.totalTicks);
+  for (let k = firstIteration; k <= lastIteration; k++) {
+    const base = k * timeline.totalTicks;
+    for (const seg of timeline.segments) {
+      const segStart = base + seg.startTick;
+      if (segStart >= toTick || segStart + seg.lengthTicks <= fromTick) continue;
+      collectSegment(song, seg.sectionId, segStart, seg.lengthTicks, fromTick, toTick, k, events, withSegments);
+    }
+  }
+  events.sort((a, b) => a.tick - b.tick);
+  return events;
+}
+
+const STRUM_DEFAULTS = Object.freeze({
+  downTime: 0.024, // seconds from the first string of a downstroke to its last, however many strings it has
+  upTime: 0.018, // the same for an upstroke, which is quicker
+  upVelocity: 0.82, // the first string of an upstroke, as a factor on the note's velocity
+  downTaper: 0.96, // each further string of a downstroke
+  upTaper: 0.9, // each further string of an upstroke
+});
+
+function strumSettings(strum) {
+  if (!strum) return null;
+  const s = { ...STRUM_DEFAULTS, ...(typeof strum === 'object' ? strum : {}) };
+  const num = (v, lo, hi, d) => (Number.isFinite(v) ? Math.max(lo, Math.min(hi, v)) : d);
+  return {
+    downTime: num(s.downTime, 0, 0.1, STRUM_DEFAULTS.downTime),
+    upTime: num(s.upTime, 0, 0.1, STRUM_DEFAULTS.upTime),
+    upVelocity: num(s.upVelocity, 0, 1, STRUM_DEFAULTS.upVelocity),
+    downTaper: num(s.downTaper, 0, 1, STRUM_DEFAULTS.downTaper),
+    upTaper: num(s.upTaper, 0, 1, STRUM_DEFAULTS.upTaper),
+  };
+}
+
+function strumPlan(notes, strum, track = null, defaults = undefined) {
+  const s = strumSettings(strum);
+  const t = trackStrum(track, defaults);
+  const plan = new Map();
+  if (!s || !notes || !notes.length) return plan;
+  if (t.spread === 0 && s.upVelocity === 1 && s.downTaper === 1 && s.upTaper === 1) return plan;
+  const byStart = new Map();
+  for (const n of notes) {
+    if (!byStart.has(n.start)) byStart.set(n.start, []);
+    byStart.get(n.start).push(n);
+  }
+  [...byStart.keys()].sort((a, b) => a - b).forEach((start, i) => {
+    const down = t.alternate ? i % 2 === 0 : true;
+    const stroke = byStart.get(start).slice().sort((a, b) => (down ? a.pitch - b.pitch : b.pitch - a.pitch));
+    const step = stroke.length > 1 ? ((down ? s.downTime : s.upTime) * t.spread) / (stroke.length - 1) : 0;
+    stroke.forEach((n, k) => {
+      plan.set(n, {
+        down,
+        delay: k * step,
+        velocity: (down ? 1 : s.upVelocity) * (down ? s.downTaper : s.upTaper) ** k,
+      });
+    });
+  });
+  return plan;
+}
+
+function collectSegment(song, sectionId, offset, lengthTicks, fromTick, toTick, iteration, events, withSegments) {
+  const section = song.sections[sectionId];
+  if (!section) return;
+  if (withSegments && offset >= fromTick && offset < toTick) {
+    events.push({ kind: 'segment', sectionId, tick: offset, lengthTicks, iteration });
+  }
+  const soloed = song.tracks.some((t) => t.solo && !t.mute);
+  for (const track of song.tracks) {
+    if (track.mute) continue;
+    if (soloed && !track.solo) continue;
+    const clip = section.clips[track.id];
+    if (!clip) continue;
+    const kit = kitById(track.kitId, track);
+    const slides = Boolean(kit.slideSeconds);
+    const played = track.arp && track.arp.on ? arpeggiate(clip.notes, track.arp) : clip.notes;
+    const sorted = slides ? [...played].sort((a, b) => a.start - b.start) : played;
+    const stroke = kitStrum(kit);
+    const strokes = stroke ? strumPlan(played, stroke, { strum: strumIn(section, track) }, strumDefaultsFor(kit)) : null;
+    for (let i = 0; i < sorted.length; i++) {
+      const note = sorted[i];
+      if (note.start >= lengthTicks) continue;
+      let end = note.start + note.duration;
+      if (slides) end = slideChainEnd(sorted, i);
+      const duration = Math.min(end, lengthTicks) - note.start;
+      const at = offset + note.start;
+      if (at >= fromTick && at < toTick) {
+        events.push({ trackId: track.id, note, tick: at, duration, iteration, sectionId, strum: strokes ? strokes.get(note) || null : null });
+      }
+    }
+  }
+}
+
+const SLIDE_TOLERANCE = 60;
+
+function slideChainEnd(sorted, i) {
+  let end = sorted[i].start + sorted[i].duration;
+  for (let j = i + 1; j < sorted.length; j++) {
+    const next = sorted[j];
+    if (next.start > end + SLIDE_TOLERANCE) break;
+    if (next.start < end - SLIDE_TOLERANCE) continue; // overlapping earlier note, not a chain link
+    if (!(next.flags && next.flags.slide)) break;
+    end = Math.max(end, next.start + next.duration);
+  }
+  return end;
+}
+
+function wrapTick(transportTick, loopTicks) {
+  if (loopTicks <= 0) return 0;
+  return ((transportTick % loopTicks) + loopTicks) % loopTicks;
+}
+
 const DEFAULT_DUCK = { on: false, trigger: { lane: 36 }, depth: 60, release: '1/8' };
 
 function renderSheet(host, store, { onChange, onLive, songs, audioReport, midiImport = null }) {
@@ -9951,7 +10212,7 @@ function songSheet(store, onChange, audioReport, onLive) {
       el('span', { class: 'row-label unlocklabel', text: 'Unlock section' }),
       el('span', {
         class: 'unlockhint',
-        text: unlocked ? 'Tempo, key, scale and beats are its own' : 'Give it its own tempo, key, scale and beats',
+        text: unlocked ? 'Tempo, key, scale, beats and strum are its own' : 'Give it its own tempo, key, scale, beats and strum',
       }),
     ]),
     el('button', {
@@ -10116,13 +10377,13 @@ function songSheet(store, onChange, audioReport, onLive) {
   ]);
 }
 
-function newNoteDefaults(store, onChange, track) {
+function newNoteDefaults(store, onChange, track, onLive) {
   const defaults = track.noteDefaults || store.state.song.noteDefaults || { velocity: 0.8, accent: false };
   const percent = Math.round(defaults.velocity * 100);
   const write = (value) => store.run((song) => setNoteDefault(song, track.id, 'velocity', value / 100), { coalesce: true });
   return el('div', {}, [
     el('div', { class: 'row row-fader' }, [
-      el('span', { class: 'row-label', text: 'Velocity' }),
+      el('span', { class: 'row-label notelabel', text: 'Velocity' }),
       fader({
         min: 10,
         max: 100,
@@ -10135,6 +10396,7 @@ function newNoteDefaults(store, onChange, track) {
         },
       }),
     ]),
+    ...strumControls(store, onChange, track, onLive),
     el('div', { class: 'chiprow' }, [
       chip('Accent', {
         active: Boolean(defaults.accent),
@@ -10148,6 +10410,81 @@ function newNoteDefaults(store, onChange, track) {
     el('p', { class: 'hint dim', text: 'Notes already placed keep what they have.' }),
   ]);
 }
+
+function strumControls(store, onChange, track, onLive) {
+  const kit = kitById(track.kitId, track);
+  const stroke = kitStrum(kit);
+  if (!stroke) return [];
+  const settings = strumSettings(stroke);
+  const defaults = strumDefaultsFor(kit);
+  const guitar = Boolean(kit.strum);
+  const { song, view } = store.state;
+  const sectionId = view.activeSectionId;
+  const section = song.sections[sectionId];
+  const own = Boolean(section && section.unlocked);
+  const current = trackStrum({ strum: strumIn(section, track) }, defaults);
+  const home = Math.round(positionOf(defaults.spread));
+  const snap = (p) => (Math.abs(p - home) <= 3 ? home : p);
+  const write = (patch, { coalesce = true } = {}) => {
+    const latest = strumIn(store.state.song.sections[sectionId], track);
+    const next = { ...(latest || {}), ...patch };
+    store.run((s) => {
+      const step = setStrum(s, sectionId, track.id, next);
+      if (step && !coalesce) step.coalesceKey = null;
+      return step;
+    }, { coalesce });
+    if (onLive) onLive();
+  };
+  const ms = (position) => `${strumMs(settings.downTime, spreadAt(position))} ms`;
+  const spread = fader({
+    min: 0,
+    max: 100,
+    value: Math.round(positionOf(current.spread)),
+    ariaLabel: 'Strum spread',
+    sliderClass: 'panslider',
+    under: el('div', { class: 'panscale strumscale' }, [
+      el('span', { text: 'Together' }),
+      el('span', { text: guitar ? 'Default' : '' }),
+      el('span', { text: 'Slower' }),
+    ]),
+    format: ms,
+    parse: (text) => {
+      const n = parseFloat(String(text).replace(',', '.'));
+      if (!Number.isFinite(n) || n < 0) return null;
+      return positionOf(n / 1000 / (settings.downTime || STRUM_FALLBACK));
+    },
+    onDrag: (value) => write({ spread: spreadAt(snap(value)) }),
+    onCommit: (value) => {
+      write({ spread: spreadAt(snap(value)) });
+      onChange();
+    },
+  });
+  const alternate = current.alternate;
+  const strokes = el('div', { class: 'row unlockrow strumrow' }, [
+    el('span', { class: 'row-label unlocklabel', text: 'Up and down strokes' }),
+    el('button', {
+      class: `switch${alternate ? ' switch-on' : ''}`,
+      type: 'button',
+      role: 'switch',
+      'aria-checked': alternate ? 'true' : 'false',
+      'aria-label': 'Up and down strokes',
+      onClick: () => {
+        write({ alternate: !alternate }, { coalesce: false });
+        onChange();
+      },
+    }, [el('span', { class: 'switchknob' })]),
+  ]);
+  
+  return [
+    el('div', { class: `strumcard${own ? ' strumcard-own' : ''}` }, [
+      own ? el('div', { class: 'strumown', text: `Only in section ${sectionLabel(song, sectionId)}` }) : null,
+      el('div', { class: 'row row-fader' }, [el('span', { class: 'row-label notelabel', text: 'Strum' }), spread]),
+      el('div', { class: 'strumdivider' }),
+      strokes,
+    ]),
+  ];
+}
+const STRUM_FALLBACK = 0.024;
 
 function pitchStrip(intervals) {
   const on = new Set(intervals.map((i) => ((i % 12) + 12) % 12));
@@ -10442,7 +10779,7 @@ function trackSheet(store, onChange, onLive) {
     timingRow,
     el('p', { class: 'hint dim', text: timingHint(store, track) }),
     el('div', { class: 'label', text: 'New notes' }),
-    newNoteDefaults(store, onChange, track),
+    newNoteDefaults(store, onChange, track, onLive),
     el('div', { class: 'chiprow wrap' }, [mix]),
     soloedElsewhere && !track.solo
       ? el('p', { class: 'hint', text: 'Another track is soloed, so this one is silent.' })
@@ -12145,140 +12482,6 @@ function createOutput(ctx, {
       useDirect();
     },
   };
-}
-
-function collectEvents({ song, sectionId, fromTick, toTick, withSegments = false }) {
-  const section = song.sections[sectionId];
-  if (!section || toTick <= fromTick) return [];
-  const loopTicks = sectionLengthTicks(song, section);
-  const events = [];
-  const firstIteration = Math.floor(fromTick / loopTicks);
-  const lastIteration = Math.floor((toTick - 1) / loopTicks);
-  for (let k = firstIteration; k <= lastIteration; k++) {
-    collectSegment(song, sectionId, k * loopTicks, loopTicks, fromTick, toTick, k, events, withSegments);
-  }
-  events.sort((a, b) => a.tick - b.tick);
-  return events;
-}
-
-function collectSongEvents({ song, fromTick, toTick, withSegments = false }) {
-  if (toTick <= fromTick) return [];
-  const timeline = songTimeline(song);
-  if (!timeline.totalTicks) return [];
-  const events = [];
-  const firstIteration = Math.floor(fromTick / timeline.totalTicks);
-  const lastIteration = Math.floor((toTick - 1) / timeline.totalTicks);
-  for (let k = firstIteration; k <= lastIteration; k++) {
-    const base = k * timeline.totalTicks;
-    for (const seg of timeline.segments) {
-      const segStart = base + seg.startTick;
-      if (segStart >= toTick || segStart + seg.lengthTicks <= fromTick) continue;
-      collectSegment(song, seg.sectionId, segStart, seg.lengthTicks, fromTick, toTick, k, events, withSegments);
-    }
-  }
-  events.sort((a, b) => a.tick - b.tick);
-  return events;
-}
-
-// Strumming, for kits whose manifest sets `strum` (the Guitar category). Notes that start on the same tick on a track are one stroke
-// across the strings: low to high on a downstroke, high to low on an upstroke, the upstroke quicker and lighter. A stroke takes the same
-// time however many strings it has, so the strings of a six-string chord sit closer together than those of a three-note one.
-// Strokes strictly alternate, down then up, in time order through the clip, whatever the rhythm; a clip starts on a downstroke.
-// Single notes count as strokes too (alternate picking).
-const STRUM_DEFAULTS = Object.freeze({
-  downTime: 0.024, // seconds from the first string of a downstroke to its last, however many strings it has
-  upTime: 0.018, // the same for an upstroke, which is quicker
-  upVelocity: 0.82, // the first string of an upstroke, as a factor on the note's velocity
-  downTaper: 0.96, // each further string of a downstroke
-  upTaper: 0.9, // each further string of an upstroke
-});
-
-function strumSettings(strum) {
-  if (!strum) return null;
-  const s = { ...STRUM_DEFAULTS, ...(typeof strum === 'object' ? strum : {}) };
-  const num = (v, lo, hi, d) => (Number.isFinite(v) ? Math.max(lo, Math.min(hi, v)) : d);
-  return {
-    downTime: num(s.downTime, 0, 0.1, STRUM_DEFAULTS.downTime),
-    upTime: num(s.upTime, 0, 0.1, STRUM_DEFAULTS.upTime),
-    upVelocity: num(s.upVelocity, 0, 1, STRUM_DEFAULTS.upVelocity),
-    downTaper: num(s.downTaper, 0, 1, STRUM_DEFAULTS.downTaper),
-    upTaper: num(s.upTaper, 0, 1, STRUM_DEFAULTS.upTaper),
-  };
-}
-
-// Each note's place in its stroke: Map(note -> { down, delay: seconds after the note's own start, velocity: factor }).
-function strumPlan(notes, strum) {
-  const s = strumSettings(strum);
-  const plan = new Map();
-  if (!s || !notes || !notes.length) return plan;
-  const byStart = new Map();
-  for (const n of notes) {
-    if (!byStart.has(n.start)) byStart.set(n.start, []);
-    byStart.get(n.start).push(n);
-  }
-  [...byStart.keys()].sort((a, b) => a - b).forEach((start, i) => {
-    const down = i % 2 === 0;
-    const stroke = byStart.get(start).slice().sort((a, b) => (down ? a.pitch - b.pitch : b.pitch - a.pitch));
-    const step = stroke.length > 1 ? (down ? s.downTime : s.upTime) / (stroke.length - 1) : 0;
-    stroke.forEach((n, k) => {
-      plan.set(n, {
-        down,
-        delay: k * step,
-        velocity: (down ? 1 : s.upVelocity) * (down ? s.downTaper : s.upTaper) ** k,
-      });
-    });
-  });
-  return plan;
-}
-
-function collectSegment(song, sectionId, offset, lengthTicks, fromTick, toTick, iteration, events, withSegments) {
-  const section = song.sections[sectionId];
-  if (!section) return;
-  if (withSegments && offset >= fromTick && offset < toTick) {
-    events.push({ kind: 'segment', sectionId, tick: offset, lengthTicks, iteration });
-  }
-  const soloed = song.tracks.some((t) => t.solo && !t.mute);
-  for (const track of song.tracks) {
-    if (track.mute) continue;
-    if (soloed && !track.solo) continue;
-    const clip = section.clips[track.id];
-    if (!clip) continue;
-    const kit = kitById(track.kitId, track);
-    const slides = Boolean(kit.slideSeconds);
-    const played = track.arp && track.arp.on ? arpeggiate(clip.notes, track.arp) : clip.notes;
-    const sorted = slides ? [...played].sort((a, b) => a.start - b.start) : played;
-    const strokes = kit.strum ? strumPlan(played, kit.strum) : null;
-    for (let i = 0; i < sorted.length; i++) {
-      const note = sorted[i];
-      if (note.start >= lengthTicks) continue;
-      let end = note.start + note.duration;
-      if (slides) end = slideChainEnd(sorted, i);
-      const duration = Math.min(end, lengthTicks) - note.start;
-      const at = offset + note.start;
-      if (at >= fromTick && at < toTick) {
-        events.push({ trackId: track.id, note, tick: at, duration, iteration, sectionId, strum: strokes ? strokes.get(note) || null : null });
-      }
-    }
-  }
-}
-
-const SLIDE_TOLERANCE = 60;
-
-function slideChainEnd(sorted, i) {
-  let end = sorted[i].start + sorted[i].duration;
-  for (let j = i + 1; j < sorted.length; j++) {
-    const next = sorted[j];
-    if (next.start > end + SLIDE_TOLERANCE) break;
-    if (next.start < end - SLIDE_TOLERANCE) continue; // overlapping earlier note, not a chain link
-    if (!(next.flags && next.flags.slide)) break;
-    end = Math.max(end, next.start + next.duration);
-  }
-  return end;
-}
-
-function wrapTick(transportTick, loopTicks) {
-  if (loopTicks <= 0) return 0;
-  return ((transportTick % loopTicks) + loopTicks) % loopTicks;
 }
 
 const LOOK_AHEAD_SECONDS = 0.28;
@@ -15331,7 +15534,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-10-11 16:07';
+const BUILD_STAMP = '2026-10-25 17:07';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -15383,12 +15586,7 @@ function mountApp(root, options = {}) {
     type: 'button',
     text: '\u25b6',
     title: 'Play',
-    onClick: () => {
-      const out = claimMedia();
-      
-      if (out && out.setActive) out.setActive(false);
-      togglePlay().catch((err) => flash(`Play failed: ${err && err.message ? err.message : err}`, 6000));
-    },
+    onClick: () => pressPlay(),
   });
   const position = el('span', { class: 'position', text: '' });
 
@@ -15485,6 +15683,8 @@ function mountApp(root, options = {}) {
   let engine = null;
   let pointerDown = false;
   let placeArrangePlayhead = null;
+  let paintArrangePlay = null;
+  let renderHeld = false;
 
   const session = options.audioSession || createAudioSession({
     onSuspend: (why) => {
@@ -15505,6 +15705,8 @@ function mountApp(root, options = {}) {
     }
   }
 
+  const preferMedia = options.preferMedia ?? ringerSwitchApplies();
+
   
   async function ensureEngine() {
     const ctx = await session.unlock();
@@ -15514,13 +15716,14 @@ function mountApp(root, options = {}) {
       engine = createEngine({
         ctx,
         
-        preferMedia: options.preferMedia ?? ringerSwitchApplies(),
+        preferMedia,
         getSong: () => store.state.song,
         getSectionId: () => store.state.view.activeSectionId,
         
         
         onPlayingChange: (playing) => {
           if (session.setPlaying) session.setPlaying(playing);
+          if (paintArrangePlay) paintArrangePlay(playing);
           render();
         },
         takeCue: () => {
@@ -15574,6 +15777,8 @@ function mountApp(root, options = {}) {
     if (!ctx) return null;
     if (!output) {
       output = createOutput(ctx, {
+        
+        preferMedia,
         doc: options.doc || globalThis.document,
         timers: options.timers && options.timers.setInterval ? options.timers : undefined,
         onFallback: () => render(),
@@ -15585,7 +15790,7 @@ function mountApp(root, options = {}) {
   
   function claimMedia() {
     const out = ensureOutput();
-    if (!out || out.route === 'media') return out;
+    if (!out || !preferMedia || out.route === 'media') return out;
     const started = out.useMedia();
     if (started && typeof started.then === 'function') started.then(() => render());
     return out;
@@ -15617,6 +15822,14 @@ function mountApp(root, options = {}) {
         .filter((k) => k && k.license && k.license.credit && k.zones.some((z) => z.file))
         .map((k) => ({ name: k.name, credit: k.license.credit, source: k.license.source, licence: licenceLabel(k.license) })),
     };
+  }
+
+  
+  function pressPlay() {
+    const out = claimMedia();
+    
+    if (out && out.setActive) out.setActive(false);
+    return togglePlay().catch((err) => flash(`Play failed: ${err && err.message ? err.message : err}`, 6000));
   }
 
   async function togglePlay() {
@@ -15696,6 +15909,7 @@ function mountApp(root, options = {}) {
   }
 
   function setPlaying(on) {
+    if (paintArrangePlay) paintArrangePlay(on);
     playButton.textContent = on ? '\u25a0' : '\u25b6';
     playButton.title = on ? 'Stop' : 'Play';
     if (on) playButton.classList.add('playing');
@@ -15750,6 +15964,23 @@ function mountApp(root, options = {}) {
   canvas.addEventListener('pointerup', () => { pointerDown = false; });
   canvas.addEventListener('pointercancel', () => { pointerDown = false; });
   root.addEventListener('pointerdown', warmAudio);
+
+  
+  root.addEventListener('pointerdown', (e) => {
+    if (e && e.isPrimary === false) return;
+    dropHolds();
+  }, true);
+  
+  const heldBack = () => {
+    setTimeout(() => {
+      if (!renderHeld || barBusy()) return;
+      const menuOpen = (arrangeHost.children ? Array.from(arrangeHost.children) : [])
+        .some((n) => String(n.className).split(' ').includes('popmenu'));
+      if (!menuOpen) render();
+    }, 0);
+  };
+  root.addEventListener('pointerup', heldBack, true);
+  root.addEventListener('pointercancel', heldBack, true);
 
   attachGestures({
     canvas,
@@ -17198,11 +17429,15 @@ function mountApp(root, options = {}) {
     arrangeHost.style.display = on ? 'block' : 'none';
     clear(arrangeHost);
     placeArrangePlayhead = null;
+    paintArrangePlay = null;
     if (!on) return;
     arrangeHost.appendChild(
       arrangementScreen(store, render, {
         onPlayhead: (place) => {
           placeArrangePlayhead = place;
+        },
+        onPlayButton: (paint) => {
+          paintArrangePlay = paint;
         },
         onCell: (sectionId, trackId) => openEditor(sectionId, trackId),
         onTrack: (trackId) => {
@@ -17223,7 +17458,7 @@ function mountApp(root, options = {}) {
         onBack: () => openSongs(),
         backLabel: 'Library',
         playing: Boolean(engine && engine.transport.playing),
-        togglePlay: () => togglePlay(),
+        togglePlay: () => pressPlay(),
         songMode,
         toggleMode: () => toggleMode(),
         onPickSection: (id) => pickSection(id),
@@ -17294,7 +17529,7 @@ function mountApp(root, options = {}) {
     return {
       holdable,
       isPlaying: () => Boolean(engine && engine.transport.playing),
-      togglePlay: () => togglePlay(),
+      togglePlay: () => pressPlay(),
       setTab: (tab) => {
         store.setUi({ library: { ...store.state.ui.library, tab, project: null } });
         render();
@@ -17478,7 +17713,11 @@ function mountApp(root, options = {}) {
   }
 
   function render() {
-    if (barBusy()) return;
+    if (barBusy()) {
+      renderHeld = true;
+      return;
+    }
+    renderHeld = false;
     
     const keepFocus = captureFocus();
 
