@@ -1200,7 +1200,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-10-25 17:07 from src/. */
+/* PocketDAW - phase 2. Built 2026-10-27 05:49 from src/. */
 (function () {
 'use strict';
 
@@ -4008,6 +4008,8 @@ function buildExampleSong(piece) {
       if (Number.isFinite(t.reverb) && t.reverb > 0) track.sends = { ...(track.sends || {}), reverb: t.reverb };
       const strum = storedStrum(t.strum);
       if (strum) track.strum = strum;
+      if (t.tremolo && typeof t.tremolo === 'object') track.tremolo = JSON.parse(JSON.stringify(t.tremolo));
+      if (t.echo && typeof t.echo === 'object') track.echo = JSON.parse(JSON.stringify(t.echo));
       return track;
     });
   } else {
@@ -9880,13 +9882,34 @@ const TREMOLO_SHAPES = [
   { id: 'square', label: 'Square' },
 ];
 
-const DEFAULT_TREMOLO = { on: false, rate: '1/8', depth: 60, shape: 'sine' };
+const DEFAULT_TREMOLO = { on: false, rate: '1/8', depth: 60, shape: 'sine', open: 50 };
+
+function openFraction(open) {
+  const n = Number(open);
+  return open === undefined || open === null || !Number.isFinite(n) ? 0.5 : Math.max(0, Math.min(100, n)) / 100;
+}
 
 const POINTS_PER_CYCLE = 64;
 
 const MIN_SLOPE = 4 / POINTS_PER_CYCLE;
 
 const MAX_CURVE_POINTS = 8192;
+
+const MAX_POINTS_PER_CYCLE = 1024;
+const MAX_FINE_CURVE_POINTS = 65536;
+
+function squareSlope(cycleSeconds, open = 50) {
+  const d = openFraction(open);
+  const base = Math.max(MIN_SLOPE, Math.min(1 / 6, 0.005 / Math.max(0.001, cycleSeconds)));
+  return Math.min(base, 2 * d, 2 * (1 - d));
+}
+
+function pointsPerCycle(shape, cycleSeconds, open = 50) {
+  if (shape !== 'square') return POINTS_PER_CYCLE;
+  const slope = squareSlope(cycleSeconds, open);
+  if (!(slope > 0)) return POINTS_PER_CYCLE;
+  return Math.min(MAX_POINTS_PER_CYCLE, Math.max(POINTS_PER_CYCLE, Math.ceil(4 / slope)));
+}
 
 function rateSeconds(rateId, bpm) {
   const entry = TREMOLO_RATES.find((r) => r.id === rateId) || TREMOLO_RATES[1];
@@ -9898,35 +9921,94 @@ function tremoloTicks(rateId) {
   return entry.beats * PPQ;
 }
 
-function waveAt(shape, phase, cycleSeconds = 0.25) {
+function waveAt(shape, phase, cycleSeconds = 0.25, open = 50) {
   const t = phase - Math.floor(phase);
   if (shape === 'triangle') return t < 0.5 ? 1 - t * 2 : (t - 0.5) * 2;
   if (shape === 'square') {
-    const slope = Math.max(
-      MIN_SLOPE,
-      Math.min(1 / 6, 0.005 / Math.max(0.001, cycleSeconds)),
-    );
-    if (t < 0.5 - slope / 2) return 1;
-    if (t < 0.5 + slope / 2) return 1 - (t - (0.5 - slope / 2)) / slope;
-    if (t < 1 - slope) return 0;
-    return (t - (1 - slope)) / slope;
+    
+    const d = openFraction(open);
+    if (d <= 0) return 0;
+    if (d >= 1) return 1;
+    const slope = squareSlope(cycleSeconds, open);
+    const window = (tau) => Math.max(0, Math.min(1, (tau + slope) / slope, (d + slope / 2 - tau) / slope));
+    return Math.max(window(t), window(t - 1));
   }
   return (Math.cos(t * 2 * Math.PI) + 1) / 2;
 }
 
-function tremoloCurve({ seconds, cycleSeconds, depth, shape, depthAt = null }) {
+function tremoloCurve({ seconds, cycleSeconds, depth, shape, open = 50, depthAt = null }) {
   const cycles = Math.max(1, seconds / Math.max(0.001, cycleSeconds));
-  const wanted = Math.ceil(cycles * POINTS_PER_CYCLE) + 1;
-  const points = Math.min(MAX_CURVE_POINTS, Math.max(2, wanted));
+  const perCycle = pointsPerCycle(shape, cycleSeconds, open);
+  const wanted = Math.ceil(cycles * perCycle) + 1;
+  const cap = perCycle > POINTS_PER_CYCLE ? MAX_FINE_CURVE_POINTS : MAX_CURVE_POINTS;
+  const points = Math.min(cap, Math.max(2, wanted));
   const fixed = Math.max(0, Math.min(100, depth)) / 100;
   const curve = new Float32Array(points);
   for (let i = 0; i < points; i++) {
     const at = (i / (points - 1)) * seconds;
     const amount = depthAt ? Math.max(0, Math.min(100, depthAt(at))) / 100 : fixed;
-    const value = waveAt(shape, at / cycleSeconds, cycleSeconds);
+    const value = waveAt(shape, at / cycleSeconds, cycleSeconds, open);
     curve[i] = 1 - amount * (1 - value);
   }
   return curve;
+}
+
+const ECHO_TIMES = [
+  { id: '1/4', label: '1/4', beats: 1 },
+  { id: '1/8.', label: '1/8.', beats: 0.75 },
+  { id: '1/8', label: '1/8', beats: 0.5 },
+  { id: '1/8T', label: '1/8T', beats: 1 / 3 },
+  { id: '1/16.', label: '1/16.', beats: 0.375 },
+  { id: '1/16', label: '1/16', beats: 0.25 },
+  { id: '1/16T', label: '1/16T', beats: 1 / 6 },
+  { id: '1/32', label: '1/32', beats: 0.125 },
+];
+
+const MAX_ECHOES = 8;
+
+const DEFAULT_ECHO = Object.freeze({ on: false, time: '1/16', count: 1, level: 75, fade: 40, pan: 0.3, pingPong: true });
+
+const echoNum = (v, lo, hi, d) => {
+  const n = Number(v);
+  return v === undefined || v === null || !Number.isFinite(n) ? d : Math.max(lo, Math.min(hi, n));
+};
+
+function echoSettings(echo) {
+  const e = { ...DEFAULT_ECHO, ...(echo && typeof echo === 'object' ? echo : {}) };
+  const time = ECHO_TIMES.find((t) => t.id === e.time) || ECHO_TIMES.find((t) => t.id === DEFAULT_ECHO.time);
+  return {
+    on: Boolean(e.on),
+    time: time.id,
+    beats: time.beats,
+    count: Math.round(echoNum(e.count, 1, MAX_ECHOES, DEFAULT_ECHO.count)),
+    level: echoNum(e.level, 0, 100, DEFAULT_ECHO.level) / 100,
+    fade: echoNum(e.fade, 0, 100, DEFAULT_ECHO.fade) / 100,
+    pan: echoNum(e.pan, -1, 1, DEFAULT_ECHO.pan),
+    pingPong: e.pingPong !== false,
+  };
+}
+
+function echoTaps(settings) {
+  const s = settings && 'beats' in settings ? settings : echoSettings(settings);
+  return Array.from({ length: s.count }, (_, k) => ({
+    level: s.level * (1 - s.fade) ** k,
+    pan: s.pingPong && k % 2 === 1 ? -s.pan : s.pan,
+  }));
+}
+
+function echoSeconds(timeId, bpm, sampleRate = 0) {
+  const time = ECHO_TIMES.find((t) => t.id === timeId) || ECHO_TIMES.find((t) => t.id === DEFAULT_ECHO.time);
+  const seconds = time.beats * (60 / (bpm || 120));
+  return sampleRate > 0 ? Math.max(1, Math.round(seconds * sampleRate)) / sampleRate : seconds;
+}
+
+function echoMs(timeId, bpm) {
+  return Math.round(echoSeconds(timeId, bpm) * 1000);
+}
+
+function fadeDb(fade) {
+  const keep = 1 - echoNum(fade, 0, 100, DEFAULT_ECHO.fade) / 100;
+  return keep <= 0 ? -Infinity : 20 * Math.log10(keep);
 }
 
 function collectEvents({ song, sectionId, fromTick, toTick, withSegments = false }) {
@@ -10788,6 +10870,7 @@ function trackSheet(store, onChange, onLive) {
     el('div', { class: 'label', text: 'Effects' }),
     filterCard(store, track, onChange, onLive),
     tremoloCard(store, track, onChange, onLive),
+    echoCard(store, track, onChange, onLive),
     reverbCard(store, track, onChange, onLive),
     arpCard(store, track, onChange),
     el('div', { class: 'label', text: 'Colour' }),
@@ -10943,6 +11026,87 @@ function duckCard(store, track, onChange, onLive) {
   ]);
 }
 
+function echoCard(store, track, onChange, onLive) {
+  const echo = { ...DEFAULT_ECHO, ...(track.echo || {}) };
+  const song = store.state.song;
+  const bpm = settingsFor(song, song.sections[store.state.view.activeSectionId]).bpm || song.bpm;
+  const set = (field, value) => {
+    store.run((s) => setTrackSetting(s, track.id, 'echo', field, value));
+    onChange();
+  };
+  const percent = (text) => {
+    const n = parseFloat(String(text).replace(/[^0-9.]/g, ''));
+    return Number.isNaN(n) ? null : n;
+  };
+  const slider = (field, { min = 0, max = 100, value, ariaLabel, toModel = (v) => v, ...rest }) => fader({
+    min,
+    max,
+    value,
+    ariaLabel,
+    ...rest,
+    onDrag: (v) => {
+      store.run((s) => setTrackSetting(s, track.id, 'echo', field, toModel(v)), { coalesce: true });
+      if (onLive) onLive();
+    },
+    onCommit: (v) => {
+      store.run((s) => setTrackSetting(s, track.id, 'echo', field, toModel(v)), { coalesce: true });
+      if (onLive) onLive();
+      onChange();
+    },
+  });
+  const level = slider('level', { value: echo.level, ariaLabel: 'Echo level', format: (v) => `${v}%`, parse: percent });
+  const fade = slider('fade', {
+    value: echo.fade,
+    ariaLabel: 'Echo fade',
+    format: (v) => `${v}%`,
+    parse: percent,
+  });
+  const pan = slider('pan', {
+    min: -100,
+    max: 100,
+    value: Math.round((Number(echo.pan) || 0) * 100),
+    ariaLabel: 'Echo pan',
+    sliderClass: 'panslider',
+    under: el('div', { class: 'panscale' }, [
+      el('span', { text: 'L' }),
+      el('span', { text: 'C' }),
+      el('span', { text: 'R' }),
+    ]),
+    format: (v) => panLabel(v / 100),
+    parse: parsePan,
+    toModel: (v) => (Math.abs(v) <= 4 ? 0 : v) / 100,
+  });
+  const count = Math.max(1, Math.min(MAX_ECHOES, Math.round(echo.count) || 1));
+  const keep = Math.round(100 * (1 - (Number(echo.fade) || 0) / 100));
+  const db = fadeDb(echo.fade);
+  return fxCard('Echo', 'repeats in time with the song', {
+    on: Boolean(echo.on),
+    onToggle: () => set('on', !echo.on),
+  }, [
+    chipRow('Time', ECHO_TIMES, echo.time, (id) => set('time', id)),
+    chipRow('Echoes', Array.from({ length: MAX_ECHOES }, (_, i) => ({ id: i + 1, label: String(i + 1) })), count, (id) => set('count', id)),
+    el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Level' }), level]),
+    count > 1 ? el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Fade' }), fade]) : null,
+    el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Pan' }), pan]),
+    count > 1
+      ? el('div', { class: 'fxrow' }, [
+          el('span', { class: 'fxlabel', text: '' }),
+          el('div', { class: 'chiprow wrap fxchips' }, [
+            chip('Ping-pong', { small: true, active: echo.pingPong !== false, onClick: () => set('pingPong', echo.pingPong === false) }),
+          ]),
+        ])
+      : null,
+    el('p', {
+      class: 'hint dim',
+      text: count === 1
+        ? `One repeat, ${echoMs(echo.time, bpm)} ms after each note at ${bpm} bpm.`
+        : `${count} repeats, ${echoMs(echo.time, bpm)} ms apart at ${bpm} bpm, each ${keep}% of the one before`
+          + ` (${Number.isFinite(db) ? `${db.toFixed(1)} dB` : 'silent'})`
+          + (echo.pingPong !== false && Math.round((Number(echo.pan) || 0) * 100) !== 0 ? ', alternating sides.' : '.'),
+    }),
+  ]);
+}
+
 function filterCard(store, track, onChange, onLive) {
   const fx = (track.effects || []).find((e) => e.typeId === 'filter')
     || { bypass: true, params: { mode: 'lowpass', cutoff: 20000, q: 1 } };
@@ -11052,6 +11216,27 @@ function tremoloCard(store, track, onChange, onLive) {
       onChange();
     },
   });
+  
+  const open = fader({
+    min: 0,
+    max: 100,
+    value: Number.isFinite(trem.open) ? trem.open : 50,
+    ariaLabel: 'Tremolo open',
+    format: (v) => `${v}%`,
+    parse: (text) => {
+      const n = parseFloat(String(text).replace(/[^0-9.]/g, ''));
+      return Number.isNaN(n) ? null : n;
+    },
+    onDrag: (value) => {
+      store.run((s) => setTrackSetting(s, track.id, 'tremolo', 'open', value), { coalesce: true });
+      if (onLive) onLive();
+    },
+    onCommit: (value) => {
+      store.run((s) => setTrackSetting(s, track.id, 'tremolo', 'open', value), { coalesce: true });
+      if (onLive) onLive();
+      onChange();
+    },
+  });
   return fxCard('Tremolo', 'the level rising and falling in time', {
     on: Boolean(trem.on),
     onToggle: () => set('on', !trem.on),
@@ -11059,6 +11244,7 @@ function tremoloCard(store, track, onChange, onLive) {
     chipRow('Rate', TREMOLO_RATES, trem.rate, (id) => set('rate', id)),
     chipRow('Shape', TREMOLO_SHAPES, trem.shape, (id) => set('shape', id)),
     el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Depth' }), depth]),
+    trem.shape === 'square' ? el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Open' }), open]) : null,
   ]);
 }
 
@@ -11236,6 +11422,7 @@ function mixSheet(store, onChange, onLive) {
           (track.effects || []).some((e) => !e.bypass)
           || (track.arp && track.arp.on)
           || (track.tremolo && track.tremolo.on)
+          || (track.echo && track.echo.on)
             ? el('span', { class: 'fxbadge', text: 'fx' })
             : null,
           chip('M', { active: track.mute, small: true, onClick: () => set('mute', !track.mute), title: 'Mute' }),
@@ -11376,6 +11563,7 @@ function songsSheet(store, onChange, songs) {
           (track.effects || []).some((e) => !e.bypass)
           || (track.arp && track.arp.on)
           || (track.tremolo && track.tremolo.on)
+          || (track.echo && track.echo.on)
             ? el('span', { class: 'fxbadge', text: 'fx' })
             : null,
           projects.length ? chip('Move', { small: true, onClick: () => songs.moveToProject(entry.id) }) : null,
@@ -11398,6 +11586,7 @@ function songsSheet(store, onChange, songs) {
           (track.effects || []).some((e) => !e.bypass)
           || (track.arp && track.arp.on)
           || (track.tremolo && track.tremolo.on)
+          || (track.echo && track.echo.on)
             ? el('span', { class: 'fxbadge', text: 'fx' })
             : null,
             chip('Rename', { small: true, onClick: () => songs.renameProject(project.id) }),
@@ -12854,6 +13043,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     const gain = ctx.createGain();
     const pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
     const sendReverb = ctx.createGain();
+    const echoSend = ctx.createGain();
 
     gain.gain.value = track.gain;
     tremolo.gain.value = 1;
@@ -12869,10 +13059,12 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     tail.connect(master);
     tail.connect(sendReverb);
     sendReverb.connect(returns.reverbIn);
+    gain.connect(echoSend);
 
     const player = {
       kitId: track.kitId, sampler: null,
-      filter, tremolo, automation, duck, gain, pan, sendReverb,
+      filter, tremolo, automation, duck, gain, pan, sendReverb, echoSend,
+      echo: null,
       filtered: false, kit,
     };
     status('loading', { trackId: track.id, kit: kit.name });
@@ -12942,7 +13134,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     player.sendReverb.gain.value = Math.max(0, Math.min(100, sends.reverb || 0)) / 100;
 
     const fx = (track.effects || []).find((e) => e.typeId === 'filter');
-    const on = Boolean(fx && !fx.bypass) || Boolean(filterLaneFor(track));
+    const on = Boolean(fx && !fx.bypass) || filterLaneAnywhere(track);
     if (player.filter && on) {
       const params = (fx && fx.params) || {};
       player.filter.type = filterModeFor(track);
@@ -12953,6 +13145,99 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       player.filtered = on;
       connectHead(player);
     }
+
+    applyEcho(player, track, { ramp });
+  }
+
+  
+  function applyEcho(player, track, { ramp = true } = {}) {
+    const e = echoSettings(track.echo);
+    if (!e.on || e.level <= 0) {
+      teardownEcho(player);
+      return;
+    }
+    const song = getSong();
+    const gap = echoSeconds(e.time, sectionTempo(song, song.sections[getSectionId()]) || song.bpm, ctx.sampleRate);
+    const room = longestEchoGap(song, e.time);
+    if (!player.echo || player.echo.delays.length !== e.count || player.echo.room < room) {
+      teardownEcho(player);
+      buildEcho(player, e.count, room);
+    }
+    const echo = player.echo;
+    const taps = echoTaps(e);
+    const now = ctx.currentTime;
+    const write = (param, value) => {
+      if (ramp) {
+        param.cancelScheduledValues(now);
+        param.setValueAtTime(param.value, now);
+        param.linearRampToValueAtTime(value, now + 0.02);
+      } else {
+        param.value = value;
+      }
+    };
+    taps.forEach((tap, k) => {
+      if (echo.levels[k] !== tap.level) {
+        write(echo.taps[k].gain, tap.level);
+        echo.levels[k] = tap.level;
+      }
+    });
+    const pans = [taps[0].pan, taps.length > 1 ? taps[1].pan : taps[0].pan];
+    [echo.panA, echo.panB].forEach((node, i) => {
+      if (node && echo.pans[i] !== pans[i]) {
+        write(node.pan, pans[i]);
+        echo.pans[i] = pans[i];
+      }
+    });
+    if (echo.gap !== gap) {
+      echo.delays.forEach((d) => { d.delayTime.value = gap; });
+      echo.gap = gap;
+    }
+  }
+
+  
+  function longestEchoGap(song, timeId) {
+    let slowest = song.bpm || 120;
+    Object.values(song.sections || {}).forEach((section) => {
+      const bpm = sectionTempo(song, section);
+      if (bpm > 0) slowest = Math.min(slowest, bpm);
+    });
+    return Math.max(0.05, echoSeconds(timeId, slowest) * 1.05);
+  }
+
+  function buildEcho(player, count, room) {
+    const out = ctx.createGain();
+    const panA = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+    const panB = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+    const delays = [];
+    const taps = [];
+    let from = player.echoSend;
+    for (let k = 0; k < count; k++) {
+      const delay = ctx.createDelay(room);
+      const tap = ctx.createGain();
+      tap.gain.value = 0;
+      from.connect(delay);
+      delay.connect(tap);
+      tap.connect(k % 2 === 0 ? (panA || out) : (panB || out));
+      delays.push(delay);
+      taps.push(tap);
+      from = delay;
+    }
+    if (panA) panA.connect(out);
+    if (panB) panB.connect(out);
+    out.connect(master);
+    out.connect(player.sendReverb);
+    player.echo = {
+      delays, taps, panA, panB, out, room,
+      levels: new Array(count).fill(null), pans: [null, null], gap: null,
+    };
+  }
+
+  function teardownEcho(player) {
+    const echo = player.echo;
+    if (!echo) return;
+    player.echoSend.disconnect();
+    [...echo.delays, ...echo.taps, echo.panA, echo.panB, echo.out].forEach((n) => n && n.disconnect && n.disconnect());
+    player.echo = null;
   }
 
   
@@ -12961,6 +13246,21 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     const section = song.sections[getSectionId()];
     const clip = section && section.clips[track.id];
     return clip ? filterLaneOf(clip) : null;
+  }
+
+  
+  function sectionsInPlay() {
+    const song = getSong();
+    return [...new Set([getSectionId(), ...(song.sectionOrder || [])])]
+      .map((id) => song.sections[id])
+      .filter(Boolean);
+  }
+
+  function filterLaneAnywhere(track) {
+    return sectionsInPlay().some((section) => {
+      const clip = section.clips[track.id];
+      return Boolean(clip && filterLaneOf(clip));
+    });
   }
 
   function filterModeFor(track) {
@@ -12976,7 +13276,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     const section = song.sections[ev.sectionId || getSectionId()];
     const clip = section && section.clips[track.id];
     const lane = clip ? laneOf(clip, 'timing') : [];
-    if (lane.length) return valueAt(lane, ev.tick % (sectionLengthTicks(song, section) || 1));
+    if (lane.length) return valueAt(lane, ev.note ? ev.note.start : ev.tick % (sectionLengthTicks(song, section) || 1));
     return track.timing || 0;
   }
 
@@ -12984,11 +13284,13 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
   function sendsInUse() {
     const song = getSong();
     let reverb = false;
-    const section = song.sections[getSectionId()];
+    const sections = sectionsInPlay();
     song.tracks.forEach((track) => {
       if (((track.sends || {}).reverb || 0) > 0) reverb = true;
-      const clip = section && section.clips[track.id];
-      if (clip && laneOf(clip, 'reverb').length) reverb = true;
+      sections.forEach((section) => {
+        const clip = section.clips[track.id];
+        if (clip && laneOf(clip, 'reverb').length) reverb = true;
+      });
     });
     return { reverb };
   }
@@ -13083,6 +13385,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
               cycleSeconds,
               depth: 0,
               shape: (trem && trem.shape) || DEFAULT_TREMOLO.shape,
+              open: trem ? trem.open : undefined,
               depthAt: (t) => valueAt(tremoloLane, t / secondsPerTick),
             }),
             ev.time,
@@ -13102,6 +13405,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
               cycleSeconds,
               depth: trem.depth === undefined ? DEFAULT_TREMOLO.depth : trem.depth,
               shape: trem.shape || DEFAULT_TREMOLO.shape,
+              open: trem.open,
             }),
             ev.time,
             span,
@@ -13110,6 +13414,13 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
         }
       } else {
         tParam.setValueAtTime(1, ev.time);
+      }
+
+      
+      if (player.echo && secondsPerTick > 0) {
+        const e = echoSettings(track.echo);
+        const gap = echoSeconds(e.time, 60 / (secondsPerTick * PPQ), ctx.sampleRate);
+        player.echo.delays.forEach((d) => d.delayTime.setValueAtTime(Math.min(gap, player.echo.room), ev.time));
       }
 
       const duck = track.duck;
@@ -13142,7 +13453,8 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     const p = players.get(trackId);
     if (!p) return;
     if (p.sampler) p.sampler.dispose();
-    [p.filter, p.tremolo, p.automation, p.duck, p.gain, p.pan, p.sendReverb]
+    teardownEcho(p);
+    [p.filter, p.tremolo, p.automation, p.duck, p.gain, p.pan, p.sendReverb, p.echoSend]
       .forEach((n) => n && n.disconnect && n.disconnect());
     players.delete(trackId);
   }
@@ -13161,35 +13473,39 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     return Promise.all([...players.values()].map((p) => p.ready.catch(() => null)));
   }
 
+  
+  function handleEvent(ev) {
+    if (ev.kind === 'segment') {
+      scheduleSegment(ev);
+      return;
+    }
+    const track = trackById(ev.trackId);
+    if (!track) return;
+    const player = ensurePlayer(track);
+    if (!player.sampler) return;
+
+    
+    
+    const offset = timingTicks(timingFor(track, ev)) * (ev.secondsPerTick || 0);
+    const stroke = ev.strum;
+    const at = (Number.isFinite(offset) ? Math.max(ctx.currentTime, ev.time - offset) : ev.time) + (stroke ? stroke.delay : 0);
+
+    player.sampler.noteOn(ev.note.pitch, stroke ? ev.note.velocity * stroke.velocity : ev.note.velocity, at, {
+      duration: ev.durationSeconds,
+      gateRelease: gateReleaseFor(getSong().bpm, ev.durationSeconds),
+      accent: ev.note.flags && ev.note.flags.accent,
+      slide: ev.note.flags && ev.note.flags.slide,
+    });
+    return at;
+  }
+
   const transport = createTransport({
     ctx,
     getSong,
     getSectionId,
     takeCue,
     timers,
-    onEvent: (ev) => {
-      if (ev.kind === 'segment') {
-        scheduleSegment(ev);
-        return;
-      }
-      const track = trackById(ev.trackId);
-      if (!track) return;
-      const player = ensurePlayer(track);
-      if (!player.sampler) return;
-
-      
-      
-      const offset = timingTicks(timingFor(track, ev)) * (ev.secondsPerTick || 0);
-      const stroke = ev.strum;
-      const at = (Number.isFinite(offset) ? Math.max(ctx.currentTime, ev.time - offset) : ev.time) + (stroke ? stroke.delay : 0);
-
-      player.sampler.noteOn(ev.note.pitch, stroke ? ev.note.velocity * stroke.velocity : ev.note.velocity, at, {
-        duration: ev.durationSeconds,
-        gateRelease: gateReleaseFor(getSong().bpm, ev.durationSeconds),
-        accent: ev.note.flags && ev.note.flags.accent,
-        slide: ev.note.flags && ev.note.flags.slide,
-      });
-    },
+    onEvent: handleEvent,
     onSectionChange: (time) => {
       for (const p of players.values()) if (p.sampler) p.sampler.allNotesOff(time);
     },
@@ -13282,6 +13598,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     limiter,
     dispose,
     
+    handleEvent,
     players,
     loader,
   };
@@ -14358,9 +14675,32 @@ async function createStorage({ win = globalThis, force, openTimeoutMs = OPEN_TIM
 
 const TAIL_SECONDS = 2;
 
+const PRE_ROLL_SECONDS = 0.5;
+
 function songSeconds(song) {
-  const { totalTicks } = songTimeline(song);
-  return (totalTicks / PPQ) * (60 / song.bpm);
+  return songTempoMap(song).totalSeconds;
+}
+
+function tailSecondsFor(song, base = TAIL_SECONDS) {
+  let slowest = song.bpm || 120;
+  Object.values(song.sections || {}).forEach((section) => {
+    const bpm = sectionTempo(song, section);
+    if (bpm > 0) slowest = Math.min(slowest, bpm);
+  });
+  let echo = 0;
+  let reverb = false;
+  (song.tracks || []).forEach((track) => {
+    if (track.mute) return;
+    const e = echoSettings(track.echo);
+    if (e.on && e.level > 0) echo = Math.max(echo, e.count * echoSeconds(e.time, slowest));
+    if (((track.sends || {}).reverb || 0) > 0) reverb = true;
+    Object.values(song.sections || {}).forEach((section) => {
+      const lanes = ((section.clips || {})[track.id] || {}).automation;
+      if (lanes && lanes.reverb && lanes.reverb.length) reverb = true;
+    });
+  });
+  const decay = reverb ? readReverbSettings(((song.returns || DEFAULT_RETURNS).reverb) || {}).decay : 0;
+  return base + Math.max(echo, decay);
 }
 
 async function renderSong({
@@ -14372,10 +14712,12 @@ async function renderSong({
   onProgress,
 }) {
   if (!OfflineContext) throw new Error('This browser cannot render audio offline.');
-  const seconds = songSeconds(song);
+  const map = songTempoMap(song);
+  const seconds = map.totalSeconds;
   if (!seconds) throw new Error('There is nothing to export yet.');
 
-  const frames = Math.ceil((seconds + tailSeconds) * sampleRate);
+  const pre = PRE_ROLL_SECONDS;
+  const frames = Math.ceil((pre + seconds + tailSecondsFor(song, tailSeconds)) * sampleRate);
   const ctx = new OfflineContext(2, frames, sampleRate);
 
   if (onProgress) onProgress('loading');
@@ -14388,24 +14730,28 @@ async function renderSong({
   await engine.ensureAll();
 
   if (onProgress) onProgress('scheduling');
-  const secondsPerTick = 60 / song.bpm / PPQ;
-  const events = collectSongEvents({ song, fromTick: 0, toTick: songTimeline(song).totalTicks });
+  
+  const events = collectSongEvents({ song, fromTick: 0, toTick: map.totalTicks, withSegments: true });
+  let earliest = pre;
   for (const event of events) {
-    const player = engine.players.get(event.trackId);
-    if (!player || !player.sampler) continue;
-    const stroke = event.strum;
-    player.sampler.noteOn(event.note.pitch, stroke ? event.note.velocity * stroke.velocity : event.note.velocity,
-      event.tick * secondsPerTick + (stroke ? stroke.delay : 0), {
-      duration: event.duration * secondsPerTick,
-      gateRelease: gateReleaseFor(song.bpm, event.duration * secondsPerTick),
-      accent: event.note.flags && event.note.flags.accent,
-      slide: event.note.flags && event.note.flags.slide,
-    });
+    const secondsPerTick = map.secondsPerTickAt(event.tick);
+    const time = pre + map.toSeconds(event.tick);
+    if (event.kind === 'segment') {
+      engine.handleEvent({ ...event, time, secondsPerTick });
+    } else {
+      const at = engine.handleEvent({ ...event, time, secondsPerTick, durationSeconds: event.duration * secondsPerTick });
+      if (Number.isFinite(at)) earliest = Math.min(earliest, at);
+    }
   }
 
   if (onProgress) onProgress('rendering');
-  const buffer = await ctx.startRendering();
+  const rendered = await ctx.startRendering();
   engine.dispose();
+  const start = Math.max(0, Math.min(rendered.length - 1, Math.floor(Math.max(0, earliest) * sampleRate)));
+  const buffer = ctx.createBuffer(rendered.numberOfChannels, rendered.length - start, sampleRate);
+  for (let c = 0; c < rendered.numberOfChannels; c++) {
+    buffer.copyToChannel(rendered.getChannelData(c).subarray(start), c);
+  }
   return buffer;
 }
 
@@ -15534,7 +15880,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-10-25 17:07';
+const BUILD_STAMP = '2026-10-27 05:49';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
