@@ -287,6 +287,9 @@ html, body {
 .row-fader { gap: 14px; }
 .row-fader .mixfader { flex: 1 1 auto; min-width: 0; }
 .stepper { display: flex; align-items: center; gap: 14px; }
+/* The echo count: − and + either side of a box you can type any number into. */
+.echostepper { gap: 6px; }
+.echostepper .step { min-width: 40px; }
 .step { border: 0; background: none; color: var(--text2); font-size: 18px; font-family: inherit; min-width: 40px; min-height: 40px; border-radius: 10px; }
 .step:active { background: var(--panel2); }
 .stepval { font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; min-width: 48px; text-align: center; }
@@ -1161,6 +1164,17 @@ html, body {
 .strumown { font-size: 11px; color: var(--purple-light); padding: 10px 14px 0; }
 .strumcard-own .strumdivider { background: var(--purple-light); opacity: 0.25; }
 
+/* Under a control: what its number means (the Reverb's space). */
+.fxsub { margin: 2px 0 0 72px; font-size: 11px; color: var(--text2); }
+/* An MIT effect's credit: who made it, the licence, and its full text a tap away. */
+.fxcredit { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--panel2); }
+.fxcredittext { flex: 1 1 auto; min-width: 0; font-size: 11px; color: var(--text3); }
+.fxlicbtn { flex: 0 0 auto; border: 0; background: var(--panel2); color: var(--text2); font: inherit; font-size: 11px; border-radius: 999px; padding: 4px 10px; cursor: pointer; }
+.fxlicbtn:focus-visible { outline: 2px solid var(--purple); outline-offset: 1px; }
+.fxlicence { flex: 1 1 100%; white-space: pre-wrap; font-size: 10.5px; line-height: 1.5; color: var(--text2); background: var(--panel2); border-radius: 8px; padding: 8px 10px; max-height: 180px; overflow-y: auto; }
+/* Hertz and milliseconds fit in an effect's number box ("7.1 kH" did not). */
+.fxrow .numfield { width: 72px; }
+
 </style>
 </head>
 <body>
@@ -1200,7 +1214,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-10-27 05:49 from src/. */
+/* PocketDAW - phase 2. Built 2026-10-29 01:51 from src/. */
 (function () {
 'use strict';
 
@@ -2229,7 +2243,7 @@ function createSong({ name = 'Untitled', projectId } = {}) {
     sectionOrder: [section.id],
     masterEffects: [],
     noteDefaults: { ...DEFAULT_NOTE },
-    returns: { reverb: { size: 1.8, tone: 55 } },
+    returns: { reverb: { space: 8, decay: 1.8, predelay: 0, highCut: 7000, lofi: 0 } },
     createdAt: now,
     updatedAt: now,
   };
@@ -3991,6 +4005,7 @@ function buildExampleSong(piece) {
   song.projectId = piece.folder || EXAMPLES_PROJECT_ID;
   song.builtIn = BUILT_IN;
   song.description = piece.description || null;
+  if (piece.room && typeof piece.room === 'object') song.returns = { reverb: JSON.parse(JSON.stringify(piece.room)) };
 
   
   let tracks;
@@ -4010,6 +4025,8 @@ function buildExampleSong(piece) {
       if (strum) track.strum = strum;
       if (t.tremolo && typeof t.tremolo === 'object') track.tremolo = JSON.parse(JSON.stringify(t.tremolo));
       if (t.echo && typeof t.echo === 'object') track.echo = JSON.parse(JSON.stringify(t.echo));
+      if (t.distortion && typeof t.distortion === 'object') track.distortion = JSON.parse(JSON.stringify(t.distortion));
+      if (t.chorus && typeof t.chorus === 'object') track.chorus = JSON.parse(JSON.stringify(t.chorus));
       return track;
     });
   } else {
@@ -9685,73 +9702,502 @@ function availableLanes(song) {
   return out;
 }
 
-const MIN_DECAY = 0.3;
-const MAX_DECAY = 6;
+const SPACES = [
+  [96, 'room'], [107, 'club'], [135, 'club'], [143, 'club'], [166, 'club'], [189, 'club'], [225, 'club'],
+  [252, 'club'], [255, 'club'], [323, 'club'], [427, 'theater'], [470, 'theater'], [606, 'theater'],
+  [643, 'theater'], [809, 'hall'], [984, 'hall'], [1541, 'hall'],
+];
+
+const DEFAULT_REVERB = { space: 8, decay: 1.8, predelay: 0, highCut: 7000, lofi: 0 };
+
+const MIN_DECAY = 0.2;
+const MAX_DECAY = 20;
+const MAX_PREDELAY = 600; // ms
 const MIN_HIGH_CUT = 2000;
 const MAX_HIGH_CUT = 20000;
+const LOFI_STEPS = 9;
+const MAX_REGEN = 0.8;
 
-function clampDecay(seconds) {
-  return Math.max(MIN_DECAY, Math.min(MAX_DECAY, Number(seconds) || 1.8));
-}
+const RETURN_TRIM = Math.pow(10, -5.04 / 20);
 
-function clampHighCut(hz) {
-  return Math.max(MIN_HIGH_CUT, Math.min(MAX_HIGH_CUT, Number(hz) || 7000));
-}
+const REGENS = Array.from({ length: 17 }, (_, i) => i * 0.05);
+
+const DECAY = [
+  [0.107, 0.148, 0.217, 0.269, 0.341, 0.423, 0.518, 0.633, 0.755, 0.919, 1.148, 1.444, 1.868, 2.488, 3.439, 5.017, 7.913],
+  [0.11, 0.164, 0.237, 0.301, 0.39, 0.483, 0.586, 0.708, 0.855, 1.043, 1.289, 1.62, 2.104, 2.804, 3.868, 5.651, 8.929],
+  [0.114, 0.181, 0.278, 0.343, 0.451, 0.55, 0.683, 0.817, 0.988, 1.206, 1.495, 1.878, 2.418, 3.231, 4.474, 6.519, 10.303],
+  [0.119, 0.204, 0.281, 0.361, 0.467, 0.559, 0.678, 0.823, 1.004, 1.227, 1.529, 1.91, 2.485, 3.302, 4.556, 6.657, 10.522],
+  [0.137, 0.215, 0.317, 0.401, 0.511, 0.617, 0.751, 0.915, 1.099, 1.338, 1.659, 2.089, 2.718, 3.609, 4.981, 7.284, 11.508],
+  [0.141, 0.224, 0.328, 0.41, 0.526, 0.64, 0.793, 0.945, 1.14, 1.388, 1.735, 2.179, 2.822, 3.75, 5.214, 7.591, 11.996],
+  [0.169, 0.246, 0.35, 0.456, 0.583, 0.712, 0.874, 1.043, 1.249, 1.536, 1.908, 2.4, 3.111, 4.125, 5.722, 8.339, 13.171],
+  [0.183, 0.251, 0.363, 0.46, 0.592, 0.713, 0.875, 1.055, 1.271, 1.568, 1.935, 2.432, 3.155, 4.184, 5.784, 8.444, 13.342],
+  [0.177, 0.251, 0.372, 0.47, 0.614, 0.744, 0.903, 1.101, 1.325, 1.612, 1.999, 2.504, 3.267, 4.337, 6.0, 8.757, 13.832],
+  [0.211, 0.253, 0.373, 0.478, 0.606, 0.733, 0.893, 1.076, 1.289, 1.567, 1.956, 2.462, 3.183, 4.236, 5.857, 8.559, 13.49],
+  [0.292, 0.301, 0.463, 0.579, 0.708, 0.866, 1.061, 1.283, 1.547, 1.883, 2.317, 2.933, 3.793, 5.044, 6.96, 10.162, 16.02],
+  [0.253, 0.338, 0.488, 0.617, 0.812, 0.954, 1.168, 1.41, 1.696, 2.075, 2.564, 3.22, 4.191, 5.561, 7.69, 11.238, 17.722],
+  [0.326, 0.364, 0.478, 0.617, 0.769, 0.941, 1.144, 1.378, 1.682, 2.027, 2.518, 3.162, 4.094, 5.429, 7.501, 10.921, 17.239],
+  [0.316, 0.378, 0.553, 0.699, 0.896, 1.078, 1.319, 1.589, 1.922, 2.361, 2.915, 3.665, 4.755, 6.331, 8.739, 12.774, 20.16],
+  [0.375, 0.439, 0.673, 0.85, 1.071, 1.313, 1.593, 1.92, 2.324, 2.83, 3.508, 4.406, 5.733, 7.606, 10.534, 15.344, 24.244],
+  [0.333, 0.5, 0.738, 0.907, 1.144, 1.432, 1.761, 2.154, 2.577, 3.133, 3.893, 4.904, 6.345, 8.421, 11.671, 17.04, 26.851],
+  [0.426, 0.603, 0.879, 1.114, 1.442, 1.742, 2.124, 2.551, 3.093, 3.784, 4.674, 5.876, 7.638, 10.157, 14.034, 20.53, 32.408],
+];
+
+const num = (v, fallback) => (Number.isFinite(Number(v)) && v !== null && v !== '' ? Number(v) : fallback);
+const clampSpace = (v) => Math.max(0, Math.min(16, Math.round(num(v, DEFAULT_REVERB.space))));
+const clampDecay = (v) => Math.max(MIN_DECAY, Math.min(MAX_DECAY, num(v, DEFAULT_REVERB.decay)));
+const clampPredelay = (v) => Math.max(0, Math.min(MAX_PREDELAY, num(v, 0)));
+const clampHighCut = (v) => Math.max(MIN_HIGH_CUT, Math.min(MAX_HIGH_CUT, num(v, DEFAULT_REVERB.highCut)));
+const clampLofi = (v) => Math.max(0, Math.min(LOFI_STEPS, Math.round(num(v, 0))));
 
 function readReverbSettings(reverb = {}) {
-  const decay = reverb.decay !== undefined ? reverb.decay : reverb.size;
-  const highCut = reverb.highCut !== undefined
-    ? reverb.highCut
-    : (reverb.tone !== undefined
-      ? 2000 * Math.pow(10, Math.max(0, Math.min(100, reverb.tone)) / 100)
-      : undefined);
-  return { decay: clampDecay(decay), highCut: clampHighCut(highCut) };
-}
-
-function noise(seed) {
-  let state = (seed | 0) || 0x9e3779b9;
-  return () => {
-    state ^= state << 13;
-    state ^= state >>> 17;
-    state ^= state << 5;
-    state |= 0;
-    return state / 2147483648;
+  const r = reverb || {};
+  const decay = r.decay !== undefined ? r.decay : r.size;
+  const highCut = r.highCut !== undefined
+    ? r.highCut
+    : (r.tone !== undefined ? 2000 * Math.pow(10, Math.max(0, Math.min(100, r.tone)) / 100) : undefined);
+  return {
+    space: clampSpace(r.space),
+    decay: clampDecay(decay),
+    predelay: clampPredelay(r.predelay),
+    highCut: clampHighCut(highCut),
+    lofi: clampLofi(r.lofi),
   };
 }
 
-function envelopeAt(t, decay) {
-  return Math.exp((-6.907755278982137 * t) / decay);
+function derezFor(lofi, sampleRate) {
+  const overallscale = sampleRate / 44100;
+  const C = Math.min(1, (overallscale / (clampLofi(lofi) + 1)) * (1 - 1e-9));
+  const derez = Math.max(0.0005, Math.min(1, C / overallscale));
+  return { C, step: Math.trunc(1 / derez) };
 }
 
-function buildImpulse(ctx, settings = {}) {
-  const sampleRate = ctx.sampleRate || 48000;
-  const { decay, highCut } = readReverbSettings(settings);
-  const seed = settings.seed === undefined ? 1 : settings.seed;
+const stretch = (lofi, sampleRate) => ((derezFor(lofi, sampleRate).step + 1) / 2) * (48000 / sampleRate);
 
-  const length = Math.max(1, Math.ceil(decay * sampleRate));
-  const buffer = ctx.createBuffer(2, length, sampleRate);
+function decayAtRegen(space, regen) {
+  const row = DECAY[clampSpace(space)];
+  const x = Math.max(0, Math.min(MAX_REGEN, regen)) / 0.05;
+  const i = Math.min(15, Math.floor(x));
+  const f = x - i;
+  return Math.exp(Math.log(row[i]) + (Math.log(row[i + 1]) - Math.log(row[i])) * f);
+}
 
-  
-  const coefficient = Math.min(0.95, 1 - Math.exp((-2 * Math.PI * highCut) / sampleRate));
-  const fadeIn = Math.min(Math.floor(sampleRate * 0.005), length);
+function decayRange(space, lofi = 0, sampleRate = 48000) {
+  const scale = stretch(lofi, sampleRate);
+  return [
+    Math.max(MIN_DECAY, decayAtRegen(space, 0) * scale),
+    Math.min(MAX_DECAY, decayAtRegen(space, MAX_REGEN) * scale),
+  ];
+}
 
-  for (let channel = 0; channel < 2; channel++) {
-    const data = buffer.getChannelData(channel);
-    const random = noise(0x2545f491 * (seed + 1) + channel * 0x9e3779b9);
-    let last = 0;
-    for (let i = 0; i < length; i++) {
-      const t = i / sampleRate;
-      const envelope = envelopeAt(t, decay);
-      const a = coefficient * (1 - (i / length) * 0.85);
-      last += a * (random() - last);
-      const attack = i < fadeIn ? i / fadeIn : 1;
-      data[i] = last * envelope * attack;
-    }
-    const fadeOut = Math.min(Math.floor(sampleRate * 0.005), Math.floor(length / 4));
-    for (let i = 0; i < fadeOut; i++) data[length - 1 - i] *= i / fadeOut;
+function creamCoatParams(settings, sampleRate = 48000) {
+  const s = readReverbSettings(settings);
+  const { C, step: k } = derezFor(s.lofi, sampleRate);
+  const scale = stretch(s.lofi, sampleRate);
+  const [lo, hi] = decayRange(s.space, s.lofi, sampleRate);
+  const want = Math.max(lo, Math.min(hi, s.decay));
+  const target = want / scale;
+  const row = DECAY[s.space];
+  let regen;
+  if (target <= row[0]) regen = 0;
+  else if (target >= decayAtRegen(s.space, MAX_REGEN)) regen = MAX_REGEN;
+  else {
+    let i = 0;
+    while (i < 15 && row[i + 1] < target) i++;
+    const f = (Math.log(target) - Math.log(row[i])) / (Math.log(row[i + 1]) - Math.log(row[i]));
+    regen = Math.min(MAX_REGEN, (i + Math.max(0, Math.min(1, f))) * 0.05);
+  }
+  const B = regen;
+  const D = Math.min(1, ((s.predelay / 1000) * sampleRate * k) / (15000 * (k + 1)));
+  return {
+    A: (s.space + 0.5) / 16.999,
+    B,
+    C,
+    D,
+    E: 1, // fully wet: it is a return, and the sends set how much is heard
+    decay: decayAtRegen(s.space, B) * scale,
+  };
+}
+
+function lofiLabel(n) {
+  const step = clampLofi(n);
+  if (!step) return 'Off';
+  const k = 48 / (step + 2);
+  return `${Number.isInteger(k) ? k : k.toFixed(1)}k`;
+}
+
+function spaceLabel(space) {
+  const [seats, kind] = SPACES[clampSpace(space)];
+  return `A ${seats}-seat ${kind}`;
+}
+
+const RESO = [4.46570214, 1.51387132, 0.93979296, 0.70710678, 0.59051105, 0.52972649, 0.50316379];
+
+const DEFAULT_DISTORTION = { on: false, drive: 30, tone: 100, tight: 0, mix: 100 };
+
+const pct = (v, fallback) => Math.max(0, Math.min(100, Math.round(Number.isFinite(Number(v)) ? Number(v) : fallback)));
+
+function readDistortion(d) {
+  const s = d || {};
+  return {
+    on: Boolean(s.on),
+    drive: pct(s.drive, DEFAULT_DISTORTION.drive),
+    tone: pct(s.tone, DEFAULT_DISTORTION.tone),
+    tight: pct(s.tight, DEFAULT_DISTORTION.tight),
+    mix: pct(s.mix, DEFAULT_DISTORTION.mix),
+  };
+}
+
+function edgeGain(drive) {
+  const d = pct(drive, DEFAULT_DISTORTION.drive) / 100;
+  return 0.12 + 0.88 * d * d;
+}
+
+const inTrim = (drive) => edgeGain(drive) * 4 + 0.5;
+
+function toneHz(tone, sampleRate = 48000) {
+  const v = pct(tone, 100);
+  const hz = v >= 100 ? 25000 : 2000 * Math.pow(10, v / 100);
+  return Math.max(0.001 * sampleRate, Math.min(0.49 * sampleRate, hz));
+}
+
+function tightHz(tight) {
+  const v = pct(tight, 0);
+  return v <= 0 ? 0 : 40 * Math.pow(750 / 40, v / 100);
+}
+
+const qDb = (q) => 20 * Math.log10(q);
+
+function edgePole(ctx, hz, highpass) {
+  const a = 1 - Math.exp((-2 * Math.PI * hz) / ctx.sampleRate);
+  return highpass
+    ? ctx.createIIRFilter([1 - a, -(1 - a)], [1, -(1 - a)])
+    : ctx.createIIRFilter([a], [1, -(1 - a)]);
+}
+
+function shaper(ctx, curve) {
+  const s = ctx.createWaveShaper();
+  s.curve = curve;
+  s.oversample = 'none';
+  return s;
+}
+
+const CLIP = new Float32Array([-1, 1]);
+const ABS = new Float32Array([1, 0, 1]);
+
+const INVERSE = (() => {
+  const n = 8193;
+  const c = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const x = (i / (n - 1)) * 2 - 1;
+    c[i] = 1 / Math.max(x, 1e-4);
+  }
+  return c;
+})();
+
+const ENVELOPE_HZ = 8;
+
+function createEdge(ctx, settings = DEFAULT_DISTORTION, { match = true } = {}) {
+  const input = ctx.createGain();
+  const output = ctx.createGain();
+  const dry = ctx.createGain();
+  const wet = ctx.createGain();
+  input.connect(dry);
+  dry.connect(output);
+  wet.connect(output);
+
+  const head = ctx.createGain();
+  const lps = RESO.map((q) => {
+    const f = ctx.createBiquadFilter();
+    f.type = 'lowpass';
+    f.Q.value = qDb(q);
+    return f;
+  });
+  const trims = [];
+  head.connect(lps[0]);
+  for (let k = 0; k < 6; k++) {
+    const g = ctx.createGain();
+    const clip = shaper(ctx, CLIP);
+    lps[k].connect(g);
+    g.connect(clip);
+    clip.connect(lps[k + 1]);
+    trims.push(g);
+  }
+  const last = lps[6];
+
+  const nodes = [];
+  if (match) {
+    const byIn = ctx.createGain();
+    const byWet = ctx.createGain();
+    byIn.gain.value = 0;
+    byWet.gain.value = 0;
+    const absIn = shaper(ctx, ABS);
+    const absWet = shaper(ctx, ABS);
+    const smoothIn = [edgePole(ctx, ENVELOPE_HZ, false), edgePole(ctx, ENVELOPE_HZ, false)];
+    const smoothWet = [edgePole(ctx, ENVELOPE_HZ, false), edgePole(ctx, ENVELOPE_HZ, false)];
+    const inverse = shaper(ctx, INVERSE);
+    input.connect(absIn); absIn.connect(smoothIn[0]); smoothIn[0].connect(smoothIn[1]); smoothIn[1].connect(byIn.gain);
+    last.connect(absWet); absWet.connect(smoothWet[0]); smoothWet[0].connect(smoothWet[1]); smoothWet[1].connect(inverse); inverse.connect(byWet.gain);
+    last.connect(byIn); byIn.connect(byWet); byWet.connect(wet);
+    nodes.push(byIn, byWet, absIn, absWet, ...smoothIn, ...smoothWet, inverse);
+  } else {
+    last.connect(wet);
   }
 
-  return buffer;
+  let tight = null; // { hz, filter, gain }
+  function setTight(hz, at) {
+    if (tight && tight.hz === hz) return;
+    const gain = ctx.createGain();
+    const filter = hz > 0 ? edgePole(ctx, hz, true) : null;
+    if (filter) { input.connect(filter); filter.connect(gain); } else input.connect(gain);
+    gain.connect(head);
+    const old = tight;
+    tight = { hz, filter, gain };
+    if (!old || at === null) {
+      gain.gain.value = 1;
+      if (old) retire(old, 0);
+      return;
+    }
+    gain.gain.setValueAtTime(0, at);
+    gain.gain.linearRampToValueAtTime(1, at + 0.015);
+    old.gain.gain.cancelScheduledValues(at);
+    old.gain.gain.setValueAtTime(old.gain.gain.value, at);
+    old.gain.gain.linearRampToValueAtTime(0, at + 0.015);
+    retire(old, 60);
+  }
+  function retire(old, ms) {
+    const drop = () => {
+      try { if (old.filter) { input.disconnect(old.filter); old.filter.disconnect(); } else input.disconnect(old.gain); } catch (err) {  }
+      try { old.gain.disconnect(); } catch (err) {  }
+    };
+    if (ms > 0 && typeof setTimeout === 'function') setTimeout(drop, ms);
+    else drop();
+  }
+
+  
+  function set(next, { live = false } = {}) {
+    const s = readDistortion(next);
+    const now = ctx.currentTime;
+    const to = (param, value) => {
+      if (live && param.setTargetAtTime) param.setTargetAtTime(value, now, 0.01);
+      else param.value = value;
+    };
+    const trim = inTrim(s.drive);
+    trims.forEach((g) => to(g.gain, trim));
+    const hz = toneHz(s.tone, ctx.sampleRate);
+    lps.forEach((f) => to(f.frequency, hz));
+    to(wet.gain, s.mix / 100);
+    to(dry.gain, 1 - s.mix / 100);
+    setTight(tightHz(s.tight), live ? now : null);
+  }
+
+  set(settings);
+
+  return {
+    input,
+    output,
+    set,
+    dispose() {
+      [input, output, dry, wet, head, ...lps, ...trims, ...nodes].forEach((n) => n && n.disconnect && n.disconnect());
+      if (tight) retire(tight, 0);
+    },
+  };
+}
+
+const DEFAULT_CHORUS = { on: false, rate: 0.75, depth: 80, delay: 3, mix: 50, voices: 1, stereo: 'mono', tone: 7000 };
+
+const CHORUS_MIN_RATE = 0.05;
+const CHORUS_MAX_RATE = 10;
+const CHORUS_MIN_DELAY = 1; // ms
+const CHORUS_MAX_DELAY = 25;
+const CHORUS_MIN_TONE = 2000;
+const CHORUS_MAX_TONE = 20000;
+const CHORUS_STEREO = ['mono', 'wide', 'split'];
+const CHORUS_MAX_VOICES = 3; // and the sixths below cover every phase 1–3 copies need
+
+const CHORUS_PRESETS = [
+  { id: 'jc120', label: 'JC-120 split', settings: { rate: 0.9, depth: 45, delay: 5, mix: 100, voices: 1, stereo: 'split', tone: 10000 } },
+  { id: 'ce1', label: 'CE-1', settings: { rate: 0.75, depth: 80, delay: 3, mix: 50, voices: 1, stereo: 'mono', tone: 7000 } },
+  { id: 'juno', label: 'Juno', settings: { rate: 0.5, depth: 62, delay: 3.5, mix: 50, voices: 1, stereo: 'wide', tone: 9000 } },
+  { id: 'ensemble', label: 'Ensemble', settings: { rate: 0.8, depth: 70, delay: 8, mix: 60, voices: 3, stereo: 'wide', tone: 10000 } },
+];
+
+const chorusNum = (v, fallback) => (Number.isFinite(Number(v)) && v !== null && v !== '' ? Number(v) : fallback);
+const chorusClamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+function readChorus(c) {
+  const s = c || {};
+  return {
+    on: Boolean(s.on),
+    rate: chorusClamp(chorusNum(s.rate, DEFAULT_CHORUS.rate), CHORUS_MIN_RATE, CHORUS_MAX_RATE),
+    depth: chorusClamp(Math.round(chorusNum(s.depth, DEFAULT_CHORUS.depth)), 0, 100),
+    delay: chorusClamp(chorusNum(s.delay, DEFAULT_CHORUS.delay), CHORUS_MIN_DELAY, CHORUS_MAX_DELAY),
+    mix: chorusClamp(Math.round(chorusNum(s.mix, DEFAULT_CHORUS.mix)), 0, 100),
+    voices: chorusClamp(Math.round(chorusNum(s.voices, DEFAULT_CHORUS.voices)), 1, CHORUS_MAX_VOICES),
+    stereo: CHORUS_STEREO.includes(s.stereo) ? s.stereo : DEFAULT_CHORUS.stereo,
+    tone: chorusClamp(chorusNum(s.tone, DEFAULT_CHORUS.tone), CHORUS_MIN_TONE, CHORUS_MAX_TONE),
+  };
+}
+
+function chorusPreset(settings) {
+  const s = readChorus(settings);
+  const found = CHORUS_PRESETS.find((p) => Object.entries(p.settings).every(([k, v]) => s[k] === v));
+  return found ? found.id : null;
+}
+
+const swingMs = (s) => (s.depth / 100) * Math.max(0, s.delay - 0.5);
+
+function detuneCents(settings) {
+  const s = readChorus(settings);
+  const frac = (4 * s.rate * swingMs(s)) / 1000;
+  return 1200 * Math.log2(1 + frac);
+}
+
+const CHORUS_HARMONICS = 48;
+function chorusTriangle(ctx, phase) {
+  const real = new Float32Array(CHORUS_HARMONICS + 1);
+  const imag = new Float32Array(CHORUS_HARMONICS + 1);
+  for (let k = 1; k <= CHORUS_HARMONICS; k += 2) {
+    const a = 8 / (Math.PI * Math.PI * k * k);
+    real[k] = -a * Math.cos(2 * Math.PI * k * phase);
+    imag[k] = a * Math.sin(2 * Math.PI * k * phase);
+  }
+  return ctx.createPeriodicWave(real, imag, { disableNormalization: true });
+}
+
+function chorusPole(ctx, hz) {
+  const a = Math.exp((-2 * Math.PI * Math.min(hz, ctx.sampleRate * 0.45)) / ctx.sampleRate);
+  return ctx.createIIRFilter([1 - a], [1, -a]);
+}
+
+function voicePhase(v, voices, side, stereo) {
+  return v / voices + (side === 1 && stereo === 'wide' ? 0.5 : 0);
+}
+
+const CHORUS_SIXTHS = [[0, 2, 3, 4], [0, 1, 3, 5]];
+
+function chorusPhases(voices, stereo) {
+  const out = [];
+  for (let side = 0; side < (stereo === 'wide' ? 2 : 1); side++) {
+    for (let v = 0; v < voices; v++) out.push([side, Math.round(voicePhase(v, voices, side, stereo) * 6) % 6]);
+  }
+  return out;
+}
+
+function chorusMatrix(stereo, mix) {
+  const m = mix / 100;
+  if (stereo === 'split') return { dryL: 1, dryR: 1 - m, lToL: 0, lToR: m, rToL: 0, rToR: 0 };
+  if (stereo === 'wide') return { dryL: 1 - m, dryR: 1 - m, lToL: m, lToR: 0, rToL: 0, rToR: m };
+  return { dryL: 1 - m, dryR: 1 - m, lToL: m, lToR: m, rToL: 0, rToR: 0 };
+}
+
+function createChorus(ctx, settings = DEFAULT_CHORUS) {
+  const input = ctx.createGain();
+  input.channelCount = 1;
+  input.channelCountMode = 'explicit';
+  input.channelInterpretation = 'speakers';
+  const merge = ctx.createChannelMerger(2);
+  const output = ctx.createGain();
+  merge.connect(output);
+
+  const g = (value = 0) => { const n = ctx.createGain(); n.gain.value = value; return n; };
+  const dryL = g(), dryR = g();
+  input.connect(dryL); input.connect(dryR);
+  dryL.connect(merge, 0, 0); dryR.connect(merge, 0, 1);
+
+  const busL = g(1), busR = g(1);
+  const lToL = g(), lToR = g(), rToL = g(), rToR = g();
+  lToL.connect(merge, 0, 0); lToR.connect(merge, 0, 1);
+  rToL.connect(merge, 0, 0); rToR.connect(merge, 0, 1);
+
+  const tones = [null, null];
+  function setTone(hz, at) {
+    [[busL, [lToL, lToR], 0], [busR, [rToL, rToR], 1]].forEach(([bus, outs, side]) => {
+      const old = tones[side];
+      if (old && old.hz === hz) return;
+      const filter = chorusPole(ctx, hz);
+      const fade = g(old && at !== null ? 0 : 1);
+      bus.connect(filter); filter.connect(fade); outs.forEach((o) => fade.connect(o));
+      tones[side] = { hz, filter, fade };
+      if (!old) return;
+      if (at === null) { retire(bus, old, 0); return; }
+      fade.gain.setValueAtTime(0, at);
+      fade.gain.linearRampToValueAtTime(1, at + 0.015);
+      old.fade.gain.cancelScheduledValues(at);
+      old.fade.gain.setValueAtTime(old.fade.gain.value, at);
+      old.fade.gain.linearRampToValueAtTime(0, at + 0.015);
+      retire(bus, old, 60);
+    });
+  }
+  function retire(bus, old, ms) {
+    const drop = () => {
+      try { bus.disconnect(old.filter); } catch (err) {  }
+      try { old.filter.disconnect(); old.fade.disconnect(); } catch (err) {  }
+    };
+    if (ms > 0 && typeof setTimeout === 'function') setTimeout(drop, ms);
+    else drop();
+  }
+
+  
+  const start = ctx.currentTime;
+  const lfos = Array.from({ length: 6 }, (_, k) => {
+    const osc = ctx.createOscillator();
+    osc.setPeriodicWave(chorusTriangle(ctx, k / 6));
+    const swing = g();
+    osc.connect(swing);
+    osc.start(start);
+    return { osc, swing };
+  });
+  const copies = [];
+  [[0, CHORUS_SIXTHS[0], busL], [1, CHORUS_SIXTHS[1], busR]].forEach(([side, sixths, bus]) => {
+    sixths.forEach((k) => {
+      const delay = ctx.createDelay(0.06);
+      const level = g();
+      lfos[k].swing.connect(delay.delayTime);
+      input.connect(delay); delay.connect(level); level.connect(bus);
+      copies.push({ side, k, delay, level });
+    });
+  });
+
+  let current = null;
+  
+  function set(next, { live = false } = {}) {
+    const s = readChorus(next);
+    const now = ctx.currentTime;
+    const to = (param, value) => {
+      if (live && param.setTargetAtTime) param.setTargetAtTime(value, now, 0.01);
+      else param.value = value;
+    };
+    const centre = s.delay / 1000;
+    const swing = swingMs(s) / 1000;
+    const used = new Set(chorusPhases(s.voices, s.stereo).map(([side, k]) => `${side}:${k}`));
+    lfos.forEach((l) => { to(l.osc.frequency, s.rate); to(l.swing.gain, swing); });
+    copies.forEach((c) => {
+      to(c.delay.delayTime, centre);
+      to(c.level.gain, used.has(`${c.side}:${c.k}`) ? 1 / Math.sqrt(s.voices) : 0);
+    });
+    const m = chorusMatrix(s.stereo, s.mix);
+    to(dryL.gain, m.dryL); to(dryR.gain, m.dryR);
+    to(lToL.gain, m.lToL); to(lToR.gain, m.lToR); to(rToL.gain, m.rToL); to(rToR.gain, m.rToR);
+    setTone(s.tone, live ? now : null);
+    current = s;
+  }
+
+  set(settings);
+
+  return {
+    input,
+    output,
+    set,
+    get settings() { return { ...current }; },
+    dispose() {
+      lfos.forEach((l) => { try { l.osc.stop(); } catch (err) {  } });
+      [input, merge, output, dryL, dryR, busL, busR, lToL, lToR, rToL, rToR,
+        ...lfos.flatMap((l) => [l.osc, l.swing]),
+        ...copies.flatMap((c) => [c.delay, c.level]),
+        ...tones.filter(Boolean).flatMap((t) => [t.filter, t.fade])]
+        .forEach((n) => n && n.disconnect && n.disconnect());
+    },
+  };
 }
 
 const TIMING_TICKS = PPQ / 8;
@@ -9868,18 +10314,28 @@ function arpeggiate(notes, arp) {
 }
 
 const TREMOLO_RATES = [
+  { id: '1/1', label: '1/1', beats: 4 },
+  { id: '1/2', label: '1/2', beats: 2 },
+  { id: '1/4.', label: '1/4.', beats: 1.5 },
   { id: '1/4', label: '1/4', beats: 1 },
+  { id: '1/4T', label: '1/4T', beats: 2 / 3 },
+  { id: '1/8.', label: '1/8.', beats: 0.75 },
   { id: '1/8', label: '1/8', beats: 0.5 },
   { id: '1/8T', label: '1/8T', beats: 1 / 3 },
+  { id: '1/16.', label: '1/16.', beats: 0.375 },
   { id: '1/16', label: '1/16', beats: 0.25 },
   { id: '1/16T', label: '1/16T', beats: 1 / 6 },
   { id: '1/32', label: '1/32', beats: 0.125 },
 ];
 
+const rateEntry = (rateId) => TREMOLO_RATES.find((r) => r.id === rateId) || TREMOLO_RATES.find((r) => r.id === '1/8');
+
 const TREMOLO_SHAPES = [
   { id: 'sine', label: 'Sine' },
   { id: 'triangle', label: 'Triangle' },
   { id: 'square', label: 'Square' },
+  { id: 'rampDown', label: 'Falling saw' },
+  { id: 'rampUp', label: 'Rising saw' },
 ];
 
 const DEFAULT_TREMOLO = { on: false, rate: '1/8', depth: 60, shape: 'sine', open: 50 };
@@ -9893,6 +10349,12 @@ const POINTS_PER_CYCLE = 64;
 
 const MIN_SLOPE = 4 / POINTS_PER_CYCLE;
 
+const MAX_FLOOR_SECONDS = 0.5 * MIN_SLOPE;
+
+function slopeFloor(cycleSeconds) {
+  return Math.min(MIN_SLOPE, MAX_FLOOR_SECONDS / Math.max(0.001, cycleSeconds));
+}
+
 const MAX_CURVE_POINTS = 8192;
 
 const MAX_POINTS_PER_CYCLE = 1024;
@@ -9900,30 +10362,49 @@ const MAX_FINE_CURVE_POINTS = 65536;
 
 function squareSlope(cycleSeconds, open = 50) {
   const d = openFraction(open);
-  const base = Math.max(MIN_SLOPE, Math.min(1 / 6, 0.005 / Math.max(0.001, cycleSeconds)));
+  const base = Math.max(slopeFloor(cycleSeconds), Math.min(1 / 6, 0.005 / Math.max(0.001, cycleSeconds)));
   return Math.min(base, 2 * d, 2 * (1 - d));
 }
 
+const MIN_HALF_SECONDS = 0.004;
+
+function warpOpen(cycleSeconds, open = 50) {
+  const least = Math.min(0.5, MIN_HALF_SECONDS / Math.max(0.001, cycleSeconds));
+  return Math.max(least, Math.min(1 - least, openFraction(open)));
+}
+
+function sawSlope(cycleSeconds) {
+  return Math.max(slopeFloor(cycleSeconds), Math.min(1 / 6, 0.005 / Math.max(0.001, cycleSeconds)));
+}
+
 function pointsPerCycle(shape, cycleSeconds, open = 50) {
-  if (shape !== 'square') return POINTS_PER_CYCLE;
-  const slope = squareSlope(cycleSeconds, open);
-  if (!(slope > 0)) return POINTS_PER_CYCLE;
-  return Math.min(MAX_POINTS_PER_CYCLE, Math.max(POINTS_PER_CYCLE, Math.ceil(4 / slope)));
+  const within = (n) => Math.min(MAX_POINTS_PER_CYCLE, Math.max(POINTS_PER_CYCLE, Math.ceil(n)));
+  if (shape === 'square') {
+    const slope = squareSlope(cycleSeconds, open);
+    return slope > 0 ? within(4 / slope) : POINTS_PER_CYCLE;
+  }
+  const d = warpOpen(cycleSeconds, open);
+  const narrowest = Math.min(d, 1 - d) * (shape === 'rampUp' || shape === 'rampDown' ? 1 - sawSlope(cycleSeconds) : 1);
+  return within(12 / narrowest);
+}
+
+function warpPhase(t, d) {
+  return t < d ? 0.5 * (t / d) : 0.5 + 0.5 * ((t - d) / (1 - d));
 }
 
 function rateSeconds(rateId, bpm) {
-  const entry = TREMOLO_RATES.find((r) => r.id === rateId) || TREMOLO_RATES[1];
-  return entry.beats * (60 / (bpm || 120));
+  return rateEntry(rateId).beats * (60 / (bpm || 120));
 }
 
 function tremoloTicks(rateId) {
-  const entry = TREMOLO_RATES.find((r) => r.id === rateId) || TREMOLO_RATES[1];
-  return entry.beats * PPQ;
+  return rateEntry(rateId).beats * PPQ;
 }
 
 function waveAt(shape, phase, cycleSeconds = 0.25, open = 50) {
   const t = phase - Math.floor(phase);
-  if (shape === 'triangle') return t < 0.5 ? 1 - t * 2 : (t - 0.5) * 2;
+  if (shape === 'triangle' || shape === 'sine' || shape === 'rampDown' || shape === 'rampUp') {
+    return smoothWaveAt(shape, t, cycleSeconds, open);
+  }
   if (shape === 'square') {
     
     const d = openFraction(open);
@@ -9933,11 +10414,35 @@ function waveAt(shape, phase, cycleSeconds = 0.25, open = 50) {
     const window = (tau) => Math.max(0, Math.min(1, (tau + slope) / slope, (d + slope / 2 - tau) / slope));
     return Math.max(window(t), window(t - 1));
   }
-  return (Math.cos(t * 2 * Math.PI) + 1) / 2;
+  return smoothWaveAt('sine', t, cycleSeconds, open);
+}
+
+function smoothWaveAt(shape, t, cycleSeconds, open) {
+  const d = warpOpen(cycleSeconds, open);
+  if (shape === 'rampDown') {
+    const s = sawSlope(cycleSeconds);
+    if (t >= 1 - s) return (t - (1 - s)) / s; // back up to full, arriving on the beat
+    return 1 - warpPhase(t / (1 - s), d);
+  }
+  if (shape === 'rampUp') {
+    const s = sawSlope(cycleSeconds);
+    if (t < s) return 1 - t / s; // the drop, just after the beat
+    const tau = (t - s) / (1 - s);
+    return 1 - warpPhase(1 - tau, d);
+  }
+  const shifted = t + d / 2;
+  const u = warpPhase(shifted - Math.floor(shifted), d);
+  if (shape === 'triangle') {
+    const from = Math.abs(u - 0.25);
+    return 1 - 2 * Math.min(from, 1 - from);
+  }
+  return (Math.sin(u * 2 * Math.PI) + 1) / 2;
 }
 
 function tremoloCurve({ seconds, cycleSeconds, depth, shape, open = 50, depthAt = null }) {
-  const cycles = Math.max(1, seconds / Math.max(0.001, cycleSeconds));
+  const start = 0;
+  const length = seconds;
+  const cycles = Math.max(1, length / Math.max(0.001, cycleSeconds));
   const perCycle = pointsPerCycle(shape, cycleSeconds, open);
   const wanted = Math.ceil(cycles * perCycle) + 1;
   const cap = perCycle > POINTS_PER_CYCLE ? MAX_FINE_CURVE_POINTS : MAX_CURVE_POINTS;
@@ -9945,7 +10450,7 @@ function tremoloCurve({ seconds, cycleSeconds, depth, shape, open = 50, depthAt 
   const fixed = Math.max(0, Math.min(100, depth)) / 100;
   const curve = new Float32Array(points);
   for (let i = 0; i < points; i++) {
-    const at = (i / (points - 1)) * seconds;
+    const at = start + (i / (points - 1)) * length;
     const amount = depthAt ? Math.max(0, Math.min(100, depthAt(at))) / 100 : fixed;
     const value = waveAt(shape, at / cycleSeconds, cycleSeconds, open);
     curve[i] = 1 - amount * (1 - value);
@@ -9953,8 +10458,24 @@ function tremoloCurve({ seconds, cycleSeconds, depth, shape, open = 50, depthAt 
   return curve;
 }
 
+function tremoloValueAt({ cycleSeconds, depth = 0, shape, open = 50, depthAt = null }, at) {
+  const amount = depthAt ? Math.max(0, Math.min(100, depthAt(at))) / 100 : Math.max(0, Math.min(100, depth)) / 100;
+  return 1 - amount * (1 - waveAt(shape, at / cycleSeconds, cycleSeconds, open));
+}
+
+function tremoloCycle({ cycleSeconds, shape, open = 50 }, sampleRate) {
+  const length = Math.ceil(cycleSeconds * sampleRate) + 2;
+  const values = new Float32Array(length);
+  for (let i = 0; i < length; i++) values[i] = waveAt(shape, i / sampleRate / cycleSeconds, cycleSeconds, open) - 1;
+  return values;
+}
+
 const ECHO_TIMES = [
+  { id: '1/1', label: '1/1', beats: 4 },
+  { id: '1/2', label: '1/2', beats: 2 },
+  { id: '1/4.', label: '1/4.', beats: 1.5 },
   { id: '1/4', label: '1/4', beats: 1 },
+  { id: '1/4T', label: '1/4T', beats: 2 / 3 },
   { id: '1/8.', label: '1/8.', beats: 0.75 },
   { id: '1/8', label: '1/8', beats: 0.5 },
   { id: '1/8T', label: '1/8T', beats: 1 / 3 },
@@ -9964,7 +10485,8 @@ const ECHO_TIMES = [
   { id: '1/32', label: '1/32', beats: 0.125 },
 ];
 
-const MAX_ECHOES = 8;
+const MAX_ECHOES = 64;
+const MAX_ECHO_SECONDS = 30;
 
 const DEFAULT_ECHO = Object.freeze({ on: false, time: '1/16', count: 1, level: 75, fade: 40, pan: 0.3, pingPong: true });
 
@@ -9988,9 +10510,9 @@ function echoSettings(echo) {
   };
 }
 
-function echoTaps(settings) {
+function echoTaps(settings, count = null) {
   const s = settings && 'beats' in settings ? settings : echoSettings(settings);
-  return Array.from({ length: s.count }, (_, k) => ({
+  return Array.from({ length: count === null ? s.count : count }, (_, k) => ({
     level: s.level * (1 - s.fade) ** k,
     pan: s.pingPong && k % 2 === 1 ? -s.pan : s.pan,
   }));
@@ -10000,6 +10522,24 @@ function echoSeconds(timeId, bpm, sampleRate = 0) {
   const time = ECHO_TIMES.find((t) => t.id === timeId) || ECHO_TIMES.find((t) => t.id === DEFAULT_ECHO.time);
   const seconds = time.beats * (60 / (bpm || 120));
   return sampleRate > 0 ? Math.max(1, Math.round(seconds * sampleRate)) / sampleRate : seconds;
+}
+
+function maxEchoesAt(timeId, bpm) {
+  return Math.max(1, Math.min(MAX_ECHOES, Math.floor(MAX_ECHO_SECONDS / echoSeconds(timeId, bpm) + 1e-9)));
+}
+
+function slowestTempo(song) {
+  let slowest = (song && song.bpm) || 120;
+  Object.values((song && song.sections) || {}).forEach((section) => {
+    const bpm = sectionTempo(song, section);
+    if (bpm > 0) slowest = Math.min(slowest, bpm);
+  });
+  return slowest;
+}
+
+function echoCount(song, echo) {
+  const e = echoSettings(echo);
+  return Math.min(e.count, maxEchoesAt(e.time, slowestTempo(song)));
 }
 
 function echoMs(timeId, bpm) {
@@ -10869,6 +11409,8 @@ function trackSheet(store, onChange, onLive) {
     duckCard(store, track, onChange, onLive),
     el('div', { class: 'label', text: 'Effects' }),
     filterCard(store, track, onChange, onLive),
+    distortionCard(store, track, onChange, onLive),
+    chorusCard(store, track, onChange, onLive),
     tremoloCard(store, track, onChange, onLive),
     echoCard(store, track, onChange, onLive),
     reverbCard(store, track, onChange, onLive),
@@ -10887,7 +11429,7 @@ function trackSheet(store, onChange, onLive) {
 
 function roomControls(store, onChange, onLive, suffix = '') {
   const returns = store.state.song.returns || {};
-  const setting = readReverbSettings(returns.reverb || {});
+  const r = readReverbSettings(returns.reverb || {});
   const write = (field, value, { live = false } = {}) => {
     store.run((s) => setReturnField(s, 'reverb', field, value), { coalesce: true });
     if (live) {
@@ -10896,46 +11438,134 @@ function roomControls(store, onChange, onLive, suffix = '') {
       onChange();
     }
   };
+  const row = (label, control) => el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: label }), control]);
+  const number = (text) => {
+    const n = parseFloat(String(text).replace(/[^0-9.]/g, ''));
+    return Number.isNaN(n) ? null : n;
+  };
 
-  const decay = fader({
-    min: Math.round(MIN_DECAY * 10),
-    max: Math.round(MAX_DECAY * 10),
-    value: Math.round(setting.decay * 10),
-    ariaLabel: `Reverb decay${suffix}`,
-    format: (v) => `${(v / 10).toFixed(1)} s`,
+  const space = fader({
+    min: 0,
+    max: 16,
+    value: r.space,
+    ariaLabel: `Reverb space${suffix}`,
+    format: (v) => String(SPACES[v][0]),
     parse: (text) => {
-      const n = parseFloat(String(text).replace(/[^0-9.]/g, ''));
-      return Number.isNaN(n) ? null : Math.round(n * 10);
+      const n = number(text);
+      if (n === null) return null;
+      let best = 0;
+      SPACES.forEach(([seats], i) => { if (Math.abs(seats - n) < Math.abs(SPACES[best][0] - n)) best = i; });
+      return best;
     },
-    onDrag: (v) => write('decay', v / 10, { live: true }),
-    onCommit: (v) => write('decay', v / 10),
+    onDrag: (v) => write('space', v, { live: true }),
+    onCommit: (v) => write('space', v),
   });
 
   const STEPS = 1000;
-  const toHz = (pos) => Math.round(MIN_HIGH_CUT * Math.pow(MAX_HIGH_CUT / MIN_HIGH_CUT, pos / STEPS));
-  const toPos = (hz) => Math.round(
-    (Math.log(clampHighCut(hz) / MIN_HIGH_CUT) / Math.log(MAX_HIGH_CUT / MIN_HIGH_CUT)) * STEPS,
-  );
-  const highCut = fader({
+  const tidy = (v) => (v >= 10 ? Math.round(v) : Math.round(v * 10) / 10);
+  const toS = (pos) => tidy(MIN_DECAY * Math.pow(MAX_DECAY / MIN_DECAY, pos / STEPS));
+  const toPos = (sec) => Math.round((Math.log(Math.max(MIN_DECAY, Math.min(MAX_DECAY, sec)) / MIN_DECAY) / Math.log(MAX_DECAY / MIN_DECAY)) * STEPS);
+  const [lo, hi] = decayRange(r.space, r.lofi);
+  const seconds = (v) => (v >= 10 ? `${Math.round(v)} s` : `${v.toFixed(1)} s`);
+  const decay = fader({
     min: 0,
     max: STEPS,
-    value: toPos(setting.highCut),
+    value: toPos(r.decay),
+    ariaLabel: `Reverb decay${suffix}`,
+    format: (pos) => seconds(Math.max(lo, Math.min(hi, toS(pos)))),
+    parse: (text) => { const n = number(text); return n === null ? null : toPos(n); },
+    onDrag: (pos) => write('decay', toS(pos), { live: true }),
+    onCommit: (pos) => write('decay', toS(pos)),
+  });
+
+  const predelay = fader({
+    min: 0,
+    max: MAX_PREDELAY / 5,
+    value: Math.round(r.predelay / 5),
+    ariaLabel: `Reverb predelay${suffix}`,
+    format: (v) => `${v * 5} ms`,
+    parse: (text) => { const n = number(text); return n === null ? null : Math.round(n / 5); },
+    onDrag: (v) => write('predelay', v * 5, { live: true }),
+    onCommit: (v) => write('predelay', v * 5),
+  });
+
+  const HC = 1000;
+  const toHz = (pos) => Math.round(MIN_HIGH_CUT * Math.pow(MAX_HIGH_CUT / MIN_HIGH_CUT, pos / HC));
+  const toHcPos = (hz) => Math.round((Math.log(clampHighCut(hz) / MIN_HIGH_CUT) / Math.log(MAX_HIGH_CUT / MIN_HIGH_CUT)) * HC);
+  const highCut = fader({
+    min: 0,
+    max: HC,
+    value: toHcPos(r.highCut),
     ariaLabel: `Reverb high cut${suffix}`,
     format: (pos) => hzLabel(toHz(pos)),
     parse: (text) => {
       const t = String(text).trim().toLowerCase();
       const n = parseFloat(t.replace(/[^0-9.]/g, ''));
       if (Number.isNaN(n)) return null;
-      return toPos(t.includes('k') ? n * 1000 : n);
+      return toHcPos(t.includes('k') ? n * 1000 : n);
     },
     onDrag: (pos) => write('highCut', toHz(pos), { live: true }),
     onCommit: (pos) => write('highCut', toHz(pos)),
   });
 
+  const lofi = fader({
+    min: 0,
+    max: LOFI_STEPS,
+    value: r.lofi,
+    ariaLabel: `Reverb lo-fi${suffix}`,
+    format: lofiLabel,
+    parse: (text) => {
+      const t = String(text).trim().toLowerCase();
+      if (t.startsWith('off')) return 0;
+      const n = parseFloat(t);
+      if (Number.isNaN(n) || n <= 0) return null;
+      return Math.max(0, Math.min(LOFI_STEPS, Math.round(48 / n) - 2));
+    },
+    onDrag: (v) => write('lofi', v, { live: true }),
+    onCommit: (v) => write('lofi', v),
+  });
+
+  const limit = r.decay > hi + 0.05 ? ` · rings ${seconds(hi)} at most`
+    : r.decay < lo - 0.05 ? ` · rings ${seconds(lo)} at least` : '';
   return [
-    el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Decay' }), decay]),
-    el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'High cut' }), highCut]),
+    row('Space', space),
+    el('p', { class: 'fxsub', text: `${spaceLabel(r.space)}${limit}` }),
+    row('Decay', decay),
+    row('Predelay', predelay),
+    row('High cut', highCut),
+    row('Lo-fi', lofi),
   ];
+}
+
+const MIT_TEXT = `MIT License
+
+Copyright (c) 2018 Chris Johnson
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.`;
+
+const openLicences = new Set();
+
+function creditRow(id, name, onChange) {
+  const open = openLicences.has(id);
+  return el('div', { class: 'fxcredit' }, [
+    el('span', { class: 'fxcredittext', text: `${name} by Airwindows · MIT licence` }),
+    el('button', {
+      class: 'fxlicbtn',
+      type: 'button',
+      text: open ? 'Hide licence' : 'Licence',
+      'aria-expanded': open ? 'true' : 'false',
+      onClick: () => {
+        if (open) openLicences.delete(id);
+        else openLicences.add(id);
+        onChange();
+      },
+    }),
+    open ? el('div', { class: 'fxlicence', text: MIT_TEXT }) : null,
+  ].filter(Boolean));
 }
 
 function timingHint(store, track) {
@@ -11076,15 +11706,50 @@ function echoCard(store, track, onChange, onLive) {
     parse: parsePan,
     toModel: (v) => (Math.abs(v) <= 4 ? 0 : v) / 100,
   });
-  const count = Math.max(1, Math.min(MAX_ECHOES, Math.round(echo.count) || 1));
+  const asked = Math.max(1, Math.min(MAX_ECHOES, Math.round(echo.count) || 1));
+  const count = echoCount(song, echo);
+  const fits = maxEchoesAt(echo.time, slowestTempo(song));
+  
+  const setCount = (n) => {
+    const next = Math.max(1, Math.min(MAX_ECHOES, Math.round(Number(n)) || 1));
+    if (next !== echo.count) set('count', next);
+  };
+  const countField = el('input', {
+    class: 'numfield',
+    type: 'number',
+    inputmode: 'numeric',
+    min: '1',
+    max: String(MAX_ECHOES),
+    step: '1',
+    value: String(asked),
+    'aria-label': 'Echoes',
+    onChange: (e) => {
+      const n = parseInt(String(e.target.value).replace(/[^0-9]/g, ''), 10);
+      if (Number.isNaN(n)) {
+        e.target.value = String(asked);
+        return;
+      }
+      setCount(n);
+    },
+  });
+  const countRow = el('div', { class: 'fxrow' }, [
+    el('span', { class: 'fxlabel', text: 'Echoes' }),
+    el('div', { class: 'stepper echostepper' }, [
+      el('button', { class: 'step', type: 'button', text: '\u2212', 'aria-label': 'Fewer echoes', onClick: () => setCount(asked - 1) }),
+      countField,
+      el('button', { class: 'step', type: 'button', text: '+', 'aria-label': 'More echoes', onClick: () => setCount(asked + 1) }),
+    ]),
+  ]);
   const keep = Math.round(100 * (1 - (Number(echo.fade) || 0) / 100));
   const db = fadeDb(echo.fade);
+  const gapMs = echoMs(echo.time, bpm);
+  const gapText = gapMs >= 1000 ? `${(gapMs / 1000).toFixed(2).replace(/\.?0+$/, '')} s` : `${gapMs} ms`;
   return fxCard('Echo', 'repeats in time with the song', {
     on: Boolean(echo.on),
     onToggle: () => set('on', !echo.on),
   }, [
     chipRow('Time', ECHO_TIMES, echo.time, (id) => set('time', id)),
-    chipRow('Echoes', Array.from({ length: MAX_ECHOES }, (_, i) => ({ id: i + 1, label: String(i + 1) })), count, (id) => set('count', id)),
+    countRow,
     el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Level' }), level]),
     count > 1 ? el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Fade' }), fade]) : null,
     el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Pan' }), pan]),
@@ -11099,11 +11764,14 @@ function echoCard(store, track, onChange, onLive) {
     el('p', {
       class: 'hint dim',
       text: count === 1
-        ? `One repeat, ${echoMs(echo.time, bpm)} ms after each note at ${bpm} bpm.`
-        : `${count} repeats, ${echoMs(echo.time, bpm)} ms apart at ${bpm} bpm, each ${keep}% of the one before`
+        ? `One repeat, ${gapText} after each note at ${bpm} bpm.`
+        : `${count} repeats, ${gapText} apart at ${bpm} bpm, each ${keep}% of the one before`
           + ` (${Number.isFinite(db) ? `${db.toFixed(1)} dB` : 'silent'})`
           + (echo.pingPong !== false && Math.round((Number(echo.pan) || 0) * 100) !== 0 ? ', alternating sides.' : '.'),
     }),
+    asked > count
+      ? el('p', { class: 'hint', text: `Only ${fits} repeat${fits === 1 ? '' : 's'} of ${echo.time} fit in ${MAX_ECHO_SECONDS} seconds at ${slowestTempo(song)} bpm, so ${fits === 1 ? 'that is what plays' : 'those are what play'}.` })
+      : null,
   ]);
 }
 
@@ -11167,6 +11835,7 @@ function filterCard(store, track, onChange, onLive) {
 
 function hzLabel(hz) {
   const n = Math.round(Number(hz) || 20000);
+  if (n >= 10000) return `${Math.round(n / 1000)} kHz`;
   return n >= 1000 ? `${(n / 1000).toFixed(1)} kHz` : `${n} Hz`;
 }
 
@@ -11188,10 +11857,136 @@ function reverbCard(store, track, onChange, onLive) {
     },
   });
 
-  return fxCard('Reverb', 'a synthesized room, no samples', {}, [
+  return fxCard('Reverb', 'CreamCoat, one room for the whole song', {}, [
     el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Send' }), send]),
     ...roomControls(store, onChange, onLive),
-    el('p', { class: 'hint dim', text: 'Send is this track. Decay and high cut are the room, shared by every track.' }),
+    el('p', { class: 'hint dim', text: 'Send is this track. Everything under it is the room, shared by every track. Lo-fi runs the room at a lower sample rate: darker, grainier and longer.' }),
+    creditRow('creamcoat', 'CreamCoat', onChange),
+  ]);
+}
+
+function distortionCard(store, track, onChange, onLive) {
+  const d = readDistortion(track.distortion);
+  const set = (field, value, live = false) => {
+    store.run((s) => setTrackSetting(s, track.id, 'distortion', field, value), { coalesce: live });
+    if (live) {
+      if (onLive) onLive();
+    } else {
+      onChange();
+    }
+  };
+  const number = (t) => {
+    const n = parseFloat(String(t).replace(/[^0-9.]/g, ''));
+    return Number.isNaN(n) ? null : n;
+  };
+  const slider = (field, label, format, parse) => el('div', { class: 'fxrow' }, [
+    el('span', { class: 'fxlabel', text: label }),
+    fader({
+      min: 0,
+      max: 100,
+      value: d[field],
+      ariaLabel: `Distortion ${label.toLowerCase()}`,
+      ...(format ? { format, parse: parse || number } : {}),
+      onDrag: (v) => set(field, v, true),
+      onCommit: (v) => set(field, v),
+    }),
+  ]);
+  const nearest = (fn, text) => {
+    const t = String(text).trim().toLowerCase();
+    if (t.startsWith('open')) return 100;
+    if (t.startsWith('off')) return 0;
+    const n = number(t);
+    if (n === null) return null;
+    const hz = t.includes('k') ? n * 1000 : n;
+    let best = 0;
+    for (let v = 0; v <= 100; v++) if (Math.abs(fn(v) - hz) < Math.abs(fn(best) - hz)) best = v;
+    return best;
+  };
+  return fxCard('Distortion', 'Edge, from grit to fuzz', { on: d.on, onToggle: () => set('on', !d.on) }, [
+    slider('drive', 'Drive'),
+    slider('tone', 'Tone', (v) => (v >= 100 ? 'Open' : hzLabel(toneHz(v))), (t) => nearest((v) => toneHz(v), t)),
+    slider('tight', 'Tight', (v) => (v <= 0 ? 'Off' : `${Math.round(tightHz(v) / 10) * 10} Hz`), (t) => nearest(tightHz, t)),
+    slider('mix', 'Mix', (v) => `${v}%`),
+    el('p', { class: 'hint dim', text: 'The level is matched as Drive goes up, so it gets dirtier, not louder. Tight cuts the bass going in; Mix keeps some of the clean sound.' }),
+    creditRow('edge', 'Edge', onChange),
+  ]);
+}
+
+function chorusCard(store, track, onChange, onLive) {
+  const c = readChorus(track.chorus);
+  const set = (field, value, live = false) => {
+    store.run((s) => setTrackSetting(s, track.id, 'chorus', field, value), { coalesce: live });
+    if (live) {
+      if (onLive) onLive();
+    } else {
+      onChange();
+    }
+  };
+  const number = (t) => {
+    const n = parseFloat(String(t).replace(/[^0-9.]/g, ''));
+    return Number.isNaN(n) ? null : n;
+  };
+  const row = (label, control) => el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: label }), control]);
+
+  const STEPS = 1000;
+  const expo = (lo, hi, tidy) => ({
+    toValue: (pos) => tidy(lo * Math.pow(hi / lo, pos / STEPS)),
+    toPos: (v) => Math.round((Math.log(Math.max(lo, Math.min(hi, v)) / lo) / Math.log(hi / lo)) * STEPS),
+  });
+  const rate = expo(CHORUS_MIN_RATE, CHORUS_MAX_RATE, (v) => (v < 1 ? Math.round(v * 100) / 100 : Math.round(v * 10) / 10));
+  const delay = expo(CHORUS_MIN_DELAY, CHORUS_MAX_DELAY, (v) => (v < 10 ? Math.round(v * 10) / 10 : Math.round(v)));
+  const tone = expo(CHORUS_MIN_TONE, CHORUS_MAX_TONE, (v) => (v < 10000 ? Math.round(v / 100) * 100 : Math.round(v / 1000) * 1000));
+  const expoFader = (field, label, map, format, parse) => row(label, fader({
+    min: 0,
+    max: STEPS,
+    value: map.toPos(c[field]),
+    ariaLabel: `Chorus ${label.toLowerCase()}`,
+    format: (pos) => format(map.toValue(pos)),
+    parse: (text) => { const v = parse(text); return v === null ? null : map.toPos(v); },
+    onDrag: (pos) => set(field, map.toValue(pos), true),
+    onCommit: (pos) => set(field, map.toValue(pos)),
+  }));
+  const pctFader = (field, label) => row(label, fader({
+    min: 0,
+    max: 100,
+    value: c[field],
+    ariaLabel: `Chorus ${label.toLowerCase()}`,
+    format: (v) => `${v}%`,
+    parse: number,
+    onDrag: (v) => set(field, v, true),
+    onCommit: (v) => set(field, v),
+  }));
+  const hz = (t) => {
+    const n = number(t);
+    if (n === null) return null;
+    return String(t).toLowerCase().includes('k') ? n * 1000 : n;
+  };
+
+  const preset = chorusPreset(c);
+  const cents = Math.round(detuneCents(c));
+  const swing = swingMs(c);
+  const fmt = (v) => (v < 10 ? v.toFixed(1).replace(/\.0$/, '') : String(Math.round(v)));
+  return fxCard('Chorus', 'copies bent a few cents, like two players', { on: c.on, onToggle: () => set('on', !c.on) }, [
+    el('div', { class: 'fxrow' }, [
+      el('span', { class: 'fxlabel', text: 'Preset' }),
+      el('div', { class: 'chiprow wrap fxchips' }, CHORUS_PRESETS.map((p) => chip(p.label, {
+        small: true,
+        active: preset === p.id,
+        onClick: () => {
+          store.run((s) => setTrackField(s, track.id, 'chorus', { ...readChorus(track.chorus), ...p.settings }));
+          onChange();
+        },
+      }))),
+    ]),
+    expoFader('rate', 'Rate', rate, (v) => `${v < 1 ? String(Math.round(v * 100) / 100) : v.toFixed(1).replace(/\.0$/, '')} Hz`, number),
+    pctFader('depth', 'Depth'),
+    expoFader('delay', 'Delay', delay, (v) => `${fmt(v)} ms`, number),
+    pctFader('mix', 'Mix'),
+    expoFader('tone', 'Tone', tone, hzLabel, hz),
+    chipRow('Voices', [1, 2, 3].map((n) => ({ id: n, label: String(n) })), c.voices, (n) => set('voices', n)),
+    chipRow('Stereo', [{ id: 'mono', label: 'Mono' }, { id: 'wide', label: 'Wide' }, { id: 'split', label: 'Split' }], c.stereo, (id) => set('stereo', id)),
+    el('p', { class: 'fxsub chorusinfo', text: `Swings ${fmt(c.delay - swing)}\u2013${fmt(c.delay + swing)} ms, \u00b1${cents} cents` }),
+    el('p', { class: 'hint dim', text: 'Split puts the dry track on the left and the chorus on the right, as a JC-120 amp\u2019s two speakers do. Wide swings the two sides in opposite directions, as a Juno does. Mix 100% is vibrato.' }),
   ]);
 }
 
@@ -11244,7 +12039,7 @@ function tremoloCard(store, track, onChange, onLive) {
     chipRow('Rate', TREMOLO_RATES, trem.rate, (id) => set('rate', id)),
     chipRow('Shape', TREMOLO_SHAPES, trem.shape, (id) => set('shape', id)),
     el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Depth' }), depth]),
-    trem.shape === 'square' ? el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Open' }), open]) : null,
+    el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Open' }), open]),
   ]);
 }
 
@@ -11423,6 +12218,8 @@ function mixSheet(store, onChange, onLive) {
           || (track.arp && track.arp.on)
           || (track.tremolo && track.tremolo.on)
           || (track.echo && track.echo.on)
+          || (track.distortion && track.distortion.on)
+          || (track.chorus && track.chorus.on)
             ? el('span', { class: 'fxbadge', text: 'fx' })
             : null,
           chip('M', { active: track.mute, small: true, onClick: () => set('mute', !track.mute), title: 'Mute' }),
@@ -11479,9 +12276,10 @@ function everyTrackCards(store, onChange, onLive) {
     }),
   ]);
 
-  const reverbCardEvery = fxCard('Reverb', 'one room, and how much of each track goes to it', {}, [
+  const reverbCardEvery = fxCard('Reverb', 'CreamCoat, one room for every track', {}, [
     allFader('Send', 'sends', 'reverb', (t) => (t.sends || {}).reverb || 0),
     ...roomControls(store, onChange, onLive, ', every track'),
+    creditRow('creamcoat-every', 'CreamCoat', onChange),
   ]);
 
   const allOn = tracks.length > 0 && tracks.every((t) => t.duck && t.duck.on);
@@ -11564,6 +12362,8 @@ function songsSheet(store, onChange, songs) {
           || (track.arp && track.arp.on)
           || (track.tremolo && track.tremolo.on)
           || (track.echo && track.echo.on)
+          || (track.distortion && track.distortion.on)
+          || (track.chorus && track.chorus.on)
             ? el('span', { class: 'fxbadge', text: 'fx' })
             : null,
           projects.length ? chip('Move', { small: true, onClick: () => songs.moveToProject(entry.id) }) : null,
@@ -11587,6 +12387,8 @@ function songsSheet(store, onChange, songs) {
           || (track.arp && track.arp.on)
           || (track.tremolo && track.tremolo.on)
           || (track.echo && track.echo.on)
+          || (track.distortion && track.distortion.on)
+          || (track.chorus && track.chorus.on)
             ? el('span', { class: 'fxbadge', text: 'fx' })
             : null,
             chip('Rename', { small: true, onClick: () => songs.renameProject(project.id) }),
@@ -11680,15 +12482,16 @@ function exportSheet(store, onChange) {
 
 function describeAudio(report) {
   const glitch = report.badTimes ? ` \u00b7 ${report.badTimes} bad note times` : '';
+  const room = report.reverb === 'response' ? ' \u00b7 reverb from a recording' : '';
   if (report.route === 'media') {
     const restarts = report.recoveries ? ` \u00b7 restarted ${report.recoveries}\u00d7` : '';
     return report.elementPlaying
-      ? `Audio: through a media element \u00b7 silent switch ignored${restarts}${glitch}`
-      : `Audio: media element stopped \u00b7 recovering${restarts}${glitch}`;
+      ? `Audio: through a media element \u00b7 silent switch ignored${restarts}${room}${glitch}`
+      : `Audio: media element stopped \u00b7 recovering${restarts}${room}${glitch}`;
   }
   if (report.route === 'none') return 'Audio: not started yet \u00b7 press play';
   const session = report.api === 'missing' ? 'no session control' : `session ${report.type || 'unknown'}`;
-  return `Audio: direct output \u00b7 ${session} \u00b7 silent switch applies${glitch}`;
+  return `Audio: direct output \u00b7 ${session} \u00b7 silent switch applies${room}${glitch}`;
 }
 
 function originFor(store, before) {
@@ -12900,62 +13703,441 @@ function createTransport({
   };
 }
 
+function createCreamCoat(sampleRate) {
+  
+  const PREDELAY = 15000;
+  const K = [350, 1710, 1610, 835, 700, 1260, 1110, 1768, 280, 2645, 1410, 1175, 12, 3110, 120, 2370];
+  const SPACES = [
+    [65, 124, 83, 180, 200, 291, 108, 189, 73, 410, 479, 310, 11, 928, 23, 654],
+    [114, 205, 498, 195, 205, 318, 143, 254, 64, 721, 512, 324, 11, 782, 26, 394],
+    [118, 272, 292, 145, 200, 241, 204, 504, 50, 678, 424, 412, 11, 1124, 47, 766],
+    [19, 474, 301, 275, 260, 321, 371, 571, 50, 410, 697, 414, 11, 986, 47, 522],
+    [112, 387, 452, 289, 173, 476, 321, 593, 73, 343, 829, 91, 11, 1055, 43, 862],
+    [60, 368, 295, 272, 210, 284, 326, 830, 125, 236, 737, 486, 11, 1178, 75, 902],
+    [73, 311, 472, 251, 134, 509, 393, 591, 124, 1070, 340, 525, 11, 1367, 75, 816],
+    [159, 518, 514, 165, 275, 494, 296, 667, 75, 1101, 116, 414, 11, 1261, 79, 998],
+    [41, 741, 274, 59, 306, 332, 291, 767, 42, 881, 959, 422, 11, 1237, 45, 958],
+    [251, 437, 783, 189, 130, 272, 244, 761, 128, 1190, 320, 491, 11, 1409, 58, 455],
+    [316, 510, 1087, 349, 359, 74, 79, 1269, 34, 693, 749, 511, 11, 1751, 93, 403],
+    [254, 651, 845, 316, 373, 267, 182, 857, 215, 1535, 1127, 315, 11, 1649, 97, 829],
+    [113, 101, 673, 357, 340, 229, 278, 1008, 265, 1890, 155, 267, 11, 2233, 116, 600],
+    [218, 1058, 862, 505, 297, 580, 532, 1387, 120, 576, 1409, 473, 11, 1991, 76, 685],
+    [78, 760, 982, 528, 445, 1128, 130, 708, 22, 2144, 354, 1169, 11, 2782, 58, 1515],
+    [330, 107, 1110, 371, 620, 143, 1014, 1763, 184, 2068, 1406, 595, 11, 2639, 33, 1594],
+    [336, 1660, 386, 623, 693, 1079, 891, 1574, 24, 2641, 1239, 775, 11, 3104, 55, 2366],
+  ];
+  const line = (k) => new Float64Array(k + 5);
+  const L = K.map(line);
+  const R = K.map(line);
+  const cL = new Int32Array(16).fill(1);
+  const cR = new Int32Array(16).fill(1);
+  const zL = new Float64Array(PREDELAY + 5);
+  const zR = new Float64Array(PREDELAY + 5);
+  let countZ = 1;
+  let short = SPACES[16].slice();
+  let fbAL = 0, fbBL = 0, fbCL = 0, fbDL = 0, fbDR = 0, fbHR = 0, fbLR = 0, fbPR = 0;
+  let prevClearcoat = -1;
+  let bAL = 0, bAR = 0, bBL = 0, bBR = 0, bCL = 0, bCR = 0, bInL = 0, bInR = 0;
+  let bUnInL = 0, bUnInR = 0, bSampL = 0, bSampR = 0, bCycle = 1;
+  let fpdL = 2756923396, fpdR = 3074185931;
+  let A = 0.5, B = 0.5, C = 1.0, D = 0.0, E = 0.25;
+  const overallscale = sampleRate / 44100;
+
+  function setParams(p) {
+    if (p.A !== undefined) A = p.A;
+    if (p.B !== undefined) B = p.B;
+    if (p.C !== undefined) C = p.C;
+    if (p.D !== undefined) D = p.D;
+    if (p.E !== undefined) E = p.E;
+  }
+
+  function space(clearcoat) {
+    for (let k = 0; k < 16; k++) {
+      L[k].fill(0, 0, K[k] + 2);
+      R[k].fill(0, 0, K[k] + 2);
+    }
+    cL.fill(1);
+    cR.fill(1);
+    short = SPACES[Math.max(0, Math.min(16, clearcoat))].slice();
+  }
+
+  function process(inL, inR, outL, outR, n) {
+    const clearcoat = Math.trunc(A * 16.999);
+    if (clearcoat !== prevClearcoat) {
+      space(clearcoat);
+      prevClearcoat = clearcoat;
+    }
+    const regen = (1.0 - Math.pow(1.0 - B, 2.0)) * 0.0625;
+    let derez = C / overallscale;
+    if (derez < 0.0005) derez = 0.0005;
+    if (derez > 1.0) derez = 1.0;
+    derez = 1.0 / Math.trunc(1.0 / derez);
+    const adjPredelay = Math.trunc(PREDELAY * D * derez);
+    let wet = E * 2.0;
+    let dry = 2.0 - wet;
+    if (wet > 1.0) wet = 1.0; else wet *= wet;
+    if (wet < 0.0) wet = 0.0;
+    if (dry > 1.0) dry = 1.0;
+    if (dry < 0.0) dry = 0.0;
+    const [sA, sB, sC, sD, sE, sF, sG, sH, sI, sJ, sK, sL, sM, sN, sO, sP] = short;
+    const [aAL, aBL, aCL, aDL, aEL, aFL, aGL, aHL, aIL, aJL, aKL, aLL, aML, aNL, aOL, aPL] = L;
+    const [aAR, aBR, aCR, aDR, aER, aFR, aGR, aHR, aIR, aJR, aKR, aLR, aMR, aNR, aOR, aPR] = R;
+    const at = (buf, count, len) => buf[count - (count > len ? len + 1 : 0)];
+    const step = (count, len) => { const c = count + 1; return (c < 0 || c > len) ? 0 : c; };
+
+    for (let i = 0; i < n; i++) {
+      let inputSampleL = inL[i];
+      let inputSampleR = inR[i];
+      if (Math.abs(inputSampleL) < 1.18e-23) inputSampleL = fpdL * 1.18e-17;
+      if (Math.abs(inputSampleR) < 1.18e-23) inputSampleR = fpdR * 1.18e-17;
+      let drySampleL = inputSampleL;
+      let drySampleR = inputSampleR;
+
+      bCycle += derez;
+      bSampL += (inputSampleL + bInL) * derez;
+      bSampR += (inputSampleR + bInR) * derez;
+      bInL = inputSampleL; bInR = inputSampleR;
+      if (bCycle > 1.0) {
+        bCycle = 0.0;
+
+        zL[countZ] = bSampL;
+        zR[countZ] = bSampR;
+        countZ++; if (countZ < 0 || countZ > adjPredelay) countZ = 0;
+        bSampL = zL[countZ - (countZ > adjPredelay ? adjPredelay + 1 : 0)];
+        bSampR = zR[countZ - (countZ > adjPredelay ? adjPredelay + 1 : 0)];
+
+        const inLsum = bSampL + bUnInL;
+        aAL[cL[0]] = inLsum + fbAL * regen;
+        aBL[cL[1]] = inLsum + fbBL * regen;
+        aCL[cL[2]] = inLsum + fbCL * regen;
+        aDL[cL[3]] = inLsum + fbDL * regen;
+        bUnInL = bSampL;
+
+        const inRsum = bSampR + bUnInR;
+        aDR[cR[3]] = inRsum + fbDR * regen;
+        aHR[cR[7]] = inRsum + fbHR * regen;
+        aLR[cR[11]] = inRsum + fbLR * regen;
+        aPR[cR[15]] = inRsum + fbPR * regen;
+        bUnInR = bSampR;
+
+        cL[0] = step(cL[0], sA); cL[1] = step(cL[1], sB); cL[2] = step(cL[2], sC); cL[3] = step(cL[3], sD);
+        cR[3] = step(cR[3], sD); cR[7] = step(cR[7], sH); cR[11] = step(cR[11], sL); cR[15] = step(cR[15], sP);
+
+        const outAL = at(aAL, cL[0], sA), outBL = at(aBL, cL[1], sB), outCL = at(aCL, cL[2], sC), outDL = at(aDL, cL[3], sD);
+        const outDR = at(aDR, cR[3], sD), outHR = at(aHR, cR[7], sH), outLR = at(aLR, cR[11], sL), outPR = at(aPR, cR[15], sP);
+
+        aEL[cL[4]] = outAL - (outBL + outCL + outDL);
+        aFL[cL[5]] = outBL - (outAL + outCL + outDL);
+        aGL[cL[6]] = outCL - (outAL + outBL + outDL);
+        aHL[cL[7]] = outDL - (outAL + outBL + outCL);
+
+        aCR[cR[2]] = outDR - (outHR + outLR + outPR);
+        aGR[cR[6]] = outHR - (outDR + outLR + outPR);
+        aKR[cR[10]] = outLR - (outDR + outHR + outPR);
+        aOR[cR[14]] = outPR - (outDR + outHR + outLR);
+
+        cL[4] = step(cL[4], sE); cL[5] = step(cL[5], sF); cL[6] = step(cL[6], sG); cL[7] = step(cL[7], sH);
+        cR[2] = step(cR[2], sC); cR[6] = step(cR[6], sG); cR[10] = step(cR[10], sK); cR[14] = step(cR[14], sO);
+
+        const outEL = at(aEL, cL[4], sE), outFL = at(aFL, cL[5], sF), outGL = at(aGL, cL[6], sG), outHL = at(aHL, cL[7], sH);
+        const outCR = at(aCR, cR[2], sC), outGR = at(aGR, cR[6], sG), outKR = at(aKR, cR[10], sK), outOR = at(aOR, cR[14], sO);
+
+        aIL[cL[8]] = outEL - (outFL + outGL + outHL);
+        aJL[cL[9]] = outFL - (outEL + outGL + outHL);
+        aKL[cL[10]] = outGL - (outEL + outFL + outHL);
+        aLL[cL[11]] = outHL - (outEL + outFL + outGL);
+
+        aBR[cR[1]] = outCR - (outGR + outKR + outOR);
+        aFR[cR[5]] = outGR - (outCR + outKR + outOR);
+        aJR[cR[9]] = outKR - (outCR + outGR + outOR);
+        aNR[cR[13]] = outOR - (outCR + outGR + outKR);
+
+        cL[8] = step(cL[8], sI); cL[9] = step(cL[9], sJ); cL[10] = step(cL[10], sK); cL[11] = step(cL[11], sL);
+        cR[1] = step(cR[1], sB); cR[5] = step(cR[5], sF); cR[9] = step(cR[9], sJ); cR[13] = step(cR[13], sN);
+
+        const outIL = at(aIL, cL[8], sI), outJL = at(aJL, cL[9], sJ), outKL = at(aKL, cL[10], sK), outLL = at(aLL, cL[11], sL);
+        const outBR = at(aBR, cR[1], sB), outFR = at(aFR, cR[5], sF), outJR = at(aJR, cR[9], sJ), outNR = at(aNR, cR[13], sN);
+
+        aML[cL[12]] = outIL - (outJL + outKL + outLL);
+        aNL[cL[13]] = outJL - (outIL + outKL + outLL);
+        aOL[cL[14]] = outKL - (outIL + outJL + outLL);
+        aPL[cL[15]] = outLL - (outIL + outJL + outKL);
+
+        aAR[cR[0]] = outBR - (outFR + outJR + outNR);
+        aER[cR[4]] = outFR - (outBR + outJR + outNR);
+        aIR[cR[8]] = outJR - (outBR + outFR + outNR);
+        aMR[cR[12]] = outNR - (outBR + outFR + outJR);
+
+        cL[12] = step(cL[12], sM); cL[13] = step(cL[13], sN); cL[14] = step(cL[14], sO); cL[15] = step(cL[15], sP);
+        cR[0] = step(cR[0], sA); cR[4] = step(cR[4], sE); cR[8] = step(cR[8], sI); cR[12] = step(cR[12], sM);
+
+        const outML = at(aML, cL[12], sM), outNL = at(aNL, cL[13], sN), outOL = at(aOL, cL[14], sO), outPL = at(aPL, cL[15], sP);
+        const outAR = at(aAR, cR[0], sA), outER = at(aER, cR[4], sE), outIR = at(aIR, cR[8], sI), outMR = at(aMR, cR[12], sM);
+
+        fbAL = outML - (outNL + outOL + outPL);
+        fbDR = outAR - (outER + outIR + outMR);
+        fbBL = outNL - (outML + outOL + outPL);
+        fbHR = outER - (outAR + outIR + outMR);
+        fbCL = outOL - (outML + outNL + outPL);
+        fbLR = outIR - (outAR + outER + outMR);
+        fbDL = outPL - (outML + outNL + outOL);
+        fbPR = outMR - (outAR + outER + outIR);
+
+        bCL = bBL; bBL = bAL; bAL = (outML + outNL + outOL + outPL) / 32.0; bSampL = 0.0;
+        bCR = bBR; bBR = bAR; bAR = (outAR + outER + outIR + outMR) / 32.0; bSampR = 0.0;
+      }
+      const CBL = bCL * (1.0 - bCycle) + bBL * bCycle;
+      const CBR = bCR * (1.0 - bCycle) + bBR * bCycle;
+      const BAL = bBL * (1.0 - bCycle) + bAL * bCycle;
+      const BAR = bBR * (1.0 - bCycle) + bAR * bCycle;
+      let outSampleL = (bBL + CBL * (1.0 - bCycle) + BAL * bCycle) * 0.125;
+      let outSampleR = (bBR + CBR * (1.0 - bCycle) + BAR * bCycle) * 0.125;
+
+      if (outSampleL > 1.0) outSampleL = 1.0;
+      if (outSampleL < -1.0) outSampleL = -1.0;
+      if (outSampleR > 1.0) outSampleR = 1.0;
+      if (outSampleR < -1.0) outSampleR = -1.0;
+
+      if (wet < 1.0) { outSampleL *= wet; outSampleR *= wet; }
+      if (dry < 1.0) { drySampleL *= dry; drySampleR *= dry; }
+      outL[i] = outSampleL + drySampleL;
+      outR[i] = outSampleR + drySampleR;
+
+      fpdL ^= fpdL << 13; fpdL >>>= 0; fpdL ^= fpdL >>> 17; fpdL ^= fpdL << 5; fpdL >>>= 0;
+      fpdR ^= fpdR << 13; fpdR >>>= 0; fpdR ^= fpdR >>> 17; fpdR ^= fpdR << 5; fpdR >>>= 0;
+    }
+  }
+
+  return { setParams, process };
+}
+
 const DEFAULT_RETURNS = {
-  reverb: { decay: 1.8, highCut: 7000 },
+  reverb: { ...DEFAULT_REVERB },
 };
+
+const CREAMCOAT_PROCESSOR = 'pd-creamcoat';
+
+function creamCoatWorkletSource() {
+  return `const createCreamCoat = ${createCreamCoat.toString()};
+class CreamCoatProcessor extends AudioWorkletProcessor {
+  constructor() {
+    super();
+    this.dsp = createCreamCoat(sampleRate);
+    this.inL = new Float64Array(128); this.inR = new Float64Array(128);
+    this.outL = new Float64Array(128); this.outR = new Float64Array(128);
+    this.quiet = 0;
+    this.port.onmessage = (e) => { if (e.data) this.dsp.setParams(e.data); };
+  }
+  process(inputs, outputs) {
+    const out = outputs[0];
+    const n = out[0].length;
+    if (this.inL.length < n) {
+      this.inL = new Float64Array(n); this.inR = new Float64Array(n);
+      this.outL = new Float64Array(n); this.outR = new Float64Array(n);
+    }
+    const input = inputs[0] || [];
+    const l = input[0], r = input[1] || input[0];
+    let loud = 0;
+    for (let i = 0; i < n; i++) {
+      const a = l ? l[i] : 0, b = r ? r[i] : 0;
+      this.inL[i] = a; this.inR[i] = b;
+      const m = Math.abs(a) > Math.abs(b) ? Math.abs(a) : Math.abs(b);
+      if (m > loud) loud = m;
+    }
+    if (loud < 1e-9 && this.quiet > sampleRate) {
+      out[0].fill(0); if (out[1]) out[1].fill(0);
+      return true;
+    }
+    this.dsp.process(this.inL, this.inR, this.outL, this.outR, n);
+    let peak = 0;
+    for (let i = 0; i < n; i++) {
+      out[0][i] = this.outL[i];
+      if (out[1]) out[1][i] = this.outR[i];
+      const m = Math.abs(this.outL[i]) > Math.abs(this.outR[i]) ? Math.abs(this.outL[i]) : Math.abs(this.outR[i]);
+      if (m > peak) peak = m;
+    }
+    this.quiet = peak < 1e-6 && loud < 1e-9 ? this.quiet + n : 0;
+    return true;
+  }
+}
+registerProcessor('${CREAMCOAT_PROCESSOR}', CreamCoatProcessor);
+`;
+}
+
+let moduleUrl = null;
+function workletUrl() {
+  if (moduleUrl) return moduleUrl;
+  if (typeof Blob === 'undefined' || typeof URL === 'undefined' || !URL.createObjectURL) return null;
+  moduleUrl = URL.createObjectURL(new Blob([creamCoatWorkletSource()], { type: 'text/javascript' }));
+  return moduleUrl;
+}
+
+const MAX_RESPONSE_SECONDS = 8;
+
+async function recordResponse(params, sampleRate, cancelled = () => false) {
+  const seconds = Math.min(MAX_RESPONSE_SECONDS, params.decay * 1.2 + 0.3 + (params.D || 0) * 0.7);
+  const frames = Math.max(1, Math.ceil(seconds * sampleRate));
+  const channels = [new Float32Array(frames), new Float32Array(frames)];
+  const derez = Math.max(0.0005, Math.min(1, (params.C === undefined ? 1 : params.C) / (sampleRate / 44100)));
+  const period = Math.trunc(1 / derez) + 1;
+  const BLOCK = 128;
+  const LEAD = BLOCK;
+  const inL = new Float64Array(BLOCK), inR = new Float64Array(BLOCK), oL = new Float64Array(BLOCK), oR = new Float64Array(BLOCK);
+  let blocks = 0;
+  for (let phase = 0; phase < period; phase++) {
+    const dsp = createCreamCoat(sampleRate);
+    dsp.setParams({ A: params.A, B: params.B, C: params.C, D: params.D, E: 1 });
+    const hit = LEAD + phase; // where the impulse goes; the response is kept from there
+    for (let at = 0; at < hit + frames; at += BLOCK) {
+      const n = Math.min(BLOCK, hit + frames - at);
+      inL.fill(0); inR.fill(0);
+      if (hit >= at && hit < at + n) { inL[hit - at] = 1 / period; inR[hit - at] = 1 / period; }
+      dsp.process(inL, inR, oL, oR, n);
+      for (let i = 0; i < n; i++) {
+        const t = at + i - hit;
+        if (t >= 0) { channels[0][t] += oL[i]; channels[1][t] += oR[i]; }
+      }
+      if (++blocks % 512 === 0) {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        if (cancelled()) return null;
+      }
+    }
+  }
+  return channels;
+}
 
 function createReturns(ctx, master, settings = DEFAULT_RETURNS) {
   const reverbIn = ctx.createGain();
+  const highCut = ctx.createBiquadFilter ? ctx.createBiquadFilter() : null;
+  const trim = ctx.createGain();
+  trim.gain.value = RETURN_TRIM;
+  if (highCut) {
+    highCut.type = 'lowpass';
+    highCut.Q.value = -3.0103; // Butterworth: a low pass's Q is in decibels in Web Audio
+    highCut.connect(trim);
+  }
+  trim.connect(master);
+  const into = highCut || trim;
 
-  const convolver = ctx.createConvolver ? ctx.createConvolver() : null;
-  if (convolver) {
-    convolver.normalize = true;
-    convolver.connect(master);
-  } else {
-    reverbIn.connect(master);
+  let mode = 'loading';
+  let node = null; // the worklet, once it is running
+  let convolver = null; // the fallback
+  let used = false;
+  let current = null;
+  let params = null;
+  let recording = 0; // which recording is the latest, so an older one finishing is ignored
+  let pending = Promise.resolve();
+  let disposed = false;
+
+  function core() {
+    return node || convolver;
   }
 
-  let current = null;
+  function connectInput() {
+    const c = core();
+    try { reverbIn.disconnect(); } catch (err) {  }
+    if (used && c) reverbIn.connect(c);
+  }
+
+  function useFallback() {
+    mode = ctx.createConvolver ? 'response' : 'none';
+    if (!ctx.createConvolver) return Promise.resolve();
+    convolver = ctx.createConvolver();
+    convolver.normalize = false;
+    convolver.connect(into);
+    connectInput();
+    return record();
+  }
 
   
-  let used = null;
+  let recorded = '';
+  const roomKey = (p) => (p ? [p.A, p.B, p.C, p.D].join() : '');
+  function record() {
+    if (mode !== 'response' || !used || !params || roomKey(params) === recorded) return Promise.resolve();
+    const id = ++recording;
+    const want = params;
+    return recordResponse(want, ctx.sampleRate, () => disposed || id !== recording).then((channels) => {
+      if (!channels || disposed || id !== recording) return;
+      const buffer = ctx.createBuffer(2, channels[0].length, ctx.sampleRate);
+      channels.forEach((data, c) => buffer.copyToChannel(data, c));
+      convolver.buffer = buffer;
+      recorded = roomKey(want);
+    });
+  }
 
+  function apply() {
+    if (highCut) {
+      const hz = current.highCut;
+      if (highCut.frequency.setTargetAtTime && ctx.currentTime > 0) highCut.frequency.setTargetAtTime(hz, ctx.currentTime, 0.02);
+      else highCut.frequency.value = hz;
+    }
+    if (node) node.port.postMessage(params);
+  }
+
+  const url = ctx.audioWorklet && typeof AudioWorkletNode !== 'undefined' ? workletUrl() : null;
+  if (url) {
+    pending = ctx.audioWorklet.addModule(url)
+      .then(() => {
+        if (disposed) return;
+        node = new AudioWorkletNode(ctx, CREAMCOAT_PROCESSOR, {
+          numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [2],
+        });
+        node.connect(into);
+        mode = 'worklet';
+        apply();
+        connectInput();
+      })
+      .catch(() => (disposed ? undefined : useFallback()));
+  } else {
+    pending = useFallback();
+  }
+
+  function update(next = DEFAULT_RETURNS) {
+    const s = readReverbSettings(((next && next.reverb) || {}));
+    const nextParams = creamCoatParams(s, ctx.sampleRate);
+    const changedRoom = roomKey(nextParams) !== roomKey(params);
+    current = s;
+    params = nextParams;
+    apply();
+    if (changedRoom && mode === 'response') pending = pending.then(() => record());
+  }
+
+  
   function setUsed(next = {}) {
     const want = Boolean(next.reverb);
     if (want === used) return;
     used = want;
-    if (!convolver) return;
-    reverbIn.disconnect();
-    if (want) reverbIn.connect(convolver);
-  }
-
-  function update(next = DEFAULT_RETURNS) {
-    const s = { reverb: { ...DEFAULT_RETURNS.reverb, ...(next.reverb || {}) } };
-    const want = readReverbSettings(s.reverb);
-    const have = current ? readReverbSettings(current.reverb) : null;
-    const changed = !have || have.decay !== want.decay || have.highCut !== want.highCut;
-    if (convolver && changed) convolver.buffer = buildImpulse(ctx, want);
-    current = s;
+    connectInput();
+    if (used && mode === 'response') pending = pending.then(() => record());
   }
 
   update(settings);
-  setUsed({ reverb: false });
 
   return {
     reverbIn,
-    convolver,
     update,
     setUsed,
+    
+    get mode() {
+      return mode;
+    },
+    
+    get ready() {
+      return pending.catch(() => {});
+    },
     get settings() {
-      return current;
+      return { reverb: { ...current } };
+    },
+    
+    get decay() {
+      return params ? params.decay : 0;
     },
     dispose() {
-      [reverbIn, convolver].forEach((n) => n && n.disconnect && n.disconnect());
+      disposed = true;
+      [reverbIn, node, convolver, highCut, trim].forEach((n) => n && n.disconnect && n.disconnect());
     },
   };
 }
-
-const GAP_SECONDS = 0.001;
 
 const CEILING_KNEE = 0.8;
 
@@ -13014,6 +14196,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
   const returns = createReturns(ctx, master, (getSong() && getSong().returns) || DEFAULT_RETURNS);
 
   const players = new Map(); // trackId -> { kitId, sampler, filter, automation, duck, gain, pan, sends, ready }
+  let livePasses = [];
   const reportedFallbacks = new Set();
 
   function status(kind, detail) {
@@ -13063,7 +14246,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
 
     const player = {
       kitId: track.kitId, sampler: null,
-      filter, tremolo, automation, duck, gain, pan, sendReverb, echoSend,
+      filter, tremolo, automation, duck, gain, pan, sendReverb, echoSend, edge: null, chorus: null,
       echo: null,
       filtered: false, kit,
     };
@@ -13100,12 +14283,22 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     if (!player.sampler) return;
     player.sampler.output.disconnect();
     if (player.filter) player.filter.disconnect();
+    if (player.edge) player.edge.output.disconnect();
+    if (player.chorus) player.chorus.output.disconnect();
+    let from = player.sampler.output;
     if (player.filtered && player.filter) {
-      player.sampler.output.connect(player.filter);
-      player.filter.connect(player.tremolo);
-    } else {
-      player.sampler.output.connect(player.tremolo);
+      from.connect(player.filter);
+      from = player.filter;
     }
+    if (player.edge) {
+      from.connect(player.edge.input);
+      from = player.edge.output;
+    }
+    if (player.chorus) {
+      from.connect(player.chorus.input);
+      from = player.chorus.output;
+    }
+    from.connect(player.tremolo);
   }
 
   
@@ -13120,7 +14313,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       player.gain.gain.value = track.gain;
     }
 
-    if (player.pan) {
+    if (player.pan && !laneOwns(track, ['pan'])) {
       if (ramp) {
         player.pan.pan.cancelScheduledValues(now);
         player.pan.pan.setValueAtTime(player.pan.pan.value, now);
@@ -13131,19 +14324,47 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     }
 
     const sends = track.sends || {};
-    player.sendReverb.gain.value = Math.max(0, Math.min(100, sends.reverb || 0)) / 100;
+    if (!laneOwns(track, ['reverb'])) player.sendReverb.gain.value = Math.max(0, Math.min(100, sends.reverb || 0)) / 100;
 
     const fx = (track.effects || []).find((e) => e.typeId === 'filter');
     const on = Boolean(fx && !fx.bypass) || filterLaneAnywhere(track);
     if (player.filter && on) {
       const params = (fx && fx.params) || {};
       player.filter.type = filterModeFor(track);
-      player.filter.frequency.value = Math.max(20, Math.min(20000, params.cutoff || 20000));
+      if (!laneOwns(track, ['cutoff', 'lowpass', 'highpass'])) player.filter.frequency.value = Math.max(20, Math.min(20000, params.cutoff || 20000));
       player.filter.Q.value = Math.max(0.0001, Math.min(20, params.q || 1));
     }
     if (on !== player.filtered) {
       player.filtered = on;
       connectHead(player);
+    }
+
+    
+    const distortion = readDistortion(track.distortion);
+    if (distortion.on && !player.edge) {
+      player.edge = createEdge(ctx, distortion);
+      connectHead(player);
+    } else if (distortion.on) {
+      player.edge.set(distortion, { live: ramp });
+    } else if (player.edge) {
+      const old = player.edge;
+      player.edge = null;
+      connectHead(player);
+      old.dispose();
+    }
+
+    
+    const chorusSettings = readChorus(track.chorus);
+    if (chorusSettings.on && !player.chorus) {
+      player.chorus = createChorus(ctx, chorusSettings);
+      connectHead(player);
+    } else if (chorusSettings.on) {
+      player.chorus.set(chorusSettings, { live: ramp });
+    } else if (player.chorus) {
+      const old = player.chorus;
+      player.chorus = null;
+      connectHead(player);
+      old.dispose();
     }
 
     applyEcho(player, track, { ramp });
@@ -13159,12 +14380,13 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     const song = getSong();
     const gap = echoSeconds(e.time, sectionTempo(song, song.sections[getSectionId()]) || song.bpm, ctx.sampleRate);
     const room = longestEchoGap(song, e.time);
-    if (!player.echo || player.echo.delays.length !== e.count || player.echo.room < room) {
+    const count = echoCount(song, track.echo);
+    if (!player.echo || player.echo.delays.length !== count || player.echo.room < room) {
       teardownEcho(player);
-      buildEcho(player, e.count, room);
+      buildEcho(player, count, room);
     }
     const echo = player.echo;
-    const taps = echoTaps(e);
+    const taps = echoTaps(e, count);
     const now = ctx.currentTime;
     const write = (param, value) => {
       if (ramp) {
@@ -13196,12 +14418,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
 
   
   function longestEchoGap(song, timeId) {
-    let slowest = song.bpm || 120;
-    Object.values(song.sections || {}).forEach((section) => {
-      const bpm = sectionTempo(song, section);
-      if (bpm > 0) slowest = Math.min(slowest, bpm);
-    });
-    return Math.max(0.05, echoSeconds(timeId, slowest) * 1.05);
+    return Math.max(0.05, echoSeconds(timeId, slowestTempo(song)) * 1.05);
   }
 
   function buildEcho(player, count, room) {
@@ -13303,6 +14520,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       if (player) applyMix(player, track);
     });
     returns.setUsed(sendsInUse());
+    refreshLive();
   }
 
   
@@ -13310,12 +14528,12 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     const song = getSong();
     const section = song.sections[ev.sectionId];
     if (!section) return;
-    const secondsPerTick = ev.secondsPerTick || 0;
+    const pass = rememberPass(ev);
 
     
     song.tracks.forEach((track) => {
       try {
-        scheduleTrackSegment(track, section, ev, secondsPerTick, song);
+        scheduleTrackSegment(track, section, pass, song);
       } catch (err) {
         reportOnce(`scheduling ${track.id}: ${(err && err.message) || 'refused'}`);
       }
@@ -13329,117 +14547,394 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     status('fallback', { kit: 'scheduler', files: [message] });
   }
 
-  function scheduleTrackSegment(track, section, ev, secondsPerTick, song) {
-    {
+  
+  const LIVE_LEAD = 0.02;
+  const LIVE_FADE = 0.008;
+  
+  const JUST_AFTER = 1e-6;
+  const LIVE_PARTS = ['volume', 'pan', 'reverb', 'filter', 'tremolo', 'duck', 'echo'];
+
+  function rememberPass(ev) {
+    const secondsPerTick = ev.secondsPerTick || 0;
+    const end = ev.time + (ev.lengthTicks || 0) * secondsPerTick;
+    const now = ctx.currentTime;
+    livePasses = livePasses.filter((p) => p.end > now && p.time < ev.time);
+    livePasses.forEach((p) => { if (p.end > ev.time) p.end = ev.time; });
+    const pass = {
+      sectionId: ev.sectionId, tick: ev.tick, lengthTicks: ev.lengthTicks || 0,
+      time: ev.time, secondsPerTick, end, keys: new Map(),
+      lines: new Map(), ducks: new Map(), trems: new Map(),
+    };
+    livePasses.push(pass);
+    return pass;
+  }
+
+  
+  function refreshLive() {
+    const now = ctx.currentTime;
+    livePasses = livePasses.filter((p) => p.end > now);
+    if (!livePasses.length) return;
+    const song = getSong();
+    const from = now + LIVE_LEAD;
+    song.tracks.forEach((track) => {
       const player = players.get(track.id);
       if (!player) return;
-      const clip = section.clips[track.id];
-
-      
-      const writeLane = (paramId, target, scale, resting) => {
-        if (!target) return;
-        const lane = laneOf(clip, paramId);
-        target.cancelScheduledValues(ev.time);
-        if (!lane.length) {
-          target.setValueAtTime(resting, ev.time);
-          return;
-        }
-        target.setValueAtTime(scale(valueAt(lane, lane[0].tick)), ev.time);
-        lane.forEach((point) => {
-          target.linearRampToValueAtTime(scale(point.value), ev.time + point.tick * secondsPerTick);
+      LIVE_PARTS.forEach((part) => {
+        const changed = livePasses.some((p) => {
+          const section = song.sections[p.sectionId];
+          return section && partKey(part, track, player, section, p, song) !== (p.keys.get(track.id) || {})[part];
         });
-      };
+        if (!changed) return;
+        livePasses.forEach((p) => {
+          const section = song.sections[p.sectionId];
+          if (!section) return;
+          const playing = p.time < from;
+          try {
+            if (!playing || p.end - from > 0.005) writePart(part, track, player, section, p, song, playing ? from : null);
+          } catch (err) {
+            reportOnce(`live ${part} ${track.id}: ${(err && err.message) || 'refused'}`);
+          }
+          const keys = p.keys.get(track.id) || {};
+          keys[part] = partKey(part, track, player, section, p, song);
+          p.keys.set(track.id, keys);
+        });
+      });
+    });
+  }
 
-      writeLane('volume', player.automation.gain, (v) => v / 100, 1);
-      if (player.pan) writeLane('pan', player.pan.pan, (v) => Math.max(-1, Math.min(1, v / 100)), clampPan(track.pan));
-      const sends = track.sends || {};
-      writeLane('reverb', player.sendReverb.gain, (v) => v / 100, Math.max(0, Math.min(100, sends.reverb || 0)) / 100);
+  
+  function releaseLive(time) {
+    const at = Math.max(time || 0, ctx.currentTime + 0.005);
+    for (const player of players.values()) {
+      (player.tremVoices || []).forEach((v) => endVoice(v, at));
+    }
+    livePasses = [];
+  }
 
-      
-      const tremoloLane = laneOf(clip, 'tremolo');
+  
+  function laneOwns(track, paramIds) {
+    const now = ctx.currentTime;
+    const song = getSong();
+    return livePasses.some((p) => {
+      if (p.end <= now) return false;
+      const section = song.sections[p.sectionId];
+      const clip = section && section.clips[track.id];
+      return Boolean(clip && paramIds.some((id) => laneOf(clip, id).length));
+    });
+  }
 
-      
-      if (player.filter && player.filtered) {
-        const fx = (track.effects || []).find((e) => e.typeId === 'filter');
-        const laneId = filterLaneOf(clip);
-        if (laneId) {
-          writeLane(laneId, player.filter.frequency, cutoffHz, (fx && fx.params.cutoff) || 20000);
-        } else {
-          writeLane('cutoff', player.filter.frequency, cutoffHz, (fx && fx.params.cutoff) || 20000);
-        }
+  
+  function partKey(part, track, player, section, pass, song) {
+    const clip = section.clips[track.id];
+    const lane = (id) => (clip ? laneOf(clip, id) : []);
+    switch (part) {
+      case 'volume': return JSON.stringify(lane('volume'));
+      case 'pan': return player.pan ? JSON.stringify(lane('pan')) : '';
+      case 'reverb': return JSON.stringify(lane('reverb'));
+      case 'filter': {
+        if (!(player.filter && player.filtered)) return 'off';
+        const laneId = clip ? filterLaneOf(clip) : null;
+        return JSON.stringify([laneId, laneId ? lane(laneId) : lane('cutoff')]);
       }
+      case 'tremolo': return JSON.stringify([track.tremolo || null, lane('tremolo')]);
+      case 'duck': {
+        const duck = track.duck;
+        const triggers = duck && duck.on ? collectDuckTriggers(song, section, pass.secondsPerTick, duck) : [];
+        return JSON.stringify([duck || null, triggers]);
+      }
+      case 'echo': return player.echo ? JSON.stringify([echoSettings(track.echo).time, player.echo.delays.length, player.echo.room]) : 'off';
+      default: return '';
+    }
+  }
 
-      
-      const trem = track.tremolo;
-      const tParam = player.tremolo.gain;
-      tParam.cancelScheduledValues(ev.time);
-      if (tremoloLane.length && secondsPerTick > 0) {
+  function scheduleTrackSegment(track, section, pass, song) {
+    const player = players.get(track.id);
+    if (!player) return;
+    const keys = {};
+    LIVE_PARTS.forEach((part) => {
+      writePart(part, track, player, section, pass, song, null);
+      keys[part] = partKey(part, track, player, section, pass, song);
+    });
+    pass.keys.set(track.id, keys);
+  }
+
+  
+  function writePart(part, track, player, section, pass, song, from) {
+    const clip = section.clips[track.id];
+    const sends = track.sends || {};
+    switch (part) {
+      case 'volume':
+        writeLane(player.automation.gain, laneOf(clip, 'volume'), (v) => v / 100, 1, pass, from, `${track.id}:volume`);
+        return;
+      case 'pan':
+        if (player.pan) writeLane(player.pan.pan, laneOf(clip, 'pan'), (v) => Math.max(-1, Math.min(1, v / 100)), clampPan(track.pan), pass, from, `${track.id}:pan`);
+        return;
+      case 'reverb':
+        writeLane(player.sendReverb.gain, laneOf(clip, 'reverb'), (v) => v / 100, Math.max(0, Math.min(100, sends.reverb || 0)) / 100, pass, from, `${track.id}:reverb`);
+        return;
+      case 'filter': {
         
-        const seconds = (ev.lengthTicks || 0) * secondsPerTick;
-        const cycleSeconds = rateSeconds((trem && trem.rate) || DEFAULT_TREMOLO.rate, song.bpm);
-        if (seconds > 0 && typeof tParam.setValueCurveAtTime === 'function') {
-          const span = Math.max(0.001, seconds - GAP_SECONDS);
-          tParam.setValueCurveAtTime(
-            tremoloCurve({
-              seconds: span,
-              cycleSeconds,
-              depth: 0,
-              shape: (trem && trem.shape) || DEFAULT_TREMOLO.shape,
-              open: trem ? trem.open : undefined,
-              depthAt: (t) => valueAt(tremoloLane, t / secondsPerTick),
-            }),
-            ev.time,
-            span,
-          );
-          tParam.setValueAtTime(1, ev.time + span);
-        }
-      } else if (trem && trem.on && secondsPerTick > 0) {
-        const seconds = (ev.lengthTicks || 0) * secondsPerTick;
-        const cycleSeconds = rateSeconds(trem.rate || DEFAULT_TREMOLO.rate, song.bpm);
-        if (seconds > 0 && typeof tParam.setValueCurveAtTime === 'function') {
-          
-          const span = Math.max(0.001, seconds - GAP_SECONDS);
-          tParam.setValueCurveAtTime(
-            tremoloCurve({
-              seconds: span,
-              cycleSeconds,
-              depth: trem.depth === undefined ? DEFAULT_TREMOLO.depth : trem.depth,
-              shape: trem.shape || DEFAULT_TREMOLO.shape,
-              open: trem.open,
-            }),
-            ev.time,
-            span,
-          );
-          tParam.setValueAtTime(1, ev.time + span);
-        }
-      } else {
-        tParam.setValueAtTime(1, ev.time);
+        if (!(player.filter && player.filtered)) return;
+        const fx = (track.effects || []).find((e) => e.typeId === 'filter');
+        const laneId = filterLaneOf(clip) || 'cutoff';
+        writeLane(player.filter.frequency, laneOf(clip, laneId), cutoffHz, (fx && fx.params.cutoff) || 20000, pass, from, `${track.id}:filter`);
+        return;
       }
-
-      
-      if (player.echo && secondsPerTick > 0) {
+      case 'tremolo':
+        writeTremolo(track, player, clip, pass, from);
+        return;
+      case 'duck':
+        writeDuck(track, player, section, pass, song, from);
+        return;
+      case 'echo': {
+        
+        if (!player.echo || !(pass.secondsPerTick > 0)) return;
         const e = echoSettings(track.echo);
-        const gap = echoSeconds(e.time, 60 / (secondsPerTick * PPQ), ctx.sampleRate);
-        player.echo.delays.forEach((d) => d.delayTime.setValueAtTime(Math.min(gap, player.echo.room), ev.time));
-      }
-
-      const duck = track.duck;
-      const dParam = player.duck.gain;
-      dParam.cancelScheduledValues(ev.time);
-      dParam.setValueAtTime(1, ev.time);
-      const triggers = duck && duck.on ? collectDuckTriggers(song, section, secondsPerTick, duck) : [];
-      if (duck && duck.on && triggers.length) {
-        const depth = Math.max(0, Math.min(100, duck.depth === undefined ? 60 : duck.depth)) / 100;
-        const attack = Math.max(0.001, (duck.attack === undefined ? 8 : duck.attack) / 1000);
-        const release = duckRelease(duck.release, secondsPerTick);
-        triggers.forEach((tick) => {
-          const at = ev.time + tick * secondsPerTick;
-          dParam.setValueAtTime(1, at);
-          dParam.linearRampToValueAtTime(1 - depth, at + attack);
-          dParam.setTargetAtTime(1, at + attack, Math.max(0.01, release / 3));
+        const gap = Math.min(echoSeconds(e.time, 60 / (pass.secondsPerTick * PPQ), ctx.sampleRate), player.echo.room);
+        const at = from === null ? pass.time : from;
+        player.echo.delays.forEach((d) => {
+          d.delayTime.cancelScheduledValues(at);
+          d.delayTime.setValueAtTime(gap, at);
         });
+        return;
+      }
+      default:
+    }
+  }
+
+  
+  function lineAt(points, t) {
+    if (!points.length) return 1;
+    if (t <= points[0][0]) return points[0][1];
+    for (let i = 1; i < points.length; i++) {
+      const [t1, v1] = points[i];
+      if (t <= t1) {
+        const [t0, v0] = points[i - 1];
+        return t1 > t0 ? v0 + (v1 - v0) * ((t - t0) / (t1 - t0)) : v1;
       }
     }
+    return points[points.length - 1][1];
+  }
+
+  
+  function writeLane(target, lane, scale, resting, pass, from, key) {
+    if (!target) return;
+    const spt = pass.secondsPerTick;
+    const drawn = lane.length && spt > 0;
+    if (from === null) {
+      target.cancelScheduledValues(pass.time);
+      if (!drawn) {
+        target.setValueAtTime(resting, pass.time);
+        pass.lines.set(key, null);
+        return;
+      }
+      const first = scale(valueAt(lane, lane[0].tick));
+      target.setValueAtTime(first, pass.time);
+      const points = [[pass.time, first]];
+      lane.forEach((point) => {
+        const at = pass.time + point.tick * spt;
+        const v = scale(point.value);
+        target.linearRampToValueAtTime(v, at);
+        points.push([at, v]);
+      });
+      pass.lines.set(key, points);
+      return;
+    }
+    const written = pass.lines.get(key);
+    const held = written ? lineAt(written, from) : resting;
+    target.linearRampToValueAtTime(held, from);
+    target.cancelScheduledValues(from + JUST_AFTER);
+    const join = from + LIVE_FADE;
+    if (!drawn) {
+      target.linearRampToValueAtTime(resting, join);
+      pass.lines.set(key, null);
+      return;
+    }
+    const joined = scale(valueAt(lane, (join - pass.time) / spt));
+    target.linearRampToValueAtTime(joined, join);
+    const points = [[from, held], [join, joined]];
+    lane.forEach((point) => {
+      const at = pass.time + point.tick * spt;
+      if (at <= join) return;
+      const v = scale(point.value);
+      target.linearRampToValueAtTime(v, at);
+      points.push([at, v]);
+    });
+    pass.lines.set(key, points);
+  }
+
+  
+  function tremoloOptions(track, clip, pass) {
+    const trem = track.tremolo;
+    const lane = laneOf(clip, 'tremolo');
+    const spt = pass.secondsPerTick;
+    const seconds = pass.lengthTicks * spt;
+    if (!((lane.length || (trem && trem.on)) && spt > 0 && seconds > 0)) return null;
+    return {
+      cycleSeconds: tremoloTicks((trem && trem.rate) || DEFAULT_TREMOLO.rate) * spt,
+      depth: lane.length ? null : (trem.depth === undefined ? DEFAULT_TREMOLO.depth : trem.depth),
+      shape: (trem && trem.shape) || DEFAULT_TREMOLO.shape,
+      open: trem ? trem.open : undefined,
+      lane: lane.length ? lane : null,
+    };
+  }
+
+  
+  function writeTremolo(track, player, clip, pass, from) {
+    const options = tremoloOptions(track, clip, pass);
+    const end = pass.time + pass.lengthTicks * pass.secondsPerTick;
+    const mine = pass.trems.get(track.id) || null;
+    if (from === null) {
+      if (mine) endVoice(mine, pass.time);
+      const previous = (player.tremVoices || []).filter((v) => v !== mine && v.start < pass.time && v.stopAt > pass.time);
+      previous.forEach((v) => { if (v.end > pass.time) endVoice(v, pass.time); });
+      const crossing = previous.length > 0;
+      pass.trems.set(track.id, options ? startVoice(player, options, pass, pass.time, end, crossing) : null);
+      return;
+    }
+    if (mine) endVoice(mine, from);
+    pass.trems.set(track.id, options ? startVoice(player, options, pass, from, end, true) : null);
+  }
+
+  
+  const cycleCache = new Map();
+  function cycleBuffer(options) {
+    const key = `${options.shape}|${options.cycleSeconds}|${options.open}`;
+    let buffer = cycleCache.get(key);
+    if (buffer) {
+      cycleCache.delete(key);
+      cycleCache.set(key, buffer);
+      return buffer;
+    }
+    const rate = Math.min(ctx.sampleRate, Math.max(22050, Math.ceil(96000 / options.cycleSeconds)));
+    const values = tremoloCycle(options, rate);
+    buffer = ctx.createBuffer(1, values.length, rate);
+    buffer.getChannelData(0).set(values);
+    cycleCache.set(key, buffer);
+    if (cycleCache.size > 32) cycleCache.delete(cycleCache.keys().next().value);
+    return buffer;
+  }
+
+  
+  function startVoice(player, options, pass, at, end, fadeIn) {
+    const spt = pass.secondsPerTick;
+    const src = ctx.createBufferSource();
+    src.buffer = cycleBuffer(options);
+    src.loop = true;
+    src.loopStart = 0;
+    src.loopEnd = options.cycleSeconds;
+    const depth = ctx.createGain();
+    const fade = ctx.createGain();
+    if (options.lane) {
+      const amount = (tick) => Math.max(0, Math.min(100, valueAt(options.lane, tick))) / 100;
+      depth.gain.value = amount((at - pass.time) / spt);
+      depth.gain.setValueAtTime(amount((at - pass.time) / spt), at);
+      options.lane.forEach((point) => {
+        const t = pass.time + point.tick * spt;
+        if (t > at) depth.gain.linearRampToValueAtTime(amount(point.tick), t);
+      });
+    } else {
+      depth.gain.value = Math.max(0, Math.min(100, options.depth)) / 100;
+    }
+    const line = fadeIn ? [[at, 0], [at + LIVE_FADE, 1]] : [[at, 1]];
+    line.push([end, 1], [end + LIVE_FADE, 0]);
+    fade.gain.value = line[0][1];
+    fade.gain.setValueAtTime(line[0][1], at);
+    line.slice(1).forEach(([t, v]) => fade.gain.linearRampToValueAtTime(v, t));
+    src.connect(depth);
+    depth.connect(fade);
+    fade.connect(player.tremolo.gain);
+    const cycle = options.cycleSeconds;
+    const offset = (((at - pass.time) % cycle) + cycle) % cycle;
+    src.start(at, offset);
+    const voice = { src, depth, fade, start: at, end, line, stopAt: end + LIVE_FADE + 0.002 };
+    src.stop(voice.stopAt);
+    src.onended = () => dropVoice(player, voice);
+    player.tremVoices = (player.tremVoices || []).filter((v) => v.stopAt > ctx.currentTime);
+    player.tremVoices.push(voice);
+    return voice;
+  }
+
+  
+  function endVoice(v, at) {
+    if (!v || v.stopAt <= at) return;
+    if (at <= v.start + 1e-9) {
+      v.stopAt = v.start;
+      try { v.src.stop(v.start); } catch (err) {  }
+      try { v.fade.disconnect(); } catch (err) {  }
+      return;
+    }
+    const held = lineAt(v.line, at);
+    const g = v.fade.gain;
+    g.linearRampToValueAtTime(held, at);
+    g.cancelScheduledValues(at + JUST_AFTER);
+    g.linearRampToValueAtTime(0, at + LIVE_FADE);
+    v.line = v.line.filter(([t]) => t < at).concat([[at, held], [at + LIVE_FADE, 0]]);
+    v.stopAt = at + LIVE_FADE + 0.002;
+    try { v.src.stop(v.stopAt); } catch (err) {  }
+  }
+
+  function dropVoice(player, voice) {
+    try { voice.fade.disconnect(); } catch (err) {  }
+    if (player.tremVoices) player.tremVoices = player.tremVoices.filter((v) => v !== voice);
+  }
+
+  
+  function duckAt(m, t) {
+    if (!m) return { value: 1, ramp: false };
+    let hit = null;
+    for (const h of m.hits) {
+      if (h.at <= t) hit = h;
+      else break;
+    }
+    if (hit) {
+      const x = t - hit.at;
+      if (x < hit.attack) return { value: 1 - hit.depth * (x / hit.attack), ramp: true };
+      return { value: 1 - hit.depth * Math.exp(-(x - hit.attack) / hit.tau), ramp: false };
+    }
+    const r = m.release;
+    if (!r || t < r.at) return { value: 1, ramp: false };
+    if (r.fade) return t < r.at + r.fade ? { value: r.value + (1 - r.value) * ((t - r.at) / r.fade), ramp: true } : { value: 1, ramp: false };
+    return { value: 1 - (1 - r.value) * Math.exp(-(t - r.at) / r.tau), ramp: false };
+  }
+
+  
+  function writeDuck(track, player, section, pass, song, from) {
+    const duck = track.duck;
+    const dParam = player.duck.gain;
+    const spt = pass.secondsPerTick;
+    const on = Boolean(duck && duck.on);
+    const triggers = on ? collectDuckTriggers(song, section, spt, duck) : [];
+    const depth = on ? Math.max(0, Math.min(100, duck.depth === undefined ? 60 : duck.depth)) / 100 : 0;
+    const attack = on ? Math.max(0.001, (duck.attack === undefined ? 8 : duck.attack) / 1000) : 0.001;
+    const tau = Math.max(0.01, (on ? duckRelease(duck.release, spt) : 0.05) / 3);
+    const model = { release: null, hits: [] };
+    if (from === null) {
+      dParam.cancelScheduledValues(pass.time);
+      dParam.setValueAtTime(1, pass.time);
+    } else {
+      const was = duckAt(pass.ducks.get(track.id), from);
+      if (was.ramp) dParam.linearRampToValueAtTime(was.value, from);
+      else dParam.setValueAtTime(was.value, from);
+      dParam.cancelScheduledValues(from + JUST_AFTER);
+      if (on) {
+        dParam.setTargetAtTime(1, from, tau);
+        model.release = { at: from, value: was.value, tau };
+      } else {
+        dParam.linearRampToValueAtTime(1, from + LIVE_FADE);
+        model.release = { at: from, value: was.value, fade: LIVE_FADE };
+      }
+    }
+    pass.ducks.set(track.id, model);
+    if (!on || !triggers.length) return;
+    triggers.forEach((tick) => {
+      const at = pass.time + tick * spt;
+      if (from !== null && at <= from + JUST_AFTER) return;
+      dParam.setValueAtTime(1, at);
+      dParam.linearRampToValueAtTime(1 - depth, at + attack);
+      dParam.setTargetAtTime(1, at + attack, tau);
+      model.hits.push({ at, depth, attack, tau });
+    });
   }
 
   
@@ -13453,7 +14948,13 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     const p = players.get(trackId);
     if (!p) return;
     if (p.sampler) p.sampler.dispose();
+    if (p.edge) p.edge.dispose();
+    if (p.chorus) p.chorus.dispose();
     teardownEcho(p);
+    (p.tremVoices || []).forEach((v) => {
+      try { v.src.stop(); } catch (err) {  }
+      try { v.fade.disconnect(); } catch (err) {  }
+    });
     [p.filter, p.tremolo, p.automation, p.duck, p.gain, p.pan, p.sendReverb, p.echoSend]
       .forEach((n) => n && n.disconnect && n.disconnect());
     players.delete(trackId);
@@ -13511,6 +15012,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     },
     onStop: (time) => {
       for (const p of players.values()) if (p.sampler) p.sampler.allNotesOff(time);
+      releaseLive(time);
       if (output.setActive) output.setActive(false);
       if (onPlayingChange) onPlayingChange(false);
     },
@@ -13599,6 +15101,8 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     dispose,
     
     handleEvent,
+    refreshLive,
+    tremoloVoices: (trackId) => ((players.get(trackId) || {}).tremVoices || []).slice(),
     players,
     loader,
   };
@@ -14681,25 +16185,22 @@ function songSeconds(song) {
   return songTempoMap(song).totalSeconds;
 }
 
-function tailSecondsFor(song, base = TAIL_SECONDS) {
-  let slowest = song.bpm || 120;
-  Object.values(song.sections || {}).forEach((section) => {
-    const bpm = sectionTempo(song, section);
-    if (bpm > 0) slowest = Math.min(slowest, bpm);
-  });
+function tailSecondsFor(song, base = TAIL_SECONDS, sampleRate = 48000) {
+  const slowest = slowestTempo(song);
   let echo = 0;
   let reverb = false;
   (song.tracks || []).forEach((track) => {
     if (track.mute) return;
     const e = echoSettings(track.echo);
-    if (e.on && e.level > 0) echo = Math.max(echo, e.count * echoSeconds(e.time, slowest));
+    if (e.on && e.level > 0) echo = Math.max(echo, echoCount(song, track.echo) * echoSeconds(e.time, slowest));
     if (((track.sends || {}).reverb || 0) > 0) reverb = true;
     Object.values(song.sections || {}).forEach((section) => {
       const lanes = ((section.clips || {})[track.id] || {}).automation;
       if (lanes && lanes.reverb && lanes.reverb.length) reverb = true;
     });
   });
-  const decay = reverb ? readReverbSettings(((song.returns || DEFAULT_RETURNS).reverb) || {}).decay : 0;
+  const room = readReverbSettings(((song.returns || DEFAULT_RETURNS).reverb) || {});
+  const decay = reverb ? creamCoatParams(room, sampleRate).decay + room.predelay / 1000 : 0;
   return base + Math.max(echo, decay);
 }
 
@@ -14717,7 +16218,7 @@ async function renderSong({
   if (!seconds) throw new Error('There is nothing to export yet.');
 
   const pre = PRE_ROLL_SECONDS;
-  const frames = Math.ceil((pre + seconds + tailSecondsFor(song, tailSeconds)) * sampleRate);
+  const frames = Math.ceil((pre + seconds + tailSecondsFor(song, tailSeconds, sampleRate)) * sampleRate);
   const ctx = new OfflineContext(2, frames, sampleRate);
 
   if (onProgress) onProgress('loading');
@@ -14744,6 +16245,7 @@ async function renderSong({
     }
   }
 
+  await engine.returns.ready;
   if (onProgress) onProgress('rendering');
   const rendered = await ctx.startRendering();
   engine.dispose();
@@ -15880,7 +17382,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-10-27 05:49';
+const BUILD_STAMP = '2026-10-29 01:51';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -16161,6 +17663,7 @@ function mountApp(root, options = {}) {
       elementPlaying: Boolean(out && out.playing),
       recoveries: out ? out.recoveries : 0,
       content: content ? content.report() : 'off',
+      reverb: engine && engine.returns ? engine.returns.mode : 'none',
       build: BUILD_STAMP,
       
       credits: [...new Set(store.state.song.tracks.map((t) => t.kitId))]
