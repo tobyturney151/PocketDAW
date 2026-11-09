@@ -1175,6 +1175,91 @@ html, body {
 /* Hertz and milliseconds fit in an effect's number box ("7.1 kH" did not). */
 .fxrow .numfield { width: 72px; }
 
+/* ---- Vocals ---------------------------------------------------------------
+   The Record button beside play, the red bar that stands in for the header
+   while recording, and the lane that stands in for the grid on a Vocals
+   track. Rose is the Vocals shade; red is recording. */
+.recbutton { min-width: 44px; min-height: 44px; padding: 0; display: grid; place-items: center; }
+.recbutton[hidden] { display: none; }
+.recbutton-dot {
+  width: 40px; height: 40px; border-radius: 50%;
+  box-shadow: inset 0 0 0 2px #ff6b63;
+  display: grid; place-items: center;
+}
+.recbutton-dot::after { content: ''; width: 24px; height: 24px; border-radius: 50%; background: #ff4b42; }
+.recbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px; min-height: 70px; box-sizing: border-box;
+  background: #2a0d0d;
+}
+.recbar[hidden] { display: none; }
+.recbar-side { width: 34px; }
+.recbar-mid { display: flex; align-items: center; gap: 12px; }
+.recbar-stop {
+  width: 44px; height: 44px; border-radius: 50%; border: 0; background: #ff4b42;
+  display: grid; place-items: center; padding: 0;
+}
+.recbar-square { width: 16px; height: 16px; border-radius: 3px; background: #fff; }
+.recbar-text { display: flex; flex-direction: column; line-height: 1.2; }
+.recbar-title { font-size: 16px; font-weight: 600; color: #ffd9d6; }
+.recbar-sub { font-size: 13px; color: #ffb0aa; font-variant-numeric: tabular-nums; }
+
+.voxlane {
+  position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden;
+  padding: 0 16px 12px; background: var(--ink); display: flex; flex-direction: column;
+  touch-action: pan-y;
+}
+.voxlane[hidden] { display: none; }
+.voxruler { position: relative; height: 24px; flex: 0 0 auto; color: var(--text2); font-size: 13px; }
+.voxbar { position: absolute; top: 4px; padding-left: 3px; border-left: 1px solid var(--bar); line-height: 16px; }
+.voxarea { position: relative; flex: 0 0 auto; border-radius: 4px; overflow: hidden; background: var(--cell); }
+.voxsvg, .voxsvg svg { display: block; }
+.voxlive { position: absolute; left: 0; right: 0; top: 30%; height: 60px; }
+.voxlive svg { display: block; }
+.voxplayhead { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: #fff; pointer-events: none; }
+.voxplayhead[hidden] { display: none; }
+.voxempty {
+  position: absolute; left: 24px; right: 24px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
+}
+.voxempty b { font-size: 17px; font-weight: 600; }
+.voxempty p { margin: 0; color: var(--text2); font-size: 14px; line-height: 1.45; }
+.voxempty p.dim { color: var(--text3); font-size: 13px; }
+.voxempty-icon {
+  width: 56px; height: 56px; border-radius: 50%; background: #4B1F2B; color: #FBBBC9;
+  display: grid; place-items: center;
+}
+.voxremind {
+  position: absolute; left: 12px; right: 12px; bottom: 14px; background: var(--panel);
+  border-radius: 14px; padding: 12px 14px; display: flex; gap: 12px; align-items: flex-start;
+}
+.voxremind > span:last-child { display: flex; flex-direction: column; gap: 4px; }
+.voxremind b { font-size: 15px; font-weight: 600; }
+.voxremind span span { color: var(--text2); font-size: 13px; line-height: 1.45; }
+.voxbusy {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  background: rgba(0, 0, 0, 0.55); color: var(--text); font-size: 15px;
+}
+.voxmeter { display: flex; align-items: center; gap: 10px; padding: 12px 0 4px; flex: 0 0 auto; }
+.voxmeter-label { font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text3); }
+.voxmeter-bar { position: relative; flex: 1 1 auto; height: 8px; border-radius: 4px; background: var(--panel2); overflow: hidden; }
+.voxmeter-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: #07AE9A; }
+.voxpanel {
+  margin-top: 12px; background: var(--panel); border-radius: 16px; padding: 14px;
+  display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto;
+}
+.voxpanel-head { display: flex; align-items: center; gap: 8px; }
+.voxpanel-title { font-size: 16px; font-weight: 500; flex: 1 1 auto; }
+.voxpanel .hint { margin: 2px 0 0; }
+.voxpanel-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.voxpanel-pair .wide { margin: 0; }
+.zipfiles { display: flex; flex-direction: column; gap: 2px; }
+.zipfile { flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 14px; }
+.zipfile .hint { margin: 0; }
+.zipname { font-family: ui-monospace, 'IBM Plex Mono', monospace; font-size: 13px; }
+.zipsteps { margin: 0; padding: 10px 14px 10px 32px; background: var(--cell); border-radius: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: var(--text2); line-height: 1.5; }
+.voxpanel .numfield { width: 78px; min-width: 78px; }
+
 </style>
 </head>
 <body>
@@ -1214,7 +1299,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-10-29 01:51 from src/. */
+/* PocketDAW - phase 2. Built 2026-11-09 06:43 from src/. */
 (function () {
 'use strict';
 
@@ -1281,8 +1366,10 @@ function fader({
   min, max, value, ariaLabel, onDrag, onCommit, number = true, sliderClass = '',
   format = null, parse = null,
   under = null,
+  snap = null,
 }) {
   const clamp = (v) => Math.max(min, Math.min(max, Math.round(Number(v) || 0)));
+  const dragged = (v) => (snap ? snap(clamp(v)) : clamp(v));
   const show = (v) => (format ? format(v) : String(v));
   const read = (text) => {
     if (!parse) return clamp(text);
@@ -1308,12 +1395,12 @@ function fader({
     value: String(value),
     'aria-label': ariaLabel,
     onInput: (e) => {
-      const next = clamp(e.target.value);
+      const next = dragged(e.target.value);
       if (readout) readout.value = show(next);
       if (onDrag) onDrag(next, e.target);
     },
     onChange: (e) => {
-      if (onCommit) onCommit(clamp(e.target.value), e.target);
+      if (onCommit) onCommit(dragged(e.target.value), e.target);
     },
   });
   if (readout) {
@@ -1455,6 +1542,7 @@ const CATEGORIES = [
   { id: 'pad', name: 'Pad', shade: 'indigo', kind: 'pitched' },
   { id: 'plucked', name: 'Plucked', shade: 'amber', kind: 'pitched' },
   { id: 'strings', name: 'Strings', shade: 'red', kind: 'pitched' },
+  { id: 'vocals', name: 'Vocals', shade: 'rose', kind: 'audio' },
 ];
 
 function categoryKind(id) {
@@ -1471,6 +1559,7 @@ function categoryById(id) {
 function categoryOf(kit) {
   if (!kit) return 'keys';
   if (KNOWN.has(kit.category)) return kit.category;
+  if (kit.kind === 'audio') return 'vocals';
   if (kit.family === 'drums' || kit.kind === 'drum') return 'drums';
   if (kit.family === 'bass') return 'bass';
   return 'keys';
@@ -1784,6 +1873,23 @@ const KITS = [
   },
 ];
 
+const MICROPHONE = {
+  id: 'microphone',
+  category: 'vocals',
+  name: 'Microphone',
+  family: 'vocals',
+  kind: 'audio',
+  range: { lo: 40, hi: 84 },
+  defaultView: { lo: 48, hi: 79 },
+  shade: 'rose',
+  license: { spdx: 'NONE', source: 'Recorded in PocketDAW', credit: 'Your own recordings' },
+  envelope: { attack: 0.002, release: 0.05 },
+  polyphony: 1,
+  voicesAtOnce: 1,
+  zones: [],
+};
+KITS.push(MICROPHONE);
+
 function kitUsesPlaceholders(kit) {
   return kit.zones.some((z) => !z.file);
 }
@@ -2058,6 +2164,7 @@ function licenceLabel(license) {
   const spdx = license && license.spdx;
   if (!spdx) return 'Licence not stated';
   if (spdx === 'CC0-1.0') return 'CC0';
+  if (spdx === 'NONE') return 'Your own recording';
   if (spdx === 'UNLICENSED' || /all.?rights.?reserved/i.test(spdx)) return 'All rights reserved';
   return spdx;
 }
@@ -2188,6 +2295,7 @@ function createClip() {
 
 function familyOfKit(kit) {
   if (!kit) return 'keys';
+  if (kit.kind === 'audio') return 'vocals';
   if (kit.kind === 'drum') return 'drums';
   if (kit.category === 'bass' || (!kit.category && kit.family === 'bass')) return 'bass';
   return 'keys';
@@ -2196,10 +2304,11 @@ function familyOfKit(kit) {
 function createTrack({ name, family, kitId, shade }) {
   const kit = kitById(kitId || kitsInFamily(familyById(family || 'keys').id)[0].id);
   const fam = familyById(familyOfKit(kit));
+  const audio = kit.kind === 'audio';
   return {
     id: newId('t'),
     name: name || null,
-    family: fam.id,
+    family: audio ? 'vocals' : fam.id,
     kind: kit.kind,
     kitId: kit.id,
     params: {},
@@ -2212,6 +2321,7 @@ function createTrack({ name, family, kitId, shade }) {
     mute: false,
     solo: false,
     shade: shade || categoryById(categoryOf(kit)).shade,
+    ...(audio ? { fit: 0, countIn: 1, tune: null } : {}),
   };
 }
 
@@ -2294,6 +2404,10 @@ function validateSong(song) {
     });
     Object.keys(section.clips).forEach((tid) => {
       if (!trackIds.has(tid)) problems.push(`section ${section.name} has an orphan clip ${tid}`);
+      const rec = section.clips[tid].recording;
+      if (rec !== undefined && rec !== null && (typeof rec !== 'object' || typeof rec.id !== 'string')) {
+        problems.push(`section ${section.name} has a recording with no id on track ${tid}`);
+      }
       section.clips[tid].notes.forEach((n) => {
         if (n.duration < 1) problems.push(`note ${n.id} has no length`);
         if (n.start < 0) problems.push(`note ${n.id} starts before the section`);
@@ -4023,10 +4137,9 @@ function buildExampleSong(piece) {
       if (Number.isFinite(t.reverb) && t.reverb > 0) track.sends = { ...(track.sends || {}), reverb: t.reverb };
       const strum = storedStrum(t.strum);
       if (strum) track.strum = strum;
-      if (t.tremolo && typeof t.tremolo === 'object') track.tremolo = JSON.parse(JSON.stringify(t.tremolo));
-      if (t.echo && typeof t.echo === 'object') track.echo = JSON.parse(JSON.stringify(t.echo));
-      if (t.distortion && typeof t.distortion === 'object') track.distortion = JSON.parse(JSON.stringify(t.distortion));
-      if (t.chorus && typeof t.chorus === 'object') track.chorus = JSON.parse(JSON.stringify(t.chorus));
+      ['tremolo', 'echo', 'distortion', 'chorus', 'flanger', 'phaser'].forEach((fx) => {
+        if (t[fx] && typeof t[fx] === 'object') track[fx] = JSON.parse(JSON.stringify(t[fx]));
+      });
       return track;
     });
   } else {
@@ -5870,6 +5983,7 @@ function duplicateSection(song, sectionId) {
   Object.entries(source.clips).forEach(([trackId, clip]) => {
     const fresh = createClip();
     fresh.notes = clip.notes.map((n) => ({ ...n, id: newId('n'), flags: { ...n.flags } }));
+    if (clip.recording) fresh.recording = { ...clip.recording };
     copy.clips[trackId] = fresh;
   });
   const at = song.sectionOrder.indexOf(sectionId) + 1;
@@ -5966,6 +6080,7 @@ function copyClipInto(song, { fromSectionId, toSectionId, trackId }) {
   const before = target.clips[trackId];
   const fresh = createClip();
   fresh.notes = source.clips[trackId].notes.map((n) => ({ ...n, id: newId('n'), flags: { ...n.flags } }));
+  if (source.clips[trackId].recording) fresh.recording = { ...source.clips[trackId].recording };
   target.clips[trackId] = fresh;
   return {
     label: 'Paste clip',
@@ -6225,6 +6340,7 @@ function copyClipData(song, sectionId, trackId) {
     kind: 'clip',
     lengthBars: section.lengthBars,
     notes: clip.notes.map((n) => ({ ...n, flags: { ...n.flags } })),
+    recording: clip.recording ? { ...clip.recording } : null,
   };
 }
 
@@ -6232,10 +6348,12 @@ function copySectionData(song, sectionId) {
   const section = song.sections[sectionId];
   if (!section) return null;
   const clips = {};
+  const recordings = {};
   Object.entries(section.clips).forEach(([trackId, clip]) => {
     clips[trackId] = clip.notes.map((n) => ({ ...n, flags: { ...n.flags } }));
+    if (clip.recording) recordings[trackId] = { ...clip.recording };
   });
-  return { kind: 'section', name: section.name, lengthBars: section.lengthBars, clips };
+  return { kind: 'section', name: section.name, lengthBars: section.lengthBars, clips, recordings };
 }
 
 function pasteClipData(song, ctx, data) {
@@ -6245,6 +6363,8 @@ function pasteClipData(song, ctx, data) {
   const before = section.clips[ctx.trackId];
   const fresh = createClip();
   fresh.notes = data.notes.map((n) => ({ ...n, id: newId('n'), flags: { ...n.flags } }));
+  const target = song.tracks.find((t) => t.id === ctx.trackId);
+  if (data.recording && target && target.kind === 'audio') fresh.recording = { ...data.recording };
   section.clips[ctx.trackId] = fresh;
   return {
     label: 'Paste clip',
@@ -6267,6 +6387,8 @@ function pasteSectionData(song, sectionId, data) {
     const fresh = createClip();
     const notes = data.clips[track.id];
     fresh.notes = (notes || []).map((n) => ({ ...n, id: newId('n'), flags: { ...n.flags } }));
+    const rec = data.recordings && data.recordings[track.id];
+    if (rec && track.kind === 'audio') fresh.recording = { ...rec };
     clips[track.id] = fresh;
   });
   const after = { clips, lengthBars: data.lengthBars };
@@ -6281,17 +6403,21 @@ function pasteSectionData(song, sectionId, data) {
 function clearClip(song, ctx) {
   const section = song.sections[ctx.sectionId];
   const clip = section && section.clips[ctx.trackId];
-  if (!clip || !clip.notes.length) return null;
+  if (!clip || (!clip.notes.length && !clip.recording)) return null;
   const before = clip.notes;
-  clip.notes = [];
+  const recording = clip.recording || null;
+  const empty = () => {
+    clip.notes = [];
+    delete clip.recording;
+  };
+  empty();
   return {
     label: 'Clear clip',
     undo: () => {
       clip.notes = before;
+      if (recording) clip.recording = recording;
     },
-    redo: () => {
-      clip.notes = [];
-    },
+    redo: empty,
   };
 }
 
@@ -6640,6 +6766,7 @@ function setTrackKit(song, trackId, kitId) {
   if (!track || track.kitId === kitId) return null;
   const from = kitById(track.kitId);
   const to = kitById(kitId);
+  if ((from.kind === 'audio') !== (to.kind === 'audio') || track.kind === 'audio') return null;
   const before = { kitId: track.kitId, kind: track.kind, family: track.family, shade: track.shade, duck: track.duck ? JSON.parse(JSON.stringify(track.duck)) : undefined };
   const clipsBefore = {};
   let moved = 0;
@@ -8375,6 +8502,7 @@ const PATHS = {
   mallets: `<rect x="3" y="16" width="18" height="3.2"/><rect x="6" y="12" width="12" height="3.2"/><path d="M12 9.5L20 3"/><circle cx="10.8" cy="10.4" r="2" ${F}/>`,
   pad: `<path d="M2.5 9C5.7 5.6 8.9 5.6 12 9S18.3 12.4 21.5 9"/><path d="M2.5 15C5.7 11.6 8.9 11.6 12 15S18.3 18.4 21.5 15"/>`,
   plucked: `<path d="M5 21V3Q14 3 20 10L5 21"/><path d="M9 4.2V18.1M13 6V15.2M16.5 7.8V12.6"/>`,
+  vocals: `<rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21.5M8.5 21.5H15.5"/>`,
   strings: `<path d="M14.5 3.5C9 4 16 11 12 12C8 13 15 20 9.5 20.5"/><circle cx="15.2" cy="3.8" r="1.7" ${F}/><circle cx="8.8" cy="20.2" r="1.7" ${F}/><path d="M9.5 10.6L12.6 9.6M11.4 14.4L14.5 13.4"/>`,
 };
 
@@ -8514,6 +8642,420 @@ function renderMenu(host, store, { onChange }) {
   }
 }
 
+const PEAK_SECONDS = 0.025;
+
+function isAudioTrack(track) {
+  return Boolean(track && track.kind === 'audio');
+}
+
+function recordingAt(song, sectionId, trackId) {
+  const section = song && song.sections ? song.sections[sectionId] : null;
+  const clip = section && section.clips ? section.clips[trackId] : null;
+  return clip && clip.recording ? clip.recording : null;
+}
+
+function recordingsIn(song) {
+  const out = [];
+  if (!song || !song.sections) return out;
+  Object.values(song.sections).forEach((section) => {
+    Object.entries(section.clips || {}).forEach(([trackId, clip]) => {
+      if (clip && clip.recording) out.push({ sectionId: section.id, trackId, recording: clip.recording });
+    });
+  });
+  return out;
+}
+
+function readStart(rec) {
+  return (Number(rec.downbeat) || 0) + (Number(rec.lineUpMs) || 0) / 1000;
+}
+
+const LINE_UP_RANGE_MS = 400;
+
+function clampLineUp(ms) {
+  const n = Math.round(Number(ms) || 0);
+  return Math.max(-LINE_UP_RANGE_MS, Math.min(LINE_UP_RANGE_MS, n));
+}
+
+function readFit(track) {
+  const n = Number(track && track.fit);
+  return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : 0;
+}
+
+function readCountIn(track) {
+  const n = Number(track && track.countIn);
+  return n === 0 || n === 2 ? n : 1;
+}
+
+const FIT_STEP_BEATS = 0.5;
+
+function fitMarkers(rec, { fit = 0, sectionBeatsLong = 8 } = {}) {
+  const bpm = Number(rec.bpm) || 120;
+  const spb = 60 / bpm;
+  const start = readStart(rec);
+  const end = sectionBeatsLong * spb;
+  const markers = [[0, 0]];
+  const strength = Math.max(0, Math.min(100, fit)) / 100;
+  if (strength > 0 && Array.isArray(rec.notes)) {
+    let lastSrc = 0;
+    let lastBeat = 0;
+    rec.notes.forEach(([on]) => {
+      const src = on - start;
+      if (src <= 0.02 || src >= end - 0.02) return;
+      const beat = src / spb;
+      const snapped = Math.round(beat / FIT_STEP_BEATS) * FIT_STEP_BEATS;
+      const b = beat + strength * (snapped - beat);
+      if (src - lastSrc < 0.04 || b - lastBeat < 0.08 || b >= sectionBeatsLong - 0.05) return;
+      markers.push([src, b]);
+      lastSrc = src;
+      lastBeat = b;
+    });
+  }
+  markers.push([Math.max(end, markers[markers.length - 1][0] + 0.05), Math.max(sectionBeatsLong, markers[markers.length - 1][1] + 0.05)]);
+  return markers;
+}
+
+function warpMap(anchors) {
+  const n = anchors.length;
+  const slope = (a, b) => (b[1] - a[1] > 1e-9 ? (b[0] - a[0]) / (b[1] - a[1]) : 1);
+  const s0 = n > 1 ? slope(anchors[0], anchors[1]) : 1;
+  const sN = n > 1 ? slope(anchors[n - 2], anchors[n - 1]) : 1;
+  return (tOut) => {
+    if (tOut <= anchors[0][1]) return anchors[0][0] + (tOut - anchors[0][1]) * s0;
+    for (let i = 1; i < n; i++) {
+      const [i0, o0] = anchors[i - 1];
+      const [i1, o1] = anchors[i];
+      if (tOut <= o1) return o1 - o0 > 1e-9 ? i0 + (i1 - i0) * ((tOut - o0) / (o1 - o0)) : i1;
+    }
+    const [iL, oL] = anchors[n - 1];
+    return iL + (tOut - oL) * sN;
+  };
+}
+
+const TUNE_FLAVOURS = [
+  { id: 'natural', name: 'Natural', speed: 50, humanize: 50, flex: 20, hold: 15 },
+  { id: 'polished', name: 'Polished', speed: 20, humanize: 30, flex: 10, hold: 10 },
+  { id: 'warble', name: 'Warble', speed: 18, humanize: 0, flex: 0, hold: 0 },
+  { id: 'hard', name: 'Hard', speed: 0, humanize: 0, flex: 0, hold: 0 },
+  { id: 'stepped', name: 'Stepped', speed: 0, humanize: 0, flex: 0, hold: 0, chromatic: true },
+  { id: 'space', name: 'Space', speed: 0, humanize: 0, flex: 0, hold: 0, space: true },
+  { id: 'hyperpop', name: 'Hyperpop', speed: 0, humanize: 0, flex: 0, hold: 0, transpose: 12, formant: 'follow' },
+];
+
+const DEFAULT_TUNE = Object.freeze({
+  on: false,
+  flavour: 'natural',
+  speed: 50,
+  humanize: 50,
+  flex: 20,
+  hold: 15,
+  amount: 100,
+  transpose: 0,
+  formant: 'keep',
+});
+
+function flavourById(id) {
+  return TUNE_FLAVOURS.find((f) => f.id === id) || TUNE_FLAVOURS[0];
+}
+
+function readTune(track) {
+  const t = { ...DEFAULT_TUNE, ...((track && track.tune) || {}) };
+  const num = (v, lo, hi, d) => (Number.isFinite(Number(v)) ? Math.max(lo, Math.min(hi, Number(v))) : d);
+  return {
+    on: Boolean(t.on),
+    flavour: flavourById(t.flavour).id,
+    speed: num(t.speed, 0, 200, DEFAULT_TUNE.speed),
+    humanize: num(t.humanize, 0, 100, DEFAULT_TUNE.humanize),
+    flex: num(t.flex, 0, 100, DEFAULT_TUNE.flex),
+    hold: num(t.hold, 0, 50, DEFAULT_TUNE.hold),
+    amount: num(t.amount, 0, 100, DEFAULT_TUNE.amount),
+    transpose: Math.round(num(t.transpose, -12, 12, 0)),
+    formant: t.formant === 'follow' ? 'follow' : 'keep',
+  };
+}
+
+function tuneForFlavour(id, current = DEFAULT_TUNE) {
+  const f = flavourById(id);
+  return {
+    ...current,
+    on: true,
+    flavour: f.id,
+    speed: f.speed,
+    humanize: f.humanize,
+    flex: f.flex,
+    hold: f.hold,
+    transpose: f.transpose ?? 0,
+    formant: f.formant || 'keep',
+  };
+}
+
+function tuneTargets(song, section, tune) {
+  const flavour = flavourById(tune.flavour);
+  if (flavour.chromatic) return { key: 0, intervals: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] };
+  const scale = scaleById(sectionScaleId(song, section));
+  return { key: sectionKey(song, section), intervals: (scale && scale.intervals) || [0, 2, 4, 5, 7, 9, 11] };
+}
+
+function sectionPlayback(song, section) {
+  const bpm = sectionTempo(song, section);
+  const beats = section.lengthBars * sectionBeats(song, section);
+  return { bpm, beats, seconds: (beats * 60) / bpm };
+}
+
+function renderKey(song, section, track, rec) {
+  const pb = sectionPlayback(song, section);
+  const tune = readTune(track);
+  const targets = tune.on ? tuneTargets(song, section, tune) : null;
+  return JSON.stringify([
+    rec.id, rec.lineUpMs || 0, rec.downbeat, rec.bpm,
+    Math.round(pb.bpm * 1000), pb.beats, readFit(track),
+    tune.on ? [tune.speed, tune.humanize, tune.flex, tune.hold, tune.amount, tune.transpose, tune.formant, targets.key, targets.intervals.join('.')] : 0,
+  ]);
+}
+
+function peaksOf(pcm, sampleRate) {
+  const step = Math.max(1, Math.round(PEAK_SECONDS * sampleRate));
+  const out = [];
+  let top = 0;
+  for (let i = 0; i < pcm.length; i += step) {
+    let m = 0;
+    const end = Math.min(pcm.length, i + step);
+    for (let j = i; j < end; j++) {
+      const v = Math.abs(pcm[j]);
+      if (v > m) m = v;
+    }
+    out.push(m);
+    if (m > top) top = m;
+  }
+  const scale = top > 0 ? 1 / top : 0;
+  return out.map((v) => Math.round(v * scale * 100) / 100);
+}
+
+function sectionPeaks(rec, { beats, count }) {
+  const peaks = rec.peaks || [];
+  const spb = 60 / (Number(rec.bpm) || 120);
+  const start = readStart(rec);
+  const out = new Array(count).fill(0);
+  for (let i = 0; i < count; i++) {
+    const a = start + ((i / count) * beats) * spb;
+    const b = start + (((i + 1) / count) * beats) * spb;
+    let m = 0;
+    for (let k = Math.floor(a / PEAK_SECONDS); k < Math.ceil(b / PEAK_SECONDS); k++) {
+      if (k >= 0 && k < peaks.length && peaks[k] > m) m = peaks[k];
+    }
+    out[i] = m;
+  }
+  return out;
+}
+
+function notesInBeats(rec) {
+  const spb = 60 / (Number(rec.bpm) || 120);
+  const start = readStart(rec);
+  return (rec.notes || []).map(([on, off, midi]) => ({ beat: (on - start) / spb, length: (off - on) / spb, midi }));
+}
+
+function setRecording(song, sectionId, trackId, recording) {
+  const section = song.sections[sectionId];
+  const clip = section && section.clips[trackId];
+  if (!clip) return null;
+  const before = clip.recording || null;
+  const next = recording || null;
+  if (before === next) return null;
+  const apply = (value) => {
+    if (value) clip.recording = value;
+    else delete clip.recording;
+  };
+  apply(next);
+  return {
+    label: next ? 'Record' : 'Delete recording',
+    recording: next,
+    undo: () => apply(before),
+    redo: () => apply(next),
+  };
+}
+
+function setRecordingFields(song, sectionId, trackId, fields) {
+  const section = song.sections[sectionId];
+  const clip = section && section.clips[trackId];
+  if (!clip || !clip.recording) return null;
+  const before = clip.recording;
+  const next = { ...before, ...fields };
+  if (Object.keys(fields).every((k) => before[k] === next[k])) return null;
+  clip.recording = next;
+  return {
+    label: 'Line up',
+    coalesceKey: `rec:${sectionId}:${trackId}:${Object.keys(fields).sort().join(',')}`,
+    undo: () => {
+      clip.recording = before;
+    },
+    redo: () => {
+      clip.recording = next;
+    },
+  };
+}
+
+function setTuneFlavour(song, trackId, id) {
+  const t = song.tracks.find((x) => x.id === trackId);
+  if (!t) return null;
+  const before = { tune: t.tune ? { ...t.tune } : t.tune, echo: t.echo, sends: t.sends };
+  if (id === 'off') {
+    if (!readTune(t).on) return null;
+    t.tune = { ...readTune(t), on: false };
+  } else {
+    t.tune = tuneForFlavour(id, readTune(t));
+    if (flavourById(id).space) {
+      t.echo = { ...(t.echo || {}), on: true, time: '1/4', count: Math.max(2, (t.echo && t.echo.count) || 0) };
+      t.sends = { ...(t.sends || {}), reverb: Math.max((t.sends && t.sends.reverb) || 0, 25) };
+    }
+  }
+  const after = { tune: t.tune, echo: t.echo, sends: t.sends };
+  const put = (v) => {
+    ['tune', 'echo', 'sends'].forEach((k) => {
+      if (v[k] === undefined) delete t[k];
+      else t[k] = v[k];
+    });
+  };
+  return { label: 'Tune', undo: () => put(before), redo: () => put(after) };
+}
+
+function encodeWav16(pcm, sampleRate) {
+  const n = pcm.length;
+  const bytes = new Uint8Array(44 + n * 2);
+  const dv = new DataView(bytes.buffer);
+  const text = (at, s) => { for (let i = 0; i < s.length; i++) bytes[at + i] = s.charCodeAt(i); };
+  text(0, 'RIFF');
+  dv.setUint32(4, 36 + n * 2, true);
+  text(8, 'WAVE');
+  text(12, 'fmt ');
+  dv.setUint32(16, 16, true);
+  dv.setUint16(20, 1, true);
+  dv.setUint16(22, 1, true);
+  dv.setUint32(24, sampleRate, true);
+  dv.setUint32(28, sampleRate * 2, true);
+  dv.setUint16(32, 2, true);
+  dv.setUint16(34, 16, true);
+  text(36, 'data');
+  dv.setUint32(40, n * 2, true);
+  for (let i = 0; i < n; i++) {
+    const v = Math.max(-1, Math.min(1, pcm[i] || 0));
+    dv.setInt16(44 + i * 2, v < 0 ? Math.round(v * 32768) : Math.round(v * 32767), true);
+  }
+  return bytes;
+}
+
+function encodeWav24(pcm, sampleRate) {
+  const n = pcm.length;
+  const bytes = new Uint8Array(44 + n * 3);
+  const dv = new DataView(bytes.buffer);
+  const text = (at, s) => { for (let i = 0; i < s.length; i++) bytes[at + i] = s.charCodeAt(i); };
+  text(0, 'RIFF');
+  dv.setUint32(4, 36 + n * 3, true);
+  text(8, 'WAVE');
+  text(12, 'fmt ');
+  dv.setUint32(16, 16, true);
+  dv.setUint16(20, 1, true);
+  dv.setUint16(22, 1, true);
+  dv.setUint32(24, sampleRate, true);
+  dv.setUint32(28, sampleRate * 3, true);
+  dv.setUint16(32, 3, true);
+  dv.setUint16(34, 24, true);
+  text(36, 'data');
+  dv.setUint32(40, n * 3, true);
+  for (let i = 0; i < n; i++) {
+    const v = Math.max(-1, Math.min(1, pcm[i] || 0));
+    let s = Math.round(v * 8388607);
+    if (s < 0) s += 16777216;
+    const at = 44 + i * 3;
+    bytes[at] = s & 255;
+    bytes[at + 1] = (s >> 8) & 255;
+    bytes[at + 2] = (s >> 16) & 255;
+  }
+  return bytes;
+}
+
+function decodeWav(bytes) {
+  const u8 = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+  const dv = new DataView(u8.buffer, u8.byteOffset, u8.byteLength);
+  const tag = (at) => String.fromCharCode(u8[at], u8[at + 1], u8[at + 2], u8[at + 3]);
+  if (u8.length < 12 || tag(0) !== 'RIFF' || tag(8) !== 'WAVE') throw new Error('not a WAV file');
+  let p = 12;
+  let fmt = null;
+  let data = null;
+  while (p + 8 <= u8.length) {
+    const id = tag(p);
+    const size = dv.getUint32(p + 4, true);
+    if (id === 'fmt ') {
+      fmt = { format: dv.getUint16(p + 8, true), channels: dv.getUint16(p + 10, true), sampleRate: dv.getUint32(p + 12, true), bits: dv.getUint16(p + 22, true) };
+    } else if (id === 'data') {
+      data = { at: p + 8, size: Math.min(size, u8.length - p - 8) };
+    }
+    p += 8 + size + (size & 1);
+  }
+  if (!fmt || !data) throw new Error('WAV file has no audio');
+  const width = fmt.bits / 8;
+  const frame = width * fmt.channels;
+  const n = Math.floor(data.size / frame);
+  const pcm = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const at = data.at + i * frame;
+    if (fmt.format === 3 && fmt.bits === 32) pcm[i] = dv.getFloat32(at, true);
+    else if (fmt.bits === 16) pcm[i] = dv.getInt16(at, true) / 32768;
+    else if (fmt.bits === 24) {
+      let s = u8[at] | (u8[at + 1] << 8) | (u8[at + 2] << 16);
+      if (s & 0x800000) s -= 0x1000000;
+      pcm[i] = s / 8388608;
+    } else if (fmt.bits === 32) pcm[i] = dv.getInt32(at, true) / 2147483648;
+    else if (fmt.bits === 8) pcm[i] = (u8[at] - 128) / 128;
+  }
+  return { pcm, sampleRate: fmt.sampleRate };
+}
+
+const B64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
+function bytesToBase64(bytes) {
+  const u8 = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+  const parts = [];
+  const CHUNK = 3 * 4096;
+  for (let c = 0; c < u8.length; c += CHUNK) {
+    let s = '';
+    const end = Math.min(u8.length, c + CHUNK);
+    for (let i = c; i < end; i += 3) {
+      const a = u8[i];
+      const b = i + 1 < end ? u8[i + 1] : 0;
+      const d = i + 2 < end ? u8[i + 2] : 0;
+      const t = (a << 16) | (b << 8) | d;
+      s += B64[(t >> 18) & 63] + B64[(t >> 12) & 63] + (i + 1 < end ? B64[(t >> 6) & 63] : '=') + (i + 2 < end ? B64[t & 63] : '=');
+    }
+    parts.push(s);
+  }
+  return parts.join('');
+}
+
+const B64_INDEX = (() => {
+  const t = new Int16Array(128).fill(-1);
+  for (let i = 0; i < B64.length; i++) t[B64.charCodeAt(i)] = i;
+  t['-'.charCodeAt(0)] = 62;
+  t['_'.charCodeAt(0)] = 63;
+  return t;
+})();
+
+function base64ToBytes(text) {
+  const clean = String(text).replace(/[^A-Za-z0-9+/\-_]/g, '');
+  const n = Math.floor((clean.length * 3) / 4);
+  const out = new Uint8Array(n);
+  let o = 0;
+  for (let i = 0; i < clean.length; i += 4) {
+    const a = B64_INDEX[clean.charCodeAt(i)];
+    const b = B64_INDEX[clean.charCodeAt(i + 1)];
+    const c = i + 2 < clean.length ? B64_INDEX[clean.charCodeAt(i + 2)] : -1;
+    const d = i + 3 < clean.length ? B64_INDEX[clean.charCodeAt(i + 3)] : -1;
+    const t = (a << 18) | (b << 12) | ((c < 0 ? 0 : c) << 6) | (d < 0 ? 0 : d);
+    if (o < n) out[o++] = (t >> 16) & 255;
+    if (c >= 0 && o < n) out[o++] = (t >> 8) & 255;
+    if (d >= 0 && o < n) out[o++] = t & 255;
+  }
+  return out.subarray(0, o);
+}
+
 const UNITY_GAIN = 0.8;
 const MAX_GAIN = 1.2;
 const TAPER = [[-48, 0.06], [-24, 0.24], [-12, 0.44], [-6, 0.59], [0, 0.8], [20 * Math.log10(MAX_GAIN / UNITY_GAIN), 1]];
@@ -8623,6 +9165,18 @@ function drawClipPreview(canvas, { clip, lengthBars, beatsPerBar = 4, shade, isD
   ctx.fillStyle = theme.line;
   for (let bar = 1; bar < lengthBars; bar++) {
     ctx.fillRect(Math.round((bar / lengthBars) * cssW), 4, 1, cssH - 8);
+  }
+  if (clip.recording) {
+    const count = Math.max(8, Math.floor(cssW / 3));
+    const peaks = sectionPeaks(clip.recording, { beats: lengthBars * beatsPerBar, count });
+    const mid = cssH * 0.45;
+    const half = cssH * 0.22;
+    ctx.fillStyle = shade;
+    peaks.forEach((p, i) => {
+      const a = Math.max(0.5, p * half);
+      ctx.fillRect(Math.round((i / count) * cssW) + 1, mid - a, 2, a * 2);
+    });
+    return;
   }
   if (!notes.length) return;
 
@@ -8950,7 +9504,7 @@ function arrangementMatrix(store, onChange, {
       const cell = el(
         'button',
         {
-          class: `arrcell${active ? ' arrcell-on' : ''}${clip && clip.notes.length ? '' : ' arrcell-empty'}`,
+          class: `arrcell${active ? ' arrcell-on' : ''}${clip && (clip.notes.length || clip.recording) ? '' : ' arrcell-empty'}`,
           type: 'button',
           style: `width:${widthOf(song, song.sections[sectionId])}px;height:${CELL_HEIGHT}px`,
           title: `${trackTitle(track)}, section ${sectionLabel(song, sectionId)}`,
@@ -10003,10 +10557,98 @@ function createEdge(ctx, settings = DEFAULT_DISTORTION, { match = true } = {}) {
   };
 }
 
+const RATE_NOTES = [
+  { id: '1/32', beats: 1 / 8 },
+  { id: '1/16T', beats: 1 / 6 },
+  { id: '1/16', beats: 1 / 4 },
+  { id: '1/8T', beats: 1 / 3 },
+  { id: '1/16.', beats: 3 / 8 },
+  { id: '1/8', beats: 1 / 2 },
+  { id: '1/4T', beats: 2 / 3 },
+  { id: '1/8.', beats: 3 / 4 },
+  { id: '1/4', beats: 1 },
+  { id: '1/4.', beats: 3 / 2 },
+  { id: '1/2', beats: 2 },
+  { id: '1/2.', beats: 3 },
+  { id: '1 bar', bars: 1 },
+  { id: '2 bars', bars: 2 },
+  { id: '4 bars', bars: 4 },
+  { id: '8 bars', bars: 8 },
+];
+
+const RATE_MIN_HZ = 0.02;
+const RATE_MAX_HZ = 20;
+
+const RATE_ALIASES = { '1/1': '1 bar' };
+
+function rateNote(rate) {
+  if (typeof rate !== 'string') return null;
+  const id = RATE_ALIASES[rate] || rate;
+  return RATE_NOTES.find((n) => n.id === id) || null;
+}
+
+const isSynced = (rate) => typeof rate === 'string';
+
+function tidyHz(hz) {
+  const v = Math.max(RATE_MIN_HZ, Math.min(RATE_MAX_HZ, hz));
+  if (v < 1) return Math.round(v * 100) / 100;
+  if (v < 10) return Math.round(v * 10) / 10;
+  return Math.round(v);
+}
+
+function readRate(rate, fallback) {
+  const note = rateNote(rate);
+  if (note) return note.id;
+  const n = typeof rate === 'number' ? rate : NaN;
+  if (Number.isFinite(n) && n > 0) return Math.max(RATE_MIN_HZ, Math.min(RATE_MAX_HZ, n));
+  return fallback;
+}
+
+function cycleSeconds(rate, bpm = 120, beatsPerBar = 4) {
+  const note = rateNote(rate);
+  if (note) return (note.bars ? note.bars * (beatsPerBar || 4) : note.beats) * (60 / (bpm || 120));
+  const r = readRate(rate, 1);
+  return 1 / r;
+}
+
+const rateHz = (rate, bpm, beatsPerBar) => 1 / cycleSeconds(rate, bpm, beatsPerBar);
+
+function rateToHz(rate, bpm, beatsPerBar) {
+  return tidyHz(rateHz(rate, bpm, beatsPerBar));
+}
+
+function rateToNote(rate, bpm, beatsPerBar) {
+  const want = Math.log(cycleSeconds(rate, bpm, beatsPerBar));
+  let best = RATE_NOTES[0];
+  RATE_NOTES.forEach((n) => {
+    const off = (x) => Math.abs(Math.log(cycleSeconds(x.id, bpm, beatsPerBar)) - want);
+    if (off(n) < off(best)) best = n;
+  });
+  return best.id;
+}
+
+function rateLabel(rate) {
+  const note = rateNote(rate);
+  if (note) return note.id;
+  return `${tidyHz(readRate(rate, 1))} Hz`;
+}
+
+function secondsLabel(s) {
+  if (s < 1) return `${Math.round(s * 100) / 100} s`;
+  if (s < 10) return `${Math.round(s * 10) / 10} s`;
+  return `${Math.round(s)} s`;
+}
+
+function parseNote(text) {
+  const t = String(text).trim().toLowerCase().replace(/\s+/g, ' ');
+  const bars = t.match(/^(\d+) ?(bars?)?$/);
+  if (bars) return rateNote(`${bars[1]} bar${bars[1] === '1' ? '' : 's'}`) ? `${bars[1]} bar${bars[1] === '1' ? '' : 's'}` : null;
+  const found = RATE_NOTES.find((n) => n.id.toLowerCase() === t.replace(/ /g, ''));
+  return found ? found.id : null;
+}
+
 const DEFAULT_CHORUS = { on: false, rate: 0.75, depth: 80, delay: 3, mix: 50, voices: 1, stereo: 'mono', tone: 7000 };
 
-const CHORUS_MIN_RATE = 0.05;
-const CHORUS_MAX_RATE = 10;
 const CHORUS_MIN_DELAY = 1; // ms
 const CHORUS_MAX_DELAY = 25;
 const CHORUS_MIN_TONE = 2000;
@@ -10028,7 +10670,7 @@ function readChorus(c) {
   const s = c || {};
   return {
     on: Boolean(s.on),
-    rate: chorusClamp(chorusNum(s.rate, DEFAULT_CHORUS.rate), CHORUS_MIN_RATE, CHORUS_MAX_RATE),
+    rate: readRate(s.rate, DEFAULT_CHORUS.rate),
     depth: chorusClamp(Math.round(chorusNum(s.depth, DEFAULT_CHORUS.depth)), 0, 100),
     delay: chorusClamp(chorusNum(s.delay, DEFAULT_CHORUS.delay), CHORUS_MIN_DELAY, CHORUS_MAX_DELAY),
     mix: chorusClamp(Math.round(chorusNum(s.mix, DEFAULT_CHORUS.mix)), 0, 100),
@@ -10046,9 +10688,9 @@ function chorusPreset(settings) {
 
 const swingMs = (s) => (s.depth / 100) * Math.max(0, s.delay - 0.5);
 
-function detuneCents(settings) {
+function detuneCents(settings, hz = null) {
   const s = readChorus(settings);
-  const frac = (4 * s.rate * swingMs(s)) / 1000;
+  const frac = (4 * (hz === null ? rateHz(s.rate) : hz) * swingMs(s)) / 1000;
   return 1200 * Math.log2(1 + frac);
 }
 
@@ -10090,7 +10732,7 @@ function chorusMatrix(stereo, mix) {
   return { dryL: 1 - m, dryR: 1 - m, lToL: m, lToR: m, rToL: 0, rToR: 0 };
 }
 
-function createChorus(ctx, settings = DEFAULT_CHORUS) {
+function createChorus(ctx, settings = DEFAULT_CHORUS, hz = rateHz(readChorus(settings).rate)) {
   const input = ctx.createGain();
   input.channelCount = 1;
   input.channelCountMode = 'explicit';
@@ -10142,6 +10784,7 @@ function createChorus(ctx, settings = DEFAULT_CHORUS) {
   const lfos = Array.from({ length: 6 }, (_, k) => {
     const osc = ctx.createOscillator();
     osc.setPeriodicWave(chorusTriangle(ctx, k / 6));
+    osc.frequency.value = hz;
     const swing = g();
     osc.connect(swing);
     osc.start(start);
@@ -10170,7 +10813,7 @@ function createChorus(ctx, settings = DEFAULT_CHORUS) {
     const centre = s.delay / 1000;
     const swing = swingMs(s) / 1000;
     const used = new Set(chorusPhases(s.voices, s.stereo).map(([side, k]) => `${side}:${k}`));
-    lfos.forEach((l) => { to(l.osc.frequency, s.rate); to(l.swing.gain, swing); });
+    lfos.forEach((l) => to(l.swing.gain, swing));
     copies.forEach((c) => {
       to(c.delay.delayTime, centre);
       to(c.level.gain, used.has(`${c.side}:${c.k}`) ? 1 / Math.sqrt(s.voices) : 0);
@@ -10184,10 +10827,21 @@ function createChorus(ctx, settings = DEFAULT_CHORUS) {
 
   set(settings);
 
+  
+  function rate(at, value, glide = false) {
+    lfos.forEach((l) => {
+      const f = l.osc.frequency;
+      f.cancelScheduledValues(at);
+      if (glide && f.setTargetAtTime) f.setTargetAtTime(value, at, 0.01);
+      else f.setValueAtTime(value, at);
+    });
+  }
+
   return {
     input,
     output,
     set,
+    rate,
     get settings() { return { ...current }; },
     dispose() {
       lfos.forEach((l) => { try { l.osc.stop(); } catch (err) {  } });
@@ -10196,6 +10850,451 @@ function createChorus(ctx, settings = DEFAULT_CHORUS) {
         ...copies.flatMap((c) => [c.delay, c.level]),
         ...tones.filter(Boolean).flatMap((t) => [t.filter, t.fade])]
         .forEach((n) => n && n.disconnect && n.disconnect());
+    },
+  };
+}
+
+function createSweepClock(sr) {
+  const glideLen = Math.max(1, Math.round(0.05 * sr));
+  const c = { ph: 0, old: 0, glide: 0, count: 0, w: 1 };
+  
+  c.take = (phase, reset, jump = false) => {
+    if (reset !== c.count) {
+      c.count = reset;
+      c.old = c.glide > 0 && c.w < 0.5 ? c.old : c.ph;
+      c.ph = phase - Math.floor(phase);
+      c.glide = jump ? 0 : glideLen;
+    }
+    c.w = c.glide > 0 ? 1 - c.glide / glideLen : 1;
+  };
+  
+  c.at = (shape, offset) => {
+    const v = shape(c.ph + offset);
+    return c.w < 1 ? v * c.w + shape(c.old + offset) * (1 - c.w) : v;
+  };
+  
+  c.step = (hz) => {
+    const inc = hz / sr;
+    c.ph += inc;
+    c.ph -= Math.floor(c.ph);
+    if (c.glide > 0) {
+      c.old += inc;
+      c.old -= Math.floor(c.old);
+      c.glide--;
+    }
+  };
+  return c;
+}
+
+function createFlangerDsp(sr) {
+  const TZ_MS = 1.2;
+  const clock = createSweepClock(sr);
+  const size = 1 << Math.ceil(Math.log2(0.025 * sr + 16));
+  const mask = size - 1;
+  const lines = [new Float32Array(size), new Float32Array(size)];
+  const drys = [new Float32Array(size), new Float32Array(size)];
+  const ch = [{ fb: 0, lp: 0, hy: 0, hx: 0 }, { fb: 0, lp: 0, hy: 0, hx: 0 }];
+  let w = 0;
+  let s = null; // the smoothed controls
+  let quiet = 0;
+  const k = 1 - Math.exp(-1 / (0.02 * sr));
+  const tri = (p) => 1 - Math.abs(2 * (p - Math.floor(p)) - 1);
+  const read = (buf, pos) => {
+    const i = Math.floor(pos);
+    const f = pos - i;
+    const y0 = buf[(i - 1) & mask], y1 = buf[i & mask], y2 = buf[(i + 1) & mask], y3 = buf[(i + 2) & mask];
+    const c1 = 0.5 * (y2 - y0);
+    const c2 = y0 - 2.5 * y1 + 2 * y2 - 0.5 * y3;
+    const c3 = 0.5 * (y3 - y0) + 1.5 * (y1 - y2);
+    return ((c3 * f + c2) * f + c1) * f + y1;
+  };
+  const LOG2_MAX = Math.log2(0.02 * sr);
+  const targets = (p) => ({
+    lo: Math.log2(Math.max(0.02, p.manual) / 1000 * sr),
+    oct: Math.max(0, Math.min(100, p.depth)) / 100 * 5,
+    fb: Math.max(-0.95, Math.min(0.95, p.feedback / 100)),
+    mix: Math.max(0, Math.min(100, p.mix)) / 100,
+    tz: p.through > 0 ? 1 : 0,
+    sign: p.through === 2 ? -1 : 1,
+    spread: Math.max(0, Math.min(180, p.stereo)) / 360,
+    tone: Math.max(200, Math.min(0.45 * sr, p.tone)),
+    lowCut: Math.max(0, Math.min(2000, p.lowCut)),
+  });
+  const tzSamples = TZ_MS / 1000 * sr;
+
+  function process(inL, inR, outL, outR, n, p) {
+    const t = targets(p);
+    if (!s) s = { ...t };
+    const hzA = p.hz, phA = p.phase, rsA = p.reset;
+    let loud = 0;
+    for (let i = 0; i < n; i++) {
+      const a = Math.abs(inL[i]), b = Math.abs(inR[i]);
+      if (a > loud) loud = a;
+      if (b > loud) loud = b;
+    }
+    if (loud < 1e-9 && quiet > 0.2 * sr) {
+      for (let i = 0; i < n; i++) {
+        clock.take(phA.length > 1 ? phA[i] : phA[0], rsA.length > 1 ? rsA[i] : rsA[0], true);
+        clock.step(hzA.length > 1 ? hzA[i] : hzA[0]);
+        outL[i] = 0; outR[i] = 0;
+      }
+      return;
+    }
+    const kb = 1 - Math.exp(-n / (0.02 * sr));
+    s.tone += (t.tone - s.tone) * kb;
+    s.lowCut += (t.lowCut - s.lowCut) * kb;
+    const aTone = Math.exp(-2 * Math.PI * s.tone / sr);
+    const aHp = Math.exp(-2 * Math.PI * s.lowCut / sr);
+    let peak = 0;
+    const jump = quiet > 0; // silent in and out until now: nothing to glide
+    for (let i = 0; i < n; i++) {
+      clock.take(phA.length > 1 ? phA[i] : phA[0], rsA.length > 1 ? rsA[i] : rsA[0], jump);
+      s.lo += (t.lo - s.lo) * k;
+      s.oct += (t.oct - s.oct) * k;
+      s.fb += (t.fb - s.fb) * k;
+      s.mix += (t.mix - s.mix) * k;
+      s.tz += (t.tz - s.tz) * k;
+      s.sign += (t.sign - s.sign) * k;
+      s.spread += (t.spread - s.spread) * k;
+      const hi = Math.min(s.lo + s.oct, LOG2_MAX);
+      for (let c = 0; c < 2; c++) {
+        const x = c ? inR[i] : inL[i];
+        const st = ch[c];
+        const line = lines[c], dry = drys[c];
+        line[w] = x + Math.tanh(s.fb * st.fb);
+        dry[w] = x;
+        const u = clock.at(tri, c ? s.spread : 0);
+        const d = Math.max(2, Math.pow(2, s.lo + u * (hi - s.lo)));
+        const raw = read(line, w - d);
+        st.lp = raw + aTone * (st.lp - raw);
+        st.fb = st.lp;
+        const dryNow = s.tz > 1e-6 ? x + s.tz * (read(dry, w - tzSamples) - x) : x;
+        const v = s.sign * st.lp;
+        st.hy = aHp * (st.hy + v - st.hx);
+        st.hx = v;
+        const out = (1 - s.mix) * dryNow + s.mix * st.hy;
+        if (c) outR[i] = out; else outL[i] = out;
+        const m = Math.abs(out);
+        if (m > peak) peak = m;
+      }
+      w = (w + 1) & mask;
+      clock.step(hzA.length > 1 ? hzA[i] : hzA[0]);
+    }
+    quiet = peak < 1e-6 && loud < 1e-9 ? quiet + n : 0;
+  }
+  return { process, clock };
+}
+
+function createPhaserDsp(sr) {
+  const MAX_STAGES = 12;
+  const clock = createSweepClock(sr);
+  const ch = [0, 1].map(() => ({ z: new Float64Array(MAX_STAGES), y: new Float64Array(MAX_STAGES), last: 0 }));
+  let s = null;
+  let stages = 0, from = 0, cross = 1;
+  let quiet = 0;
+  const k = 1 - Math.exp(-1 / (0.02 * sr));
+  const crossStep = 1 / Math.max(1, Math.round(0.02 * sr));
+  const sine = (p) => 0.5 - 0.5 * Math.cos(2 * Math.PI * p);
+  const LOG2_TOP = Math.log2(0.45 * sr);
+  const targets = (p) => ({
+    lc: Math.log2(Math.max(20, Math.min(10000, p.centre))),
+    width: Math.max(0, Math.min(100, p.depth)) / 100 * 6,
+    fb: Math.max(0, Math.min(0.95, p.feedback / 100)),
+    mix: Math.max(0, Math.min(100, p.mix)) / 100,
+    spread: Math.max(0, Math.min(180, p.stereo)) / 360,
+  });
+
+  function process(inL, inR, outL, outR, n, p) {
+    const t = targets(p);
+    if (!s) s = { ...t };
+    const want = Math.max(1, Math.min(MAX_STAGES, Math.round(p.stages) || 4));
+    if (!stages) stages = want;
+    if (want !== stages) {
+      from = cross < 1 ? from : stages;
+      for (let j = Math.max(from, stages); j < want; j++) ch.forEach((c) => { c.z[j] = 0; c.y[j] = 0; });
+      stages = want;
+      cross = 0;
+    }
+    const hzA = p.hz, phA = p.phase, rsA = p.reset;
+    let loud = 0;
+    for (let i = 0; i < n; i++) {
+      const a = Math.abs(inL[i]), b = Math.abs(inR[i]);
+      if (a > loud) loud = a;
+      if (b > loud) loud = b;
+    }
+    if (loud < 1e-9 && quiet > 0.2 * sr) {
+      for (let i = 0; i < n; i++) {
+        clock.take(phA.length > 1 ? phA[i] : phA[0], rsA.length > 1 ? rsA[i] : rsA[0], true);
+        clock.step(hzA.length > 1 ? hzA[i] : hzA[0]);
+        outL[i] = 0; outR[i] = 0;
+      }
+      return;
+    }
+    let peak = 0;
+    const jump = quiet > 0;
+    for (let i = 0; i < n; i++) {
+      clock.take(phA.length > 1 ? phA[i] : phA[0], rsA.length > 1 ? rsA[i] : rsA[0], jump);
+      s.lc += (t.lc - s.lc) * k;
+      s.width += (t.width - s.width) * k;
+      s.fb += (t.fb - s.fb) * k;
+      s.mix += (t.mix - s.mix) * k;
+      s.spread += (t.spread - s.spread) * k;
+      const lo = s.lc - s.width / 2;
+      const hi = Math.min(s.lc + s.width / 2, LOG2_TOP);
+      const run = cross < 1 ? Math.max(from, stages) : stages;
+      for (let c = 0; c < 2; c++) {
+        const x = c ? inR[i] : inL[i];
+        const st = ch[c];
+        const u = clock.at(sine, c ? s.spread : 0);
+        const f = Math.pow(2, lo + u * (hi - lo));
+        const tn = Math.tan(Math.PI * f / sr);
+        const a = (tn - 1) / (tn + 1);
+        let v = x + s.fb * st.last;
+        let tapOld = 0, tapNew = 0;
+        for (let j = 0; j < run; j++) {
+          const yj = a * v + st.z[j] - a * st.y[j];
+          st.z[j] = v; st.y[j] = yj; v = yj;
+          if (j === from - 1) tapOld = v;
+          if (j === stages - 1) tapNew = v;
+        }
+        const tap = cross < 1 ? tapOld + (tapNew - tapOld) * cross : tapNew;
+        st.last = Math.tanh(tap);
+        const out = (1 - s.mix) * x + s.mix * tap;
+        if (c) outR[i] = out; else outL[i] = out;
+        const m = Math.abs(out);
+        if (m > peak) peak = m;
+      }
+      if (cross < 1) cross = Math.min(1, cross + crossStep);
+      clock.step(hzA.length > 1 ? hzA[i] : hzA[0]);
+    }
+    quiet = peak < 1e-6 && loud < 1e-9 ? quiet + n : 0;
+  }
+  return { process, clock };
+}
+
+const SWEEP_THROUGH = ['off', 'on', 'inverted'];
+const FLANGER_MIN_MANUAL = 0.05; // ms
+const FLANGER_MAX_MANUAL = 5;
+const FLANGER_MAX_LOWCUT = 500; // Hz; 0 is off
+const SWEEP_MIN_TONE = 2000;
+const SWEEP_MAX_TONE = 20000;
+const PHASER_STAGES = [2, 4, 6, 8, 12];
+const PHASER_MIN_CENTRE = 100;
+const PHASER_MAX_CENTRE = 4000;
+
+const FLANGER_PRESETS = [
+  { id: 'tape', label: 'Tape', settings: { rate: 0.11, depth: 100, manual: 0.1, feedback: 0, mix: 50, through: 'inverted', lowCut: 0, tone: 12000, stereo: 0 } },
+  { id: 'jet', label: 'Jet', settings: { rate: 0.12, depth: 75, manual: 0.6, feedback: 70, mix: 50, through: 'off', lowCut: 0, tone: 9000, stereo: 0 } },
+  { id: 'mxr', label: 'MXR', settings: { rate: 0.3, depth: 55, manual: 0.8, feedback: 85, mix: 50, through: 'off', lowCut: 0, tone: 10000, stereo: 0 } },
+  { id: 'drums', label: 'Drum bus', settings: { rate: '2 bars', depth: 85, manual: 0.15, feedback: 60, mix: 50, through: 'off', lowCut: 300, tone: 12000, stereo: 90 } },
+];
+const DEFAULT_FLANGER = { on: false, ...FLANGER_PRESETS[1].settings };
+
+const PHASER_PRESETS = [
+  { id: 'phase90', label: 'Phase 90', settings: { rate: 0.5, stages: 4, centre: 500, depth: 70, feedback: 22, mix: 50, stereo: 0 } },
+  { id: 'stone', label: 'Small Stone', settings: { rate: 0.38, stages: 4, centre: 450, depth: 80, feedback: 65, mix: 50, stereo: 0 } },
+  { id: 'six', label: 'Six-stage', settings: { rate: 0.25, stages: 6, centre: 500, depth: 90, feedback: 72, mix: 50, stereo: 60 } },
+  { id: 'house', label: 'House', settings: { rate: '1 bar', stages: 8, centre: 1000, depth: 85, feedback: 55, mix: 50, stereo: 90 } },
+];
+const DEFAULT_PHASER = { on: false, ...PHASER_PRESETS[0].settings };
+
+const sweepNum = (v, fallback) => (Number.isFinite(Number(v)) && v !== null && v !== '' && typeof v !== 'boolean' ? Number(v) : fallback);
+const sweepClamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+function readFlanger(f) {
+  const s = f || {};
+  const d = DEFAULT_FLANGER;
+  return {
+    on: Boolean(s.on),
+    rate: readRate(s.rate, d.rate),
+    depth: sweepClamp(Math.round(sweepNum(s.depth, d.depth)), 0, 100),
+    manual: sweepClamp(sweepNum(s.manual, d.manual), FLANGER_MIN_MANUAL, FLANGER_MAX_MANUAL),
+    feedback: sweepClamp(Math.round(sweepNum(s.feedback, d.feedback)), -95, 95),
+    mix: sweepClamp(Math.round(sweepNum(s.mix, d.mix)), 0, 100),
+    through: SWEEP_THROUGH.includes(s.through) ? s.through : d.through,
+    lowCut: sweepClamp(Math.round(sweepNum(s.lowCut, d.lowCut)), 0, FLANGER_MAX_LOWCUT),
+    tone: sweepClamp(sweepNum(s.tone, d.tone), SWEEP_MIN_TONE, SWEEP_MAX_TONE),
+    stereo: sweepClamp(Math.round(sweepNum(s.stereo, d.stereo)), 0, 180),
+  };
+}
+
+function readPhaser(f) {
+  const s = f || {};
+  const d = DEFAULT_PHASER;
+  return {
+    on: Boolean(s.on),
+    rate: readRate(s.rate, d.rate),
+    stages: PHASER_STAGES.includes(Number(s.stages)) ? Number(s.stages) : d.stages,
+    centre: sweepClamp(sweepNum(s.centre, d.centre), PHASER_MIN_CENTRE, PHASER_MAX_CENTRE),
+    depth: sweepClamp(Math.round(sweepNum(s.depth, d.depth)), 0, 100),
+    feedback: sweepClamp(Math.round(sweepNum(s.feedback, d.feedback)), 0, 95),
+    mix: sweepClamp(Math.round(sweepNum(s.mix, d.mix)), 0, 100),
+    stereo: sweepClamp(Math.round(sweepNum(s.stereo, d.stereo)), 0, 180),
+  };
+}
+
+const presetOf = (list, s) => {
+  const found = list.find((p) => Object.entries(p.settings).every(([k, v]) => s[k] === v));
+  return found ? found.id : null;
+};
+const flangerPreset = (settings) => presetOf(FLANGER_PRESETS, readFlanger(settings));
+const phaserPreset = (settings) => presetOf(PHASER_PRESETS, readPhaser(settings));
+
+function flangerRange(settings) {
+  const s = readFlanger(settings);
+  return [s.manual, Math.min(s.manual * Math.pow(2, (s.depth / 100) * 5), 20)];
+}
+
+function phaserRange(settings) {
+  const s = readPhaser(settings);
+  const width = (s.depth / 100) * 6;
+  return [s.centre * Math.pow(2, -width / 2), Math.min(s.centre * Math.pow(2, width / 2), 20000)];
+}
+
+const SWEEP_KINDS = {
+  flanger: { name: 'pd-flanger', read: readFlanger, controls: ['manual', 'depth', 'feedback', 'mix', 'through', 'lowCut', 'tone', 'stereo'] },
+  phaser: { name: 'pd-phaser', read: readPhaser, controls: ['stages', 'centre', 'depth', 'feedback', 'mix', 'stereo'] },
+};
+
+const sweepValue = (s, key) => (key === 'through' ? SWEEP_THROUGH.indexOf(s.through) : s[key]);
+
+function sweepWorkletSource() {
+  const kinds = Object.entries(SWEEP_KINDS).map(([kind, k]) => [kind, k.name, k.controls]);
+  const dsp = Object.entries({ createSweepClock, createFlangerDsp, createPhaserDsp })
+    .map(([name, fn]) => `  const ${name} = ${fn.toString()};`).join('\n');
+  return `${dsp}
+  const makers = { flanger: createFlangerDsp, phaser: createPhaserDsp };
+  for (const [kind, name, controls] of ${JSON.stringify(kinds)}) {
+    const descriptors = [
+      { name: 'hz', defaultValue: 0.5, minValue: 0, maxValue: 100, automationRate: 'a-rate' },
+      { name: 'phase', defaultValue: 0, minValue: 0, maxValue: 1, automationRate: 'a-rate' },
+      { name: 'reset', defaultValue: 0, minValue: 0, maxValue: 16777216, automationRate: 'a-rate' },
+      ...controls.map((c) => ({ name: c, defaultValue: 0, minValue: -100000, maxValue: 100000, automationRate: 'k-rate' })),
+    ];
+    registerProcessor(name, class extends AudioWorkletProcessor {
+      static get parameterDescriptors() { return descriptors; }
+      constructor() {
+        super();
+        this.dsp = makers[kind](sampleRate);
+        this.zero = new Float32Array(128);
+        this.spare = new Float32Array(128);
+      }
+      process(inputs, outputs, parameters) {
+        const out = outputs[0];
+        const n = out[0].length;
+        if (this.zero.length < n) { this.zero = new Float32Array(n); this.spare = new Float32Array(n); }
+        const input = inputs[0] || [];
+        const l = input[0] || this.zero, r = input[1] || l;
+        const p = { hz: parameters.hz, phase: parameters.phase, reset: parameters.reset };
+        for (const c of controls) p[c] = parameters[c][0];
+        this.dsp.process(l, r, out[0], out[1] || this.spare, n, p);
+        return true;
+      }
+    });
+  }
+`;
+}
+
+let sweepUrl = null;
+const sweepModules = new WeakMap(); // ctx -> { promise, state: 'loading' | 'worklet' | 'none' }
+
+function loadSweeps(ctx) {
+  let entry = sweepModules.get(ctx);
+  if (entry) return entry;
+  entry = { state: 'loading', promise: null };
+  sweepModules.set(ctx, entry);
+  const can = ctx.audioWorklet && typeof AudioWorkletNode !== 'undefined' && typeof Blob !== 'undefined' && typeof URL !== 'undefined' && URL.createObjectURL;
+  if (!can) {
+    entry.state = 'none';
+    entry.promise = Promise.resolve(false);
+    return entry;
+  }
+  if (!sweepUrl) sweepUrl = URL.createObjectURL(new Blob([sweepWorkletSource()], { type: 'text/javascript' }));
+  entry.promise = ctx.audioWorklet.addModule(sweepUrl).then(
+    () => { entry.state = 'worklet'; return true; },
+    () => { entry.state = 'none'; return false; },
+  );
+  return entry;
+}
+
+function sweepMode(ctx) {
+  const entry = sweepModules.get(ctx);
+  return entry ? entry.state : 'unused';
+}
+
+function createSweep(ctx, kind, settings) {
+  const k = SWEEP_KINDS[kind];
+  const input = ctx.createGain();
+  const output = ctx.createGain();
+  input.connect(output);
+  let node = null;
+  let disposed = false;
+  let current = k.read(settings);
+  let count = 0;
+  let queue = [];
+  const entry = loadSweeps(ctx);
+
+  function write(params, at, hz, phase, n) {
+    params.hz.cancelScheduledValues(at);
+    params.phase.cancelScheduledValues(at);
+    params.reset.cancelScheduledValues(at);
+    params.hz.setValueAtTime(hz, at);
+    if (phase !== null) {
+      params.phase.setValueAtTime(phase, at);
+      params.reset.setValueAtTime(n, at);
+    }
+  }
+  function attach() {
+    if (disposed || node) return;
+    const parameterData = {};
+    k.controls.forEach((c) => { parameterData[c] = sweepValue(current, c); });
+    node = new AudioWorkletNode(ctx, k.name, {
+      numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [2],
+      channelCount: 2, channelCountMode: 'explicit', channelInterpretation: 'speakers',
+      parameterData,
+    });
+    const params = { hz: node.parameters.get('hz'), phase: node.parameters.get('phase'), reset: node.parameters.get('reset') };
+    queue.forEach((q) => write(params, ...q));
+    queue = [];
+    input.disconnect();
+    input.connect(node);
+    node.connect(output);
+  }
+  const ready = entry.state === 'worklet' ? (attach(), Promise.resolve()) : entry.promise.then((ok) => { if (ok) attach(); else queue = []; });
+
+  function set(next) {
+    current = k.read(next);
+    if (!node) return;
+    const now = ctx.currentTime;
+    k.controls.forEach((c) => {
+      const p = node.parameters.get(c);
+      p.cancelScheduledValues(now);
+      p.setValueAtTime(sweepValue(current, c), now);
+    });
+  }
+
+  function clock(at, hz, phase = null) {
+    const n = phase === null ? 0 : ++count;
+    const value = phase === null ? null : phase - Math.floor(phase);
+    if (node) {
+      write({ hz: node.parameters.get('hz'), phase: node.parameters.get('phase'), reset: node.parameters.get('reset') }, at, hz, value, n);
+    } else if (entry.state !== 'none') {
+      queue = queue.filter((q) => q[0] < at);
+      queue.push([at, hz, value, n]);
+    }
+  }
+
+  return {
+    input,
+    output,
+    set,
+    clock,
+    ready,
+    get running() { return Boolean(node); },
+    get settings() { return { ...current }; },
+    dispose() {
+      disposed = true;
+      [input, node, output].forEach((x) => x && x.disconnect && x.disconnect());
     },
   };
 }
@@ -10313,23 +11412,6 @@ function arpeggiate(notes, arp) {
   return out.sort((a, b) => a.start - b.start);
 }
 
-const TREMOLO_RATES = [
-  { id: '1/1', label: '1/1', beats: 4 },
-  { id: '1/2', label: '1/2', beats: 2 },
-  { id: '1/4.', label: '1/4.', beats: 1.5 },
-  { id: '1/4', label: '1/4', beats: 1 },
-  { id: '1/4T', label: '1/4T', beats: 2 / 3 },
-  { id: '1/8.', label: '1/8.', beats: 0.75 },
-  { id: '1/8', label: '1/8', beats: 0.5 },
-  { id: '1/8T', label: '1/8T', beats: 1 / 3 },
-  { id: '1/16.', label: '1/16.', beats: 0.375 },
-  { id: '1/16', label: '1/16', beats: 0.25 },
-  { id: '1/16T', label: '1/16T', beats: 1 / 6 },
-  { id: '1/32', label: '1/32', beats: 0.125 },
-];
-
-const rateEntry = (rateId) => TREMOLO_RATES.find((r) => r.id === rateId) || TREMOLO_RATES.find((r) => r.id === '1/8');
-
 const TREMOLO_SHAPES = [
   { id: 'sine', label: 'Sine' },
   { id: 'triangle', label: 'Triangle' },
@@ -10392,12 +11474,8 @@ function warpPhase(t, d) {
   return t < d ? 0.5 * (t / d) : 0.5 + 0.5 * ((t - d) / (1 - d));
 }
 
-function rateSeconds(rateId, bpm) {
-  return rateEntry(rateId).beats * (60 / (bpm || 120));
-}
-
-function tremoloTicks(rateId) {
-  return rateEntry(rateId).beats * PPQ;
+function rateSeconds(rate, bpm, beatsPerBar = 4) {
+  return cycleSeconds(readRate(rate, DEFAULT_TREMOLO.rate), bpm, beatsPerBar);
 }
 
 function waveAt(shape, phase, cycleSeconds = 0.25, open = 50) {
@@ -10680,6 +11758,1345 @@ function slideChainEnd(sorted, i) {
 function wrapTick(transportTick, loopTicks) {
   if (loopTicks <= 0) return 0;
   return ((transportTick % loopTicks) + loopTicks) % loopTicks;
+}
+
+const VOX_TAU = Math.PI * 2;
+
+function voxFft(re, im, inverse = false) {
+  const n = re.length;
+  for (let i = 1, j = 0; i < n; i++) {
+    let bit = n >> 1;
+    for (; j & bit; bit >>= 1) j ^= bit;
+    j ^= bit;
+    if (i < j) {
+      let t = re[i]; re[i] = re[j]; re[j] = t;
+      t = im[i]; im[i] = im[j]; im[j] = t;
+    }
+  }
+  for (let len = 2; len <= n; len <<= 1) {
+    const ang = (inverse ? VOX_TAU : -VOX_TAU) / len;
+    const wr = Math.cos(ang);
+    const wi = Math.sin(ang);
+    const half = len >> 1;
+    for (let i = 0; i < n; i += len) {
+      let cr = 1;
+      let ci = 0;
+      for (let k = 0; k < half; k++) {
+        const a = i + k;
+        const b = a + half;
+        const tr = re[b] * cr - im[b] * ci;
+        const ti = re[b] * ci + im[b] * cr;
+        re[b] = re[a] - tr;
+        im[b] = im[a] - ti;
+        re[a] += tr;
+        im[a] += ti;
+        const nr = cr * wr - ci * wi;
+        ci = cr * wi + ci * wr;
+        cr = nr;
+      }
+    }
+  }
+  if (inverse) for (let i = 0; i < n; i++) { re[i] /= n; im[i] /= n; }
+}
+
+function voxPow2(n) {
+  let p = 1;
+  while (p < n) p <<= 1;
+  return p;
+}
+
+function voxTrackPitch(x, sr, { hop = 0.005, minHz = 65, maxHz = 1000, threshold = 0.15, gate = 0.01 } = {}) {
+  const maxLag = Math.ceil(sr / minHz);
+  const minLag = Math.max(2, Math.floor(sr / maxHz));
+  const W = maxLag;
+  const N = voxPow2(W + maxLag);
+  const hopN = Math.max(1, Math.round(hop * sr));
+  const frames = Math.max(0, Math.floor((x.length - W - maxLag) / hopN));
+  const times = new Float64Array(frames);
+  const hz = new Float64Array(frames);
+  const rms = new Float64Array(frames);
+  const re = new Float64Array(N);
+  const im = new Float64Array(N);
+  const re2 = new Float64Array(N);
+  const im2 = new Float64Array(N);
+  const d = new Float64Array(maxLag + 1);
+  const sq = new Float64Array(x.length + 1);
+  for (let i = 0; i < x.length; i++) sq[i + 1] = sq[i] + x[i] * x[i];
+  for (let f = 0; f < frames; f++) {
+    const s = f * hopN;
+    times[f] = (s + 0.75 * W) / sr;
+    rms[f] = Math.sqrt((sq[s + W] - sq[s]) / W);
+    if (rms[f] < gate * 0.5) continue; // silence: nothing to find, and the FFTs are the cost
+    re.fill(0); im.fill(0); re2.fill(0); im2.fill(0);
+    for (let j = 0; j < W; j++) re[j] = x[s + j];
+    for (let j = 0; j < W + maxLag; j++) re2[j] = x[s + j];
+    voxFft(re, im);
+    voxFft(re2, im2);
+    for (let k = 0; k < N; k++) {
+      const a = re[k];
+      const b = -im[k];
+      const c = re2[k];
+      const e = im2[k];
+      re[k] = a * c - b * e;
+      im[k] = a * e + b * c;
+    }
+    voxFft(re, im, true);
+    d[0] = 1;
+    let run = 0;
+    const e0 = sq[s + W] - sq[s];
+    for (let t = 1; t <= maxLag; t++) {
+      const v = e0 + (sq[s + t + W] - sq[s + t]) - 2 * re[t];
+      run += v;
+      d[t] = run > 0 ? (v * t) / run : 1;
+    }
+    let tau = -1;
+    for (let t = minLag; t < maxLag; t++) {
+      if (d[t] < threshold) {
+        while (t + 1 < maxLag && d[t + 1] < d[t]) t++;
+        tau = t;
+        break;
+      }
+    }
+    if (tau < 0) continue;
+    const a = d[tau - 1];
+    const b = d[tau];
+    const c = d[tau + 1];
+    const den = a - 2 * b + c;
+    const shift = den !== 0 ? (0.5 * (a - c)) / den : 0;
+    const lag = tau + Math.max(-1, Math.min(1, shift));
+    hz[f] = rms[f] > gate ? sr / lag : 0;
+  }
+  return { times, hz, rms, hop: hopN / sr };
+}
+
+function voxCleanTrack(track, { median = 5, minRun = 6 } = {}) {
+  const n = track.hz.length;
+  const midi = new Float64Array(n);
+  for (let i = 0; i < n; i++) midi[i] = track.hz[i] > 0 ? 69 + 12 * Math.log2(track.hz[i] / 440) : NaN;
+  const out = new Float64Array(n);
+  const h = median >> 1;
+  const w = [];
+  for (let i = 0; i < n; i++) {
+    if (Number.isNaN(midi[i])) { out[i] = NaN; continue; }
+    w.length = 0;
+    for (let j = i - h; j <= i + h; j++) if (j >= 0 && j < n && !Number.isNaN(midi[j])) w.push(midi[j]);
+    w.sort((p, q) => p - q);
+    const med = w[w.length >> 1];
+    let v = midi[i];
+    while (v - med > 9) v -= 12;
+    while (med - v > 9) v += 12;
+    out[i] = v;
+  }
+  for (let i = 0; i < n;) {
+    if (Number.isNaN(out[i])) { i++; continue; }
+    let j = i;
+    while (j < n && !Number.isNaN(out[j])) j++;
+    if (j - i < minRun) for (let k = i; k < j; k++) out[k] = NaN;
+    i = j;
+  }
+  return out;
+}
+
+function voxSegmentNotes(times, midi, { jump = 0.7, settle = 0.05, minDur = 0.06 } = {}) {
+  if (times.length < 2) return [];
+  const hop = times[1] - times[0];
+  const need = Math.max(1, Math.round(settle / hop));
+  const notes = [];
+  let cur = null;
+  let vals = [];
+  const close = (i) => {
+    if (!cur) return;
+    cur.off = times[Math.min(i, times.length - 1)];
+    const s = vals.slice().sort((a, b) => a - b);
+    cur.midi = s[s.length >> 1];
+    if (cur.off - cur.on >= minDur) notes.push(cur);
+    cur = null;
+    vals = [];
+  };
+  for (let i = 0; i < midi.length; i++) {
+    const m = midi[i];
+    if (Number.isNaN(m)) { close(i); continue; }
+    if (!cur) { cur = { on: times[i] }; vals = [m]; continue; }
+    const s = vals.slice(-need * 4).sort((a, b) => a - b);
+    const ref = s[s.length >> 1];
+    let moved = true;
+    for (let j = 0; j < need; j++) {
+      const v = midi[i + j];
+      if (v === undefined || Number.isNaN(v) || Math.abs(v - ref) < jump) { moved = false; break; }
+    }
+    if (moved && vals.length >= need) {
+      close(i);
+      cur = { on: times[i] };
+      vals = [m];
+      continue;
+    }
+    vals.push(m);
+  }
+  close(midi.length - 1);
+  return notes;
+}
+
+function voxAnalyse(pcm, sr) {
+  const track = voxTrackPitch(pcm, sr);
+  const midi = voxCleanTrack(track);
+  const notes = voxSegmentNotes(track.times, midi);
+  const round = (v) => Math.round(v * 100) / 100;
+  return {
+    pitch: {
+      t0: track.times.length ? round(track.times[0] * 1000) / 1000 : 0,
+      hop: track.hop,
+      midi: Array.from(midi, (v) => (Number.isNaN(v) ? null : round(v))),
+    },
+    notes: notes.map((n) => [Math.round(n.on * 1000) / 1000, Math.round(n.off * 1000) / 1000, round(n.midi)]),
+  };
+}
+
+function voxPitchArrays(pitch) {
+  const n = pitch && pitch.midi ? pitch.midi.length : 0;
+  const times = new Float64Array(n);
+  const midi = new Float64Array(n);
+  for (let i = 0; i < n; i++) {
+    times[i] = pitch.t0 + i * pitch.hop;
+    const v = pitch.midi[i];
+    midi[i] = v === null || v === undefined ? NaN : v;
+  }
+  return { times, midi, hop: pitch ? pitch.hop : 0.005 };
+}
+
+function voxPitchMarks(x, sr, times, midi) {
+  const hop = times.length > 1 ? times[1] - times[0] : 0.005;
+  const t0 = times.length ? times[0] : 0;
+  const periodAt = (s) => {
+    const f = Math.round((s / sr - t0) / hop);
+    const i = Math.max(0, Math.min(midi.length - 1, f));
+    const m = midi[i];
+    return m === undefined || Number.isNaN(m) ? 0 : sr / (440 * Math.pow(2, (m - 69) / 12));
+  };
+  const ncc = (a, b, len) => {
+    let ab = 0;
+    let aa = 0;
+    let bb = 0;
+    for (let j = -len; j < len; j++) {
+      const u = x[a + j] || 0;
+      const v = x[b + j] || 0;
+      ab += u * v;
+      aa += u * u;
+      bb += v * v;
+    }
+    return ab / Math.sqrt(aa * bb + 1e-20);
+  };
+  const marks = [];
+  const unv = Math.round(0.005 * sr);
+  let s = 0;
+  let prev = null;
+  while (s < x.length) {
+    const p = midi.length ? periodAt(s) : 0;
+    if (!p) {
+      marks.push({ t: s, period: unv, voiced: false });
+      prev = null;
+      s += unv;
+      continue;
+    }
+    let best = s;
+    if (!prev) {
+      let bv = -1;
+      for (let k = s; k < Math.min(x.length, s + Math.round(p)); k++) {
+        if (Math.abs(x[k]) > bv) { bv = Math.abs(x[k]); best = k; }
+      }
+    } else {
+      const guess = prev.t + p;
+      const r = Math.max(2, Math.round(p / 8));
+      let bc = -2;
+      for (let k = Math.round(guess) - r; k <= Math.round(guess) + r; k++) {
+        const c = ncc(prev.t, k, Math.round(p / 2));
+        if (c > bc) { bc = c; best = k; }
+      }
+    }
+    const mark = { t: best, period: p, voiced: true };
+    marks.push(mark);
+    prev = mark;
+    s = best + Math.max(1, Math.round(p));
+  }
+  for (let i = 0; i < marks.length; i++) {
+    const m = marks[i];
+    const n = marks[i + 1];
+    if (m.voiced && n && n.voiced) m.period = n.t - m.t;
+  }
+  return marks;
+}
+
+function voxPsola(x, sr, marks, { timeMap = (t) => t, ratioAt = () => 1, formant = 1, outSeconds = x.length / sr } = {}) {
+  const nOut = Math.ceil(outSeconds * sr);
+  const pad = 4096;
+  const y = new Float64Array(nOut + pad);
+  const wsum = new Float64Array(nOut + pad);
+  const markT = marks.map((m) => m.t);
+  if (!marks.length) return new Float32Array(nOut);
+  const nearestMark = (s) => {
+    let lo = 0;
+    let hi = markT.length - 1;
+    while (hi - lo > 1) {
+      const mid = (lo + hi) >> 1;
+      if (markT[mid] < s) lo = mid;
+      else hi = mid;
+    }
+    return Math.abs(markT[lo] - s) <= Math.abs(markT[hi] - s) ? lo : hi;
+  };
+  let tOut = 0;
+  let lastVoiced = false;
+  let guard = 0;
+  while (tOut < nOut && guard++ < nOut) {
+    const tIn = timeMap(tOut / sr) * sr;
+    const k = nearestMark(tIn);
+    const m = marks[k];
+    if (m.voiced && !lastVoiced) {
+      const slope = Math.max(0.25, (timeMap(tOut / sr + 0.01) - timeMap(tOut / sr)) / 0.01);
+      tOut = Math.max(0, tOut + (m.t - tIn) / slope);
+    }
+    lastVoiced = m.voiced;
+    const ratio = m.voiced ? Math.max(0.25, Math.min(4, ratioAt(tOut / sr) || 1)) : 1;
+    const P = m.period;
+    const f = formant === 'follow' ? ratio : formant;
+    const g = m.voiced ? f : 1;
+    const half = Math.max(2, Math.round(P / g));
+    const centre = Math.round(tOut);
+    const from = m.voiced ? m.t : tIn;
+    for (let j = -half; j < half; j++) {
+      const srcPos = from + j * g;
+      const i0 = Math.floor(srcPos);
+      if (i0 < 0 || i0 + 1 >= x.length) continue;
+      const fr = srcPos - i0;
+      const v = x[i0] + (x[i0 + 1] - x[i0]) * fr;
+      const w = 0.5 + 0.5 * Math.cos((Math.PI * j) / half);
+      const o = centre + j;
+      if (o < 0 || o >= y.length) continue;
+      y[o] += v * w;
+      wsum[o] += w;
+    }
+    tOut += Math.max(1, P / ratio);
+  }
+  const out = new Float32Array(nOut);
+  for (let i = 0; i < nOut; i++) out[i] = wsum[i] > 1 ? y[i] / wsum[i] : y[i];
+  return out;
+}
+
+function voxNearestNote(m, key, intervals) {
+  const base = Math.floor(m) - 12;
+  let best = null;
+  for (let n = base; n <= base + 25; n++) {
+    if (!intervals.includes((((n - key) % 12) + 12) % 12)) continue;
+    if (best === null || Math.abs(n - m) < Math.abs(best - m)) best = n;
+  }
+  return best === null ? Math.round(m) : best;
+}
+
+function voxCorrectCurve(midi, hop, o) {
+  const n = midi.length;
+  const intervals = o.intervals || [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  const out = new Float64Array(n).fill(NaN);
+  let note = null;
+  let held = 0;
+  let applied = 0;
+  let wasVoiced = false;
+  const hold = (o.hold || 0) / 100;
+  const flex = (o.flex || 0) / 100;
+  const amount = (o.amount === undefined ? 100 : o.amount) / 100;
+  const humanize = (o.humanize || 0) / 100;
+  for (let i = 0; i < n; i++) {
+    const m = midi[i];
+    if (Number.isNaN(m)) { wasVoiced = false; note = null; continue; }
+    const cand = voxNearestNote(m, o.key || 0, intervals);
+    if (note === null || (cand !== note && Math.abs(m - note) > 0.5 + hold)) {
+      note = cand;
+      held = 0;
+    } else held += hop;
+    const dev = m - note;
+    const zone = 0.5 * (1 - flex) + 0.05;
+    const pull = flex > 0 ? Math.max(0, Math.min(1, (0.55 - Math.abs(dev)) / (0.55 - zone + 1e-9))) : 1;
+    const needed = -dev * pull * amount;
+    const retune = ((o.speed || 0) / 1000) * (1 + humanize * 6 * Math.min(1, held / 0.5));
+    const k = retune > 0 ? 1 - Math.exp(-hop / retune) : 1;
+    applied = wasVoiced ? applied + (needed - applied) * k : (retune > 0 ? needed * k : needed);
+    wasVoiced = true;
+    out[i] = m + applied + (o.transpose || 0);
+  }
+  return out;
+}
+
+function voxDecimate(x, factor) {
+  const n = Math.floor(x.length / factor);
+  const out = new Float64Array(n);
+  for (let i = 0; i < n; i++) {
+    let s = 0;
+    const at = i * factor;
+    for (let k = 0; k < factor; k++) s += x[at + k];
+    out[i] = s / factor;
+  }
+  return out;
+}
+
+const VOX_LINE_UP_TRUST = 8;
+
+function voxLineUp(mic, ref, sr, { maxSeconds = 0.6, minSeconds = 0 } = {}) {
+  const factor = Math.max(1, Math.round(sr / 8000));
+  const rate = sr / factor;
+  const a = voxDecimate(mic, factor);
+  const b = voxDecimate(ref, factor);
+  const len = Math.min(a.length, b.length);
+  let refEnergy = 0;
+  for (let i = 0; i < len; i++) refEnergy += b[i] * b[i];
+  if (len < rate * 0.5 || refEnergy / Math.max(1, len) < 1e-8) return { seconds: null, confidence: 0 };
+  const maxLag = Math.min(len - 1, Math.ceil(maxSeconds * rate));
+  const minLag = Math.max(0, Math.floor(minSeconds * rate));
+  const N = voxPow2(len + maxLag + 1);
+  const ar = new Float64Array(N);
+  const ai = new Float64Array(N);
+  const br = new Float64Array(N);
+  const bi = new Float64Array(N);
+  for (let i = 0; i < len; i++) { ar[i] = a[i]; br[i] = b[i]; }
+  voxFft(ar, ai);
+  voxFft(br, bi);
+  let mean = 0;
+  for (let k = 0; k < N; k++) {
+    const re = ar[k] * br[k] + ai[k] * bi[k];
+    const im = ai[k] * br[k] - ar[k] * bi[k];
+    ar[k] = re;
+    ai[k] = im;
+    mean += Math.hypot(re, im);
+  }
+  const eps = (mean / N) * 1e-3 + 1e-20;
+  for (let k = 0; k < N; k++) {
+    const m = Math.hypot(ar[k], ai[k]) + eps;
+    ar[k] /= m;
+    ai[k] /= m;
+  }
+  voxFft(ar, ai, true);
+  let best = minLag;
+  for (let L = minLag; L <= maxLag; L++) if (ar[L] > ar[best]) best = L;
+  const mags = [];
+  for (let L = minLag; L <= maxLag; L++) if (Math.abs(L - best) > 3) mags.push(Math.abs(ar[L]));
+  mags.sort((p, q) => p - q);
+  const floor = mags.length ? mags[Math.floor(mags.length * 0.9)] : 0;
+  const confidence = floor > 0 ? ar[best] / floor : 0;
+  const centre = best * factor;
+  const span = factor + 2;
+  const n = Math.min(mic.length, ref.length);
+  const stride = Math.max(1, Math.floor(n / 200000));
+  let bestFine = centre;
+  let bestVal = -Infinity;
+  for (let L = Math.max(0, centre - span); L <= centre + span; L++) {
+    let s = 0;
+    for (let i = 0; i + L < n; i += stride) s += mic[i + L] * ref[i];
+    if (s > bestVal) { bestVal = s; bestFine = L; }
+  }
+  return { seconds: bestFine / sr, confidence };
+}
+
+const CAPTURE_BATCH = 4096; // frames per message from the worklet
+const CAPTURE_TAIL = 0.45; // seconds kept after the section ends: a late voice is still in the take
+const LEAD_IN = 0.2; // seconds from pressing Record to the first click
+const LINE_UP_KEY = 'pocketdaw.lineUpMs';
+
+function captureWorkletSource() {
+  return [
+    '  class PocketCapture extends AudioWorkletProcessor {',
+    '    constructor() {',
+    '      super();',
+    `      this.size = ${CAPTURE_BATCH};`,
+    '      this.mic = new Float32Array(this.size);',
+    '      this.ref = new Float32Array(this.size);',
+    '      this.fill = 0;',
+    '      this.first = -1;',
+    '      this.port.onmessage = (e) => { if (e.data === "flush") this.flush(); };',
+    '    }',
+    '    flush() {',
+    '      if (this.fill > 0) this.port.postMessage({ frame: this.first, mic: this.mic.slice(0, this.fill), ref: this.ref.slice(0, this.fill) });',
+    '      this.fill = 0;',
+    '      this.first = -1;',
+    '    }',
+    '    process(inputs) {',
+    '      const input = inputs[0] || [];',
+    '      const a = input[0];',
+    '      const b = input[1];',
+    '      const n = a ? a.length : 128;',
+    '      for (let i = 0; i < n; i++) {',
+    '        if (this.first < 0) this.first = currentFrame + i;',
+    '        this.mic[this.fill] = a ? a[i] : 0;',
+    '        this.ref[this.fill] = b ? b[i] : 0;',
+    '        this.fill += 1;',
+    '        if (this.fill === this.size) this.flush();',
+    '      }',
+    '      return true;',
+    '    }',
+    '  }',
+    "  registerProcessor('pocket-capture', PocketCapture);",
+  ].join('\n');
+}
+
+const captureModules = new WeakMap(); // ctx -> Promise<boolean>
+let captureUrl = null;
+
+function loadCapture(ctx) {
+  if (captureModules.has(ctx)) return captureModules.get(ctx);
+  const can = ctx.audioWorklet && typeof AudioWorkletNode !== 'undefined' && typeof Blob !== 'undefined'
+    && typeof URL !== 'undefined' && URL.createObjectURL;
+  let job;
+  if (!can) job = Promise.resolve(false);
+  else {
+    if (!captureUrl) captureUrl = URL.createObjectURL(new Blob([captureWorkletSource()], { type: 'text/javascript' }));
+    job = ctx.audioWorklet.addModule(captureUrl).then(() => true, () => false);
+  }
+  captureModules.set(ctx, job);
+  return job;
+}
+
+function recordingUnavailable(nav = globalThis.navigator, win = globalThis.window) {
+  if (!nav || !nav.mediaDevices || typeof nav.mediaDevices.getUserMedia !== 'function') {
+    if (win && win.location && win.location.protocol === 'file:') return 'Recording needs the app opened from its web address, not from a file.';
+    return 'This browser cannot record from the microphone.';
+  }
+  return null;
+}
+
+function rememberedLineUp(storage = globalThis.localStorage) {
+  try {
+    const v = storage ? Number(storage.getItem(LINE_UP_KEY)) : NaN;
+    return Number.isFinite(v) && v > 0 && v < 1000 ? v : null;
+  } catch (err) {
+    return null;
+  }
+}
+
+function rememberLineUp(ms, storage = globalThis.localStorage) {
+  try {
+    if (storage) storage.setItem(LINE_UP_KEY, String(Math.round(ms)));
+  } catch (err) {
+  }
+}
+
+function estimatedLineUp(ctx, track = null) {
+  let s = 0;
+  if (Number.isFinite(ctx.outputLatency)) s += ctx.outputLatency;
+  if (Number.isFinite(ctx.baseLatency)) s += ctx.baseLatency;
+  const settings = track && track.getSettings ? track.getSettings() : {};
+  if (Number.isFinite(settings.latency)) s += settings.latency;
+  const ms = Math.round(s * 1000);
+  return ms >= 15 ? ms : 50;
+}
+
+function recordSection({
+  engine,
+  section,
+  countIn = 1,
+  nav = globalThis.navigator,
+  timers = { setTimeout: (f, ms) => setTimeout(f, ms), clearTimeout: (id) => clearTimeout(id) },
+  onState = () => {},
+  onLevel = () => {},
+  storage = globalThis.localStorage,
+}) {
+  const ctx = engine.ctx;
+  const live = { peaks: [], firstPeak: null, downbeat: NaN, end: NaN };
+  let cancelled = false;
+  let stream = null;
+  const nodes = [];
+  let timer = null;
+  let finishNow = null;
+
+  const cleanup = () => {
+    if (timer !== null) timers.clearTimeout(timer);
+    timer = null;
+    nodes.forEach((n) => { try { n.disconnect(); } catch (err) {  } });
+    if (stream) stream.getTracks().forEach((t) => { try { t.stop(); } catch (err) {  } });
+    stream = null;
+    if (nav && nav.audioSession) {
+      try { nav.audioSession.type = 'playback'; } catch (err) {  }
+    }
+  };
+
+  const take = (async () => {
+    const why = recordingUnavailable(nav);
+    if (why) throw new Error(why);
+    onState('asking');
+    if (nav.audioSession) {
+      try { nav.audioSession.type = 'play-and-record'; } catch (err) {  }
+    }
+    try {
+      stream = await nav.mediaDevices.getUserMedia({
+        audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false, channelCount: 1 },
+      });
+    } catch (err) {
+      cleanup();
+      const name = err && err.name;
+      if (name === 'NotAllowedError' || name === 'SecurityError') throw new Error('Microphone access was not allowed. You can allow it in Settings → Safari → Microphone.');
+      if (name === 'NotFoundError') throw new Error('No microphone was found.');
+      throw err;
+    }
+    if (cancelled) { cleanup(); throw new Error('cancelled'); }
+    if (ctx.state === 'suspended' && ctx.resume) await ctx.resume();
+    await engine.ensureAll();
+
+    const sr = ctx.sampleRate;
+    const mic = ctx.createMediaStreamSource(stream);
+    const merger = ctx.createChannelMerger(2);
+    mic.connect(merger, 0, 0);
+    const played = engine.ceiling || engine.limiter || engine.master;
+    played.connect(merger, 0, 1);
+    const sink = ctx.createGain();
+    sink.gain.value = 0;
+    sink.connect(ctx.destination);
+    nodes.push(mic, merger, sink);
+
+    const micChunks = [];
+    const refChunks = [];
+    let startFrame = -1;
+    let captured = 0;
+    const step = Math.max(1, Math.round(PEAK_SECONDS * sr));
+    let peakMax = 0;
+    let peakCount = 0;
+    const collect = (frame, a, b) => {
+      if (startFrame < 0) startFrame = frame;
+      micChunks.push(a);
+      refChunks.push(b);
+      captured += a.length;
+      let sum = 0;
+      for (let i = 0; i < a.length; i++) {
+        const v = a[i];
+        sum += v * v;
+        const m = v < 0 ? -v : v;
+        if (m > peakMax) peakMax = m;
+        peakCount += 1;
+        if (peakCount === step) {
+          live.peaks.push(peakMax);
+          peakMax = 0;
+          peakCount = 0;
+        }
+      }
+      if (live.firstPeak === null && Number.isFinite(live.downbeat)) live.firstPeak = Math.max(0, Math.round((live.downbeat * sr - startFrame) / step));
+      onLevel(Math.min(1, Math.sqrt(sum / Math.max(1, a.length)) * 4));
+    };
+
+    let flush = () => {};
+    if (await loadCapture(ctx)) {
+      const node = new AudioWorkletNode(ctx, 'pocket-capture', {
+        numberOfInputs: 1, numberOfOutputs: 1, channelCount: 2, channelCountMode: 'explicit', channelInterpretation: 'discrete',
+      });
+      node.port.onmessage = (e) => collect(e.data.frame, e.data.mic, e.data.ref);
+      merger.connect(node);
+      node.connect(sink);
+      nodes.push(node);
+      flush = () => node.port.postMessage('flush');
+    } else {
+      const proc = ctx.createScriptProcessor(4096, 2, 1);
+      proc.onaudioprocess = (e) => {
+        const frame = Math.round((Number.isFinite(e.playbackTime) ? e.playbackTime : ctx.currentTime) * sr);
+        collect(frame, e.inputBuffer.getChannelData(0).slice(), e.inputBuffer.getChannelData(1).slice());
+      };
+      merger.connect(proc);
+      proc.connect(sink);
+      nodes.push(proc);
+    }
+
+    const beat = section.beatSeconds;
+    const clicks = countIn * section.beatsPerBar;
+    const first = ctx.currentTime + LEAD_IN;
+    const downbeat = first + clicks * beat + (clicks ? 0 : 0.05);
+    live.downbeat = downbeat;
+    live.end = downbeat + section.seconds;
+    for (let k = 0; k < clicks; k++) {
+      const at = first + k * beat;
+      const osc = ctx.createOscillator();
+      const env = ctx.createGain();
+      osc.frequency.value = k % section.beatsPerBar === 0 ? 1760 : 1320;
+      env.gain.setValueAtTime(0, at);
+      env.gain.linearRampToValueAtTime(0.5, at + 0.002);
+      env.gain.exponentialRampToValueAtTime(0.001, at + 0.06);
+      osc.connect(env);
+      env.connect(engine.master);
+      osc.start(at);
+      osc.stop(at + 0.08);
+      nodes.push(env);
+    }
+    onState(clicks ? 'counting' : 'recording');
+    await engine.play({ at: downbeat });
+    const end = downbeat + section.seconds;
+
+    await new Promise((resolve) => {
+      let stoppedBand = false;
+      let saidRecording = !clicks;
+      finishNow = resolve;
+      const poll = () => {
+        const now = ctx.currentTime;
+        if (!saidRecording && now >= downbeat) {
+          saidRecording = true;
+          onState('recording');
+        }
+        if (!stoppedBand && now >= end - 0.3) {
+          stoppedBand = true;
+          engine.stop({ at: end });
+          onState('finishing');
+        }
+        if (now >= end + CAPTURE_TAIL || cancelled) {
+          resolve();
+          return;
+        }
+        timer = timers.setTimeout(poll, 40);
+      };
+      poll();
+    });
+    if (engine.transport.playing) engine.stop();
+    flush();
+    await new Promise((r) => timers.setTimeout(r, 120));
+    const track = stream && stream.getAudioTracks ? stream.getAudioTracks()[0] : null;
+    const estimate = estimatedLineUp(ctx, track);
+    cleanup();
+    if (cancelled) throw new Error('cancelled');
+    if (!captured) throw new Error('Nothing came in from the microphone.');
+
+    const pcm = new Float32Array(captured);
+    const ref = new Float32Array(captured);
+    let at = 0;
+    micChunks.forEach((c, i) => {
+      pcm.set(c, at);
+      ref.set(refChunks[i], at);
+      at += c.length;
+    });
+    const downbeatSeconds = (downbeat * sr - startFrame) / sr;
+    const found = voxLineUp(pcm, ref, sr, { maxSeconds: 0.6 });
+    let measuredMs = null;
+    if (found.seconds !== null && found.confidence >= VOX_LINE_UP_TRUST) {
+      measuredMs = Math.round(found.seconds * 1000);
+      rememberLineUp(measuredMs, storage);
+    }
+    const lineUpMs = measuredMs !== null ? measuredMs : (rememberedLineUp(storage) || estimate);
+    return {
+      pcm,
+      sampleRate: sr,
+      downbeat: Math.round(downbeatSeconds * 1e6) / 1e6,
+      lineUpMs,
+      measuredMs,
+      confidence: found.confidence,
+    };
+  })();
+
+  return {
+    take,
+    live,
+    
+    cancel() {
+      cancelled = true;
+      if (finishNow) finishNow();
+      if (engine.transport.playing) engine.stop();
+    },
+    
+    stopEarly() {
+      if (finishNow) finishNow();
+    },
+  };
+}
+
+function createRecordingStore({ storage = null } = {}) {
+  const memory = new Map(); // id -> { pcm: Float32Array, sampleRate }
+  const loading = new Map(); // id -> Promise
+  let backing = storage;
+
+  const key = (id) => `rec:${id}`;
+
+  async function writeThrough(id, pcm, sampleRate) {
+    if (!backing) return 'memory';
+    const bytes = encodeWav16(pcm, sampleRate);
+    if (typeof backing.setBytes === 'function') {
+      await backing.setBytes(key(id), bytes);
+      return backing.kind || 'bytes';
+    }
+    await backing.set(key(id), bytesToBase64(bytes));
+    return backing.kind || 'text';
+  }
+
+  return {
+    
+    async put(id, pcm, sampleRate) {
+      memory.set(id, { pcm, sampleRate });
+      return writeThrough(id, pcm, sampleRate);
+    },
+    
+    peek(id) {
+      return memory.get(id) || null;
+    },
+    has(id) {
+      return memory.has(id);
+    },
+    
+    async get(id) {
+      if (memory.has(id)) return memory.get(id);
+      if (loading.has(id)) return loading.get(id);
+      const job = (async () => {
+        if (!backing) return null;
+        let bytes = null;
+        if (typeof backing.getBytes === 'function') bytes = await backing.getBytes(key(id));
+        if (!bytes) {
+          const text = await backing.get(key(id));
+          if (typeof text === 'string') bytes = base64ToBytes(text);
+        }
+        if (!bytes) return null;
+        const audio = decodeWav(bytes instanceof ArrayBuffer ? new Uint8Array(bytes) : bytes);
+        memory.set(id, audio);
+        return audio;
+      })();
+      loading.set(id, job);
+      try {
+        return await job;
+      } catch (err) {
+        return null;
+      } finally {
+        loading.delete(id);
+      }
+    },
+    
+    async wavBytes(id) {
+      const audio = await this.get(id);
+      return audio ? encodeWav16(audio.pcm, audio.sampleRate) : null;
+    },
+    
+    async putWav(id, bytes) {
+      const audio = decodeWav(bytes);
+      return this.put(id, audio.pcm, audio.sampleRate);
+    },
+    setStorage(next) {
+      backing = next;
+    },
+    get storage() {
+      return backing;
+    },
+    
+    clearMemory() {
+      memory.clear();
+    },
+  };
+}
+
+const recordings = createRecordingStore();
+
+const VOX_ROSE = '#E8648A';
+
+function nextVocalsName(song) {
+  const used = new Set(song.tracks.filter(isAudioTrack).map((t) => t.name));
+  if (!used.has('Vocals')) return 'Vocals';
+  for (let n = 2; ; n++) if (!used.has(`Vocals ${n}`)) return `Vocals ${n}`;
+}
+
+function clock(seconds) {
+  const s = Math.max(0, Math.floor(seconds));
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+}
+
+function lineUpLabel(ms) {
+  const n = Math.round(Number(ms) || 0);
+  if (n === 0) return 'As recorded';
+  return `${n > 0 ? '−' : '+'}${Math.abs(n)} ms`;
+}
+
+function fitLabel(fit) {
+  if (fit <= 0) return 'As sung';
+  if (fit >= 100) return 'Every note';
+  return `${fit}%`;
+}
+
+function createVocals({
+  store,
+  ensureEngine,
+  claimMedia = () => null,
+  setPlaying = () => {},
+  flash = () => {},
+  render = () => {},
+  timers = { setTimeout: (f, ms) => setTimeout(f, ms), clearTimeout: (id) => clearTimeout(id) },
+  recordingStore = recordings,
+  getTime = () => null,
+  nav = globalThis.navigator,
+  raf = (globalThis.requestAnimationFrame || ((f) => setTimeout(f, 33))).bind(globalThis),
+}) {
+  let rec = null; // the recording under way: { phase, sectionId, trackId, job, level, startedAt }
+  let painting = false;
+
+  const levelFill = el('span', { class: 'voxmeter-fill' });
+  const recTitle = el('b', { class: 'recbar-title' });
+  const recSub = el('span', { class: 'recbar-sub' });
+  const stopButton = el('button', {
+    class: 'recbar-stop',
+    type: 'button',
+    'aria-label': 'Stop recording',
+    onClick: () => stopRecording(),
+  }, [el('span', { class: 'recbar-square' })]);
+  const recordBar = el('div', { class: 'recbar', hidden: true }, [
+    el('span', { class: 'recbar-side' }),
+    el('div', { class: 'recbar-mid' }, [stopButton, el('span', { class: 'recbar-text' }, [recTitle, recSub])]),
+    el('span', { class: 'recbar-side' }),
+  ]);
+  const recordButton = el('button', {
+    class: 'icon recbutton',
+    type: 'button',
+    title: 'Record',
+    'aria-label': 'Record this section',
+    onClick: () => startRecording(),
+  }, [el('span', { class: 'recbutton-dot' })]);
+  const host = el('div', { class: 'voxlane', hidden: true });
+  const playheadLine = el('div', { class: 'voxplayhead', hidden: true });
+
+  function activeTrack() {
+    return store.activeTrack();
+  }
+
+  async function startRecording(trackId = store.state.view.activeTrackId) {
+    if (rec) return;
+    const song = store.state.song;
+    const track = song.tracks.find((t) => t.id === trackId);
+    const section = store.activeSection();
+    if (!isAudioTrack(track) || !section) return;
+    const why = recordingUnavailable(nav);
+    if (why) {
+      flash(why, 6000);
+      return;
+    }
+    claimMedia();
+    store.setUi({ vocalPanel: null });
+    rec = { phase: 'asking', sectionId: section.id, trackId, level: 0, job: null };
+    render();
+    let engine = null;
+    try {
+      engine = await ensureEngine();
+      if (!engine) throw new Error('Audio is not available here');
+      if (engine.transport.playing) {
+        engine.stop();
+        setPlaying(false);
+      }
+      engine.setMode('section');
+      engine.silenceTrack(trackId);
+      const pb = sectionPlayback(song, section);
+      const job = recordSection({
+        engine,
+        nav,
+        timers,
+        section: { seconds: pb.seconds, beatSeconds: 60 / pb.bpm, beatsPerBar: sectionBeats(song, section) },
+        countIn: readCountIn(track),
+        onState: (phase) => {
+          if (!rec) return;
+          rec.phase = phase;
+          if (phase === 'counting' || phase === 'recording') {
+            setPlaying(true);
+            paintLoop();
+          }
+          render();
+        },
+        onLevel: (v) => {
+          if (rec) rec.level = v;
+        },
+      });
+      rec.job = job;
+      const take = await job.take;
+      setPlaying(false);
+      rec.phase = 'analysing';
+      render();
+      await new Promise((r) => timers.setTimeout(r, 40));
+      const analysis = voxAnalyse(take.pcm, take.sampleRate);
+      const id = newId('rec');
+      try {
+        await recordingStore.put(id, take.pcm, take.sampleRate);
+      } catch (err) {
+        flash('This phone would not store the recording. It plays until the app is closed; export a backup to keep it.', 8000);
+      }
+      const recording = {
+        id,
+        sampleRate: take.sampleRate,
+        frames: take.pcm.length,
+        downbeat: take.downbeat,
+        lineUpMs: clampLineUp(take.lineUpMs),
+        lineUpAuto: true,
+        measuredMs: take.measuredMs,
+        bpm: pb.bpm,
+        beatsPerBar: sectionBeats(song, section),
+        recordedAt: Date.now(),
+        peaks: peaksOf(take.pcm, take.sampleRate),
+        notes: analysis.notes,
+        pitch: analysis.pitch,
+      };
+      store.run((s) => setRecording(s, section.id, trackId, recording));
+      store.setUi({ vocalPanel: { sectionId: section.id, trackId } });
+      rec = null;
+      engine.silenceTrack(null);
+      if (engine.vocals) engine.vocals.render(store.state.song, section.id, trackId).catch(() => {});
+      render();
+    } catch (err) {
+      const message = err && err.message ? err.message : String(err);
+      rec = null;
+      if (engine) engine.silenceTrack(null);
+      setPlaying(false);
+      if (message !== 'cancelled') flash(message, 7000);
+      render();
+    }
+  }
+
+  
+  function stopRecording() {
+    if (!rec || !rec.job) {
+      rec = null;
+      render();
+      return;
+    }
+    if (rec.phase === 'counting' || rec.phase === 'asking') rec.job.cancel();
+    else rec.job.stopEarly();
+  }
+
+  
+  function paintLoop() {
+    if (painting) return;
+    painting = true;
+    const step = () => {
+      if (!rec) {
+        painting = false;
+        return;
+      }
+      paintLive();
+      raf(step);
+    };
+    raf(step);
+  }
+
+  function paintLive() {
+    if (!rec) return;
+    const song = store.state.song;
+    const section = song.sections[rec.sectionId];
+    const name = section ? sectionLabel(song, rec.sectionId) : '';
+    const pb = section ? sectionPlayback(song, section) : { seconds: 0 };
+    levelFill.style.width = `${Math.round(Math.min(1, rec.level) * 100)}%`;
+    const live = rec.job && rec.job.live;
+    const now = getTime();
+    const ctxTime = live && Number.isFinite(live.downbeat) && Number.isFinite(now) ? now : null;
+    if (rec.phase === 'counting') {
+      recTitle.textContent = 'Count-in';
+      recSub.textContent = `${name} starts next bar`;
+    } else if (rec.phase === 'asking') {
+      recTitle.textContent = 'Microphone';
+      recSub.textContent = 'Waiting for the microphone';
+    } else if (rec.phase === 'analysing') {
+      recTitle.textContent = 'Lining up';
+      recSub.textContent = name;
+    } else {
+      const elapsed = ctxTime !== null ? ctxTime - live.downbeat : 0;
+      recTitle.textContent = `Recording ${name}`;
+      recSub.textContent = `${clock(elapsed)} of ${clock(pb.seconds)}`;
+    }
+    const box = host.querySelector ? host.querySelector('.voxlive') : null;
+    if (box && live && live.firstPeak !== null) {
+      const width = box.clientWidth || 300;
+      const h = 60;
+      const total = Math.max(1, Math.round(pb.seconds / 0.025));
+      const peaks = live.peaks.slice(live.firstPeak, live.firstPeak + total);
+      const top = Math.max(0.05, ...peaks.slice(-400));
+      let d = '';
+      peaks.forEach((p, i) => {
+        if (i % 2) return;
+        const x = ((i + 0.5) / total) * width;
+        const a = Math.max(1, (p / top) * (h / 2 - 2));
+        d += `M${x.toFixed(1)} ${(h / 2 - a).toFixed(1)}V${(h / 2 + a).toFixed(1)}`;
+      });
+      const fraction = Math.min(1, peaks.length / total);
+      box.innerHTML = `<svg width="${width}" height="${h}" viewBox="0 0 ${width} ${h}" role="img" aria-label="The recording so far">`
+        + `<rect x="0" y="0" width="${(fraction * width).toFixed(1)}" height="${h}" fill="#3a1414"/>`
+        + `<path d="${d}" stroke="#ff6b63" stroke-width="2" stroke-linecap="round"/>`
+        + `<rect x="${(fraction * width - 1).toFixed(1)}" y="0" width="2" height="${h}" fill="#ffffff"/></svg>`;
+    }
+  }
+
+  function laneSvg(song, section, track, recording, width, height) {
+    const bpb = sectionBeats(song, section);
+    const beats = section.lengthBars * bpb;
+    const x = (b) => (b / beats) * width;
+    const shade = shadeColor(track.shade) || VOX_ROSE;
+    let s = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="The recording in this section">`;
+    s += `<rect width="${width}" height="${height}" fill="#242424"/>`;
+    for (let b = 1; b < beats; b++) {
+      const bar = b % bpb === 0;
+      s += `<rect x="${x(b).toFixed(1)}" y="0" width="${bar ? 1.5 : 1}" height="${height}" fill="${bar ? '#6e6e6e' : '#2f2f2f'}"/>`;
+    }
+    if (!recording) return `${s}</svg>`;
+    const notes = notesInBeats(recording).filter((n) => n.beat + n.length > 0 && n.beat < beats);
+    const waveH = Math.min(84, Math.round(height * 0.28));
+    const rollH = height - waveH - 8;
+    if (notes.length) {
+      const lo = Math.floor(Math.min(...notes.map((n) => n.midi))) - 2;
+      const hi = Math.ceil(Math.max(...notes.map((n) => n.midi))) + 2;
+      const y = (m) => 6 + (1 - (m - lo) / Math.max(1, hi - lo)) * (rollH - 12);
+      const key = sectionKey(song, section);
+      const scale = scaleById(sectionScaleId(song, section));
+      const flats = usesFlats(key, sectionScaleId(song, section));
+      const intervals = (scale && scale.intervals) || [];
+      for (let m = Math.ceil(lo); m <= hi; m++) {
+        const pc = (((m - key) % 12) + 12) % 12;
+        if (pc === 0) s += `<rect x="0" y="${y(m).toFixed(1)}" width="${width}" height="1" fill="#3a3550"/><text x="4" y="${(y(m) - 3).toFixed(1)}" fill="#b4b2a9" font-size="10" font-family="inherit">${noteName(m, flats)}</text>`;
+        else if (intervals.includes(pc)) s += `<rect x="0" y="${y(m).toFixed(1)}" width="${width}" height="1" fill="#2c2a33"/>`;
+      }
+      notes.forEach((n) => {
+        const nx = Math.max(0, x(n.beat));
+        const nw = Math.max(3, x(n.beat + n.length) - nx);
+        s += `<rect x="${nx.toFixed(1)}" y="${(y(n.midi) - 4).toFixed(1)}" width="${nw.toFixed(1)}" height="8" rx="3" fill="${shade}"/>`;
+      });
+    }
+    const count = Math.max(8, Math.round(width / 3));
+    const peaks = sectionPeaks(recording, { beats, count });
+    const wy = height - waveH - 2;
+    s += `<rect x="0" y="${wy}" width="${width}" height="${waveH}" fill="#2a2024"/>`;
+    let d = '';
+    peaks.forEach((p, i) => {
+      const px = ((i + 0.5) / count) * width;
+      const a = Math.max(0.5, p * (waveH / 2 - 3));
+      d += `M${px.toFixed(1)} ${(wy + waveH / 2 - a).toFixed(1)}V${(wy + waveH / 2 + a).toFixed(1)}`;
+    });
+    s += `<path d="${d}" stroke="${shade}" stroke-width="2" stroke-linecap="round"/>`;
+    return `${s}</svg>`;
+  }
+
+  function ruler(song, section) {
+    const bars = section.lengthBars;
+    return el('div', { class: 'voxruler' }, Array.from({ length: bars }, (_, i) =>
+      el('span', { class: 'voxbar', style: `left:${(i / bars) * 100}%`, text: String(i + 1) })));
+  }
+
+  function emptyState(song, section, track) {
+    const name = sectionLabel(song, section.id);
+    const countIn = readCountIn(track);
+    const lead = countIn ? `${countIn === 1 ? 'One bar counts' : 'Two bars count'} you in, then ` : '';
+    return el('div', { class: 'voxempty' }, [
+      el('span', { class: 'voxempty-icon', html: categoryIcon('vocals', 26) }),
+      el('b', { text: `Nothing recorded in ${name} yet` }),
+      el('p', { text: `Press the red button. ${lead}${name} plays once while you sing and the recording stops at its end.` }),
+      el('p', { text: 'You hear the band, not yourself. The first time, your phone asks to use the microphone.' }),
+      el('p', { class: 'dim', text: 'Earphones keep the band out of the recording. Without them a little gets in, quietly.' }),
+    ]);
+  }
+
+  function lineUpPanel(song, section, track, recording) {
+    const set = (fields, live = false) => {
+      store.run((s) => setRecordingFields(s, section.id, track.id, fields), { coalesce: true });
+      if (live) autoChip.className = `chip chip-sm${fields.lineUpAuto ? ' chip-on' : ''}`;
+      else render();
+    };
+    const auto = () => {
+      const target = recording.measuredMs !== null && recording.measuredMs !== undefined
+        ? recording.measuredMs
+        : (rememberedLineUp() || recording.lineUpMs);
+      set({ lineUpMs: clampLineUp(target), lineUpAuto: true });
+    };
+    const autoChip = chip('Auto', { active: Boolean(recording.lineUpAuto), small: true, title: 'Back to the measured line-up', onClick: auto });
+    const slider = fader({
+      min: -LINE_UP_RANGE_MS,
+      max: LINE_UP_RANGE_MS,
+      value: -(recording.lineUpMs || 0),
+      ariaLabel: 'Line up',
+      sliderClass: 'panslider',
+      format: (v) => lineUpLabel(-v),
+      parse: (text) => {
+        const t = String(text).trim().toLowerCase();
+        if (t.startsWith('as')) return 0;
+        const n = parseFloat(t.replace(/[\u2212]/g, '-').replace(/[^0-9.+-]/g, ''));
+        return Number.isFinite(n) ? n : null;
+      },
+      under: el('div', { class: 'panscale' }, [el('span', { text: 'Earlier' }), el('span', { text: 'As recorded' }), el('span', { text: 'Later' })]),
+      onDrag: (v) => set({ lineUpMs: clampLineUp(-v), lineUpAuto: false }, true),
+      onCommit: (v) => set({ lineUpMs: clampLineUp(-v), lineUpAuto: false }),
+    });
+    const measured = recording.measuredMs !== null && recording.measuredMs !== undefined;
+    const explain = measured
+      ? `The band came through the speaker into the microphone, so PocketDAW found it in the recording and moved your voice ${recording.measuredMs} ms earlier to match. Play, and slide if it still feels early or late.`
+      : 'No band came back into the microphone (earphones, or nothing playing), so this uses the last figure from this phone. Play, and slide if it feels early or late.';
+    return el('div', { class: 'voxpanel' }, [
+      el('div', { class: 'voxpanel-head' }, [el('span', { class: 'voxpanel-title', text: 'Lined up' }), autoChip]),
+      slider,
+      el('p', { class: 'hint', text: explain }),
+      el('button', { class: 'wide wide-on', type: 'button', text: 'Keep', onClick: () => { store.setUi({ vocalPanel: null }); render(); } }),
+      el('div', { class: 'voxpanel-pair' }, [
+        el('button', { class: 'wide', type: 'button', text: 'Record again', onClick: () => startRecording(track.id) }),
+        el('button', { class: 'wide', type: 'button', text: 'Record on a new track', onClick: () => recordOnNewTrack(track) }),
+      ]),
+      el('p', { class: 'hint dim', text: `Record again replaces this one; Undo brings it back. Record on a new track keeps it and records ${sectionLabel(song, section.id)} on another Vocals track.` }),
+    ]);
+  }
+
+  function recordOnNewTrack(from) {
+    const song = store.state.song;
+    const at = song.tracks.indexOf(from);
+    const step = store.run((s) => {
+      const added = addTrack(s, { kitId: 'microphone', name: nextVocalsName(s) });
+      if (!added) return null;
+      const t = added.track;
+      s.tracks.splice(s.tracks.indexOf(t), 1);
+      s.tracks.splice(at + 1, 0, t);
+      t.fit = from.fit;
+      t.countIn = from.countIn;
+      t.tune = from.tune ? { ...from.tune } : null;
+      return added;
+    });
+    if (!step) return;
+    store.setView({ activeTrackId: step.track.id });
+    store.setUi({ vocalPanel: null });
+    render();
+    startRecording(step.track.id);
+  }
+
+  
+  function renderLane() {
+    const track = activeTrack();
+    recordButton.hidden = !isAudioTrack(track);
+    recordBar.hidden = !rec;
+    if (!isAudioTrack(track)) {
+      host.hidden = true;
+      return;
+    }
+    host.hidden = false;
+    clear(host);
+    const song = store.state.song;
+    const section = store.activeSection();
+    const recording = recordingAt(song, section.id, track.id);
+    const recordingHere = rec && rec.sectionId === section.id && rec.trackId === track.id;
+    host.appendChild(ruler(song, section));
+    const width = Math.max(200, (host.clientWidth || 360) - 32);
+    const panel = store.state.ui.vocalPanel;
+    const panelHere = !recordingHere && recording && panel && panel.sectionId === section.id && panel.trackId === track.id;
+    const laneH = panelHere ? 250 : Math.max(220, (host.clientHeight || 520) - 90);
+    const lane = el('div', { class: 'voxarea', style: `height:${laneH}px` });
+    if (recordingHere && rec.phase !== 'analysing') {
+      lane.appendChild(el('div', { class: 'voxsvg', html: laneSvg(song, section, track, null, width, laneH) }));
+      lane.appendChild(el('div', { class: 'voxlive' }));
+      lane.appendChild(el('div', { class: 'voxremind' }, [
+        el('span', { class: 'voxremind-icon', html: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FBBBC9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6.5" rx="1.5"/><rect x="17" y="14" width="4" height="6.5" rx="1.5"/></svg>' }),
+        el('span', {}, [
+          el('b', { text: 'You hear the band, not yourself' }),
+          el('span', { text: `${sectionLabel(song, section.id)} plays once and the recording stops at its end. Then you hear yourself, lined up to the beat.` }),
+        ]),
+      ]));
+    } else if (recording) {
+      lane.appendChild(el('div', { class: 'voxsvg', html: laneSvg(song, section, track, recording, width, laneH) }));
+    } else {
+      lane.appendChild(el('div', { class: 'voxsvg', html: laneSvg(song, section, track, null, width, laneH) }));
+      if (!recordingHere) lane.appendChild(emptyState(song, section, track));
+    }
+    if (recordingHere && rec.phase === 'analysing') {
+      lane.appendChild(el('div', { class: 'voxbusy', text: 'Lining up…' }));
+    }
+    lane.appendChild(playheadLine);
+    host.appendChild(lane);
+    if (recordingHere) {
+      host.appendChild(el('div', { class: 'voxmeter' }, [
+        el('span', { class: 'voxmeter-label', text: 'Mic' }),
+        el('span', { class: 'voxmeter-bar' }, [levelFill]),
+      ]));
+      paintLive();
+    } else if (panelHere) {
+      host.appendChild(lineUpPanel(song, section, track, recording));
+    }
+  }
+
+  
+  function placePlayhead(fraction) {
+    if (fraction === null || fraction === undefined || host.hidden || rec) {
+      playheadLine.hidden = true;
+      return;
+    }
+    playheadLine.hidden = false;
+    playheadLine.style.left = `${Math.max(0, Math.min(1, fraction)) * 100}%`;
+  }
+
+  function openMenu(title, current, options, onSelect) {
+    store.setUi({
+      menu: {
+        title,
+        current,
+        options,
+        onSelect: (id) => {
+          store.setUi({ menu: null });
+          onSelect(id);
+          render();
+        },
+      },
+    });
+    render();
+  }
+
+  
+  function contextChips(strip) {
+    const track = activeTrack();
+    const song = store.state.song;
+    const section = store.activeSection();
+    const recording = recordingAt(song, section.id, track.id);
+    const countIn = readCountIn(track);
+    strip.appendChild(menuChip({
+      label: 'Count-in',
+      value: countIn === 0 ? 'None' : countIn === 1 ? '1 bar' : '2 bars',
+      onOpen: () => openMenu('Count-in', String(countIn), [
+        { id: '0', label: 'None' }, { id: '1', label: '1 bar' }, { id: '2', label: '2 bars' },
+      ], (id) => store.run((s) => setTrackField(s, track.id, 'countIn', Number(id)))),
+    }));
+    if (recording) {
+      strip.appendChild(menuChip({
+        label: 'Line up',
+        value: lineUpLabel(recording.lineUpMs),
+        onOpen: () => {
+          const open = store.state.ui.vocalPanel;
+          store.setUi({ vocalPanel: open ? null : { sectionId: section.id, trackId: track.id } });
+          render();
+        },
+      }));
+    }
+    const fit = readFit(track);
+    strip.appendChild(menuChip({
+      label: 'Fit',
+      value: fitLabel(fit),
+      onOpen: () => openMenu('Fit to the beat', String(fit), [
+        { id: '0', label: 'As sung', hint: 'timing as recorded' },
+        { id: '25', label: '25%' },
+        { id: '50', label: '50%' },
+        { id: '75', label: '75%' },
+        { id: '100', label: 'Every note', hint: 'note starts on the nearest eighth' },
+      ], (id) => store.run((s) => setTrackField(s, track.id, 'fit', Number(id)))),
+    }));
+    const tune = readTune(track);
+    strip.appendChild(menuChip({
+      label: 'Tune',
+      value: tune.on ? flavourById(tune.flavour).name : 'Off',
+      onOpen: () => openMenu('Tune', tune.on ? tune.flavour : 'off', [
+        { id: 'off', label: 'Off' },
+        ...TUNE_FLAVOURS.map((f) => ({ id: f.id, label: f.name })),
+      ], (id) => applyFlavour(track, id)),
+    }));
+  }
+
+  
+  function applyFlavour(track, id) {
+    store.run((s) => setTuneFlavour(s, track.id, id));
+  }
+
+  return {
+    recordButton,
+    recordBar,
+    host,
+    renderLane,
+    placePlayhead,
+    contextChips,
+    applyFlavour,
+    startRecording,
+    stopRecording,
+    get recording() {
+      return rec;
+    },
+    isRecording: () => Boolean(rec),
+    
+    get phase() {
+      return rec ? rec.phase : null;
+    },
+  };
+}
+
+function defaultTrackName(song, kitId) {
+  const kit = kitById(kitId);
+  return kit && kit.kind === 'audio' ? nextVocalsName(song) : undefined;
 }
 
 const DEFAULT_DUCK = { on: false, trigger: { lane: 36 }, depth: 60, release: '1/8' };
@@ -11290,7 +13707,9 @@ function trackSheet(store, onChange, onLive) {
     el('span', { class: 'soundrow-caret', text: '\u25be' }),
   ]);
 
-  const range = kit.kind === 'pitched'
+  const range = kit.kind === 'audio'
+    ? el('p', { class: 'hint', text: 'Records from the phone\'s microphone, one recording in each section.' })
+    : kit.kind === 'pitched'
     ? el('p', { class: 'hint', text: `${noteName(kit.range.lo, false)} to ${noteName(kit.range.hi, false)}, all of it on the grid. Scroll up and down to reach the rest.` })
     : el('p', { class: 'hint', text: `${kit.lanes.length} lanes. Drums have no scale, so the rows are sounds.` });
 
@@ -11315,9 +13734,9 @@ function trackSheet(store, onChange, onLive) {
 
   
   const pan = fader({
-    min: -100,
-    max: 100,
-    value: Math.round((track.pan || 0) * 100),
+    min: -PAN_STEPS,
+    max: PAN_STEPS,
+    value: Math.round((track.pan || 0) * PAN_STEPS),
     ariaLabel: 'Pan',
     sliderClass: 'panslider',
     under: el('div', { class: 'panscale' }, [
@@ -11325,16 +13744,15 @@ function trackSheet(store, onChange, onLive) {
       el('span', { text: 'C' }),
       el('span', { text: 'R' }),
     ]),
-    format: (v) => panLabel(v / 100),
+    format: (v) => panLabel(v / PAN_STEPS),
     parse: parsePan,
+    snap: panDetent,
     onDrag: (value) => {
-      const snapped = Math.abs(value) <= 4 ? 0 : value;
-      store.run((s) => setTrackField(s, track.id, 'pan', snapped / 100), { coalesce: true });
+      store.run((s) => setTrackField(s, track.id, 'pan', value / PAN_STEPS), { coalesce: true });
       if (onLive) onLive();
     },
     onCommit: (value) => {
-      const snapped = Math.abs(value) <= 4 ? 0 : value;
-      store.run((s) => setTrackField(s, track.id, 'pan', snapped / 100), { coalesce: true });
+      store.run((s) => setTrackField(s, track.id, 'pan', value / PAN_STEPS), { coalesce: true });
       if (onLive) onLive();
       onChange();
     },
@@ -11400,30 +13818,165 @@ function trackSheet(store, onChange, onLive) {
     el('div', { class: 'label', text: 'Timing' }),
     timingRow,
     el('p', { class: 'hint dim', text: timingHint(store, track) }),
-    el('div', { class: 'label', text: 'New notes' }),
-    newNoteDefaults(store, onChange, track, onLive),
+    ...(isAudioTrack(track)
+      ? [recordingCard(store, track, onChange, onLive)]
+      : [el('div', { class: 'label', text: 'New notes' }), newNoteDefaults(store, onChange, track, onLive)]),
     el('div', { class: 'chiprow wrap' }, [mix]),
     soloedElsewhere && !track.solo
       ? el('p', { class: 'hint', text: 'Another track is soloed, so this one is silent.' })
       : null,
     duckCard(store, track, onChange, onLive),
     el('div', { class: 'label', text: 'Effects' }),
+    isAudioTrack(track) ? tuneCard(store, track, onChange, onLive) : null,
     filterCard(store, track, onChange, onLive),
     distortionCard(store, track, onChange, onLive),
     chorusCard(store, track, onChange, onLive),
+    flangerCard(store, track, onChange, onLive),
+    phaserCard(store, track, onChange, onLive),
     tremoloCard(store, track, onChange, onLive),
     echoCard(store, track, onChange, onLive),
     reverbCard(store, track, onChange, onLive),
-    arpCard(store, track, onChange),
+    isAudioTrack(track) ? null : arpCard(store, track, onChange),
     el('div', { class: 'label', text: 'Colour' }),
     shades,
     range,
     el('p', {
       class: 'hint dim',
-      text: kitUsesPlaceholders(kit)
+      text: kit.kind === 'audio'
+        ? 'Your own recordings, kept with the song and in its backups.'
+        : kitUsesPlaceholders(kit)
         ? 'Stand-in sounds until a CC0 sample pack is ingested for this kit.'
         : `Sampled: ${kit.license.credit || kit.license.source} \u00b7 ${licenceLabel(kit.license)}`,
     }),
+  ]);
+}
+
+function recordingCard(store, track, onChange, onLive) {
+  const { song, view } = store.state;
+  const sectionId = view.activeSectionId;
+  const rec = recordingAt(song, sectionId, track.id);
+  const name = sectionLabel(song, sectionId);
+  const lineUp = rec
+    ? el('div', { class: 'fxrow' }, [
+        el('span', { class: 'fxlabel', text: 'Line up' }),
+        fader({
+          min: -LINE_UP_RANGE_MS,
+          max: LINE_UP_RANGE_MS,
+          value: -(rec.lineUpMs || 0),
+          ariaLabel: 'Line up',
+          sliderClass: 'panslider',
+          format: (v) => lineUpLabel(-v),
+          parse: (text) => {
+            const t = String(text).trim().toLowerCase();
+            if (t.startsWith('as')) return 0;
+            const n = parseFloat(t.replace(/\u2212/g, '-').replace(/[^0-9.+-]/g, ''));
+            return Number.isFinite(n) ? n : null;
+          },
+          under: el('div', { class: 'panscale' }, [el('span', { text: 'Earlier' }), el('span', { text: 'As recorded' }), el('span', { text: 'Later' })]),
+          onDrag: (v) => {
+            store.run((s) => setRecordingFields(s, sectionId, track.id, { lineUpMs: clampLineUp(-v), lineUpAuto: false }), { coalesce: true });
+            if (onLive) onLive();
+          },
+          onCommit: (v) => {
+            store.run((s) => setRecordingFields(s, sectionId, track.id, { lineUpMs: clampLineUp(-v), lineUpAuto: false }), { coalesce: true });
+            onChange();
+          },
+        }),
+      ])
+    : el('p', { class: 'hint', text: `Nothing recorded in ${name} yet: press the red button beside play.` });
+  const fit = readFit(track);
+  const fitRow = el('div', { class: 'fxrow' }, [
+    el('span', { class: 'fxlabel', text: 'Fit' }),
+    fader({
+      min: 0,
+      max: 100,
+      value: fit,
+      ariaLabel: 'Fit to the beat',
+      format: fitLabel,
+      parse: (t) => {
+        const x = String(t).trim().toLowerCase();
+        if (x.startsWith('as')) return 0;
+        if (x.startsWith('every')) return 100;
+        const n = parseFloat(x);
+        return Number.isFinite(n) ? n : null;
+      },
+      under: el('div', { class: 'panscale' }, [el('span', { text: 'As sung' }), el('span', { text: 'Every note on the beat' })]),
+      onDrag: (v) => {
+        store.run((s) => setTrackField(s, track.id, 'fit', v), { coalesce: true });
+        if (onLive) onLive();
+      },
+      onCommit: (v) => {
+        store.run((s) => setTrackField(s, track.id, 'fit', v), { coalesce: true });
+        onChange();
+      },
+    }),
+  ]);
+  const countIn = chipRow('Count-in', [
+    { id: 0, label: 'None' }, { id: 1, label: '1 bar' }, { id: 2, label: '2 bars' },
+  ], readCountIn(track), (id) => {
+    store.run((s) => setTrackField(s, track.id, 'countIn', id));
+    onChange();
+  });
+  return fxCard('Recording', rec ? name : null, {}, [
+    lineUp,
+    fitRow,
+    countIn,
+    el('p', { class: 'hint dim', text: 'Fit moves timing only; the notes keep their pitch. Each recording keeps where its notes fall in beats, so it stays in time when the song or a section changes tempo.' }),
+  ]);
+}
+
+function tuneCard(store, track, onChange, onLive) {
+  const t = readTune(track);
+  const { song, view } = store.state;
+  const section = song.sections[view.activeSectionId];
+  const set = (field, value, live = false) => {
+    store.run((s) => setTrackSetting(s, track.id, 'tune', field, value), { coalesce: live });
+    if (live) {
+      if (onLive) onLive();
+    } else onChange();
+  };
+  const slider = (field, label, min, max, format) => el('div', { class: 'fxrow' }, [
+    el('span', { class: 'fxlabel', text: label }),
+    fader({
+      min,
+      max,
+      value: t[field],
+      ariaLabel: `Tune ${label.toLowerCase()}`,
+      ...(format ? { format, parse: (x) => { const n = parseFloat(String(x).replace(/\u2212/g, '-')); return Number.isFinite(n) ? n : null; } } : {}),
+      onDrag: (v) => set(field, v, true),
+      onCommit: (v) => set(field, v),
+    }),
+  ]);
+  const targets = section ? tuneTargets(song, section, t) : null;
+  const keyText = targets && targets.intervals.length === 12
+    ? 'Every semitone (Stepped)'
+    : section
+    ? `${pitchClassName(targets.key, usesFlats(targets.key, settingsFor(song, section).scaleId))} ${scaleById(settingsFor(song, section).scaleId).name.toLowerCase()}, from ${sectionLabel(song, section.id)}`
+    : '';
+  return fxCard('Tune', 'pitch correction, natural to hard', {
+    on: t.on,
+    onToggle: () => {
+      store.run((s) => setTuneFlavour(s, track.id, t.on ? 'off' : t.flavour));
+      onChange();
+    },
+  }, [
+    el('div', { class: 'chiprow wrap fxchips' }, TUNE_FLAVOURS.map((f) =>
+      chip(f.name, {
+        small: true,
+        active: t.on && t.flavour === f.id,
+        onClick: () => {
+          store.run((s) => setTuneFlavour(s, track.id, f.id));
+          onChange();
+        },
+      }))),
+    el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Key' }), el('span', { class: 'fxvalue', text: keyText })]),
+    slider('speed', 'Speed', 0, 200, (v) => `${v} ms`),
+    slider('humanize', 'Humanize', 0, 100),
+    slider('flex', 'Flex', 0, 100),
+    slider('amount', 'Amount', 0, 100, (v) => `${v}%`),
+    slider('transpose', 'Transpose', -12, 12, (v) => `${v > 0 ? '+' : v < 0 ? '\u2212' : ''}${Math.abs(v)} st`),
+    chipRow('Formant', [{ id: 'keep', label: 'Keep' }, { id: 'follow', label: 'Follow' }], t.formant, (id) => set('formant', id)),
+    el('p', { class: 'hint dim', text: 'Speed 0 is the hard, stepped sound; 10\u201350 ms is natural correction. Humanize lets held notes keep their vibrato; Flex leaves notes sung far from the scale alone. Worked out once per recording, so changing it is quick.' }),
   ]);
 }
 
@@ -11576,20 +14129,24 @@ function timingHint(store, track) {
   return `A 1/32 is the whole range. At ${bpm} bpm, ${Math.abs(amount)}% is ${ms} ms ${amount > 0 ? 'early' : 'late'}.`;
 }
 
+const PAN_STEPS = 50;
+
+function panDetent(steps) {
+  return Math.abs(steps) <= 2 ? 0 : steps;
+}
+
 function parsePan(text) {
-  const t = String(text).trim().toUpperCase();
-  if (t === 'C' || t === '0') return 0;
+  const t = String(text).trim().toUpperCase().replace(/−/g, '-');
+  if (t.startsWith('C') || t === '0') return 0;
   const n = parseFloat(t.replace(/[^0-9.\-]/g, ''));
   if (Number.isNaN(n)) return null;
-  if (t.startsWith('L')) return -Math.abs(n);
-  if (t.startsWith('R')) return Math.abs(n);
+  if (t.includes('L')) return -Math.abs(n);
+  if (t.includes('R')) return Math.abs(n);
   return n;
 }
 
 function panLabel(pan) {
-  const value = Math.round((Number(pan) || 0) * 100);
-  if (value === 0) return 'C';
-  return `${value < 0 ? 'L' : 'R'} ${Math.abs(value)}`;
+  return panText(Number(pan) || 0);
 }
 
 function fxCard(title, hint, { on, onToggle }, rows) {
@@ -11692,9 +14249,9 @@ function echoCard(store, track, onChange, onLive) {
     parse: percent,
   });
   const pan = slider('pan', {
-    min: -100,
-    max: 100,
-    value: Math.round((Number(echo.pan) || 0) * 100),
+    min: -PAN_STEPS,
+    max: PAN_STEPS,
+    value: Math.round((Number(echo.pan) || 0) * PAN_STEPS),
     ariaLabel: 'Echo pan',
     sliderClass: 'panslider',
     under: el('div', { class: 'panscale' }, [
@@ -11702,9 +14259,10 @@ function echoCard(store, track, onChange, onLive) {
       el('span', { text: 'C' }),
       el('span', { text: 'R' }),
     ]),
-    format: (v) => panLabel(v / 100),
+    format: (v) => panLabel(v / PAN_STEPS),
     parse: parsePan,
-    toModel: (v) => (Math.abs(v) <= 4 ? 0 : v) / 100,
+    snap: panDetent,
+    toModel: (v) => v / PAN_STEPS,
   });
   const asked = Math.max(1, Math.min(MAX_ECHOES, Math.round(echo.count) || 1));
   const count = echoCount(song, echo);
@@ -11767,7 +14325,7 @@ function echoCard(store, track, onChange, onLive) {
         ? `One repeat, ${gapText} after each note at ${bpm} bpm.`
         : `${count} repeats, ${gapText} apart at ${bpm} bpm, each ${keep}% of the one before`
           + ` (${Number.isFinite(db) ? `${db.toFixed(1)} dB` : 'silent'})`
-          + (echo.pingPong !== false && Math.round((Number(echo.pan) || 0) * 100) !== 0 ? ', alternating sides.' : '.'),
+          + (echo.pingPong !== false && Math.round((Number(echo.pan) || 0) * PAN_STEPS) !== 0 ? ', alternating sides.' : '.'),
     }),
     asked > count
       ? el('p', { class: 'hint', text: `Only ${fits} repeat${fits === 1 ? '' : 's'} of ${echo.time} fit in ${MAX_ECHO_SECONDS} seconds at ${slowestTempo(song)} bpm, so ${fits === 1 ? 'that is what plays' : 'those are what play'}.` })
@@ -11912,10 +14470,56 @@ function distortionCard(store, track, onChange, onLive) {
   ]);
 }
 
-function chorusCard(store, track, onChange, onLive) {
-  const c = readChorus(track.chorus);
+function rateRows(store, name, rate, set) {
+  const song = store.state.song;
+  const here = settingsFor(song, song.sections[store.state.view.activeSectionId]);
+  const bpm = here.bpm || song.bpm;
+  const beats = here.beatsPerBar;
+  const synced = isSynced(rate);
+  const STEPS = 1000;
+  const span = Math.log(RATE_MAX_HZ / RATE_MIN_HZ);
+  const hzPos = (hz) => Math.round((Math.log(Math.max(RATE_MIN_HZ, Math.min(RATE_MAX_HZ, hz)) / RATE_MIN_HZ) / span) * STEPS);
+  const posHz = (pos) => tidyHz(RATE_MIN_HZ * Math.exp((pos / STEPS) * span));
+  const noteAt = (i) => RATE_NOTES[i].id;
+  const slider = synced
+    ? fader({
+        min: 0,
+        max: RATE_NOTES.length - 1,
+        value: Math.max(0, RATE_NOTES.findIndex((n) => n.id === rate)),
+        ariaLabel: `${name} rate`,
+        format: noteAt,
+        parse: (text) => { const id = parseNote(text); return id ? RATE_NOTES.findIndex((n) => n.id === id) : null; },
+        onDrag: (i) => set(noteAt(i), true),
+        onCommit: (i) => set(noteAt(i)),
+      })
+    : fader({
+        min: 0,
+        max: STEPS,
+        value: hzPos(rate),
+        ariaLabel: `${name} rate`,
+        format: (pos) => `${posHz(pos)} Hz`,
+        parse: (text) => { const n = parseFloat(String(text).replace(/[^0-9.]/g, '')); return Number.isNaN(n) || n <= 0 ? null : hzPos(n); },
+        onDrag: (pos) => set(posHz(pos), true),
+        onCommit: (pos) => set(posHz(pos)),
+      });
+  return [
+    chipRow('Sync', [{ id: 'note', label: 'Note' }, { id: 'hz', label: 'Hz' }], synced ? 'note' : 'hz', (id) => {
+      if ((id === 'note') !== synced) set(id === 'note' ? rateToNote(rate, bpm, beats) : rateToHz(rate, bpm, beats));
+    }),
+    el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Rate' }), slider]),
+    el('p', {
+      class: 'fxsub rateinfo',
+      text: synced
+        ? `${secondsLabel(cycleSeconds(rate, bpm, beats))} a cycle at ${bpm} bpm`
+        : `${secondsLabel(cycleSeconds(rate))} a cycle, free of the tempo`,
+    }),
+  ];
+}
+
+function fxControls(store, track, group, read, name, onChange, onLive) {
+  const c = read(track[group]);
   const set = (field, value, live = false) => {
-    store.run((s) => setTrackSetting(s, track.id, 'chorus', field, value), { coalesce: live });
+    store.run((s) => setTrackSetting(s, track.id, group, field, value), { coalesce: live });
     if (live) {
       if (onLive) onLive();
     } else {
@@ -11923,70 +14527,121 @@ function chorusCard(store, track, onChange, onLive) {
     }
   };
   const number = (t) => {
-    const n = parseFloat(String(t).replace(/[^0-9.]/g, ''));
+    const n = parseFloat(String(t).replace(/[^0-9.-]/g, ''));
     return Number.isNaN(n) ? null : n;
   };
-  const row = (label, control) => el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: label }), control]);
-
-  const STEPS = 1000;
-  const expo = (lo, hi, tidy) => ({
-    toValue: (pos) => tidy(lo * Math.pow(hi / lo, pos / STEPS)),
-    toPos: (v) => Math.round((Math.log(Math.max(lo, Math.min(hi, v)) / lo) / Math.log(hi / lo)) * STEPS),
-  });
-  const rate = expo(CHORUS_MIN_RATE, CHORUS_MAX_RATE, (v) => (v < 1 ? Math.round(v * 100) / 100 : Math.round(v * 10) / 10));
-  const delay = expo(CHORUS_MIN_DELAY, CHORUS_MAX_DELAY, (v) => (v < 10 ? Math.round(v * 10) / 10 : Math.round(v)));
-  const tone = expo(CHORUS_MIN_TONE, CHORUS_MAX_TONE, (v) => (v < 10000 ? Math.round(v / 100) * 100 : Math.round(v / 1000) * 1000));
-  const expoFader = (field, label, map, format, parse) => row(label, fader({
-    min: 0,
-    max: STEPS,
-    value: map.toPos(c[field]),
-    ariaLabel: `Chorus ${label.toLowerCase()}`,
-    format: (pos) => format(map.toValue(pos)),
-    parse: (text) => { const v = parse(text); return v === null ? null : map.toPos(v); },
-    onDrag: (pos) => set(field, map.toValue(pos), true),
-    onCommit: (pos) => set(field, map.toValue(pos)),
-  }));
-  const pctFader = (field, label) => row(label, fader({
-    min: 0,
-    max: 100,
-    value: c[field],
-    ariaLabel: `Chorus ${label.toLowerCase()}`,
-    format: (v) => `${v}%`,
-    parse: number,
-    onDrag: (v) => set(field, v, true),
-    onCommit: (v) => set(field, v),
-  }));
   const hz = (t) => {
     const n = number(t);
     if (n === null) return null;
     return String(t).toLowerCase().includes('k') ? n * 1000 : n;
   };
+  const row = (label, control) => el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: label }), control]);
+  const aria = (label) => `${name} ${label.toLowerCase()}`;
+  const STEPS = 1000;
+  const expo = (lo, hi, tidy) => ({
+    toValue: (pos) => tidy(lo * Math.pow(hi / lo, pos / STEPS)),
+    toPos: (v) => Math.round((Math.log(Math.max(lo, Math.min(hi, v)) / lo) / Math.log(hi / lo)) * STEPS),
+  });
+  const expoFader = (field, label, map, format, parse) => row(label, fader({
+    min: 0,
+    max: STEPS,
+    value: map.toPos(c[field]),
+    ariaLabel: aria(label),
+    format: (pos) => format(map.toValue(pos)),
+    parse: (text) => { const v = parse(text); return v === null ? null : map.toPos(v); },
+    onDrag: (pos) => set(field, map.toValue(pos), true),
+    onCommit: (pos) => set(field, map.toValue(pos)),
+  }));
+  const linFader = (field, label, min, max, format) => row(label, fader({
+    min,
+    max,
+    value: c[field],
+    ariaLabel: aria(label),
+    format,
+    parse: number,
+    onDrag: (v) => set(field, v, true),
+    onCommit: (v) => set(field, v),
+  }));
+  const pctFader = (field, label) => linFader(field, label, 0, 100, (v) => `${v}%`);
+  const degrees = (field, label) => linFader(field, label, 0, 180, (v) => `${v}°`);
+  const presets = (list, active) => row('Preset', el('div', { class: 'chiprow wrap fxchips' }, list.map((p) => chip(p.label, {
+    small: true,
+    active: active === p.id,
+    onClick: () => {
+      store.run((s) => setTrackField(s, track.id, group, { ...read(track[group]), ...p.settings }));
+      onChange();
+    },
+  }))));
+  const rate = () => rateRows(store, name, c.rate, (v, live) => set('rate', v, live));
+  const toggle = { on: c.on, onToggle: () => set('on', !c.on) };
+  return { c, set, hz, expo, expoFader, linFader, pctFader, degrees, presets, rate, toggle };
+}
 
-  const preset = chorusPreset(c);
-  const cents = Math.round(detuneCents(c));
+const fxShort = (v) => (v < 10 ? v.toFixed(1).replace(/\.0$/, '') : String(Math.round(v)));
+
+function chorusCard(store, track, onChange, onLive) {
+  const k = fxControls(store, track, 'chorus', readChorus, 'Chorus', onChange, onLive);
+  const { c } = k;
+  const delay = k.expo(CHORUS_MIN_DELAY, CHORUS_MAX_DELAY, (v) => (v < 10 ? Math.round(v * 10) / 10 : Math.round(v)));
+  const tone = k.expo(CHORUS_MIN_TONE, CHORUS_MAX_TONE, (v) => (v < 10000 ? Math.round(v / 100) * 100 : Math.round(v / 1000) * 1000));
+  const song = store.state.song;
+  const here = settingsFor(song, song.sections[store.state.view.activeSectionId]);
+  const cents = Math.round(detuneCents(c, rateHz(c.rate, here.bpm || song.bpm, here.beatsPerBar)));
   const swing = swingMs(c);
-  const fmt = (v) => (v < 10 ? v.toFixed(1).replace(/\.0$/, '') : String(Math.round(v)));
-  return fxCard('Chorus', 'copies bent a few cents, like two players', { on: c.on, onToggle: () => set('on', !c.on) }, [
-    el('div', { class: 'fxrow' }, [
-      el('span', { class: 'fxlabel', text: 'Preset' }),
-      el('div', { class: 'chiprow wrap fxchips' }, CHORUS_PRESETS.map((p) => chip(p.label, {
-        small: true,
-        active: preset === p.id,
-        onClick: () => {
-          store.run((s) => setTrackField(s, track.id, 'chorus', { ...readChorus(track.chorus), ...p.settings }));
-          onChange();
-        },
-      }))),
-    ]),
-    expoFader('rate', 'Rate', rate, (v) => `${v < 1 ? String(Math.round(v * 100) / 100) : v.toFixed(1).replace(/\.0$/, '')} Hz`, number),
-    pctFader('depth', 'Depth'),
-    expoFader('delay', 'Delay', delay, (v) => `${fmt(v)} ms`, number),
-    pctFader('mix', 'Mix'),
-    expoFader('tone', 'Tone', tone, hzLabel, hz),
-    chipRow('Voices', [1, 2, 3].map((n) => ({ id: n, label: String(n) })), c.voices, (n) => set('voices', n)),
-    chipRow('Stereo', [{ id: 'mono', label: 'Mono' }, { id: 'wide', label: 'Wide' }, { id: 'split', label: 'Split' }], c.stereo, (id) => set('stereo', id)),
-    el('p', { class: 'fxsub chorusinfo', text: `Swings ${fmt(c.delay - swing)}\u2013${fmt(c.delay + swing)} ms, \u00b1${cents} cents` }),
-    el('p', { class: 'hint dim', text: 'Split puts the dry track on the left and the chorus on the right, as a JC-120 amp\u2019s two speakers do. Wide swings the two sides in opposite directions, as a Juno does. Mix 100% is vibrato.' }),
+  return fxCard('Chorus', 'copies bent a few cents, like two players', k.toggle, [
+    k.presets(CHORUS_PRESETS, chorusPreset(c)),
+    ...k.rate(),
+    k.pctFader('depth', 'Depth'),
+    k.expoFader('delay', 'Delay', delay, (v) => `${fxShort(v)} ms`, k.hz),
+    k.pctFader('mix', 'Mix'),
+    k.expoFader('tone', 'Tone', tone, hzLabel, k.hz),
+    chipRow('Voices', [1, 2, 3].map((n) => ({ id: n, label: String(n) })), c.voices, (n) => k.set('voices', n)),
+    chipRow('Stereo', [{ id: 'mono', label: 'Mono' }, { id: 'wide', label: 'Wide' }, { id: 'split', label: 'Split' }], c.stereo, (id) => k.set('stereo', id)),
+    el('p', { class: 'fxsub chorusinfo', text: `Swings ${fxShort(c.delay - swing)}–${fxShort(c.delay + swing)} ms, ±${cents} cents` }),
+    el('p', { class: 'hint dim', text: 'Split puts the dry track on the left and the chorus on the right, as a JC-120 amp’s two speakers do. Wide swings the two sides in opposite directions, as a Juno does. Mix 100% is vibrato.' }),
+  ]);
+}
+
+function flangerCard(store, track, onChange, onLive) {
+  const k = fxControls(store, track, 'flanger', readFlanger, 'Flanger', onChange, onLive);
+  const { c } = k;
+  const manual = k.expo(FLANGER_MIN_MANUAL, FLANGER_MAX_MANUAL, (v) => (v < 1 ? Math.round(v * 100) / 100 : Math.round(v * 10) / 10));
+  const tone = k.expo(SWEEP_MIN_TONE, SWEEP_MAX_TONE, (v) => (v < 10000 ? Math.round(v / 100) * 100 : Math.round(v / 1000) * 1000));
+  const [lo, hi] = flangerRange(c);
+  const ms = (v) => (v < 1 ? String(Math.round(v * 100) / 100) : fxShort(v));
+  return fxCard('Flanger', 'a swept copy fed back on itself: the jet', k.toggle, [
+    k.presets(FLANGER_PRESETS, flangerPreset(c)),
+    ...k.rate(),
+    k.pctFader('depth', 'Depth'),
+    k.expoFader('manual', 'Manual', manual, (v) => `${ms(v)} ms`, k.hz),
+    k.linFader('feedback', 'Feedback', -95, 95, (v) => `${v}%`),
+    k.pctFader('mix', 'Mix'),
+    chipRow('Through zero', [{ id: 'off', label: 'Off' }, { id: 'on', label: 'On' }, { id: 'inverted', label: 'Inverted' }], c.through, (id) => k.set('through', id)),
+    k.linFader('lowCut', 'Low cut', 0, FLANGER_MAX_LOWCUT, (v) => (v <= 0 ? 'Off' : `${v} Hz`)),
+    k.expoFader('tone', 'Tone', tone, hzLabel, k.hz),
+    k.degrees('stereo', 'Stereo'),
+    el('p', { class: 'fxsub sweepinfo', text: `Sweeps ${ms(lo)}–${ms(hi)} ms` }),
+    el('p', { class: 'hint dim', text: 'Manual is the shortest delay and Depth how far up it sweeps. Feedback below zero is hollower. Through zero lets the copy cross the dry track, as two tape machines did; Inverted cancels it there. Low cut keeps the bass out of the sweep.' }),
+  ]);
+}
+
+function phaserCard(store, track, onChange, onLive) {
+  const k = fxControls(store, track, 'phaser', readPhaser, 'Phaser', onChange, onLive);
+  const { c } = k;
+  const centre = k.expo(PHASER_MIN_CENTRE, PHASER_MAX_CENTRE, (v) => (v < 1000 ? Math.round(v / 10) * 10 : Math.round(v / 100) * 100));
+  const [lo, hi] = phaserRange(c);
+  const notches = c.stages / 2;
+  return fxCard('Phaser', 'notches swept up and down', k.toggle, [
+    k.presets(PHASER_PRESETS, phaserPreset(c)),
+    ...k.rate(),
+    chipRow('Stages', PHASER_STAGES.map((n) => ({ id: n, label: String(n) })), c.stages, (n) => k.set('stages', n)),
+    k.pctFader('depth', 'Depth'),
+    k.expoFader('centre', 'Centre', centre, hzLabel, k.hz),
+    k.linFader('feedback', 'Feedback', 0, 95, (v) => `${v}%`),
+    k.pctFader('mix', 'Mix'),
+    k.degrees('stereo', 'Stereo'),
+    el('p', { class: 'fxsub sweepinfo', text: `${notches} notch${notches === 1 ? '' : 'es'}, swept ${hzLabel(Math.round(lo))}–${hzLabel(Math.round(hi))}` }),
+    el('p', { class: 'hint dim', text: 'Four stages is a Phase 90 or a Small Stone; eight to twelve, a synth phaser. Feedback sharpens the notches into peaks. Mix 100% is vibrato. Stereo moves the two sides’ sweeps apart.' }),
   ]);
 }
 
@@ -12036,7 +14691,14 @@ function tremoloCard(store, track, onChange, onLive) {
     on: Boolean(trem.on),
     onToggle: () => set('on', !trem.on),
   }, [
-    chipRow('Rate', TREMOLO_RATES, trem.rate, (id) => set('rate', id)),
+    ...rateRows(store, 'Tremolo', readRate(trem.rate, DEFAULT_TREMOLO.rate), (value, live) => {
+      store.run((st) => setTrackSetting(st, track.id, 'tremolo', 'rate', value), { coalesce: Boolean(live) });
+      if (live) {
+        if (onLive) onLive();
+      } else {
+        onChange();
+      }
+    }),
     chipRow('Shape', TREMOLO_SHAPES, trem.shape, (id) => set('shape', id)),
     el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Depth' }), depth]),
     el('div', { class: 'fxrow' }, [el('span', { class: 'fxlabel', text: 'Open' }), open]),
@@ -12177,21 +14839,20 @@ function mixSheet(store, onChange, onLive) {
     };
 
     const mixPan = fader({
-      min: -100,
-      max: 100,
-      value: Math.round((track.pan || 0) * 100),
+      min: -PAN_STEPS,
+      max: PAN_STEPS,
+      value: Math.round((track.pan || 0) * PAN_STEPS),
       ariaLabel: `${trackTitle(track)} pan`,
       sliderClass: 'panslider',
-      format: (v) => panLabel(v / 100),
+      format: (v) => panLabel(v / PAN_STEPS),
       parse: parsePan,
+      snap: panDetent,
       onDrag: (value) => {
-        const snapped = Math.abs(value) <= 4 ? 0 : value;
-        store.run((s) => setTrackField(s, track.id, 'pan', snapped / 100), { coalesce: true });
+        store.run((s) => setTrackField(s, track.id, 'pan', value / PAN_STEPS), { coalesce: true });
         if (onLive) onLive();
       },
       onCommit: (value) => {
-        const snapped = Math.abs(value) <= 4 ? 0 : value;
-        store.run((s) => setTrackField(s, track.id, 'pan', snapped / 100), { coalesce: true });
+        store.run((s) => setTrackField(s, track.id, 'pan', value / PAN_STEPS), { coalesce: true });
         if (onLive) onLive();
         onChange();
       },
@@ -12220,6 +14881,8 @@ function mixSheet(store, onChange, onLive) {
           || (track.echo && track.echo.on)
           || (track.distortion && track.distortion.on)
           || (track.chorus && track.chorus.on)
+          || (track.flanger && track.flanger.on)
+          || (track.phaser && track.phaser.on)
             ? el('span', { class: 'fxbadge', text: 'fx' })
             : null,
           chip('M', { active: track.mute, small: true, onClick: () => set('mute', !track.mute), title: 'Mute' }),
@@ -12364,6 +15027,8 @@ function songsSheet(store, onChange, songs) {
           || (track.echo && track.echo.on)
           || (track.distortion && track.distortion.on)
           || (track.chorus && track.chorus.on)
+          || (track.flanger && track.flanger.on)
+          || (track.phaser && track.phaser.on)
             ? el('span', { class: 'fxbadge', text: 'fx' })
             : null,
           projects.length ? chip('Move', { small: true, onClick: () => songs.moveToProject(entry.id) }) : null,
@@ -12389,6 +15054,8 @@ function songsSheet(store, onChange, songs) {
           || (track.echo && track.echo.on)
           || (track.distortion && track.distortion.on)
           || (track.chorus && track.chorus.on)
+          || (track.flanger && track.flanger.on)
+          || (track.phaser && track.phaser.on)
             ? el('span', { class: 'fxbadge', text: 'fx' })
             : null,
             chip('Rename', { small: true, onClick: () => songs.renameProject(project.id) }),
@@ -12477,6 +15144,33 @@ function exportSheet(store, onChange) {
         ? 'Share puts it in Files, AirDrop or Messages.'
         : 'Save cannot write files from an in-app preview \u2014 it will just open the file. To keep it, open the app in Safari itself and export there.',
     }),
+    kind === 'zip' ? abletonNotes(result.contents || []) : null,
+  ]);
+}
+
+function abletonNotes(files) {
+  const midi = files.find((f) => f.endsWith('.mid'));
+  const wavs = files.filter((f) => f.endsWith('.wav'));
+  const describe = (f) => (f.endsWith('.mid')
+    ? 'every instrument\u2019s notes, a track each, with the tempo'
+    : f.endsWith('.wav')
+    ? 'a Vocals track, lined up, fitted and tuned, from bar 1 to the end'
+    : 'the steps below');
+  const steps = [
+    'Unzip it on your computer.',
+    `Drag ${midi || 'the .mid file'} onto a MIDI track in the Arrangement and accept the tempo prompt. Each part lands on its own track.`,
+    ...(wavs.length ? ['Drag each WAV onto its own audio track at bar 1 and switch the clip\u2019s Warp off. It plays as recorded, in line with the MIDI.'] : []),
+    'Put instruments on the MIDI tracks: the zip carries the notes, not PocketDAW\u2019s sounds.',
+  ];
+  return el('div', {}, [
+    el('div', { class: 'label', text: 'Inside' }),
+    el('div', { class: 'zipfiles' }, files.map((f) => el('div', { class: 'row zipfile' }, [
+      el('span', { class: 'zipname', text: f }),
+      el('span', { class: 'hint', text: describe(f) }),
+    ]))),
+    el('div', { class: 'label', text: 'In Live' }),
+    el('ol', { class: 'zipsteps' }, steps.map((t) => el('li', { text: t }))),
+    wavs.length ? el('p', { class: 'hint dim', text: 'With Warp off the vocals stay at the song\u2019s tempo. To change the tempo in Live, warp them from bar 1 first.' }) : null,
   ]);
 }
 
@@ -13277,6 +15971,253 @@ function createSampler(ctx, kit, zones) {
   };
 }
 
+const CLIP_FADE = 0.012;
+
+function createClipPlayer(ctx) {
+  const output = ctx.createGain();
+  output.gain.value = 1;
+  const live = new Set(); // { src, fade, end }
+  let badTimes = 0;
+
+  
+  function play(buffer, at, { offset = 0, until = Infinity } = {}) {
+    if (!buffer || !Number.isFinite(at) || !Number.isFinite(offset)) {
+      badTimes += 1;
+      return null;
+    }
+    const now = ctx.currentTime;
+    let start = at;
+    let from = Math.max(0, offset);
+    if (start < now) {
+      from += now - start;
+      start = now;
+    }
+    if (from >= buffer.duration) return null;
+    const src = ctx.createBufferSource();
+    src.buffer = buffer;
+    const fade = ctx.createGain();
+    fade.gain.value = 1;
+    src.connect(fade);
+    fade.connect(output);
+    const end = Math.min(until, start + (buffer.duration - from));
+    src.start(start, from);
+    try {
+      src.stop(end + 0.01);
+    } catch (err) {
+    }
+    const voice = { src, fade, end };
+    live.add(voice);
+    src.onended = () => {
+      live.delete(voice);
+      try { fade.disconnect(); } catch (err) {  }
+    };
+    return voice;
+  }
+
+  function stopVoice(v, time) {
+    const t = Math.max(ctx.currentTime, time);
+    try {
+      v.fade.gain.cancelScheduledValues(t);
+      v.fade.gain.setValueAtTime(v.fade.gain.value, t);
+      v.fade.gain.linearRampToValueAtTime(0, t + CLIP_FADE);
+      v.src.stop(t + CLIP_FADE + 0.005);
+    } catch (err) {
+      try { v.src.stop(); } catch (e) {  }
+    }
+  }
+
+  function allNotesOff(time = ctx.currentTime) {
+    live.forEach((v) => stopVoice(v, time));
+  }
+
+  return {
+    output,
+    play,
+    allNotesOff,
+    noteOn: () => null,
+    noteOff: () => {},
+    dispose() {
+      allNotesOff();
+      live.clear();
+      try { output.disconnect(); } catch (err) {  }
+    },
+    get playing() {
+      return live.size;
+    },
+    get badTimes() {
+      return badTimes;
+    },
+  };
+}
+
+const VOX_RENDER_LIMIT = 48;
+const VOX_FADE_IN = 0.003;
+const VOX_FADE_OUT = 0.008;
+
+function createVocalRenderer({ store = recordings } = {}) {
+  const marksById = new Map();
+  const rendered = new Map(); // key -> { pcm, sampleRate }
+  const pending = new Map(); // key -> Promise
+  const buffers = new WeakMap(); // ctx -> Map(key -> AudioBuffer)
+
+  function remember(key, value) {
+    rendered.set(key, value);
+    while (rendered.size > VOX_RENDER_LIMIT) rendered.delete(rendered.keys().next().value);
+  }
+
+  function marksFor(rec, audio) {
+    if (marksById.has(rec.id)) return marksById.get(rec.id);
+    const { times, midi } = voxPitchArrays(rec.pitch);
+    const marks = voxPitchMarks(audio.pcm, audio.sampleRate, times, midi);
+    marksById.set(rec.id, marks);
+    return marks;
+  }
+
+  
+  function renderNow(song, section, track, rec, audio) {
+    const sr = audio.sampleRate;
+    const pcm = audio.pcm;
+    const pb = sectionPlayback(song, section);
+    const fit = readFit(track);
+    const tune = readTune(track);
+    const start = readStart(rec);
+    const n = Math.max(1, Math.ceil(pb.seconds * sr));
+    let out;
+    if (!tune.on && fit === 0 && Math.abs(pb.bpm - (Number(rec.bpm) || pb.bpm)) < 1e-6) {
+      out = new Float32Array(n);
+      const s0 = Math.round(start * sr);
+      for (let i = 0; i < n; i++) {
+        const j = s0 + i;
+        if (j >= 0 && j < pcm.length) out[i] = pcm[j];
+      }
+    } else {
+      const marks = marksFor(rec, audio);
+      const markers = fitMarkers(rec, { fit, sectionBeatsLong: pb.beats });
+      const spb = 60 / pb.bpm;
+      const warp = warpMap(markers.map(([s, b]) => [s, b * spb]));
+      const timeMap = (t) => start + warp(t);
+      let ratioAt = () => 1;
+      if (tune.on && rec.pitch && rec.pitch.midi && rec.pitch.midi.length) {
+        const { midi, hop } = voxPitchArrays(rec.pitch);
+        const targets = tuneTargets(song, section, tune);
+        const tuned = voxCorrectCurve(midi, hop, { ...tune, key: targets.key, intervals: targets.intervals });
+        const ratio = new Float64Array(midi.length);
+        for (let i = 0; i < midi.length; i++) {
+          ratio[i] = Number.isNaN(midi[i]) || Number.isNaN(tuned[i]) ? 1 : Math.pow(2, (tuned[i] - midi[i]) / 12);
+        }
+        const t0 = rec.pitch.t0;
+        ratioAt = (tOut) => {
+          const f = (timeMap(tOut) - t0) / hop;
+          const i = Math.floor(f);
+          if (i < 0) return ratio[0] || 1;
+          if (i >= ratio.length - 1) return ratio[ratio.length - 1] || 1;
+          return ratio[i] + (ratio[i + 1] - ratio[i]) * (f - i);
+        };
+      }
+      out = voxPsola(pcm, sr, marks, {
+        timeMap,
+        ratioAt,
+        formant: tune.on && tune.formant === 'follow' ? 'follow' : 1,
+        outSeconds: pb.seconds,
+      });
+    }
+    const fi = Math.min(n, Math.round(VOX_FADE_IN * sr));
+    for (let i = 0; i < fi; i++) out[i] *= i / fi;
+    const fo = Math.min(n, Math.round(VOX_FADE_OUT * sr));
+    for (let i = 0; i < fo; i++) out[n - 1 - i] *= i / fo;
+    return { pcm: out, sampleRate: sr };
+  }
+
+  function lookup(song, sectionId, trackId) {
+    const section = song && song.sections ? song.sections[sectionId] : null;
+    const track = song && song.tracks ? song.tracks.find((t) => t.id === trackId) : null;
+    const clip = section && section.clips ? section.clips[trackId] : null;
+    const rec = clip && clip.recording;
+    if (!section || !isAudioTrack(track) || !rec) return null;
+    return { section, track, rec, key: renderKey(song, section, track, rec) };
+  }
+
+  
+  function peek(song, sectionId, trackId) {
+    const it = lookup(song, sectionId, trackId);
+    return it ? rendered.get(it.key) || null : null;
+  }
+
+  
+  function render(song, sectionId, trackId) {
+    const it = lookup(song, sectionId, trackId);
+    if (!it) return Promise.resolve(null);
+    if (rendered.has(it.key)) return Promise.resolve(rendered.get(it.key));
+    if (pending.has(it.key)) return pending.get(it.key);
+    const job = (async () => {
+      const audio = await store.get(it.rec.id);
+      if (!audio) return null;
+      const out = renderNow(song, it.section, it.track, it.rec, audio);
+      remember(it.key, out);
+      return out;
+    })();
+    pending.set(it.key, job);
+    job.catch(() => {}).then(() => pending.delete(it.key));
+    return job;
+  }
+
+  
+  function prepare(song, { sectionIds = null } = {}) {
+    const jobs = [];
+    const ids = sectionIds || Object.keys((song && song.sections) || {});
+    ids.forEach((sid) => {
+      const section = song.sections[sid];
+      if (!section) return;
+      song.tracks.forEach((t) => {
+        if (isAudioTrack(t) && section.clips[t.id] && section.clips[t.id].recording) {
+          jobs.push(render(song, sid, t.id).catch(() => null));
+        }
+      });
+    });
+    return Promise.all(jobs);
+  }
+
+  
+  function bufferFor(ctx, song, sectionId, trackId) {
+    const it = lookup(song, sectionId, trackId);
+    if (!it) return null;
+    const audio = rendered.get(it.key);
+    if (!audio) return null;
+    let map = buffers.get(ctx);
+    if (!map) {
+      map = new Map();
+      buffers.set(ctx, map);
+    }
+    let buf = map.get(it.key);
+    if (!buf) {
+      buf = ctx.createBuffer(1, audio.pcm.length, audio.sampleRate);
+      if (buf.copyToChannel) buf.copyToChannel(audio.pcm, 0);
+      else buf.getChannelData(0).set(audio.pcm);
+      map.set(it.key, buf);
+      if (map.size > VOX_RENDER_LIMIT) map.delete(map.keys().next().value);
+    }
+    return buf;
+  }
+
+  return {
+    render,
+    renderNow,
+    peek,
+    prepare,
+    bufferFor,
+    
+    get marksWorkedOut() {
+      return marksById.size;
+    },
+    forget() {
+      rendered.clear();
+      marksById.clear();
+    },
+  };
+}
+
+const vocalRenderer = createVocalRenderer();
+
 const IDLE_RELEASE_MS = 4000;
 
 function createOutput(ctx, {
@@ -13626,29 +16567,57 @@ function createTransport({
     return 0;
   }
 
-  function play() {
+  
+  function announceResume() {
+    const song = getSong();
+    const m = map || buildMap();
+    let sectionId = getSectionId();
+    let segStart = 0;
+    if (mode === 'song') {
+      const timeline = songTimeline(song);
+      if (!timeline.totalTicks) return;
+      const within = wrapTick(anchorTick, timeline.totalTicks);
+      const seg = segmentAt(timeline, within);
+      if (!seg) return;
+      sectionId = seg.sectionId;
+      segStart = anchorTick - (within - seg.startTick);
+    } else {
+      const loop = loopTicks();
+      segStart = anchorTick - wrapTick(anchorTick, loop);
+    }
+    if (anchorTick <= segStart) return;
+    const total = m.totalTicks || 1;
+    const offsetSeconds = m.toSeconds(wrapTick(anchorTick, total)) - m.toSeconds(wrapTick(segStart, total));
+    if (!(offsetSeconds > 0)) return;
+    onEvent({ kind: 'resume', sectionId, tick: anchorTick, time: anchorTime, offsetSeconds, secondsPerTick: m.secondsPerTickAt(wrapTick(segStart, total)) });
+  }
+
+  
+  function play({ at = null } = {}) {
     if (playing) return;
     playing = true;
     map = null;
     mapKey = '';
 
-    anchorTime = ctx.currentTime + 0.03;
+    anchorTime = Number.isFinite(at) && at > ctx.currentTime ? at : ctx.currentTime + 0.03;
     
     loopedSection = null;
     const cue = Math.max(0, Number(takeCue()) || 0);
     anchorTick = (mode === 'song' ? songStartTick() : 0) + cue;
     ensureMap();
     scheduledUpTo = anchorTick;
+    announceResume();
     tick();
     timer = timers.setInterval(tick, intervalMs);
   }
 
-  function stop() {
+  
+  function stop({ at = null } = {}) {
     if (!playing) return;
     playing = false;
     if (timer !== null) timers.clearInterval(timer);
     timer = null;
-    if (onStop) onStop(ctx.currentTime);
+    if (onStop) onStop(Number.isFinite(at) && at > ctx.currentTime ? at : ctx.currentTime);
   }
 
   function toggle() {
@@ -13691,6 +16660,10 @@ function createTransport({
     },
     get playing() {
       return playing;
+    },
+    
+    get startTime() {
+      return anchorTime;
     },
     get bpm() {
       const song = getSong();
@@ -14157,7 +17130,7 @@ function softCeilingCurve(knee = CEILING_KNEE, n = 2049) {
 const PREVIEW_SECONDS = 2;
 const PREVIEW_FADE = 0.4;
 
-function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers , doc = globalThis.document, preferMedia = true , onOutputFallback, output: providedOutput = null, takeCue, onPlayingChange }) {
+function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers , doc = globalThis.document, preferMedia = true , onOutputFallback, output: providedOutput = null, takeCue, onPlayingChange, vocals = vocalRenderer }) {
   const loader = createKitLoader({ ctx, fetchAudio });
   const master = ctx.createGain();
   
@@ -14196,6 +17169,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
   const returns = createReturns(ctx, master, (getSong() && getSong().returns) || DEFAULT_RETURNS);
 
   const players = new Map(); // trackId -> { kitId, sampler, filter, automation, duck, gain, pan, sends, ready }
+  let silencedTrack = null; // a Vocals track being recorded into
   let livePasses = [];
   const reportedFallbacks = new Set();
 
@@ -14245,11 +17219,21 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     gain.connect(echoSend);
 
     const player = {
-      kitId: track.kitId, sampler: null,
-      filter, tremolo, automation, duck, gain, pan, sendReverb, echoSend, edge: null, chorus: null,
+      kitId: track.kitId, trackId: track.id, sampler: null,
+      filter, tremolo, automation, duck, gain, pan, sendReverb, echoSend, edge: null, chorus: null, flanger: null, phaser: null,
       echo: null,
       filtered: false, kit,
     };
+    
+    if (kit.kind === 'audio') {
+      player.sampler = createClipPlayer(ctx);
+      player.ready = Promise.resolve(player.sampler);
+      connectHead(player);
+      players.set(track.id, player);
+      applyMix(player, track, { ramp: false });
+      returns.setUsed(sendsInUse());
+      return player;
+    }
     status('loading', { trackId: track.id, kit: kit.name });
     player.ready = loader.loadKit(kit).then(({ zones, fallbacks }) => {
       if (players.get(track.id) !== player) return null;
@@ -14285,6 +17269,9 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     if (player.filter) player.filter.disconnect();
     if (player.edge) player.edge.output.disconnect();
     if (player.chorus) player.chorus.output.disconnect();
+    if (player.flanger) player.flanger.output.disconnect();
+    if (player.phaser) player.phaser.output.disconnect();
+    if (player.fold) player.fold.disconnect();
     let from = player.sampler.output;
     if (player.filtered && player.filter) {
       from.connect(player.filter);
@@ -14294,11 +17281,32 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       from.connect(player.edge.input);
       from = player.edge.output;
     }
-    if (player.chorus) {
-      from.connect(player.chorus.input);
-      from = player.chorus.output;
+    const stereo = [player.chorus, player.flanger, player.phaser].filter(Boolean);
+    stereo.forEach((fx) => {
+      from.connect(fx.input);
+      from = fx.output;
+    });
+    if (stereo.length) {
+      if (!player.fold) player.fold = ctx.createGain();
+      from.connect(player.fold);
+      from = player.fold;
+      const track = trackById(player.trackId);
+      if (track) setFold(player, track);
     }
     from.connect(player.tremolo);
+  }
+
+  
+  function setFold(player, track) {
+    if (!player.fold) return;
+    const wide = (player.chorus && readChorus(track.chorus).stereo !== 'mono')
+      || (player.flanger && readFlanger(track.flanger).stereo > 0)
+      || (player.phaser && readPhaser(track.phaser).stereo > 0);
+    const f = player.fold;
+    f.channelCountMode = 'explicit';
+    f.channelInterpretation = 'speakers';
+    f.channelCount = wide ? 2 : 1;
+    f.gain.value = wide ? Math.SQRT1_2 : 1;
   }
 
   
@@ -14356,7 +17364,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     
     const chorusSettings = readChorus(track.chorus);
     if (chorusSettings.on && !player.chorus) {
-      player.chorus = createChorus(ctx, chorusSettings);
+      player.chorus = createChorus(ctx, chorusSettings, idleHz(chorusSettings.rate));
       connectHead(player);
     } else if (chorusSettings.on) {
       player.chorus.set(chorusSettings, { live: ramp });
@@ -14366,6 +17374,23 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       connectHead(player);
       old.dispose();
     }
+
+    
+    [['flanger', readFlanger(track.flanger)], ['phaser', readPhaser(track.phaser)]].forEach(([kind, fx]) => {
+      if (fx.on && !player[kind]) {
+        player[kind] = createSweep(ctx, kind, fx);
+        connectHead(player);
+      } else if (fx.on) {
+        player[kind].set(fx);
+      } else if (player[kind]) {
+        const old = player[kind];
+        player[kind] = null;
+        connectHead(player);
+        old.dispose();
+      }
+    });
+    if (!passesLive()) idleSweeps(player, track);
+    setFold(player, track);
 
     applyEcho(player, track, { ramp });
   }
@@ -14552,7 +17577,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
   const LIVE_FADE = 0.008;
   
   const JUST_AFTER = 1e-6;
-  const LIVE_PARTS = ['volume', 'pan', 'reverb', 'filter', 'tremolo', 'duck', 'echo'];
+  const LIVE_PARTS = ['volume', 'pan', 'reverb', 'filter', 'tremolo', 'duck', 'echo', 'sweep'];
 
   function rememberPass(ev) {
     const secondsPerTick = ev.secondsPerTick || 0;
@@ -14563,6 +17588,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     const pass = {
       sectionId: ev.sectionId, tick: ev.tick, lengthTicks: ev.lengthTicks || 0,
       time: ev.time, secondsPerTick, end, keys: new Map(),
+      first: livePasses.length === 0,
       lines: new Map(), ducks: new Map(), trems: new Map(),
     };
     livePasses.push(pass);
@@ -14609,6 +17635,30 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       (player.tremVoices || []).forEach((v) => endVoice(v, at));
     }
     livePasses = [];
+    getSong().tracks.forEach((track) => {
+      const player = players.get(track.id);
+      if (player) idleSweeps(player, track, at);
+    });
+  }
+
+  
+  function passesLive() {
+    const now = ctx.currentTime;
+    return livePasses.some((p) => p.end > now);
+  }
+
+  
+  function idleHz(rate) {
+    const song = getSong();
+    const section = song.sections[getSectionId()];
+    return 1 / cycleSeconds(rate, sectionTempo(song, section) || song.bpm, sectionBeats(song, section));
+  }
+
+  
+  function idleSweeps(player, track, at = ctx.currentTime) {
+    if (player.chorus) player.chorus.rate(at, idleHz(readChorus(track.chorus).rate), true);
+    if (player.flanger) player.flanger.clock(at, idleHz(readFlanger(track.flanger).rate));
+    if (player.phaser) player.phaser.clock(at, idleHz(readPhaser(track.phaser).rate));
   }
 
   
@@ -14643,6 +17693,11 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
         return JSON.stringify([duck || null, triggers]);
       }
       case 'echo': return player.echo ? JSON.stringify([echoSettings(track.echo).time, player.echo.delays.length, player.echo.room]) : 'off';
+      case 'sweep': return JSON.stringify([
+        player.chorus ? readChorus(track.chorus).rate : null,
+        player.flanger ? readFlanger(track.flanger).rate : null,
+        player.phaser ? readPhaser(track.phaser).rate : null,
+      ]);
       default: return '';
     }
   }
@@ -14682,6 +17737,9 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       }
       case 'tremolo':
         writeTremolo(track, player, clip, pass, from);
+        return;
+      case 'sweep':
+        writeSweeps(track, player, section, pass, song, from);
         return;
       case 'duck':
         writeDuck(track, player, section, pass, song, from);
@@ -14770,8 +17828,11 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     const spt = pass.secondsPerTick;
     const seconds = pass.lengthTicks * spt;
     if (!((lane.length || (trem && trem.on)) && spt > 0 && seconds > 0)) return null;
+    const song = getSong();
+    const rate = readRate(trem && trem.rate, DEFAULT_TREMOLO.rate);
     return {
-      cycleSeconds: tremoloTicks((trem && trem.rate) || DEFAULT_TREMOLO.rate) * spt,
+      cycleSeconds: rateSeconds(rate, 60 / (spt * PPQ), sectionBeats(song, song.sections[pass.sectionId])),
+      free: !isSynced(rate),
       depth: lane.length ? null : (trem.depth === undefined ? DEFAULT_TREMOLO.depth : trem.depth),
       shape: (trem && trem.shape) || DEFAULT_TREMOLO.shape,
       open: trem ? trem.open : undefined,
@@ -14789,40 +17850,75 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       const previous = (player.tremVoices || []).filter((v) => v !== mine && v.start < pass.time && v.stopAt > pass.time);
       previous.forEach((v) => { if (v.end > pass.time) endVoice(v, pass.time); });
       const crossing = previous.length > 0;
-      pass.trems.set(track.id, options ? startVoice(player, options, pass, pass.time, end, crossing) : null);
+      const anchor = options ? voiceAnchor(options, pass, pass.time, previous[previous.length - 1]) : 0;
+      pass.trems.set(track.id, options ? startVoice(player, options, pass, pass.time, end, crossing, anchor) : null);
       return;
     }
     if (mine) endVoice(mine, from);
-    pass.trems.set(track.id, options ? startVoice(player, options, pass, from, end, true) : null);
+    const anchor = options ? voiceAnchor(options, pass, from, mine) : 0;
+    pass.trems.set(track.id, options ? startVoice(player, options, pass, from, end, true, anchor) : null);
+  }
+
+  
+  function voiceAnchor(options, pass, at, before) {
+    if (!options.free) return pass.time;
+    if (!before) return at;
+    const phase = ((((at - before.anchor) / before.cycle) % 1) + 1) % 1;
+    return at - phase * options.cycleSeconds;
+  }
+
+  
+  function writeSweeps(track, player, section, pass, song, from) {
+    const spt = pass.secondsPerTick;
+    if (!(spt > 0)) return;
+    const bpm = 60 / (spt * PPQ);
+    const beats = sectionBeats(song, section);
+    const at = from === null ? pass.time : from;
+    if (player.chorus) player.chorus.rate(at, 1 / cycleSeconds(readChorus(track.chorus).rate, bpm, beats), from !== null);
+    [['flanger', readFlanger], ['phaser', readPhaser]].forEach(([kind, read]) => {
+      const fx = player[kind];
+      if (!fx) return;
+      const rate = read(track[kind]).rate;
+      const cycle = cycleSeconds(rate, bpm, beats);
+      const synced = isSynced(rate);
+      const phase = synced ? (at - pass.time) / cycle : (from === null && pass.first ? 0 : null);
+      fx.clock(at, 1 / cycle, phase);
+    });
   }
 
   
   const cycleCache = new Map();
+  
+  const DRAWN_SECONDS = 3;
   function cycleBuffer(options) {
     const key = `${options.shape}|${options.cycleSeconds}|${options.open}`;
-    let buffer = cycleCache.get(key);
-    if (buffer) {
+    let drawn = cycleCache.get(key);
+    if (drawn) {
       cycleCache.delete(key);
-      cycleCache.set(key, buffer);
-      return buffer;
+      cycleCache.set(key, drawn);
+      return drawn;
     }
     const rate = Math.min(ctx.sampleRate, Math.max(22050, Math.ceil(96000 / options.cycleSeconds)));
-    const values = tremoloCycle(options, rate);
-    buffer = ctx.createBuffer(1, values.length, rate);
+    const points = Math.min(rate, (rate * DRAWN_SECONDS) / options.cycleSeconds);
+    const values = tremoloCycle(options, points);
+    const buffer = ctx.createBuffer(1, values.length, rate);
     buffer.getChannelData(0).set(values);
-    cycleCache.set(key, buffer);
+    drawn = { buffer, loopEnd: (options.cycleSeconds * points) / rate };
+    cycleCache.set(key, drawn);
     if (cycleCache.size > 32) cycleCache.delete(cycleCache.keys().next().value);
-    return buffer;
+    return drawn;
   }
 
   
-  function startVoice(player, options, pass, at, end, fadeIn) {
+  function startVoice(player, options, pass, at, end, fadeIn, anchor = pass.time) {
     const spt = pass.secondsPerTick;
     const src = ctx.createBufferSource();
-    src.buffer = cycleBuffer(options);
+    const drawn = cycleBuffer(options);
+    src.buffer = drawn.buffer;
     src.loop = true;
     src.loopStart = 0;
-    src.loopEnd = options.cycleSeconds;
+    src.loopEnd = drawn.loopEnd;
+    if (drawn.loopEnd !== options.cycleSeconds) src.playbackRate.value = drawn.loopEnd / options.cycleSeconds;
     const depth = ctx.createGain();
     const fade = ctx.createGain();
     if (options.lane) {
@@ -14845,9 +17941,9 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     depth.connect(fade);
     fade.connect(player.tremolo.gain);
     const cycle = options.cycleSeconds;
-    const offset = (((at - pass.time) % cycle) + cycle) % cycle;
-    src.start(at, offset);
-    const voice = { src, depth, fade, start: at, end, line, stopAt: end + LIVE_FADE + 0.002 };
+    const phase = ((((at - anchor) / cycle) % 1) + 1) % 1;
+    src.start(at, phase * drawn.loopEnd);
+    const voice = { src, depth, fade, start: at, end, line, stopAt: end + LIVE_FADE + 0.002, anchor, cycle };
     src.stop(voice.stopAt);
     src.onended = () => dropVoice(player, voice);
     player.tremVoices = (player.tremVoices || []).filter((v) => v.stopAt > ctx.currentTime);
@@ -14950,6 +18046,9 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     if (p.sampler) p.sampler.dispose();
     if (p.edge) p.edge.dispose();
     if (p.chorus) p.chorus.dispose();
+    if (p.flanger) p.flanger.dispose();
+    if (p.phaser) p.phaser.dispose();
+    if (p.fold) p.fold.disconnect();
     teardownEcho(p);
     (p.tremVoices || []).forEach((v) => {
       try { v.src.stop(); } catch (err) {  }
@@ -14971,13 +18070,52 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       ensurePlayer(t);
     });
     for (const id of [...players.keys()]) if (!ids.has(id)) disposePlayer(id);
-    return Promise.all([...players.values()].map((p) => p.ready.catch(() => null)));
+    return Promise.all([
+      ...[...players.values()].map((p) => p.ready.catch(() => null)),
+      vocals ? vocals.prepare(song).catch(() => null) : null,
+    ]);
+  }
+
+  
+  function scheduleRecordings(ev, offset = 0) {
+    const song = getSong();
+    const section = song.sections[ev.sectionId];
+    if (!section) return;
+    const soloed = song.tracks.some((t) => t.solo && !t.mute);
+    song.tracks.forEach((track) => {
+      if (track.kind !== 'audio' || track.mute || (soloed && !track.solo) || track.id === silencedTrack) return;
+      const clip = section.clips[track.id];
+      if (!clip || !clip.recording || !vocals) return;
+      const buffer = vocals.bufferFor(ctx, song, ev.sectionId, track.id);
+      if (!buffer) {
+        vocals.render(song, ev.sectionId, track.id).catch(() => {});
+        return;
+      }
+      const player = ensurePlayer(track);
+      if (!player.sampler || !player.sampler.play) return;
+      const rush = timingTicks(timingFor(track, { sectionId: ev.sectionId, tick: 0, note: { start: 0 } })) * (ev.secondsPerTick || 0);
+      const shift = Number.isFinite(rush) ? rush : 0;
+      player.sampler.play(buffer, ev.time - shift, { offset });
+    });
   }
 
   
   function handleEvent(ev) {
     if (ev.kind === 'segment') {
       scheduleSegment(ev);
+      try {
+        scheduleRecordings(ev, 0);
+      } catch (err) {
+        reportOnce(`recordings: ${(err && err.message) || 'refused'}`);
+      }
+      return;
+    }
+    if (ev.kind === 'resume') {
+      try {
+        scheduleRecordings(ev, ev.offsetSeconds || 0);
+      } catch (err) {
+        reportOnce(`recordings: ${(err && err.message) || 'refused'}`);
+      }
       return;
     }
     const track = trackById(ev.trackId);
@@ -15049,16 +18187,16 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       .catch(() => {});
   }
 
-  async function play() {
+  async function play({ at = null } = {}) {
     
     if (output.setActive) output.setActive(true);
     if (onPlayingChange) onPlayingChange(true);
     await ensureAll();
-    transport.play();
+    transport.play({ at });
   }
 
-  function stop() {
-    transport.stop();
+  function stop({ at = null } = {}) {
+    transport.stop({ at });
     if (output.setActive) output.setActive(false);
     if (onPlayingChange) onPlayingChange(false);
   }
@@ -15102,6 +18240,24 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     
     handleEvent,
     refreshLive,
+    
+    get sweepsReady() {
+      const pending = [];
+      players.forEach((p) => [p.flanger, p.phaser].forEach((fx) => fx && pending.push(fx.ready)));
+      return Promise.all(pending).catch(() => {});
+    },
+    
+    get sweepMode() {
+      return sweepMode(ctx);
+    },
+    
+    vocals,
+    
+    silenceTrack(id) {
+      silencedTrack = id || null;
+    },
+    
+    sweepOf: (trackId, kind) => (players.get(trackId) || {})[kind] || null,
     tremoloVoices: (trackId) => ((players.get(trackId) || {}).tremVoices || []).slice(),
     players,
     loader,
@@ -15369,6 +18525,68 @@ function findEndRecord(view, length) {
     if (view.getUint32(at, true) === END_SIG) return at;
   }
   return -1;
+}
+
+function writeStoredZip(files) {
+  const enc = new TextEncoder();
+  const parts = [];
+  const central = [];
+  let offset = 0;
+  const dosTime = 0;
+  const dosDate = ((2026 - 1980) << 9) | (1 << 5) | 1;
+  files.forEach(({ name, bytes }) => {
+    const data = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+    const nameBytes = enc.encode(name);
+    const crc = crc32(data);
+    const local = new Uint8Array(30 + nameBytes.length);
+    const lv = new DataView(local.buffer);
+    lv.setUint32(0, LOCAL_SIG, true);
+    lv.setUint16(4, 20, true);
+    lv.setUint16(6, 0x0800, true); // UTF-8 names
+    lv.setUint16(8, STORED, true);
+    lv.setUint16(10, dosTime, true);
+    lv.setUint16(12, dosDate, true);
+    lv.setUint32(14, crc, true);
+    lv.setUint32(18, data.length, true);
+    lv.setUint32(22, data.length, true);
+    lv.setUint16(26, nameBytes.length, true);
+    lv.setUint16(28, 0, true);
+    local.set(nameBytes, 30);
+    const head = new Uint8Array(46 + nameBytes.length);
+    const cv = new DataView(head.buffer);
+    cv.setUint32(0, CENTRAL_SIG, true);
+    cv.setUint16(4, 20, true);
+    cv.setUint16(6, 20, true);
+    cv.setUint16(8, 0x0800, true);
+    cv.setUint16(10, STORED, true);
+    cv.setUint16(12, dosTime, true);
+    cv.setUint16(14, dosDate, true);
+    cv.setUint32(16, crc, true);
+    cv.setUint32(20, data.length, true);
+    cv.setUint32(24, data.length, true);
+    cv.setUint16(28, nameBytes.length, true);
+    cv.setUint32(42, offset, true);
+    head.set(nameBytes, 46);
+    parts.push(local, data);
+    central.push(head);
+    offset += local.length + data.length;
+  });
+  const centralSize = central.reduce((n, c) => n + c.length, 0);
+  const end = new Uint8Array(22);
+  const ev = new DataView(end.buffer);
+  ev.setUint32(0, END_SIG, true);
+  ev.setUint16(8, files.length, true);
+  ev.setUint16(10, files.length, true);
+  ev.setUint32(12, centralSize, true);
+  ev.setUint32(16, offset, true);
+  const all = [...parts, ...central, end];
+  const out = new Uint8Array(all.reduce((n, p) => n + p.length, 0));
+  let at = 0;
+  all.forEach((p) => {
+    out.set(p, at);
+    at += p.length;
+  });
+  return out;
 }
 
 const CONTENT_BASE = 'https://tobyturney151.github.io/PocketDAW/content/';
@@ -16246,6 +19464,7 @@ async function renderSong({
   }
 
   await engine.returns.ready;
+  await engine.sweepsReady;
   if (onProgress) onProgress('rendering');
   const rendered = await ctx.startRendering();
   engine.dispose();
@@ -16633,18 +19852,243 @@ function createSongStore({ storage, timers = hostTimers(), debounceMs = 800, onE
   };
 }
 
-function toBackup(song) {
-  return JSON.stringify({ format: 'pocketdaw.song', exported: Date.now(), song }, null, 2);
+function toBackup(song, recordings = null) {
+  const doc = { format: 'pocketdaw.song', exported: Date.now(), song };
+  if (recordings && Object.keys(recordings).length) doc.recordings = recordings;
+  return JSON.stringify(doc, null, 2);
 }
 
-function fromBackup(text) {
+function readBackup(text) {
   const doc = JSON.parse(text);
   const song = doc && doc.format === 'pocketdaw.song' ? doc.song : doc;
   if (!song || !song.tracks || !song.sections) throw new Error('That does not look like a PocketDAW song.');
   const migrated = migrate(song);
   const problems = validateSong(migrated);
   if (problems.length) throw new Error(problems[0]);
-  return migrated;
+  const recordings = doc && doc.recordings && typeof doc.recordings === 'object' ? doc.recordings : {};
+  return { song: migrated, recordings };
+}
+
+function fromBackup(text) {
+  return readBackup(text).song;
+}
+
+function varLen(value) {
+  const n = Math.max(0, Math.round(value));
+  const out = [n & 0x7f];
+  let rest = Math.floor(n / 128);
+  while (rest > 0) {
+    out.unshift((rest & 0x7f) | 0x80);
+    rest = Math.floor(rest / 128);
+  }
+  return out;
+}
+
+const bytes = (...values) => values.flat();
+const u32 = (n) => [(n >> 24) & 0xff, (n >> 16) & 0xff, (n >> 8) & 0xff, n & 0xff];
+const u16 = (n) => [(n >> 8) & 0xff, n & 0xff];
+const ascii = (text) => Array.from(text, (c) => c.charCodeAt(0) & 0x7f);
+
+function chunk(type, body) {
+  return bytes(ascii(type), u32(body.length), body);
+}
+
+function trackName(name) {
+  const text = ascii(String(name || '').slice(0, 60));
+  return bytes([0x00, 0xff, 0x03], varLen(text.length), text);
+}
+
+function pocketdawNote(song) {
+  const info = {
+    v: 1,
+    key: song.key,
+    scaleId: song.scaleId,
+    beatsPerBar: song.beatsPerBar || 4,
+    grid: song.gridResolutionId || null,
+    tracks: (song.tracks || []).filter((t) => t && t.kind !== 'audio').map((t) => ({ kitId: t.kitId, shade: t.shade, family: t.family, name: t.name || null })),
+    sections: songTimeline(song).segments.map((seg) => {
+      const sec = song.sections[seg.sectionId];
+      return {
+        name: sec.name || null, lengthBars: sec.lengthBars, unlocked: Boolean(sec.unlocked),
+        bpm: sec.bpm, key: sec.key, scaleId: sec.scaleId, beatsPerBar: sec.beatsPerBar,
+        start: seg.startTick, length: seg.lengthTicks,
+      };
+    }),
+  };
+  const text = [...'PDAW'].map((c) => c.charCodeAt(0)).concat([...new TextEncoder().encode(JSON.stringify(info))]);
+  return bytes([0x00, 0xff, 0x7f], varLen(text.length), text);
+}
+
+function tempoTrack(song) {
+  const events = [pocketdawNote(song)];
+  let last = 0;
+  const push = (tick, bpm) => {
+    const usPerQuarter = Math.round(60000000 / Math.max(1, bpm));
+    events.push(bytes(varLen(tick - last), [0xff, 0x51, 0x03],
+      [(usPerQuarter >> 16) & 0xff, (usPerQuarter >> 8) & 0xff, usPerQuarter & 0xff]));
+    last = tick;
+  };
+
+  
+  const pushMetre = (tick, beats) => {
+    events.push(bytes(varLen(tick - last), [0xff, 0x58, 0x04], [beats, 2, 24, 8]));
+    last = tick;
+  };
+  let current = null;
+  let metre = null;
+  songTimeline(song).segments.forEach((seg) => {
+    const section = song.sections[seg.sectionId];
+    const beats = section ? sectionBeats(song, section) : 4;
+    if (beats !== metre) {
+      pushMetre(seg.startTick, beats);
+      metre = beats;
+    }
+    const bpm = (section && section.unlocked && section.bpm) || song.bpm || 120;
+    if (bpm !== current) {
+      push(seg.startTick, bpm);
+      current = bpm;
+    }
+  });
+  if (current === null) push(0, song.bpm || 120);
+
+  return chunk('MTrk', bytes(trackName(song.name || 'Song'), events.flat(), [0x00, 0xff, 0x2f, 0x00]));
+}
+
+function flattenTrack(song, track) {
+  const notes = [];
+  songTimeline(song).segments.forEach((seg) => {
+    const section = song.sections[seg.sectionId];
+    const clip = section && section.clips ? section.clips[track.id] : null;
+    if (!clip) return;
+    const limit = sectionLengthTicks(song, section);
+    clip.notes.forEach((note) => {
+      if (note.start >= limit) return;
+      notes.push({
+        pitch: note.pitch,
+        start: seg.startTick + note.start,
+        duration: Math.max(1, Math.min(note.duration, limit - note.start)),
+        velocity: note.velocity,
+        accent: Boolean(note.flags && note.flags.accent),
+      });
+    });
+  });
+  return notes.sort((a, b) => a.start - b.start || a.pitch - b.pitch);
+}
+
+function instrumentTrack(song, track, channel) {
+  const isDrum = track.kind === 'drum';
+  const ch = isDrum ? 9 : channel;
+  const notes = flattenTrack(song, track);
+
+  const events = [];
+  notes.forEach((note) => {
+    const velocity = Math.max(1, Math.min(127, Math.round((note.velocity || 0.8) * (note.accent ? 1.25 : 1) * 127)));
+    events.push({ tick: note.start, data: [0x90 | ch, note.pitch & 0x7f, velocity] });
+    events.push({ tick: note.start + note.duration, data: [0x80 | ch, note.pitch & 0x7f, 0x40] });
+  });
+  events.sort((a, b) => a.tick - b.tick || (a.data[0] & 0xf0) - (b.data[0] & 0xf0));
+
+  const body = [];
+  body.push(...trackName(trackTitle(track)));
+  let last = 0;
+  events.forEach((ev) => {
+    body.push(...varLen(ev.tick - last), ...ev.data);
+    last = ev.tick;
+  });
+  body.push(0x00, 0xff, 0x2f, 0x00);
+  return chunk('MTrk', body);
+}
+
+function toMidiFile(song) {
+  const tracks = (song.tracks || []).filter((t) => t && t.kind !== 'audio');
+  const chunks = [tempoTrack(song)];
+  let channel = 0;
+  tracks.forEach((track) => {
+    const isDrum = track.kind === 'drum';
+    chunks.push(instrumentTrack(song, track, channel));
+    if (!isDrum) {
+      channel += 1;
+      if (channel === 9) channel = 10;
+    }
+  });
+  const header = chunk('MThd', bytes(u16(1), u16(chunks.length), u16(PPQ)));
+  return new Uint8Array(bytes(header, chunks.flat()));
+}
+
+const ABLETON_SAMPLE_RATE = 48000;
+
+function fileSafe(name) {
+  return String(name || 'song').replace(/[\\/:*?"<>|]+/g, '-').replace(/\s+/g, ' ').trim() || 'song';
+}
+
+function vocalStem(song, trackId, renderedFor, sampleRate = ABLETON_SAMPLE_RATE) {
+  const map = songTempoMap(song);
+  const timeline = songTimeline(song);
+  const total = Math.ceil(map.totalSeconds * sampleRate) + 1;
+  const out = new Float32Array(total);
+  timeline.segments.forEach((seg) => {
+    const audio = renderedFor(seg.sectionId, trackId);
+    if (!audio) return;
+    const start = Math.round(map.toSeconds(seg.startTick) * sampleRate);
+    const length = Math.round((map.toSeconds(seg.startTick + seg.lengthTicks) - map.toSeconds(seg.startTick)) * sampleRate);
+    const ratio = audio.sampleRate / sampleRate;
+    for (let i = 0; i < length && start + i < total; i++) {
+      const src = i * ratio;
+      const j = Math.floor(src);
+      if (j + 1 >= audio.pcm.length) break;
+      out[start + i] += audio.pcm[j] + (audio.pcm[j + 1] - audio.pcm[j]) * (src - j);
+    }
+  });
+  return out;
+}
+
+function abletonReadme(song, midiName, wavNames) {
+  const lines = [
+    `${song.name || 'Song'} — exported from PocketDAW for Ableton Live`,
+    '',
+    'Inside:',
+    `  ${midiName}  every instrument's notes, one track each, with the tempo`,
+    ...wavNames.map((w) => `  ${w.file}  ${w.title}${w.muted ? ' (muted in the song: mute it in Live too)' : ''}, from bar 1 to the end`),
+    '',
+    'In Live:',
+    '  1. Unzip this file on your computer.',
+    `  2. Drag ${midiName} onto a MIDI track in the Arrangement view and accept the tempo prompt.`,
+    '     Each part lands on its own track.',
+    ...(wavNames.length
+      ? ['  3. Drag each WAV onto its own audio track at bar 1 and switch the clip\'s Warp off.', '     It plays as recorded, in line with the MIDI.']
+      : []),
+    `  ${wavNames.length ? 4 : 3}. Put instruments on the MIDI tracks: the zip carries the notes, not PocketDAW's sounds.`,
+    '',
+    ...(wavNames.length
+      ? ['With Warp off the vocals stay at the song\'s tempo. To change the tempo in Live, warp them from bar 1 first.', '']
+      : []),
+  ];
+  return lines.join('\n');
+}
+
+function buildAbletonZip(song, renderedFor) {
+  const base = fileSafe(song.name);
+  const midiName = `${base}.mid`;
+  const files = [{ name: midiName, bytes: toMidiFile(song) }];
+  const wavNames = [];
+  const used = new Set();
+  song.tracks.filter(isAudioTrack).forEach((track) => {
+    let title = fileSafe(trackTitle(track));
+    let n = 2;
+    while (used.has(title)) title = `${fileSafe(trackTitle(track))} ${n++}`;
+    used.add(title);
+    const pcm = vocalStem(song, track.id, renderedFor);
+    const file = `${title}.wav`;
+    files.push({ name: file, bytes: encodeWav24(pcm, ABLETON_SAMPLE_RATE) });
+    wavNames.push({ file, title: trackTitle(track), muted: Boolean(track.mute) });
+  });
+  files.push({ name: 'README.txt', bytes: new TextEncoder().encode(abletonReadme(song, midiName, wavNames)) });
+  const bytes = writeStoredZip(files);
+  return { bytes, name: `${base}-ableton.zip`, files: files.map((f) => f.name), wavNames };
+}
+
+function playedSections(song) {
+  return songTimeline(song).segments.map((seg) => sectionLabel(song, seg.sectionId));
 }
 
 function readVarLen(bytes, at) {
@@ -17194,148 +20638,6 @@ function buildImportedSong(parsed, plan, choices = {}, { name = 'Imported', bars
   return { song, report };
 }
 
-function varLen(value) {
-  const n = Math.max(0, Math.round(value));
-  const out = [n & 0x7f];
-  let rest = Math.floor(n / 128);
-  while (rest > 0) {
-    out.unshift((rest & 0x7f) | 0x80);
-    rest = Math.floor(rest / 128);
-  }
-  return out;
-}
-
-const bytes = (...values) => values.flat();
-const u32 = (n) => [(n >> 24) & 0xff, (n >> 16) & 0xff, (n >> 8) & 0xff, n & 0xff];
-const u16 = (n) => [(n >> 8) & 0xff, n & 0xff];
-const ascii = (text) => Array.from(text, (c) => c.charCodeAt(0) & 0x7f);
-
-function chunk(type, body) {
-  return bytes(ascii(type), u32(body.length), body);
-}
-
-function trackName(name) {
-  const text = ascii(String(name || '').slice(0, 60));
-  return bytes([0x00, 0xff, 0x03], varLen(text.length), text);
-}
-
-function pocketdawNote(song) {
-  const info = {
-    v: 1,
-    key: song.key,
-    scaleId: song.scaleId,
-    beatsPerBar: song.beatsPerBar || 4,
-    grid: song.gridResolutionId || null,
-    tracks: (song.tracks || []).filter(Boolean).map((t) => ({ kitId: t.kitId, shade: t.shade, family: t.family, name: t.name || null })),
-    sections: songTimeline(song).segments.map((seg) => {
-      const sec = song.sections[seg.sectionId];
-      return {
-        name: sec.name || null, lengthBars: sec.lengthBars, unlocked: Boolean(sec.unlocked),
-        bpm: sec.bpm, key: sec.key, scaleId: sec.scaleId, beatsPerBar: sec.beatsPerBar,
-        start: seg.startTick, length: seg.lengthTicks,
-      };
-    }),
-  };
-  const text = [...'PDAW'].map((c) => c.charCodeAt(0)).concat([...new TextEncoder().encode(JSON.stringify(info))]);
-  return bytes([0x00, 0xff, 0x7f], varLen(text.length), text);
-}
-
-function tempoTrack(song) {
-  const events = [pocketdawNote(song)];
-  let last = 0;
-  const push = (tick, bpm) => {
-    const usPerQuarter = Math.round(60000000 / Math.max(1, bpm));
-    events.push(bytes(varLen(tick - last), [0xff, 0x51, 0x03],
-      [(usPerQuarter >> 16) & 0xff, (usPerQuarter >> 8) & 0xff, usPerQuarter & 0xff]));
-    last = tick;
-  };
-
-  
-  const pushMetre = (tick, beats) => {
-    events.push(bytes(varLen(tick - last), [0xff, 0x58, 0x04], [beats, 2, 24, 8]));
-    last = tick;
-  };
-  let current = null;
-  let metre = null;
-  songTimeline(song).segments.forEach((seg) => {
-    const section = song.sections[seg.sectionId];
-    const beats = section ? sectionBeats(song, section) : 4;
-    if (beats !== metre) {
-      pushMetre(seg.startTick, beats);
-      metre = beats;
-    }
-    const bpm = (section && section.unlocked && section.bpm) || song.bpm || 120;
-    if (bpm !== current) {
-      push(seg.startTick, bpm);
-      current = bpm;
-    }
-  });
-  if (current === null) push(0, song.bpm || 120);
-
-  return chunk('MTrk', bytes(trackName(song.name || 'Song'), events.flat(), [0x00, 0xff, 0x2f, 0x00]));
-}
-
-function flattenTrack(song, track) {
-  const notes = [];
-  songTimeline(song).segments.forEach((seg) => {
-    const section = song.sections[seg.sectionId];
-    const clip = section && section.clips ? section.clips[track.id] : null;
-    if (!clip) return;
-    const limit = sectionLengthTicks(song, section);
-    clip.notes.forEach((note) => {
-      if (note.start >= limit) return;
-      notes.push({
-        pitch: note.pitch,
-        start: seg.startTick + note.start,
-        duration: Math.max(1, Math.min(note.duration, limit - note.start)),
-        velocity: note.velocity,
-        accent: Boolean(note.flags && note.flags.accent),
-      });
-    });
-  });
-  return notes.sort((a, b) => a.start - b.start || a.pitch - b.pitch);
-}
-
-function instrumentTrack(song, track, channel) {
-  const isDrum = track.kind === 'drum';
-  const ch = isDrum ? 9 : channel;
-  const notes = flattenTrack(song, track);
-
-  const events = [];
-  notes.forEach((note) => {
-    const velocity = Math.max(1, Math.min(127, Math.round((note.velocity || 0.8) * (note.accent ? 1.25 : 1) * 127)));
-    events.push({ tick: note.start, data: [0x90 | ch, note.pitch & 0x7f, velocity] });
-    events.push({ tick: note.start + note.duration, data: [0x80 | ch, note.pitch & 0x7f, 0x40] });
-  });
-  events.sort((a, b) => a.tick - b.tick || (a.data[0] & 0xf0) - (b.data[0] & 0xf0));
-
-  const body = [];
-  body.push(...trackName(trackTitle(track)));
-  let last = 0;
-  events.forEach((ev) => {
-    body.push(...varLen(ev.tick - last), ...ev.data);
-    last = ev.tick;
-  });
-  body.push(0x00, 0xff, 0x2f, 0x00);
-  return chunk('MTrk', body);
-}
-
-function toMidiFile(song) {
-  const tracks = (song.tracks || []).filter(Boolean);
-  const chunks = [tempoTrack(song)];
-  let channel = 0;
-  tracks.forEach((track) => {
-    const isDrum = track.kind === 'drum';
-    chunks.push(instrumentTrack(song, track, channel));
-    if (!isDrum) {
-      channel += 1;
-      if (channel === 9) channel = 10;
-    }
-  });
-  const header = chunk('MThd', bytes(u16(1), u16(chunks.length), u16(PPQ)));
-  return new Uint8Array(bytes(header, chunks.flat()));
-}
-
 const REMOTE_SONG_PREFIX = 'song_remote_';
 const REMOTE_PROJECT_PREFIX = 'p_remote_';
 
@@ -17382,7 +20684,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-10-29 01:51';
+const BUILD_STAMP = '2026-11-09 06:43';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -17447,12 +20749,26 @@ function mountApp(root, options = {}) {
     onClick: () => openArrangement(),
   });
 
+  
+  const vocals = createVocals({
+    store,
+    ensureEngine: () => ensureEngine(),
+    claimMedia: () => claimMedia(),
+    setPlaying: (on) => setPlaying(on),
+    flash: (message, ms) => flash(message, ms),
+    render: () => render(),
+    getTime: () => (engine ? engine.ctx.currentTime : null),
+    nav: options.nav || globalThis.navigator,
+    raf: options.raf,
+  });
+
   const header = el('div', { class: 'header' }, [
     arrangeButton,
     el('div', { class: 'transport' }, [
-      el('button', { class: 'icon', type: 'button', text: '\u21b6', title: 'Undo', onClick: () => { store.undo(); render(); } }),
+      el('button', { class: 'icon', type: 'button', text: '\u21b6', title: 'Undo', onClick: () => { if (!vocals.isRecording()) store.undo(); render(); } }),
       playButton,
-      el('button', { class: 'icon', type: 'button', text: '\u21b7', title: 'Redo', onClick: () => { store.redo(); render(); } }),
+      vocals.recordButton,
+      el('button', { class: 'icon', type: 'button', text: '\u21b7', title: 'Redo', onClick: () => { if (!vocals.isRecording()) store.redo(); render(); } }),
       position,
     ]),
     el('button', {
@@ -17466,11 +20782,12 @@ function mountApp(root, options = {}) {
 
   root.appendChild(
     el('div', { class: 'app' }, [
+      vocals.recordBar,
       header,
       trackStrip,
       contextStrip,
       promptBar,
-      el('div', { class: 'gridwrap' }, [canvas, playheadCanvas, popover, gridHost]),
+      el('div', { class: 'gridwrap' }, [canvas, playheadCanvas, vocals.host, popover, gridHost]),
       footer,
       arrangeHost,
       libraryHost,
@@ -17664,6 +20981,7 @@ function mountApp(root, options = {}) {
       recoveries: out ? out.recoveries : 0,
       content: content ? content.report() : 'off',
       reverb: engine && engine.returns ? engine.returns.mode : 'none',
+      sweeps: engine ? engine.sweepMode : 'none',
       build: BUILD_STAMP,
       
       credits: [...new Set(store.state.song.tracks.map((t) => t.kitId))]
@@ -17675,6 +20993,7 @@ function mountApp(root, options = {}) {
 
   
   function pressPlay() {
+    if (vocals.isRecording()) return Promise.resolve();
     const out = claimMedia();
     
     if (out && out.setActive) out.setActive(false);
@@ -17785,6 +21104,7 @@ function mountApp(root, options = {}) {
     onPaged: () => onPaged(),
     onPosition: (tick) => {
       if (tick == null) {
+        vocals.placePlayhead(null);
         position.textContent = '';
         if (playButton.textContent !== '\u25b6') {
           playButton.textContent = '\u25b6';
@@ -17796,6 +21116,10 @@ function mountApp(root, options = {}) {
       }
       if (songMode && engine) followSection(engine.transport.positionTick());
       moveArrangePlayhead();
+      if (isAudioTrack(store.activeTrack())) {
+        const loop = sectionLengthTicks(store.state.song, store.activeSection()) || 1;
+        vocals.placePlayhead(tick / loop);
+      }
       const label = songMode ? `${sectionLabel(store.state.song, store.state.view.activeSectionId)} ` : '';
       const text = `${label}${formatPosition(tick).split('.').slice(0, 2).join('.')}`;
       if (position.textContent !== text) position.textContent = text;
@@ -17944,7 +21268,8 @@ function mountApp(root, options = {}) {
           store.setUi({ menu: null });
           const kit = kitById(kitId);
           const used = store.state.song.tracks.map((t) => t.shade);
-          const step = store.run((s) => addTrack(s, { kitId, shade: shadeForCategory(categoryOf(kit), used) }));
+          const name = kit.kind === 'audio' ? nextVocalsName(store.state.song) : undefined;
+          const step = store.run((s) => addTrack(s, { kitId, name, shade: shadeForCategory(categoryOf(kit), used) }));
           if (step && store.downloadKit) store.downloadKit(kitId);
           if (step) {
             store.setView({ activeTrackId: step.track.id, selectedNoteId: null });
@@ -17954,6 +21279,7 @@ function mountApp(root, options = {}) {
             if (engine) engine.ensureAll().catch(() => {});
           }
           render();
+          if (step) trackStrip.scrollLeft = trackStrip.scrollWidth || 0;
         },
       },
     });
@@ -18009,8 +21335,9 @@ function mountApp(root, options = {}) {
     const section = store.activeSection();
     const track = store.activeTrack();
     const flats = usesFlats(song.key, song.scaleId);
+    const audio = isAudioTrack(track);
 
-    contextStrip.appendChild(
+    if (!audio) contextStrip.appendChild(
       menuChip({
         label: 'Grid',
         value: gridById(view.gridResolutionId).label,
@@ -18059,6 +21386,10 @@ function mountApp(root, options = {}) {
       el('span', { class: 'menu-chip-label', text: 'Bars' }),
       barsField,
     ]));
+    if (audio) {
+      vocals.contextChips(contextStrip);
+      return;
+    }
 
     if (kitById(track.kitId, track).kind === 'pitched') {
       const chordState = view.chord || { on: false, size: 3, inversion: 0 };
@@ -18196,7 +21527,7 @@ function mountApp(root, options = {}) {
       menu: {
         title: `Sound for ${trackTitle(track)}`,
         current: track.kitId,
-        options: soundOptions(track.kind === 'drum' ? 'drum' : 'pitched', track),
+        options: soundOptions(track.kind === 'drum' ? 'drum' : track.kind === 'audio' ? 'audio' : 'pitched', track),
         onDisabled: (o) => flash(`${o.label} can't fit all the notes on this track`, 2500),
         onSelect: (id) => {
           store.setUi({ menu: null });
@@ -18219,7 +21550,7 @@ function mountApp(root, options = {}) {
   function soundOptions(kind, track = null) {
     const span = track && kind === 'pitched' ? trackSpan(store.state.song, track.id) : null;
     return allKits()
-      .filter((k) => (kind === 'any' ? true : kind === 'drum' ? k.kind === 'drum' : k.kind !== 'drum'))
+      .filter((k) => (kind === 'any' ? true : kind === 'drum' || kind === 'audio' ? k.kind === kind : k.kind === 'pitched'))
       .map((k) => {
         const fits = !span || k.id === track.kitId || octaveShiftToFit(span, k.range) !== null;
         return fits
@@ -18821,14 +22152,35 @@ function mountApp(root, options = {}) {
   }
 
   
-  function downloadBackup() {
+  async function downloadBackup() {
     try {
       const song = store.state.song;
       const name = `${(song.name || 'song').replace(/[^\w\-]+/g, '-').toLowerCase()}.pocketdaw.json`;
-      offerFile(new Blob([toBackup(song)], { type: 'application/json' }), name, { kind: 'backup', title: song.name });
+      const recs = {};
+      let missing = 0;
+      for (const id of new Set(recordingsIn(song).map((r) => r.recording.id))) {
+        const bytes = await recordings.wavBytes(id);
+        if (bytes) recs[id] = bytesToBase64(bytes);
+        else missing += 1;
+      }
+      if (missing) flash(`${missing} recording${missing === 1 ? ' is' : 's are'} not on this phone, so not in the backup`, 6000);
+      offerFile(new Blob([toBackup(song, recs)], { type: 'application/json' }), name, { kind: 'backup', title: song.name });
     } catch (err) {
       reportError(err, 'export');
     }
+  }
+
+  
+  async function takeRecordings(recs) {
+    const entries = Object.entries(recs || {});
+    for (const [id, b64] of entries) {
+      try {
+        await recordings.putWav(id, base64ToBytes(b64));
+      } catch (err) {
+        flash('A recording in that backup could not be stored on this phone', 6000);
+      }
+    }
+    return entries.length;
   }
 
   
@@ -18839,6 +22191,27 @@ function mountApp(root, options = {}) {
       offerFile(new Blob([toMidiFile(song)], { type: 'audio/midi' }), name, { kind: 'midi', title: song.name });
     } catch (err) {
       reportError(err, 'export MIDI');
+    }
+  }
+
+  
+  async function exportAbleton() {
+    try {
+      const song = store.state.song;
+      const vocalsHere = recordingsIn(song).length;
+      if (vocalsHere) flash('Preparing the vocals\u2026', 2000);
+      await vocalRenderer.prepare(song);
+      let missing = 0;
+      const renderedFor = (sid, tid) => {
+        const audio = vocalRenderer.peek(song, sid, tid);
+        if (!audio && song.sections[sid] && song.sections[sid].clips[tid] && song.sections[sid].clips[tid].recording) missing += 1;
+        return audio;
+      };
+      const zip = buildAbletonZip(song, renderedFor);
+      if (missing) flash(`${missing} recording${missing === 1 ? ' is' : 's are'} not on this phone, so silent in the WAV`, 6000);
+      offerFile(new Blob([zip.bytes], { type: 'application/zip' }), zip.name, { kind: 'zip', title: song.name, contents: zip.files });
+    } catch (err) {
+      reportError(err, 'export for Ableton');
     }
   }
 
@@ -18951,12 +22324,14 @@ function mountApp(root, options = {}) {
   function importJson(text, projectId = null) {
     {
       let song;
+      let recs = {};
       try {
-        song = fromBackup(text);
+        ({ song, recordings: recs } = readBackup(text));
       } catch (err) {
         flash(`Couldn't import that file: ${err.message}`, 8000);
         return;
       }
+      takeRecordings(recs);
       const already = songList.find((e) => e.importedFrom && e.importedFrom === song.id);
       song.importedFrom = song.importedFrom || song.id;
       song.id = newId('song');
@@ -18978,7 +22353,9 @@ function mountApp(root, options = {}) {
     pickFile('.json,application/json', (text) => {
       let backup;
       try {
-        backup = fromBackup(text);
+        const read = readBackup(text);
+        backup = read.song;
+        takeRecordings(read.recordings);
       } catch (err) {
         flash(`Couldn't read that backup: ${err.message}`, 8000);
         return;
@@ -19004,7 +22381,9 @@ function mountApp(root, options = {}) {
           const reader = new FileReader();
           reader.onload = () => {
             try {
-              const song = fromBackup(String(reader.result));
+              const read = readBackup(String(reader.result));
+              const song = read.song;
+              takeRecordings(read.recordings);
               store.replaceSong(song);
               showFullRange();
               blockAutosave = false;
@@ -19086,7 +22465,7 @@ function mountApp(root, options = {}) {
     render();
   }
 
-  function offerFile(blob, name, { kind = 'file', seconds = 0, title, buffer = null } = {}) {
+  function offerFile(blob, name, { kind = 'file', seconds = 0, title, buffer = null, contents = null } = {}) {
     const previous = store.state.ui.exportResult;
     if (previous && previous.url) URL.revokeObjectURL(previous.url);
 
@@ -19101,6 +22480,7 @@ function mountApp(root, options = {}) {
         bytes: blob.size,
         seconds,
         kind,
+        contents,
         canShare,
         buffer,
         playing: () => previewSource !== null,
@@ -19443,6 +22823,7 @@ function mountApp(root, options = {}) {
           ]),
           { label: 'Export audio', onSelect: () => (isOpen ? exportAudio() : songsApi.open(id).then(() => exportAudio())) },
           { label: 'Export MIDI', onSelect: () => (isOpen ? downloadMidi() : songsApi.open(id).then(() => downloadMidi())) },
+          { label: 'Export for Ableton Live', onSelect: () => (isOpen ? exportAbleton() : songsApi.open(id).then(() => exportAbleton())) },
           { label: 'Export backup', onSelect: () => (isOpen ? downloadBackup() : songsApi.open(id).then(() => downloadBackup())) },
           { label: 'Restore from a backup\u2026', onSelect: () => (isOpen ? restoreFromBackup() : songsApi.open(id).then(() => restoreFromBackup())) },
         ];
@@ -19574,6 +22955,11 @@ function mountApp(root, options = {}) {
     autosave();
     renderTrackStrip();
     renderContextStrip();
+    const audioTrack = isAudioTrack(store.activeTrack());
+    canvas.style.display = audioTrack ? 'none' : '';
+    playheadCanvas.style.display = audioTrack ? 'none' : '';
+    header.style.display = vocals.isRecording() ? 'none' : '';
+    vocals.renderLane();
     renderPrompt(promptBar, store, { onChange: render });
     renderSelectionMenu();
     renderFooter();
@@ -19627,6 +23013,7 @@ function mountApp(root, options = {}) {
 
   async function startPersistence() {
     const storage = options.storage || (await createStorage());
+    if (!options.recordingStore) recordings.setStorage(storage);
     storageKind = storage.kind;
     storageDurable = storage.durable;
     
@@ -19787,6 +23174,7 @@ function mountApp(root, options = {}) {
       return Boolean(engine && engine.transport.playing);
     },
     playhead,
+    vocals,
   };
 }
 
