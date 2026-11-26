@@ -4119,6 +4119,7 @@ function buildExampleSong(piece) {
   song.projectId = piece.folder || EXAMPLES_PROJECT_ID;
   song.builtIn = BUILT_IN;
   song.description = piece.description || null;
+  if (piece.master === false) song.master = false;
   if (piece.room && typeof piece.room === 'object') song.returns = { reverb: JSON.parse(JSON.stringify(piece.room)) };
 
   
@@ -4141,6 +4142,7 @@ function buildExampleSong(piece) {
         if (t[fx] && typeof t[fx] === 'object') track[fx] = JSON.parse(JSON.stringify(t[fx]));
       });
       if (Array.isArray(t.effects) && t.effects.length) track.effects = JSON.parse(JSON.stringify(t.effects));
+      if (t.hold === true) track.holdAcross = true;
       if (SHADE_NAMES.includes(t.shade)) {
         track.shade = t.shade;
         if (t.shadeChosen) track.shadeChosen = true;
@@ -5290,6 +5292,14 @@ function drawGrid(canvas, { song, view, kit, shade: shadeName, clip, layout, scr
 
   ctx.fillStyle = theme.ink;
   ctx.fillRect(0, 0, cssW, HEADER_HEIGHT);
+  if (marquee && marquee.pick === 'cols') {
+    const x1 = Math.max(layout.labelWidth, Math.min(marquee.x1, marquee.x2));
+    const x2 = Math.max(marquee.x1, marquee.x2);
+    if (x2 > x1) {
+      ctx.fillStyle = theme.purple;
+      ctx.fillRect(x1, 0, x2 - x1, HEADER_HEIGHT);
+    }
+  }
   
   ctx.fillStyle = theme.bar;
   ctx.font = '600 17px system-ui, -apple-system, sans-serif';
@@ -7239,6 +7249,112 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     drag.scrollTimer = timers.setTimeout(guard(step, 'grid.marqueeScroll'), FRAME_MS);
   }
 
+  // Select rows or columns. Hold a lane name for its row, or the ruler for one column (one step of the
+  // Grid setting); keep holding and slide for more. A note belongs to the column its start falls in.
+  // The band is drawn with the marquee's own fill.
+  const PICK_EDGE = 36;
+  function armPick(pan, axis, p) {
+    pan.longPress = timers.setTimeout(guard(() => {
+      if (drag !== pan || pan.moved) return;
+      beginPick(axis, p);
+    }, 'grid.pickHold'), LONG_PRESS_MS);
+  }
+
+  function pickRowIndex(layout, y) {
+    const row = rowAtY(layout, y, getScroll().y);
+    return row ? layout.rows.indexOf(row) : -1;
+  }
+
+  function pickColumn(layout, x) {
+    const g = layout.gridTicks;
+    const right = canvas.clientWidth || x;
+    const at = layout.xToTick(clamp(x, layout.labelWidth, Math.max(layout.labelWidth, right - 1)));
+    return clamp(snapDown(at, g), 0, Math.max(0, layout.totalTicks - g));
+  }
+
+  function beginPick(axis, p) {
+    const layout = getLayout();
+    const anchor = axis === 'cols' ? pickColumn(layout, p.x) : pickRowIndex(layout, p.y);
+    if (anchor < 0) return;
+    drag = { kind: 'pick', axis, anchor, current: anchor, x: p.x, y: p.y, startX: p.x, startY: p.y, moved: true };
+    store.setUi({ selectionMenu: false });
+    applyPick();
+  }
+
+  function updatePick() {
+    const layout = getLayout();
+    if (drag.axis === 'cols') {
+      drag.current = pickColumn(layout, drag.x);
+    } else {
+      const bottom = (canvas.clientHeight || drag.y + 1) - 1;
+      const index = pickRowIndex(layout, clamp(drag.y, HEADER_HEIGHT, bottom));
+      if (index >= 0) drag.current = index;
+    }
+    applyPick();
+  }
+
+  function applyPick() {
+    const layout = getLayout();
+    const notes = currentClip(store).notes.filter((n) => n.start < layout.totalTicks);
+    let ids;
+    if (drag.axis === 'cols') {
+      const g = layout.gridTicks;
+      const lo = Math.min(drag.anchor, drag.current);
+      const hi = Math.max(drag.anchor, drag.current) + g;
+      ids = notes.filter((n) => n.start >= lo && n.start < hi).map((n) => n.id);
+      const floor = HEADER_HEIGHT + layout.contentHeight - getScroll().y;
+      setMarquee({ x1: layout.tickToX(lo), y1: HEADER_HEIGHT, x2: layout.tickToX(hi), y2: Math.max(HEADER_HEIGHT + 1, Math.min(floor, canvas.clientHeight || floor)), pick: 'cols' });
+    } else {
+      const a = Math.min(drag.anchor, drag.current);
+      const b = Math.max(drag.anchor, drag.current);
+      const pitches = new Set(layout.rows.slice(a, b + 1).map((r) => r.midi));
+      ids = notes.filter((n) => pitches.has(n.pitch)).map((n) => n.id);
+      const top = layout.rows[a].y + HEADER_HEIGHT - getScroll().y;
+      const bottom = layout.rows[b].y + layout.rows[b].height + HEADER_HEIGHT - getScroll().y;
+      setMarquee({ x1: 0, y1: top, x2: Math.max(1, canvas.clientWidth || 4000), y2: bottom, pick: 'rows' });
+    }
+    const now = store.state.view.selection || [];
+    if (ids.length !== now.length || ids.some((id, i) => id !== now[i])) store.setView({ selection: ids, selectedNoteId: null });
+    (onDraw || onChange)();
+  }
+
+  function pickScroll() {
+    if (!drag || drag.kind !== 'pick') return;
+    const layout = getLayout();
+    const width = canvas.clientWidth || 0;
+    const height = canvas.clientHeight || 0;
+    const past = (value, low, high) => (value < low ? (value - low) / PICK_EDGE : value > high ? (value - high) / PICK_EDGE : 0);
+    const t = drag.axis === 'cols'
+      ? past(drag.x, layout.labelWidth + PICK_EDGE, width - PICK_EDGE)
+      : past(drag.y, HEADER_HEIGHT + PICK_EDGE, height - PICK_EDGE);
+    const speed = t ? Math.sign(t) * Math.max(MIN_STEP, Math.min(1, Math.abs(t)) * MAX_STEP) : 0;
+    if (!speed) {
+      if (drag.scrollTimer) {
+        timers.clearTimeout(drag.scrollTimer);
+        drag.scrollTimer = null;
+      }
+      return;
+    }
+    if (drag.scrollTimer) return;
+    const step = () => {
+      drag.scrollTimer = null;
+      if (!drag || drag.kind !== 'pick') return;
+      const before = getScroll();
+      setScroll(drag.axis === 'cols' ? { x: before.x + Math.round(speed), y: before.y } : { x: before.x, y: before.y + Math.round(speed) });
+      const after = getScroll();
+      if (after.x === before.x && after.y === before.y) return;
+      updatePick();
+      pickScroll();
+    };
+    drag.scrollTimer = timers.setTimeout(guard(step, 'grid.pickScroll'), FRAME_MS);
+  }
+
+  function endPick() {
+    if (drag.scrollTimer) timers.clearTimeout(drag.scrollTimer);
+    drag.scrollTimer = null;
+    setMarquee(null);
+  }
+
   function marqueeSelection(drag, layout) {
     const x1 = Math.min(drag.startX, drag.x);
     const x2 = Math.max(drag.startX, drag.x);
@@ -7341,6 +7457,7 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     pointers.set(e.pointerId, localPoint(e));
 
     if (pointers.size === 2) {
+      if (drag && drag.kind === 'pick') endPick();
       drag = null;
       const pts = [...pointers.values()];
       pinch = {
@@ -7358,6 +7475,7 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
       
       drag = beginPan(p, 'x');
       drag.cueAt = p.x;
+      if (!automationOn() && p.x >= layout.labelWidth) armPick(drag, 'cols', p);
       return;
     }
 
@@ -7372,6 +7490,7 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
       const labelRow = rowAtY(layout, p.y, getScroll().y);
       drag = beginPan(p, 'y');
       drag.auditionRow = labelRow ? labelRow.midi : null;
+      if (!automationOn() && labelRow) armPick(drag, 'rows', p);
       return;
     }
 
@@ -7471,6 +7590,14 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     drag.moved = true;
     if (drag.longPress) timers.clearTimeout(drag.longPress);
 
+    if (drag.kind === 'pick') {
+      drag.x = p.x;
+      drag.y = p.y;
+      updatePick();
+      pickScroll();
+      return;
+    }
+
     if (drag.kind === 'automation') {
       const layout = getLayout();
       const tick = Math.max(0, Math.round(layout.xToTick(p.x)));
@@ -7568,6 +7695,15 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     if (drag.longPress) timers.clearTimeout(drag.longPress);
 
     if (drag.kind === 'automation') {
+      drag = null;
+      onChange();
+      return;
+    }
+
+    if (drag.kind === 'pick') {
+      endPick();
+      const chosen = store.state.view.selection || [];
+      store.setUi({ selectionMenu: chosen.length > 0 });
       drag = null;
       onChange();
       return;
@@ -11812,23 +11948,89 @@ function collectEvents({ song, sectionId, fromTick, toTick, withSegments = false
   return events;
 }
 
-function collectSongEvents({ song, fromTick, toTick, withSegments = false }) {
+function collectSongEvents({ song, fromTick, toTick, withSegments = false, startTick = 0 }) {
   if (toTick <= fromTick) return [];
   const timeline = songTimeline(song);
   if (!timeline.totalTicks) return [];
   const events = [];
+  const holding = song.tracks.filter((t) => t.holdAcross && t.kind !== 'audio' && !(t.arp && t.arp.on));
   const firstIteration = Math.floor(fromTick / timeline.totalTicks);
   const lastIteration = Math.floor((toTick - 1) / timeline.totalTicks);
   for (let k = firstIteration; k <= lastIteration; k++) {
     const base = k * timeline.totalTicks;
-    for (const seg of timeline.segments) {
+    timeline.segments.forEach((seg, index) => {
       const segStart = base + seg.startTick;
-      if (segStart >= toTick || segStart + seg.lengthTicks <= fromTick) continue;
+      if (segStart >= toTick || segStart + seg.lengthTicks <= fromTick) return;
+      const from = events.length;
       collectSegment(song, seg.sectionId, segStart, seg.lengthTicks, fromTick, toTick, k, events, withSegments);
-    }
+      if (holding.length) holdAcrossSections(song, timeline.segments, index, base, startTick, holding, events, from);
+    });
   }
   events.sort((a, b) => a.tick - b.tick);
   return events;
+}
+
+// Notes hold across sections, a track switch that starts off. In Song mode and exports, a note that runs to
+// the end of its section carries on into the next section when that one starts with the same note, instead
+// of starting again. Looping one section plays as written: collectEvents never comes here.
+function holdsPitch(kit, pitch) {
+  if (kit.kind !== 'drum') return true;
+  // drum kits: only looped sounds (rain, noise); a kick on the last step never swallows the next downbeat
+  const lane = kit.lanes ? kit.lanes.find((l) => l.midi === pitch) : null;
+  return Boolean(lane && lane.loop === true);
+}
+
+function noteToEnd(clip, pitch, lengthTicks) {
+  if (!clip) return null;
+  for (const n of clip.notes) if (n.pitch === pitch && n.start < lengthTicks && n.start + n.duration >= lengthTicks) return n;
+  return null;
+}
+
+function noteFromStart(clip, pitch) {
+  if (!clip) return null;
+  for (const n of clip.notes) if (n.pitch === pitch && n.start === 0) return n;
+  return null;
+}
+
+function clipIn(song, seg, trackId) {
+  const section = song.sections[seg.sectionId];
+  return section ? section.clips[trackId] : null;
+}
+
+function holdAcrossSections(song, segments, index, base, startTick, tracks, events, from) {
+  const seg = segments[index];
+  const kept = [];
+  for (let i = from; i < events.length; i++) {
+    const ev = events[i];
+    const track = ev.kind ? null : tracks.find((t) => t.id === ev.trackId);
+    if (!track || !holdsPitch(kitById(track.kitId, track), ev.note.pitch)) {
+      kept.push(ev);
+      continue;
+    }
+    const pitch = ev.note.pitch;
+    // the same note at the top of a section, carried on from the section before: it is already sounding
+    if (ev.note.start === 0 && index > 0) {
+      const prev = segments[index - 1];
+      const held = noteToEnd(clipIn(song, prev, track.id), pitch, prev.lengthTicks);
+      if (held && base + prev.startTick + held.start >= startTick) continue;
+    }
+    // a note that reaches the end of its section: lengthen it through each section that starts with it
+    if (ev.note.start + ev.note.duration >= seg.lengthTicks) {
+      let end = ev.tick + ev.duration;
+      for (let j = index + 1; j < segments.length; j++) {
+        const next = segments[j];
+        const carried = noteFromStart(clipIn(song, next, track.id), pitch);
+        if (!carried) break;
+        end = base + next.startTick + Math.min(carried.duration, next.lengthTicks);
+        if (carried.duration < next.lengthTicks) break;
+      }
+      kept.push(end > ev.tick + ev.duration ? { ...ev, duration: end - ev.tick, endTick: end } : ev);
+      continue;
+    }
+    kept.push(ev);
+  }
+  events.length = from;
+  for (const ev of kept) events.push(ev);
 }
 
 const STRUM_DEFAULTS = Object.freeze({
@@ -13604,6 +13806,7 @@ function newNoteDefaults(store, onChange, track, onLive) {
         },
       }),
     ]),
+    holdAcrossRow(store, onChange, track),
     ...strumControls(store, onChange, track, onLive),
     el('div', { class: 'chiprow' }, [
       chip('Accent', {
@@ -13616,6 +13819,28 @@ function newNoteDefaults(store, onChange, track, onLive) {
       }),
     ]),
     el('p', { class: 'hint dim', text: 'Notes already placed keep what they have.' }),
+  ]);
+}
+
+// A switch with its title, under Velocity. Shown wherever it can do something: every pitched kit, and drum
+// kits with looped sounds (the nature beds).
+function holdAcrossRow(store, onChange, track) {
+  const kit = kitById(track.kitId, track);
+  if (kit.kind === 'drum' && !(kit.lanes || []).some((l) => l.loop === true)) return null;
+  const on = Boolean(track.holdAcross);
+  return el('div', { class: 'row holdrow' }, [
+    el('span', { class: 'row-label', text: 'Notes hold across sections' }),
+    el('button', {
+      class: `switch${on ? ' switch-on' : ''}`,
+      type: 'button',
+      role: 'switch',
+      'aria-checked': on ? 'true' : 'false',
+      'aria-label': 'Notes hold across sections',
+      onClick: () => {
+        store.run((s) => setTrackField(s, track.id, 'holdAcross', on ? undefined : true));
+        onChange();
+      },
+    }, [el('span', { class: 'switchknob' })]),
   ]);
 }
 
@@ -15065,6 +15290,7 @@ function mixSheet(store, onChange, onLive) {
 
   return el('div', {}, [
     el('h2', { text: 'Mix' }),
+    masterCard(store, onChange),
     ...everyTrackCards(store, onChange, onLive),
     el('div', { class: 'mixlist' }, rows),
     el('p', {
@@ -15072,6 +15298,18 @@ function mixSheet(store, onChange, onLive) {
       text: '100 is the level a track is written at; above that it is boosted. Tap a name to edit that track.',
     }),
   ]);
+}
+
+// Master to −14 LUFS: on unless the song turns it off. It changes exports only (see masterBuffer).
+function masterCard(store, onChange) {
+  const on = store.state.song.master !== false;
+  return fxCard('Master to \u221214 LUFS', null, {
+    on,
+    onToggle: () => {
+      store.run((s) => setSongField(s, 'master', on ? false : undefined));
+      onChange();
+    },
+  }, []);
 }
 
 function everyTrackCards(store, onChange, onLive) {
@@ -16608,6 +16846,7 @@ function createTransport({
   let anchorTime = 0; // ctx.currentTime at anchorTick
   let anchorTick = 0;
   let scheduledUpTo = 0; // transport tick, exclusive
+  let startedAt = 0; // transport tick playback began at; notes before it were never scheduled
   let map = null;
   let mapKey = '';
 
@@ -16708,7 +16947,7 @@ function createTransport({
     const toTick = Math.ceil(timeToTick(horizon));
     if (toTick <= scheduledUpTo) return;
     const events = mode === 'song'
-      ? collectSongEvents({ song, fromTick: scheduledUpTo, toTick, withSegments: true })
+      ? collectSongEvents({ song, fromTick: scheduledUpTo, toTick, withSegments: true, startTick: startedAt })
       : collectEvents({ song, sectionId: getSectionId(), fromTick: scheduledUpTo, toTick, withSegments: true });
     for (const ev of events) {
       const time = Math.max(ctx.currentTime, tickToTime(ev.tick));
@@ -16718,7 +16957,8 @@ function createTransport({
       }
       const within = ev.tick % (m.totalTicks || 1);
       const secondsPerTick = m.secondsPerTickAt(within);
-      onEvent({ ...ev, time, secondsPerTick, durationSeconds: ev.duration * secondsPerTick });
+      const durationSeconds = Number.isFinite(ev.endTick) ? tickToTime(ev.endTick) - tickToTime(ev.tick) : ev.duration * secondsPerTick;
+      onEvent({ ...ev, time, secondsPerTick, durationSeconds });
     }
     scheduledUpTo = toTick;
   }
@@ -16773,6 +17013,7 @@ function createTransport({
     loopedSection = null;
     const cue = Math.max(0, Number(takeCue()) || 0);
     anchorTick = (mode === 'song' ? songStartTick() : 0) + cue;
+    startedAt = anchorTick;
     ensureMap();
     scheduledUpTo = anchorTick;
     announceResume();
@@ -16803,6 +17044,7 @@ function createTransport({
     mapKey = '';
     anchorTime = ctx.currentTime + 0.03;
     anchorTick = mode === 'song' ? songStartTick() : 0;
+    startedAt = anchorTick;
     loopedSection = mode === 'section' ? getSectionId() : null;
     ensureMap();
     scheduledUpTo = anchorTick;
@@ -19644,7 +19886,8 @@ async function renderSong({
     if (event.kind === 'segment') {
       engine.handleEvent({ ...event, time, secondsPerTick });
     } else {
-      const at = engine.handleEvent({ ...event, time, secondsPerTick, durationSeconds: event.duration * secondsPerTick });
+      const durationSeconds = Number.isFinite(event.endTick) ? map.toSeconds(event.endTick) - map.toSeconds(event.tick) : event.duration * secondsPerTick;
+      const at = engine.handleEvent({ ...event, time, secondsPerTick, durationSeconds });
       if (Number.isFinite(at)) earliest = Math.min(earliest, at);
     }
   }
@@ -19660,6 +19903,296 @@ async function renderSong({
     buffer.copyToChannel(rendered.getChannelData(c).subarray(start), c);
   }
   return buffer;
+}
+
+// Master to −14 LUFS, for exports. Loudness as ITU-R BS.1770-4 measures it, one gain for the whole song,
+// then a look-ahead limiter that keeps true peaks at or under −1 dBTP. Plain arithmetic on the rendered
+// samples: the same song always masters the same way, and playback is never touched.
+const MASTER_TARGET_LUFS = -14;
+const MASTER_CEILING_DB = -1;
+const MASTER_MAX_GAIN_DB = 30; // a guard for a near-silent song with one loud click, not a musical limit
+const MASTER_MIN_SECONDS = 3; // shorter than this, loudness is not meaningful: peak-normalise instead
+const MASTER_LOOKAHEAD_MS = 5;
+const MASTER_RELEASE_MS = 200;
+const MASTER_TP_TAPS = 12; // input samples each side of the true-peak interpolator (BS.1770's is 12 a phase)
+const MASTER_PAUSE_SAMPLES = 1 << 20; // hand the main thread back about this often
+
+function kWeighting(rate) {
+  const biquad = (shelf, G, Q, fc) => {
+    const A = 10 ** (G / 40);
+    const w0 = 2 * Math.PI * (fc / rate);
+    const cos = Math.cos(w0);
+    const alpha = Math.sin(w0) / (2 * Q);
+    let b0;
+    let b1;
+    let b2;
+    let a0;
+    let a1;
+    let a2;
+    if (shelf) {
+      const s = 2 * Math.sqrt(A) * alpha;
+      b0 = A * ((A + 1) + (A - 1) * cos + s);
+      b1 = -2 * A * ((A - 1) + (A + 1) * cos);
+      b2 = A * ((A + 1) + (A - 1) * cos - s);
+      a0 = (A + 1) - (A - 1) * cos + s;
+      a1 = 2 * ((A - 1) - (A + 1) * cos);
+      a2 = (A + 1) - (A - 1) * cos - s;
+    } else {
+      b0 = (1 + cos) / 2;
+      b1 = -(1 + cos);
+      b2 = (1 + cos) / 2;
+      a0 = 1 + alpha;
+      a1 = -2 * cos;
+      a2 = 1 - alpha;
+    }
+    return [b0 / a0, b1 / a0, b2 / a0, a1 / a0, a2 / a0];
+  };
+  return [biquad(true, 4, 1 / Math.SQRT2, 1500), biquad(false, 0, 0.5, 38)];
+}
+
+// Integrated loudness from the K-weighted energy of each 100 ms stretch (summed over channels):
+// 400 ms blocks every 100 ms, the absolute gate at −70 LUFS and the relative gate 10 LU below.
+function gatedLoudness(subs, frames, rate) {
+  const seconds = frames / rate;
+  if (!(seconds >= 0.4)) return -Infinity;
+  const count = Math.round((seconds - 0.4) / 0.1) + 1;
+  const norm = 1 / (0.4 * rate);
+  const z = new Float64Array(count);
+  for (let j = 0; j < count; j++) {
+    let sum = 0;
+    for (let q = j; q < j + 4 && q < subs.length; q++) sum += subs[q];
+    z[j] = sum * norm;
+  }
+  const lufs = (e) => -0.691 + 10 * Math.log10(e);
+  let sum = 0;
+  let n = 0;
+  for (let j = 0; j < count; j++) if (lufs(z[j]) >= -70) { sum += z[j]; n++; }
+  if (!n) return -Infinity;
+  const relative = lufs(sum / n) - 10;
+  sum = 0;
+  n = 0;
+  for (let j = 0; j < count; j++) {
+    const l = lufs(z[j]);
+    if (l >= -70 && l > relative) { sum += z[j]; n++; }
+  }
+  return n ? lufs(sum / n) : -Infinity;
+}
+
+// One pass over the song: K-weight each channel and measure, optionally through a gain curve
+// (fill(k, out, length) writes the gain for control block k).
+async function measureLoudness(channels, frames, rate, hop, fill, breathe) {
+  const [f, h] = kWeighting(rate);
+  const subLen = Math.round(rate * 0.1);
+  const subs = new Float64Array(Math.ceil(frames / subLen) + 1);
+  const state = new Float64Array(channels.length * 8);
+  const gain = new Float32Array(hop);
+  const blocks = Math.ceil(frames / hop);
+  for (let k = 0; k < blocks; k++) {
+    const from = k * hop;
+    const to = Math.min(frames, from + hop);
+    if (fill) fill(k, gain, to - from);
+    for (let c = 0; c < channels.length; c++) {
+      const x = channels[c];
+      const o = c * 8;
+      let x1 = state[o]; let x2 = state[o + 1]; let y1 = state[o + 2]; let y2 = state[o + 3];
+      let u1 = state[o + 4]; let u2 = state[o + 5]; let v1 = state[o + 6]; let v2 = state[o + 7];
+      let sub = Math.floor(from / subLen);
+      let subEnd = (sub + 1) * subLen;
+      let acc = 0;
+      for (let i = from; i < to; i++) {
+        if (i === subEnd) { subs[sub] += acc; acc = 0; sub++; subEnd += subLen; }
+        const s = fill ? x[i] * gain[i - from] : x[i];
+        const y = f[0] * s + f[1] * x1 + f[2] * x2 - f[3] * y1 - f[4] * y2;
+        x2 = x1; x1 = s; y2 = y1; y1 = y;
+        const v = h[0] * y + h[1] * u1 + h[2] * u2 - h[3] * v1 - h[4] * v2;
+        u2 = u1; u1 = y; v2 = v1; v1 = v;
+        acc += v * v;
+      }
+      subs[sub] += acc;
+      state[o] = x1; state[o + 1] = x2; state[o + 2] = y1; state[o + 3] = y2;
+      state[o + 4] = u1; state[o + 5] = u2; state[o + 6] = v1; state[o + 7] = v2;
+    }
+    await breathe((to - from) * channels.length);
+  }
+  return gatedLoudness(subs, frames, rate);
+}
+
+let masterTpPhases = null;
+function truePeakPhases() {
+  if (masterTpPhases) return masterTpPhases;
+  const K = MASTER_TP_TAPS;
+  const sinc = (t) => (t === 0 ? 1 : Math.sin(Math.PI * t) / (Math.PI * t));
+  const blackman = (t) => 0.42 + 0.5 * Math.cos((Math.PI * t) / K) + 0.08 * Math.cos((2 * Math.PI * t) / K);
+  masterTpPhases = [1, 2, 3].map((p) => {
+    const frac = p / 4;
+    const taps = new Float64Array(2 * K);
+    let sum = 0;
+    for (let m = 0; m < 2 * K; m++) {
+      const t = m - (K - 1) - frac; // tap m reads x[n - (K - 1) + m]; it sits t samples from n + frac
+      taps[m] = sinc(t) * blackman(t);
+      sum += taps[m];
+    }
+    for (let m = 0; m < 2 * K; m++) taps[m] /= sum;
+    return taps;
+  });
+  return masterTpPhases;
+}
+
+// The highest true peak in samples [from, to) of any channel: each sample and the three points a
+// quarter, a half and three quarters of the way to the next.
+function truePeakIn(channels, frames, from, to) {
+  const phases = truePeakPhases();
+  const K = MASTER_TP_TAPS;
+  let peak = 0;
+  for (const x of channels) {
+    for (let i = from; i < to; i++) {
+      const a = Math.abs(x[i]);
+      if (a > peak) peak = a;
+      const base = i - (K - 1);
+      const inside = base >= 0 && base + 2 * K <= frames;
+      for (let p = 0; p < 3; p++) {
+        const taps = phases[p];
+        let y = 0;
+        if (inside) {
+          for (let m = 0; m < 2 * K; m++) y += taps[m] * x[base + m];
+        } else {
+          for (let m = 0; m < 2 * K; m++) {
+            const j = base + m;
+            if (j >= 0 && j < frames) y += taps[m] * x[j];
+          }
+        }
+        const b = Math.abs(y);
+        if (b > peak) peak = b;
+      }
+    }
+  }
+  return peak;
+}
+
+async function masterBuffer(buffer, {
+  target = MASTER_TARGET_LUFS,
+  ceilingDb = MASTER_CEILING_DB,
+  pause = null,
+} = {}) {
+  const rate = buffer.sampleRate;
+  const frames = buffer.length;
+  const channels = [];
+  for (let c = 0; c < buffer.numberOfChannels; c++) channels.push(buffer.getChannelData(c));
+  const report = { before: null, after: null, gainDb: 0, short: false, silent: false };
+  if (!frames || !channels.length) { report.silent = true; return report; }
+
+  let since = 0;
+  const breathe = async (count) => {
+    since += count;
+    if (pause && since >= MASTER_PAUSE_SAMPLES) { since = 0; await pause(); }
+  };
+
+  const ceiling = 10 ** (ceilingDb / 20);
+  const hop = Math.max(1, Math.round(rate / 1000)); // about 1 ms control blocks
+  const blocks = Math.ceil(frames / hop);
+
+  // Sample peaks per block, cheap; true peaks only where the limiter could be working.
+  const samplePeak = new Float32Array(blocks);
+  for (let k = 0; k < blocks; k++) {
+    const to = Math.min(frames, (k + 1) * hop);
+    let peak = 0;
+    for (const x of channels) {
+      for (let i = k * hop; i < to; i++) {
+        const a = x[i] < 0 ? -x[i] : x[i];
+        if (a > peak) peak = a;
+      }
+    }
+    samplePeak[k] = peak;
+  }
+  const truePeak = new Float32Array(blocks).fill(-1);
+  const truePeakOf = (k) => {
+    if (truePeak[k] < 0) truePeak[k] = truePeakIn(channels, frames, k * hop, Math.min(frames, (k + 1) * hop));
+    return truePeak[k];
+  };
+  const scaleAll = (g) => {
+    for (const x of channels) for (let i = 0; i < frames; i++) x[i] *= g;
+  };
+
+  if (frames / rate < MASTER_MIN_SECONDS) {
+    report.short = true;
+    let peak = 0;
+    for (let k = 0; k < blocks; k++) peak = Math.max(peak, truePeakOf(k));
+    if (!(peak > 0)) { report.silent = true; return report; }
+    const g = ceiling / peak;
+    scaleAll(g);
+    report.gainDb = 20 * Math.log10(g);
+    return report;
+  }
+
+  const before = await measureLoudness(channels, frames, rate, hop, null, breathe);
+  report.before = before;
+  if (!Number.isFinite(before)) { report.silent = true; return report; }
+
+  const lookahead = Math.max(1, Math.round(((MASTER_LOOKAHEAD_MS / 1000) * rate) / hop));
+  const release = Math.exp(-1 / Math.max(1, ((MASTER_RELEASE_MS / 1000) * rate) / hop));
+  const need = new Float32Array(blocks);
+  const held = new Float32Array(blocks);
+  const smooth = new Float32Array(blocks);
+  const MARGIN = 10 ** (6 / 20); // a true peak is never this far above the sample peak in practice
+
+  // The block-rate gain curve for an overall gain g (linear): what each block needs to keep its true
+  // peak under the ceiling, looked ahead so the gain is already down when a peak arrives, released slowly.
+  const plan = (g) => {
+    for (let k = 0; k < blocks; k++) {
+      need[k] = samplePeak[k] * g * MARGIN < ceiling ? 1 : Math.min(1, ceiling / (g * Math.max(1e-9, truePeakOf(k))));
+    }
+    let prev = 1;
+    for (let k = 0; k < blocks; k++) {
+      let ahead = need[k];
+      for (let j = k + 1; j <= k + lookahead && j < blocks; j++) if (need[j] < ahead) ahead = need[j];
+      prev = Math.min(ahead, 1 - (1 - prev) * release);
+      held[k] = prev;
+    }
+    let run = 0;
+    for (let k = 0; k < blocks; k++) {
+      run += held[k] - (k >= lookahead ? held[k - lookahead] : held[0]);
+      smooth[k] = (run + lookahead * held[0]) / lookahead;
+    }
+  };
+  // Per-sample gain in block k: a line between block centres, never above what block k needs, so no
+  // sample can pass the ceiling.
+  const fillFor = (g) => (k, out, length) => {
+    const cap = need[k];
+    const here = smooth[k];
+    const prior = k > 0 ? smooth[k - 1] : here;
+    const after = k + 1 < blocks ? smooth[k + 1] : here;
+    const half = hop / 2;
+    for (let i = 0; i < length; i++) {
+      const t = i + 0.5 - half;
+      const v = t < 0 ? here + (here - prior) * (t / hop) : here + (after - here) * (t / hop);
+      out[i] = g * (v < cap ? v : cap);
+    }
+  };
+
+  let gainDb = Math.min(MASTER_MAX_GAIN_DB, target - before);
+  let after = before;
+  for (let pass = 0; ; pass++) {
+    const g = 10 ** (gainDb / 20);
+    plan(g);
+    after = await measureLoudness(channels, frames, rate, hop, fillFor(g), breathe);
+    // the limiter takes a little loudness back: top up, at most twice
+    if (pass === 2 || !Number.isFinite(after) || Math.abs(target - after) < 0.05 || gainDb >= MASTER_MAX_GAIN_DB) break;
+    gainDb = Math.min(MASTER_MAX_GAIN_DB, gainDb + (target - after));
+  }
+  // `need`, `smooth` hold the plan the last measurement used: apply exactly that.
+  const g = 10 ** (gainDb / 20);
+  const fill = fillFor(g);
+  const out = new Float32Array(hop);
+  for (let k = 0; k < blocks; k++) {
+    const from = k * hop;
+    const to = Math.min(frames, from + hop);
+    fill(k, out, to - from);
+    for (const x of channels) for (let i = from; i < to; i++) x[i] *= out[i - from];
+    await breathe((to - from) * channels.length);
+  }
+  report.gainDb = gainDb;
+  report.after = after;
+  return report;
 }
 
 function encodeWav(buffer) {
@@ -20870,7 +21403,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-11-26 18:21';
+const BUILD_STAMP = '2026-11-26 23:45';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -22608,6 +23141,10 @@ function mountApp(root, options = {}) {
           if (stage === 'rendering') flash('Rendering\u2026', 30000);
         },
       });
+      if (song.master !== false) {
+        flash('Mastering\u2026', 30000);
+        await masterBuffer(buffer, { pause: () => new Promise((resolve) => timers.setTimeout(resolve, 0)) });
+      }
       const name = `${(song.name || 'song').replace(/[^\w\-]+/g, '-').toLowerCase()}.wav`;
       offerFile(new Blob([encodeWav(buffer)], { type: 'audio/wav' }), name, {
         kind: 'audio',
