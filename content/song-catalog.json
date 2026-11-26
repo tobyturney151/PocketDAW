@@ -1,7 +1,7 @@
 {
   "format": "pocketdaw.song-catalog",
   "version": 1,
-  "built": "2026-11-09",
+  "built": "2026-11-26",
   "projects": [
     {
       "id": "p_remote_ragtime",
@@ -31,6 +31,11 @@
     {
       "id": "p_remote_edm",
       "name": "EDM",
+      "parentId": "p_builtin_examples"
+    },
+    {
+      "id": "p_remote_chillhop",
+      "name": "Chillhop",
       "parentId": "p_builtin_examples"
     }
   ],
@@ -23515,10 +23520,10 @@
     {
       "id": "song_remote_sleepy-tea-in-the-morning",
       "name": "Sleepy Tea in the Morning",
-      "folder": "p_remote_edm",
-      "version": "1.0.0",
-      "file": "songs/sleepy-tea-in-the-morning-1_0_0.json",
-      "bytes": 30715,
+      "folder": "p_remote_chillhop",
+      "version": "1.0.1",
+      "file": "songs/sleepy-tea-in-the-morning-1_0_1.json",
+      "bytes": 30720,
       "bpm": 76,
       "key": 7,
       "scaleId": "naturalMinor",
