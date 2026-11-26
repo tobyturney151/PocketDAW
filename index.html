@@ -1299,7 +1299,7 @@ html, body {
 })();
 </script>
 <script>
-/* PocketDAW - phase 2. Built 2026-11-09 06:43 from src/. */
+/* PocketDAW - phase 2. Built 2026-11-26 18:21 from src/. */
 (function () {
 'use strict';
 
@@ -4140,6 +4140,11 @@ function buildExampleSong(piece) {
       ['tremolo', 'echo', 'distortion', 'chorus', 'flanger', 'phaser'].forEach((fx) => {
         if (t[fx] && typeof t[fx] === 'object') track[fx] = JSON.parse(JSON.stringify(t[fx]));
       });
+      if (Array.isArray(t.effects) && t.effects.length) track.effects = JSON.parse(JSON.stringify(t.effects));
+      if (SHADE_NAMES.includes(t.shade)) {
+        track.shade = t.shade;
+        if (t.shadeChosen) track.shadeChosen = true;
+      }
       return track;
     });
   } else {
@@ -4164,8 +4169,8 @@ function buildExampleSong(piece) {
     tracks.forEach((track, t) => {
       clips[track.id] = {
         id: `c_builtin_${slug(piece.name)}_${i}${tracks.length > 1 ? `_${t}` : ''}`,
-        notes: (lists[t] || []).map(([pitch, start, duration, velocity]) =>
-          createNote({ pitch, start, duration, velocity: velocity / 100 })),
+        notes: (lists[t] || []).map(([pitch, start, duration, velocity, flags]) =>
+          createNote({ pitch, start, duration, velocity: Math.round(velocity * 10) / 1000, flags: flags && typeof flags === 'object' ? flags : {} })),
       };
       const lanes = part.automation && part.automation[t];
       if (lanes) {
@@ -4175,7 +4180,7 @@ function buildExampleSong(piece) {
     });
     song.sections[id] = {
       id,
-      name: `Bars ${part.fromBar + 1}\u2013${part.fromBar + part.bars}`,
+      name: typeof part.name === 'string' && part.name ? part.name : `Bars ${part.fromBar + 1}\u2013${part.fromBar + part.bars}`,
       lengthBars: part.bars,
       unlocked: differs || undefined,
       key: differs ? part.key : undefined,
@@ -5764,11 +5769,11 @@ function removeAutomationPoint(song, ctx, paramId, index) {
   };
 }
 
-function setTrackSetting(song, trackId, group, field, value) {
+function setTrackSetting(song, trackId, group, field, value, defaults = null) {
   const track = trackById(song, trackId);
   if (!track) return null;
   const before = track[group] ? { ...track[group] } : undefined;
-  const next = { ...(track[group] || {}), [field]: value };
+  const next = { ...(defaults || {}), ...(track[group] || {}), [field]: value };
   if (before && before[field] === value) return null;
   track[group] = next;
   return {
@@ -5784,12 +5789,13 @@ function setTrackSetting(song, trackId, group, field, value) {
   };
 }
 
-function setEveryTrackSetting(song, group, field, value) {
+function setEveryTrackSetting(song, group, field, value, defaults = null) {
   const before = song.tracks.map((t) => (t[group] ? { ...t[group] } : undefined));
   if (before.every((g) => g && g[field] === value)) return null;
+  const after = song.tracks.map((track) => ({ ...(defaults || {}), ...(track[group] || {}), [field]: value }));
   const apply = () => {
-    song.tracks.forEach((track) => {
-      track[group] = { ...(track[group] || {}), [field]: value };
+    song.tracks.forEach((track, i) => {
+      track[group] = { ...after[i] };
     });
   };
   apply();
@@ -10384,6 +10390,67 @@ function spaceLabel(space) {
   return `A ${seats}-seat ${kind}`;
 }
 
+const paramSent = new WeakMap();
+
+function paramSame(param, value, at) {
+  const last = paramSent.get(param);
+  return Boolean(last) && last.value === value && last.at <= at;
+}
+
+function paramGlide(param, value, at, tau = 0.01) {
+  if (!param || !Number.isFinite(value) || !Number.isFinite(at)) return false;
+  if (paramSame(param, value, at)) return false;
+  if (param.cancelScheduledValues) param.cancelScheduledValues(at);
+  if (param.setTargetAtTime) param.setTargetAtTime(value, at, tau);
+  else param.value = value;
+  paramSent.set(param, { value, at });
+  return true;
+}
+
+function paramStep(param, value, at) {
+  if (!param || !Number.isFinite(value) || !Number.isFinite(at)) return false;
+  if (paramSame(param, value, at)) return false;
+  if (param.cancelScheduledValues) param.cancelScheduledValues(at);
+  if (param.setValueAtTime) param.setValueAtTime(value, at);
+  else param.value = value;
+  paramSent.set(param, { value, at });
+  return true;
+}
+
+function paramRamp(param, value, at, seconds = 0.02) {
+  if (!param || !Number.isFinite(value) || !Number.isFinite(at)) return false;
+  if (paramSame(param, value, at)) return false;
+  if (param.cancelScheduledValues) param.cancelScheduledValues(at);
+  if (param.setValueAtTime && param.linearRampToValueAtTime) {
+    param.setValueAtTime(param.value, at);
+    param.linearRampToValueAtTime(value, at + seconds);
+  } else {
+    param.value = value;
+  }
+  paramSent.set(param, { value, at });
+  return true;
+}
+
+function paramSet(param, value) {
+  if (!param || !Number.isFinite(value)) return false;
+  const last = paramSent.get(param);
+  if (last && last.value === value && last.at === -Infinity) return false;
+  param.value = value;
+  paramSent.set(param, { value, at: -Infinity });
+  return true;
+}
+
+function paramSetShared(param, value) {
+  if (!param || !Number.isFinite(value)) return false;
+  if (Math.abs(param.value - value) <= Math.abs(value) * 1e-6) return false;
+  param.value = value;
+  return true;
+}
+
+function paramForget(param) {
+  if (param) paramSent.delete(param);
+}
+
 const RESO = [4.46570214, 1.51387132, 0.93979296, 0.70710678, 0.59051105, 0.52972649, 0.50316379];
 
 const DEFAULT_DISTORTION = { on: false, drive: 30, tone: 100, tight: 0, mix: 100 };
@@ -10450,6 +10517,9 @@ const INVERSE = (() => {
 
 const ENVELOPE_HZ = 8;
 
+const TIGHT_GAP_MS = 120;
+const edgeNowMs = () => (typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now());
+
 function createEdge(ctx, settings = DEFAULT_DISTORTION, { match = true } = {}) {
   const input = ctx.createGain();
   const output = ctx.createGain();
@@ -10497,22 +10567,41 @@ function createEdge(ctx, settings = DEFAULT_DISTORTION, { match = true } = {}) {
     last.connect(wet);
   }
 
+  
   let tight = null; // { hz, filter, gain }
+  let lastTight = -Infinity;
+  let tightTimer = null;
+  let wantTight = null; // the value waiting for the gap
   function setTight(hz, at) {
-    if (tight && tight.hz === hz) return;
+    if (tight && tight.hz === hz) { wantTight = null; return; }
+    const wait = tight && at !== null && typeof setTimeout === 'function' ? TIGHT_GAP_MS - (edgeNowMs() - lastTight) : 0;
+    if (wait > 0) {
+      wantTight = hz;
+      if (!tightTimer) {
+        tightTimer = setTimeout(() => {
+          tightTimer = null;
+          if (wantTight !== null) { const next = wantTight; wantTight = null; setTight(next, ctx.currentTime); }
+        }, wait);
+      }
+      return;
+    }
+    wantTight = null;
     const gain = ctx.createGain();
     const filter = hz > 0 ? edgePole(ctx, hz, true) : null;
-    if (filter) { input.connect(filter); filter.connect(gain); } else input.connect(gain);
     gain.connect(head);
+    if (filter) filter.connect(gain);
     const old = tight;
     tight = { hz, filter, gain };
     if (!old || at === null) {
       gain.gain.value = 1;
+      input.connect(filter || gain);
       if (old) retire(old, 0);
       return;
     }
+    lastTight = edgeNowMs(); // only a live swap counts toward the gap
     gain.gain.setValueAtTime(0, at);
     gain.gain.linearRampToValueAtTime(1, at + 0.015);
+    input.connect(filter || gain);
     old.gain.gain.cancelScheduledValues(at);
     old.gain.gain.setValueAtTime(old.gain.gain.value, at);
     old.gain.gain.linearRampToValueAtTime(0, at + 0.015);
@@ -10531,10 +10620,7 @@ function createEdge(ctx, settings = DEFAULT_DISTORTION, { match = true } = {}) {
   function set(next, { live = false } = {}) {
     const s = readDistortion(next);
     const now = ctx.currentTime;
-    const to = (param, value) => {
-      if (live && param.setTargetAtTime) param.setTargetAtTime(value, now, 0.01);
-      else param.value = value;
-    };
+    const to = (param, value) => (live ? paramGlide(param, value, now, 0.01) : paramSet(param, value));
     const trim = inTrim(s.drive);
     trims.forEach((g) => to(g.gain, trim));
     const hz = toneHz(s.tone, ctx.sampleRate);
@@ -10551,6 +10637,7 @@ function createEdge(ctx, settings = DEFAULT_DISTORTION, { match = true } = {}) {
     output,
     set,
     dispose() {
+      if (tightTimer) { clearTimeout(tightTimer); tightTimer = null; }
       [input, output, dry, wet, head, ...lps, ...trims, ...nodes].forEach((n) => n && n.disconnect && n.disconnect());
       if (tight) retire(tight, 0);
     },
@@ -10732,11 +10819,15 @@ function chorusMatrix(stereo, mix) {
   return { dryL: 1 - m, dryR: 1 - m, lToL: m, lToR: m, rToL: 0, rToR: 0 };
 }
 
-function createChorus(ctx, settings = DEFAULT_CHORUS, hz = rateHz(readChorus(settings).rate)) {
+const CHORUS_REBUILD_FIELDS = 3;
+
+const CHORUS_REBUILD_GAP_MS = 120;
+const CHORUS_CROSS = 0.02;
+const chorusNowMs = () => (typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now());
+
+function chorusCore(ctx, settings, hz) {
+  const s0 = readChorus(settings);
   const input = ctx.createGain();
-  input.channelCount = 1;
-  input.channelCountMode = 'explicit';
-  input.channelInterpretation = 'speakers';
   const merge = ctx.createChannelMerger(2);
   const output = ctx.createGain();
   merge.connect(output);
@@ -10751,40 +10842,19 @@ function createChorus(ctx, settings = DEFAULT_CHORUS, hz = rateHz(readChorus(set
   lToL.connect(merge, 0, 0); lToR.connect(merge, 0, 1);
   rToL.connect(merge, 0, 0); rToR.connect(merge, 0, 1);
 
-  const tones = [null, null];
-  function setTone(hz, at) {
-    [[busL, [lToL, lToR], 0], [busR, [rToL, rToR], 1]].forEach(([bus, outs, side]) => {
-      const old = tones[side];
-      if (old && old.hz === hz) return;
-      const filter = chorusPole(ctx, hz);
-      const fade = g(old && at !== null ? 0 : 1);
-      bus.connect(filter); filter.connect(fade); outs.forEach((o) => fade.connect(o));
-      tones[side] = { hz, filter, fade };
-      if (!old) return;
-      if (at === null) { retire(bus, old, 0); return; }
-      fade.gain.setValueAtTime(0, at);
-      fade.gain.linearRampToValueAtTime(1, at + 0.015);
-      old.fade.gain.cancelScheduledValues(at);
-      old.fade.gain.setValueAtTime(old.fade.gain.value, at);
-      old.fade.gain.linearRampToValueAtTime(0, at + 0.015);
-      retire(bus, old, 60);
-    });
-  }
-  function retire(bus, old, ms) {
-    const drop = () => {
-      try { bus.disconnect(old.filter); } catch (err) {  }
-      try { old.filter.disconnect(); old.fade.disconnect(); } catch (err) {  }
-    };
-    if (ms > 0 && typeof setTimeout === 'function') setTimeout(drop, ms);
-    else drop();
-  }
+  const tones = [[busL, [lToL, lToR]], [busR, [rToL, rToR]]].map(([bus, outs]) => {
+    const filter = chorusPole(ctx, s0.tone);
+    outs.forEach((o) => filter.connect(o));
+    bus.connect(filter);
+    return filter;
+  });
 
   
   const start = ctx.currentTime;
   const lfos = Array.from({ length: 6 }, (_, k) => {
     const osc = ctx.createOscillator();
     osc.setPeriodicWave(chorusTriangle(ctx, k / 6));
-    osc.frequency.value = hz;
+    paramSet(osc.frequency, hz);
     const swing = g();
     osc.connect(swing);
     osc.start(start);
@@ -10796,20 +10866,17 @@ function createChorus(ctx, settings = DEFAULT_CHORUS, hz = rateHz(readChorus(set
       const delay = ctx.createDelay(0.06);
       const level = g();
       lfos[k].swing.connect(delay.delayTime);
-      input.connect(delay); delay.connect(level); level.connect(bus);
+      delay.connect(level); level.connect(bus);
+      input.connect(delay);
       copies.push({ side, k, delay, level });
     });
   });
 
-  let current = null;
   
-  function set(next, { live = false } = {}) {
+  function set(next, live) {
     const s = readChorus(next);
     const now = ctx.currentTime;
-    const to = (param, value) => {
-      if (live && param.setTargetAtTime) param.setTargetAtTime(value, now, 0.01);
-      else param.value = value;
-    };
+    const to = (param, value) => (live ? paramGlide(param, value, now, 0.01) : paramSet(param, value));
     const centre = s.delay / 1000;
     const swing = swingMs(s) / 1000;
     const used = new Set(chorusPhases(s.voices, s.stereo).map(([side, k]) => `${side}:${k}`));
@@ -10821,20 +10888,128 @@ function createChorus(ctx, settings = DEFAULT_CHORUS, hz = rateHz(readChorus(set
     const m = chorusMatrix(s.stereo, s.mix);
     to(dryL.gain, m.dryL); to(dryR.gain, m.dryR);
     to(lToL.gain, m.lToL); to(lToR.gain, m.lToR); to(rToL.gain, m.rToL); to(rToR.gain, m.rToR);
-    setTone(s.tone, live ? now : null);
-    current = s;
   }
 
-  set(settings);
+  function rate(at, value, glide) {
+    lfos.forEach((l) => (glide ? paramGlide(l.osc.frequency, value, at, 0.01) : paramStep(l.osc.frequency, value, at)));
+  }
+
+  set(s0, false);
+
+  return {
+    input,
+    output,
+    tone: s0.tone,
+    set,
+    rate,
+    dispose() {
+      lfos.forEach((l) => { try { l.osc.stop(); } catch (err) {  } });
+      [input, merge, output, dryL, dryR, busL, busR, lToL, lToR, rToL, rToR, ...tones,
+        ...lfos.flatMap((l) => [l.osc, l.swing]),
+        ...copies.flatMap((c) => [c.delay, c.level])]
+        .forEach((n) => n && n.disconnect && n.disconnect());
+    },
+  };
+}
+
+function chorusChanged(a, b) {
+  return ['rate', 'depth', 'delay', 'mix', 'voices', 'stereo', 'tone'].filter((k) => a[k] !== b[k]).length;
+}
+
+function createChorus(ctx, settings = DEFAULT_CHORUS, hz = rateHz(readChorus(settings).rate)) {
+  const input = ctx.createGain();
+  input.channelCount = 1;
+  input.channelCountMode = 'explicit';
+  input.channelInterpretation = 'speakers';
+  const output = ctx.createGain();
+
+  
+  let speeds = [{ at: -Infinity, value: hz, glide: false }];
+  const speedAt = (t) => speeds.reduce((v, r) => (r.at <= t ? r.value : v), speeds[0].value);
+
+  let current = readChorus(settings);
+  const retiring = new Set();
+  let active = attach(current, 1);
+  let lastRebuild = -Infinity;
+  let rebuildTimer = null;
+
+  function attach(s, level) {
+    const now = ctx.currentTime;
+    const core = chorusCore(ctx, s, speedAt(now));
+    speeds.filter((r) => r.at > now).forEach((r) => core.rate(r.at, r.value, r.glide));
+    const fade = ctx.createGain();
+    fade.gain.value = level;
+    core.output.connect(fade);
+    fade.connect(output);
+    input.connect(core.input); // last: the network is whole before any sound reaches it
+    return { core, fade };
+  }
+
+  function retire(entry, ms) {
+    retiring.add(entry);
+    const drop = () => {
+      retiring.delete(entry);
+      try { input.disconnect(entry.core.input); } catch (err) {  }
+      try { entry.fade.disconnect(); } catch (err) {  }
+      entry.core.dispose();
+    };
+    if (ms > 0 && typeof setTimeout === 'function') setTimeout(drop, ms);
+    else drop();
+  }
+
+  
+  function rebuild(s, live) {
+    lastRebuild = chorusNowMs();
+    const old = active;
+    if (!live) {
+      active = attach(s, 1);
+      retire(old, 0);
+      return;
+    }
+    const now = ctx.currentTime;
+    active = attach(s, 0);
+    active.fade.gain.setValueAtTime(0, now);
+    active.fade.gain.linearRampToValueAtTime(1, now + CHORUS_CROSS);
+    old.fade.gain.cancelScheduledValues(now);
+    old.fade.gain.setValueAtTime(old.fade.gain.value, now);
+    old.fade.gain.linearRampToValueAtTime(0, now + CHORUS_CROSS);
+    retire(old, 80);
+  }
+
+  
+  function set(next, { live = false } = {}) {
+    const s = readChorus(next);
+    const was = current;
+    current = s;
+    const toneChanged = s.tone !== active.core.tone;
+    if (!toneChanged && chorusChanged(was, s) < CHORUS_REBUILD_FIELDS) {
+      active.core.set(s, live);
+      return;
+    }
+    const wait = live && toneChanged && typeof setTimeout === 'function'
+      ? CHORUS_REBUILD_GAP_MS - (chorusNowMs() - lastRebuild)
+      : 0;
+    if (wait > 0) {
+      active.core.set(s, live);
+      if (!rebuildTimer) {
+        rebuildTimer = setTimeout(() => {
+          rebuildTimer = null;
+          if (current.tone !== active.core.tone) rebuild(current, true);
+        }, wait);
+      }
+      return;
+    }
+    rebuild(s, live);
+  }
 
   
   function rate(at, value, glide = false) {
-    lfos.forEach((l) => {
-      const f = l.osc.frequency;
-      f.cancelScheduledValues(at);
-      if (glide && f.setTargetAtTime) f.setTargetAtTime(value, at, 0.01);
-      else f.setValueAtTime(value, at);
-    });
+    if (!Number.isFinite(value) || value <= 0 || !Number.isFinite(at)) return;
+    const now = ctx.currentTime;
+    const past = speeds.filter((r) => r.at <= Math.min(at, now));
+    speeds = [past.length ? past[past.length - 1] : speeds[0], ...speeds.filter((r) => r.at > now && r.at < at), { at, value, glide }];
+    active.core.rate(at, value, glide);
+    retiring.forEach((e) => e.core.rate(at, value, glide));
   }
 
   return {
@@ -10844,12 +11019,10 @@ function createChorus(ctx, settings = DEFAULT_CHORUS, hz = rateHz(readChorus(set
     rate,
     get settings() { return { ...current }; },
     dispose() {
-      lfos.forEach((l) => { try { l.osc.stop(); } catch (err) {  } });
-      [input, merge, output, dryL, dryR, busL, busR, lToL, lToR, rToL, rToR,
-        ...lfos.flatMap((l) => [l.osc, l.swing]),
-        ...copies.flatMap((c) => [c.delay, c.level]),
-        ...tones.filter(Boolean).flatMap((t) => [t.filter, t.fade])]
-        .forEach((n) => n && n.disconnect && n.disconnect());
+      if (rebuildTimer) { clearTimeout(rebuildTimer); rebuildTimer = null; }
+      retire(active, 0);
+      [...retiring].forEach((e) => retire(e, 0));
+      [input, output].forEach((n) => n.disconnect());
     },
   };
 }
@@ -11266,11 +11439,7 @@ function createSweep(ctx, kind, settings) {
     current = k.read(next);
     if (!node) return;
     const now = ctx.currentTime;
-    k.controls.forEach((c) => {
-      const p = node.parameters.get(c);
-      p.cancelScheduledValues(now);
-      p.setValueAtTime(sweepValue(current, c), now);
-    });
+    k.controls.forEach((c) => paramStep(node.parameters.get(c), sweepValue(current, c), now));
   }
 
   function clock(at, hz, phase = null) {
@@ -14179,7 +14348,7 @@ function chipRow(label, options, current, onPick) {
 function duckCard(store, track, onChange, onLive) {
   const duck = track.duck || DEFAULT_DUCK;
   const set = (field, value) => {
-    store.run((s) => setTrackSetting(s, track.id, 'duck', field, value));
+    store.run((s) => setTrackSetting(s, track.id, 'duck', field, value, DEFAULT_DUCK));
     onChange();
   };
   const triggers = [
@@ -14194,11 +14363,11 @@ function duckCard(store, track, onChange, onLive) {
     value: duck.depth === undefined ? 60 : duck.depth,
     ariaLabel: 'Duck depth',
     onDrag: (value) => {
-      store.run((s) => setTrackSetting(s, track.id, 'duck', 'depth', value), { coalesce: true });
+      store.run((s) => setTrackSetting(s, track.id, 'duck', 'depth', value, DEFAULT_DUCK), { coalesce: true });
       if (onLive) onLive();
     },
     onCommit: (value) => {
-      store.run((s) => setTrackSetting(s, track.id, 'duck', 'depth', value), { coalesce: true });
+      store.run((s) => setTrackSetting(s, track.id, 'duck', 'depth', value, DEFAULT_DUCK), { coalesce: true });
       if (onLive) onLive();
       onChange();
     },
@@ -14919,7 +15088,7 @@ function everyTrackCards(store, onChange, onLive) {
     return tracks.every((t) => JSON.stringify(read(t)) === first) ? read(tracks[0]) : undefined;
   };
   const setAll = (group, field, value, { live = false } = {}) => {
-    store.run((s) => setEveryTrackSetting(s, group, field, value), { coalesce: live });
+    store.run((s) => setEveryTrackSetting(s, group, field, value, group === 'duck' ? DEFAULT_DUCK : null), { coalesce: live });
     if (live) {
       if (onLive) onLive();
     } else {
@@ -17271,7 +17440,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     if (player.chorus) player.chorus.output.disconnect();
     if (player.flanger) player.flanger.output.disconnect();
     if (player.phaser) player.phaser.output.disconnect();
-    if (player.fold) player.fold.disconnect();
+    if (player.foldMono) { player.foldMono.disconnect(); player.foldWide.disconnect(); }
     let from = player.sampler.output;
     if (player.filtered && player.filter) {
       from.connect(player.filter);
@@ -17287,60 +17456,72 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       from = fx.output;
     });
     if (stereo.length) {
-      if (!player.fold) player.fold = ctx.createGain();
-      from.connect(player.fold);
-      from = player.fold;
+      if (!player.foldMono) {
+        const path = (channels) => {
+          const n = ctx.createGain();
+          n.channelCountMode = 'explicit';
+          n.channelInterpretation = 'speakers';
+          n.channelCount = channels;
+          n.gain.value = 0;
+          return n;
+        };
+        player.foldMono = path(1);
+        player.foldWide = path(2);
+      }
+      from.connect(player.foldMono);
+      from.connect(player.foldWide);
+      player.foldMono.connect(player.tremolo);
+      player.foldWide.connect(player.tremolo);
       const track = trackById(player.trackId);
-      if (track) setFold(player, track);
+      if (track) setFold(player, track, false);
+      return;
     }
     from.connect(player.tremolo);
   }
 
   
-  function setFold(player, track) {
-    if (!player.fold) return;
-    const wide = (player.chorus && readChorus(track.chorus).stereo !== 'mono')
+  function setFold(player, track, live = true) {
+    if (!player.foldMono) return;
+    const wide = Boolean((player.chorus && readChorus(track.chorus).stereo !== 'mono')
       || (player.flanger && readFlanger(track.flanger).stereo > 0)
-      || (player.phaser && readPhaser(track.phaser).stereo > 0);
-    const f = player.fold;
-    f.channelCountMode = 'explicit';
-    f.channelInterpretation = 'speakers';
-    f.channelCount = wide ? 2 : 1;
-    f.gain.value = wide ? Math.SQRT1_2 : 1;
+      || (player.phaser && readPhaser(track.phaser).stereo > 0));
+    const now = ctx.currentTime;
+    const to = (param, value) => (live ? paramGlide(param, value, now, 0.005) : paramSet(param, value));
+    to(player.foldMono.gain, wide ? 0 : 1);
+    to(player.foldWide.gain, wide ? Math.SQRT1_2 : 0);
   }
 
   
   
   function applyMix(player, track, { ramp = true } = {}) {
     const now = ctx.currentTime;
-    if (ramp) {
-      player.gain.gain.cancelScheduledValues(now);
-      player.gain.gain.setValueAtTime(player.gain.gain.value, now);
-      player.gain.gain.linearRampToValueAtTime(track.gain, now + 0.02);
-    } else {
-      player.gain.gain.value = track.gain;
-    }
+    const level = Number.isFinite(track.gain) ? track.gain : 0.8;
+    if (ramp) paramRamp(player.gain.gain, level, now, 0.02);
+    else paramSet(player.gain.gain, level);
 
     if (player.pan && !laneOwns(track, ['pan'])) {
-      if (ramp) {
-        player.pan.pan.cancelScheduledValues(now);
-        player.pan.pan.setValueAtTime(player.pan.pan.value, now);
-        player.pan.pan.linearRampToValueAtTime(clampPan(track.pan), now + 0.02);
-      } else {
-        player.pan.pan.value = clampPan(track.pan);
+      const pan = clampPan(track.pan);
+      if (Math.abs(player.pan.pan.value - pan) > 1e-6) {
+        if (ramp) {
+          paramForget(player.pan.pan);
+          paramRamp(player.pan.pan, pan, now, 0.02);
+        } else {
+          paramSetShared(player.pan.pan, pan);
+        }
       }
     }
 
     const sends = track.sends || {};
-    if (!laneOwns(track, ['reverb'])) player.sendReverb.gain.value = Math.max(0, Math.min(100, sends.reverb || 0)) / 100;
+    if (!laneOwns(track, ['reverb'])) paramSetShared(player.sendReverb.gain, Math.max(0, Math.min(100, sends.reverb || 0)) / 100);
 
     const fx = (track.effects || []).find((e) => e.typeId === 'filter');
     const on = Boolean(fx && !fx.bypass) || filterLaneAnywhere(track);
     if (player.filter && on) {
       const params = (fx && fx.params) || {};
-      player.filter.type = filterModeFor(track);
-      if (!laneOwns(track, ['cutoff', 'lowpass', 'highpass'])) player.filter.frequency.value = Math.max(20, Math.min(20000, params.cutoff || 20000));
-      player.filter.Q.value = Math.max(0.0001, Math.min(20, params.q || 1));
+      const mode = filterModeFor(track);
+      if (player.filter.type !== mode) player.filter.type = mode;
+      if (!laneOwns(track, ['cutoff', 'lowpass', 'highpass'])) paramSetShared(player.filter.frequency, Math.max(20, Math.min(20000, params.cutoff || 20000)));
+      paramSet(player.filter.Q, Math.max(0.0001, Math.min(20, params.q || 1)));
     }
     if (on !== player.filtered) {
       player.filtered = on;
@@ -17542,7 +17723,12 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     returns.update(song.returns || DEFAULT_RETURNS);
     song.tracks.forEach((track) => {
       const player = players.get(track.id);
-      if (player) applyMix(player, track);
+      if (!player) return;
+      try {
+        applyMix(player, track);
+      } catch (err) {
+        reportOnce(`mix ${track.id}: ${(err && err.message) || 'refused'}`);
+      }
     });
     returns.setUsed(sendsInUse());
     refreshLive();
@@ -18048,7 +18234,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     if (p.chorus) p.chorus.dispose();
     if (p.flanger) p.flanger.dispose();
     if (p.phaser) p.phaser.dispose();
-    if (p.fold) p.fold.disconnect();
+    if (p.foldMono) { p.foldMono.disconnect(); p.foldWide.disconnect(); }
     teardownEcho(p);
     (p.tremVoices || []).forEach((v) => {
       try { v.src.stop(); } catch (err) {  }
@@ -20684,7 +20870,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-11-09 06:43';
+const BUILD_STAMP = '2026-11-26 18:21';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
