@@ -277,6 +277,13 @@ html, body {
 /* No transition on the sheet: the pull has to track the finger exactly, and
    easing a transform that is being set every frame lags behind it. */
 .sheet h2 { font-size: 16px; font-weight: 500; margin: 0 0 14px; }
+/* Export progress: a bar, what is happening, and Cancel. Busy (no percentage to show) when the browser renders
+   without pausing, as Firefox does. */
+.exportbar { position: relative; height: 8px; border-radius: 4px; background: var(--panel2); overflow: hidden; margin: 4px 0 0; }
+.exportbar-fill { height: 100%; width: 0; border-radius: 4px; background: var(--purple); transition: width 160ms linear; }
+.exportbar-busy .exportbar-fill { width: 30%; transition: none; animation: exportbusy 1.3s ease-in-out infinite; }
+@keyframes exportbusy { from { transform: translateX(-100%); } to { transform: translateX(340%); } }
+.exportlabel { font-variant-numeric: tabular-nums; }
 .label { font-size: 11px; color: var(--text2); margin: 14px 0 6px; }
 .hint { font-size: 12px; color: var(--text2); line-height: 1.5; margin: 12px 0 0; }
 .hint.dim { color: var(--text3); }
@@ -506,11 +513,18 @@ html, body {
   /* Both ways: it scrolls sideways itself, and a vertical swipe on it goes on
      to the page. pan-x alone meant only the strip beside it scrolled. */
   touch-action: pan-x pan-y;
-  overscroll-behavior: contain;
+  /* Contained sideways only. Contained both ways, a vertical swipe that began on the grid stopped here
+     instead of scrolling the screen, so a long song could only be scrolled from its margins. */
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
   scrollbar-width: none;
   padding-bottom: 4px;
 }
 .arrscroll::-webkit-scrollbar { display: none; }
+/* Each row is as wide as everything in it. A sticky track name can only stay within its own row, and a
+   row the width of the screen scrolled away after one screenful, taking the names with it. */
+.arrscroll > .arrrow,
+.arrscroll > .arrlanes { width: max-content; min-width: 100%; }
 .arrrow { display: flex; align-items: stretch; gap: 6px; margin-bottom: 6px; }
 .arrheader { margin-bottom: 8px; }
 .arrcells { display: flex; gap: 6px; flex: 0 0 auto; }
@@ -1138,6 +1152,8 @@ html, body {
 /* The arrangement's header: undo, play, redo, Loop, Mix, more. The back label
    gives way (with an ellipsis) before any button is pushed off the screen. */
 .arrscreen .libhead .libback { min-width: 0; flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Pinned to the top while the song scrolls under it, edge to edge over the screen's side padding. */
+.arrscreen .libhead { position: sticky; top: 0; z-index: 4; background: var(--ink); margin: 0 -16px; padding: 14px 16px 8px; }
 .arrscreen .arrhead-actions { flex: 0 0 auto; gap: 6px; }
 .arrundo { width: 32px; min-width: 32px; padding: 0; font-size: 22px; }
 
@@ -4279,6 +4295,7 @@ function createStore(initialSong) {
       sheet: null, // 'song' | 'track' | 'note' | 'mix' | 'sections' | null
       sectionMenu: null, // section id whose actions are showing, if any
       exportResult: null, // a finished file waiting to be shared or saved
+      exporting: null, // an export under way: { stage, fraction, cancel }, shown in the export sheet
       selectionMenu: false, // the small menu over a fresh selection
       screen: 'editor', // 'library' | 'arrange' | 'editor' — what is on top
       library: { tab: 'collections', project: null }, // the library's own state
@@ -7339,7 +7356,9 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     const step = () => {
       drag.scrollTimer = null;
       if (!drag || drag.kind !== 'pick') return;
-      const before = getScroll();
+      // A copy: getScroll() is the live position, which setScroll changes in place. Compared with itself, the
+      // scroll always looked finished, so holding at the edge moved the grid one step and stopped.
+      const before = { ...getScroll() };
       setScroll(drag.axis === 'cols' ? { x: before.x + Math.round(speed), y: before.y } : { x: before.x, y: before.y + Math.round(speed) });
       const after = getScroll();
       if (after.x === before.x && after.y === before.y) return;
@@ -7543,6 +7562,8 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
         originPitches: new Map(currentClip(store).notes.map((n) => [n.id, n.pitch])),
         wasSelected: inSelection,
         moved: false,
+        pressX: p.x,
+        pressY: p.y,
       };
       return;
     }
@@ -7556,6 +7577,8 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
       originStart: hit.start,
       originPitch: hit.pitch,
       moved: false,
+      pressX: p.x,
+      pressY: p.y,
     };
     if (onLongPress) {
       drag.longPress = timers.setTimeout(guard(() => {
@@ -7643,6 +7666,22 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
       return;
     }
 
+    if (drag.kind === 'moveMany' || drag.kind === 'resizeMany' || drag.kind === 'move' || drag.kind === 'resize') {
+      drag.x = p.x;
+      drag.y = p.y;
+      if (!drag.armedEdge && Math.hypot(p.x - drag.pressX, p.y - drag.pressY) > NOTE_EDGE_ARM) drag.armedEdge = true;
+      applyNoteDrag(p);
+      noteEdgeScroll(drag);
+      return;
+    }
+  }
+
+  // Moving or stretching notes, one or a selection, from where the finger is now. Called on every move and again
+  // each time the edge scroll carries the grid along under a finger that is holding still.
+  function applyNoteDrag(p) {
+    const layout = getLayout();
+    const g = layout.gridTicks;
+    const dx = p.x - drag.startX;
     if (drag.kind === 'moveMany' || drag.kind === 'resizeMany') {
       if (!drag.selectionApplied) {
         drag.selectionApplied = true;
@@ -7688,11 +7727,54 @@ function attachGestures({ canvas, store, getLayout, getScroll, setScroll, onChan
     onChange();
   }
 
+  // Dragging notes towards an edge of the grid scrolls it, so they can be carried to any bar of the section, not
+  // only as far as the screen shows. The finger has to travel a little first, so a note picked up beside an edge
+  // does not set the grid running.
+  const NOTE_EDGE = 48;
+  const NOTE_EDGE_ARM = 24;
+  function noteEdgeScroll(d) {
+    const layout = getLayout();
+    const width = canvas.clientWidth || 0;
+    const height = canvas.clientHeight || 0;
+    const past = (value, low, high) => (value < low ? (value - low) / NOTE_EDGE : value > high ? (value - high) / NOTE_EDGE : 0);
+    const ax = d.armedEdge ? past(d.x, layout.labelWidth + NOTE_EDGE, width - NOTE_EDGE) : 0;
+    const ay = d.armedEdge ? past(d.y, HEADER_HEIGHT + NOTE_EDGE, height - NOTE_EDGE) : 0;
+    const speed = (t) => (t ? Math.sign(t) * Math.max(MIN_STEP, Math.min(1, Math.abs(t)) * MAX_STEP) : 0);
+    const sx = Math.round(speed(ax));
+    const sy = Math.round(speed(ay));
+    if (!sx && !sy) {
+      if (d.scrollTimer) {
+        timers.clearTimeout(d.scrollTimer);
+        d.scrollTimer = null;
+      }
+      return;
+    }
+    if (d.scrollTimer) return;
+    const step = () => {
+      d.scrollTimer = null;
+      if (drag !== d) return;
+      const before = { ...getScroll() };
+      setScroll({ x: before.x + sx, y: before.y + sy });
+      const after = getScroll();
+      const movedX = after.x - before.x;
+      if (!movedX && after.y === before.y) return;
+      // The notes stay under the finger: the grid moved by movedX, so the drag has come that much further.
+      d.startX -= movedX;
+      applyNoteDrag({ x: d.x, y: d.y });
+      noteEdgeScroll(d);
+    };
+    d.scrollTimer = timers.setTimeout(guard(step, 'grid.noteScroll'), FRAME_MS);
+  }
+
   function onUp() {
     pointers.clear();
     pinch = null;
     if (!drag) return;
     if (drag.longPress) timers.clearTimeout(drag.longPress);
+    if (drag.scrollTimer && drag.kind !== 'marquee' && drag.kind !== 'pick') {
+      timers.clearTimeout(drag.scrollTimer);
+      drag.scrollTimer = null;
+    }
 
     if (drag.kind === 'automation') {
       drag = null;
@@ -9461,6 +9543,7 @@ function arrangementMatrix(store, onChange, {
   onLive,
   onPlayhead,
   onPickSection = null,
+  onStartHere = null,
   hint = true,
 }) {
   const { song, view } = store.state;
@@ -9887,6 +9970,10 @@ function arrangementMatrix(store, onChange, {
       const x = Math.max(0, Math.min(width, (e.clientX || 0) - rect.left));
       const beatTicks = lengthTicks / total;
       const tick = Math.min(lengthTicks - beatTicks, Math.round(((x / width) * lengthTicks) / beatTicks) * beatTicks);
+      if (onStartHere && onStartHere(sectionId, Math.max(0, tick))) {
+        onChange();
+        return;
+      }
       store.setView({ activeSectionId: sectionId, cueTick: Math.max(0, tick), selectedNoteId: null });
       onChange();
     });
@@ -10201,6 +10288,7 @@ function arrangementScreen(store, onChange, {
   songMode,
   toggleMode,
   onPickSection = null,
+  onStartHere = null,
   openSongMenu,
   openMix,
   onSongSettings,
@@ -10294,7 +10382,7 @@ function arrangementScreen(store, onChange, {
     songControls(store, onChange, onSongSettings),
     
     el('div', { class: 'arrscreen-body' }, [
-      arrangementMatrix(store, onChange, { onPickSection, onTrackMenu, onCell, onTrack, onAddTrack, onHoldCell, onHoldTrack, onLive, onPlayhead, hint: false }),
+      arrangementMatrix(store, onChange, { onPickSection, onStartHere, onTrackMenu, onCell, onTrack, onAddTrack, onHoldCell, onHoldTrack, onLive, onPlayhead, hint: false }),
     ]),
     menuOpen
       ? null
@@ -10994,6 +11082,7 @@ function chorusCore(ctx, settings, hz) {
     const swing = g();
     osc.connect(swing);
     osc.start(start);
+    keepRunning(ctx, osc);
     return { osc, swing };
   });
   const copies = [];
@@ -11050,6 +11139,26 @@ function chorusCore(ctx, settings, hz) {
 
 function chorusChanged(a, b) {
   return ['rate', 'depth', 'delay', 'mix', 'voices', 'stereo', 'tone'].filter((k) => a[k] !== b[k]).length;
+}
+
+// Chrome stops pulling a chain once nothing is playing into it, and with it anything that only feeds that chain's
+// parameters. A chorus's LFOs and the tremolo's wave stood still through every rest and came back at a different
+// point, so the same song sounded slightly different in playback, in an export scheduled at once and in a windowed
+// one, and could differ between two exports. Tied to a silent sink at the output, they run on regardless.
+const keepAliveSinks = new WeakMap();
+function keepRunning(ctx, node) {
+  if (!ctx || !node || typeof node.connect !== 'function' || !ctx.destination || typeof ctx.createGain !== 'function') return;
+  let sink = keepAliveSinks.get(ctx);
+  if (!sink) {
+    sink = ctx.createGain();
+    sink.gain.value = 0;
+    sink.connect(ctx.destination);
+    keepAliveSinks.set(ctx, sink);
+  }
+  try {
+    node.connect(sink);
+  } catch (err) {
+  }
 }
 
 function createChorus(ctx, settings = DEFAULT_CHORUS, hz = rateHz(readChorus(settings).rate)) {
@@ -15516,8 +15625,53 @@ function songsSheet(store, onChange, songs) {
   ]);
 }
 
+function exportJobLabel(job) {
+  switch (job.stage) {
+    case 'loading': return 'Loading sounds\u2026';
+    case 'scheduling': return 'Getting ready\u2026';
+    case 'rendering': return Number.isFinite(job.fraction) ? `Rendering ${Math.round(job.fraction * 100)}%` : 'Rendering\u2026';
+    case 'mastering': return 'Mastering to \u221214 LUFS\u2026';
+    case 'saving': return 'Saving\u2026';
+    default: return 'Exporting\u2026';
+  }
+}
+
+// How far through the whole export, 0 to 1, or null while that cannot be told.
+function exportJobShare(job) {
+  if (job.stage === 'loading') return 0.02;
+  if (job.stage === 'scheduling') return 0.05;
+  if (job.stage === 'rendering') return Number.isFinite(job.fraction) ? 0.05 + 0.85 * Math.min(1, job.fraction) : null;
+  if (job.stage === 'mastering') return 0.92;
+  return 0.98;
+}
+
+function exportProgressView(job) {
+  const fill = el('div', { class: 'exportbar-fill' });
+  const bar = el('div', { class: 'exportbar' }, [fill]);
+  const label = el('p', { class: 'hint exportlabel' });
+  const paint = () => {
+    const share = exportJobShare(job);
+    bar.className = share === null ? 'exportbar exportbar-busy' : 'exportbar';
+    fill.style.width = share === null ? '' : `${Math.round(share * 1000) / 10}%`;
+    label.textContent = exportJobLabel(job);
+  };
+  job.paint = paint;
+  paint();
+  return el('div', {}, [
+    el('h2', { text: 'Exporting' }),
+    bar,
+    label,
+    el('div', { class: 'chiprow' }, [
+      el('button', { class: 'ghost', type: 'button', text: 'Cancel', onClick: () => job.cancel() }),
+    ]),
+    el('p', { class: 'hint dim', text: 'You can close this. The file opens here when it is ready.' }),
+  ]);
+}
+
 function exportSheet(store, onChange) {
   const result = store.state.ui.exportResult;
+  const job = store.state.ui.exporting;
+  if (!result && job) return exportProgressView(job);
   if (!result) return el('div', {}, [el('h2', { text: 'Export' })]);
 
   const { url, name, bytes, seconds, kind, canShare } = result;
@@ -16215,8 +16369,20 @@ function createSampler(ctx, kit, zones) {
     }
   }
 
+  // Decided from song time, not from the browser's "ended" callback, so playback, a windowed export and an export
+  // scheduled all at once agree on which voices are still sounding, and steal the same ones at the voice limit.
   function isLive(voice, time) {
-    return voice && active.has(voice) && (voice.releaseAt == null || voice.releaseAt > time + 0.001);
+    return voice && active.has(voice) && time < voice.endsAt
+      && (voice.releaseAt == null || voice.releaseAt > time + 0.001);
+  }
+
+  // A voice's playback rate at a time, from the slides already written to it.
+  function rateAt(voice, t) {
+    const g = voice.glide;
+    if (!g) return voice.rate;
+    if (t >= g.end) return g.to;
+    if (t <= g.start) return g.from;
+    return g.from + (g.to - g.from) * ((t - g.start) / (g.end - g.start));
   }
 
   function chokeGroupOf(pitch) {
@@ -16264,9 +16430,20 @@ function createSampler(ctx, kit, zones) {
 
     if (legato && lastVoice.zone === zone) {
       const target = lastVoice.source.playbackRate;
-      target.cancelScheduledValues(time);
-      target.setValueAtTime(target.value, time);
+      // Where the pitch has got to at the note's time, from the slides already written. Reading target.value gave
+      // the pitch at the moment this code runs, which is earlier: a look-ahead early in playback, the whole song
+      // early in an export.
+      const was = rateAt(lastVoice, time);
+      target.linearRampToValueAtTime(was, time);
+      target.cancelScheduledValues(time + 1.5 / ctx.sampleRate);
       target.linearRampToValueAtTime(rate, time + kit.slideSeconds);
+      if (Number.isFinite(lastVoice.endsAt)) {
+        // When the sample now runs out, at its new speed.
+        const left = (lastVoice.endsAt - time) * was;
+        const during = kit.slideSeconds * (was + rate) / 2;
+        lastVoice.endsAt = left <= during ? time + left / ((was + rate) / 2) : time + kit.slideSeconds + (left - during) / rate;
+      }
+      lastVoice.glide = { from: was, to: rate, start: time, end: time + kit.slideSeconds };
       lastVoice.pitch = pitch;
       if (held) stopVoice(lastVoice, time + held);
       return lastVoice;
@@ -16326,8 +16503,10 @@ function createSampler(ctx, kit, zones) {
     gain.connect(output);
     source.start(time);
 
+    const seconds = zone.buffer.duration || zone.buffer.length / zone.buffer.sampleRate;
     const voice = {
       source, gain, rumble, zone, pitch, peak, startedAt: time, chokeGroup: group, stopped: false, releaseAt: null,
+      rate, endsAt: source.loop ? Infinity : time + seconds / rate,
     };
     active.add(voice);
     lastVoice = voice;
@@ -16359,6 +16538,25 @@ function createSampler(ctx, kit, zones) {
     lastVoice = null;
   }
 
+  // Notes queued to start at or after `time` never sound; notes already sounding carry on as written.
+  function cancelFrom(time) {
+    for (const v of [...active]) {
+      if (v.startedAt < time - 1e-6) continue;
+      v.stopped = true;
+      v.releaseAt = v.startedAt;
+      try {
+        v.gain.gain.cancelScheduledValues(0);
+        v.gain.gain.setValueAtTime(0, 0);
+      } catch (err) {
+      }
+      try {
+        v.source.stop(v.startedAt);
+      } catch (err) {
+      }
+      if (lastVoice === v) lastVoice = null;
+    }
+  }
+
   function dispose() {
     allNotesOff();
     output.disconnect();
@@ -16373,6 +16571,7 @@ function createSampler(ctx, kit, zones) {
     noteOn,
     noteOff,
     allNotesOff,
+    cancelFrom,
     dispose,
     activeVoices: (time = ctx.currentTime) => liveVoices(time).length,
   };
@@ -16412,7 +16611,7 @@ function createClipPlayer(ctx) {
       src.stop(end + 0.01);
     } catch (err) {
     }
-    const voice = { src, fade, end };
+    const voice = { src, fade, end, start };
     live.add(voice);
     src.onended = () => {
       live.delete(voice);
@@ -16437,10 +16636,19 @@ function createClipPlayer(ctx) {
     live.forEach((v) => stopVoice(v, time));
   }
 
+  function cancelFrom(time) {
+    live.forEach((v) => {
+      if (!(v.start >= time - 1e-6)) return;
+      try { v.fade.gain.cancelScheduledValues(0); v.fade.gain.setValueAtTime(0, 0); } catch (err) {  }
+      try { v.src.stop(v.start); } catch (err) {  }
+    });
+  }
+
   return {
     output,
     play,
     allNotesOff,
+    cancelFrom,
     noteOn: () => null,
     noteOff: () => {},
     dispose() {
@@ -16836,11 +17044,13 @@ function createTransport({
   onEvent,
   onStop,
   onSectionChange = null,
+  onCancelFrom = null,
   timers = hostTimers(),
   lookAhead = LOOK_AHEAD_SECONDS,
   intervalMs = TIMER_INTERVAL_MS,
 }) {
   let playing = false;
+  let heardFrom = 0; // when the sound of the latest start or jump reaches the speaker, as context time
   let mode = 'section'; // 'section' loops the one being edited, 'song' plays the order
   let timer = null;
   let anchorTime = 0; // ctx.currentTime at anchorTick
@@ -16930,6 +17140,15 @@ function createTransport({
     return wrapTick(transportTick(), loopTicks());
   }
 
+  // Where the listener is: the position the speaker is playing now, not the one the engine is working on. They
+  // differ by the output's latency (a few milliseconds on a laptop, a fifth of a second or more over Bluetooth),
+  // and a playhead drawn from the engine's clock reached each note that much before it was heard.
+  function heardTick() {
+    if (!playing) return 0;
+    const t = Math.max(heardFrom, ctx.currentTime - outputDelay(ctx));
+    return wrapTick(timeToTick(t), loopTicks());
+  }
+
   
   let loopedSection = null;
 
@@ -16998,7 +17217,7 @@ function createTransport({
     const total = m.totalTicks || 1;
     const offsetSeconds = m.toSeconds(wrapTick(anchorTick, total)) - m.toSeconds(wrapTick(segStart, total));
     if (!(offsetSeconds > 0)) return;
-    onEvent({ kind: 'resume', sectionId, tick: anchorTick, time: anchorTime, offsetSeconds, secondsPerTick: m.secondsPerTickAt(wrapTick(segStart, total)) });
+    onEvent({ kind: 'resume', sectionId, tick: anchorTick, segmentTick: segStart, time: anchorTime, offsetSeconds, secondsPerTick: m.secondsPerTickAt(wrapTick(segStart, total)) });
   }
 
   
@@ -17014,6 +17233,7 @@ function createTransport({
     const cue = Math.max(0, Number(takeCue()) || 0);
     anchorTick = (mode === 'song' ? songStartTick() : 0) + cue;
     startedAt = anchorTick;
+    heardFrom = anchorTime;
     ensureMap();
     scheduledUpTo = anchorTick;
     announceResume();
@@ -17037,25 +17257,104 @@ function createTransport({
   }
 
   
-  function jump() {
+  // Start again from the current section, `cue` ticks into it.
+  function jump({ cue = 0 } = {}) {
     if (!playing) return;
     if (onSectionChange) onSectionChange(ctx.currentTime);
     map = null;
     mapKey = '';
     anchorTime = ctx.currentTime + 0.03;
-    anchorTick = mode === 'song' ? songStartTick() : 0;
+    anchorTick = (mode === 'song' ? songStartTick() : 0) + Math.max(0, Number(cue) || 0);
     startedAt = anchorTick;
+    heardFrom = anchorTime;
     loopedSection = mode === 'section' ? getSectionId() : null;
     ensureMap();
     scheduledUpTo = anchorTick;
+    announceResume();
     tick();
   }
 
-  
-  function setMode(next) {
+  // The section a time falls in, as { sectionId, start, length } in transport ticks. At a section line `before`
+  // picks the section that is ending rather than the one starting.
+  function sectionAround(at, before) {
+    const song = getSong();
+    if (mode !== 'song') {
+      const length = loopTicks();
+      if (!(length > 0)) return null;
+      const start = before ? length * Math.floor((at - 1e-6) / length) : at - wrapTick(at, length);
+      return { sectionId: loopedSection || getSectionId(), start, length };
+    }
+    const timeline = songTimeline(song);
+    const total = timeline.totalTicks;
+    if (!total) return null;
+    const lap = total * Math.floor((before ? at - 1e-6 : at) / total);
+    const within = at - lap;
+    const seg = timeline.segments.find((s) => (before ? within > s.startTick && within <= s.endTick : within >= s.startTick && within < s.endTick));
+    return seg ? { sectionId: seg.sectionId, start: lap + seg.startTick, length: seg.lengthTicks } : null;
+  }
+
+  function startOfSection(sectionId) {
+    const seg = songTimeline(getSong()).segments.find((s) => s.sectionId === sectionId);
+    return seg ? seg.startTick : null;
+  }
+
+  // Loop and Song swap without a break. What the engine already has (a quarter of a second, the look-ahead) is
+  // kept, and the new mode carries on from where that ends, at the same place in the same section: nothing
+  // restarts, nothing is cut. If a section ends inside that quarter second, where Loop and Song part ways, the
+  // switch is made at that line instead, and the notes the old mode had queued beyond it are taken back.
+  // `loopSection(id)` is told which section Loop is to go round, before it starts, so the editor can follow.
+  function setMode(next, { seamless = false, loopSection = null } = {}) {
     if (next === mode) return;
+    if (!playing || !seamless) {
+      mode = next;
+      if (playing) jump();
+      return;
+    }
+    ensureMap();
+    const now = ctx.currentTime;
+    const nowTick = timeToTick(now);
+    let at = Math.max(scheduledUpTo, Math.ceil(nowTick));
+    const here = sectionAround(nowTick, false);
+    if (!here) {
+      mode = next;
+      jump();
+      return;
+    }
+    const line = here.start + here.length;
+    const cut = line < at;
+    if (cut) at = line;
+    const place = sectionAround(at, at > startedAt);
+    if (!place) {
+      mode = next;
+      jump();
+      return;
+    }
+    const within = at - place.start;
+    const atTime = Math.max(now, tickToTime(at));
+    let to;
+    if (next === 'song') {
+      const start = startOfSection(place.sectionId);
+      if (start === null) {
+        mode = next;
+        jump();
+        return;
+      }
+      to = start + within;
+    } else {
+      if (loopSection) loopSection(place.sectionId);
+      to = within;
+    }
+    if (cut && onCancelFrom) onCancelFrom(atTime);
     mode = next;
-    if (playing) jump();
+    map = null;
+    mapKey = '';
+    anchorTime = atTime;
+    anchorTick = to;
+    startedAt = to;
+    loopedSection = mode === 'section' ? getSectionId() : null;
+    ensureMap();
+    scheduledUpTo = to;
+    tick();
   }
 
   return {
@@ -17082,9 +17381,29 @@ function createTransport({
       return sectionTempo(song, section);
     },
     positionTick,
+    heardTick,
     transportTick,
     loopTicks,
   };
+}
+
+// How far behind the engine's clock the speaker is, in seconds: the output's own latency where the browser reports
+// it (Chrome, Firefox, Safari 18.4 and later), otherwise worked out from an output timestamp.
+function outputDelay(ctx) {
+  const base = Number.isFinite(ctx.baseLatency) && ctx.baseLatency > 0 ? ctx.baseLatency : 0;
+  if (Number.isFinite(ctx.outputLatency) && ctx.outputLatency > 0) return Math.min(1, base + ctx.outputLatency);
+  if (typeof ctx.getOutputTimestamp === 'function' && typeof performance !== 'undefined') {
+    try {
+      const ts = ctx.getOutputTimestamp();
+      if (ts && ts.contextTime > 0 && Number.isFinite(ts.performanceTime) && ts.performanceTime > 0) {
+        const heard = ts.contextTime + (performance.now() - ts.performanceTime) / 1000;
+        const behind = ctx.currentTime - heard;
+        if (behind > 0 && behind < 1) return behind;
+      }
+    } catch (err) {
+    }
+  }
+  return base;
 }
 
 function createCreamCoat(sampleRate) {
@@ -17977,7 +18296,8 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
   }
 
   
-  function scheduleSegment(ev) {
+  // `from`: join the pass at that time instead of writing it from its start (playback began part-way through).
+  function scheduleSegment(ev, from = null) {
     const song = getSong();
     const section = song.sections[ev.sectionId];
     if (!section) return;
@@ -17986,7 +18306,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     
     song.tracks.forEach((track) => {
       try {
-        scheduleTrackSegment(track, section, pass, song);
+        scheduleTrackSegment(track, section, pass, song, from);
       } catch (err) {
         reportOnce(`scheduling ${track.id}: ${(err && err.message) || 'refused'}`);
       }
@@ -18004,7 +18324,9 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
   const LIVE_LEAD = 0.02;
   const LIVE_FADE = 0.008;
   
-  const JUST_AFTER = 1e-6;
+  // A sample and a half. Firefox files automation by whole samples, so a millionth of a second "after" a point
+  // landed on the point's own sample, and cancelling from there removed the point too.
+  const JUST_AFTER = 1.5 / ctx.sampleRate;
   const LIVE_PARTS = ['volume', 'pan', 'reverb', 'filter', 'tremolo', 'duck', 'echo', 'sweep'];
 
   function rememberPass(ev) {
@@ -18130,12 +18452,12 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     }
   }
 
-  function scheduleTrackSegment(track, section, pass, song) {
+  function scheduleTrackSegment(track, section, pass, song, from = null) {
     const player = players.get(track.id);
     if (!player) return;
     const keys = {};
     LIVE_PARTS.forEach((part) => {
-      writePart(part, track, player, section, pass, song, null);
+      writePart(part, track, player, section, pass, song, from);
       keys[part] = partKey(part, track, player, section, pass, song);
     });
     pass.keys.set(track.id, keys);
@@ -18208,7 +18530,9 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     const spt = pass.secondsPerTick;
     const drawn = lane.length && spt > 0;
     if (from === null) {
-      target.cancelScheduledValues(pass.time);
+      // Just after the line, not on it: a lane whose last point sits on the section line ends its final ramp at
+      // this very moment, and cancelling from the line itself deleted that ramp. Exports lost the whole sweep.
+      target.cancelScheduledValues(pass.time + JUST_AFTER);
       if (!drawn) {
         target.setValueAtTime(resting, pass.time);
         pass.lines.set(key, null);
@@ -18227,7 +18551,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       return;
     }
     const written = pass.lines.get(key);
-    const held = written ? lineAt(written, from) : resting;
+    const held = written ? lineAt(written, from) : drawn ? scale(valueAt(lane, (from - pass.time) / spt)) : resting;
     target.linearRampToValueAtTime(held, from);
     target.cancelScheduledValues(from + JUST_AFTER);
     const join = from + LIVE_FADE;
@@ -18371,6 +18695,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     const cycle = options.cycleSeconds;
     const phase = ((((at - anchor) / cycle) % 1) + 1) % 1;
     src.start(at, phase * drawn.loopEnd);
+    keepRunning(ctx, src);
     const voice = { src, depth, fade, start: at, end, line, stopAt: end + LIVE_FADE + 0.002, anchor, cycle };
     src.stop(voice.stopAt);
     src.onended = () => dropVoice(player, voice);
@@ -18400,6 +18725,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
 
   function dropVoice(player, voice) {
     try { voice.fade.disconnect(); } catch (err) {  }
+    try { voice.src.disconnect(); } catch (err) {  }
     if (player.tremVoices) player.tremVoices = player.tremVoices.filter((v) => v !== voice);
   }
 
@@ -18539,6 +18865,25 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
       return;
     }
     if (ev.kind === 'resume') {
+      // Starting part-way into a section: its lanes, tremolo, ducking and echo are joined where play begins, as
+      // they would be had it played from the top. Before, they waited for the next section line.
+      try {
+        const song = getSong();
+        const section = song.sections[ev.sectionId];
+        if (section && ev.offsetSeconds > 0) {
+          for (const p of players.values()) (p.tremVoices || []).forEach((v) => endVoice(v, ev.time));
+          scheduleSegment({
+            kind: 'segment',
+            sectionId: ev.sectionId,
+            tick: Number.isFinite(ev.segmentTick) ? ev.segmentTick : ev.tick,
+            lengthTicks: sectionLengthTicks(song, section),
+            time: ev.time - ev.offsetSeconds,
+            secondsPerTick: ev.secondsPerTick,
+          }, ev.time);
+        }
+      } catch (err) {
+        reportOnce(`resume: ${(err && err.message) || 'refused'}`);
+      }
       try {
         scheduleRecordings(ev, ev.offsetSeconds || 0);
       } catch (err) {
@@ -18575,6 +18920,13 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     onEvent: handleEvent,
     onSectionChange: (time) => {
       for (const p of players.values()) if (p.sampler) p.sampler.allNotesOff(time);
+    },
+    // A seamless Loop/Song switch at a section line takes back what the old mode queued from there on.
+    onCancelFrom: (time) => {
+      for (const p of players.values()) {
+        if (p.sampler && p.sampler.cancelFrom) p.sampler.cancelFrom(time);
+        (p.tremVoices || []).forEach((v) => { if (v.start >= time - 1e-4) endVoice(v, v.start); });
+      }
     },
     onStop: (time) => {
       for (const p of players.values()) if (p.sampler) p.sampler.allNotesOff(time);
@@ -18646,7 +18998,7 @@ function createEngine({ ctx, getSong, getSectionId, fetchAudio, onStatus, timers
     audition,
     play,
     stop,
-    setMode: (m) => transport.setMode(m),
+    setMode: (m, opts) => transport.setMode(m, opts),
     ensureAll,
     ensurePlayer,
     syncMix,
@@ -19850,6 +20202,20 @@ function tailSecondsFor(song, base = TAIL_SECONDS, sampleRate = 48000) {
   return base + Math.max(echo, decay);
 }
 
+// Exports hand the engine the song a window at a time, the way playback does and the way desktop programs bounce:
+// one continuous render that pauses every couple of seconds of song while the next notes are queued. Handed the
+// whole song at once, Chrome and Safari visit every note's nodes on every block whether it is sounding or not, so a
+// three-minute song took minutes; windowed it takes seconds. Firefox cannot pause an offline render and has no need
+// to: it skips silent nodes by itself, so it gets the whole song at once, as before, and is just as quick.
+const EXPORT_WINDOW_SECONDS = 2;
+const EXPORT_LEAD_SECONDS = 0.5; // the least a window reaches past the next pause
+
+function cancelledError() {
+  const err = new Error('Export cancelled');
+  err.name = 'AbortError';
+  return err;
+}
+
 async function renderSong({
   song,
   fetchAudio,
@@ -19857,6 +20223,8 @@ async function renderSong({
   sampleRate = 44100,
   tailSeconds = TAIL_SECONDS,
   onProgress,
+  windowSeconds = EXPORT_WINDOW_SECONDS,
+  signal = null,
 }) {
   if (!OfflineContext) throw new Error('This browser cannot render audio offline.');
   const map = songTempoMap(song);
@@ -19867,6 +20235,17 @@ async function renderSong({
   const frames = Math.ceil((pre + seconds + tailSecondsFor(song, tailSeconds, sampleRate)) * sampleRate);
   const ctx = new OfflineContext(2, frames, sampleRate);
 
+  // Cancel (an AbortSignal) ends the wait at once. A windowed render also stops at its next pause; Firefox's
+  // carries on unseen and its result is dropped.
+  const cancelled = () => Boolean(signal && signal.aborted);
+  let stop = () => {};
+  const stopped = new Promise((resolve, reject) => { stop = reject; });
+  stopped.catch(() => {});
+  if (signal) {
+    if (signal.aborted) stop(cancelledError());
+    else signal.addEventListener('abort', () => stop(cancelledError()), { once: true });
+  }
+
   if (onProgress) onProgress('loading');
   const engine = createEngine({
     ctx,
@@ -19874,29 +20253,65 @@ async function renderSong({
     getSectionId: () => song.sectionOrder[0],
     fetchAudio,
   });
-  await engine.ensureAll();
-
-  if (onProgress) onProgress('scheduling');
-  
-  const events = collectSongEvents({ song, fromTick: 0, toTick: map.totalTicks, withSegments: true });
+  let rendered;
   let earliest = pre;
-  for (const event of events) {
-    const secondsPerTick = map.secondsPerTickAt(event.tick);
-    const time = pre + map.toSeconds(event.tick);
-    if (event.kind === 'segment') {
-      engine.handleEvent({ ...event, time, secondsPerTick });
-    } else {
-      const durationSeconds = Number.isFinite(event.endTick) ? map.toSeconds(event.endTick) - map.toSeconds(event.tick) : event.duration * secondsPerTick;
-      const at = engine.handleEvent({ ...event, time, secondsPerTick, durationSeconds });
-      if (Number.isFinite(at)) earliest = Math.min(earliest, at);
-    }
-  }
+  try {
+    await Promise.race([engine.ensureAll(), stopped]);
 
-  await engine.returns.ready;
-  await engine.sweepsReady;
-  if (onProgress) onProgress('rendering');
-  const rendered = await ctx.startRendering();
-  engine.dispose();
+    if (onProgress) onProgress('scheduling');
+    const events = collectSongEvents({ song, fromTick: 0, toTick: map.totalTicks, withSegments: true });
+    let cursor = 0;
+    const timeOf = (event) => pre + map.toSeconds(event.tick);
+    // Hand the engine every event that starts before `limit` seconds.
+    const scheduleUpTo = (limit) => {
+      while (cursor < events.length && timeOf(events[cursor]) < limit) {
+        const event = events[cursor++];
+        const secondsPerTick = map.secondsPerTickAt(event.tick);
+        const time = timeOf(event);
+        if (event.kind === 'segment') {
+          engine.handleEvent({ ...event, time, secondsPerTick });
+        } else {
+          const durationSeconds = Number.isFinite(event.endTick) ? map.toSeconds(event.endTick) - map.toSeconds(event.tick) : event.duration * secondsPerTick;
+          const at = engine.handleEvent({ ...event, time, secondsPerTick, durationSeconds });
+          if (Number.isFinite(at)) earliest = Math.min(earliest, at);
+        }
+      }
+    };
+
+    // Each window reaches past the next pause by more than Timing can pull a note early at the song's slowest tempo,
+    // so every note is queued before the render gets to it.
+    const lead = Math.max(EXPORT_LEAD_SECONDS, (TIMING_TICKS * 60) / (slowestTempo(song) * PPQ) + 0.1);
+    const total = frames / sampleRate;
+    const windowed = windowSeconds > 0 && typeof ctx.suspend === 'function' && typeof ctx.resume === 'function';
+    let fail = () => {};
+    const failed = new Promise((resolve, reject) => { fail = reject; });
+    failed.catch(() => {});
+    if (windowed) {
+      scheduleUpTo(windowSeconds + lead);
+      // A pause has to fall before the last render quantum, or the browser refuses it.
+      for (let at = windowSeconds; at * sampleRate < frames - 256; at += windowSeconds) {
+        ctx.suspend(at).then(() => {
+          if (cancelled()) return undefined; // left paused: this render is being thrown away
+          try {
+            scheduleUpTo(at + windowSeconds + lead);
+          } catch (err) {
+            fail(err);
+            return undefined;
+          }
+          if (onProgress) onProgress('rendering', at / total);
+          return ctx.resume();
+        }).catch((err) => fail(err));
+      }
+    } else {
+      scheduleUpTo(Infinity);
+    }
+
+    await Promise.race([Promise.all([engine.returns.ready, engine.sweepsReady]), stopped]);
+    if (onProgress) onProgress('rendering', windowed ? 0 : null);
+    rendered = await Promise.race([ctx.startRendering(), stopped, failed]);
+  } finally {
+    engine.dispose();
+  }
   const start = Math.max(0, Math.min(rendered.length - 1, Math.floor(Math.max(0, earliest) * sampleRate)));
   const buffer = ctx.createBuffer(rendered.numberOfChannels, rendered.length - start, sampleRate);
   for (let c = 0; c < rendered.numberOfChannels; c++) {
@@ -21403,7 +21818,7 @@ function expandRemoteSong(doc) {
   return song;
 }
 
-const BUILD_STAMP = '2026-11-26 23:45';
+const BUILD_STAMP = '2026-11-27 13:10';
 
 function mountApp(root, options = {}) {
   const store = createStore(options.song);
@@ -21748,11 +22163,28 @@ function mountApp(root, options = {}) {
     engine.transport.jump();
   }
 
+  // Loop and Song swap where you are: the section playing carries on, and only what happens at its end changes.
   function toggleMode() {
     songMode = !songMode;
-    if (engine) engine.setMode(songMode ? 'song' : 'section');
+    if (engine) {
+      engine.setMode(songMode ? 'song' : 'section', {
+        seamless: true,
+        loopSection: (sectionId) => {
+          if (sectionId !== store.state.view.activeSectionId) store.setView({ activeSectionId: sectionId, selectedNoteId: null });
+        },
+      });
+    }
     flash(songMode ? 'Playing the whole song' : 'Looping this section');
     render();
+  }
+
+  // The arrangement's start strip, tapped while playing: go there now, as tapping a section goes to its top.
+  // Stopped, the mark just waits for play.
+  function startHere(sectionId, tick) {
+    if (!engine || !engine.transport.playing) return false;
+    store.setView({ activeSectionId: sectionId, cueTick: 0, selectedNoteId: null });
+    engine.transport.jump({ cue: tick });
+    return true;
   }
 
   
@@ -21778,7 +22210,7 @@ function mountApp(root, options = {}) {
   function arrangePosition() {
     if (!engine || !engine.transport.playing) return null;
     const { song, view } = store.state;
-    const tick = engine.transport.positionTick();
+    const tick = engine.transport.heardTick();
     if (engine.transport.mode !== 'song') {
       const index = song.sectionOrder.indexOf(view.activeSectionId);
       return index < 0 ? null : { index, tick };
@@ -21811,8 +22243,9 @@ function mountApp(root, options = {}) {
     getLayout: layout,
     getPositionTick: () => {
       if (!engine) return 0;
-      const tick = engine.transport.positionTick();
-      if (!songMode) return tick;
+      const tick = engine.transport.heardTick();
+      // The editor always loops its section, whatever the Loop/Song chip says, so ask the transport.
+      if (engine.transport.mode !== 'song') return tick;
       const timeline = songTimeline(store.state.song);
       const seg = timeline.totalTicks ? segmentAt(timeline, tick % timeline.totalTicks) : null;
       return seg ? tick % timeline.totalTicks - seg.startTick : tick;
@@ -21833,7 +22266,7 @@ function mountApp(root, options = {}) {
         if (placeArrangePlayhead) placeArrangePlayhead(null);
         return;
       }
-      if (songMode && engine) followSection(engine.transport.positionTick());
+      if (songMode && engine) followSection(engine.transport.heardTick());
       moveArrangePlayhead();
       if (isAudioTrack(store.activeTrack())) {
         const loop = sectionLengthTicks(store.state.song, store.activeSection()) || 1;
@@ -23124,28 +23557,63 @@ function mountApp(root, options = {}) {
   }
 
   
+  // The export in progress, shown in the export sheet with a percentage and Cancel. Closing the sheet leaves it
+  // running (the toast keeps count); the file opens in the sheet when it is ready.
+  let exportJob = null;
+
+  function exportStage(stage, fraction = null) {
+    const job = exportJob;
+    if (!job) return;
+    const changed = job.stage !== stage;
+    job.stage = stage;
+    job.fraction = fraction;
+    if (store.state.ui.sheet === 'export' && !store.state.ui.exportResult && store.state.ui.exporting === job) {
+      if (job.paint) job.paint();
+    } else if (changed || stage === 'rendering') {
+      flash(exportJobLabel(job), 30000);
+    }
+  }
+
   async function exportAudio() {
     const song = store.state.song;
+    if (exportJob) {
+      store.setUi({ sheet: 'export', exportResult: null, exporting: exportJob });
+      render();
+      return;
+    }
     if (!songSeconds(song)) {
       flash('There is nothing to export yet.');
       return;
     }
+    const controller = typeof AbortController === 'function' ? new AbortController() : null;
+    const job = { stage: 'loading', fraction: null, paint: null, cancelled: false };
+    job.cancel = () => {
+      job.cancelled = true;
+      if (controller) controller.abort();
+    };
+    exportJob = job;
+    store.setUi({ sheet: 'export', exportResult: null, exporting: job });
+    render();
     try {
-      flash('Rendering\u2026', 30000);
       const ctx = await session.unlock();
       const { fetchAudio } = createSampleFetcher({ ctx: ctx || {}, content });
       const buffer = await renderSong({
         song,
         fetchAudio: ctx ? fetchAudio : null,
-        onProgress: (stage) => {
-          if (stage === 'rendering') flash('Rendering\u2026', 30000);
-        },
+        signal: controller ? controller.signal : null,
+        onProgress: (stage, fraction) => exportStage(stage, fraction),
       });
+      if (job.cancelled) throw cancelledError();
       if (song.master !== false) {
-        flash('Mastering\u2026', 30000);
-        await masterBuffer(buffer, { pause: () => new Promise((resolve) => timers.setTimeout(resolve, 0)) });
+        exportStage('mastering');
+        await masterBuffer(buffer, {
+          pause: () => new Promise((resolve, reject) => timers.setTimeout(() => (job.cancelled ? reject(cancelledError()) : resolve()), 0)),
+        });
       }
+      exportStage('saving');
       const name = `${(song.name || 'song').replace(/[^\w\-]+/g, '-').toLowerCase()}.wav`;
+      exportJob = null;
+      store.setUi({ exporting: null });
       offerFile(new Blob([encodeWav(buffer)], { type: 'audio/wav' }), name, {
         kind: 'audio',
         seconds: buffer.length / buffer.sampleRate,
@@ -23154,7 +23622,12 @@ function mountApp(root, options = {}) {
       });
       flash(`Rendered ${name}`);
     } catch (err) {
-      flash(`Couldn't export: ${err.message}`, 8000);
+      exportJob = null;
+      const showing = store.state.ui.sheet === 'export' && !store.state.ui.exportResult;
+      store.setUi(showing ? { exporting: null, sheet: null } : { exporting: null });
+      if (err && err.name === 'AbortError') flash('Export cancelled');
+      else flash(`Couldn't export: ${err && err.message ? err.message : err}`, 8000);
+      render();
     }
   }
 
@@ -23414,6 +23887,7 @@ function mountApp(root, options = {}) {
         songMode,
         toggleMode: () => toggleMode(),
         onPickSection: (id) => pickSection(id),
+        onStartHere: (sectionId, tick) => startHere(sectionId, tick),
         onSongSettings: () => {
           store.setUi({ sheet: 'song' });
           render();
@@ -23700,7 +24174,7 @@ function mountApp(root, options = {}) {
     renderMenu(menuHost, store, { onChange: render });
     Object.assign(scroll, clampScroll(scroll));
     paintGrid();
-    if (playhead.running && engine) playhead.draw(engine.transport.positionTick(), { follow: false });
+    if (playhead.running && engine) playhead.draw(engine.transport.heardTick(), { follow: false });
     if (store.state.ui.toast) {
       flash(store.state.ui.toast);
       store.state.ui.toast = null;
